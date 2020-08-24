@@ -156,6 +156,420 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/24/Understanding-division-and-Its-Implementation-in-SQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/24/Understanding-division-and-Its-Implementation-in-SQL/" class="post-title-link" itemprop="url">Understanding 'division' and Its Implementation in SQL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-24 20:10:22 / Modified: 22:45:56" itemprop="dateCreated datePublished" datetime="2020-08-24T20:10:22+08:00">2020-08-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <center><h1>What does Division really do</h1></center>
+<h2>Process</h2>
+2. The result of Division of R/S, contains columns which are in R but not in S. (In other words, R's columns except which also in S.)
+3. Define T=R/S and T's columns is C.
+4. For each c in C, find their “象集” in R.
+5. Find S's projection on its common columns with R.
+6. If c's “象集” includes the result in 5, then add it to T.
+<h2>Example</h2>
+1. <br>
+![](https://img-blog.csdn.net/20161221185506785)
+2. 
+在R关系中A属性的值可以取{ a1，a2，a3，a4 }
+a1值对应的象集为 {  (b1,c2)  , (b2,c1) ,  (b2,c3)  }
+a2值对应的象集为 {  (b3,c7)  , (b2,c3) }
+a3值对应的象集为 {  (b4,c6)  }
+a4值对应的象集为 {  (b6,c6)  }
+3. 关系S在B、C上的投影为 {  (b1,c2)  , (b2,c1) ,  (b2,c3)  }
+4. 只有a1值对应的象集包含关系S的投影集，所以只有a1应该包含在A属性中
+5. R/S=
+<table>
+<thead>
+<tr>
+<th>A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a1</td>
+</tr>
+</tbody>
+</table>
+<center><h1>Implementation in SQL</h1></center>
+<h2>How to do</h2>
+1. R(X，Y)÷S(Y，Z)的运算用结构化语言SQL 语句可表达为下列形式:
+2. 
+ ![](/Understanding-division-and-Its-Implementation-in-SQL/division.png)
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/23/Summary-for-Learn-SQL-Codecademy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/23/Summary-for-Learn-SQL-Codecademy/" class="post-title-link" itemprop="url">Summary for =Learn SQL= //Codecademy</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-23 21:50:00" itemprop="dateCreated datePublished" datetime="2020-08-23T21:50:00+08:00">2020-08-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-24 19:50:04" itemprop="dateModified" datetime="2020-08-24T19:50:04+08:00">2020-08-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Codecademy/" itemprop="url" rel="index"><span itemprop="name">Codecademy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <center><h1>Manipulation</h1></center>
+We’ve learned six commands commonly used to manage data stored in a relational database and how to set constraints on such data. What can we generalize so far?
+<ul>
+<li>SQL is a programming language designed to manipulate and manage data stored in relational databases.</li>
+<li>A relational database is a database that organizes information into one or more tables.</li>
+<li>A table is a collection of data organized into rows and columns.</li>
+<li>A statement is a string of characters that the database recognizes as a valid command.</li>
+</ul>
+<p>creates a new table:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE table_name(</span><br><span class="line">	attribute1 type constraint,</span><br><span class="line">	attribute1 type constraint</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>constraint:</p>
+<ol>
+<li>
+<p><code>PRIMARY KEY</code> columns can be used to uniquely identify the row. Attempts to insert a row with an identical value to a row already in the table will result in a constraint violation which will not allow you to insert the new row.</p>
+</li>
+<li>
+<p><code>UNIQUE</code> columns have a different value for every row. This is similar to PRIMARY KEY except a table can have many different UNIQUE columns.</p>
+</li>
+<li>
+<p><code>NOT NULL</code> columns must have a value. Attempts to insert a row without a value for a NOT NULL column will result in a constraint violation and the new row will not be inserted.</p>
+</li>
+<li>
+<p><code>DEFAULT</code> columns take an additional argument that will be the assumed value for an inserted row if the new row does not specify a value for that column.</p>
+</li>
+</ol>
+<p>adds a new row to a table:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table_name(a1,a2,a3) </span><br><span class="line">VALUES(v1,v2,v3);</span><br></pre></td></tr></table></figure>
+<p>queries data from a table:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT attributes</span><br><span class="line">FROM table_name </span><br><span class="line">WHERE condition;</span><br></pre></td></tr></table></figure>
+<p>changes an existing table:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE table_name</span><br><span class="line">ADD COLUMN c1_name type; </span><br></pre></td></tr></table></figure>
+<p>edits a row in a table:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_name</span><br><span class="line">SET .....</span><br><span class="line">WHERE condition;</span><br></pre></td></tr></table></figure>
+<p>deletes rows from a table:</p>
+<h2 id="hexoPostRenderEscape-figure-class-highlight-plain-table-tr-td-class-gutter-pre-span-class-line-1-span-br-span-class-line-2-span-br-pre-td-td-class-code-pre-span-class-line-DELETE-FROM-table-name-span-br-span-class-line-WHERE-condition-span-br-pre-td-tr-table-figure-hexoPostRenderEscape-TO-BE-CONTINUED…"><a class="header-anchor" href="#hexoPostRenderEscape-figure-class-highlight-plain-table-tr-td-class-gutter-pre-span-class-line-1-span-br-span-class-line-2-span-br-pre-td-td-class-code-pre-span-class-line-DELETE-FROM-table-name-span-br-span-class-line-WHERE-condition-span-br-pre-td-tr-table-figure-hexoPostRenderEscape-TO-BE-CONTINUED…">¶</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name</span><br><span class="line">WHERE condition;</span><br></pre></td></tr></table></figure><br>
+TO BE CONTINUED…</h2>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/23/Summary-for-Learn-JavaScript-Codecademy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/23/Summary-for-Learn-JavaScript-Codecademy/" class="post-title-link" itemprop="url">Summary for =Learn JavaScript= //Codecademy</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-23 02:03:19 / Modified: 18:00:46" itemprop="dateCreated datePublished" datetime="2020-08-23T02:03:19+08:00">2020-08-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Codecademy/" itemprop="url" rel="index"><span itemprop="name">Codecademy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <center><h1>Introduction</h1></center>
+<h2>Introduction to JavaScript</h2>
+- Data is printed, or logged, to the console, a panel that displays messages, with `console.log()`.
+- We can write single-line comments with `//` and multi-line comments between `/*` and `*/`.
+- There are 7 fundamental data types in JavaScript: strings, numbers, booleans, null, undefined, symbol, and object.
+- Numbers are any number without quotes: 23.8879
+- Strings are characters wrapped in single or double quotes: 'Sample String'
+- The built-in arithmetic operators include `+`, `-`, `*`, `/`, and `%`.
+- Objects, including instances of data types, can have properties, stored information. The properties are denoted with a . after the name of the object, for example: `'Hello'.length`.
+- Objects, including instances of data types, can have methods which perform actions. Methods are called by appending the object or instance with a period, the method name, and parentheses. For example: `'hello'.toUpperCase()`.
+- We can access properties and methods by using the ., dot operator.
+- Built-in objects, including Math, are collections of **methods and properties** that JavaScript provides.
+<h2>Variables</h2>
+- Variables hold reusable data in a program and associate it with a name.
+- Variables are stored in memory.
+- The `var` keyword is used in *pre-ES6* versions of JS.
+- `let` is the preferred way to declare a variable when it can be **reassigned**, and `const` is the preferred way to declare a variable with a **constant** value.
+- Variables that have not been initialized store the primitive data type **undefined**.
+- Mathematical assignment operators make it easy to calculate a new value and assign it to the same variable.
+- The `+` operator is used to concatenate strings including string values held in variables
+- In ES6, template literals use `backticks` and `${}` to interpolate values into a string.
+- The `typeof` keyword returns the data type (as a string) of a value.
+<center><h1>Conditions</h1></center>
+<h2>Conditional Statements</h2>
+- An `if` statement checks a condition and will execute a task if that condition evaluates to true.
+- `if...else` statements make binary decisions and execute different code blocks based on a provided condition.
+- We can add more conditions using `else if` statements.
+- Comparison operators, including `<`, `>`, `<=`, `>=`, `===`, and `!==` can compare two values.
+&emsp;*P.S. Mention that we use `===` rather than `==` in JS.*  
+- The logical and operator, `&&`, or “`and`”, checks if both provided expressions are truthy.
+- The logical operator `||`, or “`or`”, checks if either provided expression is truthy.
+- The bang operator, `!`, switches the truthiness and falsiness of a value.
+- The **ternary** operator is shorthand to simplify concise `if...else` statements.
+- A `switch` statement can be used to simplify the process of writing multiple else if statements. The **break** keyword stops the remaining cases from being checked and executed in a switch statement.
+<center><h1>Functions</h1></center>
+<h2>Functions</h2>
+</=`,></`,>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/22/Summmary-for-Learn-CSS-Codecademy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/22/Summmary-for-Learn-CSS-Codecademy/" class="post-title-link" itemprop="url">Summmary for =Learn CSS= //Codecademy</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-22 21:43:12 / Modified: 23:09:41" itemprop="dateCreated datePublished" datetime="2020-08-22T21:43:12+08:00">2020-08-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Codecademy/" itemprop="url" rel="index"><span itemprop="name">Codecademy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Selectors and Visual Rules</h1>
+<h2> CSS Setup and Selectors </h2>
+- CSS can change the look of HTML elements. In order to do this, CSS must select HTML elements, then apply styles to them.
+- CSS can select HTML elements by **tag**, **class**, **or ID**.
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   tag: p</span><br><span class="line">class: .</span><br><span class="line">ID: #</span><br></pre></td></tr></table></figure>
+- Multiple CSS classes can be applied to one HTML element.
+- Classes can be reusable, while IDs can only be used once.
+- IDs are more specific than classes, and classes are more specific than tags. That means IDs will override any styles from a class, and classes will override any styles from a tag selector.
+- Multiple selectors can be **chained** together to select an element. This raises the specificity, but can be necessary.
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h5.description</span><br></pre></td></tr></table></figure>
+- Nested elements can be selected by separating selectors with a space.
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.class li</span><br></pre></td></tr></table></figure>
+- Multiple unrelated selectors can receive the same styles by separating the selector names with **commas**.
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p,</span><br><span class="line">h5</span><br></pre></td></tr></table></figure>
+<h2>CSS Visual Rules</h2>
+I've learned concepts including:
+<ul>
+<li>CSS declarations are structured into property and value pairs.</li>
+<li>The <code>font-family</code> property defines the typeface of an element.</li>
+<li><code>font-size</code> controls the size of text displayed.</li>
+<li><code>font-weight</code> defines how thin or thick text is displayed.</li>
+<li>The <code>text-align</code> property places text in the left, right, or center of its parent container.</li>
+<li>Text can have two different color attributes: <code>color</code> and <code>background-color</code>. color defines the color of the text, while background-color defines the color behind the text.</li>
+<li>CSS can make an element transparent with the <code>opacity</code> property.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opacity: 0.75;</span><br><span class="line">&#x2F;&#x2F;From 0 to 1, 0 means invisible;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>CSS can also set the background of an element to an image with the <code>background-image</code> property.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-image:url(&quot;http:&#x2F;&#x2F;....&quot;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>The <code>!important</code> flag will override any style, however it should almost never be used, as it is extremely difficult to override.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">color: #FFF !important;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/21/A-Summary-for-Learn-HTML-Codecademy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -322,6 +736,93 @@
 0x03 Forms
 ---
 <h2 id="0x04-Semantic-HTML"><a class="header-anchor" href="#0x04-Semantic-HTML">¶</a>0x04 Semantic HTML</h2>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/21/Merge-Two-Binary-Trees-Leetcode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/21/Merge-Two-Binary-Trees-Leetcode/" class="post-title-link" itemprop="url">Merge Two Binary Trees //Leetcode</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-21 20:42:36" itemprop="dateCreated datePublished" datetime="2020-08-21T20:42:36+08:00">2020-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-22 09:48:43" itemprop="dateModified" datetime="2020-08-22T09:48:43+08:00">2020-08-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Leetcode-Top-100-Liked-Questions/" itemprop="url" rel="index"><span itemprop="name">Leetcode Top 100 Liked Questions</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Description</h1>
+<blockquote>
+<p>Given two binary trees and imagine that when you put one of them to cover the other, some nodes of the two trees are overlapped while the others are not.</p>
+<p>You need to merge them into a new binary tree. The merge rule is that if two nodes overlap, then sum node values up as the new value of the merged node. Otherwise, the NOT null node will be used as the node of new tree.</p>
+</blockquote>
+<h1>Input</h1>
+<p><img src="/images/input1.png" alt></p>
+<h1>Output</h1>
+<p><img src="/images/ouput1.png" alt></p>
+<h1>Analysis</h1>
+<h2 id="1-Recursion"><a class="header-anchor" href="#1-Recursion">¶</a>1 Recursion</h2>
+<h1>Code</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode() &#123;&#125;</span><br><span class="line"> *     TreeNode(int val) &#123; this.val &#x3D; val; &#125;</span><br><span class="line"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="line"> *         this.val &#x3D; val;</span><br><span class="line"> *         this.left &#x3D; left;</span><br><span class="line"> *         this.right &#x3D; right;</span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) &#123;</span><br><span class="line">        if (t1&#x3D;&#x3D;null)&#123;</span><br><span class="line">            return t2;</span><br><span class="line">        &#125;</span><br><span class="line">        if (t2&#x3D;&#x3D;null)&#123;</span><br><span class="line">            return t1;</span><br><span class="line">        &#125;</span><br><span class="line">        t1.val+&#x3D;t2.val;</span><br><span class="line">        t1.left&#x3D;mergeTrees(t1.left,t2.left);</span><br><span class="line">        t2.right&#x3D;mergeTrees(t1.right,t2.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>Complexity</h1>
 
       
     </div>
@@ -596,20 +1097,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
