@@ -28,7 +28,7 @@
 <meta property="og:description" content="Manipulation We’ve learned six commands commonly used to manage data stored in a relational database and how to set constraints on such data. What can we generalize so far?  SQL is a programming langu">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-08-23T13:50:00.000Z">
-<meta property="article:modified_time" content="2020-08-24T11:50:04.187Z">
+<meta property="article:modified_time" content="2020-08-27T09:59:25.635Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-24 19:50:04" itemprop="dateModified" datetime="2020-08-24T19:50:04+08:00">2020-08-24</time>
+                <time title="Modified: 2020-08-27 17:59:25" itemprop="dateModified" datetime="2020-08-27T17:59:25+08:00">2020-08-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,8 +249,16 @@ We’ve learned six commands commonly used to manage data stored in a relational
 <p>edits a row in a table:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_name</span><br><span class="line">SET .....</span><br><span class="line">WHERE condition;</span><br></pre></td></tr></table></figure>
 <p>deletes rows from a table:</p>
-<h2 id="hexoPostRenderEscape-figure-class-highlight-plain-table-tr-td-class-gutter-pre-span-class-line-1-span-br-span-class-line-2-span-br-pre-td-td-class-code-pre-span-class-line-DELETE-FROM-table-name-span-br-span-class-line-WHERE-condition-span-br-pre-td-tr-table-figure-hexoPostRenderEscape-TO-BE-CONTINUED…"><a class="header-anchor" href="#hexoPostRenderEscape-figure-class-highlight-plain-table-tr-td-class-gutter-pre-span-class-line-1-span-br-span-class-line-2-span-br-pre-td-td-class-code-pre-span-class-line-DELETE-FROM-table-name-span-br-span-class-line-WHERE-condition-span-br-pre-td-tr-table-figure-hexoPostRenderEscape-TO-BE-CONTINUED…">¶</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name</span><br><span class="line">WHERE condition;</span><br></pre></td></tr></table></figure><br>
-TO BE CONTINUED…</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name</span><br><span class="line">WHERE condition;</span><br></pre></td></tr></table></figure>
+<h1><center>Queries</center></h1>
+<p><code>AS</code> is a keyword in SQL that allows you to rename a column or table using an alias. The new name can be anything you want as long as you put it inside of single quotes.</p>
+<p>Some important things to note:</p>
+<ul>
+<li>Although it’s not always necessary, it’s best practice to surround your aliases with single quotes.</li>
+<li>When using <code>AS</code>, the columns are not being renamed in the table. The aliases only appear in the result.</li>
+</ul>
+<h1><center>Aggregate Functions</center></h1>
+<h1><center>Multiple Tables</center></h1>
 
     </div>
 
@@ -334,13 +342,7 @@ TO BE CONTINUED…</h2>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Manipulation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hexoPostRenderEscape-figure-class-highlight-plain-table-tr-td-class-gutter-pre-span-class-line-1-span-br-span-class-line-2-span-br-pre-td-td-class-code-pre-span-class-line-DELETE-FROM-table-name-span-br-span-class-line-WHERE-condition-span-br-pre-td-tr-table-figure-hexoPostRenderEscape-TO-BE-CONTINUED%E2%80%A6"><span class="nav-number">1.1.</span> <span class="nav-text">1
-2
-DELETE FROM table_name
-WHERE condition;
-
-
-TO BE CONTINUED…</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Manipulation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Queries</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Aggregate Functions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Multiple Tables</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

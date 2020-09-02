@@ -263,7 +263,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-27 16:34:49" itemprop="dateModified" datetime="2020-08-27T16:34:49+08:00">2020-08-27</time>
+                <time title="Modified: 2020-09-02 14:03:44" itemprop="dateModified" datetime="2020-09-02T14:03:44+08:00">2020-09-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -289,8 +289,9 @@
           <center><h1>About Keys</h1></center>
 &emsp;&emsp;码、主码、候选码的关系:
 ![](https://img-blog.csdnimg.cn/20190625173457198.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N1bWFsaXFpbmdodWE=,size_16,color_FFFFFF,t_70)
-貌似码=超键
-<a target="_blank" rel="noopener" href="https://blog.csdn.net/sumaliqinghua/article/details/85872446">一篇不错的博客</a>
+<p>貌似码=超键<br>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/sumaliqinghua/article/details/85872446">一篇不错的博客</a><br>
+全码：整个属性组是码</p>
 <center><h1>About Dependencies</h1></center>
 <h2>完全函数依赖</h2>
 &emsp;&emsp;设X,Y是关系R的两个属性集合，X’是X的真子集，存在X→Y，但对每一个X’都有X’!→Y，则称Y完全函数依赖于X。
@@ -304,10 +305,20 @@
 <h2>多值依赖</h2>
 设R(U)是一个属性集合U上的一个关系模式，X, Y, 和Z是U的子集，并且Z=U-X-Y，多值依赖X->->Y成立当且仅当对R的任一个关系r，r在(X,Z)上的每个值对应一组Y的值，这组值仅仅决定于X值而与Z值无关。
 <p>若X-&gt;-&gt;Y，而Z=空集，则称X-&gt;-&gt;Y为平凡的多值依赖。否则，称X-&gt;-&gt;Y为非平凡的多值依赖。</p>
-<p>平凡多值依赖就是，属性集合中分为两个真子集，每一个X对应一组Y的取值</p>
-<p>可以看出，如果把上面的一组改为一个，那么多值依赖就变成了函数依赖。当然一个值组成的组也是组，所以说，函数依赖是多值依赖的特殊情况。<br>
-<img src="/.com//%5CHard-to-Understand-Concepts-in-Database%5Cdepen.png" alt></p>
+<p>平凡多值依赖就是，属性集合中分为两个真子集，每一个X对应一组Y的取值<br>
+**<br>
+可以看出，如果把上面的一组改为一个，那么多值依赖就变成了函数依赖。当然一个值组成的组也是组，所以说，函数依赖是多值依赖的特殊情况。<br>
+（首先函数依赖和多值依赖的X、Y应该都可以是属性组吧，函数依赖是一个x值决定一个y值，多值依赖是一个x值决定多个y值）**</p>
+<h3>多值依赖的性质</h3>
+![](\Hard-to-Understand-Concepts-in-Database\mdependp.png)
+<p><img src="/2020/08/26/Hard-to-Understand-Concepts-in-Database/%5CHard-to-Understand-Concepts-in-Database%5Cdepen.png" alt></p>
 <h2>函数依赖图</h2>
+看了这个你就懂怎么操作了
+![](\Hard-to-Understand-Concepts-in-Database\fdepend.png)
+还有涉及到部分函数依赖时，可以用虚线表示
+![](\Hard-to-Understand-Concepts-in-Database\pdepend.png)
+多值依赖
+![](\Hard-to-Understand-Concepts-in-Database\mdepend.png)
       
     </div>
 
@@ -357,7 +368,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-27 17:28:56" itemprop="dateModified" datetime="2020-08-27T17:28:56+08:00">2020-08-27</time>
+                <time title="Modified: 2020-09-02 13:31:30" itemprop="dateModified" datetime="2020-09-02T13:31:30+08:00">2020-09-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -387,7 +398,7 @@
   符合的关系：<br>
 <img src="https://pic3.zhimg.com/80/6b735fb9503b0930e741faa474fed28e_1440w.jpg?source=1940ef5c" alt></p>
 <center><h1>2NF</h1></center>
-2NF是对记录的**惟一性**，要求记录有惟一标识，即实体的惟一性，即不存在部分依赖；2NF在1NF的基础之上，消除了非主属性对于码的部分函数依赖，简而言之，第二范式就是非主属性依赖于主关键字。
+2NF是对记录的**惟一性**，要求记录有惟一标识，即实体的惟一性，即不存在部分依赖；2NF在1NF的基础之上，消除了非主属性对于码的部分函数依赖，简而言之，第二范式就是非主属性完全依赖于主关键字。
 <h3>如何确定一个关系是否为2NF</h3>
 - 第一步：找出数据表中所有的候选码。
 首先考察包含一个属性的所有属性组，看它们能否唯一确定别的属性；接下来看包含两个属性的、三个的...以此类推
@@ -397,23 +408,30 @@
 - 第三步：数据表中，除去所有的主属性，剩下的就都是非主属性了。
 - 第四步：查看是否存在非主属性对码的部分函数依赖。
 ![](\Understanding-Paradigm-in-Database-Design\2NF.png)
+<h3>如何把一个关系改造成2NF</h3>
+投影分解，把存在部分依赖的地方拆开
 <center><h1>3NF</h1></center>
 3NF是对字段的**冗余性**，它要求字段没有冗余，即不存在传递依赖；要求任何字段不能由其他字段派生出来
 每个**非主属性**都不传递依赖于R的候选键
 > 表: 学号, 姓名, 年龄, 学院名称, 学院电话
+<h3>如何把一个关系改造成3NF</h3>
+投影分解，把存在传递依赖的地方拆开
 <center><h1>BCNF</h1></center>
-在 3NF 的基础上消除主属性对于码的部分与传递函数依赖，就是属性不依赖于其它非主属性（不能存在关键字段决定关键字段的情况）
+在 3NF 的基础上消除主属性对于码的部分与传递函数依赖（是修正的/扩充的第三范式），就是属性不依赖于其它非主属性（不能存在关键字段决定关键字段的情况）
 每个**属性**都不传递依赖于R的候选键
 一个满足BCNF的关系模式：
-- 所有非主属性对每一个码都是完全函数依赖
-- 所有的主属性对每一个不包含它的码，是完全函数依赖
-- 没有任何属性完全函数依赖于非码的任何一组属性
+- 所有非主属性对每一个码都是完全函数依赖（满足2NF）
+- 所有的主属性对每一个不包含它的码，是完全函数依赖（让主属性对码不存在部分函数依赖）
+- 没有任何属性完全函数依赖于非码的任何一组属性（主属性和非主属性都不能完全依赖于非码的任何一组属性，因为这样就存在属性对码的传递函数依赖）
+<p><em>Tips:全码的关系一定属于BCNF</em></p>
 <center><h1>4NF</h1></center>
 ![](Understanding-Paradigm-in-Database-Design\2.png)
 <center><h1>To put it Simple</h1></center>
 1、第一范式（1NF）：一个关系模式R的所有属性都是不可分的基本数据项。
-2、第二范式（2NF）：满足第一范式，然后消除部分依赖。
-3、第三范式（3NF）： 满足第二范式，消除传递依赖。
+2、第二范式（2NF）：满足第一范式，然后消除部分依赖。（消除-非主-部分）
+3、第三范式（3NF）： 满足第二范式，消除传递依赖。（消除-非主-传递）
+4、BC范式（BCNF）：满足第三范式（消除-主与非主-部分与传递）
+5、第四范式（4NF）：满足BC范式（消除-非平凡与非函数依赖-多值依赖）
 ![](https://img-blog.csdn.net/20170508213333607?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvRG92ZV9Lbm93bGVkZ2U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 <center><h1>规范化过程</h1></center>
 ![](Understanding-Paradigm-in-Database-Design\1.png)
@@ -638,7 +656,7 @@ a4值对应的象集为 {  (b6,c6)  }
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-24 19:50:04" itemprop="dateModified" datetime="2020-08-24T19:50:04+08:00">2020-08-24</time>
+                <time title="Modified: 2020-08-27 17:59:25" itemprop="dateModified" datetime="2020-08-27T17:59:25+08:00">2020-08-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -695,8 +713,16 @@ We’ve learned six commands commonly used to manage data stored in a relational
 <p>edits a row in a table:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table_name</span><br><span class="line">SET .....</span><br><span class="line">WHERE condition;</span><br></pre></td></tr></table></figure>
 <p>deletes rows from a table:</p>
-<h2 id="hexoPostRenderEscape-figure-class-highlight-plain-table-tr-td-class-gutter-pre-span-class-line-1-span-br-span-class-line-2-span-br-pre-td-td-class-code-pre-span-class-line-DELETE-FROM-table-name-span-br-span-class-line-WHERE-condition-span-br-pre-td-tr-table-figure-hexoPostRenderEscape-TO-BE-CONTINUED…"><a class="header-anchor" href="#hexoPostRenderEscape-figure-class-highlight-plain-table-tr-td-class-gutter-pre-span-class-line-1-span-br-span-class-line-2-span-br-pre-td-td-class-code-pre-span-class-line-DELETE-FROM-table-name-span-br-span-class-line-WHERE-condition-span-br-pre-td-tr-table-figure-hexoPostRenderEscape-TO-BE-CONTINUED…">¶</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name</span><br><span class="line">WHERE condition;</span><br></pre></td></tr></table></figure><br>
-TO BE CONTINUED…</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name</span><br><span class="line">WHERE condition;</span><br></pre></td></tr></table></figure>
+<h1><center>Queries</center></h1>
+<p><code>AS</code> is a keyword in SQL that allows you to rename a column or table using an alias. The new name can be anything you want as long as you put it inside of single quotes.</p>
+<p>Some important things to note:</p>
+<ul>
+<li>Although it’s not always necessary, it’s best practice to surround your aliases with single quotes.</li>
+<li>When using <code>AS</code>, the columns are not being renamed in the table. The aliases only appear in the result.</li>
+</ul>
+<h1><center>Aggregate Functions</center></h1>
+<h1><center>Multiple Tables</center></h1>
 
       
     </div>
