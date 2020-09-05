@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="关系的一个分解 ![](\Model-Decomposition\definition.png) 说人话： 分解以后的关系，它们的属性集合并起来应该和原关系的属性集相等，此外呢，分解出来的各子关系，它们的属性集之间不能有包含关系 那么如何确定某个子关系上的函数依赖呢？ 在原关系函数依赖的闭包上找，要左右两边的属性合并起来在此子关系的属性集内就可以纳入这个子关系的函数依赖中~ 模式分解的三种等价形式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Model Decomposition">
+<meta property="og:url" content="http://yoursite.com/2020/09/03/Model-Decomposition/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="关系的一个分解 ![](\Model-Decomposition\definition.png) 说人话： 分解以后的关系，它们的属性集合并起来应该和原关系的属性集相等，此外呢，分解出来的各子关系，它们的属性集之间不能有包含关系 那么如何确定某个子关系上的函数依赖呢？ 在原关系函数依赖的闭包上找，要左右两边的属性合并起来在此子关系的属性集内就可以纳入这个子关系的函数依赖中~ 模式分解的三种等价形式">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-03T07:05:35.000Z">
+<meta property="article:modified_time" content="2020-09-05T05:22:28.818Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta property="article:tag" content="Database">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/09/03/Model-Decomposition/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Model Decomposition | Crestiny's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Crestiny's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Life is fantastic ! </p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/03/Model-Decomposition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Model Decomposition
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-03 15:05:35" itemprop="dateCreated datePublished" datetime="2020-09-03T15:05:35+08:00">2020-09-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 13:22:28" itemprop="dateModified" datetime="2020-09-05T13:22:28+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2>关系的一个分解</h2>
+![](\Model-Decomposition\definition.png)
+说人话：
+分解以后的关系，它们的属性集合并起来应该和原关系的属性集相等，此外呢，分解出来的各子关系，它们的属性集之间不能有包含关系
+那么如何确定某个子关系上的函数依赖呢？
+在原关系函数依赖的闭包上找，要左右两边的属性合并起来在此子关系的属性集内就可以纳入这个子关系的函数依赖中~
+<h2>模式分解的三种等价形式</h2>
+![](\Model-Decomposition\3.png)
+<h3>什么是“无损连接性”？</h3>
+个人理解：要从分解后的子关系恢复到原关系，一般是通过自然连接来实现的；假如分解后再用自然连接得到的关系并非原关系，而是一个“元组增加了，信息丢失了”的关系，这种就是有损连接性的分解
+<h3>什么是“保持函数依赖”？</h3>
+个人理解：原关系的各种函数依赖，每个应该在某子关系中出现至少一次
+<h2>引理</h2>
+<h3>记号定义</h3>
+![](\Model-Decomposition\ydefinition.png)
+<h3>相关性质</h3>
+![](\Model-Decomposition\p.png)
+<h2>无损连接性</h2>
+<h3>定义</h3>
+![](\Model-Decomposition\wdefinition.png)
+<h3>判别算法</h3>
+![](\Model-Decomposition\algorithm.png)
+<h3>特殊地</h3>
+![](\Model-Decomposition\adefinition.png)
+<h2>保持函数依赖</h2>
+<h3>定义</h3>
+![](\Model-Decomposition\depend.png)
+根据这个定义，我们再加上判断两个函数依赖集是否相等就可以完整地作为一个“保持函数依赖”的判别算法了！
+<h2>模式分解的算法</h2>
+<h3>关于模式分解结果的几种情况</h3>
+1. 如果保持了“无损连接性”，则分解后的关系一定是4NF的
+2. 如果保持了“保持函数依赖性”，则分解后的关系一定是3NF的，不一定能到BCNF
+3. 如果保持了“无损连接性”和“保持函数依赖性”，则分解后的关系一定是3NF的，不一定能到BCNF（？？？）
+<h3>“保持函数依赖性”+3NF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a1.png)
+<h4>说人话</h4>
+- 第一步：极小化F
+- 第二步：在U中去掉F中不包含的属性
+*注：接下来讨论的都是处理后的F和U了！！！*
+- 第三步：假如F中有函数依赖能使左右两边合并起来恰好是U，那没事了，R不用作分解，算法终止；不是的话就转第四步
+- 第四步：把F按照相同左边X的规则分组成几个小的函数依赖集F'(i)，对应地有它的U(i)，再用U(i)在F上找到对应的F(i)，R就这样被分解了
+<h3>“保持函数依赖性”+“无损连接性”+3NF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a2.png)
+<h4>说人话</h4>
+- 第一步：先做算法6.3，也就是先让分解后的模式“保持函数依赖性”。
+- 第二步：找到原关系R的码X，和它在F上的闭包，形成一个对应关系R(x)
+- 第三步：在先前得到的几个子关系R(i)中，寻找一下有没有对应的U(i)包含了X的，要是有，那么这个R(x)就不用加到分解出的子关系里面了，反之是需要的
+<h3>“无损连接性”+BCNF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a3.png)
+<h4>说人话</h4>
+<ul>
+<li>第一步：初始的状态就是从原关系R开始，</li>
+<li>第二步：检查一下当前分解中是不是每个关系都符合BCNF了，如果是，就可以终止了；如果不是，跳第三步</li>
+<li>第三步：对于那些不符合BCNF的关系，我们找到某个函数依赖——它的左边X并非此关系的码。我们把这个函数依赖的左右两边合并，这是一个属性集；然后在此关系属性集里面剔除“此函数依赖的右边Y”就形成另一个属性集。有了分解后的两个属性集，根据它们生成对应的F就好啦。这样就把这个关系分解好了。跳第二步</li>
+</ul>
+<h3>“无损连接性”+4NF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a4.png)
+<h4>说人话</h4>
+- 第一步：用算法6.5做到“无损连接性”+BCNF
+- 第二步：考察分解中那些不符合4NF的关系，用定理6.6的方法分解
+- 第三步：分解中的每个子关系都属于4NF即可终止
+<h4>补充：什么是传说中的定理6.6呢？</h4>
+![](\Model-Decomposition\d1.png)
+这个定理的意思就是，既然这个关系不符合4NF吧，那就是有非平凡非函数依赖的多值依赖，也就是X-->Y。有了它我们把关系分成（X,Y）和（X,Z），有点奇怪的是，为什么关系可以这样表示啊？
+<h2>完整版数据依赖的公理系统</h2>
+<h3>8条公理</h3>
+![](\Model-Decomposition\g1.png)
+<h3>4条推理规则</h3>
+![](\Model-Decomposition\g2.png)
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Database/" rel="tag"># Database</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/02/Axiom-System-of-Data-Dependency/" rel="prev" title="Axiom System of Data Dependency">
+      <i class="fa fa-chevron-left"></i> Axiom System of Data Dependency
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/04/Skills-for-Database-Exercises/" rel="next" title="Skills for Database Exercises">
+      Skills for Database Exercises <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">关系的一个分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">模式分解的三种等价形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">什么是“无损连接性”？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">什么是“保持函数依赖”？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">引理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">记号定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">相关性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">无损连接性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">判别算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">特殊地</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">保持函数依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">模式分解的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.1.</span> <span class="nav-text">关于模式分解结果的几种情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.2.</span> <span class="nav-text">“保持函数依赖性”+3NF&amp;emsp;模式分解算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.2.1.</span> <span class="nav-text">教科书式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.2.2.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.3.</span> <span class="nav-text">“保持函数依赖性”+“无损连接性”+3NF&amp;emsp;模式分解算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.3.1.</span> <span class="nav-text">教科书式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.3.2.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.4.</span> <span class="nav-text">“无损连接性”+BCNF&amp;emsp;模式分解算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.4.1.</span> <span class="nav-text">教科书式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.4.2.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.5.</span> <span class="nav-text">“无损连接性”+4NF&amp;emsp;模式分解算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.5.1.</span> <span class="nav-text">教科书式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.5.2.</span> <span class="nav-text">说人话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.5.3.</span> <span class="nav-text">补充：什么是传说中的定理6.6呢？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">完整版数据依赖的公理系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">7.1.</span> <span class="nav-text">8条公理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">7.2.</span> <span class="nav-text">4条推理规则</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CrestinyCoco</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CrestinyCoco</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

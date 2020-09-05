@@ -156,6 +156,359 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/04/Skills-for-Database-Exercises/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/04/Skills-for-Database-Exercises/" class="post-title-link" itemprop="url">Skills for Database Exercises</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-04 13:02:29" itemprop="dateCreated datePublished" datetime="2020-09-04T13:02:29+08:00">2020-09-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 02:07:33" itemprop="dateModified" datetime="2020-09-05T02:07:33+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <center><h1>如何求最小函数依赖集</h1></center>
+<h2>教科书式的定理</h2>
+![](\Skills-for-Database-Exercises\min.png)
+<h2>说人话</h2>
+- 第一步：看到函数依赖式右边有多个属性的，用分解规则拆开
+- 第二步：考察F中的每个函数依赖，对于其中一个，令一个新的函数依赖集G，这个G就是在F中把这个函数依赖去掉所形成的。接下来，对于这个函数依赖的左边X，考察它在G上的闭包是什么，如果这个闭包包含了函数依赖的右边Y，那么就从F中去掉这个函数依赖；反之保留
+- 第三步：对于F中每一个左端包含多个属性的函数依赖式，选择左边X的每个子集Z,如果右边Y属于Z的在F上的闭包,则用Z->Y代替X->Y
+<h2>练练手</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">关系模式R(U，F)中，U&#x3D;ABCDEG，F&#x3D;&#123;B-&gt;D，DG-&gt;C,BD-&gt;E,AG-&gt;B,ADG-&gt;BC&#125;，求F的最小函数依赖集</span><br></pre></td></tr></table></figure>
+- 第一步：用分解规则拆右边，得到新的F={B->D，DG->C,BD->E,AG->B,ADG->B,ADG->C}
+- 第二步：
+对于B->D，B在G中的闭包是{B},不包含D，所以可以保留
+对于DG->C，DG在G中的闭包是{D，G}，不包含C，所以可以保留
+对于BD->E，BD在G中的闭包是{B，D}，不包含E，所以可以保留
+对于AG->B，AG在G中的闭包是{A，G}，不包含B，所以可以保留
+对于ADG->B，ADG在G中的闭包是{A，D，G，B，C，E}，包含B，所以丢弃
+对于ADG->C，ADG在G中的闭包是{A，D，G，B，C，E}，包含C，所以丢弃
+*注：这里每一步考察完，到下一步时用的还是原来那个F，一次考察就是一次考察，不会动态变化的，不然就很奇怪了。*
+好，现在的F={B->D，DG->C,BD->E,AG->B}
+- 第三步：
+对于DG->C，D在F上的闭包是{D}，没啥替换的；G在F上的闭包是{G}，同样没啥
+对于BD->E，B在F上的闭包是{B，D，E}，包含E，可用B->E替换BD->E
+对于AG->B，A在F上的闭包是{A}....
+所以现在的F={B->D，DG->C,B->E,AG->B}
+<center><h1>如何求一个属性(组)在某函数依赖集上的闭包</h1></center>
+<h2>教科书式的定理</h2>
+![](\Skills-for-Database-Exercises\algorithm.png)
+<h2>说人话</h2>
+通过一个多次迭代的方法求。
+![](\Skills-for-Database-Exercises\algorithm1.png)
+*注：改正一下，应该是“在F中找到一些函数依赖式——它们的左边应该是**包含于**X(i)的”*
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/03/Model-Decomposition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/03/Model-Decomposition/" class="post-title-link" itemprop="url">Model Decomposition</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-03 15:05:35" itemprop="dateCreated datePublished" datetime="2020-09-03T15:05:35+08:00">2020-09-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-05 13:22:28" itemprop="dateModified" datetime="2020-09-05T13:22:28+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2>关系的一个分解</h2>
+![](\Model-Decomposition\definition.png)
+说人话：
+分解以后的关系，它们的属性集合并起来应该和原关系的属性集相等，此外呢，分解出来的各子关系，它们的属性集之间不能有包含关系
+那么如何确定某个子关系上的函数依赖呢？
+在原关系函数依赖的闭包上找，要左右两边的属性合并起来在此子关系的属性集内就可以纳入这个子关系的函数依赖中~
+<h2>模式分解的三种等价形式</h2>
+![](\Model-Decomposition\3.png)
+<h3>什么是“无损连接性”？</h3>
+个人理解：要从分解后的子关系恢复到原关系，一般是通过自然连接来实现的；假如分解后再用自然连接得到的关系并非原关系，而是一个“元组增加了，信息丢失了”的关系，这种就是有损连接性的分解
+<h3>什么是“保持函数依赖”？</h3>
+个人理解：原关系的各种函数依赖，每个应该在某子关系中出现至少一次
+<h2>引理</h2>
+<h3>记号定义</h3>
+![](\Model-Decomposition\ydefinition.png)
+<h3>相关性质</h3>
+![](\Model-Decomposition\p.png)
+<h2>无损连接性</h2>
+<h3>定义</h3>
+![](\Model-Decomposition\wdefinition.png)
+<h3>判别算法</h3>
+![](\Model-Decomposition\algorithm.png)
+<h3>特殊地</h3>
+![](\Model-Decomposition\adefinition.png)
+<h2>保持函数依赖</h2>
+<h3>定义</h3>
+![](\Model-Decomposition\depend.png)
+根据这个定义，我们再加上判断两个函数依赖集是否相等就可以完整地作为一个“保持函数依赖”的判别算法了！
+<h2>模式分解的算法</h2>
+<h3>关于模式分解结果的几种情况</h3>
+1. 如果保持了“无损连接性”，则分解后的关系一定是4NF的
+2. 如果保持了“保持函数依赖性”，则分解后的关系一定是3NF的，不一定能到BCNF
+3. 如果保持了“无损连接性”和“保持函数依赖性”，则分解后的关系一定是3NF的，不一定能到BCNF（？？？）
+<h3>“保持函数依赖性”+3NF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a1.png)
+<h4>说人话</h4>
+- 第一步：极小化F
+- 第二步：在U中去掉F中不包含的属性
+*注：接下来讨论的都是处理后的F和U了！！！*
+- 第三步：假如F中有函数依赖能使左右两边合并起来恰好是U，那没事了，R不用作分解，算法终止；不是的话就转第四步
+- 第四步：把F按照相同左边X的规则分组成几个小的函数依赖集F'(i)，对应地有它的U(i)，再用U(i)在F上找到对应的F(i)，R就这样被分解了
+<h3>“保持函数依赖性”+“无损连接性”+3NF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a2.png)
+<h4>说人话</h4>
+- 第一步：先做算法6.3，也就是先让分解后的模式“保持函数依赖性”。
+- 第二步：找到原关系R的码X，和它在F上的闭包，形成一个对应关系R(x)
+- 第三步：在先前得到的几个子关系R(i)中，寻找一下有没有对应的U(i)包含了X的，要是有，那么这个R(x)就不用加到分解出的子关系里面了，反之是需要的
+<h3>“无损连接性”+BCNF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a3.png)
+<h4>说人话</h4>
+<ul>
+<li>第一步：初始的状态就是从原关系R开始，</li>
+<li>第二步：检查一下当前分解中是不是每个关系都符合BCNF了，如果是，就可以终止了；如果不是，跳第三步</li>
+<li>第三步：对于那些不符合BCNF的关系，我们找到某个函数依赖——它的左边X并非此关系的码。我们把这个函数依赖的左右两边合并，这是一个属性集；然后在此关系属性集里面剔除“此函数依赖的右边Y”就形成另一个属性集。有了分解后的两个属性集，根据它们生成对应的F就好啦。这样就把这个关系分解好了。跳第二步</li>
+</ul>
+<h3>“无损连接性”+4NF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a4.png)
+<h4>说人话</h4>
+- 第一步：用算法6.5做到“无损连接性”+BCNF
+- 第二步：考察分解中那些不符合4NF的关系，用定理6.6的方法分解
+- 第三步：分解中的每个子关系都属于4NF即可终止
+<h4>补充：什么是传说中的定理6.6呢？</h4>
+![](\Model-Decomposition\d1.png)
+这个定理的意思就是，既然这个关系不符合4NF吧，那就是有非平凡非函数依赖的多值依赖，也就是X-->Y。有了它我们把关系分成（X,Y）和（X,Z），有点奇怪的是，为什么关系可以这样表示啊？
+<h2>完整版数据依赖的公理系统</h2>
+<h3>8条公理</h3>
+![](\Model-Decomposition\g1.png)
+<h3>4条推理规则</h3>
+![](\Model-Decomposition\g2.png)
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/02/Axiom-System-of-Data-Dependency/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/02/Axiom-System-of-Data-Dependency/" class="post-title-link" itemprop="url">Axiom System of Data Dependency</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-02 14:33:49" itemprop="dateCreated datePublished" datetime="2020-09-02T14:33:49+08:00">2020-09-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-04 13:16:17" itemprop="dateModified" datetime="2020-09-04T13:16:17+08:00">2020-09-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <center><h1>Armstrong公理系统</h1></center>
+<h2>什么是逻辑蕴含？</h2>
+![](\Axiom-System-of-Data-Dependency\logical.png)
+<br><br>
+<h2>如何确定一个函数依赖是否为F所蕴含？</h2>
+![](\Axiom-System-of-Data-Dependency\Armstrong.png)
+*注：XZ表示X并Z*
+对于Armstrong公理的简要说明：
+1. 自反律：其实这个和F无关，我们只要有一个大集合X和它的子集Y，就会有X->Y
+2. 增广率：需要推出XZ->YZ，也就是证明，如果有两个元组在XZ上的值相等，那么在YZ上的值也会相等；对于前半句：这个条件就给出两个元组在X上值相等，且在Z上值相等；根据X->Y，它们在Y上的值相等，和Z的一合并，就推出了这两个元组在YZ上的值也会相等
+3. 传递率：你懂的
+<p>顺带导出了3条推理规则：</p>
+<ol>
+<li>合并规则：X-&gt;Y与X-&gt;Z可得X-&gt;YZ</li>
+<li>伪传递规则：X-&gt;Y与WY-&gt;Z可得XW-&gt;Z</li>
+<li>分解规则：X-&gt;Y与Z包含于Y可得X-&gt;Z<br>
+还顺带有个小引理：<br>
+就是X-&gt;ABCDEF…与右边的分开写，是互为充要条件的<br>
+<br><br></li>
+</ol>
+<h2>关于闭包</h2>
+函数依赖集F的闭包：是指运用Armstrong公理系统推导出来的所有F可蕴含的函数依赖，结果形式应该是一个函数依赖组成的集合
+属性集X关于函数依赖集F的闭包：有个推导算法可以用，结果形式应该是一个属性组成的集合
+算法如下：
+![](\Axiom-System-of-Data-Dependency\algorithm.png)
+<h2>极小函数依赖集</h2>
+<h3>定义</h3>
+![](\Axiom-System-of-Data-Dependency\definition.png)
+*注：两个函数依赖集等价，就是函数依赖集的闭包相等*
+<h3>化简为极小函数依赖集（亦为判定）</h3>
+![](\Axiom-System-of-Data-Dependency\min.png)
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/27/Without-Faith/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -263,7 +616,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-02 14:03:44" itemprop="dateModified" datetime="2020-09-02T14:03:44+08:00">2020-09-02</time>
+                <time title="Modified: 2020-09-05 10:01:28" itemprop="dateModified" datetime="2020-09-05T10:01:28+08:00">2020-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -304,14 +657,19 @@
 &emsp;&emsp;*举个例子*：通过A得到B，通过B得到C，但是C得不到B，B得不到A，那么成C传递依赖于A
 <h2>多值依赖</h2>
 设R(U)是一个属性集合U上的一个关系模式，X, Y, 和Z是U的子集，并且Z=U-X-Y，多值依赖X->->Y成立当且仅当对R的任一个关系r，r在(X,Z)上的每个值对应一组Y的值，这组值仅仅决定于X值而与Z值无关。
+注：我突然觉得，这个与Z值无关，貌似不是什么很特别的言论。其实吧，我的理解就是，有一个X，有一个Y，一个X值对应多个Y值。（啊不过！Z的有无还是会决定这个多值依赖是非平凡/平凡的！）
 <p>若X-&gt;-&gt;Y，而Z=空集，则称X-&gt;-&gt;Y为平凡的多值依赖。否则，称X-&gt;-&gt;Y为非平凡的多值依赖。</p>
 <p>平凡多值依赖就是，属性集合中分为两个真子集，每一个X对应一组Y的取值<br>
+<img src="/2020/08/26/Hard-to-Understand-Concepts-in-Database/%5CHard-to-Understand-Concepts-in-Database%5Cpingdepend.png" alt><br>
 **<br>
 可以看出，如果把上面的一组改为一个，那么多值依赖就变成了函数依赖。当然一个值组成的组也是组，所以说，函数依赖是多值依赖的特殊情况。<br>
-（首先函数依赖和多值依赖的X、Y应该都可以是属性组吧，函数依赖是一个x值决定一个y值，多值依赖是一个x值决定多个y值）**</p>
+（首先函数依赖和多值依赖的X、Y应该都可以是属性组吧，函数依赖是一个x值决定一个y值，多值依赖是一个x值决定多个y值）**<br>
+<img src="/2020/08/26/Hard-to-Understand-Concepts-in-Database/%5CHard-to-Understand-Concepts-in-Database%5Cdepen.png" alt></p>
 <h3>多值依赖的性质</h3>
 ![](\Hard-to-Understand-Concepts-in-Database\mdependp.png)
-<p><img src="/2020/08/26/Hard-to-Understand-Concepts-in-Database/%5CHard-to-Understand-Concepts-in-Database%5Cdepen.png" alt></p>
+<h3>多值依赖与函数依赖区别</h3>
+![](\Hard-to-Understand-Concepts-in-Database\difference1.png)
+<h2>连接依赖</h2>
 <h2>函数依赖图</h2>
 看了这个你就懂怎么操作了
 ![](\Hard-to-Understand-Concepts-in-Database\fdepend.png)
@@ -319,6 +677,11 @@
 ![](\Hard-to-Understand-Concepts-in-Database\pdepend.png)
 多值依赖
 ![](\Hard-to-Understand-Concepts-in-Database\mdepend.png)
+<center><h1>零散小知识</h1></center>
+<h2>二目关系</h2>
+其实**目**或者说**度**，就是一个关系中有多少个属性而已......
+所以二目关系就是有两列的那种啦
+
       
     </div>
 
@@ -368,7 +731,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-02 13:31:30" itemprop="dateModified" datetime="2020-09-02T13:31:30+08:00">2020-09-02</time>
+                <time title="Modified: 2020-09-02 14:24:43" itemprop="dateModified" datetime="2020-09-02T14:24:43+08:00">2020-09-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -431,67 +794,10 @@
 2、第二范式（2NF）：满足第一范式，然后消除部分依赖。（消除-非主-部分）
 3、第三范式（3NF）： 满足第二范式，消除传递依赖。（消除-非主-传递）
 4、BC范式（BCNF）：满足第三范式（消除-主与非主-部分与传递）
-5、第四范式（4NF）：满足BC范式（消除-非平凡与非函数依赖-多值依赖）
+5、第四范式（4NF）：满足BC范式，在多值依赖中，去掉了属于函数依赖的，也去掉了非平凡的（消除-非平凡与非函数依赖-多值依赖）
 ![](https://img-blog.csdn.net/20170508213333607?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvRG92ZV9Lbm93bGVkZ2U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 <center><h1>规范化过程</h1></center>
 ![](Understanding-Paradigm-in-Database-Design\1.png)
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/26/Understanding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/26/Understanding/" class="post-title-link" itemprop="url">Understanding </a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-26 21:00:35" itemprop="dateCreated datePublished" datetime="2020-08-26T21:00:35+08:00">2020-08-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
       
     </div>
 
@@ -656,7 +962,7 @@ a4值对应的象集为 {  (b6,c6)  }
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-27 17:59:25" itemprop="dateModified" datetime="2020-08-27T17:59:25+08:00">2020-08-27</time>
+                <time title="Modified: 2020-09-03 18:48:05" itemprop="dateModified" datetime="2020-09-03T18:48:05+08:00">2020-09-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -720,9 +1026,88 @@ We’ve learned six commands commonly used to manage data stored in a relational
 <ul>
 <li>Although it’s not always necessary, it’s best practice to surround your aliases with single quotes.</li>
 <li>When using <code>AS</code>, the columns are not being renamed in the table. The aliases only appear in the result.</li>
+<li><code>SELECT</code> is the clause we use every time we want to query information from a database.</li>
+<li><code>AS</code> renames a column or table.</li>
+<li><code>DISTINCT</code> return unique values.</li>
+<li><code>WHERE</code> is a popular command that lets you filter the results of the query based on conditions that you specify.</li>
+<li><code>LIKE</code> and <code>BETWEEN</code> are special operators.</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LIKE:</span><br><span class="line">The _ means you can substitute any individual character here without breaking the pattern.(一个对一个字符，汉字的话要用两个空空)</span><br><span class="line">% is a wildcard character that matches zero or more missing letters in the pattern. </span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>AND</code> and <code>OR</code> combines multiple conditions.</li>
+<li><code>ORDER BY</code> sorts the result.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">默认asc，降序是desc</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>LIMIT</code> specifies the maximum number of rows that the query will return.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIMIT 数字 &#x2F;*数字就是最后显示的结果有多少行*&#x2F;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>CASE</code> creates different outputs.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,</span><br><span class="line"> CASE</span><br><span class="line">  WHEN imdb_rating &gt; 8 THEN &#39;Fantastic&#39;</span><br><span class="line">  WHEN imdb_rating &gt; 6 THEN &#39;Poorly Received&#39;</span><br><span class="line">  ELSE &#39;Avoid at All Costs&#39;</span><br><span class="line"> END AS &#39;Review&#39;	%表示新增的这一列的命名，没有貌似也可</span><br><span class="line">FROM movies;</span><br></pre></td></tr></table></figure>
 <h1><center>Aggregate Functions</center></h1>
+<ul>
+<li><code>COUNT()</code>: count the number of rows</li>
+<li><code>SUM()</code>: the sum of the values in a column</li>
+<li><code>MAX()/MIN()</code>: the largest/smallest value</li>
+<li><code>AVG()</code>: the average of the values in a column</li>
+<li><code>ROUND()</code>: round the values in the column</li>
+</ul>
+<p>Aggregate functions combine multiple rows together to form a single value of more meaningful information.</p>
+<ul>
+<li><code>GROUP BY</code> is a clause used with aggregate functions to combine data from one or more columns.</li>
+<li><code>HAVING</code> limit the results of a query based on an aggregate property.</li>
+</ul>
+<p>关于SQL语句的执行顺序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(1) from </span><br><span class="line">(3) join </span><br><span class="line">(2) on </span><br><span class="line">(4) where </span><br><span class="line">(5) group by(开始使用select中的别名，后面的语句中都可以使用)</span><br><span class="line">(6) avg,sum.... </span><br><span class="line">(7) having </span><br><span class="line">(8) select </span><br><span class="line">(9) distinct </span><br><span class="line">(10) order by</span><br><span class="line">(11) limit </span><br></pre></td></tr></table></figure>
+<p>从这个顺序中我们不难发现，所有的查询语句都是从from开始执行的，在执行过程中，每个步骤都会为下一个步骤<strong>生成一个虚拟表</strong>，这个虚拟表将作为下一个执行步骤的输入。<br>
+第一步：首先对from子句中的前两个表执行一个笛卡尔乘积，此时生成虚拟表 vt1（选择相对小的表做基础表）</p>
+<p>第二步：接下来便是应用on筛选器，on 中的逻辑表达式将应用到 vt1 中的各个行，筛选出满足on逻辑表达式的行，生成虚拟表 vt2</p>
+<p>第三步：如果是outer join 那么这一步就将添加外部行，left outer jion 就把左表在第二步中过滤的添加进来，如果是right outer join 那么就将右表在第二步中过滤掉的行添加进来，这样生成虚拟表 vt3</p>
+<p>第四步：如果 from 子句中的表数目多余两个表，那么就将vt3和第三个表连接从而计算笛卡尔乘积，生成虚拟表，该过程就是一个重复1-3的步骤，最终得到一个新的虚拟表 vt3。</p>
+<p>第五步：应用where筛选器，对上一步生产的虚拟表引用where筛选器，生成虚拟表vt4，在这有个比较重要的细节不得不说一下，对于包含outer join子句的查询，就有一个让人感到困惑的问题，到底在on筛选器还是用where筛选器指定逻辑表达式呢？on和where的最大区别在于，如果在on应用逻辑表达式那么在第三步outer join中还可以把移除的行再次添加回来，而where的移除的最终的。举个简单的例子，有一个学生表（班级,姓名）和一个成绩表(姓名,成绩)，我现在需要返回一个x班级的全体同学的成绩，但是这个班级有几个学生缺考，也就是说在成绩表中没有记录。为了得到我们预期的结果我们就需要在on子句指定学生和成绩表的关系（学生.姓名=成绩.姓名）那么我们是否发现在执行第二步的时候，对于没有参加考试的学生记录就不会出现在vt2中，因为他们被on的逻辑表达式过滤掉了,但是我们用left outer join就可以把左表（学生）中没有参加考试的学生找回来，因为我们想返回的是x班级的所有学生，如果在on中应用学生.班级='x’的话，left outer join会把x班级的所有学生记录找回（感谢网友康钦谋__康钦苗的指正），所以只能在where筛选器中应用学生.班级=‘x’ 因为它的过滤是最终的。</p>
+<p>第六步：group by 子句将中的唯一的值组合成为一组，得到虚拟表vt5。如果应用了group by，那么后面的所有步骤都只能得到的vt5的列或者是聚合函数（count、sum、avg等）。原因在于最终的结果集中只为每个组包含一行。这一点请牢记。</p>
+<p>第七步：应用cube或者rollup选项，为vt5生成超组，生成vt6.</p>
+<p>第八步：应用having筛选器，生成vt7。having筛选器是第一个也是为唯一一个应用到已分组数据的筛选器。</p>
+<p>第九步：处理select子句。将vt7中的在select中出现的列筛选出来。生成vt8.</p>
+<p>第十步：应用distinct子句，vt8中移除相同的行，生成vt9。事实上如果应用了group by子句那么distinct是多余的，原因同样在于，分组的时候是将列中唯一的值分成一组，同时只为每一组返回一行记录，那么所以的记录都将是不相同的。</p>
+<p>第十一步：应用order by子句。按照order_by_condition排序vt9，此时返回的一个游标，而不是虚拟表。sql是基于集合的理论的，集合不会预先对他的行排序，它只是成员的逻辑集合，成员的顺序是无关紧要的。对表进行排序的查询可以返回一个对象，这个对象包含特定的物理顺序的逻辑组织。这个对象就叫游标。正因为返回值是游标，那么使用order by 子句查询不能应用于表表达式。排序是很需要成本的，除非你必须要排序，否则最好不要指定order by，最后，在这一步中是第一个也是唯一一个可以使用select列表中别名的步骤。</p>
+<p>第十二步：应用top选项。此时才返回结果给请求者即用户。</p>
 <h1><center>Multiple Tables</center></h1>
+<p>Why is this important? The most common types of joins will be joining a foreign key from one table with the primary key from another table. For instance, when we join orders and customers, we join on customer_id, which is a foreign key in orders and the primary key in customers.</p>
+<p>SQL has strict rules for appending data:<br>
+Tables must have the same number of columns.<br>
+The columns must have the same data types in the same order as the first table.</p>
+<ul>
+<li>
+<p><code>JOIN</code> will combine rows from different tables if the join condition is true.</p>
+</li>
+<li>
+<p><code>LEFT JOIN</code> will return every row in the left table, and if the join condition is not met, NULL values are used to fill in the columns from the right table.</p>
+</li>
+<li>
+<p>Primary key is a column that serves a unique identifier for the rows in the table.</p>
+</li>
+<li>
+<p>Foreign key is a column that contains the primary key to another table.</p>
+</li>
+<li>
+<p><code>CROSS JOIN</code> lets us combine all rows of one table with all rows of another table.</p>
+</li>
+<li>
+<p><code>UNION</code> stacks one dataset on top of another.</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM table1</span><br><span class="line">UNION</span><br><span class="line">SELECT *</span><br><span class="line">FROM table2;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>WITH</code> allows us to define one or more temporary tables that can be used in the final query.</li>
+</ul>
+<p>关于SQL语句的写法顺序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">WITH [临时表名] AS(</span><br><span class="line">	&#x2F;*一段查询*&#x2F;</span><br><span class="line">)</span><br><span class="line">SELECT [列名称 *代表所有的列]</span><br><span class="line">	CASE</span><br><span class="line">  		WHEN [条件] THEN [对应的新属性上的值]</span><br><span class="line">  		WHEN [条件] THEN [对应的新属性上的值]</span><br><span class="line">		  ......</span><br><span class="line">  		ELSE [对应的新属性上的值]</span><br><span class="line"> 	END AS [新属性名字]	%表示新增的这一列的命名，没有貌似也可</span><br><span class="line">FROM [表名称]</span><br><span class="line">	join_type JOIN [表名称]</span><br><span class="line">	ON [join条件]</span><br><span class="line">WHERE [过滤条件]</span><br><span class="line">GROUP BY [分组字段]	&#x2F;*可用select中的“列号”代表，就是直接写数字*&#x2F;</span><br><span class="line">	HAVING [分组条件]</span><br><span class="line">ORDER BY [排序字段] [ASC&#x2F;DESC]</span><br><span class="line">LIMIT [输出组数]</span><br></pre></td></tr></table></figure>
+<h1><center>小感想</center></h1>
+<p>这门小小的SQL语句课程就结束了，虽然内容十分少，但是用SQL语句解决实际需求时，还是需要很好的逻辑和语句熟练度的！<br>
+过几天就要考试了，加油吧小可可！</p>
 
       
     </div>
@@ -941,278 +1326,6 @@ I've learned concepts including:
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/21/A-Summary-for-Learn-HTML-Codecademy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/21/A-Summary-for-Learn-HTML-Codecademy/" class="post-title-link" itemprop="url">Summary for =Learn HTML= //Codecademy</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-21 22:47:51" itemprop="dateCreated datePublished" datetime="2020-08-21T22:47:51+08:00">2020-08-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-22 00:46:50" itemprop="dateModified" datetime="2020-08-22T00:46:50+08:00">2020-08-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Codecademy/" itemprop="url" rel="index"><span itemprop="name">Codecademy</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1><center>Learn HTML</center></h1>
-<h2 id="0x01-Elements-and-Structure"><a class="header-anchor" href="#0x01-Elements-and-Structure">¶</a>0x01 Elements and Structure</h2>
-<h3>1&emsp;Introduction to HTML</h3>
-<h4>1.1&emsp;Summary</h4>
-<ul>
-<li>HTML stands for <strong>HyperText Markup Language</strong> and is used to create the structure and content of a webpage.</li>
-<li>Most HTML elements contain opening and closing tags with raw text or other HTML tags between them.</li>
-<li>HTML elements can be nested inside other elements. The enclosed element is <strong>the child of</strong> the enclosing parent element.</li>
-<li>Any visible content should be placed within the opening and closing <body> tags.</body></li>
-<li>Headings and sub-headings, <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> tags, are used to enlarge text.</li>
-<li><code>&lt;p&gt;</code>, <code>&lt;span&gt;</code> and <code>&lt;div&gt;</code> tags specify text or blocks.</li>
-<li>The <code>&lt;em&gt;</code> and <code>&lt;strong&gt;</code> tags are used to emphasize text.</li>
-<li>Line breaks are created with the <code>&lt;br&gt;</code> tag.</li>
-<li>Ordered lists (<code>&lt;ol&gt;</code>) are numbered and unordered lists (<code>&lt;ul&gt;</code>) are bulleted.</li>
-<li>Images (<code>&lt;img&gt;</code>) and videos (<code>&lt;video&gt;</code>) can be added by linking to an existing source.</li>
-</ul>
-<aside>*P.S. `<img>` is a single tag.*</aside>
-<h3>2&emsp;HTML Document Standards</h3>
-<h4>2.1&emsp;Summary</h4>
-<center>*HTML Tags*</center>
-&emsp;While some tags have a very specific purpose, such as image and video tags, most tags are used to describe the content that they surround, which helps us modify and style our content later. There are seemingly infinite numbers of tags to use (many more than we’ve taught). Knowing when to use each one is based on how you want to describe the content of your HTML. Descriptive, well-chosen tags are one key to high-quality web development. A full list of available HTML tags can be found in Mozilla documentation.
-<ul>
-<li>The <code>&lt;!DOCTYPE html&gt;</code> declaration should always be the first line of code in your HTML files. This lets the browser know what version of HTML to expect.</li>
-<li>The <code>&lt;html&gt;</code> element will contain all of your HTML code.</li>
-<li>Information about the web page, like the title, belongs within the <code>&lt;head&gt;</code> of the page.</li>
-<li>You can add a title to your web page by using the <code>&lt;title&gt;</code> element, inside of the head.A webpage’s title appears in a browser’s tab.</li>
-<li>Anchor tags (<code>&lt;a&gt;</code>) are used to link to internal pages, external pages or content on the same page.You can create sections on a webpage and jump to them using <code>&lt;a&gt;</code> tags and adding ids to the elements you wish to jump to.</li>
-<li>Whitespace between HTML elements helps make code easier to read while not changing how elements appear in the browser.Indentation also helps make code easier to read. It makes parent-child relationships visible.</li>
-<li>Comments are written in HTML using the following syntax: <code>&lt;!-- comment --&gt;</code>.<br></li>
-</ul>
-<h4>2.2&emsp;Demo</h4>
-<pre>
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Brown Bears&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;nav&gt;
-    &lt;a href=&quot;./index.html&quot;&gt;Brown Bear&lt;/a&gt;
-    &lt;a href=&quot;./aboutme.html&quot;&gt;About Me&lt;/a&gt;
-  &lt;/nav&gt;
-  &lt;h1&gt;The Brown Bear&lt;/h1&gt;
-  &lt;nav&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#habitat&quot;&gt;Habitat&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#media&quot;&gt;Media&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/nav&gt;
-  &lt;div id=&quot;introduction&quot;&gt;
-    &lt;h2&gt;About Brown Bears&lt;/h2&gt;
-    &lt;p&gt;The brown bear (&lt;em&gt;Ursus arctos&lt;/em&gt;) is native to parts of northern Eurasia and North America. Its conservation status is currently &lt;strong&gt;Least Concern&lt;/strong&gt;.&lt;br /&gt;&lt;br /&gt; There are many subspecies within the brown bear species, including the
-      Atlas bear and the Himalayan brown bear.&lt;/p&gt;
-    &lt;a href=&quot;https://en.wikipedia.org/wiki/Brown_bear&quot; target=&quot;_blank&quot;&gt;Learn More&lt;/a&gt;
-    &lt;h3&gt;Species&lt;/h3&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Arctos&lt;/li&gt;
-      &lt;li&gt;Collarus&lt;/li&gt;
-      &lt;li&gt;Horribilis&lt;/li&gt;
-      &lt;li&gt;Nelsoni (extinct)&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;h3&gt;Features&lt;/h3&gt;
-    &lt;p&gt;Brown bears are not always completely brown. Some can be reddish or yellowish. They have very large, curved claws and huge paws. Male brown bears are often 30% larger than female brown bears. They can range from 5 feet to 9 feet from head to toe.&lt;/p&gt;
-  &lt;/div&gt;
-  &lt;div id=&quot;habitat&quot;&gt;
-    &lt;h2&gt;Habitat&lt;/h2&gt;
-    &lt;h3&gt;Countries with Large Brown Bear Populations&lt;/h3&gt;
-    &lt;ol&gt;
-      &lt;li&gt;Russia&lt;/li&gt;
-      &lt;li&gt;United States&lt;/li&gt;
-      &lt;li&gt;Canada&lt;/li&gt;
-    &lt;/ol&gt;
-    &lt;h3&gt;Countries with Small Brown Bear Populations&lt;/h3&gt;
-    &lt;p&gt;Some countries with smaller brown bear populations include Armenia, Belarus, Bulgaria, China, Finland, France, Greece, India, Japan, Nepal, Poland, Romania, Slovenia, Turkmenistan, and Uzbekistan.&lt;/p&gt;
-  &lt;/div&gt;
-  &lt;div id=&quot;media&quot;&gt;
-    &lt;h2&gt;Media&lt;/h2&gt;
-    &lt;img src=&quot;https://s3.amazonaws.com/codecademy-content/courses/web-101/web101-image_brownbear.jpg&quot; /&gt;
-    &lt;video src=&quot;https://s3.amazonaws.com/codecademy-content/courses/freelance-1/unit-1/lesson-2/htmlcss1-vid_brown-bear.mp4&quot; height=&quot;240&quot; width=&quot;320&quot; controls&gt;Video not supported&lt;/video&gt;
-  &lt;/div&gt;
-&lt;/body&gt;
-
-&lt;/html&gt;
-</pre>
-<p> Let’ see what it looks like in a browser:<br>
-<img src="/.com//%5CA-Summary-for-Learn-HTML-Codecademy%5Cwebsite1.png" alt><br>
-<img src="/.com//%5CA-Summary-for-Learn-HTML-Codecademy%5Cwebsite2.png" alt></p>
-<h2 id="0x02-Tables"><a class="header-anchor" href="#0x02-Tables">¶</a>0x02 Tables</h2>
-<h4>2.1&emsp;Summary</h4>
-&emsp;In this lesson, we learned how to create a table, add data to it, and section the table into smaller parts that make it easier to read.
-<ul>
-<li>The <code>&lt;table&gt;</code> element creates a table.</li>
-<li>The <code>&lt;tr&gt;</code> element adds rows to a table.</li>
-<li>To add data to a row, you can use the <code>&lt;td&gt;</code> element.</li>
-<li>Table headings clarify the meaning of data. Headings are added with the <code>&lt;th&gt;</code> element.</li>
-<li>Table data can span columns using the colspan attribute; Table data can span rows using the rowspan attribute.</li>
-<li>Tables can be split into three main sections: a head, a body, and a footer.<br>
-  A table’s head is created with the <code>&lt;thead&gt;</code> element.<br>
-  A table’s body is created with the <code>&lt;tbody&gt;</code> element.<br>
-  A table’s footer is created with the <code>&lt;tfoot&gt;</code> element.</li>
-<li>All the CSS properties you learned about in this course can be applied to tables and their data.</li>
-</ul>
-<h4>2.2&emsp;Demo</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">  &lt;thead&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;th&gt;Company Name&lt;&#x2F;th&gt;</span><br><span class="line">    &lt;th&gt;Number of Items to Ship&lt;&#x2F;th&gt;</span><br><span class="line">    &lt;th&gt;Next Action&lt;&#x2F;th&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;&#x2F;thead&gt;</span><br><span class="line">  &lt;tbody&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td colspan&#x3D;&quot;2&quot;&gt;Adam’s Greenworks&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;14&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;Package Items&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;Davie&#39;s Burgers&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td rowspan&#x3D;&quot;2&quot;&gt;2&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;Send Invoice&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;Baker&#39;s Bike Shop&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;3&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;Send Invoice&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;Miss Sally&#39;s Southern&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;4&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;Ship&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;Summit Resort Rentals&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;4&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;Ship&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;Strike Fitness&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;1&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;Enter Order&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;tfoot&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">      &lt;td&gt;Total&lt;&#x2F;td&gt;</span><br><span class="line">      &lt;td&gt;28&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;&#x2F;tfoot&gt;</span><br><span class="line">  &lt;&#x2F;tbody&gt;</span><br><span class="line">&lt;&#x2F;table&gt;</span><br></pre></td></tr></table></figure>
-&emsp;This is what it looks like: 
-![](\A-Summary-for-Learn-HTML-Codecademy\table.png)
-<br><h1>To be continued......</h1>
-************
-0x03 Forms
----
-<h2 id="0x04-Semantic-HTML"><a class="header-anchor" href="#0x04-Semantic-HTML">¶</a>0x04 Semantic HTML</h2>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/21/Merge-Two-Binary-Trees-Leetcode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/21/Merge-Two-Binary-Trees-Leetcode/" class="post-title-link" itemprop="url">Merge Two Binary Trees //Leetcode</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-21 20:42:36" itemprop="dateCreated datePublished" datetime="2020-08-21T20:42:36+08:00">2020-08-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-22 09:48:43" itemprop="dateModified" datetime="2020-08-22T09:48:43+08:00">2020-08-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Leetcode-Top-100-Liked-Questions/" itemprop="url" rel="index"><span itemprop="name">Leetcode Top 100 Liked Questions</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>Description</h1>
-<blockquote>
-<p>Given two binary trees and imagine that when you put one of them to cover the other, some nodes of the two trees are overlapped while the others are not.</p>
-<p>You need to merge them into a new binary tree. The merge rule is that if two nodes overlap, then sum node values up as the new value of the merged node. Otherwise, the NOT null node will be used as the node of new tree.</p>
-</blockquote>
-<h1>Input</h1>
-<p><img src="/images/input1.png" alt></p>
-<h1>Output</h1>
-<p><img src="/images/ouput1.png" alt></p>
-<h1>Analysis</h1>
-<h2 id="1-Recursion"><a class="header-anchor" href="#1-Recursion">¶</a>1 Recursion</h2>
-<h1>Code</h1>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode() &#123;&#125;</span><br><span class="line"> *     TreeNode(int val) &#123; this.val &#x3D; val; &#125;</span><br><span class="line"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="line"> *         this.val &#x3D; val;</span><br><span class="line"> *         this.left &#x3D; left;</span><br><span class="line"> *         this.right &#x3D; right;</span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) &#123;</span><br><span class="line">        if (t1&#x3D;&#x3D;null)&#123;</span><br><span class="line">            return t2;</span><br><span class="line">        &#125;</span><br><span class="line">        if (t2&#x3D;&#x3D;null)&#123;</span><br><span class="line">            return t1;</span><br><span class="line">        &#125;</span><br><span class="line">        t1.val+&#x3D;t2.val;</span><br><span class="line">        t1.left&#x3D;mergeTrees(t1.left,t2.left);</span><br><span class="line">        t2.right&#x3D;mergeTrees(t1.right,t2.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1>Complexity</h1>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1282,7 +1395,7 @@ I've learned concepts including:
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
