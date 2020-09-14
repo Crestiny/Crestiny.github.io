@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/08/26/Hard-to-Understand-Concepts-in-Database/%5CHard-to-Understand-Concepts-in-Database%5Cpingdepend.png">
 <meta property="og:image" content="http://yoursite.com/2020/08/26/Hard-to-Understand-Concepts-in-Database/%5CHard-to-Understand-Concepts-in-Database%5Cdepen.png">
 <meta property="article:published_time" content="2020-08-26T13:18:48.000Z">
-<meta property="article:modified_time" content="2020-09-05T02:01:28.008Z">
+<meta property="article:modified_time" content="2020-09-07T00:54:26.463Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta property="article:tag" content="Database">
 <meta name="twitter:card" content="summary">
@@ -195,7 +195,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 10:01:28" itemprop="dateModified" datetime="2020-09-05T10:01:28+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-07 08:54:26" itemprop="dateModified" datetime="2020-09-07T08:54:26+08:00">2020-09-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,7 +260,24 @@
 <h2>二目关系</h2>
 其实**目**或者说**度**，就是一个关系中有多少个属性而已......
 所以二目关系就是有两列的那种啦
-
+<h2>数据流图</h2>
+数据流程图（DFD）是一种能全面地描述信息系统逻辑模型的主要工具，它可以用少数几种符号综合地反映出信息在系统中的流动、处理和存储情况。数据流程图是表示**操作或数据的方向**。
+![](\Hard-to-Understand-Concepts-in-Database\DFD.png)
+数据流图有四种基本图形符号：
+- 箭头：表示数据流；
+- 圆或椭圆：表示加工；
+- 双杠：表示数据存储；
+- 方框：表示数据的源点或终点。
+<h2>决定因素</h2>
+貌似说的就是一个函数依赖的左边
+<h2>函数依赖集的覆盖</h2>
+F的最小覆盖其实就是它的极小函数依赖集
+<h2>表达查询的一堆语句形式</h2>
+<h3>关系代数表达式</h3>
+应该就是π、ρ那些吧
+<h3>元组关系演算表达式</h3>
+就是那些集合的形式
+<h2>函数依赖集的覆盖</h2>
     </div>
 
     
@@ -343,7 +360,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">About Keys</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">About Dependencies</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">完全函数依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">部分函数依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">传递函数依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">多值依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.4.1.</span> <span class="nav-text">多值依赖的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.4.2.</span> <span class="nav-text">多值依赖与函数依赖区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.5.</span> <span class="nav-text">连接依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.6.</span> <span class="nav-text">函数依赖图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">零散小知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">二目关系</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">About Keys</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">About Dependencies</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">完全函数依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">部分函数依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">传递函数依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">多值依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.4.1.</span> <span class="nav-text">多值依赖的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.4.2.</span> <span class="nav-text">多值依赖与函数依赖区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.5.</span> <span class="nav-text">连接依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.6.</span> <span class="nav-text">函数依赖图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">零散小知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">二目关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">数据流图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">决定因素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.4.</span> <span class="nav-text">函数依赖集的覆盖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.5.</span> <span class="nav-text">表达查询的一堆语句形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.5.1.</span> <span class="nav-text">关系代数表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.5.2.</span> <span class="nav-text">元组关系演算表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.6.</span> <span class="nav-text">函数依赖集的覆盖</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,20 +374,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

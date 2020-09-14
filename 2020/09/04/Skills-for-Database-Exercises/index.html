@@ -28,7 +28,7 @@
 <meta property="og:description" content="如何求最小函数依赖集 教科书式的定理 ![](\Skills-for-Database-Exercises\min.png) 说人话 - 第一步：看到函数依赖式右边有多个属性的，用分解规则拆开 - 第二步：考察F中的每个函数依赖，对于其中一个，令一个新的函数依赖集G，这个G就是在F中把这个函数依赖去掉所形成的。接下来，对于这个函数依赖的左边X，考察它在G上的闭包是什么，如果这个闭包包含了函数依赖的">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-04T05:02:29.000Z">
-<meta property="article:modified_time" content="2020-09-04T18:07:33.632Z">
+<meta property="article:modified_time" content="2020-09-07T01:48:51.048Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta property="article:tag" content="Database">
 <meta name="twitter:card" content="summary">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 02:07:33" itemprop="dateModified" datetime="2020-09-05T02:07:33+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-07 09:48:51" itemprop="dateModified" datetime="2020-09-07T09:48:51+08:00">2020-09-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,6 +246,40 @@
 通过一个多次迭代的方法求。
 ![](\Skills-for-Database-Exercises\algorithm1.png)
 *注：改正一下，应该是“在F中找到一些函数依赖式——它们的左边应该是**包含于**X(i)的”*
+<center><h1>如何求某函数依赖集的闭包</h1></center>
+其实就是用那些公理、推理规则之类的开始造作！
+**如何不重不漏？**
+这好像是个NP问题啊....
+<center><h1>如何判断一个函数依赖FD是否属于某函数依赖集F的闭包</h1></center>
+用公理+推理规则，能推导出来就是属于
+<center><h1>如何设计E-R图并转换</h1></center>
+<center><h1>如何写好SQL查询</h1></center>
+<center><h1>如何判断关系所属范式</h1></center>
+我觉得在实际判断中，下面这些判断方法应该一个个往后用，就像过五关斩六将一样
+<h2>准备工作</h2>
+- 第一步：找出数据表中所有的候选码。
+首先考察包含一个属性的所有属性组，看它们能否唯一确定别的所有属性；接下来看包含两个属性的、三个的...以此类推
+*Tips:假如A是码，那么所有包含了A的属性组，如（A，B）、（A，C）、（A，B，C）等等，都不是候选码了（因为作为码的要求里有一个“完全函数依赖”）*
+- 第二步：根据第一步所得到的候选码，找出所有的主属性。
+也就是其中用到的所有属性（候选码的并集）
+- 第三步：数据表中，除去所有的主属性，剩下的就都是非主属性了。
+<h2>判断是否为2NF</h2>
+**在关系模式中若没有非主属性对码的部分函数依赖即可称为2NF**
+<pre>考虑关系模式R（A,B,C,D），已知函数依赖有{B->D,AB->C}，关系模式R的码是（    ），R属于（    ）范式
+首先找码 码是AB，然后又有D依赖于B，而B属于AB，所以存在D部分函数依赖于AB，所以不是第二范式</pre>
+<h2>判断是否为3NF</h2>
+**在关系模式中若没有非主属性对码的传递函数依赖即可称为3NF**
+<h2>判断是否为BCNF</h2>
+**在关系模式中，如果每一个决定因素都包含码，则属于BCNF**
+<h2>判断是否为4NF</h2>
+<center><h1>如何将关系规范化（各种模式分解算法）</h1></center>
+<center><h1>SQL语句转查询树</h1></center>
+给个例子你就懂了，叶子应该是关系。
+原SQL语句：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT Sname</span><br><span class="line">FROM Student，SC</span><br><span class="line">WHERE Student.Sno&#x3D;SC.Sno AND SC.Cno&#x3D;&#39;2&#39;;</span><br></pre></td></tr></table></figure>
+优化后：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT Sname</span><br><span class="line">FROM Student</span><br><span class="line">WHERE Student.Sno in (</span><br><span class="line">	SELECT Sno</span><br><span class="line">	FROM SC</span><br><span class="line">	WHERE SC.Cno&#x3D;&#39;2&#39;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+![](\Skills-for-Database-Exercises\tree.png)
     </div>
 
     
@@ -266,7 +300,10 @@
     <a href="/2020/09/03/Model-Decomposition/" rel="prev" title="Model Decomposition">
       <i class="fa fa-chevron-left"></i> Model Decomposition
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/05/How-to-do-E-R-Design/" rel="next" title="How to do E-R Design">
+      How to do E-R Design <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -325,7 +362,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">如何求最小函数依赖集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">教科书式的定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">说人话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">练练手</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">如何求一个属性(组)在某函数依赖集上的闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">教科书式的定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">说人话</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">如何求最小函数依赖集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">教科书式的定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">说人话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">练练手</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">如何求一个属性(组)在某函数依赖集上的闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">教科书式的定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">如何求某函数依赖集的闭包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">如何判断一个函数依赖FD是否属于某函数依赖集F的闭包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">如何设计E-R图并转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">如何写好SQL查询</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">如何判断关系所属范式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.2.</span> <span class="nav-text">判断是否为2NF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.3.</span> <span class="nav-text">判断是否为3NF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.4.</span> <span class="nav-text">判断是否为BCNF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.5.</span> <span class="nav-text">判断是否为4NF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">如何将关系规范化（各种模式分解算法）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">SQL语句转查询树</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -339,20 +376,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

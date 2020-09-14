@@ -28,7 +28,7 @@
 <meta property="og:description" content="关系的一个分解 ![](\Model-Decomposition\definition.png) 说人话： 分解以后的关系，它们的属性集合并起来应该和原关系的属性集相等，此外呢，分解出来的各子关系，它们的属性集之间不能有包含关系 那么如何确定某个子关系上的函数依赖呢？ 在原关系函数依赖的闭包上找，要左右两边的属性合并起来在此子关系的属性集内就可以纳入这个子关系的函数依赖中~ 模式分解的三种等价形式">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-03T07:05:35.000Z">
-<meta property="article:modified_time" content="2020-09-05T05:22:28.818Z">
+<meta property="article:modified_time" content="2020-09-07T01:47:10.911Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta property="article:tag" content="Database">
 <meta name="twitter:card" content="summary">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-05 13:22:28" itemprop="dateModified" datetime="2020-09-05T13:22:28+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-07 09:47:10" itemprop="dateModified" datetime="2020-09-07T09:47:10+08:00">2020-09-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,12 +237,21 @@
 ![](\Model-Decomposition\wdefinition.png)
 <h3>判别算法</h3>
 ![](\Model-Decomposition\algorithm.png)
+<h3>说人话</h3>
+- 第一步：画一张初始表，所有属性按列排开，分解的有几个关系就几行
+- 第二步：填初始数据，一行行看，在每个关系模式的U包含的属性列那里写上a(j)，否则写b(ij)
+- 第三步：遍历所有FD，对于每个，左边X所在的那些列里面，找出填了相同值的那些行；这些行里面，再去看右边Y对应的属性下标对应的列，看里面是否有a(li)这个元素，有的话，全部改为a(li)
+注：假如有b相关的值在上一句的操作里被改掉了，那这一列所有这个值都要被改
+- 第四步：知道有一行是a1，a2，a3.....，就说明是无损连接性的
 <h3>特殊地</h3>
 ![](\Model-Decomposition\adefinition.png)
+<h3>说人话</h3>
+如果是分解成两个关系要判别是否无损连接性，写出“U1交U2->U1-U2(谁先谁后看情况)”，看看这个函数依赖是否在F的闭包内，在的话就……
 <h2>保持函数依赖</h2>
 <h3>定义</h3>
 ![](\Model-Decomposition\depend.png)
 根据这个定义，我们再加上判断两个函数依赖集是否相等就可以完整地作为一个“保持函数依赖”的判别算法了！
+即：（原F的闭包）要和（分解后F们的并集的闭包）相等
 <h2>模式分解的算法</h2>
 <h3>关于模式分解结果的几种情况</h3>
 1. 如果保持了“无损连接性”，则分解后的关系一定是4NF的
@@ -371,7 +380,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">关系的一个分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">模式分解的三种等价形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">什么是“无损连接性”？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">什么是“保持函数依赖”？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">引理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">记号定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">相关性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">无损连接性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">判别算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">特殊地</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">保持函数依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">模式分解的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.1.</span> <span class="nav-text">关于模式分解结果的几种情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.2.</span> <span class="nav-text">“保持函数依赖性”+3NF&amp;emsp;模式分解算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.2.1.</span> <span class="nav-text">教科书式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.2.2.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.3.</span> <span class="nav-text">“保持函数依赖性”+“无损连接性”+3NF&amp;emsp;模式分解算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.3.1.</span> <span class="nav-text">教科书式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.3.2.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.4.</span> <span class="nav-text">“无损连接性”+BCNF&amp;emsp;模式分解算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.4.1.</span> <span class="nav-text">教科书式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.4.2.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.5.</span> <span class="nav-text">“无损连接性”+4NF&amp;emsp;模式分解算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.5.1.</span> <span class="nav-text">教科书式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.5.2.</span> <span class="nav-text">说人话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.5.3.</span> <span class="nav-text">补充：什么是传说中的定理6.6呢？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">完整版数据依赖的公理系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">7.1.</span> <span class="nav-text">8条公理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">7.2.</span> <span class="nav-text">4条推理规则</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">关系的一个分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">模式分解的三种等价形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">什么是“无损连接性”？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">什么是“保持函数依赖”？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">引理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">记号定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">相关性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">无损连接性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">判别算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">说人话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.4.</span> <span class="nav-text">特殊地</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.5.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">保持函数依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">模式分解的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.1.</span> <span class="nav-text">关于模式分解结果的几种情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.2.</span> <span class="nav-text">“保持函数依赖性”+3NF&amp;emsp;模式分解算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.2.1.</span> <span class="nav-text">教科书式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.2.2.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.3.</span> <span class="nav-text">“保持函数依赖性”+“无损连接性”+3NF&amp;emsp;模式分解算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.3.1.</span> <span class="nav-text">教科书式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.3.2.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.4.</span> <span class="nav-text">“无损连接性”+BCNF&amp;emsp;模式分解算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.4.1.</span> <span class="nav-text">教科书式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.4.2.</span> <span class="nav-text">说人话</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.5.</span> <span class="nav-text">“无损连接性”+4NF&amp;emsp;模式分解算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.5.1.</span> <span class="nav-text">教科书式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.5.2.</span> <span class="nav-text">说人话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">6.5.3.</span> <span class="nav-text">补充：什么是传说中的定理6.6呢？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">完整版数据依赖的公理系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">7.1.</span> <span class="nav-text">8条公理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">7.2.</span> <span class="nav-text">4条推理规则</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -385,20 +394,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

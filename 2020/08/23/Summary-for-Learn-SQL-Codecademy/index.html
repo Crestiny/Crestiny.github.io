@@ -28,7 +28,7 @@
 <meta property="og:description" content="Manipulation We’ve learned six commands commonly used to manage data stored in a relational database and how to set constraints on such data. What can we generalize so far?  SQL is a programming langu">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-08-23T13:50:00.000Z">
-<meta property="article:modified_time" content="2020-09-03T10:48:05.135Z">
+<meta property="article:modified_time" content="2020-09-07T04:45:40.923Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-03 18:48:05" itemprop="dateModified" datetime="2020-09-03T18:48:05+08:00">2020-09-03</time>
+                <time title="Modified: 2020-09-07 12:45:40" itemprop="dateModified" datetime="2020-09-07T12:45:40+08:00">2020-09-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -239,7 +239,17 @@ We’ve learned six commands commonly used to manage data stored in a relational
 <li>
 <p><code>DEFAULT</code> columns take an additional argument that will be the assumed value for an inserted row if the new row does not specify a value for that column.</p>
 </li>
+<li>
+<p>关于外码（主码也可放最后）</p>
+</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE Orders</span><br><span class="line">(</span><br><span class="line">O_Id int NOT NULL,</span><br><span class="line">OrderNo int NOT NULL,</span><br><span class="line">P_Id int,</span><br><span class="line">PRIMARY KEY (O_Id),</span><br><span class="line">FOREIGN KEY (P_Id) REFERENCES Persons(P_Id)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>关于自定义约束</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE Persons</span><br><span class="line">(</span><br><span class="line">P_Id int NOT NULL,</span><br><span class="line">LastName varchar(255) NOT NULL,</span><br><span class="line">FirstName varchar(255),</span><br><span class="line">Address varchar(255),</span><br><span class="line">City varchar(255),</span><br><span class="line">CHECK (P_Id&gt;0)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">&#x2F;*可以给约束命名*&#x2F;</span><br><span class="line">CREATE TABLE Persons</span><br><span class="line">(</span><br><span class="line">P_Id int NOT NULL,</span><br><span class="line">LastName varchar(255) NOT NULL,</span><br><span class="line">FirstName varchar(255),</span><br><span class="line">Address varchar(255),</span><br><span class="line">City varchar(255),</span><br><span class="line">CONSTRAINT chk_Person CHECK (P_Id&gt;0 AND City&#x3D;&#39;Sandnes&#39;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>注：如果建表时忘记加了，之后加也是可以的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE Persons</span><br><span class="line">ADD CONSTRAINT chk_Person CHECK (P_Id&gt;0 AND City&#x3D;&#39;Sandnes&#39;)</span><br></pre></td></tr></table></figure>
 <p>adds a new row to a table:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table_name(a1,a2,a3) </span><br><span class="line">VALUES(v1,v2,v3);</span><br></pre></td></tr></table></figure>
 <p>queries data from a table:</p>
@@ -435,20 +445,20 @@ The columns must have the same data types in the same order as the first table.<
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
