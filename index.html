@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -24,7 +24,7 @@
 <meta property="og:title" content="Crestiny&#39;s Blog">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="Crestiny&#39;s Blog">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale">
 <meta property="article:author" content="CrestinyCoco">
 <meta name="twitter:card" content="summary">
 
@@ -37,7 +37,7 @@
     sidebar: "",
     isHome : true,
     isPost : false,
-    lang   : 'en'
+    lang   : 'zh-Hans'
   };
 </script>
 
@@ -81,7 +81,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="تشغيل شريط التصفح">
       <span class="toggle-line toggle-line-first"></span>
       <span class="toggle-line toggle-line-middle"></span>
       <span class="toggle-line toggle-line-last"></span>
@@ -116,17 +116,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>الوسوم</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>التصنيفات</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>الأرشيفات</a>
 
   </li>
   </ul>
@@ -155,7 +155,414 @@
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/" class="post-title-link" itemprop="url">Chapter2 对称加密和消息机密性</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">نُشر في</span>
+
+              <time title="أُنشأ: 2020-09-21 08:03:01" itemprop="dateCreated datePublished" datetime="2020-09-21T08:03:01+08:00">2020-09-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">عُدل في</span>
+                <time title="عُدل: 2020-09-22 18:14:19" itemprop="dateModified" datetime="2020-09-22T18:14:19+08:00">2020-09-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">في</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+                  ، 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <center><h1>2.1 对称加密原理</h1></center>
+<h2>2.1.0 对称加密简介</h2>
+<h3>一个对称加密算法的组成</h3>
+![](\Chapter2-对称加密和消息机密性\model.png)
+<h3>对称加密算法的安全性</h3>
+需要达到以下两个要求：
+- 强加密算法：（一个很强的条件）攻击者有很多（算法）+密文+密文对应的明文，却不能解出全部明文|密钥
+- 密钥安全：Alice和Bob的密钥收发仅两人可得
+<p><strong>注：对称加密的安全取决于密钥的保密性，算法可公开</strong></p>
+<h2>2.1.1 密码体制</h2>
+密码体制有以下三个分类标准：
+<h3>1. 明文转换成密文的操作类型</h3>
+<ul>
+<li>替换：明文映射到……</li>
+<li>换位：明文再排列</li>
+</ul>
+<p>（注：上述两种操作可以以比特、字母等等为单位）</p>
+<h3>2. 使用的密钥数</h3>
+<ul>
+<li>AB同一密钥：对称/单钥/秘密密钥/传统加密</li>
+<li>AB不同密钥：不对称/双钥/公钥加密</li>
+</ul>
+<h3>3. 明文的处理方式</h3>
+<ul>
+<li>一次处理一个分组：分组密码</li>
+<li>明文输入过程中连续处理：流密码</li>
+</ul>
+<h2>2.1.2 密码分析</h2>
+密码分析或破译：找出明文或密钥
+<p>根据攻击者掌握的信息量，可将攻击类型分类如下：<br>
+<img src="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Cattack.png" alt></p>
+<h3>1. 惟密文攻击</h3>
+或许只能穷举……但是也有一些小技巧，比如统计测试（前提是对明文的类型有一个大致的了解）
+<h3>2. 已知明文攻击</h3>
+比如某种文件可能有些固定的内容……
+**一般密码算法会被设计成能抵挡已知明文攻击的程度**
+<h3>3. 选择明文</h3>
+攻击者能得到源系统，可以插入自己选定的消息
+<h3>4. 选择密文</h3>
+不太常见
+<h3>5. 选择文本</h3>
+不太常见
+<p>计算安全的加密方案：</p>
+<ul>
+<li>破解密文的代价&gt;明文的价值</li>
+<li>破解密文的时间&gt;信息的有用寿命</li>
+</ul>
+<h2>2.1.3 Feistel密码结构</h2>
+<h5>可以看做是对称密码算法的通用结构</h5>
+![](\Chapter2-对称加密和消息机密性\Fiestel.png)
+<h5>其中有些可以调整的参数：</h5>
+- 分组大小：折中128bit一组比较常见
+- 密钥大小：越长——越安全——加解密越慢
+- 迭代轮数：典型16
+- 子密钥产生算法：越复杂越安全
+- 轮函数：同上
+<h5>设计算法还需考虑</h5>
+- 软件执行速度比较快
+- 容易分析——容易找到弱点——随即加固
+<p><strong>对称密码算法的加解密本质上是相同的过程，不需要实现两个不同的算法</strong></p>
+<center><h1>2.2 对称分组加密算法</h1></center>
+<h2>2.2.1 数据加密标准DES</h2>
+说实话，我总是不能把数据加密标准和DES联系在一起，这两个名字，一个像标准，一个像算法哈哈哈哈；但是仔细研究一下发现，其实我的直觉没错
+DES准确来说是一种标准，数据加密标准；算法本身其实叫做DEA，略感陌生；一般都直接说DES了
+<h5>DEA算法描述</h5>
+基本沿用Fiestel结构，参数如下：
+- 分组大小：64
+- 密钥大小：56
+- 迭代轮数：典型16
+- 子密钥产生算法：越复杂越安全
+- 轮函数：同上
+<h5>DES的强度</h5>
+- 算法本身：至今还没人指出弱点
+- 密钥长度：一定范围内，蛮力攻击还是可行的（所以后来有改进的算法来替代它，如3DES和AES）
+<h2>2.2.2 三重DES</h2>
+<h5>3DES流程</h5>
+使用三次DES，加密——解密——加密
+<h5>3DES优点</h5>
+- 底层算法与DES相同，之前说过无弱点了
+- 密钥长度168bit，解决了被穷举的问题
+<h5>3DES缺点</h5>
+软件运行慢
+<h2>2.2.3 高级加密标准AES</h2>
+替代3DES，安全性>=，效率>=
+<h5>AES流程</h5>
+值得注意的是，它不是Feistel结构
+（具体可见书30—31页）
+<center><h1>2.3 随机数和伪随机数</h1></center>
+<h2>2.3.1 随机数的应用</h2>
+<h5>基于随机数的安全算法</h5>
+RSA、对称流密码的密钥流的生成、密钥分配方案……
+<h5>应用对随机数的需求</h5>
+<ol>
+<li>随机性：有两个验证标准<br>
+（1）均匀分布：一串中，0与1出现概率大致相同<br>
+（2）独立：统一序列上，没有数字能影响别人</li>
+<li>不可预测性</li>
+</ol>
+<h2>2.3.2 真随机数发生器TRNG、伪随机数生成器PRNG和伪随机函数PRF</h2>
+首先要明白，什么是统计上的随机性？不太懂……也没查到
+![](\Chapter2-对称加密和消息机密性\random.png)
+伪随机数发生器和伪随机函数的区别在于产生的比特数不同
+<h2>2.3.3 算法设计</h2>
+PRNG的算法可以分为两类：
+<h5>1. 为特定目的构造的算法</h5>
+<h5>2. 基于现存密码算法的算法</h5>
+不太懂这是什么意思……
+<center><h1>2.4 流密码和RC4</h1></center>
+分组密码更普遍，但对于特定应用还是要用流密码的。
+最对称的流密码可以说是RC4了哈哈哈哈
+<h2>2.4.1 流密码结构</h2>
+<h5>流密码结构示意图</h5>
+![](\Chapter2-对称加密和消息机密性\flow.png)
+解释一下：首先呢，你要先有个密钥K，把它投入伪随机字节生成器里面得到密钥流k；k和明文异或就得到密文字节流啦。由于是对称的，加密解密用同一个密钥
+<h5>设计流密码的考虑因素</h5>
+<ul>
+<li>加密序列有个长周期：意思是，其实伪随机字节生成器生成的是周期性循环的确定字节流，如果周期太短容易被破</li>
+<li>生成的密钥流最好能通过随机数检测那些</li>
+<li>PRNG的输入要足够长以便不会被穷举</li>
+</ul>
+<h5>流密码优点</h5>
+<ul>
+<li>比分组密码快，代码少</li>
+</ul>
+<h5>分组密码优点</h5>
+<ul>
+<li>分组密码可以重复使用密钥，但是流密码的密钥最好不要重复用不然容易被破</li>
+</ul>
+<h2>2.4.2 RC4算法</h2>
+<h5>RC4算法</h5>
+<ul>
+<li>初始化S：S是个状态向量，有256维，刚开始从0-255维依次设为0-255；K为密钥（1-256字节可变）；T为临时向量（256维）<br>
+T的赋值：将K循环利用填充进去<br>
+S的初始置换：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">j&#x3D;0;</span><br><span class="line">for(i&#x3D;0;i&lt;&#x3D;255;i++)&#123;</span><br><span class="line">	j&#x3D;(j+S[i]+T[i])mod 256;</span><br><span class="line">	swap(S[i],S[j]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>密钥流产生：感觉只有对S的置换操作<br>
+<img src="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Ca1.png" alt></li>
+</ul>
+<h5>RC4强度</h5>
+有些特定的攻击方法
+、
+<center><h1>2.5 分组密码工作模式</h1></center>
+NIST定义了以下五种工作模式：
+<h2>2.5.1 电子密码本ECB模式</h2>
+<h5>原理</h5>
+假设明文被分成b比特一组，每个分组都是同一密钥加密的。每个分组对于一个给定的密钥会有一个密文（唯一的结果），但是如果一段明文里有两个完全相同的分组……它们对应的密文也是相同的……
+<h5>不足</h5>
+如果明文过长以至于出现两个分组重复，就不安全。所以我们希望有上述情况的话，它们会对应两个不同的密文。
+<h2>2.5.2 密码分组链接CBC模式</h2>
+<h5>原理</h5>
+![](\Chapter2-对称加密和消息机密性\CBC.png)
+如图所示，输入：每组明文和上一组密文的异或；处理：所有分组用同一密钥；
+<h5>数学推导说明的一些东西</h5>
+见书P39
+<h2>2.5.3 密码反馈CFB模式</h2>
+<h5>作用</h5>
+将任意分组密码转化为流密码
+<h5>原理</h5>
+不想整了hai，之后有需要再补吧，P39-40
+<h2>2.5.4 计数器模式</h2>
+<h5>原理</h5>
+不想整了hai，之后有需要再补吧，P39-40
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/" class="post-title-link" itemprop="url">Chapter1 绪论 | Reading Notes</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">نُشر في</span>
+
+              <time title="أُنشأ: 2020-09-19 22:00:55" itemprop="dateCreated datePublished" datetime="2020-09-19T22:00:55+08:00">2020-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">عُدل في</span>
+                <time title="عُدل: 2020-09-21 22:02:15" itemprop="dateModified" datetime="2020-09-21T22:02:15+08:00">2020-09-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">في</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件安全分析与应用》</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2>为什么软件安全问题日渐复杂？</h2>
+- 随着科技发展、研究与分析的深入,我们注意到软件安全的问题非常多样化
+- 试图利用软件安全问题获利的各类组织机构也在不断发展，针对软件安全问题的利用、破坏技术手段，造成软件安全问题日趋复杂
+<h2>软件安全问题分类</h2>
+<h3>（一）恶意软件</h3>
+<h5>1. 传统恶意软件</h5>
+<ul>
+<li>传统的恶意软件包括：病毒、僵木蠕、间谍软件等</li>
+<li>破坏：窃取信息、远程控制、实施破坏等</li>
+<li>传统恶意软件需要发展的能力：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">渗透与扩散：突破防御+感染目标</span><br><span class="line">隐蔽能力：隐蔽特征避免被发现+被发现了能保护操纵者身份</span><br><span class="line">破坏能力：搜集信息+实施破坏</span><br></pre></td></tr></table></figure>
+<h5>2. 恶意软件发展历程</h5>
+单机传播——网络传播——协同攻击
+APT攻击（高可持续性威胁）：针对特定目标+高技术
+<h3>（二）软件漏洞</h3>
+说的是程序设计错误导致的
+<h5>1. 漏洞为什么越来越多？</h5>
+- 软件更复杂
+- 漏洞多样化
+- 软件开发周期变短
+<h3>（三）软件后门</h3>
+开发人员刻意设计，但对用户隐瞒的功能。为什么算在软件安全问题中呢？因为有的攻击者，开发软件的时候，会留下后门，将其设计为此软件的漏洞。
+举个栗子：建城墙的人留了个暗道，工程交付以后，保护城墙的人不一定能找出来它，但是工人却一清二楚，可以通过暗道做些坏事。而且，工人更懂怎么利用城墙的设计藏好这个暗道。
+<h5>1. 将软件后门设计为软件漏洞，此方法优势：</h5>
+- 难发现
+- 易利用
+- 难取证：后门代码其实不在软件的产品代码中，而是攻击者利用漏洞动态加载的（被发现了说成设计错误就完事儿了，不是故意的哈哈哈）
+<h2>软件安全性分析要解决的问题</h2>
+<h3>1. 存在问题</h3>
+“是否”的问题：有恶意功能/漏洞/后门吗？
+<h3>2. 机理问题</h3>
+“为什么”的问题：分析下此问题出现的原因/原理/工作流程之类的，具体问题具体分析
+<h3>3. 对策问题</h3>
+“怎么办”的问题：防御
+<h2>无源码时对软件逆向分析的挑战</h2>
+<h3>1. 指令代码的理解</h3>
+从可执行文件或指令执行序列等，理解到操作语义很困难
+<h3>2. 关联关系的抽取</h3>
+操作之间的数据传递、计算，数据/指令之间的依赖关系，很难有直观的认识
+<h3>3. 对策问题</h3>
+“怎么办”的问题：防御
+<center><h1>1.4 主要方法与技术</h1></center>
+<h2>1.4.0 软件逆向分析方法分类</h2>
+主要有两大类：静态分析和动态分析
+<h5>1. 静态分析</h5>
+感觉就像通过反汇编或反编译的手段，对软件的可执行代码进行分析
+（1）优点：比较全面、整体
+（2）缺点：一方面，软件代码规模大了或者复杂了就不好搞；另一方面，如果软件做了加壳保护那就不能反汇编等等
+<h5>2. 动态分析</h5>
+通过直接运行软件，监测软件运行过程进行分析。
+（1）优点：分析过程中可根据软件的运行过程直接获得在各个指令执行后的结果数据，减少推理分析
+（2）缺点：每次分析只能针对动态执行的一条路径执行，整体性较差（所以说，如何构造多条执行路径也是动态分析需要研究的一个重要问题）
+<p><strong>现在一般：动态为主，静态为辅</strong></p>
+<h2>1.4.1 反汇编与反编译</h2>
+通常是逆向分析的第一步（静态动态都是）
+<h5>作用</h5>
+二进制exe文件（完全不可读）——>汇编代码——>其他高级语言代码（基本可读）
+第一个箭头是反汇编，第二个是反编译；做到**功能等价**就行
+<h2>1.4.2 程序调试</h2>
+动态分析
+<h5>定义</h5>
+用一些工具，通过断点、单步执行等方式
+内核代码的调试需要虚拟化技术+多台设备
+<h5>优缺点</h5>
+优缺点基本同“动态分析”中所写，此外，软件自保护技术可能阻碍调试，且数据量和复杂度都挺恐怖的
+<h2>1.4.3 程序切片</h2>
+<h5>作用</h5>
+解决软件代码规模超大带来的理解困难，比如分析出了汇编代码，对汇编代码切片……
+<h5>基本思想</h5>
+分析指令的相关性，从而提取用户“感兴趣”的代码
+<p>主要用于静态分析，也可用于动态分析，有差异：<br>
+（1）静态分析：通过计算操作数<strong>可能的影响范围</strong>（要考虑各种可能的执行路径）来计算指令的关联关系<br>
+（2）动态分析：更有针对性，对某条路径某个操作数来分析指令关联</p>
+<h5>缺点</h5>
+对局部代码还不错，但代码多了照样难受
+<h2>1.4.4 污点传播分析</h2>
+静态动态都有，**数据流分析方法**
+<h5>基本思想</h5>
+将感兴趣的数据标记，根据每条指令的污点传播过程，分析数据的传递关系
+<h5>实现方式</h5>
+按照“如何获得后台执行过程中具体每一条指令和指令执行前后状态”，可以分为：
+基于插桩/硬件/编译器扩展/硬件模拟器等等
+<h5>存在问题</h5>
+由于控制依赖、查表操作等引入的隐式污点传播无法简单地引入或去除
+<h2>1.4.5 符号执行</h2>
+静态动态都有
+<h2>1.4.6 模糊测试</h2>
+动态分析
+<h5>作用</h5>
+本来是构造许多奇怪数据来看软件鲁棒性的，但现在是为了触发不同的执行路径
+<h5>存在问题</h5>
+提高测试数据生成的针对性——>提高模糊测试效率
+<center><h1>1.5 主要分析应用</h1></center>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Day1-in-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7-PHP-Audit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -178,9 +585,9 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">نُشر في</span>
 
-              <time title="Created: 2020-09-19 17:27:15" itemprop="dateCreated datePublished" datetime="2020-09-19T17:27:15+08:00">2020-09-19</time>
+              <time title="أُنشأ: 2020-09-19 17:27:15" itemprop="dateCreated datePublished" datetime="2020-09-19T17:27:15+08:00">2020-09-19</time>
             </span>
 
           
@@ -212,7 +619,7 @@
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Sqlmap-Mannal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -235,9 +642,9 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">نُشر في</span>
 
-              <time title="Created: 2020-09-19 16:22:40" itemprop="dateCreated datePublished" datetime="2020-09-19T16:22:40+08:00">2020-09-19</time>
+              <time title="أُنشأ: 2020-09-19 16:22:40" itemprop="dateCreated datePublished" datetime="2020-09-19T16:22:40+08:00">2020-09-19</time>
             </span>
 
           
@@ -269,7 +676,7 @@
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/%E8%9A%81%E5%89%91-Mannal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -292,16 +699,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">نُشر في</span>
               
 
-              <time title="Created: 2020-09-19 16:22:20 / Modified: 17:46:26" itemprop="dateCreated datePublished" datetime="2020-09-19T16:22:20+08:00">2020-09-19</time>
+              <time title="أُنشأ: 2020-09-19 16:22:20 / عُدل: 17:46:26" itemprop="dateCreated datePublished" datetime="2020-09-19T16:22:20+08:00">2020-09-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">في</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Web-Security/" itemprop="url" rel="index"><span itemprop="name">Web Security</span></a>
                 </span>
@@ -355,7 +762,7 @@
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Wireshark-Mannal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -378,9 +785,9 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">نُشر في</span>
 
-              <time title="Created: 2020-09-19 16:21:42" itemprop="dateCreated datePublished" datetime="2020-09-19T16:21:42+08:00">2020-09-19</time>
+              <time title="أُنشأ: 2020-09-19 16:21:42" itemprop="dateCreated datePublished" datetime="2020-09-19T16:21:42+08:00">2020-09-19</time>
             </span>
 
           
@@ -412,7 +819,7 @@
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Burpsuite-Mannal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -435,16 +842,16 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">نُشر في</span>
               
 
-              <time title="Created: 2020-09-19 16:21:19 / Modified: 17:15:36" itemprop="dateCreated datePublished" datetime="2020-09-19T16:21:19+08:00">2020-09-19</time>
+              <time title="أُنشأ: 2020-09-19 16:21:19 / عُدل: 17:15:36" itemprop="dateCreated datePublished" datetime="2020-09-19T16:21:19+08:00">2020-09-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">في</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Web-Sercurity/" itemprop="url" rel="index"><span itemprop="name">Web Sercurity</span></a>
                 </span>
@@ -518,7 +925,7 @@ Repeater是一个重放攻击器。
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Understanding-HTTP-Deeply/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -541,16 +948,16 @@ Repeater是一个重放攻击器。
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">نُشر في</span>
               
 
-              <time title="Created: 2020-09-19 14:38:31 / Modified: 16:54:47" itemprop="dateCreated datePublished" datetime="2020-09-19T14:38:31+08:00">2020-09-19</time>
+              <time title="أُنشأ: 2020-09-19 14:38:31 / عُدل: 16:54:47" itemprop="dateCreated datePublished" datetime="2020-09-19T14:38:31+08:00">2020-09-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">في</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Web-Sercurity/" itemprop="url" rel="index"><span itemprop="name">Web Sercurity</span></a>
                 </span>
@@ -814,7 +1221,7 @@ Cookie（复数形态Cookies），又称为“小甜饼”。类型为“小型�
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/18/Common-Web-Vulnerabilities-Causes-Damage-and-Defense/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -837,22 +1244,22 @@ Cookie（复数形态Cookies），又称为“小甜饼”。类型为“小型�
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">نُشر في</span>
 
-              <time title="Created: 2020-09-18 18:17:49" itemprop="dateCreated datePublished" datetime="2020-09-18T18:17:49+08:00">2020-09-18</time>
+              <time title="أُنشأ: 2020-09-18 18:17:49" itemprop="dateCreated datePublished" datetime="2020-09-18T18:17:49+08:00">2020-09-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-19 14:39:21" itemprop="dateModified" datetime="2020-09-19T14:39:21+08:00">2020-09-19</time>
+                <span class="post-meta-item-text">عُدل في</span>
+                <time title="عُدل: 2020-09-19 14:39:21" itemprop="dateModified" datetime="2020-09-19T14:39:21+08:00">2020-09-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">في</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Web-Security/" itemprop="url" rel="index"><span itemprop="name">Web Security</span></a>
                 </span>
@@ -1218,7 +1625,7 @@ Insufficient logging and monitoring, coupled with missing or ineffective integra
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/Software-Security-First-Class/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1241,22 +1648,22 @@ Insufficient logging and monitoring, coupled with missing or ineffective integra
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">نُشر في</span>
 
-              <time title="Created: 2020-09-14 14:14:46" itemprop="dateCreated datePublished" datetime="2020-09-14T14:14:46+08:00">2020-09-14</time>
+              <time title="أُنشأ: 2020-09-14 14:14:46" itemprop="dateCreated datePublished" datetime="2020-09-14T14:14:46+08:00">2020-09-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-17 16:34:02" itemprop="dateModified" datetime="2020-09-17T16:34:02+08:00">2020-09-17</time>
+                <span class="post-meta-item-text">عُدل في</span>
+                <time title="عُدل: 2020-09-17 16:34:02" itemprop="dateModified" datetime="2020-09-17T16:34:02+08:00">2020-09-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">في</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
                 </span>
@@ -1292,207 +1699,10 @@ Insufficient logging and monitoring, coupled with missing or ineffective integra
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/Chapter1-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%BC%95%E8%A8%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/14/Chapter1-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%BC%95%E8%A8%80/" class="post-title-link" itemprop="url">Chapter1 网络安全引言</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-09-14 09:31:57" itemprop="dateCreated datePublished" datetime="2020-09-14T09:31:57+08:00">2020-09-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-16 10:24:56" itemprop="dateModified" datetime="2020-09-16T10:24:56+08:00">2020-09-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <center><h2>计算机安全概念</h2></center>
-<h4>计算机安全</h4>
-用于保护数据安全和防范黑客的工具集合的通用名称
-<h4>网络（互联网）安全</h4>
-分布式系统的引入、网络以及在计算机终端用户与计算机之间、计算机与计算机之间进行通信的工具应用，其中都包含数据传输，需要网络安全措施来保护数据。
-<h4>计算机安全定义</h4>
-对某个自动化信息系统的保护措施，其目的在于实现信息系统资源的**完整性**、**可用性**以及**机密性**（包括硬件、软件、固件、信息/数据、电信）。
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/10/Problems-during-Solving-2020CUMCM-A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/10/Problems-during-Solving-2020CUMCM-A/" class="post-title-link" itemprop="url">Problems during Solving 2020CUMCM-A</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-09-10 19:13:04" itemprop="dateCreated datePublished" datetime="2020-09-10T19:13:04+08:00">2020-09-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-14 09:17:01" itemprop="dateModified" datetime="2020-09-14T09:17:01+08:00">2020-09-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Contest/" itemprop="url" rel="index"><span itemprop="name">Contest</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <center><h1>待查问题</h1></center>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">怎么根据相邻温区之间的温度求温区间隙和边缘的温度？</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">什么关系？怎么预测？</span><br></pre></td></tr></table></figure>
-<center><h1>可参考网址</h1></center>
-<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%86%B1%E5%82%B3%E5%B0%8E%E6%96%B9%E7%A8%8B%E5%BC%8F">热传导方程式简介</a><br>
-<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Zw53kxy7yL0">回流炉视频</a><br>
-<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=xn_oN8ZMaMk">回流炉原理更清晰</a><br>
-<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=NQiAcJxYfAs">回流炉视频2</a><br>
-<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=q37g3RflFQ0">物体走过对应温度曲线变化</a><br>
-<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4pVUMda2prQ">物体走过对应温度曲线变化2-best oven setup</a><br>
-<a target="_blank" rel="noopener" href="https://blog.51cto.com/9269309/1865554">牛顿冷却定律</a><br>
-<a href></a><br>
-<a href></a><br>
-<a href></a><br>
-<a href></a></p>
-<center><h1>名词解释</h1></center>
-<h3>PCB</h3>
-印刷电路板，又称印制电路板，印刷线路板，常用英文缩写PCB（Printed circuit board）或PWB（Printed wire board），是电子元件的支撑体，在这其中有金属导体作为连接电子元器件的线路。
-<p>reflow oven</p>
-<p>reflow profile</p>
-<p>soldering  焊接</p>
-<p>SMT<br>
-SMT贴片指的是在PCB基础上进行加工的系列工艺流程的简称，PCB（Printed Circuit Board)为印刷电路板。SMT是表面组装技术（表面贴装技术）（Surface Mounted Technology的缩写），是电子组装行业里最流行的一种技术和工艺。</p>
-<p>非稳态导热</p>
-<p>导热和热传导的区别<br>
-材料直接传导热量的能力称为热传导率,或称热导率.热导率定义为单位截面、长度的材料在单位温差下和单位时间内直接传导的热量.热导率的单位为瓦每米每开尔文((W/m.K)). 导热率:物体传导热量的能力,又称为热导率 . 所以,我感觉你提出这两个概念没有区别</p>
-<h3>辨析几个概念</h3>
-这些公式的适用范围？
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">牛顿冷却定律</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">傅里叶导热定律</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">热传导与导热</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">牛顿冷却定律</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">稳态导热</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">非稳态导热</span><br></pre></td></tr></table></figure>
-<center><h1>或许可用的公式</h1></center>
-<p>热传导方程</p>
-<p>牛顿冷却定律</p>
-<p>傅里叶定律</p>
-<p>Crank − Nicholson 方法</p>
-<center><h1>一些假设</h1></center>
-1. 只考虑热对流、热传导
-2. 是从炉前区域就开始的
-3. 假设是热风回流焊炉，热对流传热为主
-<center><h1>一些想法</h1></center>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="الصفحة التالية"></i></a>
   </nav>
 
 
@@ -1536,10 +1746,10 @@ SMT贴片指的是在PCB基础上进行加工的系列工艺流程的简称，PC
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          Table of Contents
+          المحتويات
         </li>
         <li class="sidebar-nav-overview">
-          Overview
+          عام
         </li>
       </ul>
 
@@ -1558,21 +1768,21 @@ SMT贴片指的是在PCB基础上进行加工的系列工艺流程的简称，PC
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">المقالات</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">categories</span></a>
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">التصنيفات</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
-        <span class="site-state-item-name">tags</span></a>
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">الوسوم</span></a>
       </div>
   </nav>
 </div>
@@ -1604,7 +1814,7 @@ SMT贴片指的是在PCB基础上进行加工的系列工艺流程的简称，PC
   </span>
   <span class="author" itemprop="copyrightHolder">CrestinyCoco</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
         

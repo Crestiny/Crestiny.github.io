@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2.1 对称加密原理 2.1.0 对称加密简介 一个对称加密算法的组成 ![](\Chapter2-对称加密和消息机密性\model.png) 对称加密算法的安全性 需要达到以下两个要求： - 强加密算法：（一个很强的条件）攻击者有很多（算法）+密文+密文对应的明文，却不能解出全部明文|密钥 - 密钥安全：Alice和Bob的密钥收发仅两人可得 注：对称加密的安全取决于密钥的保密性，算法可公开 2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter2 对称加密和消息机密性">
+<meta property="og:url" content="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="2.1 对称加密原理 2.1.0 对称加密简介 一个对称加密算法的组成 ![](\Chapter2-对称加密和消息机密性\model.png) 对称加密算法的安全性 需要达到以下两个要求： - 强加密算法：（一个很强的条件）攻击者有很多（算法）+密文+密文对应的明文，却不能解出全部明文|密钥 - 密钥安全：Alice和Bob的密钥收发仅两人可得 注：对称加密的安全取决于密钥的保密性，算法可公开 2">
+<meta property="og:locale">
+<meta property="og:image" content="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Cattack.png">
+<meta property="og:image" content="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Ca1.png">
+<meta property="article:published_time" content="2020-09-21T00:03:01.000Z">
+<meta property="article:modified_time" content="2020-09-22T10:14:19.697Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta property="article:tag" content="Cryptography">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Cattack.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Chapter2 对称加密和消息机密性 | Crestiny's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Crestiny's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Life is fantastic ! </p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>الوسوم</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>التصنيفات</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>الأرشيفات</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Chapter2 对称加密和消息机密性
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">نُشر في</span>
+
+              <time title="أُنشأ: 2020-09-21 08:03:01" itemprop="dateCreated datePublished" datetime="2020-09-21T08:03:01+08:00">2020-09-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">عُدل في</span>
+                <time title="عُدل: 2020-09-22 18:14:19" itemprop="dateModified" datetime="2020-09-22T18:14:19+08:00">2020-09-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">في</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+                  ، 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <center><h1>2.1 对称加密原理</h1></center>
+<h2>2.1.0 对称加密简介</h2>
+<h3>一个对称加密算法的组成</h3>
+![](\Chapter2-对称加密和消息机密性\model.png)
+<h3>对称加密算法的安全性</h3>
+需要达到以下两个要求：
+- 强加密算法：（一个很强的条件）攻击者有很多（算法）+密文+密文对应的明文，却不能解出全部明文|密钥
+- 密钥安全：Alice和Bob的密钥收发仅两人可得
+<p><strong>注：对称加密的安全取决于密钥的保密性，算法可公开</strong></p>
+<h2>2.1.1 密码体制</h2>
+密码体制有以下三个分类标准：
+<h3>1. 明文转换成密文的操作类型</h3>
+<ul>
+<li>替换：明文映射到……</li>
+<li>换位：明文再排列</li>
+</ul>
+<p>（注：上述两种操作可以以比特、字母等等为单位）</p>
+<h3>2. 使用的密钥数</h3>
+<ul>
+<li>AB同一密钥：对称/单钥/秘密密钥/传统加密</li>
+<li>AB不同密钥：不对称/双钥/公钥加密</li>
+</ul>
+<h3>3. 明文的处理方式</h3>
+<ul>
+<li>一次处理一个分组：分组密码</li>
+<li>明文输入过程中连续处理：流密码</li>
+</ul>
+<h2>2.1.2 密码分析</h2>
+密码分析或破译：找出明文或密钥
+<p>根据攻击者掌握的信息量，可将攻击类型分类如下：<br>
+<img src="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Cattack.png" alt></p>
+<h3>1. 惟密文攻击</h3>
+或许只能穷举……但是也有一些小技巧，比如统计测试（前提是对明文的类型有一个大致的了解）
+<h3>2. 已知明文攻击</h3>
+比如某种文件可能有些固定的内容……
+**一般密码算法会被设计成能抵挡已知明文攻击的程度**
+<h3>3. 选择明文</h3>
+攻击者能得到源系统，可以插入自己选定的消息
+<h3>4. 选择密文</h3>
+不太常见
+<h3>5. 选择文本</h3>
+不太常见
+<p>计算安全的加密方案：</p>
+<ul>
+<li>破解密文的代价&gt;明文的价值</li>
+<li>破解密文的时间&gt;信息的有用寿命</li>
+</ul>
+<h2>2.1.3 Feistel密码结构</h2>
+<h5>可以看做是对称密码算法的通用结构</h5>
+![](\Chapter2-对称加密和消息机密性\Fiestel.png)
+<h5>其中有些可以调整的参数：</h5>
+- 分组大小：折中128bit一组比较常见
+- 密钥大小：越长——越安全——加解密越慢
+- 迭代轮数：典型16
+- 子密钥产生算法：越复杂越安全
+- 轮函数：同上
+<h5>设计算法还需考虑</h5>
+- 软件执行速度比较快
+- 容易分析——容易找到弱点——随即加固
+<p><strong>对称密码算法的加解密本质上是相同的过程，不需要实现两个不同的算法</strong></p>
+<center><h1>2.2 对称分组加密算法</h1></center>
+<h2>2.2.1 数据加密标准DES</h2>
+说实话，我总是不能把数据加密标准和DES联系在一起，这两个名字，一个像标准，一个像算法哈哈哈哈；但是仔细研究一下发现，其实我的直觉没错
+DES准确来说是一种标准，数据加密标准；算法本身其实叫做DEA，略感陌生；一般都直接说DES了
+<h5>DEA算法描述</h5>
+基本沿用Fiestel结构，参数如下：
+- 分组大小：64
+- 密钥大小：56
+- 迭代轮数：典型16
+- 子密钥产生算法：越复杂越安全
+- 轮函数：同上
+<h5>DES的强度</h5>
+- 算法本身：至今还没人指出弱点
+- 密钥长度：一定范围内，蛮力攻击还是可行的（所以后来有改进的算法来替代它，如3DES和AES）
+<h2>2.2.2 三重DES</h2>
+<h5>3DES流程</h5>
+使用三次DES，加密——解密——加密
+<h5>3DES优点</h5>
+- 底层算法与DES相同，之前说过无弱点了
+- 密钥长度168bit，解决了被穷举的问题
+<h5>3DES缺点</h5>
+软件运行慢
+<h2>2.2.3 高级加密标准AES</h2>
+替代3DES，安全性>=，效率>=
+<h5>AES流程</h5>
+值得注意的是，它不是Feistel结构
+（具体可见书30—31页）
+<center><h1>2.3 随机数和伪随机数</h1></center>
+<h2>2.3.1 随机数的应用</h2>
+<h5>基于随机数的安全算法</h5>
+RSA、对称流密码的密钥流的生成、密钥分配方案……
+<h5>应用对随机数的需求</h5>
+<ol>
+<li>随机性：有两个验证标准<br>
+（1）均匀分布：一串中，0与1出现概率大致相同<br>
+（2）独立：统一序列上，没有数字能影响别人</li>
+<li>不可预测性</li>
+</ol>
+<h2>2.3.2 真随机数发生器TRNG、伪随机数生成器PRNG和伪随机函数PRF</h2>
+首先要明白，什么是统计上的随机性？不太懂……也没查到
+![](\Chapter2-对称加密和消息机密性\random.png)
+伪随机数发生器和伪随机函数的区别在于产生的比特数不同
+<h2>2.3.3 算法设计</h2>
+PRNG的算法可以分为两类：
+<h5>1. 为特定目的构造的算法</h5>
+<h5>2. 基于现存密码算法的算法</h5>
+不太懂这是什么意思……
+<center><h1>2.4 流密码和RC4</h1></center>
+分组密码更普遍，但对于特定应用还是要用流密码的。
+最对称的流密码可以说是RC4了哈哈哈哈
+<h2>2.4.1 流密码结构</h2>
+<h5>流密码结构示意图</h5>
+![](\Chapter2-对称加密和消息机密性\flow.png)
+解释一下：首先呢，你要先有个密钥K，把它投入伪随机字节生成器里面得到密钥流k；k和明文异或就得到密文字节流啦。由于是对称的，加密解密用同一个密钥
+<h5>设计流密码的考虑因素</h5>
+<ul>
+<li>加密序列有个长周期：意思是，其实伪随机字节生成器生成的是周期性循环的确定字节流，如果周期太短容易被破</li>
+<li>生成的密钥流最好能通过随机数检测那些</li>
+<li>PRNG的输入要足够长以便不会被穷举</li>
+</ul>
+<h5>流密码优点</h5>
+<ul>
+<li>比分组密码快，代码少</li>
+</ul>
+<h5>分组密码优点</h5>
+<ul>
+<li>分组密码可以重复使用密钥，但是流密码的密钥最好不要重复用不然容易被破</li>
+</ul>
+<h2>2.4.2 RC4算法</h2>
+<h5>RC4算法</h5>
+<ul>
+<li>初始化S：S是个状态向量，有256维，刚开始从0-255维依次设为0-255；K为密钥（1-256字节可变）；T为临时向量（256维）<br>
+T的赋值：将K循环利用填充进去<br>
+S的初始置换：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">j&#x3D;0;</span><br><span class="line">for(i&#x3D;0;i&lt;&#x3D;255;i++)&#123;</span><br><span class="line">	j&#x3D;(j+S[i]+T[i])mod 256;</span><br><span class="line">	swap(S[i],S[j]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>密钥流产生：感觉只有对S的置换操作<br>
+<img src="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Ca1.png" alt></li>
+</ul>
+<h5>RC4强度</h5>
+有些特定的攻击方法
+、
+<center><h1>2.5 分组密码工作模式</h1></center>
+NIST定义了以下五种工作模式：
+<h2>2.5.1 电子密码本ECB模式</h2>
+<h5>原理</h5>
+假设明文被分成b比特一组，每个分组都是同一密钥加密的。每个分组对于一个给定的密钥会有一个密文（唯一的结果），但是如果一段明文里有两个完全相同的分组……它们对应的密文也是相同的……
+<h5>不足</h5>
+如果明文过长以至于出现两个分组重复，就不安全。所以我们希望有上述情况的话，它们会对应两个不同的密文。
+<h2>2.5.2 密码分组链接CBC模式</h2>
+<h5>原理</h5>
+![](\Chapter2-对称加密和消息机密性\CBC.png)
+如图所示，输入：每组明文和上一组密文的异或；处理：所有分组用同一密钥；
+<h5>数学推导说明的一些东西</h5>
+见书P39
+<h2>2.5.3 密码反馈CFB模式</h2>
+<h5>作用</h5>
+将任意分组密码转化为流密码
+<h5>原理</h5>
+不想整了hai，之后有需要再补吧，P39-40
+<h2>2.5.4 计数器模式</h2>
+<h5>原理</h5>
+不想整了hai，之后有需要再补吧，P39-40
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Cryptography/" rel="tag"># Cryptography</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/" rel="prev" title="Chapter1 绪论 | Reading Notes">
+      <i class="fa fa-chevron-left"></i> Chapter1 绪论 | Reading Notes
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">2.1 对称加密原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">2.1.0 对称加密简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.1.</span> <span class="nav-text">一个对称加密算法的组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.2.</span> <span class="nav-text">对称加密算法的安全性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">2.1.1 密码体制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 明文转换成密文的操作类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 使用的密钥数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 明文的处理方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">2.1.2 密码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 惟密文攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 已知明文攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. 选择明文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.4.</span> <span class="nav-text">4. 选择密文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.5.</span> <span class="nav-text">5. 选择文本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">2.1.3 Feistel密码结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.4.0.0.1.</span> <span class="nav-text">可以看做是对称密码算法的通用结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.4.0.0.2.</span> <span class="nav-text">其中有些可以调整的参数：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.4.0.0.3.</span> <span class="nav-text">设计算法还需考虑</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">2.2 对称分组加密算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">2.2.1 数据加密标准DES</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">2.1.0.0.1.</span> <span class="nav-text">DEA算法描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">2.1.0.0.2.</span> <span class="nav-text">DES的强度</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">2.2.2 三重DES</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">2.2.0.0.1.</span> <span class="nav-text">3DES流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">2.2.0.0.2.</span> <span class="nav-text">3DES优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">2.2.0.0.3.</span> <span class="nav-text">3DES缺点</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">2.2.3 高级加密标准AES</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">2.3.0.0.1.</span> <span class="nav-text">AES流程</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">2.3 随机数和伪随机数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">2.3.1 随机数的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">3.1.0.0.1.</span> <span class="nav-text">基于随机数的安全算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">3.1.0.0.2.</span> <span class="nav-text">应用对随机数的需求</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">2.3.2 真随机数发生器TRNG、伪随机数生成器PRNG和伪随机函数PRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">2.3.3 算法设计</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">3.3.0.0.1.</span> <span class="nav-text">1. 为特定目的构造的算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">3.3.0.0.2.</span> <span class="nav-text">2. 基于现存密码算法的算法</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">2.4 流密码和RC4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">2.4.1 流密码结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">4.1.0.0.1.</span> <span class="nav-text">流密码结构示意图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">4.1.0.0.2.</span> <span class="nav-text">设计流密码的考虑因素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">4.1.0.0.3.</span> <span class="nav-text">流密码优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">4.1.0.0.4.</span> <span class="nav-text">分组密码优点</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">2.4.2 RC4算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">4.2.0.0.1.</span> <span class="nav-text">RC4算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">4.2.0.0.2.</span> <span class="nav-text">RC4强度</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">2.5 分组密码工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">2.5.1 电子密码本ECB模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.1.0.0.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.1.0.0.2.</span> <span class="nav-text">不足</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">2.5.2 密码分组链接CBC模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.2.0.0.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.2.0.0.2.</span> <span class="nav-text">数学推导说明的一些东西</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.3.</span> <span class="nav-text">2.5.3 密码反馈CFB模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.3.0.0.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.3.0.0.2.</span> <span class="nav-text">原理</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.4.</span> <span class="nav-text">2.5.4 计数器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.4.0.0.1.</span> <span class="nav-text">原理</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CrestinyCoco</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">التصنيفات</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">الوسوم</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CrestinyCoco</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
