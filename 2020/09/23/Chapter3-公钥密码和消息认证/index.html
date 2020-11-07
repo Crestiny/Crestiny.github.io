@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="3.1 消息认证方法 3.1.0 引言 加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。 首先，什么是可信？ 可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。 对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等 3.1.1 利用常规加密">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter3 公钥密码和消息认证">
+<meta property="og:url" content="http://yoursite.com/2020/09/23/Chapter3-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%92%8C%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="3.1 消息认证方法 3.1.0 引言 加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。 首先，什么是可信？ 可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。 对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等 3.1.1 利用常规加密">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-23T04:06:11.000Z">
+<meta property="article:modified_time" content="2020-09-27T00:17:53.245Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta property="article:tag" content="Public-key cryptography">
+<meta property="article:tag" content="Message authentication">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/09/23/Chapter3-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%92%8C%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Chapter3 公钥密码和消息认证 | Crestiny's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Crestiny's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Life is fantastic ! </p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/23/Chapter3-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%92%8C%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Chapter3 公钥密码和消息认证
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-23 12:06:11" itemprop="dateCreated datePublished" datetime="2020-09-23T12:06:11+08:00">2020-09-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-27 08:17:53" itemprop="dateModified" datetime="2020-09-27T08:17:53+08:00">2020-09-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <center><h1>3.1 消息认证方法</h1></center>
+<h2>3.1.0 引言</h2>
+加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。
+首先，什么是可信？
+可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。
+对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等
+<h2>3.1.1 利用常规加密的消息认证</h2>
+常规就是说简单的对称加密这样子，但是对于分组对称加密会出现问题。
+假如攻击者想换动消息流之间的顺序，那么由于是分组的，所以B还是能每组都正常解密……
+<h2>3.1.2 非加密的消息认证</h2>
+<h5>认证与加密</h5>
+把这两个词放一起的时候，我常常感觉……很迷糊，现在理一理：
+一般来说认证和加密是两个功能，说一句话可能会让关系更明白：
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如我们有一个对消息作处理的算法，这里面可以包含两步操作：先对消息加密，再打上认证标签；这样我们就可以说：把消息的认证和保密结合起来了</span><br></pre></td></tr></tbody></table></figure>
+<h5>什么时候可以不加密只认证呢？</h5>
+1. 相同消息广播时，只由一端负责监控的系统执行认证（不是很理解，直观是什么样的？）
+2. 交换信息时，某一端负载太大不能全部解密，就会随机抽一些进行认证
+3. 程序可以用明文+认证标签，节省处理器解密的消耗
+<h5>消息认证码MAC</h5>
+定义：用私钥产生一小块数据，它可以作为MAC
+工作流程：
+![](\Chapter3-公钥密码和消息认证\MAC.png)
+A和B共享一个密钥K，A给B发消息的时候，A用消息+K生成MAC，再把消息和MAC一起发给B；B收到以后，算一算MAC对不对
+值得注意的是，认证算法不需要可逆，因为B验证的时候和A是一样的操作（与加密相比更不容易被破）
+<h5>单向散列函数</h5>
+这是MAC的一种替代品，不同之处在于：MAC需要密钥而单向散列不需要，它只是输入M得到H(M)而已。
+H函数可以有以下三种形式：
+![](\Chapter3-公钥密码和消息认证\HASH.png)
+（详细见P50-51）
+<center><h1>3.2 安全散列函数</h1></center>
+<h2>3.2.1 散列函数的要求</h2>
+1. 输入长度不受限制
+2. 输出长度固定
+3. 从x——&gt;H(x)容易计算
+4. 单向性/抗原像攻击性：从H(x)——&gt;x计算上不可行
+5. 抗弱碰撞攻击性/抗第二原像攻击性：对于x，找一个和它哈希值相同的y从计算上不可行
+6. 抗碰撞性/抗强碰撞性：找到任意一对哈希值相同的x，y计算上不可行（可以防止生日攻击）
+<h2>3.2.2 散列函数的安全性</h2>
+攻击方法：密码分析法+蛮力攻击法
+前者利用密码算法的缺陷，后者是要付出指数级代价的（不过2004年王小云教授破了MD5！）
+<h2>3.2.3 简单散列函数</h2>
+<h2>3.2.4 SHA安全散列函数</h2>
+<center><h1>3.3 消息认证码</h1></center>
+<h2>3.3.1 HMAC</h2>
+<h5>为什么会有HMAC呢？</h5>
+首先，由于SHA-1软件实现速度快、有许多共享的Hash函数代码库等优点，人们逐渐将它用于MAC。但是为了把密钥合并到散列算法中，人们开发出了HMAC
+<h5>HMAC的设计目标</h5>
+<h5>HMAC的算法设计</h5>
+<h2>3.3.2 基于分组密码的MAC</h2>
+<h5>基于密文的消息认证码CMAC</h5>
+<h5>具有密码块链式信息认证码的计数器</h5>
+<center><h1>3.4 公钥密码原理</h1></center>
+<h2>3.4.1 公钥密码思想</h2>
+公钥密码基于数学函数，可以用于消息认证、密钥分发
+<h5>常见误解</h5>
+公钥比对称密码更安全
+<center><h1>3.5 公钥密码算法</h1></center>
+<center><h1>3.6 数字签名</h1></center><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Public-key-cryptography/" rel="tag"># Public-key cryptography</a>
+              <a href="/tags/Message-authentication/" rel="tag"># Message authentication</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/23/Chapter4-%E5%AF%86%E9%92%A5%E5%88%86%E9%85%8D%E5%92%8C%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/" rel="prev" title="Chapter4 密钥分配和用户认证">
+      <i class="fa fa-chevron-left"></i> Chapter4 密钥分配和用户认证
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/23/Chapter1-%E6%A6%82%E8%BF%B0/" rel="next" title="Chapter1 概述">
+      Chapter1 概述 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">3.1 消息认证方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">3.1.0 引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">3.1.1 利用常规加密的消息认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">3.1.2 非加密的消息认证</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.3.0.0.1.</span> <span class="nav-text">认证与加密</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.3.0.0.2.</span> <span class="nav-text">什么时候可以不加密只认证呢？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.3.0.0.3.</span> <span class="nav-text">消息认证码MAC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.3.0.0.4.</span> <span class="nav-text">单向散列函数</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">3.2 安全散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">3.2.1 散列函数的要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">3.2.2 散列函数的安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">3.2.3 简单散列函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">3.2.4 SHA安全散列函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">3.3 消息认证码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">3.3.1 HMAC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">3.1.0.0.1.</span> <span class="nav-text">为什么会有HMAC呢？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">3.1.0.0.2.</span> <span class="nav-text">HMAC的设计目标</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">3.1.0.0.3.</span> <span class="nav-text">HMAC的算法设计</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">3.3.2 基于分组密码的MAC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">3.2.0.0.1.</span> <span class="nav-text">基于密文的消息认证码CMAC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">3.2.0.0.2.</span> <span class="nav-text">具有密码块链式信息认证码的计数器</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">3.4 公钥密码原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">3.4.1 公钥密码思想</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">4.1.0.0.1.</span> <span class="nav-text">常见误解</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">3.5 公钥密码算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">3.6 数字签名</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CrestinyCoco</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CrestinyCoco</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="2.1 对称加密原理 2.1.0 对称加密简介 一个对称加密算法的组成 ![](\Chapter2-对称加密和消息机密性\model.png) 对称加密算法的安全性 需要达到以下两个要求： - 强加密算法：（一个很强的条件）攻击者有很多（算法）+密文+密文对应的明文，却不能解出全部明文|密钥 - 密钥安全：Alice和Bob的密钥收发仅两人可得 注：对称加密的安全取决于密钥的保密性，算法可公开 2">
@@ -26,11 +26,11 @@
 <meta property="og:url" content="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/index.html">
 <meta property="og:site_name" content="Crestiny&#39;s Blog">
 <meta property="og:description" content="2.1 对称加密原理 2.1.0 对称加密简介 一个对称加密算法的组成 ![](\Chapter2-对称加密和消息机密性\model.png) 对称加密算法的安全性 需要达到以下两个要求： - 强加密算法：（一个很强的条件）攻击者有很多（算法）+密文+密文对应的明文，却不能解出全部明文|密钥 - 密钥安全：Alice和Bob的密钥收发仅两人可得 注：对称加密的安全取决于密钥的保密性，算法可公开 2">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Cattack.png">
 <meta property="og:image" content="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Ca1.png">
 <meta property="article:published_time" content="2020-09-21T00:03:01.000Z">
-<meta property="article:modified_time" content="2020-09-22T10:14:19.697Z">
+<meta property="article:modified_time" content="2020-09-22T16:53:02.630Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta property="article:tag" content="Cryptography">
 <meta name="twitter:card" content="summary">
@@ -45,7 +45,7 @@
     sidebar: "",
     isHome : false,
     isPost : true,
-    lang   : 'zh-Hans'
+    lang   : 'zh-CN'
   };
 </script>
 
@@ -80,7 +80,8 @@
   </style>
 </noscript>
 
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -89,7 +90,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="تشغيل شريط التصفح">
+    <div class="toggle" aria-label="切换导航栏">
       <span class="toggle-line toggle-line-first"></span>
       <span class="toggle-line toggle-line-middle"></span>
       <span class="toggle-line toggle-line-last"></span>
@@ -119,22 +120,22 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>الوسوم</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>التصنيفات</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>الأرشيفات</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
   </ul>
@@ -164,7 +165,7 @@
     
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -186,26 +187,26 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">نُشر في</span>
+              <span class="post-meta-item-text">发表于</span>
 
-              <time title="أُنشأ: 2020-09-21 08:03:01" itemprop="dateCreated datePublished" datetime="2020-09-21T08:03:01+08:00">2020-09-21</time>
+              <time title="创建时间：2020-09-21 08:03:01" itemprop="dateCreated datePublished" datetime="2020-09-21T08:03:01+08:00">2020-09-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
-                <span class="post-meta-item-text">عُدل في</span>
-                <time title="عُدل: 2020-09-22 18:14:19" itemprop="dateModified" datetime="2020-09-22T18:14:19+08:00">2020-09-22</time>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-23 00:53:02" itemprop="dateModified" datetime="2020-09-23T00:53:02+08:00">2020-09-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">في</span>
+              <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
                 </span>
-                  ، 
+                  ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
                 </span>
@@ -252,7 +253,7 @@
 <h2>2.1.2 密码分析</h2>
 密码分析或破译：找出明文或密钥
 <p>根据攻击者掌握的信息量，可将攻击类型分类如下：<br>
-<img src="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Cattack.png" alt></p>
+<img src="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Cattack.png" alt=""></p>
 <h3>1. 惟密文攻击</h3>
 或许只能穷举……但是也有一些小技巧，比如统计测试（前提是对明文的类型有一个大致的了解）
 <h3>2. 已知明文攻击</h3>
@@ -300,12 +301,14 @@ DES准确来说是一种标准，数据加密标准；算法本身其实叫做DE
 <h5>3DES流程</h5>
 使用三次DES，加密——解密——加密
 <h5>3DES优点</h5>
-- 底层算法与DES相同，之前说过无弱点了
-- 密钥长度168bit，解决了被穷举的问题
+<ul>
+<li>底层算法与DES相同，之前说过无弱点了</li>
+<li>密钥长度168bit，解决了被穷举的问题</li>
+</ul>
 <h5>3DES缺点</h5>
 软件运行慢
 <h2>2.2.3 高级加密标准AES</h2>
-替代3DES，安全性>=，效率>=
+替代3DES，安全性&gt;=，效率&gt;=
 <h5>AES流程</h5>
 值得注意的是，它不是Feistel结构
 （具体可见书30—31页）
@@ -357,10 +360,10 @@ PRNG的算法可以分为两类：
 T的赋值：将K循环利用填充进去<br>
 S的初始置换：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">j&#x3D;0;</span><br><span class="line">for(i&#x3D;0;i&lt;&#x3D;255;i++)&#123;</span><br><span class="line">	j&#x3D;(j+S[i]+T[i])mod 256;</span><br><span class="line">	swap(S[i],S[j]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">j=0;</span><br><span class="line">for(i=0;i&lt;=255;i++){</span><br><span class="line">	j=(j+S[i]+T[i])mod 256;</span><br><span class="line">	swap(S[i],S[j]);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>密钥流产生：感觉只有对S的置换操作<br>
-<img src="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Ca1.png" alt></li>
+<img src="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Ca1.png" alt=""></li>
 </ul>
 <h5>RC4强度</h5>
 有些特定的攻击方法
@@ -385,7 +388,25 @@ NIST定义了以下五种工作模式：
 不想整了hai，之后有需要再补吧，P39-40
 <h2>2.5.4 计数器模式</h2>
 <h5>原理</h5>
-不想整了hai，之后有需要再补吧，P39-40
+不想整了hai，之后有需要再补吧，P39-40<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     </div>
 
     
@@ -406,7 +427,10 @@ NIST定义了以下五种工作模式：
     <a href="/2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/" rel="prev" title="Chapter1 绪论 | Reading Notes">
       <i class="fa fa-chevron-left"></i> Chapter1 绪论 | Reading Notes
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/23/Chapter4-%E5%AF%86%E9%92%A5%E5%88%86%E9%85%8D%E5%92%8C%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/" rel="next" title="Chapter4 密钥分配和用户认证">
+      Chapter4 密钥分配和用户认证 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -456,10 +480,10 @@ NIST定义了以下五种工作模式：
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          المحتويات
+          文章目录
         </li>
         <li class="sidebar-nav-overview">
-          عام
+          站点概览
         </li>
       </ul>
 
@@ -479,21 +503,21 @@ NIST定义了以下五种工作模式：
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
-          <span class="site-state-item-name">المقالات</span>
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
-        <span class="site-state-item-name">التصنيفات</span></a>
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
-        <span class="site-state-item-name">الوسوم</span></a>
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -525,7 +549,7 @@ NIST定义了以下五种工作模式：
   </span>
   <span class="author" itemprop="copyrightHolder">CrestinyCoco</span>
 </div>
-  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
         
