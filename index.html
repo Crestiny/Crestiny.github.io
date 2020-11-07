@@ -157,6 +157,178 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/08/HongYi-Lee-Model-Compression-Lecture/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/08/HongYi-Lee-Model-Compression-Lecture/" class="post-title-link" itemprop="url">HongYi Lee: Model Compression Lecture</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-08 00:40:12 / 修改时间：00:47:23" itemprop="dateCreated datePublished" datetime="2020-11-08T00:40:12+08:00">2020-11-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Research-Group/" itemprop="url" rel="index"><span itemprop="name">Research Group</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Network-Pruning"><a class="header-anchor" href="#Network-Pruning">¶</a>Network Pruning</h2>
+<h5 id="What’s-it-for"><a class="header-anchor" href="#What’s-it-for">¶</a>What’s it for?</h5>
+<p>Deleting some neurons or weights to make the model smaller.</p>
+<h5 id="Why-can-we-do-that-without-affecting-the-accuracy"><a class="header-anchor" href="#Why-can-we-do-that-without-affecting-the-accuracy">¶</a>Why can we do that(without affecting the accuracy)?</h5>
+<p>We usually believe the network is over-parameterized,<br>
+That is to say, many neurons’ outputs often turn out to be zero.</p>
+<h5 id="How-about-simply-train-a-smaller-network-at-the-beginning"><a class="header-anchor" href="#How-about-simply-train-a-smaller-network-at-the-beginning">¶</a>How about simply train a smaller network at the beginning?</h5>
+<ul>
+<li>It’s proved that larger network is easier to be optimized.(the problem of local minimum and saddle point become less severe)</li>
+<li>Lottery Ticket Hypothesis<br>
+When we follow these steps, we’ll get a parameterized pruned network.<br>
+If we want to train it futher, we shouldn’t give it a random initialization, instead, we should copy the weight from the original initialization of the larger network.And start from this.(Because this initialization is proved to be trainable, so we should still use it.)<br>
+(Though this seems to be reasonable, another paper put forward a contrast idea.)</li>
+</ul>
+<h5 id="To-drop-neuron-or-drop-weight"><a class="header-anchor" href="#To-drop-neuron-or-drop-weight">¶</a>To drop neuron or drop weight?</h5>
+<h6 id="Weight-pruning"><a class="header-anchor" href="#Weight-pruning">¶</a>Weight pruning</h6>
+<p>We may get an irregular network:</p>
+<ul>
+<li>hard to implement</li>
+<li>hard to speedup(Because GPU’s speedup is based on  matrix manipulation.)</li>
+</ul>
+<p>To solve “irregular”, we may remain those weights and set them to be zero rather than drop them out. But this is meaningless from the perspective of storage.</p>
+<h6 id="Neuron-pruning"><a class="header-anchor" href="#Neuron-pruning">¶</a>Neuron pruning</h6>
+<ul>
+<li>regular</li>
+<li>easy to implement</li>
+<li>easy to speedup</li>
+</ul>
+<h2 id="Knowledge-Distillation"><a class="header-anchor" href="#Knowledge-Distillation">¶</a>Knowledge Distillation</h2>
+<h5 id="How-to-do"><a class="header-anchor" href="#How-to-do">¶</a>How to do?</h5>
+<p>Let a student model learn from a teacher model.<br>
+Note that the student model doesn’t learn from real data, it learns from outputs of the teacher model which may be wrong.</p>
+<h5 id="Why-is-it-useful"><a class="header-anchor" href="#Why-is-it-useful">¶</a>Why is it useful?</h5>
+<p>Because data from the teacher model may be richer than labels, the student model may be able to classify the piture which it has never seen.</p>
+<h5 id="One-application-for-knowledge-distillation"><a class="header-anchor" href="#One-application-for-knowledge-distillation">¶</a>One application for knowledge distillation</h5>
+<p>Sometimes we use ensemble models to get better performance, but the model maybe too large to be deployed on mobile device.<br>
+So we can use the average of models’ output as a teacher model 's output to train our student network</p>
+<h2 id="Parameter-Quantization"><a class="header-anchor" href="#Parameter-Quantization">¶</a>Parameter Quantization</h2>
+<h5 id="Ways-to-quantize-weights"><a class="header-anchor" href="#Ways-to-quantize-weights">¶</a>Ways to quantize weights</h5>
+<ul>
+<li>using less bits to represnt a value</li>
+<li>Weight clustering<br>
+divide weights into groups, for each group, we use the average value to represent members.</li>
+<li>Huffman encoding</li>
+</ul>
+<h5 id="Binary-Weights"><a class="header-anchor" href="#Binary-Weights">¶</a>Binary Weights</h5>
+<ul>
+<li>First of all, we have a network with real value weights and a network with binary weights.</li>
+<li>We randomly initialize “real network”</li>
+<li>Choose the closest binary weight, do gradient descent, follow the direction to update our real weight(to another real weight)</li>
+<li>iterative</li>
+<li>finally arrive at a real weight and we’ll choose the closest binary weight as our result.</li>
+</ul>
+<h2 id="Architecture-Design"><a class="header-anchor" href="#Architecture-Design">¶</a>Architecture Design</h2>
+<h5 id="Low-rank-approximation"><a class="header-anchor" href="#Low-rank-approximation">¶</a>Low rank approximation</h5>
+<p>insert a hidden linear layer with K neuron<br>
+if well-designed, weights will be less<br>
+（Not so intuitive，we need some computation to prove that）</p>
+<h5 id="Depthwise-Separable-Convolution"><a class="header-anchor" href="#Depthwise-Separable-Convolution">¶</a>Depthwise Separable Convolution</h5>
+<p>Divide convolution into two steps:</p>
+<ol>
+<li>
+<p>Depthwise Convolution<br>
+——the number of filters=the number of channels<br>
+——filters is not three-dimensional<br>
+——each filter considers one channel</p>
+</li>
+<li>
+<p>Pointwise Convolution<br>
+——just like the normal convolution<br>
+——filter is 1*1<br>
+——the height of the filter=the number of channels</p>
+</li>
+</ol>
+<h5 id="The-connections-between-normal-convolution-and-Depthwise-Separable-Convolution"><a class="header-anchor" href="#The-connections-between-normal-convolution-and-Depthwise-Separable-Convolution">¶</a>The connections between normal convolution and Depthwise Separable Convolution</h5>
+<ul>
+<li>Depthwise Separable Convolution has common ground with inserting a hidden linear layer</li>
+<li>After analyzing the origin of each output, we may discover that the first step of DSC has “weights sharing”.(keep the same performance with less parameters)</li>
+</ul>
+<h2 id="Dynamic-Computation"><a class="header-anchor" href="#Dynamic-Computation">¶</a>Dynamic Computation</h2>
+<p>Possible Solutions:</p>
+<ul>
+<li>Train multiple classifiers:<br>
+from small to large, and choose the suitable one according to the computational power of the device</li>
+<li>Classifiers at the intermedia layer:<br>
+Instead of using the final output, we use the output at the intermedia layer.(But the performance is not good always &amp;&amp; classifiers near the input layer will decrease the perfomance(it forces layers to learn more complicate features than before))</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/12/Chapter9-IP%E5%AE%89%E5%85%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1167,270 +1339,10 @@ H函数可以有以下三种形式：
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/" class="post-title-link" itemprop="url">Chapter2 对称加密和消息机密性</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-21 08:03:01" itemprop="dateCreated datePublished" datetime="2020-09-21T08:03:01+08:00">2020-09-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-23 00:53:02" itemprop="dateModified" datetime="2020-09-23T00:53:02+08:00">2020-09-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <center><h1>2.1 对称加密原理</h1></center>
-<h2>2.1.0 对称加密简介</h2>
-<h3>一个对称加密算法的组成</h3>
-![](\Chapter2-对称加密和消息机密性\model.png)
-<h3>对称加密算法的安全性</h3>
-需要达到以下两个要求：
-- 强加密算法：（一个很强的条件）攻击者有很多（算法）+密文+密文对应的明文，却不能解出全部明文|密钥
-- 密钥安全：Alice和Bob的密钥收发仅两人可得
-<p><strong>注：对称加密的安全取决于密钥的保密性，算法可公开</strong></p>
-<h2>2.1.1 密码体制</h2>
-密码体制有以下三个分类标准：
-<h3>1. 明文转换成密文的操作类型</h3>
-<ul>
-<li>替换：明文映射到……</li>
-<li>换位：明文再排列</li>
-</ul>
-<p>（注：上述两种操作可以以比特、字母等等为单位）</p>
-<h3>2. 使用的密钥数</h3>
-<ul>
-<li>AB同一密钥：对称/单钥/秘密密钥/传统加密</li>
-<li>AB不同密钥：不对称/双钥/公钥加密</li>
-</ul>
-<h3>3. 明文的处理方式</h3>
-<ul>
-<li>一次处理一个分组：分组密码</li>
-<li>明文输入过程中连续处理：流密码</li>
-</ul>
-<h2>2.1.2 密码分析</h2>
-密码分析或破译：找出明文或密钥
-<p>根据攻击者掌握的信息量，可将攻击类型分类如下：<br>
-<img src="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Cattack.png" alt=""></p>
-<h3>1. 惟密文攻击</h3>
-或许只能穷举……但是也有一些小技巧，比如统计测试（前提是对明文的类型有一个大致的了解）
-<h3>2. 已知明文攻击</h3>
-比如某种文件可能有些固定的内容……
-**一般密码算法会被设计成能抵挡已知明文攻击的程度**
-<h3>3. 选择明文</h3>
-攻击者能得到源系统，可以插入自己选定的消息
-<h3>4. 选择密文</h3>
-不太常见
-<h3>5. 选择文本</h3>
-不太常见
-<p>计算安全的加密方案：</p>
-<ul>
-<li>破解密文的代价&gt;明文的价值</li>
-<li>破解密文的时间&gt;信息的有用寿命</li>
-</ul>
-<h2>2.1.3 Feistel密码结构</h2>
-<h5>可以看做是对称密码算法的通用结构</h5>
-![](\Chapter2-对称加密和消息机密性\Fiestel.png)
-<h5>其中有些可以调整的参数：</h5>
-- 分组大小：折中128bit一组比较常见
-- 密钥大小：越长——越安全——加解密越慢
-- 迭代轮数：典型16
-- 子密钥产生算法：越复杂越安全
-- 轮函数：同上
-<h5>设计算法还需考虑</h5>
-- 软件执行速度比较快
-- 容易分析——容易找到弱点——随即加固
-<p><strong>对称密码算法的加解密本质上是相同的过程，不需要实现两个不同的算法</strong></p>
-<center><h1>2.2 对称分组加密算法</h1></center>
-<h2>2.2.1 数据加密标准DES</h2>
-说实话，我总是不能把数据加密标准和DES联系在一起，这两个名字，一个像标准，一个像算法哈哈哈哈；但是仔细研究一下发现，其实我的直觉没错
-DES准确来说是一种标准，数据加密标准；算法本身其实叫做DEA，略感陌生；一般都直接说DES了
-<h5>DEA算法描述</h5>
-基本沿用Fiestel结构，参数如下：
-- 分组大小：64
-- 密钥大小：56
-- 迭代轮数：典型16
-- 子密钥产生算法：越复杂越安全
-- 轮函数：同上
-<h5>DES的强度</h5>
-- 算法本身：至今还没人指出弱点
-- 密钥长度：一定范围内，蛮力攻击还是可行的（所以后来有改进的算法来替代它，如3DES和AES）
-<h2>2.2.2 三重DES</h2>
-<h5>3DES流程</h5>
-使用三次DES，加密——解密——加密
-<h5>3DES优点</h5>
-<ul>
-<li>底层算法与DES相同，之前说过无弱点了</li>
-<li>密钥长度168bit，解决了被穷举的问题</li>
-</ul>
-<h5>3DES缺点</h5>
-软件运行慢
-<h2>2.2.3 高级加密标准AES</h2>
-替代3DES，安全性&gt;=，效率&gt;=
-<h5>AES流程</h5>
-值得注意的是，它不是Feistel结构
-（具体可见书30—31页）
-<center><h1>2.3 随机数和伪随机数</h1></center>
-<h2>2.3.1 随机数的应用</h2>
-<h5>基于随机数的安全算法</h5>
-RSA、对称流密码的密钥流的生成、密钥分配方案……
-<h5>应用对随机数的需求</h5>
-<ol>
-<li>随机性：有两个验证标准<br>
-（1）均匀分布：一串中，0与1出现概率大致相同<br>
-（2）独立：统一序列上，没有数字能影响别人</li>
-<li>不可预测性</li>
-</ol>
-<h2>2.3.2 真随机数发生器TRNG、伪随机数生成器PRNG和伪随机函数PRF</h2>
-首先要明白，什么是统计上的随机性？不太懂……也没查到
-![](\Chapter2-对称加密和消息机密性\random.png)
-伪随机数发生器和伪随机函数的区别在于产生的比特数不同
-<h2>2.3.3 算法设计</h2>
-PRNG的算法可以分为两类：
-<h5>1. 为特定目的构造的算法</h5>
-<h5>2. 基于现存密码算法的算法</h5>
-不太懂这是什么意思……
-<center><h1>2.4 流密码和RC4</h1></center>
-分组密码更普遍，但对于特定应用还是要用流密码的。
-最对称的流密码可以说是RC4了哈哈哈哈
-<h2>2.4.1 流密码结构</h2>
-<h5>流密码结构示意图</h5>
-![](\Chapter2-对称加密和消息机密性\flow.png)
-解释一下：首先呢，你要先有个密钥K，把它投入伪随机字节生成器里面得到密钥流k；k和明文异或就得到密文字节流啦。由于是对称的，加密解密用同一个密钥
-<h5>设计流密码的考虑因素</h5>
-<ul>
-<li>加密序列有个长周期：意思是，其实伪随机字节生成器生成的是周期性循环的确定字节流，如果周期太短容易被破</li>
-<li>生成的密钥流最好能通过随机数检测那些</li>
-<li>PRNG的输入要足够长以便不会被穷举</li>
-</ul>
-<h5>流密码优点</h5>
-<ul>
-<li>比分组密码快，代码少</li>
-</ul>
-<h5>分组密码优点</h5>
-<ul>
-<li>分组密码可以重复使用密钥，但是流密码的密钥最好不要重复用不然容易被破</li>
-</ul>
-<h2>2.4.2 RC4算法</h2>
-<h5>RC4算法</h5>
-<ul>
-<li>初始化S：S是个状态向量，有256维，刚开始从0-255维依次设为0-255；K为密钥（1-256字节可变）；T为临时向量（256维）<br>
-T的赋值：将K循环利用填充进去<br>
-S的初始置换：</li>
-</ul>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">j=0;</span><br><span class="line">for(i=0;i&lt;=255;i++){</span><br><span class="line">	j=(j+S[i]+T[i])mod 256;</span><br><span class="line">	swap(S[i],S[j]);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>密钥流产生：感觉只有对S的置换操作<br>
-<img src="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Ca1.png" alt=""></li>
-</ul>
-<h5>RC4强度</h5>
-有些特定的攻击方法
-、
-<center><h1>2.5 分组密码工作模式</h1></center>
-NIST定义了以下五种工作模式：
-<h2>2.5.1 电子密码本ECB模式</h2>
-<h5>原理</h5>
-假设明文被分成b比特一组，每个分组都是同一密钥加密的。每个分组对于一个给定的密钥会有一个密文（唯一的结果），但是如果一段明文里有两个完全相同的分组……它们对应的密文也是相同的……
-<h5>不足</h5>
-如果明文过长以至于出现两个分组重复，就不安全。所以我们希望有上述情况的话，它们会对应两个不同的密文。
-<h2>2.5.2 密码分组链接CBC模式</h2>
-<h5>原理</h5>
-![](\Chapter2-对称加密和消息机密性\CBC.png)
-如图所示，输入：每组明文和上一组密文的异或；处理：所有分组用同一密钥；
-<h5>数学推导说明的一些东西</h5>
-见书P39
-<h2>2.5.3 密码反馈CFB模式</h2>
-<h5>作用</h5>
-将任意分组密码转化为流密码
-<h5>原理</h5>
-不想整了hai，之后有需要再补吧，P39-40
-<h2>2.5.4 计数器模式</h2>
-<h5>原理</h5>
-不想整了hai，之后有需要再补吧，P39-40<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1496,20 +1408,20 @@ NIST定义了以下五种工作模式：
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
