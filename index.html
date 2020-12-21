@@ -157,6 +157,817 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/21/Chapter7-%E6%B1%A1%E7%82%B9%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/21/Chapter7-%E6%B1%A1%E7%82%B9%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">Chapter7 污点传播分析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-21 14:24:31 / 修改时间：14:35:03" itemprop="dateCreated datePublished" datetime="2020-12-21T14:24:31+08:00">2020-12-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件安全分析与应用》</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>污点分析是属于<strong>数据流分析方法</strong>的一种。<br>
+<strong>主要思想</strong>是：标记程序中的数据为污点，跟踪它的去向，看它是不是到了什么敏感的地方（重要的控制决策变量之类的）等等。<br>
+<strong>应用领域</strong>：恶意代码检测、软件漏洞挖掘、用户隐私保护</p>
+<h1>7.1 概述</h1>
+<h2 id="7-1-1-发展简史"><a class="header-anchor" href="#7-1-1-发展简史">¶</a>7.1.1 发展简史</h2>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/21/Chapter2-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/21/Chapter2-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">Chapter2 基础知识</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-21 13:58:42 / 修改时间：14:02:50" itemprop="dateCreated datePublished" datetime="2020-12-21T13:58:42+08:00">2020-12-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件安全分析与应用》</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本章的基础知识是指：在恶意代码分析、软件漏洞分析中需要的基础知识</p>
+<h1>2.1 处理器硬件架构基础</h1>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/15/Scraps-of-Study-or-Life-Skills/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/15/Scraps-of-Study-or-Life-Skills/" class="post-title-link" itemprop="url">Scraps of Study or Life Skills</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-15 17:13:34" itemprop="dateCreated datePublished" datetime="2020-12-15T17:13:34+08:00">2020-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-16 10:15:53" itemprop="dateModified" datetime="2020-12-16T10:15:53+08:00">2020-12-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tiny-Skills/" itemprop="url" rel="index"><span itemprop="name">Tiny Skills</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Convert ppt to pdf automatically</h1>
+<p><a target="_blank" rel="noopener" href="https://sspai.com/post/44122">一键批量将PPT/Word文档转为PDF</a></p>
+<h1>你需要来自xxx的权限才能更改……</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lanluyug/article/details/76559748">你需要来自XXX的权限才能对此文件夹进行更改 win10</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/14/Chapter-4-%E7%A8%8B%E5%BA%8F%E5%88%87%E7%89%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/14/Chapter-4-%E7%A8%8B%E5%BA%8F%E5%88%87%E7%89%87/" class="post-title-link" itemprop="url">Chapter 4-程序切片</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-14 14:05:14" itemprop="dateCreated datePublished" datetime="2020-12-14T14:05:14+08:00">2020-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-21 14:31:43" itemprop="dateModified" datetime="2020-12-21T14:31:43+08:00">2020-12-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件安全分析与应用》</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>4.1 概述</h1>
+<h2 id="程序切片定义"><a class="header-anchor" href="#程序切片定义">¶</a>程序切片定义</h2>
+<ul>
+<li>一种重要的程序分解技术</li>
+<li>从程序中提取</li>
+</ul>
+<h2 id="“分解”在软工中的运用"><a class="header-anchor" href="#“分解”在软工中的运用">¶</a>“分解”在软工中的运用</h2>
+<p>见书P99-100</p>
+<h1>4.2 程序切片初探</h1>
+<h2 id="4-2-1-切片相关基础知识"><a class="header-anchor" href="#4-2-1-切片相关基础知识">¶</a>4.2.1 切片相关基础知识</h2>
+<h3 id="控制流"><a class="header-anchor" href="#控制流">¶</a>控制流</h3>
+<p>程序中一系列指令（语句、函数调用）执行的顺序<br>
+程序指令分类：</p>
+<ul>
+<li>具备一定独立性的<strong>功能性指令</strong></li>
+<li>对指令执行顺序进行<strong>控制的指令</strong>——&gt;形成特定的控制结构</li>
+</ul>
+<h4 id="控制结构"><a class="header-anchor" href="#控制结构">¶</a>控制结构</h4>
+<p>三种基本结构：</p>
+<p><img src="http://crestiny.top/img/20201214144554.png" alt=""></p>
+<h3 id="数据流"><a class="header-anchor" href="#数据流">¶</a>数据流</h3>
+<p>数据在指令间变化（产生、传递、复制和消失）的过程</p>
+<h3 id="1-控制流分析"><a class="header-anchor" href="#1-控制流分析">¶</a>1.控制流分析</h3>
+<h4 id="基本块的定义"><a class="header-anchor" href="#基本块的定义">¶</a>基本块的定义</h4>
+<h4 id="基本块的计算方法"><a class="header-anchor" href="#基本块的计算方法">¶</a><strong>基本块的计算方法</strong></h4>
+<h4 id="控制流图构造算法"><a class="header-anchor" href="#控制流图构造算法">¶</a><strong>控制流图构造算法</strong></h4>
+<h3 id="2-数据流分析"><a class="header-anchor" href="#2-数据流分析">¶</a>2.数据流分析</h3>
+<h3 id="3-可到达定义"><a class="header-anchor" href="#3-可到达定义">¶</a>3.可到达定义</h3>
+<h4 id="可到达定义的计算方法"><a class="header-anchor" href="#可到达定义的计算方法">¶</a><strong>可到达定义的计算方法</strong></h4>
+<h3 id="4-活性分析"><a class="header-anchor" href="#4-活性分析">¶</a>4.活性分析</h3>
+<h3 id="5-程序依赖图"><a class="header-anchor" href="#5-程序依赖图">¶</a>5.程序依赖图</h3>
+<p>在介绍之前，我们来辨析一下各种“关系”：</p>
+<ul>
+<li>两个语句之间的依赖关系：控制流分析和数据流分析</li>
+<li>基本块（或者语句）之间的关系：控制依赖关系和数据依赖关系</li>
+</ul>
+<h4 id="控制依赖关系"><a class="header-anchor" href="#控制依赖关系">¶</a>控制依赖关系</h4>
+<h4 id="数据依赖关系"><a class="header-anchor" href="#数据依赖关系">¶</a>数据依赖关系</h4>
+<h2 id="4-2-2-切片的基本原理"><a class="header-anchor" href="#4-2-2-切片的基本原理">¶</a>4.2.2 切片的基本原理</h2>
+<h2 id="切片作用之一"><a class="header-anchor" href="#切片作用之一">¶</a>切片作用之一</h2>
+<p>调试的时候，为了排除不相干的代码的影响，我们需要有一些条件来过滤出我们感兴趣的代码<br>
+这个条件就叫“切片准则”</p>
+<h3 id="切片准则"><a class="header-anchor" href="#切片准则">¶</a>切片准则</h3>
+<ul>
+<li>切片准则包含两个要素：目标变量和开始切片的代码位置</li>
+<li>所以切片准则用形式化定义可以表示为一个二元组：&lt;n,V&gt;</li>
+<li>针对动态切片，可以是三元组：&lt;n,V,p&gt;；其中p为一个输入序列</li>
+</ul>
+<h3 id="程序切片技术的发展历程"><a class="header-anchor" href="#程序切片技术的发展历程">¶</a>程序切片技术的发展历程</h3>
+<p>见书P100</p>
+<h3 id="程序切片的步骤与细分类"><a class="header-anchor" href="#程序切片的步骤与细分类">¶</a>程序切片的步骤与细分类</h3>
+<ol>
+<li>程序依赖关系提取：考察控制流和数据流信息</li>
+<li>切片规则制定</li>
+<li>切片生成</li>
+</ol>
+<p><img src="http://crestiny.top/img/20201214142921.png" alt=""></p>
+<h3 id="程序切片的应用"><a class="header-anchor" href="#程序切片的应用">¶</a>程序切片的应用</h3>
+<h3 id="符号执行"><a class="header-anchor" href="#符号执行">¶</a>符号执行</h3>
+<p>核心思想：用符号指来表示程序的输入数据，并将程序的运算过程逐指令或逐语句地转换为数学表达式；在CFG的基础上构建<strong>符号执行树</strong></p>
+<h3 id="动态污点标记和非法操作检测"><a class="header-anchor" href="#动态污点标记和非法操作检测">¶</a>动态污点标记和非法操作检测</h3>
+<h2 id="4-3-静态程序切片"><a class="header-anchor" href="#4-3-静态程序切片">¶</a>4.3 静态程序切片</h2>
+<p>以下是静态程序切片的主要两种方法：</p>
+<h3 id="4-3-1-基于数据流方程的切片方法"><a class="header-anchor" href="#4-3-1-基于数据流方程的切片方法">¶</a>4.3.1 基于数据流方程的切片方法</h3>
+<h4 id="Mark-Weiser数据流切片算法"><a class="header-anchor" href="#Mark-Weiser数据流切片算法">¶</a><strong>Mark Weiser数据流切片算法</strong></h4>
+<h3 id="4-3-2-基于图可达性算法的切片方法"><a class="header-anchor" href="#4-3-2-基于图可达性算法的切片方法">¶</a>4.3.2 基于图可达性算法的切片方法</h3>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/14/Learning-about-Caffe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/14/Learning-about-Caffe/" class="post-title-link" itemprop="url">Learning about Caffe</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-14 01:16:45" itemprop="dateCreated datePublished" datetime="2020-12-14T01:16:45+08:00">2020-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-21 14:43:47" itemprop="dateModified" datetime="2020-12-21T14:43:47+08:00">2020-12-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Research-Group/" itemprop="url" rel="index"><span itemprop="name">Research Group</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Learning References</h1>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/27982282">深度学习caffe的代码怎么读？</a></p>
+<h1>Setup Caffe</h1>
+<p><a target="_blank" rel="noopener" href="https://alberthg.github.io/2018/04/12/Caffe-Windows-%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/">Caffe Windows 配置</a></p>
+<p><a target="_blank" rel="noopener" href="https://software.intel.com/content/www/cn/zh/develop/articles/installation-and-configuration-of-bvlc-caffe-under-windows-the-caffe-learning-notes-part1.html">里面有各个版本caffe介绍</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zb1165048017/article/details/51355143?utm_medium=distribute.pc_relevant.none-task-blog-OPENSEARCH-5.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-OPENSEARCH-5.control">【caffe-Windows】caffe+VS2013+Windows无GPU快速配置教程</a></p>
+<h1>Several Questions</h1>
+<h2 id="What-is-CUDA"><a class="header-anchor" href="#What-is-CUDA">¶</a>What is CUDA?</h2>
+<blockquote>
+<p>CUDA（Compute Unified Device Architecture），是显卡厂商NVIDIA推出的运算平台。 CUDA™是一种由NVIDIA推出的通用并行计算架构，该架构使GPU能够解决复杂的计算问题。 它包含了CUDA指令集架构（ISA）以及GPU内部的并行计算引擎。 开发人员可以使用C语言来为CUDA™架构编写程序，C语言是应用最广泛的一种高级编程语言。所编写出的程序可以在支持CUDA™的处理器上以超高性能运行。CUDA3.0已经开始支持C++和FORTRAN。</p>
+</blockquote>
+<p>哦……原来是让GPU解决问题的啊……我这台没有GPU的电脑难怪在安装CUDA的时候会出错了……</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/14/Gradually-Build-up-my-own-Blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/14/Gradually-Build-up-my-own-Blog/" class="post-title-link" itemprop="url">Gradually Build up my own Blog</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-14 00:53:11 / 修改时间：14:54:00" itemprop="dateCreated datePublished" datetime="2020-12-14T00:53:11+08:00">2020-12-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tiny-Skills/" itemprop="url" rel="index"><span itemprop="name">Tiny Skills</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Turn off the Auto-created Folder</h1>
+<ul>
+<li>find “_config.yml”</li>
+<li>in the file, find “post_asset…”</li>
+<li>set it to be “false”</li>
+</ul>
+<h1>Turn off auto-number</h1>
+<ul>
+<li>find “_config.yml” in /themes/next</li>
+<li>find “number”</li>
+<li>set it to be “false”</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/14/Learning-about-ResNet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/14/Learning-about-ResNet/" class="post-title-link" itemprop="url">Learning about ResNet</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-14 00:47:14" itemprop="dateCreated datePublished" datetime="2020-12-14T00:47:14+08:00">2020-12-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/14/Fix-My-Long-broken-Python-Environment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/14/Fix-My-Long-broken-Python-Environment/" class="post-title-link" itemprop="url">Fix My Long-broken Python Environment</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-14 00:46:34" itemprop="dateCreated datePublished" datetime="2020-12-14T00:46:34+08:00">2020-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-21 14:42:58" itemprop="dateModified" datetime="2020-12-21T14:42:58+08:00">2020-12-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Research-Group/" itemprop="url" rel="index"><span itemprop="name">Research Group</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Use Anaconda to Manage Python Environments</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014628771/article/details/80066624">Anaconda 查看、创建、管理和使用python环境</a></p>
+<p>If <code>conda activate your-env-name</code> won’t work, we can use <code>activate your-env-name</code></p>
+<h1>Pip install time-out</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sxf1061926959/article/details/54091748">pip和conda安装源更改</a></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pandas</span><br></pre></td></tr></tbody></table></figure>
+<h1>Unable to pip install pickle</h1>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/48477949/not-able-to-pip-install-pickle-in-python-3-6/48477988">Not able to pip install pickle in python 3.6</a></p>
+<p>try to add <code>D:\anaconda3\envs\python38</code> to <code>Path</code>.</p>
+<h1>PyCharm远程连接到服务器</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yeler082/article/details/83818771?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.control">https://blog.csdn.net/yeler082/article/details/83818771?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.control</a></p>
+<h1>PyTorch中指定使用的GPU</h1>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.environ["CUDA_VISIBLE_DEVICES"] = "2"</span><br></pre></td></tr></tbody></table></figure>
+<h1>调用另一个python文件中的代码</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010412719/article/details/47089883">如何调用另一个python文件中的代码</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42159393/article/details/107188710">暴力解</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/08/HongYi-Lee-Model-Compression-Lecture/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -444,901 +1255,6 @@ Instead of using the final output, we use the output at the intermedia layer.(Bu
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/12/Chapter5-%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%92%8C%E4%BA%91%E5%AE%89%E5%85%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/12/Chapter5-%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%92%8C%E4%BA%91%E5%AE%89%E5%85%A8/" class="post-title-link" itemprop="url">Chapter5 网络访问控制和云安全</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-12 08:54:14 / 修改时间：20:07:04" itemprop="dateCreated datePublished" datetime="2020-10-12T08:54:14+08:00">2020-10-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>5.1 网络访问协议</h1>
-<p>简称NAC，大概包括：登录认证+决定用户可以访问哪些数据+执行哪些操作+检查用户端设备的安全程度</p>
-<h2 id="5-1-1-网络访问控制系统的组成元素"><a class="header-anchor" href="#5-1-1-网络访问控制系统的组成元素">¶</a>5.1.1 网络访问控制系统的组成元素</h2>
-<h5 id="组成成分"><a class="header-anchor" href="#组成成分">¶</a>组成成分</h5>
-<p>（1）访问请求者AR<br>
-（2）策略服务器<br>
-（3）网络访问服务器NAS</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/09/Reverse-Linked-List/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/09/Reverse-Linked-List/" class="post-title-link" itemprop="url">Reverse Linked List</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-09 16:55:31 / 修改时间：16:57:10" itemprop="dateCreated datePublished" datetime="2020-10-09T16:55:31+08:00">2020-10-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Leetcode-Top-100-Liked-Questions/" itemprop="url" rel="index"><span itemprop="name">Leetcode Top 100 Liked Questions</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>Description</h1>
-<p>Reverse a singly linked list.</p>
-<h1>Input&amp;Output</h1>
-<p>Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>
-Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
-<h1>Analysis</h1>
-<p>感觉二叉树经常会用递归，我们应该一直走到底，将两个叶节点交换，然后再一路往上……<br>
-妙啊，越写越快了！</p>
-<h1>Code</h1>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode {</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode() {}</span><br><span class="line"> *     ListNode(int val) { this.val = val; }</span><br><span class="line"> *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }</span><br><span class="line"> * }</span><br><span class="line"> */</span><br><span class="line">class Solution {</span><br><span class="line">    public ListNode reverseList(ListNode head) {</span><br><span class="line">        </span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/30/Invert-Binary-Tree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/30/Invert-Binary-Tree/" class="post-title-link" itemprop="url">Invert Binary Tree</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-30 20:29:49" itemprop="dateCreated datePublished" datetime="2020-09-30T20:29:49+08:00">2020-09-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-09 16:50:23" itemprop="dateModified" datetime="2020-10-09T16:50:23+08:00">2020-10-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Leetcode-Top-100-Liked-Questions/" itemprop="url" rel="index"><span itemprop="name">Leetcode Top 100 Liked Questions</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>Description</h1>
-<p>Invert a binary tree.</p>
-<h1>Input&amp;Output</h1>
-<p><img src="/2020/09/30/Invert-Binary-Tree/%5CInvert-Binary-Tree%5CIO.png" alt=""></p>
-<h1>Analysis</h1>
-<p>感觉二叉树经常会用递归，我们应该一直走到底，将两个叶节点交换，然后再一路往上……<br>
-妙啊，越写越快了！</p>
-<h1>Code</h1>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode {</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode() {}</span><br><span class="line"> *     TreeNode(int val) { this.val = val; }</span><br><span class="line"> *     TreeNode(int val, TreeNode left, TreeNode right) {</span><br><span class="line"> *         this.val = val;</span><br><span class="line"> *         this.left = left;</span><br><span class="line"> *         this.right = right;</span><br><span class="line"> *     }</span><br><span class="line"> * }</span><br><span class="line"> */</span><br><span class="line">class Solution {</span><br><span class="line">    public TreeNode invertTree(TreeNode root) {</span><br><span class="line"></span><br><span class="line">        if(root==null){</span><br><span class="line">            return null;</span><br><span class="line">        }else{</span><br><span class="line">            if(root.left==null&amp;&amp;root.right==null){</span><br><span class="line">                return root;</span><br><span class="line">            }</span><br><span class="line">            root.left=invertTree(root.left);</span><br><span class="line">            root.right=invertTree(root.right);</span><br><span class="line">            TreeNode temp=new TreeNode();</span><br><span class="line">            temp=root.left;</span><br><span class="line">            root.left=root.right;</span><br><span class="line">            root.right=temp;</span><br><span class="line">        </span><br><span class="line">            return root;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/30/Single-Number/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/30/Single-Number/" class="post-title-link" itemprop="url">Single Number</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-09-30 19:53:46 / 修改时间：20:31:13" itemprop="dateCreated datePublished" datetime="2020-09-30T19:53:46+08:00">2020-09-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Leetcode-Top-100-Liked-Questions/" itemprop="url" rel="index"><span itemprop="name">Leetcode Top 100 Liked Questions</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>Description</h1>
-<p>Given a non-empty array of integers, every element appears twice except for one. Find that single one.</p>
-<p><em>NOTE：Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?</em></p>
-<h1>Input&amp;Output</h1>
-<p><img src="/2020/09/30/Single-Number/%5CSingle-Number%5CIO.png" alt=""></p>
-<h1>Code</h1>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution {</span><br><span class="line">    public int singleNumber(int[] nums) {</span><br><span class="line">        int i=1;</span><br><span class="line">        </span><br><span class="line">        java.util.Arrays.sort(nums);</span><br><span class="line">        </span><br><span class="line">        if(nums.length==1){</span><br><span class="line">            return nums[0];</span><br><span class="line">        }else if(nums[0]!=nums[1]){</span><br><span class="line">            return nums[0];</span><br><span class="line">        }else if(nums[nums.length-1]!=nums[nums.length-1]){</span><br><span class="line">            return nums[nums.length-1];</span><br><span class="line">        }</span><br><span class="line">        </span><br><span class="line">        for(;i&lt;nums.length-1;i++){</span><br><span class="line">            if(nums[i]==nums[i-1]||nums[i]==nums[i+1]){</span><br><span class="line">                continue;</span><br><span class="line">            }else{</span><br><span class="line">                break;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        </span><br><span class="line">        return nums[i];</span><br><span class="line">        </span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/30/Maximum-Depth-of-Binary-Tree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/30/Maximum-Depth-of-Binary-Tree/" class="post-title-link" itemprop="url">Maximum Depth of Binary Tree</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-09-30 19:11:22 / 修改时间：19:52:44" itemprop="dateCreated datePublished" datetime="2020-09-30T19:11:22+08:00">2020-09-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Leetcode-Top-100-Liked-Questions/" itemprop="url" rel="index"><span itemprop="name">Leetcode Top 100 Liked Questions</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>Description</h1>
-<p>Given a binary tree, find its maximum depth.</p>
-<p>The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.</p>
-<h1>Input&amp;Output</h1>
-<p><img src="/2020/09/30/Maximum-Depth-of-Binary-Tree/%5CMaximum-Depth-of-Binary-Tree%5CIO.png" alt=""></p>
-<h1>Analysis</h1>
-<p>大致的思路是，一直往下，过程中有计数器，到底了就返回数字啥的</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode {</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode() {}</span><br><span class="line"> *     TreeNode(int val) { this.val = val; }</span><br><span class="line"> *     TreeNode(int val, TreeNode left, TreeNode right) {</span><br><span class="line"> *         this.val = val;</span><br><span class="line"> *         this.left = left;</span><br><span class="line"> *         this.right = right;</span><br><span class="line"> *     }</span><br><span class="line"> * }</span><br><span class="line"> */</span><br><span class="line">class Solution {</span><br><span class="line">    int depth=0;</span><br><span class="line">    </span><br><span class="line">    public int maxDepth(TreeNode root) {</span><br><span class="line">        if(root!=null){</span><br><span class="line">            depth++;</span><br><span class="line">            if(root.left==null&amp;&amp;root.right==null){</span><br><span class="line">                return depth;</span><br><span class="line">            }</span><br><span class="line">            if(root.left!=null&amp;&amp;root.right==null){</span><br><span class="line">                depth=maxDepth(root.left);</span><br><span class="line">            }       </span><br><span class="line">            if(root.left==null&amp;&amp;root.right!=null){</span><br><span class="line">                depth=maxDepth(root.right);</span><br><span class="line">            }</span><br><span class="line">            if(root.left!=null&amp;&amp;root.right!=null){</span><br><span class="line">                int depthTemp=depth;</span><br><span class="line">                int depthLeft=maxDepth(root.left);</span><br><span class="line">                depth=depthTemp;</span><br><span class="line">                int depthRight=maxDepth(root.right);</span><br><span class="line">                depth=depthLeft&gt;depthRight?depthLeft:depthRight;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        </span><br><span class="line">        return depth;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/23/Chapter1-%E6%A6%82%E8%BF%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/23/Chapter1-%E6%A6%82%E8%BF%B0/" class="post-title-link" itemprop="url">Chapter1 概述</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-09-23 20:22:32 / 修改时间：20:40:19" itemprop="dateCreated datePublished" datetime="2020-09-23T20:22:32+08:00">2020-09-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/%E3%80%8ALinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8-E2-%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《Linux操作系统原理与应用(E2)》</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <center><h1>1.1 认识操作系统</h1></center>
-<h2>1.1.1 从使用者角度看</h2>
-<h2>1.1.2 从程序开发者的角度看</h2>
-<h2>1.1.3 从操作系统在整个计算机系统所处的位置看</h2>
-<h2>1.1.4 从操作系统设计者的角度看</h2>
-<h2>1.1.5 操作系统组成</h2>
-<center><h1>1.2 开放源代码的UNIX/Linux操作系统</h1></center>
-<h2>1.2.1 UNIX诞生和发展</h2>
-<h2>1.2.2 Linux诞生</h2>
-<h2>1.2.3 操作系统标准POSIX</h2>
-<h2>1.2.4 GNU和Linux</h2>
-<h2>1.2.5 Linux的开发模式</h2>
-<center><h1>1.3 Linux内核</h1></center>
-<h2>1.3.1 Linux内核的技术特点</h2>
-<h2>1.3.2 Linux内核的位置</h2>
-<h2>1.3.3 Linux内核体系结构</h2>
-<center><h1>1.4 Linux内核源代码</h1></center>
-<h2>1.3.1 Linux内核版本</h2>
-<h2>1.3.2 Linux内核源代码的结构</h2>
-<h2>1.3.3 Linux内核源代码分析工具</h2>
-<center><h1>1.5 Linux内核模块编程入门</h1></center>
-<h2>1.5.1 模块的定义</h2>
-<h2>1.5.2 编写一个简单的模块</h2>
-<h2>1.5.3 应用程序与内核模块的比较</h2>
-<center><h1>1.6 Linux内核中链表的实现及应用</h1></center>
-<h2>1.5.1 模块的定义</h2>
-<h2>1.5.2 编写一个简单的模块</h2>
-<h2>1.5.3 应用程序与内核模块的比较</h2>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/23/Chapter3-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%92%8C%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/23/Chapter3-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%92%8C%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81/" class="post-title-link" itemprop="url">Chapter3 公钥密码和消息认证</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-23 12:06:11" itemprop="dateCreated datePublished" datetime="2020-09-23T12:06:11+08:00">2020-09-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-27 08:17:53" itemprop="dateModified" datetime="2020-09-27T08:17:53+08:00">2020-09-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <center><h1>3.1 消息认证方法</h1></center>
-<h2>3.1.0 引言</h2>
-加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。
-首先，什么是可信？
-可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。
-对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等
-<h2>3.1.1 利用常规加密的消息认证</h2>
-常规就是说简单的对称加密这样子，但是对于分组对称加密会出现问题。
-假如攻击者想换动消息流之间的顺序，那么由于是分组的，所以B还是能每组都正常解密……
-<h2>3.1.2 非加密的消息认证</h2>
-<h5>认证与加密</h5>
-把这两个词放一起的时候，我常常感觉……很迷糊，现在理一理：
-一般来说认证和加密是两个功能，说一句话可能会让关系更明白：
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如我们有一个对消息作处理的算法，这里面可以包含两步操作：先对消息加密，再打上认证标签；这样我们就可以说：把消息的认证和保密结合起来了</span><br></pre></td></tr></tbody></table></figure>
-<h5>什么时候可以不加密只认证呢？</h5>
-1. 相同消息广播时，只由一端负责监控的系统执行认证（不是很理解，直观是什么样的？）
-2. 交换信息时，某一端负载太大不能全部解密，就会随机抽一些进行认证
-3. 程序可以用明文+认证标签，节省处理器解密的消耗
-<h5>消息认证码MAC</h5>
-定义：用私钥产生一小块数据，它可以作为MAC
-工作流程：
-![](\Chapter3-公钥密码和消息认证\MAC.png)
-A和B共享一个密钥K，A给B发消息的时候，A用消息+K生成MAC，再把消息和MAC一起发给B；B收到以后，算一算MAC对不对
-值得注意的是，认证算法不需要可逆，因为B验证的时候和A是一样的操作（与加密相比更不容易被破）
-<h5>单向散列函数</h5>
-这是MAC的一种替代品，不同之处在于：MAC需要密钥而单向散列不需要，它只是输入M得到H(M)而已。
-H函数可以有以下三种形式：
-![](\Chapter3-公钥密码和消息认证\HASH.png)
-（详细见P50-51）
-<center><h1>3.2 安全散列函数</h1></center>
-<h2>3.2.1 散列函数的要求</h2>
-1. 输入长度不受限制
-2. 输出长度固定
-3. 从x——&gt;H(x)容易计算
-4. 单向性/抗原像攻击性：从H(x)——&gt;x计算上不可行
-5. 抗弱碰撞攻击性/抗第二原像攻击性：对于x，找一个和它哈希值相同的y从计算上不可行
-6. 抗碰撞性/抗强碰撞性：找到任意一对哈希值相同的x，y计算上不可行（可以防止生日攻击）
-<h2>3.2.2 散列函数的安全性</h2>
-攻击方法：密码分析法+蛮力攻击法
-前者利用密码算法的缺陷，后者是要付出指数级代价的（不过2004年王小云教授破了MD5！）
-<h2>3.2.3 简单散列函数</h2>
-<h2>3.2.4 SHA安全散列函数</h2>
-<center><h1>3.3 消息认证码</h1></center>
-<h2>3.3.1 HMAC</h2>
-<h5>为什么会有HMAC呢？</h5>
-首先，由于SHA-1软件实现速度快、有许多共享的Hash函数代码库等优点，人们逐渐将它用于MAC。但是为了把密钥合并到散列算法中，人们开发出了HMAC
-<h5>HMAC的设计目标</h5>
-<h5>HMAC的算法设计</h5>
-<h2>3.3.2 基于分组密码的MAC</h2>
-<h5>基于密文的消息认证码CMAC</h5>
-<h5>具有密码块链式信息认证码的计数器</h5>
-<center><h1>3.4 公钥密码原理</h1></center>
-<h2>3.4.1 公钥密码思想</h2>
-公钥密码基于数学函数，可以用于消息认证、密钥分发
-<h5>常见误解</h5>
-公钥比对称密码更安全
-<center><h1>3.5 公钥密码算法</h1></center>
-<center><h1>3.6 数字签名</h1></center><script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/23/Chapter4-%E5%AF%86%E9%92%A5%E5%88%86%E9%85%8D%E5%92%8C%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/23/Chapter4-%E5%AF%86%E9%92%A5%E5%88%86%E9%85%8D%E5%92%8C%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/" class="post-title-link" itemprop="url">Chapter4 密钥分配和用户认证</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-23 10:42:15" itemprop="dateCreated datePublished" datetime="2020-09-23T10:42:15+08:00">2020-09-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-27 17:52:07" itemprop="dateModified" datetime="2020-09-27T17:52:07+08:00">2020-09-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <center><h1>4.1 基于对称加密的密钥分配</h1></center>
-<center><h1>4.2 Kerberos</h1></center>
-<h2>4.2.0 引言</h2>
-<h5>要解决的问题</h5>
-分布式环境中，控制访问权限，为用户提供认证服务
-<h5>三种威胁</h5>
-1. 用户可以伪装成其他用户
-2. 伪造网络地址发消息
-3. 监听消息/重放攻击
-<p>Kerberos仅依赖于对称加密；此外，版本4逐渐被淘汰，现在常用版本5</p>
-<h2>4.2.1 Kerberos版本4</h2>
-啊好复杂……之后慢慢啃
-<h2>4.2.1 Kerberos版本5</h2>
-<center><h1>4.3 基于非对称加密的密钥分配</h1></center>
-<h2>4.3.0 引言</h2>
-公钥加密一个重要作用：处理密钥分发（公钥的分发+使用公钥加密分发私钥）
-<h2>4.3.1 公钥证书</h2>
-<ul>
-<li>为什么要有公钥证书？<br>
-就像邮箱、银行卡号这种公钥，它们是广而告之的；但是你怎么知道他说这是就是呢？万一伪造了呢？所以我们引入第三方、公钥证书这些来验证。</li>
-<li>X.509标准是人们广泛接受的公钥证书格式</li>
-</ul>
-<h2>4.3.2 基于公钥密码的秘密密钥分发</h2>
-对称密钥中，共享密钥是前提，之后才能安全通信
-<h5></h5>
-<center><h1>4.4 X.509证书</h1></center>
-<h2>4.4.0 引言</h2>
-公钥加密一个重要作用：处理密钥分发（公钥的分发+使用公钥加密分发私钥）
-<h2>4.4.1 证书</h2>
-<h2>4.4.2 X.509版本3</h2>
-<center><h1>4.5 公钥基础设施KPI</h1></center>
-<h2>4.5.0 引言</h2>
-<ul>
-<li>PKI是什么？<br>
-之所以叫基础设施：包含了硬件+软件+人员+策略+过程</li>
-<li>那是干什么的基础设施？<br>
-公钥密码中，用于生成+管理+存储+分配+撤销数字证书</li>
-<li>PKIX是什么？<br>
-基于X.509的PKI</li>
-<li>所以具体来说，PKIX包括些什么呢？</li>
-</ul>
-<h2>4.5.1 PKIX管理功能</h2>
-<ul>
-<li>注册：注册开始了一个PKI中的登记过程</li>
-<li>初始化：客户端安装密钥资料</li>
-<li>认证：CA发证书</li>
-<li>密钥对恢复：</li>
-<li>密钥对更新：</li>
-<li>撤销申请：CA撤销</li>
-<li>交叉认证：两个CA之间</li>
-</ul>
-<h2>4.5.2 PKIX管理协议</h2>
-<center><h1>4.6 联合身份管理</h1></center>
-<h2>4.6.1 身份管理</h2>
-<h5>作用</h5>
-验证身份以后给对应的资源接口，基于单点登录SSO
-<h5>基本要素</h5>
-<h2>4.6.2 身份联合</h2>
-身份联合就是将身份管理扩展到多个安全域<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1408,20 +1324,20 @@ H函数可以有以下三种形式：
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

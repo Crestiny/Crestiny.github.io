@@ -4,6 +4,178 @@
   
     
     <entry>
+      <title>Chapter7 污点传播分析</title>
+      <link href="2020/12/21/Chapter7-%E6%B1%A1%E7%82%B9%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/"/>
+      <url>2020/12/21/Chapter7-%E6%B1%A1%E7%82%B9%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/</url>
+      
+        <content type="html"><![CDATA[<p>污点分析是属于<strong>数据流分析方法</strong>的一种。<br><strong>主要思想</strong>是：标记程序中的数据为污点，跟踪它的去向，看它是不是到了什么敏感的地方（重要的控制决策变量之类的）等等。<br><strong>应用领域</strong>：恶意代码检测、软件漏洞挖掘、用户隐私保护</p><h1>7.1 概述</h1><h2 id="7-1-1-发展简史"><a class="header-anchor" href="#7-1-1-发展简史">¶</a>7.1.1 发展简史</h2><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> 《软件安全分析与应用》 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Chapter2 基础知识</title>
+      <link href="2020/12/21/Chapter2-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+      <url>2020/12/21/Chapter2-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+      
+        <content type="html"><![CDATA[<p>本章的基础知识是指：在恶意代码分析、软件漏洞分析中需要的基础知识</p><h1>2.1 处理器硬件架构基础</h1><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> 《软件安全分析与应用》 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Scraps of Study or Life Skills</title>
+      <link href="2020/12/15/Scraps-of-Study-or-Life-Skills/"/>
+      <url>2020/12/15/Scraps-of-Study-or-Life-Skills/</url>
+      
+        <content type="html"><![CDATA[<h1>Convert ppt to pdf automatically</h1><p><a href="https://sspai.com/post/44122">一键批量将PPT/Word文档转为PDF</a></p><h1>你需要来自xxx的权限才能更改……</h1><p><a href="https://blog.csdn.net/lanluyug/article/details/76559748">你需要来自XXX的权限才能对此文件夹进行更改 win10</a></p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> Tiny Skills </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Chapter 4-程序切片</title>
+      <link href="2020/12/14/Chapter-4-%E7%A8%8B%E5%BA%8F%E5%88%87%E7%89%87/"/>
+      <url>2020/12/14/Chapter-4-%E7%A8%8B%E5%BA%8F%E5%88%87%E7%89%87/</url>
+      
+        <content type="html"><![CDATA[<h1>4.1 概述</h1><h2 id="程序切片定义"><a class="header-anchor" href="#程序切片定义">¶</a>程序切片定义</h2><ul><li>一种重要的程序分解技术</li><li>从程序中提取</li></ul><h2 id="“分解”在软工中的运用"><a class="header-anchor" href="#“分解”在软工中的运用">¶</a>“分解”在软工中的运用</h2><p>见书P99-100</p><h1>4.2 程序切片初探</h1><h2 id="4-2-1-切片相关基础知识"><a class="header-anchor" href="#4-2-1-切片相关基础知识">¶</a>4.2.1 切片相关基础知识</h2><h3 id="控制流"><a class="header-anchor" href="#控制流">¶</a>控制流</h3><p>程序中一系列指令（语句、函数调用）执行的顺序<br>程序指令分类：</p><ul><li>具备一定独立性的<strong>功能性指令</strong></li><li>对指令执行顺序进行<strong>控制的指令</strong>——&gt;形成特定的控制结构</li></ul><h4 id="控制结构"><a class="header-anchor" href="#控制结构">¶</a>控制结构</h4><p>三种基本结构：</p><p><img src="http://crestiny.top/img/20201214144554.png" alt=""></p><h3 id="数据流"><a class="header-anchor" href="#数据流">¶</a>数据流</h3><p>数据在指令间变化（产生、传递、复制和消失）的过程</p><h3 id="1-控制流分析"><a class="header-anchor" href="#1-控制流分析">¶</a>1.控制流分析</h3><h4 id="基本块的定义"><a class="header-anchor" href="#基本块的定义">¶</a>基本块的定义</h4><h4 id="基本块的计算方法"><a class="header-anchor" href="#基本块的计算方法">¶</a><strong>基本块的计算方法</strong></h4><h4 id="控制流图构造算法"><a class="header-anchor" href="#控制流图构造算法">¶</a><strong>控制流图构造算法</strong></h4><h3 id="2-数据流分析"><a class="header-anchor" href="#2-数据流分析">¶</a>2.数据流分析</h3><h3 id="3-可到达定义"><a class="header-anchor" href="#3-可到达定义">¶</a>3.可到达定义</h3><h4 id="可到达定义的计算方法"><a class="header-anchor" href="#可到达定义的计算方法">¶</a><strong>可到达定义的计算方法</strong></h4><h3 id="4-活性分析"><a class="header-anchor" href="#4-活性分析">¶</a>4.活性分析</h3><h3 id="5-程序依赖图"><a class="header-anchor" href="#5-程序依赖图">¶</a>5.程序依赖图</h3><p>在介绍之前，我们来辨析一下各种“关系”：</p><ul><li>两个语句之间的依赖关系：控制流分析和数据流分析</li><li>基本块（或者语句）之间的关系：控制依赖关系和数据依赖关系</li></ul><h4 id="控制依赖关系"><a class="header-anchor" href="#控制依赖关系">¶</a>控制依赖关系</h4><h4 id="数据依赖关系"><a class="header-anchor" href="#数据依赖关系">¶</a>数据依赖关系</h4><h2 id="4-2-2-切片的基本原理"><a class="header-anchor" href="#4-2-2-切片的基本原理">¶</a>4.2.2 切片的基本原理</h2><h2 id="切片作用之一"><a class="header-anchor" href="#切片作用之一">¶</a>切片作用之一</h2><p>调试的时候，为了排除不相干的代码的影响，我们需要有一些条件来过滤出我们感兴趣的代码<br>这个条件就叫“切片准则”</p><h3 id="切片准则"><a class="header-anchor" href="#切片准则">¶</a>切片准则</h3><ul><li>切片准则包含两个要素：目标变量和开始切片的代码位置</li><li>所以切片准则用形式化定义可以表示为一个二元组：&lt;n,V&gt;</li><li>针对动态切片，可以是三元组：&lt;n,V,p&gt;；其中p为一个输入序列</li></ul><h3 id="程序切片技术的发展历程"><a class="header-anchor" href="#程序切片技术的发展历程">¶</a>程序切片技术的发展历程</h3><p>见书P100</p><h3 id="程序切片的步骤与细分类"><a class="header-anchor" href="#程序切片的步骤与细分类">¶</a>程序切片的步骤与细分类</h3><ol><li>程序依赖关系提取：考察控制流和数据流信息</li><li>切片规则制定</li><li>切片生成</li></ol><p><img src="http://crestiny.top/img/20201214142921.png" alt=""></p><h3 id="程序切片的应用"><a class="header-anchor" href="#程序切片的应用">¶</a>程序切片的应用</h3><h3 id="符号执行"><a class="header-anchor" href="#符号执行">¶</a>符号执行</h3><p>核心思想：用符号指来表示程序的输入数据，并将程序的运算过程逐指令或逐语句地转换为数学表达式；在CFG的基础上构建<strong>符号执行树</strong></p><h3 id="动态污点标记和非法操作检测"><a class="header-anchor" href="#动态污点标记和非法操作检测">¶</a>动态污点标记和非法操作检测</h3><h2 id="4-3-静态程序切片"><a class="header-anchor" href="#4-3-静态程序切片">¶</a>4.3 静态程序切片</h2><p>以下是静态程序切片的主要两种方法：</p><h3 id="4-3-1-基于数据流方程的切片方法"><a class="header-anchor" href="#4-3-1-基于数据流方程的切片方法">¶</a>4.3.1 基于数据流方程的切片方法</h3><h4 id="Mark-Weiser数据流切片算法"><a class="header-anchor" href="#Mark-Weiser数据流切片算法">¶</a><strong>Mark Weiser数据流切片算法</strong></h4><h3 id="4-3-2-基于图可达性算法的切片方法"><a class="header-anchor" href="#4-3-2-基于图可达性算法的切片方法">¶</a>4.3.2 基于图可达性算法的切片方法</h3><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> 《软件安全分析与应用》 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 程序切片 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Learning about Caffe</title>
+      <link href="2020/12/14/Learning-about-Caffe/"/>
+      <url>2020/12/14/Learning-about-Caffe/</url>
+      
+        <content type="html"><![CDATA[<h1>Learning References</h1><p><a href="https://www.zhihu.com/question/27982282">深度学习caffe的代码怎么读？</a></p><h1>Setup Caffe</h1><p><a href="https://alberthg.github.io/2018/04/12/Caffe-Windows-%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/">Caffe Windows 配置</a></p><p><a href="https://software.intel.com/content/www/cn/zh/develop/articles/installation-and-configuration-of-bvlc-caffe-under-windows-the-caffe-learning-notes-part1.html">里面有各个版本caffe介绍</a></p><p><a href="https://blog.csdn.net/zb1165048017/article/details/51355143?utm_medium=distribute.pc_relevant.none-task-blog-OPENSEARCH-5.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-OPENSEARCH-5.control">【caffe-Windows】caffe+VS2013+Windows无GPU快速配置教程</a></p><h1>Several Questions</h1><h2 id="What-is-CUDA"><a class="header-anchor" href="#What-is-CUDA">¶</a>What is CUDA?</h2><blockquote><p>CUDA（Compute Unified Device Architecture），是显卡厂商NVIDIA推出的运算平台。 CUDA™是一种由NVIDIA推出的通用并行计算架构，该架构使GPU能够解决复杂的计算问题。 它包含了CUDA指令集架构（ISA）以及GPU内部的并行计算引擎。 开发人员可以使用C语言来为CUDA™架构编写程序，C语言是应用最广泛的一种高级编程语言。所编写出的程序可以在支持CUDA™的处理器上以超高性能运行。CUDA3.0已经开始支持C++和FORTRAN。</p></blockquote><p>哦……原来是让GPU解决问题的啊……我这台没有GPU的电脑难怪在安装CUDA的时候会出错了……</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> Research Group </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Caffe </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Gradually Build up my own Blog</title>
+      <link href="2020/12/14/Gradually-Build-up-my-own-Blog/"/>
+      <url>2020/12/14/Gradually-Build-up-my-own-Blog/</url>
+      
+        <content type="html"><![CDATA[<h1>Turn off the Auto-created Folder</h1><ul><li>find “_config.yml”</li><li>in the file, find “post_asset…”</li><li>set it to be “false”</li></ul><h1>Turn off auto-number</h1><ul><li>find “_config.yml” in /themes/next</li><li>find “number”</li><li>set it to be “false”</li></ul><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> Tiny Skills </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Blog Settings </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Learning about ResNet</title>
+      <link href="2020/12/14/Learning-about-ResNet/"/>
+      <url>2020/12/14/Learning-about-ResNet/</url>
+      
+        <content type="html"><![CDATA[<script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Fix My Long-broken Python Environment</title>
+      <link href="2020/12/14/Fix-My-Long-broken-Python-Environment/"/>
+      <url>2020/12/14/Fix-My-Long-broken-Python-Environment/</url>
+      
+        <content type="html"><![CDATA[<h1>Use Anaconda to Manage Python Environments</h1><p><a href="https://blog.csdn.net/u014628771/article/details/80066624">Anaconda 查看、创建、管理和使用python环境</a></p><p>If <code>conda activate your-env-name</code> won’t work, we can use <code>activate your-env-name</code></p><h1>Pip install time-out</h1><p><a href="https://blog.csdn.net/sxf1061926959/article/details/54091748">pip和conda安装源更改</a></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pandas</span><br></pre></td></tr></tbody></table></figure><h1>Unable to pip install pickle</h1><p><a href="https://stackoverflow.com/questions/48477949/not-able-to-pip-install-pickle-in-python-3-6/48477988">Not able to pip install pickle in python 3.6</a></p><p>try to add <code>D:\anaconda3\envs\python38</code> to <code>Path</code>.</p><h1>PyCharm远程连接到服务器</h1><p><a href="https://blog.csdn.net/yeler082/article/details/83818771?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.control">https://blog.csdn.net/yeler082/article/details/83818771?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.control</a></p><h1>PyTorch中指定使用的GPU</h1><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.environ["CUDA_VISIBLE_DEVICES"] = "2"</span><br></pre></td></tr></tbody></table></figure><h1>调用另一个python文件中的代码</h1><p><a href="https://blog.csdn.net/u010412719/article/details/47089883">如何调用另一个python文件中的代码</a></p><p><a href="https://blog.csdn.net/weixin_42159393/article/details/107188710">暴力解</a></p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> Research Group </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Env Setup </tag>
+            
+            <tag> Python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HongYi Lee: Model Compression Lecture</title>
       <link href="2020/11/08/HongYi-Lee-Model-Compression-Lecture/"/>
       <url>2020/11/08/HongYi-Lee-Model-Compression-Lecture/</url>
@@ -299,7 +471,7 @@
     
     
     <entry>
-      <title>Chapter1 绪论 | Reading Notes</title>
+      <title>Chapter1 绪论</title>
       <link href="2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/"/>
       <url>2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/</url>
       
