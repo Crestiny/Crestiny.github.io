@@ -28,7 +28,7 @@
 <meta property="og:description" content="注入Injection Injection flaws, such as **SQL**, **NoSQL**, **OS**, and **LDAP** injection, occur when untrusted data is sent to an interpreter as part of a command or query. The attacker’s hostile(怀有敌意的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-18T10:17:49.000Z">
-<meta property="article:modified_time" content="2020-09-19T06:39:21.513Z">
+<meta property="article:modified_time" content="2020-12-24T12:11:01.961Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta property="article:tag" content="Web Vulnerabilities">
 <meta property="article:tag" content="Flaw">
@@ -195,7 +195,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-19 14:39:21" itemprop="dateModified" datetime="2020-09-19T14:39:21+08:00">2020-09-19</time>
+                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -230,7 +230,7 @@ Injection flaws, such as **SQL**, **NoSQL**, **OS**, and **LDAP** injection, occ
 <li>攻击者利用发送给SQL服务器的输入参数构造可执行的SQL代码（可加入到get请求、post请求、http头信息、cookie中）</li>
 <li>数据库未做相应的安全配置</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人总结：</span><br><span class="line">网页需要根据用户输入动态构造SQL语句的时候，如果过滤之类的安全工作没做好，就会导致恶意代码执行、绕过认证、数据泄露等危害。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人总结：</span><br><span class="line">网页需要根据用户输入动态构造SQL语句的时候，如果过滤之类的安全工作没做好，就会导致恶意代码执行、绕过认证、数据泄露等危害。</span><br></pre></td></tr></tbody></table></figure>
 <h2>Damage</h2>
 <ul>
 <li>数据库信息泄漏：数据库中存放的用户的隐私信息的泄露。猜解后台数据库，这是利用最多的方式，盗取网站的敏感信息。</li>
@@ -254,7 +254,7 @@ Injection flaws, such as **SQL**, **NoSQL**, **OS**, and **LDAP** injection, occ
 <p>过滤和转义特殊字符<br>
 例如：引号、双引号、斜杠、反斜杠、冒号、 空字符等的字符<br>
 过滤的对象: 用户的输入 | 提交的URL请求中的参数部分 | 从cookie中得到的数据<br>
-在username这个变量前进行转义，对’、&quot;、\等特殊字符进行转义，如：php中的addslashes()函数对username参数进行转义</p>
+在username这个变量前进行转义，对’、"、\等特殊字符进行转义，如：php中的addslashes()函数对username参数进行转义</p>
 </li>
 <li>
 <p>利用mysql的预编译机制<br>
@@ -268,8 +268,8 @@ Injection flaws, such as **SQL**, **NoSQL**, **OS**, and **LDAP** injection, occ
 </li>
 </ol>
 <h2>References</h2>
-<a target="_blank" rel="noopener" href="https://blog.csdn.net/github_36032947/article/details/78442189?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160042717419195162113454%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160042717419195162113454&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_blog_v1-1-78442189.pc_v2_rank_blog_v1&utm_term=SQL%E6%B3%A8%E5%85%A5&spm=1018.2118.3001.4187">SQL注入攻击常见方式及测试方法</a>
-<a href></a>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/github_36032947/article/details/78442189?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160042717419195162113454%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=160042717419195162113454&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_blog_v1-1-78442189.pc_v2_rank_blog_v1&amp;utm_term=SQL%E6%B3%A8%E5%85%A5&amp;spm=1018.2118.3001.4187">SQL注入攻击常见方式及测试方法</a>
+<a href=""></a>
 <center><h1>失效的身份认证Broken Authentication</h1></center>
 Application functions related to authentication and session management are often implemented incorrectly, allowing attackers to compromise passwords, keys, or session tokens, or to exploit other implementation flaws to assume(篡夺) other users’ identities temporarily or permanently.
 <h2>前言：名词解释</h2>
@@ -387,7 +387,7 @@ XXE注入，即XML External Entity，XML外部实体注入。通过 XML 实体�
 <p>执行SSRF攻击，其中外部实体是基于后端系统的URL定义的，如：</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY xxe SYSTEM &quot;http:&#x2F;&#x2F;127.0.0.1:8080&quot; &gt;探测端口；</span><br><span class="line"></span><br><span class="line"> &lt;!ENTITY xxe SYSTEM &quot;expect:&#x2F;&#x2F;id&quot; &gt;执行命令；</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY xxe SYSTEM "http://127.0.0.1:8080" &gt;探测端口；</span><br><span class="line"></span><br><span class="line"> &lt;!ENTITY xxe SYSTEM "expect://id" &gt;执行命令；</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>
 <p>敏感文件泄露:无回显读取本地敏感文件(Blind OOB XXE)，敏感数据从应用服务器传输到攻击者的服务器上。</p>
@@ -499,7 +499,7 @@ XSS flaws occur whenever an application **includes untrusted data in a new web p
 Insecure deserialization often leads to remote code execution. Even if deserialization flaws do not result in remote code execution, they can be used to perform attacks, including replay attacks, injection attacks, and privilege escalation attacks.
 <h2>什么是序列化/反序列化？</h2>
 序列化（serialization）在计算机科学的资料处理中，是指将数据结构或对象状态转换成可取用格式（例如存成文件，存于缓冲，或经由网络中发送），以留待后续在相同或另一台计算机环境中，能恢复原先状态的过程。依照序列化格式重新获取字节的结果时，可以利用它来产生与原始对象相同语义的副本。对于许多对象，像是使用大量引用的复杂对象，这种序列化重建的过程并不容易。面向对象中的对象序列化，并不概括之前原始对象所关系的函数。这种过程也称为对象编组（marshalling）。从一系列字节提取数据结构的反向操作，是反序列化（也称为解编组、deserialization、unmarshalling）。
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人理解：</span><br><span class="line">序列化：对象到字节流；反序列化：字节流到对象</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人理解：</span><br><span class="line">序列化：对象到字节流；反序列化：字节流到对象</span><br></pre></td></tr></tbody></table></figure>
 <h2>Causes</h2>
 PHP 的反序列化漏洞也叫PHP 对象注⼊，是⼀个⾮常常⻅的漏洞，这种漏洞充某些场景下虽然有些难以利⽤，但是⼀旦利⽤成功就会造成⾮常危险的后果。
 <p>漏洞形成的根本原因就是程序没有对⽤户输⼊的反序列化字符串进⾏检测，导致反序列化过程可以被恶意控制，进⽽造成代码执⾏、GetShell 等⼀系列不可控的后果。反序列化漏洞并不是PHP 特有的，也存在与Java、Python 语⾔中。其原理基本相同。在Java反序列化中，会调用被反序列化的readObject方法，当readObject方法书写不当时就会引发漏洞</p>
@@ -535,7 +535,7 @@ Using Components with Known Vulnerabilities</h1></center>
 3. 仅从官方渠道安全的获取组件，并使用签名机制来降低组件被篡改或加入恶意漏洞的风险
 4. 监控那些不再维护或者不发布安全补丁的库和组件。如果不能打补丁，可以考虑部署虚拟补丁来监控、检测或保护。
 5. 每个组织都应该制定相应的计划，对整个软件生命周期进行监控、评审、升级或更改配置。
-<center><h1>不足的日志记录和监控Insufficient Logging & Monitoring</h1></center>
+<center><h1>不足的日志记录和监控Insufficient Logging &amp; Monitoring</h1></center>
 Insufficient logging and monitoring, coupled with missing or ineffective integration with incident response, allows attackers to further attack systems, maintain persistence, pivot（以……为中心旋转） to more systems, and tamper, extract, or destroy data. Most breach studies show time to detect a breach is over 200 days, typically detected by external parties rather than internal processes or monitoring.
 <h2>Causes</h2>
 不足的日志和监控系统，缺失的或无效的事件相应
@@ -549,7 +549,25 @@ Insufficient logging and monitoring, coupled with missing or ineffective integra
 - 建立有效的监控和告警机制，使可疑活动在可接受的时间内被发现和应对。
 - 建立或采取一个应急响应机制和恢复计划，例如：NIST 800-61 rev 2或更新版本。
 <p>目前已有商业的和开源的应用程序防护框架（例如：OWASP AppSensor）、Web应用防火墙（例如 ：Modsecurity with the OWASP Core Rule Set）、带有自定义仪表盘和告警功能的日志关联软件。</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     </div>
 
     

@@ -188,7 +188,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-27 17:52:07" itemprop="dateModified" datetime="2020-09-27T17:52:07+08:00">2020-09-27</time>
+                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -341,7 +341,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-23 00:53:02" itemprop="dateModified" datetime="2020-09-23T00:53:02+08:00">2020-09-23</time>
+                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -398,7 +398,7 @@
 <h2>2.1.2 密码分析</h2>
 密码分析或破译：找出明文或密钥
 <p>根据攻击者掌握的信息量，可将攻击类型分类如下：<br>
-<img src="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Cattack.png" alt=""></p>
+<img src="%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Cattack.png" alt=""></p>
 <h3>1. 惟密文攻击</h3>
 或许只能穷举……但是也有一些小技巧，比如统计测试（前提是对明文的类型有一个大致的了解）
 <h3>2. 已知明文攻击</h3>
@@ -508,7 +508,7 @@ S的初始置换：</li>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">j=0;</span><br><span class="line">for(i=0;i&lt;=255;i++){</span><br><span class="line">	j=(j+S[i]+T[i])mod 256;</span><br><span class="line">	swap(S[i],S[j]);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>密钥流产生：感觉只有对S的置换操作<br>
-<img src="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Ca1.png" alt=""></li>
+<img src="%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Ca1.png" alt=""></li>
 </ul>
 <h5>RC4强度</h5>
 有些特定的攻击方法
@@ -601,7 +601,7 @@ NIST定义了以下五种工作模式：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 13:56:11" itemprop="dateModified" datetime="2020-12-21T13:56:11+08:00">2020-12-21</time>
+                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -624,11 +624,19 @@ NIST定义了以下五种工作模式：
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2>为什么软件安全问题日渐复杂？</h2>
-- 随着科技发展、研究与分析的深入,我们注意到软件安全的问题非常多样化
-- 试图利用软件安全问题获利的各类组织机构也在不断发展，针对软件安全问题的利用、破坏技术手段，造成软件安全问题日趋复杂
-<h2>软件安全问题分类</h2>
-<h3>（一）恶意软件</h3>
+          <h2 id="1-1-引言"><a class="header-anchor" href="#1-1-引言">¶</a>1.1 引言</h2>
+<p>为什么会出现安全问题？</p>
+<ul>
+<li>软件变复杂，规模变大</li>
+<li>软件承载的利益，让某些人利用软件安全问题来获取利益</li>
+</ul>
+<h2 id="1-2-典型安全问题"><a class="header-anchor" href="#1-2-典型安全问题">¶</a>1.2 典型安全问题</h2>
+<p>为什么软件安全问题日渐复杂？</p>
+<ul>
+<li>随着科技发展、研究与分析的深入,我们注意到软件安全的问题非常多样化</li>
+<li>试图利用软件安全问题获利的各类组织机构也在不断发展，针对软件安全问题的利用、破坏技术手段，造成软件安全问题日趋复杂</li>
+</ul>
+<h3>1.2.1 恶意软件</h3>
 <h5>1. 传统恶意软件</h5>
 <ul>
 <li>传统的恶意软件包括：病毒、僵木蠕、间谍软件等</li>
@@ -639,36 +647,53 @@ NIST定义了以下五种工作模式：
 <h5>2. 恶意软件发展历程</h5>
 单机传播——网络传播——协同攻击
 APT攻击（高可持续性威胁）：针对特定目标+高技术
-<h3>（二）软件漏洞</h3>
+<h3>1.2.2 软件漏洞</h3>
 说的是程序设计错误导致的
 <h5>1. 漏洞为什么越来越多？</h5>
 - 软件更复杂
 - 漏洞多样化
 - 软件开发周期变短
-<h3>（三）软件后门</h3>
+<h3>1.2.3 软件后门</h3>
 开发人员刻意设计，但对用户隐瞒的功能。为什么算在软件安全问题中呢？因为有的攻击者，开发软件的时候，会留下后门，将其设计为此软件的漏洞。
 举个栗子：建城墙的人留了个暗道，工程交付以后，保护城墙的人不一定能找出来它，但是工人却一清二楚，可以通过暗道做些坏事。而且，工人更懂怎么利用城墙的设计藏好这个暗道。
 <h5>1. 将软件后门设计为软件漏洞，此方法优势：</h5>
 - 难发现
 - 易利用
 - 难取证：后门代码其实不在软件的产品代码中，而是攻击者利用漏洞动态加载的（被发现了说成设计错误就完事儿了，不是故意的哈哈哈）
-<h2>软件安全性分析要解决的问题</h2>
-<h3>1. 存在问题</h3>
-“是否”的问题：有恶意功能/漏洞/后门吗？
-<h3>2. 机理问题</h3>
-“为什么”的问题：分析下此问题出现的原因/原理/工作流程之类的，具体问题具体分析
-<h3>3. 对策问题</h3>
-“怎么办”的问题：防御
-<h2>无源码时对软件逆向分析的挑战</h2>
-<h3>1. 指令代码的理解</h3>
-从可执行文件或指令执行序列等，理解到操作语义很困难
-<h3>2. 关联关系的抽取</h3>
-操作之间的数据传递、计算，数据/指令之间的依赖关系，很难有直观的认识
-<h3>3. 对策问题</h3>
-“怎么办”的问题：防御
-<center><h1>1.4 主要方法与技术</h1></center>
-<h2>1.4.0 软件逆向分析方法分类</h2>
-主要有两大类：静态分析和动态分析
+<h2 id="1-3-软件安全性分析的目标"><a class="header-anchor" href="#1-3-软件安全性分析的目标">¶</a>1.3 软件安全性分析的目标</h2>
+<h3 id="1-3-1-软件安全性分析要解决的问题"><a class="header-anchor" href="#1-3-1-软件安全性分析要解决的问题">¶</a>1.3.1 软件安全性分析要解决的问题</h3>
+<ol>
+<li>
+<p>存在问题<br>
+“是否”的问题：有恶意功能/漏洞/后门吗？</p>
+</li>
+<li>
+<p>机理问题<br>
+“为什么”的问题：分析下此问题出现的原因/原理/工作流程之类的，具体问题具体分析</p>
+</li>
+<li>
+<p>对策问题<br>
+“怎么办”的问题：防御</p>
+</li>
+</ol>
+<h3 id="1-3-2-无源码时对软件逆向分析的挑战"><a class="header-anchor" href="#1-3-2-无源码时对软件逆向分析的挑战">¶</a>1.3.2 无源码时对软件逆向分析的挑战</h3>
+<ol>
+<li>
+<p>指令代码的理解<br>
+从可执行文件或指令执行序列等，理解到操作语义很困难</p>
+</li>
+<li>
+<p>关联关系的抽取<br>
+操作之间的数据传递、计算，数据/指令之间的依赖关系，很难有直观的认识</p>
+</li>
+<li>
+<p>对策问题<br>
+“怎么办”的问题：防御</p>
+</li>
+</ol>
+<h2 id="1-4-主要方法与技术"><a class="header-anchor" href="#1-4-主要方法与技术">¶</a>1.4 主要方法与技术</h2>
+<h3 id="1-4-0-软件逆向分析方法分类"><a class="header-anchor" href="#1-4-0-软件逆向分析方法分类">¶</a>1.4.0 软件逆向分析方法分类</h3>
+<p>主要有两大类：静态分析和动态分析</p>
 <h5>1. 静态分析</h5>
 感觉就像通过反汇编或反编译的手段，对软件的可执行代码进行分析
 （1）优点：比较全面、整体
@@ -678,19 +703,19 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术
 （1）优点：分析过程中可根据软件的运行过程直接获得在各个指令执行后的结果数据，减少推理分析
 （2）缺点：每次分析只能针对动态执行的一条路径执行，整体性较差（所以说，如何构造多条执行路径也是动态分析需要研究的一个重要问题）
 <p><strong>现在一般：动态为主，静态为辅</strong></p>
-<h2>1.4.1 反汇编与反编译</h2>
-通常是逆向分析的第一步（静态动态都是）
+<h3 id="1-4-1-反汇编与反编译"><a class="header-anchor" href="#1-4-1-反汇编与反编译">¶</a>1.4.1 反汇编与反编译</h3>
+<p>通常是逆向分析的第一步（静态动态都是）</p>
 <h5>作用</h5>
 二进制exe文件（完全不可读）——&gt;汇编代码——&gt;其他高级语言代码（基本可读）
 第一个箭头是反汇编，第二个是反编译；做到**功能等价**就行
-<h2>1.4.2 程序调试</h2>
-动态分析
+<h3 id="1-4-2-程序调试"><a class="header-anchor" href="#1-4-2-程序调试">¶</a>1.4.2 程序调试</h3>
+<p>动态分析</p>
 <h5>定义</h5>
 用一些工具，通过断点、单步执行等方式
 内核代码的调试需要虚拟化技术+多台设备
 <h5>优缺点</h5>
 优缺点基本同“动态分析”中所写，此外，软件自保护技术可能阻碍调试，且数据量和复杂度都挺恐怖的
-<h2>1.4.3 程序切片</h2>
+<h3 id="1-4-3-程序切片"><a class="header-anchor" href="#1-4-3-程序切片">¶</a>1.4.3 程序切片</h3>
 <h5>作用</h5>
 解决软件代码规模超大带来的理解困难，比如分析出了汇编代码，对汇编代码切片……
 <h5>基本思想</h5>
@@ -700,8 +725,8 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术
 （2）动态分析：更有针对性，对某条路径某个操作数来分析指令关联</p>
 <h5>缺点</h5>
 对局部代码还不错，但代码多了照样难受
-<h2>1.4.4 污点传播分析</h2>
-静态动态都有，**数据流分析方法**
+<h3 id="1-4-4-污点传播分析"><a class="header-anchor" href="#1-4-4-污点传播分析">¶</a>1.4.4 污点传播分析</h3>
+<p>静态动态都有，<strong>数据流分析方法</strong></p>
 <h5>基本思想</h5>
 将感兴趣的数据标记，根据每条指令的污点传播过程，分析数据的传递关系
 <h5>实现方式</h5>
@@ -709,16 +734,16 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术
 基于插桩/硬件/编译器扩展/硬件模拟器等等
 <h5>存在问题</h5>
 由于控制依赖、查表操作等引入的隐式污点传播无法简单地引入或去除
-<h2>1.4.5 符号执行</h2>
-静态动态都有
-<h2>1.4.6 模糊测试</h2>
-动态分析
+<h3 id="1-4-5-符号执行"><a class="header-anchor" href="#1-4-5-符号执行">¶</a>1.4.5 符号执行</h3>
+<p>静态动态都有</p>
+<h3 id="1-4-6-模糊测试"><a class="header-anchor" href="#1-4-6-模糊测试">¶</a>1.4.6 模糊测试</h3>
+<p>动态分析</p>
 <h5>作用</h5>
 本来是构造许多奇怪数据来看软件鲁棒性的，但现在是为了触发不同的执行路径
 <h5>存在问题</h5>
 提高测试数据生成的针对性——&gt;提高模糊测试效率
-<center><h1>1.5 主要分析应用</h1></center>
-<h2 id="恶意软件分析"><a class="header-anchor" href="#恶意软件分析">¶</a>恶意软件分析</h2>
+<h2 id="1-5-主要分析应用"><a class="header-anchor" href="#1-5-主要分析应用">¶</a>1.5 主要分析应用</h2>
+<h3 id="1-5-1-恶意软件分析"><a class="header-anchor" href="#1-5-1-恶意软件分析">¶</a>1.5.1 恶意软件分析</h3>
 <h5 id="对恶意软件的分析目标"><a class="header-anchor" href="#对恶意软件的分析目标">¶</a>对恶意软件的分析目标</h5>
 <ul>
 <li>分析出主要功能</li>
@@ -802,6 +827,13 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术
 
               <time title="创建时间：2020-09-19 17:27:15" itemprop="dateCreated datePublished" datetime="2020-09-19T17:27:15+08:00">2020-09-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
+              </span>
 
           
 
@@ -814,7 +846,25 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
 
@@ -1056,10 +1106,16 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-09-19 16:21:19 / 修改时间：17:15:36" itemprop="dateCreated datePublished" datetime="2020-09-19T16:21:19+08:00">2020-09-19</time>
+              <time title="创建时间：2020-09-19 16:21:19" itemprop="dateCreated datePublished" datetime="2020-09-19T16:21:19+08:00">2020-09-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -1082,16 +1138,16 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术
 
       
           <center><h1>Proxy</h1></center>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">forward：传输本次数据</span><br><span class="line">drop：丢弃本次数据</span><br><span class="line">Intercepton&#x2F;off：拦截开启&#x2F;关闭</span><br><span class="line">Action：提供功能选项</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">forward：传输本次数据</span><br><span class="line">drop：丢弃本次数据</span><br><span class="line">Intercepton/off：拦截开启/关闭</span><br><span class="line">Action：提供功能选项</span><br></pre></td></tr></tbody></table></figure>
 <p>当Burp Suite拦截的客户端和服务器交互之后，我们可以在Burp Suite的消息分析选项卡中查看这次请求的实体内容、消息头、请求参数等信息。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Raw：视图主要显示web请求的raw格式，包含请求地址、http协议版本、主机头、浏览器信息、Accept可接受的内容类型、字符集、编码方式、cookie等。我们可以通过手工修改这些信息，对服务器端进行渗透测试。</span><br><span class="line"></span><br><span class="line">params ：视图主要显示客户端请求的参数信息、包括GET或者POST请求的参数、Cookie参数。渗透人员可以通过修改这些请求参数来完成对服务器端的渗透测试。</span><br><span class="line"></span><br><span class="line">headers：视图显示的信息和Raw的信息类似，只不过在这个视图中，展示得更直观、友好。</span><br><span class="line"></span><br><span class="line">Hex ：视图显示Raw的二进制内容，你可以通过hex编辑器对请求的内容进行修改。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Raw：视图主要显示web请求的raw格式，包含请求地址、http协议版本、主机头、浏览器信息、Accept可接受的内容类型、字符集、编码方式、cookie等。我们可以通过手工修改这些信息，对服务器端进行渗透测试。</span><br><span class="line"></span><br><span class="line">params ：视图主要显示客户端请求的参数信息、包括GET或者POST请求的参数、Cookie参数。渗透人员可以通过修改这些请求参数来完成对服务器端的渗透测试。</span><br><span class="line"></span><br><span class="line">headers：视图显示的信息和Raw的信息类似，只不过在这个视图中，展示得更直观、友好。</span><br><span class="line"></span><br><span class="line">Hex ：视图显示Raw的二进制内容，你可以通过hex编辑器对请求的内容进行修改。</span><br></pre></td></tr></tbody></table></figure>
 <p>Burpproxy所拦截的消息可在Fitter（过滤器）中根据需要进行修改</p>
 <p>所有流经burpproxy的消息都会在 http history中记录下来，我们可以通过历史选项卡，查看传输的数据内容，对交互的数据进行测试和验证，同时，我们可以通过右击来弹出菜单，发送内容到burp的其他组件进行处理（类似于Action的功能）</p>
 <p>comment：对拦截的消息添加备注，在一次渗透测试中，你通常会遇到一连串的请求消息，为了便于区分，在某个关键的请求消息上，你可以添加备注信息。</p>
 <p>Highlight的功能与Comment功能有点类似，即对当前拦截的消息设置高亮，以便于其他的请求消息相区分。</p>
 <p>可选项配置Options</p>
 <p>从界面上看，主要有以下几大板块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">▪客户端请求消息拦截（Interceptclient requests）</span><br><span class="line"></span><br><span class="line">▪服务器端返回消息拦截（intercept server responses）</span><br><span class="line"></span><br><span class="line">▪服务器返回消息修改（response modification）</span><br><span class="line"></span><br><span class="line">▪正则表达式配置（match and replace）</span><br><span class="line"></span><br><span class="line">▪其他配置项（miscellaneous）</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">▪客户端请求消息拦截（Interceptclient requests）</span><br><span class="line"></span><br><span class="line">▪服务器端返回消息拦截（intercept server responses）</span><br><span class="line"></span><br><span class="line">▪服务器返回消息修改（response modification）</span><br><span class="line"></span><br><span class="line">▪正则表达式配置（match and replace）</span><br><span class="line"></span><br><span class="line">▪其他配置项（miscellaneous）</span><br></pre></td></tr></tbody></table></figure>
 <center><h1>Intruder</h1></center>
 工作原理：
 Intruder在原始请求数据的基础上，通过修改各种请求参数，以获取不同的请求应答。每一次请求中，Intruder通常会携带一个或多个有效攻击载荷（Payload),在不同的位置进行攻击重放，通过应答数据的比对分析来获得需要的特征数据。
@@ -1110,7 +1166,7 @@ Intruder在原始请求数据的基础上，通过修改各种请求参数，以
 <li>进行Intruder选项卡，打开Target和Positions子选项卡。这时，你会看到上一步发送过来的请求消息。</li>
 <li>因为我们了解到Burp Intruder攻击的基础是围绕刚刚发送过来的原始请求信息，在原始信息指定的位置上设置一定数量的攻击载荷Payload，通过Payload来发送请求获取应答消息。在默认情况下，所有的请求参数和cookie参数都会被设置为添加载荷<br>
 6.点击clear清除默认载荷（如果需要），圈定需要设置载荷的参数，点击add</li>
-<li>当我们打开Payload子选项卡，选择Payload的生成或者选择策略，默认情况下选择“Simplelist&quot;,当然你也可以通过下拉选择其他Payload类型或者手工添加。</li>
+<li>当我们打开Payload子选项卡，选择Payload的生成或者选择策略，默认情况下选择“Simplelist",当然你也可以通过下拉选择其他Payload类型或者手工添加。</li>
 <li>之后点击start attack发动攻击，此时burp 会自动打开一个新的界面，包含执行攻击的情况，http状态码、长度等信息的结果。我们还可以选择其中某一次通信消息，查看请求消息和应答消息的详细</li>
 </ol>
 <p>在很多时候，为了更好的标明应答消息中是否包含有我们需要的信息，通常在进行攻击前，会进行Options选项的相关配置，使用最多的为正则表达式匹配（Grep - Match）。</p>
@@ -1120,7 +1176,25 @@ Intruder在原始请求数据的基础上，通过修改各种请求参数，以
 Repeater是一个重放攻击器。
 我们可以在这里对数据包的参数进行修改，以此来进行请求与响应的消息验证分析。
 ![](https://img-blog.csdn.net/20170805164656913?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzU1NDQzNzk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
 
@@ -1466,7 +1540,7 @@ Cookie（复数形态Cookies），又称为“小甜饼”。类型为“小型�
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-19 14:39:21" itemprop="dateModified" datetime="2020-09-19T14:39:21+08:00">2020-09-19</time>
+                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1501,7 +1575,7 @@ Injection flaws, such as **SQL**, **NoSQL**, **OS**, and **LDAP** injection, occ
 <li>攻击者利用发送给SQL服务器的输入参数构造可执行的SQL代码（可加入到get请求、post请求、http头信息、cookie中）</li>
 <li>数据库未做相应的安全配置</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人总结：</span><br><span class="line">网页需要根据用户输入动态构造SQL语句的时候，如果过滤之类的安全工作没做好，就会导致恶意代码执行、绕过认证、数据泄露等危害。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人总结：</span><br><span class="line">网页需要根据用户输入动态构造SQL语句的时候，如果过滤之类的安全工作没做好，就会导致恶意代码执行、绕过认证、数据泄露等危害。</span><br></pre></td></tr></tbody></table></figure>
 <h2>Damage</h2>
 <ul>
 <li>数据库信息泄漏：数据库中存放的用户的隐私信息的泄露。猜解后台数据库，这是利用最多的方式，盗取网站的敏感信息。</li>
@@ -1525,7 +1599,7 @@ Injection flaws, such as **SQL**, **NoSQL**, **OS**, and **LDAP** injection, occ
 <p>过滤和转义特殊字符<br>
 例如：引号、双引号、斜杠、反斜杠、冒号、 空字符等的字符<br>
 过滤的对象: 用户的输入 | 提交的URL请求中的参数部分 | 从cookie中得到的数据<br>
-在username这个变量前进行转义，对’、&quot;、\等特殊字符进行转义，如：php中的addslashes()函数对username参数进行转义</p>
+在username这个变量前进行转义，对’、"、\等特殊字符进行转义，如：php中的addslashes()函数对username参数进行转义</p>
 </li>
 <li>
 <p>利用mysql的预编译机制<br>
@@ -1539,8 +1613,8 @@ Injection flaws, such as **SQL**, **NoSQL**, **OS**, and **LDAP** injection, occ
 </li>
 </ol>
 <h2>References</h2>
-<a target="_blank" rel="noopener" href="https://blog.csdn.net/github_36032947/article/details/78442189?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160042717419195162113454%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=160042717419195162113454&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_blog_v1-1-78442189.pc_v2_rank_blog_v1&utm_term=SQL%E6%B3%A8%E5%85%A5&spm=1018.2118.3001.4187">SQL注入攻击常见方式及测试方法</a>
-<a href></a>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/github_36032947/article/details/78442189?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160042717419195162113454%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=160042717419195162113454&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_blog_v1-1-78442189.pc_v2_rank_blog_v1&amp;utm_term=SQL%E6%B3%A8%E5%85%A5&amp;spm=1018.2118.3001.4187">SQL注入攻击常见方式及测试方法</a>
+<a href=""></a>
 <center><h1>失效的身份认证Broken Authentication</h1></center>
 Application functions related to authentication and session management are often implemented incorrectly, allowing attackers to compromise passwords, keys, or session tokens, or to exploit other implementation flaws to assume(篡夺) other users’ identities temporarily or permanently.
 <h2>前言：名词解释</h2>
@@ -1658,7 +1732,7 @@ XXE注入，即XML External Entity，XML外部实体注入。通过 XML 实体�
 <p>执行SSRF攻击，其中外部实体是基于后端系统的URL定义的，如：</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY xxe SYSTEM &quot;http:&#x2F;&#x2F;127.0.0.1:8080&quot; &gt;探测端口；</span><br><span class="line"></span><br><span class="line"> &lt;!ENTITY xxe SYSTEM &quot;expect:&#x2F;&#x2F;id&quot; &gt;执行命令；</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY xxe SYSTEM "http://127.0.0.1:8080" &gt;探测端口；</span><br><span class="line"></span><br><span class="line"> &lt;!ENTITY xxe SYSTEM "expect://id" &gt;执行命令；</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>
 <p>敏感文件泄露:无回显读取本地敏感文件(Blind OOB XXE)，敏感数据从应用服务器传输到攻击者的服务器上。</p>
@@ -1770,7 +1844,7 @@ XSS flaws occur whenever an application **includes untrusted data in a new web p
 Insecure deserialization often leads to remote code execution. Even if deserialization flaws do not result in remote code execution, they can be used to perform attacks, including replay attacks, injection attacks, and privilege escalation attacks.
 <h2>什么是序列化/反序列化？</h2>
 序列化（serialization）在计算机科学的资料处理中，是指将数据结构或对象状态转换成可取用格式（例如存成文件，存于缓冲，或经由网络中发送），以留待后续在相同或另一台计算机环境中，能恢复原先状态的过程。依照序列化格式重新获取字节的结果时，可以利用它来产生与原始对象相同语义的副本。对于许多对象，像是使用大量引用的复杂对象，这种序列化重建的过程并不容易。面向对象中的对象序列化，并不概括之前原始对象所关系的函数。这种过程也称为对象编组（marshalling）。从一系列字节提取数据结构的反向操作，是反序列化（也称为解编组、deserialization、unmarshalling）。
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人理解：</span><br><span class="line">序列化：对象到字节流；反序列化：字节流到对象</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人理解：</span><br><span class="line">序列化：对象到字节流；反序列化：字节流到对象</span><br></pre></td></tr></tbody></table></figure>
 <h2>Causes</h2>
 PHP 的反序列化漏洞也叫PHP 对象注⼊，是⼀个⾮常常⻅的漏洞，这种漏洞充某些场景下虽然有些难以利⽤，但是⼀旦利⽤成功就会造成⾮常危险的后果。
 <p>漏洞形成的根本原因就是程序没有对⽤户输⼊的反序列化字符串进⾏检测，导致反序列化过程可以被恶意控制，进⽽造成代码执⾏、GetShell 等⼀系列不可控的后果。反序列化漏洞并不是PHP 特有的，也存在与Java、Python 语⾔中。其原理基本相同。在Java反序列化中，会调用被反序列化的readObject方法，当readObject方法书写不当时就会引发漏洞</p>
@@ -1806,7 +1880,7 @@ Using Components with Known Vulnerabilities</h1></center>
 3. 仅从官方渠道安全的获取组件，并使用签名机制来降低组件被篡改或加入恶意漏洞的风险
 4. 监控那些不再维护或者不发布安全补丁的库和组件。如果不能打补丁，可以考虑部署虚拟补丁来监控、检测或保护。
 5. 每个组织都应该制定相应的计划，对整个软件生命周期进行监控、评审、升级或更改配置。
-<center><h1>不足的日志记录和监控Insufficient Logging & Monitoring</h1></center>
+<center><h1>不足的日志记录和监控Insufficient Logging &amp; Monitoring</h1></center>
 Insufficient logging and monitoring, coupled with missing or ineffective integration with incident response, allows attackers to further attack systems, maintain persistence, pivot（以……为中心旋转） to more systems, and tamper, extract, or destroy data. Most breach studies show time to detect a breach is over 200 days, typically detected by external parties rather than internal processes or monitoring.
 <h2>Causes</h2>
 不足的日志和监控系统，缺失的或无效的事件相应
@@ -1820,7 +1894,25 @@ Insufficient logging and monitoring, coupled with missing or ineffective integra
 - 建立有效的监控和告警机制，使可疑活动在可接受的时间内被发现和应对。
 - 建立或采取一个应急响应机制和恢复计划，例如：NIST 800-61 rev 2或更新版本。
 <p>目前已有商业的和开源的应用程序防护框架（例如：OWASP AppSensor）、Web应用防火墙（例如 ：Modsecurity with the OWASP Core Rule Set）、带有自定义仪表盘和告警功能的日志关联软件。</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
 
