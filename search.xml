@@ -4,11 +4,70 @@
   
     
     <entry>
+      <title>Chapter1 人工智能绪论</title>
+      <link href="2020/12/24/Chapter1-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%BB%AA%E8%AE%BA/"/>
+      <url>2020/12/24/Chapter1-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%BB%AA%E8%AE%BA/</url>
+      
+        <content type="html"><![CDATA[<script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Chapter7 机器学习</title>
+      <link href="2020/12/24/Chapter7-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <url>2020/12/24/Chapter7-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="7-1-机器学习的定义和发展历史"><a class="header-anchor" href="#7-1-机器学习的定义和发展历史">¶</a>7.1 机器学习的定义和发展历史</h2><h3 id="7-1-1-机器学习的定义"><a class="header-anchor" href="#7-1-1-机器学习的定义">¶</a>7.1.1 机器学习的定义</h3><p>书上首先介绍了很多很多大师的定义，最后提出了一个为了便于学科研究的定义：</p><blockquote><p>机器学习是研究机器<strong>模拟人类</strong>的学习活动、<strong>获取知识和技能</strong>的理论和方法，以<strong>改善系统性能</strong>的学科</p></blockquote><h3 id="7-1-2-机器学习的发展史"><a class="header-anchor" href="#7-1-2-机器学习的发展史">¶</a>7.1.2 机器学习的发展史</h3><p><img src="http://crestiny.top/img/20201224142728.png" alt=""></p><p>另外书中还提到机器学习进入新阶段的重要表现（6条）</p><h2 id="7-2-机器学习的主要策略与基本结构"><a class="header-anchor" href="#7-2-机器学习的主要策略与基本结构">¶</a>7.2 机器学习的主要策略与基本结构</h2><h3 id="7-2-1-机器学习的主要策略"><a class="header-anchor" href="#7-2-1-机器学习的主要策略">¶</a>7.2.1 机器学习的主要策略</h3><p>分为四种，所需要的推理能力从低到高：</p><ul><li>机械学习：即记忆，外界知识表示方式与系统内部表示方式完全一致，不需要任何处理与转换</li><li>示教学习：表达方式不完全一致，需要一定的推理、翻译和转化工作</li><li>类比学习：去发现已知任务和当前任务的相似之处，由此为当前任务制定解决方案</li><li>示例学习：对具体的工作例子及工作经验进行分析总结和推广，得到完成任务的一般性规律</li></ul><h3 id="7-2-2-机器学习系统的基本结构"><a class="header-anchor" href="#7-2-2-机器学习系统的基本结构">¶</a>7.2.2 机器学习系统的基本结构</h3><p><img src="http://crestiny.top/img/0E13DC29D62D538FC2881F61451D6AD0.png" alt=""></p><p>注意到知识库中知识的表示多种多样，所以书中提到了四条选择原则：</p><ol><li>表达能力强</li><li>易于推理：学习系统计算代价较低</li><li>容易修改知识库：难点在于——修改某一知识的时候，可能关联到其他的知识，需要全面检查</li><li>知识表示易于扩展：发展以来，一个系统可能变得需要多种知识表示方式</li></ol><h2 id="7-3-归纳学习"><a class="header-anchor" href="#7-3-归纳学习">¶</a>7.3 归纳学习</h2><p>归纳学习定义：</p><blockquote><p>是应用<strong>归纳推理</strong>进行学习的一种方法</p></blockquote><p>分类（根据有无教师指导）：</p><ul><li>示例学习：有师学习</li><li>观察与发现学习：无师学习</li></ul><h3 id="7-3-1-归纳学习的模式和规则"><a class="header-anchor" href="#7-3-1-归纳学习的模式和规则">¶</a>7.3.1 归纳学习的模式和规则</h3><p>归纳学习的一些特点：<br>这里把归纳学习分成有穷归纳、数学归纳和一般归纳<br>除去前两者以外，一般归纳其实推理结论只**“保假”**</p><blockquote><p>保假的意思：当归纳前提是错误时，我们可以肯定地说结论也是错的；但是前提是正确的时候就不一定了</p></blockquote><p>其实人类的知识也是存在很强的<strong>可证伪性</strong></p><h4 id="1-归纳学习的模式"><a class="header-anchor" href="#1-归纳学习的模式">¶</a>1. 归纳学习的模式</h4><p>（从这里开始不讲人话了）</p><h4 id="2-归纳概括规则"><a class="header-anchor" href="#2-归纳概括规则">¶</a>2. 归纳概括规则</h4><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> Courses </category>
+          
+          <category> 《人工智能及其应用》 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Chapter8 恶意代码检测与分析</title>
+      <link href="2020/12/21/Chapter8-%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%88%86%E6%9E%90/"/>
+      <url>2020/12/21/Chapter8-%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%88%86%E6%9E%90/</url>
+      
+        <content type="html"><![CDATA[<h2 id="8-1-恶意代码分析基础"><a class="header-anchor" href="#8-1-恶意代码分析基础">¶</a>8.1 恶意代码分析基础</h2><h3 id="8-1-1-恶意代码分类"><a class="header-anchor" href="#8-1-1-恶意代码分类">¶</a>8.1.1 恶意代码分类</h3><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> 《软件安全分析与应用》 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Chapter7 污点传播分析</title>
       <link href="2020/12/21/Chapter7-%E6%B1%A1%E7%82%B9%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/"/>
       <url>2020/12/21/Chapter7-%E6%B1%A1%E7%82%B9%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/</url>
       
-        <content type="html"><![CDATA[<p>污点分析是属于<strong>数据流分析方法</strong>的一种。<br><strong>主要思想</strong>是：标记程序中的数据为污点，跟踪它的去向，看它是不是到了什么敏感的地方（重要的控制决策变量之类的）等等。<br><strong>应用领域</strong>：恶意代码检测、软件漏洞挖掘、用户隐私保护</p><h1>7.1 概述</h1><h2 id="7-1-1-发展简史"><a class="header-anchor" href="#7-1-1-发展简史">¶</a>7.1.1 发展简史</h2><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+        <content type="html"><![CDATA[<p>污点分析是属于<strong>数据流分析方法</strong>的一种。<br><strong>主要思想</strong>是：标记程序中的数据为污点，跟踪它的去向，看它是不是到了什么敏感的地方（重要的控制决策变量之类的）等等。<br><strong>应用领域</strong>：恶意代码检测、软件漏洞挖掘、用户隐私保护</p><h2 id="7-1-概述"><a class="header-anchor" href="#7-1-概述">¶</a>7.1 概述</h2><h3 id="7-1-1-发展简史"><a class="header-anchor" href="#7-1-1-发展简史">¶</a>7.1.1 发展简史</h3><p><img src="http://crestiny.top/img/20201221152906.png" alt=""></p><h3 id="7-1-2-应用领域"><a class="header-anchor" href="#7-1-2-应用领域">¶</a>7.1.2 应用领域</h3><h4 id="1-恶意代码检测"><a class="header-anchor" href="#1-恶意代码检测">¶</a>1. 恶意代码检测</h4><h4 id="2-软件漏洞挖掘"><a class="header-anchor" href="#2-软件漏洞挖掘">¶</a>2. 软件漏洞挖掘</h4><h4 id="3-敏感数据泄露分析方面"><a class="header-anchor" href="#3-敏感数据泄露分析方面">¶</a>3. 敏感数据泄露分析方面</h4><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
       
       
       <categories>
@@ -115,7 +174,7 @@
       <link href="2020/12/14/Gradually-Build-up-my-own-Blog/"/>
       <url>2020/12/14/Gradually-Build-up-my-own-Blog/</url>
       
-        <content type="html"><![CDATA[<h1>Turn off the Auto-created Folder</h1><ul><li>find “_config.yml”</li><li>in the file, find “post_asset…”</li><li>set it to be “false”</li></ul><h1>Turn off auto-number</h1><ul><li>find “_config.yml” in /themes/next</li><li>find “number”</li><li>set it to be “false”</li></ul><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+        <content type="html"><![CDATA[<h1>Turn off the Auto-created Folder</h1><ul><li>find “_config.yml”</li><li>in the file, find “post_asset…”</li><li>set it to be “false”</li></ul><h1>Turn off auto-number</h1><ul><li>find “_config.yml” in /themes/next</li><li>find “number”</li><li>set it to be “false”</li></ul><h2 id="References"><a class="header-anchor" href="#References">¶</a>References</h2><p><a href="https://io-oi.me/tech/hexo-next-optimization/">打造个性超赞博客 Hexo + NexT + GitHub Pages 的超深度优化</a></p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
       
       
       <categories>
@@ -662,7 +721,7 @@
       <link href="2020/09/14/Chapter1-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%BC%95%E8%A8%80/"/>
       <url>2020/09/14/Chapter1-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%BC%95%E8%A8%80/</url>
       
-        <content type="html"><![CDATA[<center><h1>1.1 计算机安全概念</h1></center><h4>计算机安全</h4>用于保护数据安全和防范黑客的工具集合的通用名称<h4>网络（互联网）安全</h4>分布式系统的引入、网络以及在计算机终端用户与计算机之间、计算机与计算机之间进行通信的工具应用，其中都包含数据传输，需要网络安全措施来保护数据。<h2>1.1.1 计算机安全定义</h2>对某个自动化信息系统的保护措施，其目的在于实现信息系统资源的**完整性**、**可用性**以及**机密性**（包括硬件、软件、固件、信息/数据、电信）。<h5>完整性</h5>1. 数据完整性：只能通过已授权的方式来更改数据2. 系统完整性：保证系统只做它被期待做的事，不会被奇怪的东西控制<h5>机密性</h5>1. 数据机密性：隐私数据不泄漏给未授权的个体2. 隐私性：每个人可以控制自己的信息<p>这三者取英文首字母组成CIA三元组。</p><p>另外，也有人说可以加入真实性、可计量性的概念。</p><h2>1.1.2 计算机安全挑战</h2>见书P5-6<center><h1>1.2 OSI安全体系结构</h1></center>OSI模型关注的包括以下三个方面：<h5>1. 安全攻击</h5><h5>2. 安全机制</h5>检测、防范与恢复<h5>3. 安全服务</h5>加强安全性，防范攻击<p>关于威胁和攻击：个人觉得威胁是潜在危险，攻击是破坏手段</p><center><h1>1.3 安全攻击</h1></center>可以分为两大类：主动和被动攻击<h2>1.3.1 被动攻击</h2><h5>内容</h5>本质：窃听或监视<script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+        <content type="html"><![CDATA[<h2 id="1-1-计算机安全概念"><a class="header-anchor" href="#1-1-计算机安全概念">¶</a>1.1 计算机安全概念</h2><h4 id="（1）计算机安全"><a class="header-anchor" href="#（1）计算机安全">¶</a>（1）计算机安全</h4><p><strong>用于保护数据安全和防范黑客的工具集合的通用名称</strong></p><p>为什么会出现计算机安全呢？<br>是因为引入了计算机，人们需要保护信息的自动工具了，而不是原始的物理保护（指保险箱hhh）</p><h4 id="（2）网络（互联网）安全"><a class="header-anchor" href="#（2）网络（互联网）安全">¶</a>（2）网络（互联网）安全</h4><p><strong>分布式系统的引入</strong>、网络以及在计算机终端用户与计算机之间、计算机与计算机之间进行通信的工具应用，其中都包含<strong>数据传输</strong>，需要网络安全措施来保护数据。<br><em>（其实更专业的术语叫互联网安全）</em></p><h3 id="1-1-1-计算机安全定义"><a class="header-anchor" href="#1-1-1-计算机安全定义">¶</a>1.1.1 计算机安全定义</h3><p>这是NIST对计算机安全的定义：</p><p>对某个自动化信息系统的保护措施，其目的在于实现信息系统资源的<strong>完整性</strong>、<strong>可用性</strong>以及<strong>机密性</strong>（包括硬件、软件、固件、信息/数据、电信）。</p><h5 id="（1）完整性"><a class="header-anchor" href="#（1）完整性">¶</a>（1）完整性</h5><ol><li>数据完整性：<strong>只能通过已授权的方式</strong>来更改数据</li><li>系统完整性：保证系统<strong>只做它被期待做的事</strong>，不会被奇怪的东西控制</li></ol><p>总结：有种感觉是完整性就是关于只能按照预期的什么什么……</p><h5 id="（2）机密性"><a class="header-anchor" href="#（2）机密性">¶</a>（2）机密性</h5><ol><li>数据机密性：隐私数据不泄漏给未授权的个体</li><li>隐私性：每个人可以控制自己的信息</li></ol><h5 id="（3）可用性"><a class="header-anchor" href="#（3）可用性">¶</a>（3）可用性</h5><p>服务不会拒绝已授权的用户</p><p>这三者取英文首字母组成CIA三元组。</p><p>从损失的角度，可以作如下描述：</p><ul><li>机密性：非授权的信息泄露</li><li>完整性：未经授权的信息修改和破坏</li><li>可用性：访问或使用的中断</li></ul><p>另外，也有人说可以加入真实性（信息是否来自可靠的信息源）、可计量性（能够追踪安全违规的责任方）的概念。</p><p>书P4-5有例子，说明了低、中、高三种级别的损失，以及具体实例下的数据机密性、完整性和可用性的具体内容。</p><h3 id="1-1-2-计算机安全挑战"><a class="header-anchor" href="#1-1-2-计算机安全挑战">¶</a>1.1.2 计算机安全挑战</h3><p>见书P5-6，说明了为什么计算机安全和网络安全复杂且多变。</p><h2 id="1-2-OSI安全体系结构"><a class="header-anchor" href="#1-2-OSI安全体系结构">¶</a>1.2 OSI安全体系结构</h2><p>OSI模型关注的包括以下三个方面：</p><ol><li>安全攻击</li><li>安全机制：检测、防范与恢复</li><li>安全服务：加强安全性，防范攻击</li></ol><p>关于威胁和攻击的辨析：个人觉得威胁是潜在危险，攻击是破坏手段</p><h2 id="1-3-安全攻击"><a class="header-anchor" href="#1-3-安全攻击">¶</a>1.3 安全攻击</h2><p>可以分为两大类：主动和被动攻击</p><ul><li>主动：试图改变系统资源或影响系统操作</li><li>被动：企图了解或利用系统信息<strong>但不影响系统资源</strong></li></ul><h3 id="1-3-1-被动攻击"><a class="header-anchor" href="#1-3-1-被动攻击">¶</a>1.3.1 被动攻击</h3><h4 id="（1）内容"><a class="header-anchor" href="#（1）内容">¶</a>（1）内容</h4><ul><li>本质：窃听或监视</li><li>目标：获取传输的数据信息</li><li>两种形式：消息内容泄露（传输的文件中包含机密信息）和流量分析攻击（观察交换信息的频率和长度来猜测相关通信性质）</li></ul><h4 id="（2）防范"><a class="header-anchor" href="#（2）防范">¶</a>（2）防范</h4><p>由于不改变数据，所以很难检测；一般都是防范为主（如加密），检测为次</p><h3 id="1-3-2-主动攻击"><a class="header-anchor" href="#1-3-2-主动攻击">¶</a>1.3.2 主动攻击</h3><h4 id="（1）内容-v2"><a class="header-anchor" href="#（1）内容-v2">¶</a>（1）内容</h4><ul><li>本质：数据流的改写、错误数据流的添加</li></ul><h4 id="（2）分类"><a class="header-anchor" href="#（2）分类">¶</a>（2）分类</h4><ol><li>假冒：比如可以让某个实体冒充别人后获得更多特权</li><li>重放：=被动捕获数据+主动重新传输</li><li>改写消息：合法消息被篡改——被延迟、重排、被改内容等等</li><li>拒绝服务：</li></ol><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
       
       
       <categories>
