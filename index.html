@@ -157,6 +157,439 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/25/Chapter2-%E8%BD%AF%E4%BB%B6%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/25/Chapter2-%E8%BD%AF%E4%BB%B6%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">Chapter2 软件过程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-25 15:14:09 / 修改时间：15:15:46" itemprop="dateCreated datePublished" datetime="2020-12-25T15:14:09+08:00">2020-12-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件工程原理》</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/25/Reading-Report-for-Adversarial-Roubustness-vs-Model-Compression-or-Both/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/25/Reading-Report-for-Adversarial-Roubustness-vs-Model-Compression-or-Both/" class="post-title-link" itemprop="url">Reading Report for Adversarial Roubustness vs. Model Compression, or Both?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-25 12:21:10 / 修改时间：13:49:33" itemprop="dateCreated datePublished" datetime="2020-12-25T12:21:10+08:00">2020-12-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Research-Group/" itemprop="url" rel="index"><span itemprop="name">Research Group</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="0-Abstract"><a class="header-anchor" href="#0-Abstract">¶</a>0. Abstract</h2>
+<ul>
+<li>DNN is vulnerable to adversarial attacks</li>
+<li>adversarial robustness requires larger capacity of the network than normal</li>
+<li>This paper proposed a training framework to achieve both model compression and adversarial attacks</li>
+<li>This paper studied 2 hypotheses:
+<ul>
+<li>under adversarial setting, weight pruning is essential for reducing the model size</li>
+<li>train a small model from scratch cannot achieve neither compression and adversarial robustness</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-Introduction"><a class="header-anchor" href="#1-Introduction">¶</a>1. Introduction</h2>
+<h3 id="1-1-Background"><a class="header-anchor" href="#1-1-Background">¶</a>1.1 Background</h3>
+<ul>
+<li>Listing several bad results brought by DNN’s vulnerability</li>
+<li>brief introduction of adversarial attack and 2 types of it (black and white box)</li>
+</ul>
+<h3 id="1-2-Existing-conclusions"><a class="header-anchor" href="#1-2-Existing-conclusions">¶</a>1.2 Existing conclusions</h3>
+<ul>
+<li>So there are many denfense mechanisms, such as adversarial training using min-max robust optimization</li>
+<li>Increase the capacity of a network may provide a better trade off between  standard accuracy of an adversarially trained model and its adversarial robustness</li>
+<li>But large network capacity required in adversarial training may limit its use in resource constrained application systems.</li>
+<li>Some studies work on the relationship between adversarial robustness and weight sparsity, one of them concludes that moderate spasity can help with adversarial robustness, still vulnerable though.</li>
+</ul>
+<h3 id="1-3-Our-contribution"><a class="header-anchor" href="#1-3-Our-contribution">¶</a>1.3 Our contribution</h3>
+<ul>
+<li>This paper investigated whether and how weight sparsity can facilitate an active defense technique. And got following observations:
+<ul>
+<li>smaller model size leads to both lower accuarcy and robustness
+<ul>
+<li>so pre-pruning before training isn’t useful</li>
+</ul>
+</li>
+<li>adversarially trained model is less sparse
+<ul>
+<li>harder to prune an adversarially trained network</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Based on above observations, this paper tries to enable <strong>security-critical applications in resource constrained systems</strong> by integrating weight pruning with the adversarial robustness and model compression together.</li>
+<li>We studied 2 hypotheses (mentioned above)</li>
+<li>We build a framework to achieve both, for details:
+<ul>
+<li>ADMM based pruning (because it’s compatible with adversarial training)</li>
+<li>can switch between different pruning schemes</li>
+</ul>
+</li>
+<li>We find that the irregular pruning is best for achieving both</li>
+</ul>
+<h2 id="2-Related-Work"><a class="header-anchor" href="#2-Related-Work">¶</a>2. Related Work</h2>
+<h3 id="2-1-Adversarial-Trainning"><a class="header-anchor" href="#2-1-Adversarial-Trainning">¶</a>2.1 Adversarial Trainning</h3>
+<h3 id="2-2-Weight-Pruning"><a class="header-anchor" href="#2-2-Weight-Pruning">¶</a>2.2 Weight Pruning</h3>
+<h2 id="3-Concurrent-Adversarial-Training-and-Weight-Pruning"><a class="header-anchor" href="#3-Concurrent-Adversarial-Training-and-Weight-Pruning">¶</a>3. Concurrent Adversarial Training and Weight Pruning</h2>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/25/Chapter1-%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E7%BB%AA%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/25/Chapter1-%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E7%BB%AA%E8%AE%BA/" class="post-title-link" itemprop="url">Chapter1 软件工程绪论</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-25 02:17:06 / 修改时间：15:13:01" itemprop="dateCreated datePublished" datetime="2020-12-25T02:17:06+08:00">2020-12-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件工程原理》</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本章将从软件和工程两个方面来探讨软件工程的<strong>本质</strong>和<strong>基本原理</strong></p>
+<h2 id="1-1-软件"><a class="header-anchor" href="#1-1-软件">¶</a>1.1 软件</h2>
+<h3 id="1-1-1-软件的作用和特性"><a class="header-anchor" href="#1-1-1-软件的作用和特性">¶</a>1.1.1 软件的作用和特性</h3>
+<h4 id="（1）软件定义："><a class="header-anchor" href="#（1）软件定义：">¶</a>（1）软件定义：</h4>
+<blockquote>
+<p>软件是计算机系统中与硬件相互依存的另一部分<br>
+软件=程序+相关数据+说明文档</p>
+</blockquote>
+<h4 id="（2）软件和硬件区别："><a class="header-anchor" href="#（2）软件和硬件区别：">¶</a>（2）软件和硬件区别：</h4>
+<ul>
+<li>软件开发不同于硬件设计</li>
+<li>软件生产不同于硬件制造</li>
+<li>软件维护不同于硬件维修</li>
+</ul>
+<h3 id="1-1-2-软件的发展和面临的新挑战"><a class="header-anchor" href="#1-1-2-软件的发展和面临的新挑战">¶</a>1.1.2 软件的发展和面临的新挑战</h3>
+<p>挑战：</p>
+<ul>
+<li>软件复杂性增加</li>
+<li>软件规模的扩大</li>
+<li>软件环境的变化</li>
+<li>遗留系统的集成和复用</li>
+<li>软件开发的高质量和敏捷性要求</li>
+<li>分散的开发团队的协同</li>
+</ul>
+<h3 id="1-1-3-软件危机"><a class="header-anchor" href="#1-1-3-软件危机">¶</a>1.1.3 软件危机</h3>
+<h4 id="（1）软件危机定义"><a class="header-anchor" href="#（1）软件危机定义">¶</a>（1）软件危机定义</h4>
+<p>指的是软件开发过程中面临的一系列问题：</p>
+<ul>
+<li>不符合需求</li>
+<li>出错</li>
+<li>鲁棒性差</li>
+<li>使用不方便</li>
+<li>工期超时</li>
+<li>成本超预算</li>
+</ul>
+<h4 id="（2）软件开发不成熟的原因"><a class="header-anchor" href="#（2）软件开发不成熟的原因">¶</a>（2）软件开发不成熟的原因</h4>
+<ul>
+<li>软件本身复杂</li>
+<li>软件开发维护的方法、工具等等不恰当</li>
+</ul>
+<h2 id="1-2-工程"><a class="header-anchor" href="#1-2-工程">¶</a>1.2 工程</h2>
+<h3 id="1-2-1-软件开发与艺术、科学和工程的关系"><a class="header-anchor" href="#1-2-1-软件开发与艺术、科学和工程的关系">¶</a>1.2.1 软件开发与艺术、科学和工程的关系</h3>
+<p>科学（真）、工程（善）、艺术（美），软件开发三者兼备</p>
+<h3 id="1-2-2-工程的定义和特性"><a class="header-anchor" href="#1-2-2-工程的定义和特性">¶</a>1.2.2 工程的定义和特性</h3>
+<h4 id="（1）定义"><a class="header-anchor" href="#（1）定义">¶</a>（1）定义</h4>
+<p><strong>组织</strong>良好+<strong>管理</strong>严密+各类人员协同配合<strong>共同</strong>完成工作<br>
+的学科</p>
+<h4 id="（2）特性"><a class="header-anchor" href="#（2）特性">¶</a>（2）特性</h4>
+<ul>
+<li>以价值为目标</li>
+<li>高度的组织管理性</li>
+<li>多种学科的综合</li>
+<li>高度的实践性。工程实践一般包括如下步骤：
+<ul>
+<li>理解问题——需求分析</li>
+<li>规划方案——设计</li>
+<li>实施计划——编码</li>
+<li>验证结果的准确性——测试和质量保证</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-3-工程的准则"><a class="header-anchor" href="#1-2-3-工程的准则">¶</a>1.2.3 工程的准则</h3>
+<p>见书</p>
+<h2 id="1-3-软件工程"><a class="header-anchor" href="#1-3-软件工程">¶</a>1.3 软件工程</h2>
+<p>即把工程的方法应用于软件开发<br>
+是工程师解决“软件危机”的探索</p>
+<h3 id="1-3-1-软件工程的概念和知识域"><a class="header-anchor" href="#1-3-1-软件工程的概念和知识域">¶</a>1.3.1 软件工程的概念和知识域</h3>
+<h4 id="（1）概念"><a class="header-anchor" href="#（1）概念">¶</a>（1）概念</h4>
+<p>为了<strong>经济地</strong>获得<strong>可靠的</strong>且能在实际机器上<strong>高效运行</strong>的软件<br>
+而建立和使用的<br>
+工程原理</p>
+<h4 id="（2）软件工程知识域"><a class="header-anchor" href="#（2）软件工程知识域">¶</a>（2）软件工程知识域</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201225144907.png" alt=""></p>
+<h3 id="1-3-2-软件工程的金三角"><a class="header-anchor" href="#1-3-2-软件工程的金三角">¶</a>1.3.2 软件工程的金三角</h3>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201225145134.png" alt=""></p>
+<ul>
+<li>人：软件开发和维护的主体，最重要的因素</li>
+<li>技术：解决“如何做”的问题<br>
+软件工程核心技术环节：
+<ul>
+<li>系统工程：了解软件所处系统的方法</li>
+<li>软件需求：确定软件的目标和范围</li>
+<li>软件设计：从需求到代码的桥梁</li>
+<li>软件构造/编码：就是写代码啦</li>
+<li>软件测试：</li>
+<li>软件维护<br>
+记住上面这个顺序……这个思路很常见</li>
+</ul>
+</li>
+<li>管理：我国大企业不多</li>
+<li>过程：=人+技术+管理</li>
+</ul>
+<h3 id="1-3-3-控制软件开发的复杂性"><a class="header-anchor" href="#1-3-3-控制软件开发的复杂性">¶</a>1.3.3 控制软件开发的复杂性</h3>
+<h4 id="（1）软件复杂在哪？"><a class="header-anchor" href="#（1）软件复杂在哪？">¶</a>（1）软件复杂在哪？</h4>
+<ul>
+<li>技术复杂</li>
+<li>需求复杂</li>
+<li>人复杂</li>
+</ul>
+<h4 id="（2）控制复杂性的方法"><a class="header-anchor" href="#（2）控制复杂性的方法">¶</a>（2）控制复杂性的方法</h4>
+<p>把复杂的问题转变为计算机能处理的简单问题</p>
+<ul>
+<li>抽象：含义你懂的，程序设计中主要用到两种：
+<ul>
+<li>过程抽象：i.e.类的方法</li>
+<li>数据抽象：i.e.类的属性</li>
+</ul>
+</li>
+<li>分解：复杂问题——&gt;简单子问题</li>
+<li>迭代：比如多次试验以获取足够多的经验</li>
+</ul>
+<h3 id="1-3-4-软件工程经济学"><a class="header-anchor" href="#1-3-4-软件工程经济学">¶</a>1.3.4 软件工程经济学</h3>
+<p>研究软件价值及提高的方法</p>
+<h2 id="1-4-案例概述"><a class="header-anchor" href="#1-4-案例概述">¶</a>1.4 案例概述</h2>
+<p>4S店与软件工程比对</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/24/Chapter1-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%BB%AA%E8%AE%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -923,289 +1356,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/14/Learning-about-Caffe/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/14/Learning-about-Caffe/" class="post-title-link" itemprop="url">Learning about Caffe</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-12-14 01:16:45" itemprop="dateCreated datePublished" datetime="2020-12-14T01:16:45+08:00">2020-12-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-21 14:43:47" itemprop="dateModified" datetime="2020-12-21T14:43:47+08:00">2020-12-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Research-Group/" itemprop="url" rel="index"><span itemprop="name">Research Group</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>Learning References</h1>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/27982282">深度学习caffe的代码怎么读？</a></p>
-<h1>Setup Caffe</h1>
-<p><a target="_blank" rel="noopener" href="https://alberthg.github.io/2018/04/12/Caffe-Windows-%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/">Caffe Windows 配置</a></p>
-<p><a target="_blank" rel="noopener" href="https://software.intel.com/content/www/cn/zh/develop/articles/installation-and-configuration-of-bvlc-caffe-under-windows-the-caffe-learning-notes-part1.html">里面有各个版本caffe介绍</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zb1165048017/article/details/51355143?utm_medium=distribute.pc_relevant.none-task-blog-OPENSEARCH-5.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-OPENSEARCH-5.control">【caffe-Windows】caffe+VS2013+Windows无GPU快速配置教程</a></p>
-<h1>Several Questions</h1>
-<h2 id="What-is-CUDA"><a class="header-anchor" href="#What-is-CUDA">¶</a>What is CUDA?</h2>
-<blockquote>
-<p>CUDA（Compute Unified Device Architecture），是显卡厂商NVIDIA推出的运算平台。 CUDA™是一种由NVIDIA推出的通用并行计算架构，该架构使GPU能够解决复杂的计算问题。 它包含了CUDA指令集架构（ISA）以及GPU内部的并行计算引擎。 开发人员可以使用C语言来为CUDA™架构编写程序，C语言是应用最广泛的一种高级编程语言。所编写出的程序可以在支持CUDA™的处理器上以超高性能运行。CUDA3.0已经开始支持C++和FORTRAN。</p>
-</blockquote>
-<p>哦……原来是让GPU解决问题的啊……我这台没有GPU的电脑难怪在安装CUDA的时候会出错了……</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/14/Gradually-Build-up-my-own-Blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/14/Gradually-Build-up-my-own-Blog/" class="post-title-link" itemprop="url">Gradually Build up my own Blog</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-12-14 00:53:11" itemprop="dateCreated datePublished" datetime="2020-12-14T00:53:11+08:00">2020-12-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tiny-Skills/" itemprop="url" rel="index"><span itemprop="name">Tiny Skills</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>Turn off the Auto-created Folder</h1>
-<ul>
-<li>find “_config.yml”</li>
-<li>in the file, find “post_asset…”</li>
-<li>set it to be “false”</li>
-</ul>
-<h1>Turn off auto-number</h1>
-<ul>
-<li>find “_config.yml” in /themes/next</li>
-<li>find “number”</li>
-<li>set it to be “false”</li>
-</ul>
-<h2 id="References"><a class="header-anchor" href="#References">¶</a>References</h2>
-<p><a target="_blank" rel="noopener" href="https://io-oi.me/tech/hexo-next-optimization/">打造个性超赞博客 Hexo + NexT + GitHub Pages 的超深度优化</a></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/14/Learning-about-ResNet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/14/Learning-about-ResNet/" class="post-title-link" itemprop="url">Learning about ResNet</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-12-14 00:47:14" itemprop="dateCreated datePublished" datetime="2020-12-14T00:47:14+08:00">2020-12-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1275,20 +1425,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
