@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="¶1.1 引言 为什么会出现安全问题？  软件变复杂，规模变大 软件承载的利益，让某些人利用软件安全问题来获取利益  ¶1.2 典型安全问题 为什么软件安全问题日渐复杂？  随着科技发展、研究与分析的深入,我们注意到软件安全的问题非常多样化 试图利用软件安全问题获利的各类组织机构也在不断发展，针对软件安全问题的利用、破坏技术手段，造成软件安全问题日趋复杂  1.2.1 恶意软件 1. 传统恶意软件">
+  <meta name="description" content="¶1.1 引言 为什么会出现安全问题？  软件变复杂，规模变大 软件承载的利益，让某些人利用软件安全问题来获取利益  ¶1.2 典型安全问题 为什么软件安全问题日渐复杂？  随着科技发展、研究与分析的深入,我们注意到软件安全的问题非常多样化 试图利用软件安全问题获利的各类组织机构也在不断发展，针对软件安全问题的利用、破坏技术手段，造成软件安全问题日趋复杂  ¶1.2.1 恶意软件 ¶1. 传统恶意">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Chapter1 绪论">
+<meta property="og:title" content="Chapter1 软件安全绪论">
 <meta property="og:url" content="http://yoursite.com/2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/index.html">
 <meta property="og:site_name" content="Crestiny&#39;s Blog">
-<meta property="og:description" content="¶1.1 引言 为什么会出现安全问题？  软件变复杂，规模变大 软件承载的利益，让某些人利用软件安全问题来获取利益  ¶1.2 典型安全问题 为什么软件安全问题日渐复杂？  随着科技发展、研究与分析的深入,我们注意到软件安全的问题非常多样化 试图利用软件安全问题获利的各类组织机构也在不断发展，针对软件安全问题的利用、破坏技术手段，造成软件安全问题日趋复杂  1.2.1 恶意软件 1. 传统恶意软件">
+<meta property="og:description" content="¶1.1 引言 为什么会出现安全问题？  软件变复杂，规模变大 软件承载的利益，让某些人利用软件安全问题来获取利益  ¶1.2 典型安全问题 为什么软件安全问题日渐复杂？  随着科技发展、研究与分析的深入,我们注意到软件安全的问题非常多样化 试图利用软件安全问题获利的各类组织机构也在不断发展，针对软件安全问题的利用、破坏技术手段，造成软件安全问题日趋复杂  ¶1.2.1 恶意软件 ¶1. 传统恶意">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-19T14:00:55.000Z">
-<meta property="article:modified_time" content="2020-12-24T12:11:01.923Z">
+<meta property="article:modified_time" content="2020-12-28T06:01:28.889Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta name="twitter:card" content="summary">
 
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>Chapter1 绪论 | Crestiny's Blog</title>
+  <title>Chapter1 软件安全绪论 | Crestiny's Blog</title>
   
 
 
@@ -175,7 +175,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Chapter1 绪论
+          Chapter1 软件安全绪论
         </h1>
 
         <div class="post-meta">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
+                <time title="修改时间：2020-12-28 14:01:28" itemprop="dateModified" datetime="2020-12-28T14:01:28+08:00">2020-12-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,30 +227,34 @@
 <li>随着科技发展、研究与分析的深入,我们注意到软件安全的问题非常多样化</li>
 <li>试图利用软件安全问题获利的各类组织机构也在不断发展，针对软件安全问题的利用、破坏技术手段，造成软件安全问题日趋复杂</li>
 </ul>
-<h3>1.2.1 恶意软件</h3>
-<h5>1. 传统恶意软件</h5>
+<h4 id="1-2-1-恶意软件"><a class="header-anchor" href="#1-2-1-恶意软件">¶</a>1.2.1 恶意软件</h4>
+<h4 id="1-传统恶意软件"><a class="header-anchor" href="#1-传统恶意软件">¶</a>1. 传统恶意软件</h4>
 <ul>
 <li>传统的恶意软件包括：病毒、僵木蠕、间谍软件等</li>
 <li>破坏：窃取信息、远程控制、实施破坏等</li>
 <li>传统恶意软件需要发展的能力：</li>
 </ul>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">渗透与扩散：突破防御+感染目标</span><br><span class="line">隐蔽能力：隐蔽特征避免被发现+被发现了能保护操纵者身份</span><br><span class="line">破坏能力：搜集信息+实施破坏</span><br></pre></td></tr></tbody></table></figure>
-<h5>2. 恶意软件发展历程</h5>
-单机传播——网络传播——协同攻击
-APT攻击（高可持续性威胁）：针对特定目标+高技术
-<h3>1.2.2 软件漏洞</h3>
-说的是程序设计错误导致的
-<h5>1. 漏洞为什么越来越多？</h5>
-- 软件更复杂
-- 漏洞多样化
-- 软件开发周期变短
-<h3>1.2.3 软件后门</h3>
-开发人员刻意设计，但对用户隐瞒的功能。为什么算在软件安全问题中呢？因为有的攻击者，开发软件的时候，会留下后门，将其设计为此软件的漏洞。
-举个栗子：建城墙的人留了个暗道，工程交付以后，保护城墙的人不一定能找出来它，但是工人却一清二楚，可以通过暗道做些坏事。而且，工人更懂怎么利用城墙的设计藏好这个暗道。
-<h5>1. 将软件后门设计为软件漏洞，此方法优势：</h5>
-- 难发现
-- 易利用
-- 难取证：后门代码其实不在软件的产品代码中，而是攻击者利用漏洞动态加载的（被发现了说成设计错误就完事儿了，不是故意的哈哈哈）
+<h4 id="2-恶意软件发展历程"><a class="header-anchor" href="#2-恶意软件发展历程">¶</a>2. 恶意软件发展历程</h4>
+<p>单机传播——网络传播——协同攻击<br>
+APT攻击（高可持续性威胁）：针对特定目标+高技术</p>
+<h4 id="1-2-2-软件漏洞"><a class="header-anchor" href="#1-2-2-软件漏洞">¶</a>1.2.2 软件漏洞</h4>
+<p>说的是程序设计错误导致的</p>
+<h4 id="1-漏洞为什么越来越多？"><a class="header-anchor" href="#1-漏洞为什么越来越多？">¶</a>1. 漏洞为什么越来越多？</h4>
+<ul>
+<li>软件更复杂</li>
+<li>漏洞多样化</li>
+<li>软件开发周期变短</li>
+</ul>
+<h4 id="1-2-3-软件后门"><a class="header-anchor" href="#1-2-3-软件后门">¶</a>1.2.3 软件后门</h4>
+<p>开发人员刻意设计，但对用户隐瞒的功能。为什么算在软件安全问题中呢？因为有的攻击者，开发软件的时候，会留下后门，将其设计为此软件的漏洞。<br>
+举个栗子：建城墙的人留了个暗道，工程交付以后，保护城墙的人不一定能找出来它，但是工人却一清二楚，可以通过暗道做些坏事。而且，工人更懂怎么利用城墙的设计藏好这个暗道。</p>
+<h4 id="1-将软件后门设计为软件漏洞，此方法优势："><a class="header-anchor" href="#1-将软件后门设计为软件漏洞，此方法优势：">¶</a>1. 将软件后门设计为软件漏洞，此方法优势：</h4>
+<ul>
+<li>难发现</li>
+<li>易利用</li>
+<li>难取证：后门代码其实不在软件的产品代码中，而是攻击者利用漏洞动态加载的（被发现了说成设计错误就完事儿了，不是故意的哈哈哈）</li>
+</ul>
 <h2 id="1-3-软件安全性分析的目标"><a class="header-anchor" href="#1-3-软件安全性分析的目标">¶</a>1.3 软件安全性分析的目标</h2>
 <h3 id="1-3-1-软件安全性分析要解决的问题"><a class="header-anchor" href="#1-3-1-软件安全性分析要解决的问题">¶</a>1.3.1 软件安全性分析要解决的问题</h3>
 <ol>
@@ -285,54 +289,54 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术
 <h2 id="1-4-主要方法与技术"><a class="header-anchor" href="#1-4-主要方法与技术">¶</a>1.4 主要方法与技术</h2>
 <h3 id="1-4-0-软件逆向分析方法分类"><a class="header-anchor" href="#1-4-0-软件逆向分析方法分类">¶</a>1.4.0 软件逆向分析方法分类</h3>
 <p>主要有两大类：静态分析和动态分析</p>
-<h5>1. 静态分析</h5>
-感觉就像通过反汇编或反编译的手段，对软件的可执行代码进行分析
-（1）优点：比较全面、整体
-（2）缺点：一方面，软件代码规模大了或者复杂了就不好搞；另一方面，如果软件做了加壳保护那就不能反汇编等等
-<h5>2. 动态分析</h5>
-通过直接运行软件，监测软件运行过程进行分析。
-（1）优点：分析过程中可根据软件的运行过程直接获得在各个指令执行后的结果数据，减少推理分析
-（2）缺点：每次分析只能针对动态执行的一条路径执行，整体性较差（所以说，如何构造多条执行路径也是动态分析需要研究的一个重要问题）
+<h4 id="1-静态分析"><a class="header-anchor" href="#1-静态分析">¶</a>1. 静态分析</h4>
+<p>感觉就像通过反汇编或反编译的手段，对软件的可执行代码进行分析<br>
+（1）优点：比较全面、整体<br>
+（2）缺点：一方面，软件代码规模大了或者复杂了就不好搞；另一方面，如果软件做了加壳保护那就不能反汇编等等</p>
+<h4 id="2-动态分析"><a class="header-anchor" href="#2-动态分析">¶</a>2. 动态分析</h4>
+<p>通过直接运行软件，监测软件运行过程进行分析。<br>
+（1）优点：分析过程中可根据软件的运行过程直接获得在各个指令执行后的结果数据，减少推理分析<br>
+（2）缺点：每次分析只能针对动态执行的一条路径执行，整体性较差（所以说，如何构造多条执行路径也是动态分析需要研究的一个重要问题）</p>
 <p><strong>现在一般：动态为主，静态为辅</strong></p>
 <h3 id="1-4-1-反汇编与反编译"><a class="header-anchor" href="#1-4-1-反汇编与反编译">¶</a>1.4.1 反汇编与反编译</h3>
 <p>通常是逆向分析的第一步（静态动态都是）</p>
-<h5>作用</h5>
-二进制exe文件（完全不可读）——&gt;汇编代码——&gt;其他高级语言代码（基本可读）
-第一个箭头是反汇编，第二个是反编译；做到**功能等价**就行
+<h4 id="作用"><a class="header-anchor" href="#作用">¶</a>作用</h4>
+<p>二进制exe文件（完全不可读）——&gt;汇编代码——&gt;其他高级语言代码（基本可读）<br>
+第一个箭头是反汇编，第二个是反编译；做到<strong>功能等价</strong>就行</p>
 <h3 id="1-4-2-程序调试"><a class="header-anchor" href="#1-4-2-程序调试">¶</a>1.4.2 程序调试</h3>
 <p>动态分析</p>
-<h5>定义</h5>
-用一些工具，通过断点、单步执行等方式
-内核代码的调试需要虚拟化技术+多台设备
-<h5>优缺点</h5>
-优缺点基本同“动态分析”中所写，此外，软件自保护技术可能阻碍调试，且数据量和复杂度都挺恐怖的
+<h4 id="定义"><a class="header-anchor" href="#定义">¶</a>定义</h4>
+<p>用一些工具，通过断点、单步执行等方式<br>
+内核代码的调试需要虚拟化技术+多台设备</p>
+<h4 id="优缺点"><a class="header-anchor" href="#优缺点">¶</a>优缺点</h4>
+<p>优缺点基本同“动态分析”中所写，此外，软件自保护技术可能阻碍调试，且数据量和复杂度都挺恐怖的</p>
 <h3 id="1-4-3-程序切片"><a class="header-anchor" href="#1-4-3-程序切片">¶</a>1.4.3 程序切片</h3>
-<h5>作用</h5>
-解决软件代码规模超大带来的理解困难，比如分析出了汇编代码，对汇编代码切片……
-<h5>基本思想</h5>
-分析指令的相关性，从而提取用户“感兴趣”的代码
+<h4 id="作用-v2"><a class="header-anchor" href="#作用-v2">¶</a>作用</h4>
+<p>解决软件代码规模超大带来的理解困难，比如分析出了汇编代码，对汇编代码切片……</p>
+<h4 id="基本思想"><a class="header-anchor" href="#基本思想">¶</a>基本思想</h4>
+<p>分析指令的相关性，从而提取用户“感兴趣”的代码</p>
 <p>主要用于静态分析，也可用于动态分析，有差异：<br>
 （1）静态分析：通过计算操作数<strong>可能的影响范围</strong>（要考虑各种可能的执行路径）来计算指令的关联关系<br>
 （2）动态分析：更有针对性，对某条路径某个操作数来分析指令关联</p>
-<h5>缺点</h5>
-对局部代码还不错，但代码多了照样难受
+<h4 id="缺点"><a class="header-anchor" href="#缺点">¶</a>缺点</h4>
+<p>对局部代码还不错，但代码多了照样难受</p>
 <h3 id="1-4-4-污点传播分析"><a class="header-anchor" href="#1-4-4-污点传播分析">¶</a>1.4.4 污点传播分析</h3>
 <p>静态动态都有，<strong>数据流分析方法</strong></p>
-<h5>基本思想</h5>
-将感兴趣的数据标记，根据每条指令的污点传播过程，分析数据的传递关系
-<h5>实现方式</h5>
-按照“如何获得后台执行过程中具体每一条指令和指令执行前后状态”，可以分为：
-基于插桩/硬件/编译器扩展/硬件模拟器等等
-<h5>存在问题</h5>
-由于控制依赖、查表操作等引入的隐式污点传播无法简单地引入或去除
+<h4 id="基本思想-v2"><a class="header-anchor" href="#基本思想-v2">¶</a>基本思想</h4>
+<p>将感兴趣的数据标记，根据每条指令的污点传播过程，分析数据的传递关系</p>
+<h4 id="实现方式"><a class="header-anchor" href="#实现方式">¶</a>实现方式</h4>
+<p>按照“如何获得后台执行过程中具体每一条指令和指令执行前后状态”，可以分为：<br>
+基于插桩/硬件/编译器扩展/硬件模拟器等等</p>
+<h4 id="存在问题"><a class="header-anchor" href="#存在问题">¶</a>存在问题</h4>
+<p>由于控制依赖、查表操作等引入的隐式污点传播无法简单地引入或去除</p>
 <h3 id="1-4-5-符号执行"><a class="header-anchor" href="#1-4-5-符号执行">¶</a>1.4.5 符号执行</h3>
 <p>静态动态都有</p>
 <h3 id="1-4-6-模糊测试"><a class="header-anchor" href="#1-4-6-模糊测试">¶</a>1.4.6 模糊测试</h3>
 <p>动态分析</p>
-<h5>作用</h5>
-本来是构造许多奇怪数据来看软件鲁棒性的，但现在是为了触发不同的执行路径
-<h5>存在问题</h5>
-提高测试数据生成的针对性——&gt;提高模糊测试效率
+<h4 id="作用-v3"><a class="header-anchor" href="#作用-v3">¶</a>作用</h4>
+<p>本来是构造许多奇怪数据来看软件鲁棒性的，但现在是为了触发不同的执行路径</p>
+<h4 id="存在问题-v2"><a class="header-anchor" href="#存在问题-v2">¶</a>存在问题</h4>
+<p>提高测试数据生成的针对性——&gt;提高模糊测试效率</p>
 <h2 id="1-5-主要分析应用"><a class="header-anchor" href="#1-5-主要分析应用">¶</a>1.5 主要分析应用</h2>
 <h3 id="1-5-1-恶意软件分析"><a class="header-anchor" href="#1-5-1-恶意软件分析">¶</a>1.5.1 恶意软件分析</h3>
 <h5 id="对恶意软件的分析目标"><a class="header-anchor" href="#对恶意软件的分析目标">¶</a>对恶意软件的分析目标</h5>
@@ -453,7 +457,7 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%BC%95%E8%A8%80"><span class="nav-text">1.1 引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%85%B8%E5%9E%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="nav-text">1.2 典型安全问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">1.2.1 恶意软件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">1. 传统恶意软件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">2. 恶意软件发展历程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">1.2.2 软件漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">1. 漏洞为什么越来越多？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">1.2.3 软件后门</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">1. 将软件后门设计为软件漏洞，此方法优势：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E6%80%A7%E5%88%86%E6%9E%90%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="nav-text">1.3 软件安全性分析的目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E6%80%A7%E5%88%86%E6%9E%90%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">1.3.1 软件安全性分析要解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-%E6%97%A0%E6%BA%90%E7%A0%81%E6%97%B6%E5%AF%B9%E8%BD%AF%E4%BB%B6%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E7%9A%84%E6%8C%91%E6%88%98"><span class="nav-text">1.3.2 无源码时对软件逆向分析的挑战</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8A%80%E6%9C%AF"><span class="nav-text">1.4 主要方法与技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-0-%E8%BD%AF%E4%BB%B6%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E5%88%86%E7%B1%BB"><span class="nav-text">1.4.0 软件逆向分析方法分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">1. 静态分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">2. 动态分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-%E5%8F%8D%E6%B1%87%E7%BC%96%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91"><span class="nav-text">1.4.1 反汇编与反编译</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">作用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-%E7%A8%8B%E5%BA%8F%E8%B0%83%E8%AF%95"><span class="nav-text">1.4.2 程序调试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">优缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-%E7%A8%8B%E5%BA%8F%E5%88%87%E7%89%87"><span class="nav-text">1.4.3 程序切片</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">基本思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-4-%E6%B1%A1%E7%82%B9%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90"><span class="nav-text">1.4.4 污点传播分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">基本思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">实现方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">存在问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-5-%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C"><span class="nav-text">1.4.5 符号执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-6-%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95"><span class="nav-text">1.4.6 模糊测试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">存在问题</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E4%B8%BB%E8%A6%81%E5%88%86%E6%9E%90%E5%BA%94%E7%94%A8"><span class="nav-text">1.5 主要分析应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%86%E6%9E%90"><span class="nav-text">1.5.1 恶意软件分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%88%86%E6%9E%90%E7%9B%AE%E6%A0%87"><span class="nav-text">对恶意软件的分析目标</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E9%80%86%E5%90%91%E5%88%86%E6%9E%90"><span class="nav-text">网络协议逆向分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8"><span class="nav-text">软件漏洞分析与利用</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%BC%95%E8%A8%80"><span class="nav-text">1.1 引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%85%B8%E5%9E%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="nav-text">1.2 典型安全问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6"><span class="nav-text">1.2.1 恶意软件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BC%A0%E7%BB%9F%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6"><span class="nav-text">1. 传统恶意软件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="nav-text">2. 恶意软件发展历程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E"><span class="nav-text">1.2.2 软件漏洞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%BC%8F%E6%B4%9E%E4%B8%BA%E4%BB%80%E4%B9%88%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%A4%9A%EF%BC%9F"><span class="nav-text">1. 漏洞为什么越来越多？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-%E8%BD%AF%E4%BB%B6%E5%90%8E%E9%97%A8"><span class="nav-text">1.2.3 软件后门</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%B0%86%E8%BD%AF%E4%BB%B6%E5%90%8E%E9%97%A8%E8%AE%BE%E8%AE%A1%E4%B8%BA%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%EF%BC%8C%E6%AD%A4%E6%96%B9%E6%B3%95%E4%BC%98%E5%8A%BF%EF%BC%9A"><span class="nav-text">1. 将软件后门设计为软件漏洞，此方法优势：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E6%80%A7%E5%88%86%E6%9E%90%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="nav-text">1.3 软件安全性分析的目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E6%80%A7%E5%88%86%E6%9E%90%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">1.3.1 软件安全性分析要解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-%E6%97%A0%E6%BA%90%E7%A0%81%E6%97%B6%E5%AF%B9%E8%BD%AF%E4%BB%B6%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E7%9A%84%E6%8C%91%E6%88%98"><span class="nav-text">1.3.2 无源码时对软件逆向分析的挑战</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8A%80%E6%9C%AF"><span class="nav-text">1.4 主要方法与技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-0-%E8%BD%AF%E4%BB%B6%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E5%88%86%E7%B1%BB"><span class="nav-text">1.4.0 软件逆向分析方法分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90"><span class="nav-text">1. 静态分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%8A%A8%E6%80%81%E5%88%86%E6%9E%90"><span class="nav-text">2. 动态分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-%E5%8F%8D%E6%B1%87%E7%BC%96%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91"><span class="nav-text">1.4.1 反汇编与反编译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-text">作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-%E7%A8%8B%E5%BA%8F%E8%B0%83%E8%AF%95"><span class="nav-text">1.4.2 程序调试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3-%E7%A8%8B%E5%BA%8F%E5%88%87%E7%89%87"><span class="nav-text">1.4.3 程序切片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8-v2"><span class="nav-text">作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="nav-text">基本思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-4-%E6%B1%A1%E7%82%B9%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90"><span class="nav-text">1.4.4 污点传播分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3-v2"><span class="nav-text">基本思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-text">实现方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E5%9C%A8%E9%97%AE%E9%A2%98"><span class="nav-text">存在问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-5-%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C"><span class="nav-text">1.4.5 符号执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-6-%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95"><span class="nav-text">1.4.6 模糊测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8-v3"><span class="nav-text">作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E5%9C%A8%E9%97%AE%E9%A2%98-v2"><span class="nav-text">存在问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E4%B8%BB%E8%A6%81%E5%88%86%E6%9E%90%E5%BA%94%E7%94%A8"><span class="nav-text">1.5 主要分析应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%86%E6%9E%90"><span class="nav-text">1.5.1 恶意软件分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%88%86%E6%9E%90%E7%9B%AE%E6%A0%87"><span class="nav-text">对恶意软件的分析目标</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E9%80%86%E5%90%91%E5%88%86%E6%9E%90"><span class="nav-text">网络协议逆向分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8"><span class="nav-text">软件漏洞分析与利用</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -467,20 +471,20 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

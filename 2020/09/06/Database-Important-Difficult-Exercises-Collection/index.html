@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="题目 1证明：任何一个二目关系都是3NF的 正确。因为关系模式中只有两个属性，所以无传递。 1证明：任何一个二目关系都是BCNF的 正确。按BCNF的定义，若X-&gt;Y,且Y不是X的子集时，每个决定因素都包含码（如果不包含，那就有属性依赖于非码属性啦！就是存在传递依赖咯），对于二目关系决定因素必然包含码。详细证明如下：（任何二元关系模式必定是BCNF）。 证明：设R为一个二目关系R(A1，A2">
+  <meta name="description" content="¶题目 1证明：任何一个二目关系都是3NF的 正确。因为关系模式中只有两个属性，所以无传递。 1证明：任何一个二目关系都是BCNF的 正确。按BCNF的定义，若X-&gt;Y,且Y不是X的子集时，每个决定因素都包含码（如果不包含，那就有属性依赖于非码属性啦！就是存在传递依赖咯），对于二目关系决定因素必然包含码。详细证明如下：（任何二元关系模式必定是BCNF）。 证明：设R为一个二目关系R(A1，A">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Database Important&amp;Difficult Exercises Collection">
 <meta property="og:url" content="http://yoursite.com/2020/09/06/Database-Important-Difficult-Exercises-Collection/index.html">
 <meta property="og:site_name" content="Crestiny&#39;s Blog">
-<meta property="og:description" content="题目 1证明：任何一个二目关系都是3NF的 正确。因为关系模式中只有两个属性，所以无传递。 1证明：任何一个二目关系都是BCNF的 正确。按BCNF的定义，若X-&gt;Y,且Y不是X的子集时，每个决定因素都包含码（如果不包含，那就有属性依赖于非码属性啦！就是存在传递依赖咯），对于二目关系决定因素必然包含码。详细证明如下：（任何二元关系模式必定是BCNF）。 证明：设R为一个二目关系R(A1，A2">
+<meta property="og:description" content="¶题目 1证明：任何一个二目关系都是3NF的 正确。因为关系模式中只有两个属性，所以无传递。 1证明：任何一个二目关系都是BCNF的 正确。按BCNF的定义，若X-&gt;Y,且Y不是X的子集时，每个决定因素都包含码（如果不包含，那就有属性依赖于非码属性啦！就是存在传递依赖咯），对于二目关系决定因素必然包含码。详细证明如下：（任何二元关系模式必定是BCNF）。 证明：设R为一个二目关系R(A1，A">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-05T17:05:58.000Z">
-<meta property="article:modified_time" content="2020-12-24T12:11:01.963Z">
+<meta property="article:modified_time" content="2020-12-27T18:13:13.541Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta property="article:tag" content="Database">
 <meta name="twitter:card" content="summary">
@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
+                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -216,9 +216,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <center><h1>题目</h1></center>
+        <h2 id="题目"><a class="header-anchor" href="#题目">¶</a>题目</h2>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">证明：任何一个二目关系都是3NF的</span><br></pre></td></tr></tbody></table></figure>
-正确。因为关系模式中只有两个属性，所以无传递。
+<p>正确。因为关系模式中只有两个属性，所以无传递。</p>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">证明：任何一个二目关系都是BCNF的</span><br></pre></td></tr></tbody></table></figure>
 <p>正确。按BCNF的定义，若X-&gt;Y,且Y不是X的子集时，<strong>每个决定因素都包含码</strong>（如果不包含，那就有属性依赖于非码属性啦！就是存在传递依赖咯），对于二目关系决定因素必然包含码。详细证明如下：（任何二元关系模式必定是BCNF）。<br>
 证明：设R为一个二目关系R(A1，A2)，则属性A1和A2之间可能存在以下几种依赖关系：<br>
@@ -232,13 +232,13 @@ C、R的码为(A1，A2)（即A1-&gt;A2，A2-&gt;A1），决定因素都包含码
 （2）反例：关系模式 SC（S#，C#，G） 其中有（S#，C#）→G，但是S# 不→ G，C#不→G，也就是说少了一些决定因素就不行了</p>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">指出下列关系模式是第几范式？并说明理由。</span><br><span class="line">① R（X，Y，Z） F={XY→Z}</span><br><span class="line">② R（X，Y，Z） F={Y→Z，XZ→Y}</span><br><span class="line">③ R（X，Y，Z） F={Y→Z，Y→X，X→Y ， X→ Z}</span><br><span class="line">④ R（X，Y，Z） F={X→Y，X→Z}</span><br><span class="line">⑤ R（W，X，Y，Z） F={X→Z，WX→Y}</span><br><span class="line">``` </span><br><span class="line">（1）码：（X，Y），主属性：X，Y，非主属性：Z</span><br><span class="line">	不存在非主对码的部分函数依赖——2NF</span><br><span class="line">	不存在非主对码的传递函数依赖——3NF</span><br><span class="line">	每个决定因素都包含码——BCNF</span><br><span class="line">	除了平凡的、函数依赖的，没有其他多值依赖——4NF</span><br><span class="line">	4NF</span><br><span class="line">（2）码：（X，Z），主属性：X，Z，非主属性：Y</span><br><span class="line">	不存在非主对码的部分函数依赖——2NF</span><br><span class="line">	不存在非主对码的传递函数依赖——3NF</span><br><span class="line">	不是每个决定因素都包含码</span><br><span class="line">	3NF</span><br><span class="line">（3）码：X，Y，主属性：X，Y，非主属性：Z</span><br><span class="line">	不存在非主对码的部分函数依赖——2NF</span><br><span class="line">	不存在非主对码的传递函数依赖——3NF</span><br><span class="line">	每个决定因素都包含码——BCNF</span><br><span class="line">	除了平凡的、函数依赖的，没有其他多值依赖——4NF</span><br><span class="line">	4NF</span><br><span class="line">（4）码：X，主属性：X，非主属性：Y，Z</span><br><span class="line">	不存在非主对码的部分函数依赖——2NF</span><br><span class="line">	不存在非主对码的传递函数依赖——3NF</span><br><span class="line">	每个决定因素都包含码——BCNF</span><br><span class="line">	除了平凡的、函数依赖的，没有其他多值依赖——4NF</span><br><span class="line">	4NF</span><br><span class="line">（5）码：（W，X），主属性：W，X，非主属性：Y，Z</span><br><span class="line">	存在非主对码的部分函数依赖</span><br><span class="line">	1NF</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 <p>设有关系模式 R(U,F)，其中 U＝ABC，F＝｛A→B，B→C｝，求 F 的闭包 F＋</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">（注：K表示空集）</span><br><span class="line">（1）自反：</span><br><span class="line">k-&gt;K,</span><br><span class="line">A-&gt;K,B-&gt;K,C-&gt;K,</span><br><span class="line">A-&gt;A,B-&gt;B,C-&gt;C,</span><br><span class="line">AB-&gt;K,BC-&gt;K,AC-&gt;K,</span><br><span class="line">AB-&gt;A,AB-&gt;B,BC-&gt;B,BC-&gt;C,AC-&gt;A,AC-&gt;C,</span><br><span class="line">AB-&gt;AB,BC-&gt;BC,AC-&gt;AC,</span><br><span class="line">ABC-&gt;K,</span><br><span class="line">ABC-&gt;A,ABC-&gt;B,ABC-&gt;C,</span><br><span class="line">ABC-&gt;AB,ABC-&gt;BC,ABC-&gt;AC,</span><br><span class="line">ABC-&gt;ABC</span><br><span class="line">（2）增广：</span><br><span class="line">（对于A→B）：A→AB,AB→B,AC→BC</span><br><span class="line">（对于B→C）：AB→AC,B→BC,BC→C</span><br><span class="line">（对于A→C）：A→AC,AB→BC,AC→C</span><br><span class="line">（3）传递：</span><br><span class="line">A-&gt;C,AC-&gt;B,AB-&gt;C</span><br><span class="line"></span><br><span class="line">**如何不重不漏？**</span><br><span class="line">这好像是个NP问题啊....</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">（注：K表示空集）</span><br><span class="line">（1）自反：</span><br><span class="line">k-&gt;K,</span><br><span class="line">A-&gt;K,B-&gt;K,C-&gt;K,</span><br><span class="line">A-&gt;A,B-&gt;B,C-&gt;C,</span><br><span class="line">AB-&gt;K,BC-&gt;K,AC-&gt;K,</span><br><span class="line">AB-&gt;A,AB-&gt;B,BC-&gt;B,BC-&gt;C,AC-&gt;A,AC-&gt;C,</span><br><span class="line">AB-&gt;AB,BC-&gt;BC,AC-&gt;AC,</span><br><span class="line">ABC-&gt;K,</span><br><span class="line">ABC-&gt;A,ABC-&gt;B,ABC-&gt;C,</span><br><span class="line">ABC-&gt;AB,ABC-&gt;BC,ABC-&gt;AC,</span><br><span class="line">ABC-&gt;ABC</span><br><span class="line">（2）增广：</span><br><span class="line">（对于A→B）：A→AB,AB→B,AC→BC</span><br><span class="line">（对于B→C）：AB→AC,B→BC,BC→C</span><br><span class="line">（对于A→C）：A→AC,AB→BC,AC→C</span><br><span class="line">（3）传递：</span><br><span class="line">A-&gt;C,AC-&gt;B,AB-&gt;C</span><br><span class="line"></span><br><span class="line">**如何不重不漏？**</span><br><span class="line">这好像是个NP问题啊....</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 <p>对题 6 的关系模式R，求其候选键并判断A→C和B→A是否属于F＋。</p>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">候选键：A</span><br><span class="line">传递律所以A→C属于</span><br><span class="line">B→A不属于</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 <p>对于关系模式R(ABC)，F={A→BC,BC→A}，求其候选键。</p>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">候选键：A，（B，C）</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 <p>设有关系模式 R(U,F)，其中 U＝ABC，F＝｛A→{B,C},B→C, A→B, {A, B}→C｝，求 Fmin。</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">第一步：分解右边得到F＝｛A→B,A→C,B→C,{A, B}→C｝</span><br><span class="line">第二步：</span><br><span class="line">对于A→B：A在G上的闭包为{A,C}，不含B，可以保留</span><br><span class="line">对于A→C：A在G上的闭包为{A,B,C},含C，不保留</span><br><span class="line">对于B→C：B在G上的闭包为{B},不含C，保留</span><br><span class="line">对于{A, B}→C：AB在G上的闭包为{A,B,C},含C，不保留</span><br><span class="line">F＝｛A→B,B→C｝</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;center&gt;&lt;h1&gt;一些小疑问&lt;/h1&gt;&lt;/center&gt;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">第一步：分解右边得到F＝｛A→B,A→C,B→C,{A, B}→C｝</span><br><span class="line">第二步：</span><br><span class="line">对于A→B：A在G上的闭包为{A,C}，不含B，可以保留</span><br><span class="line">对于A→C：A在G上的闭包为{A,B,C},含C，不保留</span><br><span class="line">对于B→C：B在G上的闭包为{B},不含C，保留</span><br><span class="line">对于{A, B}→C：AB在G上的闭包为{A,B,C},含C，不保留</span><br><span class="line">F＝｛A→B,B→C｝</span><br><span class="line"></span><br><span class="line">## 一些小疑问</span><br></pre></td></tr></tbody></table></figure>
 <p>定义SQL表时，各种数据类型怎么用？</p>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href="https://www.runoob.com/sql/sql-datatypes-general.html"&gt;是一个比较全面的整理&lt;/a&gt;</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 <p>SQL语句和用户权限相关的那部分内容？</p>
@@ -272,12 +272,12 @@ C、R的码为(A1，A2)（即A1-&gt;A2，A2-&gt;A1），决定因素都包含码
 等值连接：下面有条件
 自然连接：下面没有条件
 
-&lt;center&gt;&lt;h1&gt;一句话知识点&lt;/h1&gt;&lt;/center&gt;
+## 一句话知识点
 1. 数据库系统中，数据独立性是指：应用程序与数据库的结构之间相互独立
 2. 关系数据库包含：内模式、模式、外模式三级模式；分别对应数据库的存储文件、基表、视图
 (外模式也就是：子模式/用户模式，是用户看到的数据视图)
 
-&lt;center&gt;&lt;h1&gt;要背的知识点&lt;/h1&gt;&lt;/center&gt;
+## 要背的知识点
 1. 数据库系统的特点（物理独立性、逻辑独立性）
 2. 数据库系统的三级结构模式
 3. 完整性约束条件
@@ -292,13 +292,11 @@ C、R的码为(A1，A2)（即A1-&gt;A2，A2-&gt;A1），决定因素都包含码
 12. 启发式规则
 13. 视图的优点
 
+## 要注意的名词解释
 
-&lt;center&gt;&lt;h1&gt;要注意的名词解释&lt;/h1&gt;&lt;/center&gt;
-
-&lt;center&gt;&lt;h1&gt;要熟悉的算法&lt;/h1&gt;&lt;/center&gt;
+## 要熟悉的算法
 1. 判别无损连接性
 2. 判别保持函数依赖性
-
 
 </code></pre>
 <script>
@@ -402,7 +400,7 @@ C、R的码为(A1，A2)（即A1-&gt;A2，A2-&gt;A1），决定因素都包含码
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">题目</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-text">题目</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -416,20 +414,20 @@ C、R的码为(A1，A2)（即A1-&gt;A2，A2-&gt;A1），决定因素都包含码
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

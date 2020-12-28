@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="4.1 基于对称加密的密钥分配 4.2 Kerberos 4.2.0 引言 要解决的问题 分布式环境中，控制访问权限，为用户提供认证服务 三种威胁 1. 用户可以伪装成其他用户 2. 伪造网络地址发消息 3. 监听消息&#x2F;重放攻击 Kerberos仅依赖于对称加密；此外，版本4逐渐被淘汰，现在常用版本5 4.2.1 Kerberos版本4 啊好复杂……之后慢慢啃 4.2.1 Kerberos版本5">
+  <meta name="description" content="¶4.1 基于对称加密的密钥分配 ¶4.2 Kerberos ¶4.2.0 引言 ¶要解决的问题 分布式环境中，控制访问权限，为用户提供认证服务 ¶三种威胁  用户可以伪装成其他用户 伪造网络地址发消息 监听消息&#x2F;重放攻击  Kerberos仅依赖于对称加密；此外，版本4逐渐被淘汰，现在常用版本5 ¶4.2.1 Kerberos版本4 啊好复杂……之后慢慢啃 ¶4.2.1 Kerberos版本5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Chapter4 密钥分配和用户认证">
 <meta property="og:url" content="http://yoursite.com/2020/09/23/Chapter4-%E5%AF%86%E9%92%A5%E5%88%86%E9%85%8D%E5%92%8C%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/index.html">
 <meta property="og:site_name" content="Crestiny&#39;s Blog">
-<meta property="og:description" content="4.1 基于对称加密的密钥分配 4.2 Kerberos 4.2.0 引言 要解决的问题 分布式环境中，控制访问权限，为用户提供认证服务 三种威胁 1. 用户可以伪装成其他用户 2. 伪造网络地址发消息 3. 监听消息&#x2F;重放攻击 Kerberos仅依赖于对称加密；此外，版本4逐渐被淘汰，现在常用版本5 4.2.1 Kerberos版本4 啊好复杂……之后慢慢啃 4.2.1 Kerberos版本5">
+<meta property="og:description" content="¶4.1 基于对称加密的密钥分配 ¶4.2 Kerberos ¶4.2.0 引言 ¶要解决的问题 分布式环境中，控制访问权限，为用户提供认证服务 ¶三种威胁  用户可以伪装成其他用户 伪造网络地址发消息 监听消息&#x2F;重放攻击  Kerberos仅依赖于对称加密；此外，版本4逐渐被淘汰，现在常用版本5 ¶4.2.1 Kerberos版本4 啊好复杂……之后慢慢啃 ¶4.2.1 Kerberos版本5">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-23T02:42:15.000Z">
-<meta property="article:modified_time" content="2020-12-24T12:11:01.927Z">
+<meta property="article:modified_time" content="2020-12-27T18:13:13.501Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta name="twitter:card" content="summary">
 
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
+                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -219,38 +219,40 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <center><h1>4.1 基于对称加密的密钥分配</h1></center>
-<center><h1>4.2 Kerberos</h1></center>
-<h2>4.2.0 引言</h2>
-<h5>要解决的问题</h5>
-分布式环境中，控制访问权限，为用户提供认证服务
-<h5>三种威胁</h5>
-1. 用户可以伪装成其他用户
-2. 伪造网络地址发消息
-3. 监听消息/重放攻击
+        <h2 id="4-1-基于对称加密的密钥分配"><a class="header-anchor" href="#4-1-基于对称加密的密钥分配">¶</a>4.1 基于对称加密的密钥分配</h2>
+<h2 id="4-2-Kerberos"><a class="header-anchor" href="#4-2-Kerberos">¶</a>4.2 Kerberos</h2>
+<h3 id="4-2-0-引言"><a class="header-anchor" href="#4-2-0-引言">¶</a>4.2.0 引言</h3>
+<h4 id="要解决的问题"><a class="header-anchor" href="#要解决的问题">¶</a>要解决的问题</h4>
+<p>分布式环境中，控制访问权限，为用户提供认证服务</p>
+<h4 id="三种威胁"><a class="header-anchor" href="#三种威胁">¶</a>三种威胁</h4>
+<ol>
+<li>用户可以伪装成其他用户</li>
+<li>伪造网络地址发消息</li>
+<li>监听消息/重放攻击</li>
+</ol>
 <p>Kerberos仅依赖于对称加密；此外，版本4逐渐被淘汰，现在常用版本5</p>
-<h2>4.2.1 Kerberos版本4</h2>
-啊好复杂……之后慢慢啃
-<h2>4.2.1 Kerberos版本5</h2>
-<center><h1>4.3 基于非对称加密的密钥分配</h1></center>
-<h2>4.3.0 引言</h2>
-公钥加密一个重要作用：处理密钥分发（公钥的分发+使用公钥加密分发私钥）
-<h2>4.3.1 公钥证书</h2>
+<h3 id="4-2-1-Kerberos版本4"><a class="header-anchor" href="#4-2-1-Kerberos版本4">¶</a>4.2.1 Kerberos版本4</h3>
+<p>啊好复杂……之后慢慢啃</p>
+<h3 id="4-2-1-Kerberos版本5"><a class="header-anchor" href="#4-2-1-Kerberos版本5">¶</a>4.2.1 Kerberos版本5</h3>
+<h2 id="4-3-基于非对称加密的密钥分配"><a class="header-anchor" href="#4-3-基于非对称加密的密钥分配">¶</a>4.3 基于非对称加密的密钥分配</h2>
+<h3 id="4-3-0-引言"><a class="header-anchor" href="#4-3-0-引言">¶</a>4.3.0 引言</h3>
+<p>公钥加密一个重要作用：处理密钥分发（公钥的分发+使用公钥加密分发私钥）</p>
+<h3 id="4-3-1-公钥证书"><a class="header-anchor" href="#4-3-1-公钥证书">¶</a>4.3.1 公钥证书</h3>
 <ul>
 <li>为什么要有公钥证书？<br>
 就像邮箱、银行卡号这种公钥，它们是广而告之的；但是你怎么知道他说这是就是呢？万一伪造了呢？所以我们引入第三方、公钥证书这些来验证。</li>
 <li>X.509标准是人们广泛接受的公钥证书格式</li>
 </ul>
-<h2>4.3.2 基于公钥密码的秘密密钥分发</h2>
-对称密钥中，共享密钥是前提，之后才能安全通信
-<h5></h5>
-<center><h1>4.4 X.509证书</h1></center>
-<h2>4.4.0 引言</h2>
-公钥加密一个重要作用：处理密钥分发（公钥的分发+使用公钥加密分发私钥）
-<h2>4.4.1 证书</h2>
-<h2>4.4.2 X.509版本3</h2>
-<center><h1>4.5 公钥基础设施KPI</h1></center>
-<h2>4.5.0 引言</h2>
+<h3 id="4-3-2-基于公钥密码的秘密密钥分发"><a class="header-anchor" href="#4-3-2-基于公钥密码的秘密密钥分发">¶</a>4.3.2 基于公钥密码的秘密密钥分发</h3>
+<p>对称密钥中，共享密钥是前提，之后才能安全通信</p>
+<h4 id=""><a class="header-anchor" href="#">¶</a></h4>
+<h2 id="4-4-X-509证书"><a class="header-anchor" href="#4-4-X-509证书">¶</a>4.4 X.509证书</h2>
+<h3 id="4-4-0-引言"><a class="header-anchor" href="#4-4-0-引言">¶</a>4.4.0 引言</h3>
+<p>公钥加密一个重要作用：处理密钥分发（公钥的分发+使用公钥加密分发私钥）</p>
+<h3 id="4-4-1-证书"><a class="header-anchor" href="#4-4-1-证书">¶</a>4.4.1 证书</h3>
+<h3 id="4-4-2-X-509版本3"><a class="header-anchor" href="#4-4-2-X-509版本3">¶</a>4.4.2 X.509版本3</h3>
+<h2 id="4-5-公钥基础设施KPI"><a class="header-anchor" href="#4-5-公钥基础设施KPI">¶</a>4.5 公钥基础设施KPI</h2>
+<h3 id="4-5-0-引言"><a class="header-anchor" href="#4-5-0-引言">¶</a>4.5.0 引言</h3>
 <ul>
 <li>PKI是什么？<br>
 之所以叫基础设施：包含了硬件+软件+人员+策略+过程</li>
@@ -260,7 +262,7 @@
 基于X.509的PKI</li>
 <li>所以具体来说，PKIX包括些什么呢？</li>
 </ul>
-<h2>4.5.1 PKIX管理功能</h2>
+<h3 id="4-5-1-PKIX管理功能"><a class="header-anchor" href="#4-5-1-PKIX管理功能">¶</a>4.5.1 PKIX管理功能</h3>
 <ul>
 <li>注册：注册开始了一个PKI中的登记过程</li>
 <li>初始化：客户端安装密钥资料</li>
@@ -270,14 +272,15 @@
 <li>撤销申请：CA撤销</li>
 <li>交叉认证：两个CA之间</li>
 </ul>
-<h2>4.5.2 PKIX管理协议</h2>
-<center><h1>4.6 联合身份管理</h1></center>
-<h2>4.6.1 身份管理</h2>
-<h5>作用</h5>
-验证身份以后给对应的资源接口，基于单点登录SSO
-<h5>基本要素</h5>
-<h2>4.6.2 身份联合</h2>
-身份联合就是将身份管理扩展到多个安全域<script>
+<h3 id="4-5-2-PKIX管理协议"><a class="header-anchor" href="#4-5-2-PKIX管理协议">¶</a>4.5.2 PKIX管理协议</h3>
+<h2 id="4-6-联合身份管理"><a class="header-anchor" href="#4-6-联合身份管理">¶</a>4.6 联合身份管理</h2>
+<h3 id="4-6-1-身份管理"><a class="header-anchor" href="#4-6-1-身份管理">¶</a>4.6.1 身份管理</h3>
+<h4 id="作用"><a class="header-anchor" href="#作用">¶</a>作用</h4>
+<p>验证身份以后给对应的资源接口，基于单点登录SSO</p>
+<h4 id="基本要素"><a class="header-anchor" href="#基本要素">¶</a>基本要素</h4>
+<h3 id="4-6-2-身份联合"><a class="header-anchor" href="#4-6-2-身份联合">¶</a>4.6.2 身份联合</h3>
+<p>身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域</p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -375,7 +378,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">4.1 基于对称加密的密钥分配</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">4.2 Kerberos</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.2.0 引言</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">要解决的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">三种威胁</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.2.1 Kerberos版本4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.2.1 Kerberos版本5</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">4.3 基于非对称加密的密钥分配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.3.0 引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.3.1 公钥证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.3.2 基于公钥密码的秘密密钥分发</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text"></span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">4.4 X.509证书</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.4.0 引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.4.1 证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.4.2 X.509版本3</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">4.5 公钥基础设施KPI</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.5.0 引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.5.1 PKIX管理功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.5.2 PKIX管理协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">4.6 联合身份管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.6.1 身份管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">基本要素</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">4.6.2 身份联合</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%9F%BA%E4%BA%8E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9A%84%E5%AF%86%E9%92%A5%E5%88%86%E9%85%8D"><span class="nav-text">4.1 基于对称加密的密钥分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Kerberos"><span class="nav-text">4.2 Kerberos</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-0-%E5%BC%95%E8%A8%80"><span class="nav-text">4.2.0 引言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">要解决的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E5%A8%81%E8%83%81"><span class="nav-text">三种威胁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-Kerberos%E7%89%88%E6%9C%AC4"><span class="nav-text">4.2.1 Kerberos版本4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-Kerberos%E7%89%88%E6%9C%AC5"><span class="nav-text">4.2.1 Kerberos版本5</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E5%9F%BA%E4%BA%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9A%84%E5%AF%86%E9%92%A5%E5%88%86%E9%85%8D"><span class="nav-text">4.3 基于非对称加密的密钥分配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-0-%E5%BC%95%E8%A8%80"><span class="nav-text">4.3.0 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-%E5%85%AC%E9%92%A5%E8%AF%81%E4%B9%A6"><span class="nav-text">4.3.1 公钥证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-%E5%9F%BA%E4%BA%8E%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E7%9A%84%E7%A7%98%E5%AF%86%E5%AF%86%E9%92%A5%E5%88%86%E5%8F%91"><span class="nav-text">4.3.2 基于公钥密码的秘密密钥分发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-text">¶</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-X-509%E8%AF%81%E4%B9%A6"><span class="nav-text">4.4 X.509证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-0-%E5%BC%95%E8%A8%80"><span class="nav-text">4.4.0 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-1-%E8%AF%81%E4%B9%A6"><span class="nav-text">4.4.1 证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-2-X-509%E7%89%88%E6%9C%AC3"><span class="nav-text">4.4.2 X.509版本3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BDKPI"><span class="nav-text">4.5 公钥基础设施KPI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-0-%E5%BC%95%E8%A8%80"><span class="nav-text">4.5.0 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-1-PKIX%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD"><span class="nav-text">4.5.1 PKIX管理功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-2-PKIX%E7%AE%A1%E7%90%86%E5%8D%8F%E8%AE%AE"><span class="nav-text">4.5.2 PKIX管理协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-%E8%81%94%E5%90%88%E8%BA%AB%E4%BB%BD%E7%AE%A1%E7%90%86"><span class="nav-text">4.6 联合身份管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-1-%E8%BA%AB%E4%BB%BD%E7%AE%A1%E7%90%86"><span class="nav-text">4.6.1 身份管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-text">作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%A6%81%E7%B4%A0"><span class="nav-text">基本要素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-2-%E8%BA%AB%E4%BB%BD%E8%81%94%E5%90%88"><span class="nav-text">4.6.2 身份联合</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -389,20 +392,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

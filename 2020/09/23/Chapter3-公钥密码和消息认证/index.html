@@ -20,19 +20,22 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="3.1 消息认证方法 3.1.0 引言 加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。 首先，什么是可信？ 可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。 对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等 3.1.1 利用常规加密">
+  <meta name="description" content="¶3.1 消息认证方法 ¶3.1.0 引言 加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。 首先，什么是可信？ 可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。 对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等 ¶3.1.1 利用常">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Chapter3 公钥密码和消息认证">
 <meta property="og:url" content="http://yoursite.com/2020/09/23/Chapter3-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%92%8C%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81/index.html">
 <meta property="og:site_name" content="Crestiny&#39;s Blog">
-<meta property="og:description" content="3.1 消息认证方法 3.1.0 引言 加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。 首先，什么是可信？ 可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。 对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等 3.1.1 利用常规加密">
+<meta property="og:description" content="¶3.1 消息认证方法 ¶3.1.0 引言 加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。 首先，什么是可信？ 可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。 对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等 ¶3.1.1 利用常">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/MAC.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/HASH.png">
 <meta property="article:published_time" content="2020-09-23T04:06:11.000Z">
-<meta property="article:modified_time" content="2020-12-24T12:11:01.926Z">
+<meta property="article:modified_time" content="2020-12-28T05:58:25.881Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta property="article:tag" content="Public-key cryptography">
 <meta property="article:tag" content="Message authentication">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/MAC.png">
 
 <link rel="canonical" href="http://yoursite.com/2020/09/23/Chapter3-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%92%8C%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81/">
 
@@ -194,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
+                <time title="修改时间：2020-12-28 13:58:25" itemprop="dateModified" datetime="2020-12-28T13:58:25+08:00">2020-12-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,64 +224,79 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <center><h1>3.1 消息认证方法</h1></center>
-<h2>3.1.0 引言</h2>
-加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。
-首先，什么是可信？
-可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。
-对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等
-<h2>3.1.1 利用常规加密的消息认证</h2>
-常规就是说简单的对称加密这样子，但是对于分组对称加密会出现问题。
-假如攻击者想换动消息流之间的顺序，那么由于是分组的，所以B还是能每组都正常解密……
-<h2>3.1.2 非加密的消息认证</h2>
-<h5>认证与加密</h5>
-把这两个词放一起的时候，我常常感觉……很迷糊，现在理一理：
-一般来说认证和加密是两个功能，说一句话可能会让关系更明白：
+        <h2 id="3-1-消息认证方法"><a class="header-anchor" href="#3-1-消息认证方法">¶</a>3.1 消息认证方法</h2>
+<h3 id="3-1-0-引言"><a class="header-anchor" href="#3-1-0-引言">¶</a>3.1.0 引言</h3>
+<p>加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。<br>
+首先，什么是可信？<br>
+可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。<br>
+对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等</p>
+<h3 id="3-1-1-利用常规加密的消息认证"><a class="header-anchor" href="#3-1-1-利用常规加密的消息认证">¶</a>3.1.1 利用常规加密的消息认证</h3>
+<p>常规就是说简单的对称加密这样子，但是对于分组对称加密会出现问题。<br>
+假如攻击者想换动消息流之间的顺序，那么由于是分组的，所以B还是能每组都正常解密……<br>
+但通常情况下，分组的重排其实还是能算是一种威胁</p>
+<h3 id="3-1-2-非加密的消息认证"><a class="header-anchor" href="#3-1-2-非加密的消息认证">¶</a>3.1.2 非加密的消息认证</h3>
+<h4 id="（1）认证与加密"><a class="header-anchor" href="#（1）认证与加密">¶</a>（1）认证与加密</h4>
+<p>把这两个词放一起的时候，我常常感觉……很迷糊，现在理一理：<br>
+一般来说认证和加密是两个功能，说一句话可能会让关系更明白：</p>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如我们有一个对消息作处理的算法，这里面可以包含两步操作：先对消息加密，再打上认证标签；这样我们就可以说：把消息的认证和保密结合起来了</span><br></pre></td></tr></tbody></table></figure>
-<h5>什么时候可以不加密只认证呢？</h5>
-1. 相同消息广播时，只由一端负责监控的系统执行认证（不是很理解，直观是什么样的？）
-2. 交换信息时，某一端负载太大不能全部解密，就会随机抽一些进行认证
-3. 程序可以用明文+认证标签，节省处理器解密的消耗
-<h5>消息认证码MAC</h5>
-定义：用私钥产生一小块数据，它可以作为MAC
-工作流程：
-![](\Chapter3-公钥密码和消息认证\MAC.png)
-A和B共享一个密钥K，A给B发消息的时候，A用消息+K生成MAC，再把消息和MAC一起发给B；B收到以后，算一算MAC对不对
-值得注意的是，认证算法不需要可逆，因为B验证的时候和A是一样的操作（与加密相比更不容易被破）
-<h5>单向散列函数</h5>
-这是MAC的一种替代品，不同之处在于：MAC需要密钥而单向散列不需要，它只是输入M得到H(M)而已。
-H函数可以有以下三种形式：
-![](\Chapter3-公钥密码和消息认证\HASH.png)
-（详细见P50-51）
-<center><h1>3.2 安全散列函数</h1></center>
-<h2>3.2.1 散列函数的要求</h2>
-1. 输入长度不受限制
-2. 输出长度固定
-3. 从x——&gt;H(x)容易计算
-4. 单向性/抗原像攻击性：从H(x)——&gt;x计算上不可行
-5. 抗弱碰撞攻击性/抗第二原像攻击性：对于x，找一个和它哈希值相同的y从计算上不可行
-6. 抗碰撞性/抗强碰撞性：找到任意一对哈希值相同的x，y计算上不可行（可以防止生日攻击）
-<h2>3.2.2 散列函数的安全性</h2>
-攻击方法：密码分析法+蛮力攻击法
-前者利用密码算法的缺陷，后者是要付出指数级代价的（不过2004年王小云教授破了MD5！）
-<h2>3.2.3 简单散列函数</h2>
-<h2>3.2.4 SHA安全散列函数</h2>
-<center><h1>3.3 消息认证码</h1></center>
-<h2>3.3.1 HMAC</h2>
-<h5>为什么会有HMAC呢？</h5>
-首先，由于SHA-1软件实现速度快、有许多共享的Hash函数代码库等优点，人们逐渐将它用于MAC。但是为了把密钥合并到散列算法中，人们开发出了HMAC
-<h5>HMAC的设计目标</h5>
-<h5>HMAC的算法设计</h5>
-<h2>3.3.2 基于分组密码的MAC</h2>
-<h5>基于密文的消息认证码CMAC</h5>
-<h5>具有密码块链式信息认证码的计数器</h5>
-<center><h1>3.4 公钥密码原理</h1></center>
-<h2>3.4.1 公钥密码思想</h2>
-公钥密码基于数学函数，可以用于消息认证、密钥分发
-<h5>常见误解</h5>
-公钥比对称密码更安全
-<center><h1>3.5 公钥密码算法</h1></center>
-<center><h1>3.6 数字签名</h1></center><script>
+<p>在满足安全需求这件事上，认证和加密是各有应用场景的</p>
+<h4 id="（2）什么时候可以不加密只认证呢？"><a class="header-anchor" href="#（2）什么时候可以不加密只认证呢？">¶</a>（2）什么时候可以不加密只认证呢？</h4>
+<ol>
+<li>相同消息广播时，只由一端负责监控的系统执行认证（不是很理解，直观是什么样的？）</li>
+<li>交换信息时，某一端负载太大不能全部解密，就会随机抽一些进行认证</li>
+<li>程序可以用明文+认证标签，节省处理器解密的消耗</li>
+</ol>
+<h4 id="（3）消息认证码MAC"><a class="header-anchor" href="#（3）消息认证码MAC">¶</a>（3）消息认证码MAC</h4>
+<p>定义：用私钥产生一小块数据，它可以作为MAC<br>
+工作流程：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/MAC.png" alt=""></p>
+<ul>
+<li>A和B共享一个密钥K</li>
+<li>A给B发消息的时候，A用(消息+K)生成MAC，再把消息和MAC一起发给B</li>
+<li>B收到以后，算一算MAC对不对</li>
+</ul>
+<p><em>值得注意的是，认证算法不需要可逆，因为B验证的时候和A是一样的操作（与加密相比更不容易被破）</em></p>
+<h4 id="（4）单向散列函数"><a class="header-anchor" href="#（4）单向散列函数">¶</a>（4）单向散列函数</h4>
+<p>这是MAC的一种替代品，不同之处在于：<strong>MAC需要密钥而单向散列不需要</strong>，它只是输入M得到H(M)而已。</p>
+<p>H函数可以有以下三种形式：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/HASH.png" alt=""></p>
+<ul>
+<li>传统加密：先hash再加密</li>
+<li>公钥加密：先hash再用公钥加密</li>
+<li>秘密值加密：原消息与秘密值Secret一起hash，结果和原消息拼接</li>
+</ul>
+<p>（详细见P50-51）</p>
+<h2 id="3-2-安全散列函数"><a class="header-anchor" href="#3-2-安全散列函数">¶</a>3.2 安全散列函数</h2>
+<h3 id="3-2-1-散列函数的要求"><a class="header-anchor" href="#3-2-1-散列函数的要求">¶</a>3.2.1 散列函数的要求</h3>
+<ol>
+<li>输入长度不受限制</li>
+<li>输出长度固定</li>
+<li>从x——&gt;H(x)容易计算</li>
+<li>单向性/抗原像攻击性：从H(x)——&gt;x计算上不可行</li>
+<li>抗弱碰撞攻击性/抗第二原像攻击性：对于x，找一个和它哈希值相同的y从计算上不可行</li>
+<li>抗碰撞性/抗强碰撞性：找到任意一对哈希值相同的x，y计算上不可行（可以防止生日攻击）</li>
+</ol>
+<h3 id="3-2-2-散列函数的安全性"><a class="header-anchor" href="#3-2-2-散列函数的安全性">¶</a>3.2.2 散列函数的安全性</h3>
+<p>攻击方法：密码分析法+蛮力攻击法<br>
+前者利用密码算法的缺陷，后者是要付出指数级代价的（不过2004年王小云教授破了MD5！）</p>
+<h3 id="3-2-3-简单散列函数"><a class="header-anchor" href="#3-2-3-简单散列函数">¶</a>3.2.3 简单散列函数</h3>
+<h3 id="3-2-4-SHA安全散列函数"><a class="header-anchor" href="#3-2-4-SHA安全散列函数">¶</a>3.2.4 SHA安全散列函数</h3>
+<h2 id="3-3-消息认证码"><a class="header-anchor" href="#3-3-消息认证码">¶</a>3.3 消息认证码</h2>
+<h3 id="3-3-1-HMAC"><a class="header-anchor" href="#3-3-1-HMAC">¶</a>3.3.1 HMAC</h3>
+<h4 id="为什么会有HMAC呢？"><a class="header-anchor" href="#为什么会有HMAC呢？">¶</a>为什么会有HMAC呢？</h4>
+<p>首先，由于SHA-1软件实现速度快、有许多共享的Hash函数代码库等优点，人们逐渐将它用于MAC。但是为了把密钥合并到散列算法中，人们开发出了HMAC</p>
+<h4 id="HMAC的设计目标"><a class="header-anchor" href="#HMAC的设计目标">¶</a>HMAC的设计目标</h4>
+<h4 id="HMAC的算法设计"><a class="header-anchor" href="#HMAC的算法设计">¶</a>HMAC的算法设计</h4>
+<h3 id="3-3-2-基于分组密码的MAC"><a class="header-anchor" href="#3-3-2-基于分组密码的MAC">¶</a>3.3.2 基于分组密码的MAC</h3>
+<h4 id="基于密文的消息认证码CMAC"><a class="header-anchor" href="#基于密文的消息认证码CMAC">¶</a>基于密文的消息认证码CMAC</h4>
+<h4 id="具有密码块链式信息认证码的计数器"><a class="header-anchor" href="#具有密码块链式信息认证码的计数器">¶</a>具有密码块链式信息认证码的计数器</h4>
+<h2 id="3-4-公钥密码原理"><a class="header-anchor" href="#3-4-公钥密码原理">¶</a>3.4 公钥密码原理</h2>
+<h3 id="3-4-1-公钥密码思想"><a class="header-anchor" href="#3-4-1-公钥密码思想">¶</a>3.4.1 公钥密码思想</h3>
+<p>公钥密码基于数学函数，可以用于消息认证、密钥分发</p>
+<h4 id="常见误解"><a class="header-anchor" href="#常见误解">¶</a>常见误解</h4>
+<p>公钥比对称密码更安全</p>
+<h2 id="3-5-公钥密码算法"><a class="header-anchor" href="#3-5-公钥密码算法">¶</a>3.5 公钥密码算法</h2>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -380,7 +398,7 @@ H函数可以有以下三种形式：
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">3.1 消息认证方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">3.1.0 引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">3.1.1 利用常规加密的消息认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">3.1.2 非加密的消息认证</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">认证与加密</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">什么时候可以不加密只认证呢？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">消息认证码MAC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">单向散列函数</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">3.2 安全散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">3.2.1 散列函数的要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">3.2.2 散列函数的安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">3.2.3 简单散列函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">3.2.4 SHA安全散列函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">3.3 消息认证码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">3.3.1 HMAC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">为什么会有HMAC呢？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">HMAC的设计目标</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">HMAC的算法设计</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">3.3.2 基于分组密码的MAC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">基于密文的消息认证码CMAC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">具有密码块链式信息认证码的计数器</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">3.4 公钥密码原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-text">3.4.1 公钥密码思想</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-text">常见误解</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">3.5 公钥密码算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">3.6 数字签名</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E6%96%B9%E6%B3%95"><span class="nav-text">3.1 消息认证方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-0-%E5%BC%95%E8%A8%80"><span class="nav-text">3.1.0 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-%E5%88%A9%E7%94%A8%E5%B8%B8%E8%A7%84%E5%8A%A0%E5%AF%86%E7%9A%84%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81"><span class="nav-text">3.1.1 利用常规加密的消息认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-%E9%9D%9E%E5%8A%A0%E5%AF%86%E7%9A%84%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81"><span class="nav-text">3.1.2 非加密的消息认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E8%AE%A4%E8%AF%81%E4%B8%8E%E5%8A%A0%E5%AF%86"><span class="nav-text">（1）认证与加密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%8F%AF%E4%BB%A5%E4%B8%8D%E5%8A%A0%E5%AF%86%E5%8F%AA%E8%AE%A4%E8%AF%81%E5%91%A2%EF%BC%9F"><span class="nav-text">（2）什么时候可以不加密只认证呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81MAC"><span class="nav-text">（3）消息认证码MAC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E5%8D%95%E5%90%91%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">（4）单向散列函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%AE%89%E5%85%A8%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">3.2 安全散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0%E7%9A%84%E8%A6%81%E6%B1%82"><span class="nav-text">3.2.1 散列函数的要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-text">3.2.2 散列函数的安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E7%AE%80%E5%8D%95%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">3.2.3 简单散列函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4-SHA%E5%AE%89%E5%85%A8%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">3.2.4 SHA安全散列函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81"><span class="nav-text">3.3 消息认证码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-HMAC"><span class="nav-text">3.3.1 HMAC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89HMAC%E5%91%A2%EF%BC%9F"><span class="nav-text">为什么会有HMAC呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HMAC%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87"><span class="nav-text">HMAC的设计目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HMAC%E7%9A%84%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1"><span class="nav-text">HMAC的算法设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-%E5%9F%BA%E4%BA%8E%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E7%9A%84MAC"><span class="nav-text">3.3.2 基于分组密码的MAC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%AF%86%E6%96%87%E7%9A%84%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81CMAC"><span class="nav-text">基于密文的消息认证码CMAC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E6%9C%89%E5%AF%86%E7%A0%81%E5%9D%97%E9%93%BE%E5%BC%8F%E4%BF%A1%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="nav-text">具有密码块链式信息认证码的计数器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%8E%9F%E7%90%86"><span class="nav-text">3.4 公钥密码原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E6%80%9D%E6%83%B3"><span class="nav-text">3.4.1 公钥密码思想</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E8%AF%AF%E8%A7%A3"><span class="nav-text">常见误解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95"><span class="nav-text">3.5 公钥密码算法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -394,20 +412,20 @@ H函数可以有以下三种形式：
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

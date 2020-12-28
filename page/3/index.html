@@ -157,6 +157,233 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/30/Invert-Binary-Tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/30/Invert-Binary-Tree/" class="post-title-link" itemprop="url">Invert Binary Tree</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-30 20:29:49" itemprop="dateCreated datePublished" datetime="2020-09-30T20:29:49+08:00">2020-09-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Leetcode-Top-100-Liked-Questions/" itemprop="url" rel="index"><span itemprop="name">Leetcode Top 100 Liked Questions</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Description</h1>
+<p>Invert a binary tree.</p>
+<h1>Input&amp;Output</h1>
+<p><img src="%5CInvert-Binary-Tree%5CIO.png" alt=""></p>
+<h1>Analysis</h1>
+<p>感觉二叉树经常会用递归，我们应该一直走到底，将两个叶节点交换，然后再一路往上……<br>
+妙啊，越写越快了！</p>
+<h1>Code</h1>
+<pre><code>/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+
+        if(root==null){
+            return null;
+        }else{
+            if(root.left==null&amp;&amp;root.right==null){
+                return root;
+            }
+            root.left=invertTree(root.left);
+            root.right=invertTree(root.right);
+            TreeNode temp=new TreeNode();
+            temp=root.left;
+            root.left=root.right;
+            root.right=temp;
+        
+            return root;
+        }
+
+    }
+}
+</code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/30/Single-Number/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/30/Single-Number/" class="post-title-link" itemprop="url">Single Number</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-30 19:53:46 / 修改时间：20:31:13" itemprop="dateCreated datePublished" datetime="2020-09-30T19:53:46+08:00">2020-09-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Leetcode-Top-100-Liked-Questions/" itemprop="url" rel="index"><span itemprop="name">Leetcode Top 100 Liked Questions</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Description</h1>
+<p>Given a non-empty array of integers, every element appears twice except for one. Find that single one.</p>
+<p><em>NOTE：Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?</em></p>
+<h1>Input&amp;Output</h1>
+<p><img src="/2020/09/30/Single-Number/%5CSingle-Number%5CIO.png" alt=""></p>
+<h1>Code</h1>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution {</span><br><span class="line">    public int singleNumber(int[] nums) {</span><br><span class="line">        int i=1;</span><br><span class="line">        </span><br><span class="line">        java.util.Arrays.sort(nums);</span><br><span class="line">        </span><br><span class="line">        if(nums.length==1){</span><br><span class="line">            return nums[0];</span><br><span class="line">        }else if(nums[0]!=nums[1]){</span><br><span class="line">            return nums[0];</span><br><span class="line">        }else if(nums[nums.length-1]!=nums[nums.length-1]){</span><br><span class="line">            return nums[nums.length-1];</span><br><span class="line">        }</span><br><span class="line">        </span><br><span class="line">        for(;i&lt;nums.length-1;i++){</span><br><span class="line">            if(nums[i]==nums[i-1]||nums[i]==nums[i+1]){</span><br><span class="line">                continue;</span><br><span class="line">            }else{</span><br><span class="line">                break;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        </span><br><span class="line">        return nums[i];</span><br><span class="line">        </span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/30/Maximum-Depth-of-Binary-Tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -281,7 +508,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
+                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -308,34 +535,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <center><h1>1.1 认识操作系统</h1></center>
-<h2>1.1.1 从使用者角度看</h2>
-<h2>1.1.2 从程序开发者的角度看</h2>
-<h2>1.1.3 从操作系统在整个计算机系统所处的位置看</h2>
-<h2>1.1.4 从操作系统设计者的角度看</h2>
-<h2>1.1.5 操作系统组成</h2>
-<center><h1>1.2 开放源代码的UNIX/Linux操作系统</h1></center>
-<h2>1.2.1 UNIX诞生和发展</h2>
-<h2>1.2.2 Linux诞生</h2>
-<h2>1.2.3 操作系统标准POSIX</h2>
-<h2>1.2.4 GNU和Linux</h2>
-<h2>1.2.5 Linux的开发模式</h2>
-<center><h1>1.3 Linux内核</h1></center>
-<h2>1.3.1 Linux内核的技术特点</h2>
-<h2>1.3.2 Linux内核的位置</h2>
-<h2>1.3.3 Linux内核体系结构</h2>
-<center><h1>1.4 Linux内核源代码</h1></center>
-<h2>1.3.1 Linux内核版本</h2>
-<h2>1.3.2 Linux内核源代码的结构</h2>
-<h2>1.3.3 Linux内核源代码分析工具</h2>
-<center><h1>1.5 Linux内核模块编程入门</h1></center>
-<h2>1.5.1 模块的定义</h2>
-<h2>1.5.2 编写一个简单的模块</h2>
-<h2>1.5.3 应用程序与内核模块的比较</h2>
-<center><h1>1.6 Linux内核中链表的实现及应用</h1></center>
-<h2>1.5.1 模块的定义</h2>
-<h2>1.5.2 编写一个简单的模块</h2>
-<h2>1.5.3 应用程序与内核模块的比较</h2>
+          <h2 id="1-1-认识操作系统"><a class="header-anchor" href="#1-1-认识操作系统">¶</a>1.1 认识操作系统</h2>
+<h3 id="1-1-1-从使用者角度看"><a class="header-anchor" href="#1-1-1-从使用者角度看">¶</a>1.1.1 从使用者角度看</h3>
+<h3 id="1-1-2-从程序开发者的角度看"><a class="header-anchor" href="#1-1-2-从程序开发者的角度看">¶</a>1.1.2 从程序开发者的角度看</h3>
+<h3 id="1-1-3-从操作系统在整个计算机系统所处的位置看"><a class="header-anchor" href="#1-1-3-从操作系统在整个计算机系统所处的位置看">¶</a>1.1.3 从操作系统在整个计算机系统所处的位置看</h3>
+<h3 id="1-1-4-从操作系统设计者的角度看"><a class="header-anchor" href="#1-1-4-从操作系统设计者的角度看">¶</a>1.1.4 从操作系统设计者的角度看</h3>
+<h3 id="1-1-5-操作系统组成"><a class="header-anchor" href="#1-1-5-操作系统组成">¶</a>1.1.5 操作系统组成</h3>
+<h2 id="1-2-开放源代码的UNIX-Linux操作系统"><a class="header-anchor" href="#1-2-开放源代码的UNIX-Linux操作系统">¶</a>1.2 开放源代码的UNIX/Linux操作系统</h2>
+<h3 id="1-2-1-UNIX诞生和发展"><a class="header-anchor" href="#1-2-1-UNIX诞生和发展">¶</a>1.2.1 UNIX诞生和发展</h3>
+<h3 id="1-2-2-Linux诞生"><a class="header-anchor" href="#1-2-2-Linux诞生">¶</a>1.2.2 Linux诞生</h3>
+<h3 id="1-2-3-操作系统标准POSIX"><a class="header-anchor" href="#1-2-3-操作系统标准POSIX">¶</a>1.2.3 操作系统标准POSIX</h3>
+<h3 id="1-2-4-GNU和Linux"><a class="header-anchor" href="#1-2-4-GNU和Linux">¶</a>1.2.4 GNU和Linux</h3>
+<h3 id="1-2-5-Linux的开发模式"><a class="header-anchor" href="#1-2-5-Linux的开发模式">¶</a>1.2.5 Linux的开发模式</h3>
+<h2 id="1-3-Linux内核"><a class="header-anchor" href="#1-3-Linux内核">¶</a>1.3 Linux内核</h2>
+<h3 id="1-3-1-Linux内核的技术特点"><a class="header-anchor" href="#1-3-1-Linux内核的技术特点">¶</a>1.3.1 Linux内核的技术特点</h3>
+<h3 id="1-3-2-Linux内核的位置"><a class="header-anchor" href="#1-3-2-Linux内核的位置">¶</a>1.3.2 Linux内核的位置</h3>
+<h3 id="1-3-3-Linux内核体系结构"><a class="header-anchor" href="#1-3-3-Linux内核体系结构">¶</a>1.3.3 Linux内核体系结构</h3>
+<h2 id="1-4-Linux内核源代码"><a class="header-anchor" href="#1-4-Linux内核源代码">¶</a>1.4 Linux内核源代码</h2>
+<h3 id="1-3-1-Linux内核版本"><a class="header-anchor" href="#1-3-1-Linux内核版本">¶</a>1.3.1 Linux内核版本</h3>
+<h3 id="1-3-2-Linux内核源代码的结构"><a class="header-anchor" href="#1-3-2-Linux内核源代码的结构">¶</a>1.3.2 Linux内核源代码的结构</h3>
+<h3 id="1-3-3-Linux内核源代码分析工具"><a class="header-anchor" href="#1-3-3-Linux内核源代码分析工具">¶</a>1.3.3 Linux内核源代码分析工具</h3>
+<h2 id="1-5-Linux内核模块编程入门"><a class="header-anchor" href="#1-5-Linux内核模块编程入门">¶</a>1.5 Linux内核模块编程入门</h2>
+<h3 id="1-5-1-模块的定义"><a class="header-anchor" href="#1-5-1-模块的定义">¶</a>1.5.1 模块的定义</h3>
+<h3 id="1-5-2-编写一个简单的模块"><a class="header-anchor" href="#1-5-2-编写一个简单的模块">¶</a>1.5.2 编写一个简单的模块</h3>
+<h3 id="1-5-3-应用程序与内核模块的比较"><a class="header-anchor" href="#1-5-3-应用程序与内核模块的比较">¶</a>1.5.3 应用程序与内核模块的比较</h3>
+<h2 id="1-6-Linux内核中链表的实现及应用"><a class="header-anchor" href="#1-6-Linux内核中链表的实现及应用">¶</a>1.6 Linux内核中链表的实现及应用</h2>
+<h3 id="1-5-1-模块的定义-v2"><a class="header-anchor" href="#1-5-1-模块的定义-v2">¶</a>1.5.1 模块的定义</h3>
+<h3 id="1-5-2-编写一个简单的模块-v2"><a class="header-anchor" href="#1-5-2-编写一个简单的模块-v2">¶</a>1.5.2 编写一个简单的模块</h3>
+<h3 id="1-5-3-应用程序与内核模块的比较-v2"><a class="header-anchor" href="#1-5-3-应用程序与内核模块的比较-v2">¶</a>1.5.3 应用程序与内核模块的比较</h3>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -404,7 +631,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
+                <time title="修改时间：2020-12-28 13:58:25" itemprop="dateModified" datetime="2020-12-28T13:58:25+08:00">2020-12-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -431,64 +658,79 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <center><h1>3.1 消息认证方法</h1></center>
-<h2>3.1.0 引言</h2>
-加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。
-首先，什么是可信？
-可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。
-对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等
-<h2>3.1.1 利用常规加密的消息认证</h2>
-常规就是说简单的对称加密这样子，但是对于分组对称加密会出现问题。
-假如攻击者想换动消息流之间的顺序，那么由于是分组的，所以B还是能每组都正常解密……
-<h2>3.1.2 非加密的消息认证</h2>
-<h5>认证与加密</h5>
-把这两个词放一起的时候，我常常感觉……很迷糊，现在理一理：
-一般来说认证和加密是两个功能，说一句话可能会让关系更明白：
+          <h2 id="3-1-消息认证方法"><a class="header-anchor" href="#3-1-消息认证方法">¶</a>3.1 消息认证方法</h2>
+<h3 id="3-1-0-引言"><a class="header-anchor" href="#3-1-0-引言">¶</a>3.1.0 引言</h3>
+<p>加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。<br>
+首先，什么是可信？<br>
+可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。<br>
+对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等</p>
+<h3 id="3-1-1-利用常规加密的消息认证"><a class="header-anchor" href="#3-1-1-利用常规加密的消息认证">¶</a>3.1.1 利用常规加密的消息认证</h3>
+<p>常规就是说简单的对称加密这样子，但是对于分组对称加密会出现问题。<br>
+假如攻击者想换动消息流之间的顺序，那么由于是分组的，所以B还是能每组都正常解密……<br>
+但通常情况下，分组的重排其实还是能算是一种威胁</p>
+<h3 id="3-1-2-非加密的消息认证"><a class="header-anchor" href="#3-1-2-非加密的消息认证">¶</a>3.1.2 非加密的消息认证</h3>
+<h4 id="（1）认证与加密"><a class="header-anchor" href="#（1）认证与加密">¶</a>（1）认证与加密</h4>
+<p>把这两个词放一起的时候，我常常感觉……很迷糊，现在理一理：<br>
+一般来说认证和加密是两个功能，说一句话可能会让关系更明白：</p>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如我们有一个对消息作处理的算法，这里面可以包含两步操作：先对消息加密，再打上认证标签；这样我们就可以说：把消息的认证和保密结合起来了</span><br></pre></td></tr></tbody></table></figure>
-<h5>什么时候可以不加密只认证呢？</h5>
-1. 相同消息广播时，只由一端负责监控的系统执行认证（不是很理解，直观是什么样的？）
-2. 交换信息时，某一端负载太大不能全部解密，就会随机抽一些进行认证
-3. 程序可以用明文+认证标签，节省处理器解密的消耗
-<h5>消息认证码MAC</h5>
-定义：用私钥产生一小块数据，它可以作为MAC
-工作流程：
-![](\Chapter3-公钥密码和消息认证\MAC.png)
-A和B共享一个密钥K，A给B发消息的时候，A用消息+K生成MAC，再把消息和MAC一起发给B；B收到以后，算一算MAC对不对
-值得注意的是，认证算法不需要可逆，因为B验证的时候和A是一样的操作（与加密相比更不容易被破）
-<h5>单向散列函数</h5>
-这是MAC的一种替代品，不同之处在于：MAC需要密钥而单向散列不需要，它只是输入M得到H(M)而已。
-H函数可以有以下三种形式：
-![](\Chapter3-公钥密码和消息认证\HASH.png)
-（详细见P50-51）
-<center><h1>3.2 安全散列函数</h1></center>
-<h2>3.2.1 散列函数的要求</h2>
-1. 输入长度不受限制
-2. 输出长度固定
-3. 从x——&gt;H(x)容易计算
-4. 单向性/抗原像攻击性：从H(x)——&gt;x计算上不可行
-5. 抗弱碰撞攻击性/抗第二原像攻击性：对于x，找一个和它哈希值相同的y从计算上不可行
-6. 抗碰撞性/抗强碰撞性：找到任意一对哈希值相同的x，y计算上不可行（可以防止生日攻击）
-<h2>3.2.2 散列函数的安全性</h2>
-攻击方法：密码分析法+蛮力攻击法
-前者利用密码算法的缺陷，后者是要付出指数级代价的（不过2004年王小云教授破了MD5！）
-<h2>3.2.3 简单散列函数</h2>
-<h2>3.2.4 SHA安全散列函数</h2>
-<center><h1>3.3 消息认证码</h1></center>
-<h2>3.3.1 HMAC</h2>
-<h5>为什么会有HMAC呢？</h5>
-首先，由于SHA-1软件实现速度快、有许多共享的Hash函数代码库等优点，人们逐渐将它用于MAC。但是为了把密钥合并到散列算法中，人们开发出了HMAC
-<h5>HMAC的设计目标</h5>
-<h5>HMAC的算法设计</h5>
-<h2>3.3.2 基于分组密码的MAC</h2>
-<h5>基于密文的消息认证码CMAC</h5>
-<h5>具有密码块链式信息认证码的计数器</h5>
-<center><h1>3.4 公钥密码原理</h1></center>
-<h2>3.4.1 公钥密码思想</h2>
-公钥密码基于数学函数，可以用于消息认证、密钥分发
-<h5>常见误解</h5>
-公钥比对称密码更安全
-<center><h1>3.5 公钥密码算法</h1></center>
-<center><h1>3.6 数字签名</h1></center><script>
+<p>在满足安全需求这件事上，认证和加密是各有应用场景的</p>
+<h4 id="（2）什么时候可以不加密只认证呢？"><a class="header-anchor" href="#（2）什么时候可以不加密只认证呢？">¶</a>（2）什么时候可以不加密只认证呢？</h4>
+<ol>
+<li>相同消息广播时，只由一端负责监控的系统执行认证（不是很理解，直观是什么样的？）</li>
+<li>交换信息时，某一端负载太大不能全部解密，就会随机抽一些进行认证</li>
+<li>程序可以用明文+认证标签，节省处理器解密的消耗</li>
+</ol>
+<h4 id="（3）消息认证码MAC"><a class="header-anchor" href="#（3）消息认证码MAC">¶</a>（3）消息认证码MAC</h4>
+<p>定义：用私钥产生一小块数据，它可以作为MAC<br>
+工作流程：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/MAC.png" alt=""></p>
+<ul>
+<li>A和B共享一个密钥K</li>
+<li>A给B发消息的时候，A用(消息+K)生成MAC，再把消息和MAC一起发给B</li>
+<li>B收到以后，算一算MAC对不对</li>
+</ul>
+<p><em>值得注意的是，认证算法不需要可逆，因为B验证的时候和A是一样的操作（与加密相比更不容易被破）</em></p>
+<h4 id="（4）单向散列函数"><a class="header-anchor" href="#（4）单向散列函数">¶</a>（4）单向散列函数</h4>
+<p>这是MAC的一种替代品，不同之处在于：<strong>MAC需要密钥而单向散列不需要</strong>，它只是输入M得到H(M)而已。</p>
+<p>H函数可以有以下三种形式：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/HASH.png" alt=""></p>
+<ul>
+<li>传统加密：先hash再加密</li>
+<li>公钥加密：先hash再用公钥加密</li>
+<li>秘密值加密：原消息与秘密值Secret一起hash，结果和原消息拼接</li>
+</ul>
+<p>（详细见P50-51）</p>
+<h2 id="3-2-安全散列函数"><a class="header-anchor" href="#3-2-安全散列函数">¶</a>3.2 安全散列函数</h2>
+<h3 id="3-2-1-散列函数的要求"><a class="header-anchor" href="#3-2-1-散列函数的要求">¶</a>3.2.1 散列函数的要求</h3>
+<ol>
+<li>输入长度不受限制</li>
+<li>输出长度固定</li>
+<li>从x——&gt;H(x)容易计算</li>
+<li>单向性/抗原像攻击性：从H(x)——&gt;x计算上不可行</li>
+<li>抗弱碰撞攻击性/抗第二原像攻击性：对于x，找一个和它哈希值相同的y从计算上不可行</li>
+<li>抗碰撞性/抗强碰撞性：找到任意一对哈希值相同的x，y计算上不可行（可以防止生日攻击）</li>
+</ol>
+<h3 id="3-2-2-散列函数的安全性"><a class="header-anchor" href="#3-2-2-散列函数的安全性">¶</a>3.2.2 散列函数的安全性</h3>
+<p>攻击方法：密码分析法+蛮力攻击法<br>
+前者利用密码算法的缺陷，后者是要付出指数级代价的（不过2004年王小云教授破了MD5！）</p>
+<h3 id="3-2-3-简单散列函数"><a class="header-anchor" href="#3-2-3-简单散列函数">¶</a>3.2.3 简单散列函数</h3>
+<h3 id="3-2-4-SHA安全散列函数"><a class="header-anchor" href="#3-2-4-SHA安全散列函数">¶</a>3.2.4 SHA安全散列函数</h3>
+<h2 id="3-3-消息认证码"><a class="header-anchor" href="#3-3-消息认证码">¶</a>3.3 消息认证码</h2>
+<h3 id="3-3-1-HMAC"><a class="header-anchor" href="#3-3-1-HMAC">¶</a>3.3.1 HMAC</h3>
+<h4 id="为什么会有HMAC呢？"><a class="header-anchor" href="#为什么会有HMAC呢？">¶</a>为什么会有HMAC呢？</h4>
+<p>首先，由于SHA-1软件实现速度快、有许多共享的Hash函数代码库等优点，人们逐渐将它用于MAC。但是为了把密钥合并到散列算法中，人们开发出了HMAC</p>
+<h4 id="HMAC的设计目标"><a class="header-anchor" href="#HMAC的设计目标">¶</a>HMAC的设计目标</h4>
+<h4 id="HMAC的算法设计"><a class="header-anchor" href="#HMAC的算法设计">¶</a>HMAC的算法设计</h4>
+<h3 id="3-3-2-基于分组密码的MAC"><a class="header-anchor" href="#3-3-2-基于分组密码的MAC">¶</a>3.3.2 基于分组密码的MAC</h3>
+<h4 id="基于密文的消息认证码CMAC"><a class="header-anchor" href="#基于密文的消息认证码CMAC">¶</a>基于密文的消息认证码CMAC</h4>
+<h4 id="具有密码块链式信息认证码的计数器"><a class="header-anchor" href="#具有密码块链式信息认证码的计数器">¶</a>具有密码块链式信息认证码的计数器</h4>
+<h2 id="3-4-公钥密码原理"><a class="header-anchor" href="#3-4-公钥密码原理">¶</a>3.4 公钥密码原理</h2>
+<h3 id="3-4-1-公钥密码思想"><a class="header-anchor" href="#3-4-1-公钥密码思想">¶</a>3.4.1 公钥密码思想</h3>
+<p>公钥密码基于数学函数，可以用于消息认证、密钥分发</p>
+<h4 id="常见误解"><a class="header-anchor" href="#常见误解">¶</a>常见误解</h4>
+<p>公钥比对称密码更安全</p>
+<h2 id="3-5-公钥密码算法"><a class="header-anchor" href="#3-5-公钥密码算法">¶</a>3.5 公钥密码算法</h2>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -556,7 +798,7 @@ H函数可以有以下三种形式：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
+                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -583,38 +825,40 @@ H函数可以有以下三种形式：
     <div class="post-body" itemprop="articleBody">
 
       
-          <center><h1>4.1 基于对称加密的密钥分配</h1></center>
-<center><h1>4.2 Kerberos</h1></center>
-<h2>4.2.0 引言</h2>
-<h5>要解决的问题</h5>
-分布式环境中，控制访问权限，为用户提供认证服务
-<h5>三种威胁</h5>
-1. 用户可以伪装成其他用户
-2. 伪造网络地址发消息
-3. 监听消息/重放攻击
+          <h2 id="4-1-基于对称加密的密钥分配"><a class="header-anchor" href="#4-1-基于对称加密的密钥分配">¶</a>4.1 基于对称加密的密钥分配</h2>
+<h2 id="4-2-Kerberos"><a class="header-anchor" href="#4-2-Kerberos">¶</a>4.2 Kerberos</h2>
+<h3 id="4-2-0-引言"><a class="header-anchor" href="#4-2-0-引言">¶</a>4.2.0 引言</h3>
+<h4 id="要解决的问题"><a class="header-anchor" href="#要解决的问题">¶</a>要解决的问题</h4>
+<p>分布式环境中，控制访问权限，为用户提供认证服务</p>
+<h4 id="三种威胁"><a class="header-anchor" href="#三种威胁">¶</a>三种威胁</h4>
+<ol>
+<li>用户可以伪装成其他用户</li>
+<li>伪造网络地址发消息</li>
+<li>监听消息/重放攻击</li>
+</ol>
 <p>Kerberos仅依赖于对称加密；此外，版本4逐渐被淘汰，现在常用版本5</p>
-<h2>4.2.1 Kerberos版本4</h2>
-啊好复杂……之后慢慢啃
-<h2>4.2.1 Kerberos版本5</h2>
-<center><h1>4.3 基于非对称加密的密钥分配</h1></center>
-<h2>4.3.0 引言</h2>
-公钥加密一个重要作用：处理密钥分发（公钥的分发+使用公钥加密分发私钥）
-<h2>4.3.1 公钥证书</h2>
+<h3 id="4-2-1-Kerberos版本4"><a class="header-anchor" href="#4-2-1-Kerberos版本4">¶</a>4.2.1 Kerberos版本4</h3>
+<p>啊好复杂……之后慢慢啃</p>
+<h3 id="4-2-1-Kerberos版本5"><a class="header-anchor" href="#4-2-1-Kerberos版本5">¶</a>4.2.1 Kerberos版本5</h3>
+<h2 id="4-3-基于非对称加密的密钥分配"><a class="header-anchor" href="#4-3-基于非对称加密的密钥分配">¶</a>4.3 基于非对称加密的密钥分配</h2>
+<h3 id="4-3-0-引言"><a class="header-anchor" href="#4-3-0-引言">¶</a>4.3.0 引言</h3>
+<p>公钥加密一个重要作用：处理密钥分发（公钥的分发+使用公钥加密分发私钥）</p>
+<h3 id="4-3-1-公钥证书"><a class="header-anchor" href="#4-3-1-公钥证书">¶</a>4.3.1 公钥证书</h3>
 <ul>
 <li>为什么要有公钥证书？<br>
 就像邮箱、银行卡号这种公钥，它们是广而告之的；但是你怎么知道他说这是就是呢？万一伪造了呢？所以我们引入第三方、公钥证书这些来验证。</li>
 <li>X.509标准是人们广泛接受的公钥证书格式</li>
 </ul>
-<h2>4.3.2 基于公钥密码的秘密密钥分发</h2>
-对称密钥中，共享密钥是前提，之后才能安全通信
-<h5></h5>
-<center><h1>4.4 X.509证书</h1></center>
-<h2>4.4.0 引言</h2>
-公钥加密一个重要作用：处理密钥分发（公钥的分发+使用公钥加密分发私钥）
-<h2>4.4.1 证书</h2>
-<h2>4.4.2 X.509版本3</h2>
-<center><h1>4.5 公钥基础设施KPI</h1></center>
-<h2>4.5.0 引言</h2>
+<h3 id="4-3-2-基于公钥密码的秘密密钥分发"><a class="header-anchor" href="#4-3-2-基于公钥密码的秘密密钥分发">¶</a>4.3.2 基于公钥密码的秘密密钥分发</h3>
+<p>对称密钥中，共享密钥是前提，之后才能安全通信</p>
+<h4 id=""><a class="header-anchor" href="#">¶</a></h4>
+<h2 id="4-4-X-509证书"><a class="header-anchor" href="#4-4-X-509证书">¶</a>4.4 X.509证书</h2>
+<h3 id="4-4-0-引言"><a class="header-anchor" href="#4-4-0-引言">¶</a>4.4.0 引言</h3>
+<p>公钥加密一个重要作用：处理密钥分发（公钥的分发+使用公钥加密分发私钥）</p>
+<h3 id="4-4-1-证书"><a class="header-anchor" href="#4-4-1-证书">¶</a>4.4.1 证书</h3>
+<h3 id="4-4-2-X-509版本3"><a class="header-anchor" href="#4-4-2-X-509版本3">¶</a>4.4.2 X.509版本3</h3>
+<h2 id="4-5-公钥基础设施KPI"><a class="header-anchor" href="#4-5-公钥基础设施KPI">¶</a>4.5 公钥基础设施KPI</h2>
+<h3 id="4-5-0-引言"><a class="header-anchor" href="#4-5-0-引言">¶</a>4.5.0 引言</h3>
 <ul>
 <li>PKI是什么？<br>
 之所以叫基础设施：包含了硬件+软件+人员+策略+过程</li>
@@ -624,7 +868,7 @@ H函数可以有以下三种形式：
 基于X.509的PKI</li>
 <li>所以具体来说，PKIX包括些什么呢？</li>
 </ul>
-<h2>4.5.1 PKIX管理功能</h2>
+<h3 id="4-5-1-PKIX管理功能"><a class="header-anchor" href="#4-5-1-PKIX管理功能">¶</a>4.5.1 PKIX管理功能</h3>
 <ul>
 <li>注册：注册开始了一个PKI中的登记过程</li>
 <li>初始化：客户端安装密钥资料</li>
@@ -634,14 +878,15 @@ H函数可以有以下三种形式：
 <li>撤销申请：CA撤销</li>
 <li>交叉认证：两个CA之间</li>
 </ul>
-<h2>4.5.2 PKIX管理协议</h2>
-<center><h1>4.6 联合身份管理</h1></center>
-<h2>4.6.1 身份管理</h2>
-<h5>作用</h5>
-验证身份以后给对应的资源接口，基于单点登录SSO
-<h5>基本要素</h5>
-<h2>4.6.2 身份联合</h2>
-身份联合就是将身份管理扩展到多个安全域<script>
+<h3 id="4-5-2-PKIX管理协议"><a class="header-anchor" href="#4-5-2-PKIX管理协议">¶</a>4.5.2 PKIX管理协议</h3>
+<h2 id="4-6-联合身份管理"><a class="header-anchor" href="#4-6-联合身份管理">¶</a>4.6 联合身份管理</h2>
+<h3 id="4-6-1-身份管理"><a class="header-anchor" href="#4-6-1-身份管理">¶</a>4.6.1 身份管理</h3>
+<h4 id="作用"><a class="header-anchor" href="#作用">¶</a>作用</h4>
+<p>验证身份以后给对应的资源接口，基于单点登录SSO</p>
+<h4 id="基本要素"><a class="header-anchor" href="#基本要素">¶</a>基本要素</h4>
+<h3 id="4-6-2-身份联合"><a class="header-anchor" href="#4-6-2-身份联合">¶</a>4.6.2 身份联合</h3>
+<p>身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域身份联合就是将身份管理扩展到多个安全域</p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -709,7 +954,7 @@ H函数可以有以下三种形式：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
+                <time title="修改时间：2020-12-28 13:15:11" itemprop="dateModified" datetime="2020-12-28T13:15:11+08:00">2020-12-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -736,172 +981,225 @@ H函数可以有以下三种形式：
     <div class="post-body" itemprop="articleBody">
 
       
-          <center><h1>2.1 对称加密原理</h1></center>
-<h2>2.1.0 对称加密简介</h2>
-<h3>一个对称加密算法的组成</h3>
-![](\Chapter2-对称加密和消息机密性\model.png)
-<h3>对称加密算法的安全性</h3>
-需要达到以下两个要求：
-- 强加密算法：（一个很强的条件）攻击者有很多（算法）+密文+密文对应的明文，却不能解出全部明文|密钥
-- 密钥安全：Alice和Bob的密钥收发仅两人可得
+          <h2 id="2-1-对称加密原理"><a class="header-anchor" href="#2-1-对称加密原理">¶</a>2.1 对称加密原理</h2>
+<h3 id="2-1-0-对称加密简介"><a class="header-anchor" href="#2-1-0-对称加密简介">¶</a>2.1.0 对称加密简介</h3>
+<h4 id="（1）一个对称加密算法的组成"><a class="header-anchor" href="#（1）一个对称加密算法的组成">¶</a>（1）一个对称加密算法的组成</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/model.png" alt=""></p>
+<h4 id="（2）对称加密算法的安全性"><a class="header-anchor" href="#（2）对称加密算法的安全性">¶</a>（2）对称加密算法的安全性</h4>
+<p>需要达到以下两个要求：</p>
+<ul>
+<li>强加密算法：（一个很强的条件）攻击者知道算法且有很多密文+密文对应的明文，却不能破译密文，或者解出密钥</li>
+<li>密钥安全：Alice和Bob的密钥收发仅两人可得。（因为如果别人得到了他们的密钥，所有使用此密钥的通信都可读）</li>
+</ul>
 <p><strong>注：对称加密的安全取决于密钥的保密性，算法可公开</strong></p>
-<h2>2.1.1 密码体制</h2>
-密码体制有以下三个分类标准：
-<h3>1. 明文转换成密文的操作类型</h3>
+<h3 id="2-1-1-密码体制"><a class="header-anchor" href="#2-1-1-密码体制">¶</a>2.1.1 密码体制</h3>
+<p>密码体制有以下三个分类标准：</p>
+<h4 id="1-明文转换成密文的操作类型"><a class="header-anchor" href="#1-明文转换成密文的操作类型">¶</a>1. 明文转换成密文的操作类型</h4>
 <ul>
 <li>替换：明文映射到……</li>
 <li>换位：明文再排列</li>
 </ul>
 <p>（注：上述两种操作可以以比特、字母等等为单位）</p>
-<h3>2. 使用的密钥数</h3>
+<h4 id="2-使用的密钥数"><a class="header-anchor" href="#2-使用的密钥数">¶</a>2. 使用的密钥数</h4>
 <ul>
 <li>AB同一密钥：对称/单钥/秘密密钥/传统加密</li>
 <li>AB不同密钥：不对称/双钥/公钥加密</li>
 </ul>
-<h3>3. 明文的处理方式</h3>
+<h4 id="3-明文的处理方式"><a class="header-anchor" href="#3-明文的处理方式">¶</a>3. 明文的处理方式</h4>
 <ul>
 <li>一次处理一个分组：分组密码</li>
 <li>明文输入过程中连续处理：流密码</li>
 </ul>
-<h2>2.1.2 密码分析</h2>
-密码分析或破译：找出明文或密钥
-<p>根据攻击者掌握的信息量，可将攻击类型分类如下：<br>
-<img src="%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Cattack.png" alt=""></p>
-<h3>1. 惟密文攻击</h3>
-或许只能穷举……但是也有一些小技巧，比如统计测试（前提是对明文的类型有一个大致的了解）
-<h3>2. 已知明文攻击</h3>
-比如某种文件可能有些固定的内容……
-**一般密码算法会被设计成能抵挡已知明文攻击的程度**
-<h3>3. 选择明文</h3>
-攻击者能得到源系统，可以插入自己选定的消息
-<h3>4. 选择密文</h3>
-不太常见
-<h3>5. 选择文本</h3>
-不太常见
-<p>计算安全的加密方案：</p>
+<h3 id="2-1-2-密码分析"><a class="header-anchor" href="#2-1-2-密码分析">¶</a>2.1.2 密码分析</h3>
+<p>密码分析或破译：找出明文或密钥</p>
+<p>根据攻击者掌握的信息量，可将攻击类型分类如下：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/attack.png" alt=""></p>
+<h4 id="1-惟密文攻击"><a class="header-anchor" href="#1-惟密文攻击">¶</a>1. 惟密文攻击</h4>
+<p>或许只能穷举……但是也有一些小技巧，比如统计测试（前提是对明文的类型有一个大致的了解）</p>
+<h4 id="2-已知明文攻击"><a class="header-anchor" href="#2-已知明文攻击">¶</a>2. 已知明文攻击</h4>
+<p>比如某种文件可能有些固定的内容……<br>
+<strong>一般密码算法会被设计成能抵挡已知明文攻击的程度</strong></p>
+<h4 id="3-选择明文"><a class="header-anchor" href="#3-选择明文">¶</a>3. 选择明文</h4>
+<p>攻击者能得到源系统，可以插入自己选定的消息（选定明文，查看密文）</p>
+<h4 id="4-选择密文"><a class="header-anchor" href="#4-选择密文">¶</a>4. 选择密文</h4>
+<p>是选择明文的反向，不过不太常见</p>
+<h4 id="5-选择文本"><a class="header-anchor" href="#5-选择文本">¶</a>5. 选择文本</h4>
+<p>选择明文+选择密文的能力，不过不太常见</p>
+<p>计算安全的加密方案（妙啊！）：</p>
 <ul>
 <li>破解密文的代价&gt;明文的价值</li>
 <li>破解密文的时间&gt;信息的有用寿命</li>
 </ul>
-<h2>2.1.3 Feistel密码结构</h2>
-<h5>可以看做是对称密码算法的通用结构</h5>
-![](\Chapter2-对称加密和消息机密性\Fiestel.png)
-<h5>其中有些可以调整的参数：</h5>
-- 分组大小：折中128bit一组比较常见
-- 密钥大小：越长——越安全——加解密越慢
-- 迭代轮数：典型16
-- 子密钥产生算法：越复杂越安全
-- 轮函数：同上
-<h5>设计算法还需考虑</h5>
-- 软件执行速度比较快
-- 容易分析——容易找到弱点——随即加固
+<h3 id="2-1-3-Feistel密码结构"><a class="header-anchor" href="#2-1-3-Feistel密码结构">¶</a>2.1.3 Feistel密码结构</h3>
+<h4 id="可以看做是对称密码算法的通用结构"><a class="header-anchor" href="#可以看做是对称密码算法的通用结构">¶</a>可以看做是对称密码算法的通用结构</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/Fiestel.png" alt=""></p>
+<h4 id="其中有些可以调整的参数："><a class="header-anchor" href="#其中有些可以调整的参数：">¶</a>其中有些可以调整的参数：</h4>
+<ul>
+<li>分组大小：折中128bit一组比较常见</li>
+<li>密钥大小：越长——越安全——加解密越慢</li>
+<li>迭代轮数：典型16</li>
+<li>子密钥产生算法：越复杂越安全</li>
+<li>轮函数：同上</li>
+</ul>
+<h4 id="设计算法还需考虑"><a class="header-anchor" href="#设计算法还需考虑">¶</a>设计算法还需考虑</h4>
+<ul>
+<li>软件执行速度比较快</li>
+<li>容易分析——容易找到弱点——随即加固</li>
+</ul>
 <p><strong>对称密码算法的加解密本质上是相同的过程，不需要实现两个不同的算法</strong></p>
-<center><h1>2.2 对称分组加密算法</h1></center>
-<h2>2.2.1 数据加密标准DES</h2>
-说实话，我总是不能把数据加密标准和DES联系在一起，这两个名字，一个像标准，一个像算法哈哈哈哈；但是仔细研究一下发现，其实我的直觉没错
-DES准确来说是一种标准，数据加密标准；算法本身其实叫做DEA，略感陌生；一般都直接说DES了
-<h5>DEA算法描述</h5>
-基本沿用Fiestel结构，参数如下：
-- 分组大小：64
-- 密钥大小：56
-- 迭代轮数：典型16
-- 子密钥产生算法：越复杂越安全
-- 轮函数：同上
-<h5>DES的强度</h5>
-- 算法本身：至今还没人指出弱点
-- 密钥长度：一定范围内，蛮力攻击还是可行的（所以后来有改进的算法来替代它，如3DES和AES）
-<h2>2.2.2 三重DES</h2>
-<h5>3DES流程</h5>
-使用三次DES，加密——解密——加密
-<h5>3DES优点</h5>
+<h2 id="2-2-对称分组加密算法"><a class="header-anchor" href="#2-2-对称分组加密算法">¶</a>2.2 对称分组加密算法</h2>
+<h3 id="2-2-1-数据加密标准DES"><a class="header-anchor" href="#2-2-1-数据加密标准DES">¶</a>2.2.1 数据加密标准DES</h3>
+<p>说实话，我总是不能把数据加密标准和DES联系在一起，这两个名字，一个像标准，一个像算法哈哈哈哈；但是仔细研究一下发现，其实我的直觉没错<br>
+DES准确来说是一种标准，数据加密标准；算法本身其实叫做DEA，略感陌生；一般都直接说DES了</p>
+<h4 id="DEA算法描述"><a class="header-anchor" href="#DEA算法描述">¶</a>DEA算法描述</h4>
+<p>基本沿用Fiestel结构，参数如下：</p>
+<ul>
+<li>分组大小：64</li>
+<li>密钥大小：56</li>
+<li>迭代轮数：典型16</li>
+<li>子密钥产生算法：越复杂越安全</li>
+<li>轮函数：同上</li>
+</ul>
+<h4 id="DES的强度"><a class="header-anchor" href="#DES的强度">¶</a>DES的强度</h4>
+<ul>
+<li>算法本身：至今还没人指出弱点</li>
+<li>密钥长度：一定范围内，蛮力攻击还是可行的（所以后来有改进的算法来替代它，如3DES和AES）</li>
+</ul>
+<h3 id="2-2-2-三重DES"><a class="header-anchor" href="#2-2-2-三重DES">¶</a>2.2.2 三重DES</h3>
+<h4 id="3DES流程"><a class="header-anchor" href="#3DES流程">¶</a>3DES流程</h4>
+<p>使用三次DES，加密——解密——加密</p>
+<h4 id="3DES优点"><a class="header-anchor" href="#3DES优点">¶</a>3DES优点</h4>
 <ul>
 <li>底层算法与DES相同，之前说过无弱点了</li>
 <li>密钥长度168bit，解决了被穷举的问题</li>
 </ul>
-<h5>3DES缺点</h5>
-软件运行慢
-<h2>2.2.3 高级加密标准AES</h2>
-替代3DES，安全性&gt;=，效率&gt;=
-<h5>AES流程</h5>
-值得注意的是，它不是Feistel结构
-（具体可见书30—31页）
-<center><h1>2.3 随机数和伪随机数</h1></center>
-<h2>2.3.1 随机数的应用</h2>
-<h5>基于随机数的安全算法</h5>
-RSA、对称流密码的密钥流的生成、密钥分配方案……
-<h5>应用对随机数的需求</h5>
+<h4 id="3DES缺点"><a class="header-anchor" href="#3DES缺点">¶</a>3DES缺点</h4>
+<p>软件运行慢</p>
+<h3 id="2-2-3-高级加密标准AES"><a class="header-anchor" href="#2-2-3-高级加密标准AES">¶</a>2.2.3 高级加密标准AES</h3>
+<p>替代3DES，安全性&gt;=，效率&gt;=</p>
+<h4 id="AES流程"><a class="header-anchor" href="#AES流程">¶</a>AES流程</h4>
+<p>值得注意的是，它不是Feistel结构<br>
+（具体可见书30—31页）</p>
+<h2 id="2-3-随机数和伪随机数"><a class="header-anchor" href="#2-3-随机数和伪随机数">¶</a>2.3 随机数和伪随机数</h2>
+<h3 id="2-3-1-随机数的应用"><a class="header-anchor" href="#2-3-1-随机数的应用">¶</a>2.3.1 随机数的应用</h3>
+<h4 id="（1）基于随机数的安全算法"><a class="header-anchor" href="#（1）基于随机数的安全算法">¶</a>（1）基于随机数的安全算法</h4>
+<p>RSA、对称流密码的密钥流的生成、密钥分配方案……</p>
+<h4 id="（2）应用对随机数的需求"><a class="header-anchor" href="#（2）应用对随机数的需求">¶</a>（2）应用对随机数的需求</h4>
 <ol>
 <li>随机性：有两个验证标准<br>
 （1）均匀分布：一串中，0与1出现概率大致相同<br>
 （2）独立：统一序列上，没有数字能影响别人</li>
 <li>不可预测性</li>
 </ol>
-<h2>2.3.2 真随机数发生器TRNG、伪随机数生成器PRNG和伪随机函数PRF</h2>
-首先要明白，什么是统计上的随机性？不太懂……也没查到
-![](\Chapter2-对称加密和消息机密性\random.png)
-伪随机数发生器和伪随机函数的区别在于产生的比特数不同
-<h2>2.3.3 算法设计</h2>
-PRNG的算法可以分为两类：
-<h5>1. 为特定目的构造的算法</h5>
-<h5>2. 基于现存密码算法的算法</h5>
-不太懂这是什么意思……
-<center><h1>2.4 流密码和RC4</h1></center>
-分组密码更普遍，但对于特定应用还是要用流密码的。
-最对称的流密码可以说是RC4了哈哈哈哈
-<h2>2.4.1 流密码结构</h2>
-<h5>流密码结构示意图</h5>
-![](\Chapter2-对称加密和消息机密性\flow.png)
-解释一下：首先呢，你要先有个密钥K，把它投入伪随机字节生成器里面得到密钥流k；k和明文异或就得到密文字节流啦。由于是对称的，加密解密用同一个密钥
-<h5>设计流密码的考虑因素</h5>
+<h3 id="2-3-2-真随机数发生器TRNG、伪随机数生成器PRNG和伪随机函数PRF"><a class="header-anchor" href="#2-3-2-真随机数发生器TRNG、伪随机数生成器PRNG和伪随机函数PRF">¶</a>2.3.2 真随机数发生器TRNG、伪随机数生成器PRNG和伪随机函数PRF</h3>
+<p>首先要明白，什么是统计上的随机性？（？）</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/random.png" alt=""></p>
+<p>伪随机数发生器和伪随机函数的区别在于产生的比特数不同</p>
+<h3 id="2-3-3-算法设计"><a class="header-anchor" href="#2-3-3-算法设计">¶</a>2.3.3 算法设计</h3>
+<p>PRNG的算法可以分为两类：</p>
+<h4 id="1-为特定目的构造的算法"><a class="header-anchor" href="#1-为特定目的构造的算法">¶</a>1. 为特定目的构造的算法</h4>
+<ul>
+<li>用于PRNG应用程序</li>
+<li>有些算法专门被设计用在流密码中（如流密码）</li>
+</ul>
+<h4 id="2-基于现存密码算法的算法-、"><a class="header-anchor" href="#2-基于现存密码算法的算法-、">¶</a>2. 基于现存密码算法的算法          、</h4>
+<p>有些密码算法可以嵌在PRNG应用中，作为其核心算法，比如：</p>
+<ul>
+<li>对称的分组密码</li>
+<li>不对称的密码</li>
+<li>散列函数和消息认证码</li>
+</ul>
+<h2 id="2-4-流密码和RC4"><a class="header-anchor" href="#2-4-流密码和RC4">¶</a>2.4 流密码和RC4</h2>
+<p>分组密码更普遍，但对于特定应用还是要用流密码的。<br>
+流密码就是一次产生一个输出元素，我觉得和分组密码的区别就像：前者是python命令行一句句解释，后者是python IDE一整个程序给个解释<br>
+最对称的流密码可以说是RC4了哈哈哈哈</p>
+<h3 id="2-4-1-流密码结构"><a class="header-anchor" href="#2-4-1-流密码结构">¶</a>2.4.1 流密码结构</h3>
+<h4 id="（1）流密码结构示意图"><a class="header-anchor" href="#（1）流密码结构示意图">¶</a>（1）流密码结构示意图</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/flow.png" alt=""></p>
+<p>解释一下：首先呢，你要先有个密钥K，把它投入伪随机字节生成器里面得到密钥流k；k和明文异或就得到密文字节流啦。由于是对称的，加密解密用同一个密钥</p>
+<h4 id="2-设计流密码的考虑因素"><a class="header-anchor" href="#2-设计流密码的考虑因素">¶</a>(2)设计流密码的考虑因素</h4>
 <ul>
 <li>加密序列有个长周期：意思是，其实伪随机字节生成器生成的是周期性循环的确定字节流，如果周期太短容易被破</li>
 <li>生成的密钥流最好能通过随机数检测那些</li>
 <li>PRNG的输入要足够长以便不会被穷举</li>
 </ul>
-<h5>流密码优点</h5>
+<h4 id="3-流密码优点"><a class="header-anchor" href="#3-流密码优点">¶</a>(3)流密码优点</h4>
 <ul>
 <li>比分组密码快，代码少</li>
 </ul>
-<h5>分组密码优点</h5>
+<h4 id="4-分组密码优点"><a class="header-anchor" href="#4-分组密码优点">¶</a>(4)分组密码优点</h4>
 <ul>
-<li>分组密码可以重复使用密钥，但是流密码的密钥最好不要重复用不然容易被破</li>
+<li>分组密码可以重复使用密钥，但是流密码的密钥最好不要重复用不然容易被破<br>
+若已知两个密文流，将它们进行异或，结果=对应两个明文流的异或</li>
 </ul>
-<h2>2.4.2 RC4算法</h2>
-<h5>RC4算法</h5>
+<h3 id="2-4-2-RC4算法"><a class="header-anchor" href="#2-4-2-RC4算法">¶</a>2.4.2 RC4算法</h3>
+<h4 id="1-RC4算法"><a class="header-anchor" href="#1-RC4算法">¶</a>(1)RC4算法</h4>
 <ul>
-<li>初始化S：S是个状态向量，有256维，刚开始从0-255维依次设为0-255；K为密钥（1-256字节可变）；T为临时向量（256维）<br>
-T的赋值：将K循环利用填充进去<br>
-S的初始置换：</li>
+<li>初始化
+<ul>
+<li>S是个状态向量，有256维，刚开始从0-255维依次设为0-255；</li>
+<li>K为密钥（1-256字节可变）；</li>
+<li>T为临时向量（256维），T的赋值即将K循环利用填充进去</li>
+</ul>
+</li>
+<li>S的初始置换：</li>
 </ul>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">j=0;</span><br><span class="line">for(i=0;i&lt;=255;i++){</span><br><span class="line">	j=(j+S[i]+T[i])mod 256;</span><br><span class="line">	swap(S[i],S[j]);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <ul>
-<li>密钥流产生：感觉只有对S的置换操作<br>
-<img src="%5CChapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7%5Ca1.png" alt=""></li>
+<li>密钥流产生：感觉只有对S的置换操作，因为一旦完成S向量的初始置换，就不在需要输入密要了</li>
 </ul>
-<h5>RC4强度</h5>
-有些特定的攻击方法
-、
-<center><h1>2.5 分组密码工作模式</h1></center>
-NIST定义了以下五种工作模式：
-<h2>2.5.1 电子密码本ECB模式</h2>
-<h5>原理</h5>
-假设明文被分成b比特一组，每个分组都是同一密钥加密的。每个分组对于一个给定的密钥会有一个密文（唯一的结果），但是如果一段明文里有两个完全相同的分组……它们对应的密文也是相同的……
-<h5>不足</h5>
-如果明文过长以至于出现两个分组重复，就不安全。所以我们希望有上述情况的话，它们会对应两个不同的密文。
-<h2>2.5.2 密码分组链接CBC模式</h2>
-<h5>原理</h5>
-![](\Chapter2-对称加密和消息机密性\CBC.png)
-如图所示，输入：每组明文和上一组密文的异或；处理：所有分组用同一密钥；
-<h5>数学推导说明的一些东西</h5>
-见书P39
-<h2>2.5.3 密码反馈CFB模式</h2>
-<h5>作用</h5>
-将任意分组密码转化为流密码
-<h5>原理</h5>
-不想整了hai，之后有需要再补吧，P39-40
-<h2>2.5.4 计数器模式</h2>
-<h5>原理</h5>
-不想整了hai，之后有需要再补吧，P39-40<script>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/a1.png" alt=""></p>
+<h4 id="2-RC4强度"><a class="header-anchor" href="#2-RC4强度">¶</a>(2)RC4强度</h4>
+<p>有些特定的攻击方法，但是当密钥长度&gt;128bit时，没有可以成功的。<br>
+另外有个有趣的点是：我们发现WEP协议易受攻击从而导致RC4易受攻击，这说明了一条安全系统设计的困难性所在：</p>
+<blockquote>
+<p>密码算法要安全还不够，密码函数所处的协议也要安全，比如考虑输入输出上下游的安全等等</p>
+</blockquote>
+<h2 id="2-5-分组密码工作模式"><a class="header-anchor" href="#2-5-分组密码工作模式">¶</a>2.5 分组密码工作模式</h2>
+<p>NIST提出了五种工作模式，希望覆盖“用分组密码做加密”的所有应用场景，这里列出了以下四种：</p>
+<h3 id="2-5-1-电子密码本ECB模式"><a class="header-anchor" href="#2-5-1-电子密码本ECB模式">¶</a>2.5.1 电子密码本ECB模式</h3>
+<h4 id="1-原理"><a class="header-anchor" href="#1-原理">¶</a>(1)原理</h4>
+<p>假设明文被分成b比特一组，每个分组都是同一密钥加密的。每个分组对于一个给定的密钥会有一个密文（唯一的结果），但是如果一段明文里有两个完全相同的分组……它们对应的密文也是相同的……</p>
+<h4 id="2-不足"><a class="header-anchor" href="#2-不足">¶</a>(2)不足</h4>
+<p>如果明文过长以至于出现两个分组重复，就不安全。所以我们希望有上述情况的话，它们会对应两个不同的密文。</p>
+<h3 id="2-5-2-密码分组链接CBC模式"><a class="header-anchor" href="#2-5-2-密码分组链接CBC模式">¶</a>2.5.2 密码分组链接CBC模式</h3>
+<h4 id="1-原理-v2"><a class="header-anchor" href="#1-原理-v2">¶</a>(1)原理</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/CBC.png" alt=""></p>
+<ul>
+<li>输入：每组明文和上一组密文的异或</li>
+<li>处理：所有分组用同一密钥</li>
+</ul>
+<h4 id="2-数学推导说明的一些东西"><a class="header-anchor" href="#2-数学推导说明的一些东西">¶</a>(2)数学推导说明的一些东西</h4>
+<p>见书P39，说明在接收者收数据准备解密之前，如果Attacker有机会改变初始向量IV，那么P1也会被改变，也就是接收者会解出错误的明文</p>
+<h3 id="2-5-3-密码反馈CFB模式"><a class="header-anchor" href="#2-5-3-密码反馈CFB模式">¶</a>2.5.3 密码反馈CFB模式</h3>
+<h4 id="（1）作用"><a class="header-anchor" href="#（1）作用">¶</a>（1）作用</h4>
+<p>将任意分组密码转化为流密码，为什么要转换呢？是由于有些应用场景下比较适合用流密码：</p>
+<ul>
+<li>流密码不需要将消息填充为分组大小的整数倍</li>
+<li>流密码可以实时操作，也就是说，如果传送字符流，流密码可以使我们及时加密并传送每个字符</li>
+<li>流密码的密文长度=明文长度，由于传输能力是一个比较宝贵的资源，我们用分组密码可能导致密文比明文长，从而浪费传输能力</li>
+</ul>
+<h4 id="（2）原理"><a class="header-anchor" href="#（2）原理">¶</a>（2）原理</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201228130754.png" alt=""></p>
+<h3 id="2-5-4-计数器模式CTR"><a class="header-anchor" href="#2-5-4-计数器模式CTR">¶</a>2.5.4 计数器模式CTR</h3>
+<h4 id="（1）应用"><a class="header-anchor" href="#（1）应用">¶</a>（1）应用</h4>
+<p>（？）</p>
+<ul>
+<li>异步传输模式的网络安全中</li>
+<li>IPSec中</li>
+</ul>
+<h4 id="（2）原理-v2"><a class="header-anchor" href="#（2）原理-v2">¶</a>（2）原理</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201228130708.png" alt=""></p>
+<h4 id="（3）CTR模式优点"><a class="header-anchor" href="#（3）CTR模式优点">¶</a>（3）CTR模式优点</h4>
+<ul>
+<li>硬件效率：各明文单元可以并行计算</li>
+<li>软件效率：由于CTR允许并行计算，所以可以用一些有“并行特征”的指令</li>
+<li>预处理：加密部分可以预处理</li>
+<li>随机访问：对于只需要解密一部分密文的情况，CTR由于无链接，所以各块之间独立，想解密哪一块并不需要之前的信息</li>
+<li>可证明的安全性</li>
+<li>简单性：加解密算法完全相同</li>
+</ul>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -952,7 +1250,7 @@ NIST定义了以下五种工作模式：
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/" class="post-title-link" itemprop="url">Chapter1 绪论</a>
+            <a href="/2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/" class="post-title-link" itemprop="url">Chapter1 软件安全绪论</a>
         </h2>
 
         <div class="post-meta">
@@ -969,7 +1267,7 @@ NIST定义了以下五种工作模式：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
+                <time title="修改时间：2020-12-28 14:01:28" itemprop="dateModified" datetime="2020-12-28T14:01:28+08:00">2020-12-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1004,30 +1302,34 @@ NIST定义了以下五种工作模式：
 <li>随着科技发展、研究与分析的深入,我们注意到软件安全的问题非常多样化</li>
 <li>试图利用软件安全问题获利的各类组织机构也在不断发展，针对软件安全问题的利用、破坏技术手段，造成软件安全问题日趋复杂</li>
 </ul>
-<h3>1.2.1 恶意软件</h3>
-<h5>1. 传统恶意软件</h5>
+<h4 id="1-2-1-恶意软件"><a class="header-anchor" href="#1-2-1-恶意软件">¶</a>1.2.1 恶意软件</h4>
+<h4 id="1-传统恶意软件"><a class="header-anchor" href="#1-传统恶意软件">¶</a>1. 传统恶意软件</h4>
 <ul>
 <li>传统的恶意软件包括：病毒、僵木蠕、间谍软件等</li>
 <li>破坏：窃取信息、远程控制、实施破坏等</li>
 <li>传统恶意软件需要发展的能力：</li>
 </ul>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">渗透与扩散：突破防御+感染目标</span><br><span class="line">隐蔽能力：隐蔽特征避免被发现+被发现了能保护操纵者身份</span><br><span class="line">破坏能力：搜集信息+实施破坏</span><br></pre></td></tr></tbody></table></figure>
-<h5>2. 恶意软件发展历程</h5>
-单机传播——网络传播——协同攻击
-APT攻击（高可持续性威胁）：针对特定目标+高技术
-<h3>1.2.2 软件漏洞</h3>
-说的是程序设计错误导致的
-<h5>1. 漏洞为什么越来越多？</h5>
-- 软件更复杂
-- 漏洞多样化
-- 软件开发周期变短
-<h3>1.2.3 软件后门</h3>
-开发人员刻意设计，但对用户隐瞒的功能。为什么算在软件安全问题中呢？因为有的攻击者，开发软件的时候，会留下后门，将其设计为此软件的漏洞。
-举个栗子：建城墙的人留了个暗道，工程交付以后，保护城墙的人不一定能找出来它，但是工人却一清二楚，可以通过暗道做些坏事。而且，工人更懂怎么利用城墙的设计藏好这个暗道。
-<h5>1. 将软件后门设计为软件漏洞，此方法优势：</h5>
-- 难发现
-- 易利用
-- 难取证：后门代码其实不在软件的产品代码中，而是攻击者利用漏洞动态加载的（被发现了说成设计错误就完事儿了，不是故意的哈哈哈）
+<h4 id="2-恶意软件发展历程"><a class="header-anchor" href="#2-恶意软件发展历程">¶</a>2. 恶意软件发展历程</h4>
+<p>单机传播——网络传播——协同攻击<br>
+APT攻击（高可持续性威胁）：针对特定目标+高技术</p>
+<h4 id="1-2-2-软件漏洞"><a class="header-anchor" href="#1-2-2-软件漏洞">¶</a>1.2.2 软件漏洞</h4>
+<p>说的是程序设计错误导致的</p>
+<h4 id="1-漏洞为什么越来越多？"><a class="header-anchor" href="#1-漏洞为什么越来越多？">¶</a>1. 漏洞为什么越来越多？</h4>
+<ul>
+<li>软件更复杂</li>
+<li>漏洞多样化</li>
+<li>软件开发周期变短</li>
+</ul>
+<h4 id="1-2-3-软件后门"><a class="header-anchor" href="#1-2-3-软件后门">¶</a>1.2.3 软件后门</h4>
+<p>开发人员刻意设计，但对用户隐瞒的功能。为什么算在软件安全问题中呢？因为有的攻击者，开发软件的时候，会留下后门，将其设计为此软件的漏洞。<br>
+举个栗子：建城墙的人留了个暗道，工程交付以后，保护城墙的人不一定能找出来它，但是工人却一清二楚，可以通过暗道做些坏事。而且，工人更懂怎么利用城墙的设计藏好这个暗道。</p>
+<h4 id="1-将软件后门设计为软件漏洞，此方法优势："><a class="header-anchor" href="#1-将软件后门设计为软件漏洞，此方法优势：">¶</a>1. 将软件后门设计为软件漏洞，此方法优势：</h4>
+<ul>
+<li>难发现</li>
+<li>易利用</li>
+<li>难取证：后门代码其实不在软件的产品代码中，而是攻击者利用漏洞动态加载的（被发现了说成设计错误就完事儿了，不是故意的哈哈哈）</li>
+</ul>
 <h2 id="1-3-软件安全性分析的目标"><a class="header-anchor" href="#1-3-软件安全性分析的目标">¶</a>1.3 软件安全性分析的目标</h2>
 <h3 id="1-3-1-软件安全性分析要解决的问题"><a class="header-anchor" href="#1-3-1-软件安全性分析要解决的问题">¶</a>1.3.1 软件安全性分析要解决的问题</h3>
 <ol>
@@ -1062,54 +1364,54 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术
 <h2 id="1-4-主要方法与技术"><a class="header-anchor" href="#1-4-主要方法与技术">¶</a>1.4 主要方法与技术</h2>
 <h3 id="1-4-0-软件逆向分析方法分类"><a class="header-anchor" href="#1-4-0-软件逆向分析方法分类">¶</a>1.4.0 软件逆向分析方法分类</h3>
 <p>主要有两大类：静态分析和动态分析</p>
-<h5>1. 静态分析</h5>
-感觉就像通过反汇编或反编译的手段，对软件的可执行代码进行分析
-（1）优点：比较全面、整体
-（2）缺点：一方面，软件代码规模大了或者复杂了就不好搞；另一方面，如果软件做了加壳保护那就不能反汇编等等
-<h5>2. 动态分析</h5>
-通过直接运行软件，监测软件运行过程进行分析。
-（1）优点：分析过程中可根据软件的运行过程直接获得在各个指令执行后的结果数据，减少推理分析
-（2）缺点：每次分析只能针对动态执行的一条路径执行，整体性较差（所以说，如何构造多条执行路径也是动态分析需要研究的一个重要问题）
+<h4 id="1-静态分析"><a class="header-anchor" href="#1-静态分析">¶</a>1. 静态分析</h4>
+<p>感觉就像通过反汇编或反编译的手段，对软件的可执行代码进行分析<br>
+（1）优点：比较全面、整体<br>
+（2）缺点：一方面，软件代码规模大了或者复杂了就不好搞；另一方面，如果软件做了加壳保护那就不能反汇编等等</p>
+<h4 id="2-动态分析"><a class="header-anchor" href="#2-动态分析">¶</a>2. 动态分析</h4>
+<p>通过直接运行软件，监测软件运行过程进行分析。<br>
+（1）优点：分析过程中可根据软件的运行过程直接获得在各个指令执行后的结果数据，减少推理分析<br>
+（2）缺点：每次分析只能针对动态执行的一条路径执行，整体性较差（所以说，如何构造多条执行路径也是动态分析需要研究的一个重要问题）</p>
 <p><strong>现在一般：动态为主，静态为辅</strong></p>
 <h3 id="1-4-1-反汇编与反编译"><a class="header-anchor" href="#1-4-1-反汇编与反编译">¶</a>1.4.1 反汇编与反编译</h3>
 <p>通常是逆向分析的第一步（静态动态都是）</p>
-<h5>作用</h5>
-二进制exe文件（完全不可读）——&gt;汇编代码——&gt;其他高级语言代码（基本可读）
-第一个箭头是反汇编，第二个是反编译；做到**功能等价**就行
+<h4 id="作用"><a class="header-anchor" href="#作用">¶</a>作用</h4>
+<p>二进制exe文件（完全不可读）——&gt;汇编代码——&gt;其他高级语言代码（基本可读）<br>
+第一个箭头是反汇编，第二个是反编译；做到<strong>功能等价</strong>就行</p>
 <h3 id="1-4-2-程序调试"><a class="header-anchor" href="#1-4-2-程序调试">¶</a>1.4.2 程序调试</h3>
 <p>动态分析</p>
-<h5>定义</h5>
-用一些工具，通过断点、单步执行等方式
-内核代码的调试需要虚拟化技术+多台设备
-<h5>优缺点</h5>
-优缺点基本同“动态分析”中所写，此外，软件自保护技术可能阻碍调试，且数据量和复杂度都挺恐怖的
+<h4 id="定义"><a class="header-anchor" href="#定义">¶</a>定义</h4>
+<p>用一些工具，通过断点、单步执行等方式<br>
+内核代码的调试需要虚拟化技术+多台设备</p>
+<h4 id="优缺点"><a class="header-anchor" href="#优缺点">¶</a>优缺点</h4>
+<p>优缺点基本同“动态分析”中所写，此外，软件自保护技术可能阻碍调试，且数据量和复杂度都挺恐怖的</p>
 <h3 id="1-4-3-程序切片"><a class="header-anchor" href="#1-4-3-程序切片">¶</a>1.4.3 程序切片</h3>
-<h5>作用</h5>
-解决软件代码规模超大带来的理解困难，比如分析出了汇编代码，对汇编代码切片……
-<h5>基本思想</h5>
-分析指令的相关性，从而提取用户“感兴趣”的代码
+<h4 id="作用-v2"><a class="header-anchor" href="#作用-v2">¶</a>作用</h4>
+<p>解决软件代码规模超大带来的理解困难，比如分析出了汇编代码，对汇编代码切片……</p>
+<h4 id="基本思想"><a class="header-anchor" href="#基本思想">¶</a>基本思想</h4>
+<p>分析指令的相关性，从而提取用户“感兴趣”的代码</p>
 <p>主要用于静态分析，也可用于动态分析，有差异：<br>
 （1）静态分析：通过计算操作数<strong>可能的影响范围</strong>（要考虑各种可能的执行路径）来计算指令的关联关系<br>
 （2）动态分析：更有针对性，对某条路径某个操作数来分析指令关联</p>
-<h5>缺点</h5>
-对局部代码还不错，但代码多了照样难受
+<h4 id="缺点"><a class="header-anchor" href="#缺点">¶</a>缺点</h4>
+<p>对局部代码还不错，但代码多了照样难受</p>
 <h3 id="1-4-4-污点传播分析"><a class="header-anchor" href="#1-4-4-污点传播分析">¶</a>1.4.4 污点传播分析</h3>
 <p>静态动态都有，<strong>数据流分析方法</strong></p>
-<h5>基本思想</h5>
-将感兴趣的数据标记，根据每条指令的污点传播过程，分析数据的传递关系
-<h5>实现方式</h5>
-按照“如何获得后台执行过程中具体每一条指令和指令执行前后状态”，可以分为：
-基于插桩/硬件/编译器扩展/硬件模拟器等等
-<h5>存在问题</h5>
-由于控制依赖、查表操作等引入的隐式污点传播无法简单地引入或去除
+<h4 id="基本思想-v2"><a class="header-anchor" href="#基本思想-v2">¶</a>基本思想</h4>
+<p>将感兴趣的数据标记，根据每条指令的污点传播过程，分析数据的传递关系</p>
+<h4 id="实现方式"><a class="header-anchor" href="#实现方式">¶</a>实现方式</h4>
+<p>按照“如何获得后台执行过程中具体每一条指令和指令执行前后状态”，可以分为：<br>
+基于插桩/硬件/编译器扩展/硬件模拟器等等</p>
+<h4 id="存在问题"><a class="header-anchor" href="#存在问题">¶</a>存在问题</h4>
+<p>由于控制依赖、查表操作等引入的隐式污点传播无法简单地引入或去除</p>
 <h3 id="1-4-5-符号执行"><a class="header-anchor" href="#1-4-5-符号执行">¶</a>1.4.5 符号执行</h3>
 <p>静态动态都有</p>
 <h3 id="1-4-6-模糊测试"><a class="header-anchor" href="#1-4-6-模糊测试">¶</a>1.4.6 模糊测试</h3>
 <p>动态分析</p>
-<h5>作用</h5>
-本来是构造许多奇怪数据来看软件鲁棒性的，但现在是为了触发不同的执行路径
-<h5>存在问题</h5>
-提高测试数据生成的针对性——&gt;提高模糊测试效率
+<h4 id="作用-v3"><a class="header-anchor" href="#作用-v3">¶</a>作用</h4>
+<p>本来是构造许多奇怪数据来看软件鲁棒性的，但现在是为了触发不同的执行路径</p>
+<h4 id="存在问题-v2"><a class="header-anchor" href="#存在问题-v2">¶</a>存在问题</h4>
+<p>提高测试数据生成的针对性——&gt;提高模糊测试效率</p>
 <h2 id="1-5-主要分析应用"><a class="header-anchor" href="#1-5-主要分析应用">¶</a>1.5 主要分析应用</h2>
 <h3 id="1-5-1-恶意软件分析"><a class="header-anchor" href="#1-5-1-恶意软件分析">¶</a>1.5.1 恶意软件分析</h3>
 <h5 id="对恶意软件的分析目标"><a class="header-anchor" href="#对恶意软件的分析目标">¶</a>对恶意软件的分析目标</h5>
@@ -1304,149 +1606,6 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/%E8%9A%81%E5%89%91-Mannal/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/19/%E8%9A%81%E5%89%91-Mannal/" class="post-title-link" itemprop="url">蚁剑 Mannal</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-09-19 16:22:20 / 修改时间：17:46:26" itemprop="dateCreated datePublished" datetime="2020-09-19T16:22:20+08:00">2020-09-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-Security/" itemprop="url" rel="index"><span itemprop="name">Web Security</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.fujieace.com/hacker/tools/antsword.html">中国蚁剑下载、安装、使用教程</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av86179526/">https://www.bilibili.com/video/av86179526/</a></p>
-<center><h1>Webshell</h1></center>
-理解 webshell 我们可以从字面上去理解，将其拆分成 web 和 shell 来分别进行理解，web 在百度百科的解释如下：
-<p>web（World Wide Web）即全球广域网，也称为万维网，它是一种基于超文本和 HTTP 的、全球性的、动态交互的、跨平台的分布式图形信息系统。<br>
-是建立在 Internet 上的一种网络服务，为浏览者在 Internet 上查找和浏览信息提供了图形化的、易于访问的直观界面，其中的文档及超级链接将 Internet 上的信息节点组织成一个互为关联的网状结构。</p>
-<p>web 对于我们来说都不陌生，是从事安全行业的同僚接触最多，也是入门必学的基础，为什么会是必学的基础呢？</p>
-<p>因为这个在企业中是应用最广泛，也是最容易暴露在攻击者面前的东西，任何人都能找到任何企业暴露在外面可供入侵者攻击的应用，所以学习 web 安全没有错。</p>
-<p>那么 shell 是什么呢？百度百科的解释如下：</p>
-<p>在计算机科学中，Shell 俗称壳（用来区别于核），是指“提供使用者使用界面”的软件（命令解析器）。它类似于 DOS <a target="_blank" rel="noopener" href="http://xn--command-nw3k6121a.com">下的command.com</a> 和后来的 cmd.exe。<br>
-它接收用户命令，然后调用相应的应用程序。</p>
-<p>对于 shell 的理解，我们也可以理解为一个接口，用来管理某些应用程序。</p>
-<p>webshell 就是两者的集合，合起来的意思可以理解为 web 应用管理工具，正常情况下，运维人员可以通过 webshell 针对 web 服务器进行日常的运维管理以及系统上线更新等，那么攻击者也可以通过 webshell 来管理 web 应用服务器。</p>
-<p><strong>两者在使用上并没有太多区别，但是在叫法上可能就不大一样了，管理员使用可以叫服务器管理工具，而在攻击者手里就可以叫做后门程序了。</strong></p>
-<center><h1>一句话木马</h1></center>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php eval($_POST[&quot;kxc&quot;]);?&gt;</span><br></pre></td></tr></table></figure>
-<p>php的eval()函数：eval($str)函数是把$str当做PHP代码执行。</p>
-<p>这是php的一句话后门中最普遍的一种。它的工作原理是：<br>
-首先存在一个名为shell的变量，shell的取值为HTTP的POST方式。Web服务器对shell取值以后，然后通过eval()函数执行shell里面的内容。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Wireshark-Mannal/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/19/Wireshark-Mannal/" class="post-title-link" itemprop="url">Wireshark Mannal</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-19 16:21:42" itemprop="dateCreated datePublished" datetime="2020-09-19T16:21:42+08:00">2020-09-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1516,20 +1675,20 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
