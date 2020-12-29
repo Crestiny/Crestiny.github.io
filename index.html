@@ -402,7 +402,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
+                <time title="修改时间：2020-12-29 14:54:03" itemprop="dateModified" datetime="2020-12-29T14:54:03+08:00">2020-12-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -612,8 +612,146 @@
 </ul>
 </li>
 </ul>
-<h3 id="2-3-3-过程迭代"><a class="header-anchor" href="#2-3-3-过程迭代">¶</a>2.3.3 过程迭代</h3>
-<h3 id="2-3-2-迭代-v2"><a class="header-anchor" href="#2-3-2-迭代-v2">¶</a>2.3.2 迭代</h3>
+<h3 id="2-3-3-过程规范"><a class="header-anchor" href="#2-3-3-过程规范">¶</a>2.3.3 过程规范</h3>
+<p>UP把软件生命周期分为6个核心规范和3个支持规范：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229085723.png" alt=""></p>
+<h2 id="2-4-敏捷过程"><a class="header-anchor" href="#2-4-敏捷过程">¶</a>2.4 敏捷过程</h2>
+<blockquote>
+<p>敏捷过程=<br>
+以人为本（？）+<br>
+快速响应需求和变化+<br>
+注意力集中到项目的主要目标——做出可用软件+<br>
+文档、度量适度（前提是保证质量）</p>
+</blockquote>
+<p>敏捷过程比较注重人的沟通，发挥人的能动性和创造性，而不是机械地做事；所以这种软件过程适合如下场景：</p>
+<ul>
+<li>需求不确定、易挥发</li>
+<li>有责任感和积极向上的开发人员</li>
+<li>用户容易沟通并能参与（？）</li>
+<li>团队人数&lt;10</li>
+</ul>
+<h3 id="2-4-1-敏捷过程的价值观和原则"><a class="header-anchor" href="#2-4-1-敏捷过程的价值观和原则">¶</a>2.4.1 敏捷过程的价值观和原则</h3>
+<p>敏捷过程的框架分为四个层次：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229093511.png" alt=""></p>
+<p>下面介绍三种具体的敏捷过程：</p>
+<table>
+<thead>
+<tr>
+<th>XP</th>
+<th>Scrum</th>
+<th>MSF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>敏捷开发技术</td>
+<td>敏捷开发管理</td>
+<td>敏捷开发过程框架</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-4-2-极限编程XP"><a class="header-anchor" href="#2-4-2-极限编程XP">¶</a>2.4.2 极限编程XP</h3>
+<p>是一种敏捷过程方法</p>
+<h4 id="（1）4个价值目标"><a class="header-anchor" href="#（1）4个价值目标">¶</a>（1）4个价值目标</h4>
+<ul>
+<li>沟通</li>
+<li>简化</li>
+<li>反馈</li>
+<li>勇气</li>
+</ul>
+<h4 id="（2）XP项目状态变迁图"><a class="header-anchor" href="#（2）XP项目状态变迁图">¶</a>（2）XP项目状态变迁图</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229122726.png" alt=""></p>
+<p>XP项目的大概开发流程是：</p>
+<ul>
+<li>首先探索出架构</li>
+<li>根据用户需求发布规划，并且发布的规划可以根据用户新需求的加入来迭代</li>
+<li>根据规划做软件，做出的软件根据测试结果打回去迭代；测试的场景可以来自用户</li>
+<li>测试完了可以交给用户验收，可以的话就进行小型发布</li>
+</ul>
+<h4 id="（3）XP的一些核心思想"><a class="header-anchor" href="#（3）XP的一些核心思想">¶</a>（3）XP的一些核心思想</h4>
+<ul>
+<li>先开发最重要的特性，只关注当下</li>
+<li>其它新需求和变化靠重构来实现</li>
+<li>不对未来投入过多</li>
+</ul>
+<p>代码重构部分可以用下图表示：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229124026.png" alt=""></p>
+<h4 id="（4）XP的使用条件"><a class="header-anchor" href="#（4）XP的使用条件">¶</a>（4）XP的使用条件</h4>
+<p>根据XP的特点我们可以知道，假如重构比事先充分设计的开销要大，那就不值得用XP了</p>
+<h4 id="（5）XP的核心内容（12条实践做法）"><a class="header-anchor" href="#（5）XP的核心内容（12条实践做法）">¶</a>（5）XP的核心内容（12条实践做法）</h4>
+<p>前面说了XP的一些理论层面的内容，接下来谈谈这些理论在实践中表现为什么。以下是12条准则，<strong>不过并非XP特有</strong>：</p>
+<ul>
+<li>计划博弈：做简短的计划，快速确定下次迭代的发布范围</li>
+<li>小型发布：small releases先投入使用，之后再改</li>
+<li>系统隐喻：（？）太抽象了吧</li>
+<li>简化设计：到恰好满足需求的程度</li>
+<li>测试驱动：<strong>XP要求“先写测试，后编码”，用失败的测试驱动编码（？）</strong></li>
+<li>重构：重构以简化系统</li>
+<li>结对编程：两人一起，一人写一人看——<strong>同级评审</strong></li>
+<li>代码全体拥有：大家都能改</li>
+<li>持续集成：每当完成一个任务，都集成一次成品；可能一天有好几次，并不断回归测试</li>
+<li>每周40小时工作制</li>
+<li>现场客户：加入开发环节</li>
+<li>代码规范：为了减少文档</li>
+</ul>
+<h3 id="2-4-3-Scrum"><a class="header-anchor" href="#2-4-3-Scrum">¶</a>2.4.3 Scrum</h3>
+<h4 id="（1）Scrum特点"><a class="header-anchor" href="#（1）Scrum特点">¶</a>（1）Scrum特点</h4>
+<p>类比于橄榄球争球：</p>
+<ul>
+<li>迅速</li>
+<li>适应性</li>
+<li>自组织</li>
+</ul>
+<h4 id="（2）Scrum核心思想"><a class="header-anchor" href="#（2）Scrum核心思想">¶</a>（2）Scrum核心思想</h4>
+<p>Scrum认为软件更多地是<strong>经验性的过程</strong>，而非确定性的过程</p>
+<ul>
+<li>经验性：中间是黑箱，只定两头输入输出，然后根据经验调控黑箱（黑箱里面是分析、设计、实现这些步骤）</li>
+<li>确定性：如一个具体的软件过程模型</li>
+</ul>
+<p>所以Scrum更有适应性和创造力，没有卡得那么死</p>
+<h4 id="（3）Scrum核心准则"><a class="header-anchor" href="#（3）Scrum核心准则">¶</a>（3）Scrum核心准则</h4>
+<ul>
+<li>自我管理：每个Scrum团队都有3种角色，没有中心，可以自组织，跨职能；十分灵活</li>
+<li>迭代开发：<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229143834.png" alt=""></li>
+</ul>
+<h4 id="4-Scrum的一系列规则"><a class="header-anchor" href="#4-Scrum的一系列规则">¶</a>(4) Scrum的一系列规则</h4>
+<p>书P36-37</p>
+<h3 id="2-4-4-微软解决方案框架MSF-（？）"><a class="header-anchor" href="#2-4-4-微软解决方案框架MSF-（？）">¶</a>2.4.4 微软解决方案框架MSF （？）</h3>
+<p>包括两个过程：</p>
+<ul>
+<li>MSF敏捷开发过程</li>
+<li>MSF for CMMI过程</li>
+</ul>
+<h2 id="2-5-软件过程的选择、裁剪、评估和改进"><a class="header-anchor" href="#2-5-软件过程的选择、裁剪、评估和改进">¶</a>2.5 软件过程的选择、裁剪、评估和改进</h2>
+<h3 id="2-5-1-软件过程的选择和裁剪"><a class="header-anchor" href="#2-5-1-软件过程的选择和裁剪">¶</a>2.5.1 软件过程的选择和裁剪</h3>
+<p><strong>其实可以不止使用一个软件过程，可以融合</strong></p>
+<h4 id="（1）选择"><a class="header-anchor" href="#（1）选择">¶</a>（1）选择</h4>
+<p>书P38，3条考虑</p>
+<h4 id="（2）裁剪"><a class="header-anchor" href="#（2）裁剪">¶</a>（2）裁剪</h4>
+<p>书P38-39，3条考虑</p>
+<h3 id="2-5-2-软件过程的评估"><a class="header-anchor" href="#2-5-2-软件过程的评估">¶</a>2.5.2 软件过程的评估</h3>
+<p>用来考察以下问题：</p>
+<ul>
+<li>用的软件过程适合本团队吗？</li>
+<li>过程绩效如何？</li>
+<li>软件过程能力成熟度为几级？</li>
+<li>做的好与不好之处？</li>
+</ul>
+<h4 id="（1）参考模型"><a class="header-anchor" href="#（1）参考模型">¶</a>（1）参考模型</h4>
+<ul>
+<li>CMM/CMMI</li>
+<li>ISO/IEC 15504</li>
+<li>ISO/IEC 20000</li>
+</ul>
+<h4 id="（2）评估方法"><a class="header-anchor" href="#（2）评估方法">¶</a>（2）评估方法</h4>
+<p>以上模型还提供了配套的评估方法</p>
+<h3 id="2-5-3-软件过程的改进"><a class="header-anchor" href="#2-5-3-软件过程的改进">¶</a>2.5.3 软件过程的改进</h3>
+<p>惊讶的是，软件工程的知识完备到，连软件过程的改进也有一些生命周期模型<br>
+一般切入点是找要素，比如人、技术、方法等等；<br>
+软件过程、过程评估、过程改进三者关系如下：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229145317.png" alt=""></p>
+<h4 id="（1）PDCA循环"><a class="header-anchor" href="#（1）PDCA循环">¶</a>（1）PDCA循环</h4>
+<h4 id="（2）IDEAL模型"><a class="header-anchor" href="#（2）IDEAL模型">¶</a>（2）IDEAL模型</h4>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1271,7 +1409,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 14:11:06" itemprop="dateModified" datetime="2020-12-28T14:11:06+08:00">2020-12-28</time>
+                <time title="修改时间：2020-12-28 15:37:33" itemprop="dateModified" datetime="2020-12-28T15:37:33+08:00">2020-12-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1305,7 +1443,39 @@
 <li>将exe文件上传至</li>
 </ol>
 <h2 id="8-3-动态分析"><a class="header-anchor" href="#8-3-动态分析">¶</a>8.3 动态分析</h2>
+<p>有效的简单动态分析步骤：</p>
+<ul>
+<li>准备：有效的目标+安全的运行环境+尽量真实的网络环境配置</li>
+<li>运行恶意代码</li>
+<li>使用监视工具</li>
+<li>综合分析</li>
+</ul>
 <h3 id="8-3-1-动态分析环境构建"><a class="header-anchor" href="#8-3-1-动态分析环境构建">¶</a>8.3.1 动态分析环境构建</h3>
+<h4 id="（1）环境构建要考虑的重点问题"><a class="header-anchor" href="#（1）环境构建要考虑的重点问题">¶</a>（1）环境构建要考虑的重点问题</h4>
+<p>不破坏/影响外部环境</p>
+<h4 id="（2）做法"><a class="header-anchor" href="#（2）做法">¶</a>（2）做法</h4>
+<p>在受控的隔离环境里面进行动态分析，可以做到：</p>
+<ul>
+<li>影响限制到一定范围内</li>
+<li>可以快速恢复环境而不影响后续分析</li>
+</ul>
+<h4 id="（3）构建环境的工具"><a class="header-anchor" href="#（3）构建环境的工具">¶</a>（3）构建环境的工具</h4>
+<p>按采用的技术方法的不同，做如下分类:</p>
+<ul>
+<li>
+<p>沙箱程序：</p>
+<ul>
+<li>作用：比如可以按照用户指定的安全策略来限制程序行为等，是一种可以运行在</li>
+<li></li>
+</ul>
+</li>
+<li>
+<p>虚拟化软件（如VMware/VirtualBox）：</p>
+</li>
+<li>
+<p>硬件模拟器：</p>
+</li>
+</ul>
 <h3 id="8-3-2-动态行为分析"><a class="header-anchor" href="#8-3-2-动态行为分析">¶</a>8.3.2 动态行为分析</h3>
 <h3 id="8-3-3-动态调试分析"><a class="header-anchor" href="#8-3-3-动态调试分析">¶</a>8.3.3 动态调试分析</h3>
 <h3 id="8-3-4-反虚拟化分析对抗"><a class="header-anchor" href="#8-3-4-反虚拟化分析对抗">¶</a>8.3.4 反虚拟化分析对抗</h3>
@@ -1479,7 +1649,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 14:12:44" itemprop="dateModified" datetime="2020-12-28T14:12:44+08:00">2020-12-28</time>
+                <time title="修改时间：2020-12-28 15:11:20" itemprop="dateModified" datetime="2020-12-28T15:11:20+08:00">2020-12-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1509,7 +1679,29 @@
           <p>本章的基础知识是指：在恶意代码分析、软件漏洞分析中需要的基础知识</p>
 <h2 id="2-1-处理器硬件架构基础"><a class="header-anchor" href="#2-1-处理器硬件架构基础">¶</a>2.1 处理器硬件架构基础</h2>
 <p>了解硬件知识有利于了解操作系统原理和软件漏洞</p>
-<h3 id="2-1-1"><a class="header-anchor" href="#2-1-1">¶</a>2.1.1</h3>
+<h3 id="2-1-1-CPU结构介绍"><a class="header-anchor" href="#2-1-1-CPU结构介绍">¶</a>2.1.1 CPU结构介绍</h3>
+<h4 id="（1）CPU结构示意图"><a class="header-anchor" href="#（1）CPU结构示意图">¶</a>（1）CPU结构示意图</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201228142159.png" alt=""></p>
+<p>包括：寄存器+算术逻辑单元ALU+控制器+内部总线</p>
+<ul>
+<li>寄存器：暂存运算数据与结果</li>
+<li>ALU：多种运算功能</li>
+<li>控制器：取指、译码、执行</li>
+<li>内部总线：连接各部分，提供通信</li>
+</ul>
+<p><strong>由于寄存器记录了操作系统关键数据结构的入口，所以我们重点关注它</strong></p>
+<h4 id="（2）CPU寄存器详解"><a class="header-anchor" href="#（2）CPU寄存器详解">¶</a>（2）CPU寄存器详解</h4>
+<p>以32位系统为例：</p>
+<ul>
+<li>指令指针寄存器EIP：存储当前执行指令的地址；操作系统从根据EIP内容寻址，然后取指、译码、执行</li>
+<li>通用数据寄存器EAX/ECX/EDX/EBX：各自有一些常见用法；16位的表示为AX/CX/DX/BX，8位的表示为AL/CL/DL/BL
+<ul>
+<li>ECX：存储循环次数</li>
+<li>EAX/EDX：乘除法的隐含操作数</li>
+</ul>
+</li>
+<li>地址指针寄存器ESP/EBP：</li>
+</ul>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
