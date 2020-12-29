@@ -157,6 +157,127 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/21/Chapter2-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/21/Chapter2-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">Chapter2 基础知识</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-21 13:58:42" itemprop="dateCreated datePublished" datetime="2020-12-21T13:58:42+08:00">2020-12-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-28 15:11:20" itemprop="dateModified" datetime="2020-12-28T15:11:20+08:00">2020-12-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件安全分析与应用》</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本章的基础知识是指：在恶意代码分析、软件漏洞分析中需要的基础知识</p>
+<h2 id="2-1-处理器硬件架构基础"><a class="header-anchor" href="#2-1-处理器硬件架构基础">¶</a>2.1 处理器硬件架构基础</h2>
+<p>了解硬件知识有利于了解操作系统原理和软件漏洞</p>
+<h3 id="2-1-1-CPU结构介绍"><a class="header-anchor" href="#2-1-1-CPU结构介绍">¶</a>2.1.1 CPU结构介绍</h3>
+<h4 id="（1）CPU结构示意图"><a class="header-anchor" href="#（1）CPU结构示意图">¶</a>（1）CPU结构示意图</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201228142159.png" alt=""></p>
+<p>包括：寄存器+算术逻辑单元ALU+控制器+内部总线</p>
+<ul>
+<li>寄存器：暂存运算数据与结果</li>
+<li>ALU：多种运算功能</li>
+<li>控制器：取指、译码、执行</li>
+<li>内部总线：连接各部分，提供通信</li>
+</ul>
+<p><strong>由于寄存器记录了操作系统关键数据结构的入口，所以我们重点关注它</strong></p>
+<h4 id="（2）CPU寄存器详解"><a class="header-anchor" href="#（2）CPU寄存器详解">¶</a>（2）CPU寄存器详解</h4>
+<p>以32位系统为例：</p>
+<ul>
+<li>指令指针寄存器EIP：存储当前执行指令的地址；操作系统从根据EIP内容寻址，然后取指、译码、执行</li>
+<li>通用数据寄存器EAX/ECX/EDX/EBX：各自有一些常见用法；16位的表示为AX/CX/DX/BX，8位的表示为AL/CL/DL/BL
+<ul>
+<li>ECX：存储循环次数</li>
+<li>EAX/EDX：乘除法的隐含操作数</li>
+</ul>
+</li>
+<li>地址指针寄存器ESP/EBP：</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/15/Scraps-of-Study-or-Life-Skills/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1194,100 +1315,6 @@ Instead of using the final output, we use the output at the intermedia layer.(Bu
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/09/Reverse-Linked-List/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/09/Reverse-Linked-List/" class="post-title-link" itemprop="url">Reverse Linked List</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-09 16:55:31 / 修改时间：16:57:10" itemprop="dateCreated datePublished" datetime="2020-10-09T16:55:31+08:00">2020-10-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Leetcode-Top-100-Liked-Questions/" itemprop="url" rel="index"><span itemprop="name">Leetcode Top 100 Liked Questions</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>Description</h1>
-<p>Reverse a singly linked list.</p>
-<h1>Input&amp;Output</h1>
-<p>Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>
-Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
-<h1>Analysis</h1>
-<p>感觉二叉树经常会用递归，我们应该一直走到底，将两个叶节点交换，然后再一路往上……<br>
-妙啊，越写越快了！</p>
-<h1>Code</h1>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode {</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode() {}</span><br><span class="line"> *     ListNode(int val) { this.val = val; }</span><br><span class="line"> *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }</span><br><span class="line"> * }</span><br><span class="line"> */</span><br><span class="line">class Solution {</span><br><span class="line">    public ListNode reverseList(ListNode head) {</span><br><span class="line">        </span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1357,7 +1384,7 @@ Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1370,7 +1397,7 @@ Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

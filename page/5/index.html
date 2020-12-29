@@ -157,6 +157,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/07/SQL-Clauses-for-Database-Security/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/07/SQL-Clauses-for-Database-Security/" class="post-title-link" itemprop="url">SQL Clauses for Database Security</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-07 05:17:53 / 修改时间：05:40:26" itemprop="dateCreated datePublished" datetime="2020-09-07T05:17:53+08:00">2020-09-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <center><h1>对数据的操作权限</h1></center>
+<h2>授权</h2>
+GRANT语句：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;权限&gt; [,&lt;权限&gt;]...</span><br><span class="line">ON &lt;对象类型&gt; &lt;对象名&gt; [,&lt;对象类型&gt; &lt;对象名&gt;]...</span><br><span class="line">TO &lt;用户&gt; [,&lt;用户&gt;]...</span><br><span class="line">[WITH GRANT OPTION];</span><br><span class="line"></span><br><span class="line">参数解释：</span><br><span class="line">- 权限：SQL语句动词、如UPDATE(Sno)、特定ALL PRIVILEGES......</span><br><span class="line">- 对象：其实一般就是写TABLE table-name这样子，也有直接“视图名”的</span><br><span class="line">- 用户：如U1、特定的PUBLIC.......</span><br><span class="line">- 最后一个可选子句：加上代表获得此权限的用户同时也有给别人授予它的权利</span><br></pre></td></tr></table></figure>
+<h2>回收权限</h2>
+REVOKE语句：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">REVOKE &lt;权限&gt; [,&lt;权限&gt;]...</span><br><span class="line">ON &lt;对象类型&gt; &lt;对象名&gt; [,&lt;对象类型&gt; &lt;对象名&gt;]...</span><br><span class="line">FROM &lt;用户&gt; [,&lt;用户&gt;]...[CASCADE|RESTRICT];</span><br><span class="line"></span><br><span class="line">参数说明：最后可选的是级联收回或限制操作</span><br></pre></td></tr></table></figure>
+<center><h1>关于数据库模式的权限</h1></center>
+在DBA创建用户时实现
+<p>创建用户语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &lt;user-name&gt;</span><br><span class="line">[WITH] [DBA|RESOURCE|CONNECT];</span><br><span class="line"></span><br><span class="line">参数说明：最后括号里的是三种权限，默认最后一个，它们对应的可执行操作见下表</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/09/07/SQL-Clauses-for-Database-Security/%5CSQL-Clauses-for-Database-Security%5Cquan.png" alt></p>
+<center><h1>数据库角色</h1></center>
+很神奇的是，角色居然是权限的集合（而非用户的集合）
+可以为拥有相同权限的一组用户创建一个角色
+<h2>创建</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE ROLE &lt;角色名&gt;；</span><br></pre></td></tr></table></figure>
+<h2>授权</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;权限&gt; [,&lt;权限&gt;]...</span><br><span class="line">ON &lt;对象类型&gt; &lt;对象名&gt; [,&lt;对象类型&gt; &lt;对象名&gt;]...</span><br><span class="line">TO &lt;角色&gt; [,&lt;角色&gt;]...</span><br></pre></td></tr></table></figure>
+<h2>用角色授权</h2>
+因为角色本质是权限，所以我们可以：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;角色1&gt; [,&lt;角色2&gt;]...</span><br><span class="line">TO &lt;角色3&gt; [,&lt;角色4&gt;]...</span><br><span class="line">[WITH GRANT OPTION]</span><br></pre></td></tr></table></figure>
+<h2>收回角色权限</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REVOKE &lt;权限&gt; [,&lt;权限&gt;]...</span><br><span class="line">ON &lt;对象类型&gt; &lt;对象名&gt; [,&lt;对象类型&gt; &lt;对象名&gt;]...</span><br><span class="line">FROM &lt;角色1&gt; [,&lt;角色2&gt;]...;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/06/Database-Important-Difficult-Exercises-Collection/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1415,121 +1506,6 @@ SQL语句主变量：内容是一句SQL语句</p>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/24/Understanding-division-and-Its-Implementation-in-SQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/24/Understanding-division-and-Its-Implementation-in-SQL/" class="post-title-link" itemprop="url">Understanding 'division' and Its Implementation in SQL</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-24 20:10:22" itemprop="dateCreated datePublished" datetime="2020-08-24T20:10:22+08:00">2020-08-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-26 21:36:14" itemprop="dateModified" datetime="2020-08-26T21:36:14+08:00">2020-08-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <center><h1>What does Division really do</h1></center>
-<h2>Process</h2>
-2. The result of Division of R/S, contains columns which are in R but not in S. (In other words, R's columns except which also in S.)
-3. Define T=R/S and T's columns is C.
-4. For each c in C, find their “象集” in R.
-5. Find S's projection on its common columns with R.
-6. If c's “象集” includes the result in 5, then add it to T.
-<h2>Example</h2>
-1. <br>
-![](https://img-blog.csdn.net/20161221185506785)
-2. 
-在R关系中A属性的值可以取{ a1，a2，a3，a4 }
-a1值对应的象集为 {  (b1,c2)  , (b2,c1) ,  (b2,c3)  }
-a2值对应的象集为 {  (b3,c7)  , (b2,c3) }
-a3值对应的象集为 {  (b4,c6)  }
-a4值对应的象集为 {  (b6,c6)  }
-3. 关系S在B、C上的投影为 {  (b1,c2)  , (b2,c1) ,  (b2,c3)  }
-4. 只有a1值对应的象集包含关系S的投影集，所以只有a1应该包含在A属性中
-5. R/S=
-<table>
-<thead>
-<tr>
-<th>A</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>a1</td>
-</tr>
-</tbody>
-</table>
-<center><h1>Implementation in SQL</h1></center>
-<h2>How to do</h2>
-1. R(X，Y)÷S(Y，Z)的运算用结构化语言SQL 语句可表达为下列形式:
-2. 
- ![](/Understanding-division-and-Its-Implementation-in-SQL/division.png)
-3. 用双重`not exists`来实现，
-- 第一层：选出R表中，Y属性上的值和S中有相等的那些元组
-- 第二层：从S中排除这些元组，余下的都是在Y上S有但R没有的Y值
-- 第三层：
-<p><em>补充</em>：什么是not exists？<br>
-  exists，强调的是是否有返回集，不需知道具体返回的是什么,只要exists引导的子句有结果集返回，这个条件就算成立。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1599,7 +1575,7 @@ a4值对应的象集为 {  (b6,c6)  }
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1612,7 +1588,7 @@ a4值对应的象集为 {  (b6,c6)  }
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

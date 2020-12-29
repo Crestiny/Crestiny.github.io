@@ -157,6 +157,63 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Sqlmap-Mannal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/19/Sqlmap-Mannal/" class="post-title-link" itemprop="url">Sqlmap Mannal</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-19 16:22:40" itemprop="dateCreated datePublished" datetime="2020-09-19T16:22:40+08:00">2020-09-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/%E8%9A%81%E5%89%91-Mannal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1712,97 +1769,6 @@ SMT贴片指的是在PCB基础上进行加工的系列工艺流程的简称，PC
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/07/SQL-Clauses-for-Database-Security/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/07/SQL-Clauses-for-Database-Security/" class="post-title-link" itemprop="url">SQL Clauses for Database Security</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-09-07 05:17:53 / 修改时间：05:40:26" itemprop="dateCreated datePublished" datetime="2020-09-07T05:17:53+08:00">2020-09-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <center><h1>对数据的操作权限</h1></center>
-<h2>授权</h2>
-GRANT语句：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;权限&gt; [,&lt;权限&gt;]...</span><br><span class="line">ON &lt;对象类型&gt; &lt;对象名&gt; [,&lt;对象类型&gt; &lt;对象名&gt;]...</span><br><span class="line">TO &lt;用户&gt; [,&lt;用户&gt;]...</span><br><span class="line">[WITH GRANT OPTION];</span><br><span class="line"></span><br><span class="line">参数解释：</span><br><span class="line">- 权限：SQL语句动词、如UPDATE(Sno)、特定ALL PRIVILEGES......</span><br><span class="line">- 对象：其实一般就是写TABLE table-name这样子，也有直接“视图名”的</span><br><span class="line">- 用户：如U1、特定的PUBLIC.......</span><br><span class="line">- 最后一个可选子句：加上代表获得此权限的用户同时也有给别人授予它的权利</span><br></pre></td></tr></table></figure>
-<h2>回收权限</h2>
-REVOKE语句：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">REVOKE &lt;权限&gt; [,&lt;权限&gt;]...</span><br><span class="line">ON &lt;对象类型&gt; &lt;对象名&gt; [,&lt;对象类型&gt; &lt;对象名&gt;]...</span><br><span class="line">FROM &lt;用户&gt; [,&lt;用户&gt;]...[CASCADE|RESTRICT];</span><br><span class="line"></span><br><span class="line">参数说明：最后可选的是级联收回或限制操作</span><br></pre></td></tr></table></figure>
-<center><h1>关于数据库模式的权限</h1></center>
-在DBA创建用户时实现
-<p>创建用户语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &lt;user-name&gt;</span><br><span class="line">[WITH] [DBA|RESOURCE|CONNECT];</span><br><span class="line"></span><br><span class="line">参数说明：最后括号里的是三种权限，默认最后一个，它们对应的可执行操作见下表</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/09/07/SQL-Clauses-for-Database-Security/%5CSQL-Clauses-for-Database-Security%5Cquan.png" alt></p>
-<center><h1>数据库角色</h1></center>
-很神奇的是，角色居然是权限的集合（而非用户的集合）
-可以为拥有相同权限的一组用户创建一个角色
-<h2>创建</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE ROLE &lt;角色名&gt;；</span><br></pre></td></tr></table></figure>
-<h2>授权</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;权限&gt; [,&lt;权限&gt;]...</span><br><span class="line">ON &lt;对象类型&gt; &lt;对象名&gt; [,&lt;对象类型&gt; &lt;对象名&gt;]...</span><br><span class="line">TO &lt;角色&gt; [,&lt;角色&gt;]...</span><br></pre></td></tr></table></figure>
-<h2>用角色授权</h2>
-因为角色本质是权限，所以我们可以：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GRANT &lt;角色1&gt; [,&lt;角色2&gt;]...</span><br><span class="line">TO &lt;角色3&gt; [,&lt;角色4&gt;]...</span><br><span class="line">[WITH GRANT OPTION]</span><br></pre></td></tr></table></figure>
-<h2>收回角色权限</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REVOKE &lt;权限&gt; [,&lt;权限&gt;]...</span><br><span class="line">ON &lt;对象类型&gt; &lt;对象名&gt; [,&lt;对象类型&gt; &lt;对象名&gt;]...</span><br><span class="line">FROM &lt;角色1&gt; [,&lt;角色2&gt;]...;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1872,7 +1838,7 @@ REVOKE语句：
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1885,7 +1851,7 @@ REVOKE语句：
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

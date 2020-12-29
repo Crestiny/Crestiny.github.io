@@ -157,6 +157,121 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/24/Understanding-division-and-Its-Implementation-in-SQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/24/Understanding-division-and-Its-Implementation-in-SQL/" class="post-title-link" itemprop="url">Understanding 'division' and Its Implementation in SQL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-24 20:10:22" itemprop="dateCreated datePublished" datetime="2020-08-24T20:10:22+08:00">2020-08-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-26 21:36:14" itemprop="dateModified" datetime="2020-08-26T21:36:14+08:00">2020-08-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <center><h1>What does Division really do</h1></center>
+<h2>Process</h2>
+2. The result of Division of R/S, contains columns which are in R but not in S. (In other words, R's columns except which also in S.)
+3. Define T=R/S and T's columns is C.
+4. For each c in C, find their “象集” in R.
+5. Find S's projection on its common columns with R.
+6. If c's “象集” includes the result in 5, then add it to T.
+<h2>Example</h2>
+1. <br>
+![](https://img-blog.csdn.net/20161221185506785)
+2. 
+在R关系中A属性的值可以取{ a1，a2，a3，a4 }
+a1值对应的象集为 {  (b1,c2)  , (b2,c1) ,  (b2,c3)  }
+a2值对应的象集为 {  (b3,c7)  , (b2,c3) }
+a3值对应的象集为 {  (b4,c6)  }
+a4值对应的象集为 {  (b6,c6)  }
+3. 关系S在B、C上的投影为 {  (b1,c2)  , (b2,c1) ,  (b2,c3)  }
+4. 只有a1值对应的象集包含关系S的投影集，所以只有a1应该包含在A属性中
+5. R/S=
+<table>
+<thead>
+<tr>
+<th>A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a1</td>
+</tr>
+</tbody>
+</table>
+<center><h1>Implementation in SQL</h1></center>
+<h2>How to do</h2>
+1. R(X，Y)÷S(Y，Z)的运算用结构化语言SQL 语句可表达为下列形式:
+2. 
+ ![](/Understanding-division-and-Its-Implementation-in-SQL/division.png)
+3. 用双重`not exists`来实现，
+- 第一层：选出R表中，Y属性上的值和S中有相等的那些元组
+- 第二层：从S中排除这些元组，余下的都是在Y上S有但R没有的Y值
+- 第三层：
+<p><em>补充</em>：什么是not exists？<br>
+  exists，强调的是是否有返回集，不需知道具体返回的是什么,只要exists引导的子句有结果集返回，这个条件就算成立。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/23/Summary-for-Learn-SQL-Codecademy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1169,7 +1284,7 @@ I've learned concepts including:
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1182,7 +1297,7 @@ I've learned concepts including:
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
