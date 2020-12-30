@@ -29,8 +29,18 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/MAC.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/HASH.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230095511.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230104252.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE12.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230125126.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230130735.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230132126.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230132641.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230140625.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230141939.png">
 <meta property="article:published_time" content="2020-09-23T04:06:11.000Z">
-<meta property="article:modified_time" content="2020-12-29T16:53:57.510Z">
+<meta property="article:modified_time" content="2020-12-30T06:30:26.700Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta property="article:tag" content="Public-key cryptography">
 <meta property="article:tag" content="Message authentication">
@@ -197,7 +207,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-30 00:53:57" itemprop="dateModified" datetime="2020-12-30T00:53:57+08:00">2020-12-30</time>
+                <time title="修改时间：2020-12-30 14:30:26" itemprop="dateModified" datetime="2020-12-30T14:30:26+08:00">2020-12-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -281,22 +291,99 @@
 前者利用密码算法的缺陷，后者是要付出指数级代价的（不过2004年王小云教授破了MD5！）</p>
 <h3 id="3-2-3-简单散列函数"><a class="header-anchor" href="#3-2-3-简单散列函数">¶</a>3.2.3 简单散列函数</h3>
 <h4 id="（1）散列函数基本原理"><a class="header-anchor" href="#（1）散列函数基本原理">¶</a>（1）散列函数基本原理</h4>
+<p>把消息按照n比特每块划分，迭代地每次处理一块，最后生成n比特的散列函数</p>
+<h4 id="（2）一种最简单的散列函数"><a class="header-anchor" href="#（2）一种最简单的散列函数">¶</a>（2）一种最简单的散列函数</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230095511.png" alt=""></p>
+<p>对于随机数据的完整性校验很有效，书上有一些数学推导和改进；但是这些改进并不是很有效……</p>
+<p>举个例子，如果我们想替换一个假消息上去，为了让散列函数不变，我们可以根据需要附加一个n比特的数据块，想怎么调怎么调，非常容易生成相同的散列码……所以我们可以考虑散列码拼在消息后面以后，对整个进行加密</p>
 <h3 id="3-2-4-SHA安全散列函数"><a class="header-anchor" href="#3-2-4-SHA安全散列函数">¶</a>3.2.4 SHA安全散列函数</h3>
-<h2 id="3-3-消息认证码"><a class="header-anchor" href="#3-3-消息认证码">¶</a>3.3 消息认证码</h2>
+<p>SHA-1有时候也叫加密散列码，码和函数貌似差不多，不要纠结<br>
+经过一段时间的发展，现在主要是用SHA-2：</p>
+<blockquote>
+<p>SHA-2，名称来自于安全散列算法2（英语：Secure Hash Algorithm 2）的缩写，一种密码散列函数算法标准，由美国国家安全局研发[3]，由美国国家标准与技术研究院（NIST）在2001年发布。属于SHA算法之一，是SHA-1的后继者。其下又可再分为六个不同的算法标准，包括了：SHA-224、SHA-256、SHA-384、SHA-512、SHA-512/224、SHA-512/256。<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230104252.png" alt=""></p>
+</blockquote>
+<p>这里介绍一下SHA-512：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE2.png" alt=""></p>
+<p>（？）M和K是干嘛的？</p>
+<p>书上有些安全性的数学表达</p>
+<h2 id="3-3-消息认证码MAC"><a class="header-anchor" href="#3-3-消息认证码MAC">¶</a>3.3 消息认证码MAC</h2>
 <h3 id="3-3-1-HMAC"><a class="header-anchor" href="#3-3-1-HMAC">¶</a>3.3.1 HMAC</h3>
-<h4 id="为什么会有HMAC呢？"><a class="header-anchor" href="#为什么会有HMAC呢？">¶</a>为什么会有HMAC呢？</h4>
-<p>首先，由于SHA-1软件实现速度快、有许多共享的Hash函数代码库等优点，人们逐渐将它用于MAC。但是为了把密钥合并到散列算法中，人们开发出了HMAC</p>
-<h4 id="HMAC的设计目标"><a class="header-anchor" href="#HMAC的设计目标">¶</a>HMAC的设计目标</h4>
-<h4 id="HMAC的算法设计"><a class="header-anchor" href="#HMAC的算法设计">¶</a>HMAC的算法设计</h4>
+<h4 id="（1）为什么会有HMAC呢？"><a class="header-anchor" href="#（1）为什么会有HMAC呢？">¶</a>（1）为什么会有HMAC呢？</h4>
+<p>首先，由于SHA-1软件实现速度快、有许多共享的Hash函数代码库等优点，人们逐渐将它用于MAC。但是为了<strong>把密钥合并到散列算法</strong>中（本身做散列函数是不需要密钥的），人们开发出了HMAC</p>
+<h4 id="（2）HMAC的设计目标"><a class="header-anchor" href="#（2）HMAC的设计目标">¶</a>（2）HMAC的设计目标</h4>
+<ul>
+<li>不用大改散列函数</li>
+<li>嵌入的散列函数可移植，便于二次开发</li>
+<li>保持性能</li>
+<li>使用、处理密钥简单</li>
+<li>知散列函数强度——&gt;知HMAC强度</li>
+</ul>
+<p><strong>把散列函数模块化是个不错的做法</strong></p>
+<h4 id="（3）HMAC的算法设计"><a class="header-anchor" href="#（3）HMAC的算法设计">¶</a>（3）HMAC的算法设计</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE12.png" alt=""></p>
 <h3 id="3-3-2-基于分组密码的MAC"><a class="header-anchor" href="#3-3-2-基于分组密码的MAC">¶</a>3.3.2 基于分组密码的MAC</h3>
-<h4 id="基于密文的消息认证码CMAC"><a class="header-anchor" href="#基于密文的消息认证码CMAC">¶</a>基于密文的消息认证码CMAC</h4>
-<h4 id="具有密码块链式信息认证码的计数器"><a class="header-anchor" href="#具有密码块链式信息认证码的计数器">¶</a>具有密码块链式信息认证码的计数器</h4>
+<h4 id="（1）基于密文的消息认证码CMAC"><a class="header-anchor" href="#（1）基于密文的消息认证码CMAC">¶</a>（1）基于密文的消息认证码CMAC</h4>
+<p>适用于AES和3DES</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230125126.png" alt=""></p>
+<h4 id="（2）具有密码块链式信息认证码的计数器CCM"><a class="header-anchor" href="#（2）具有密码块链式信息认证码的计数器CCM">¶</a>（2）具有密码块链式信息认证码的计数器CCM</h4>
+<p>（？）好迷惑的名字</p>
+<p>又叫认证加密模式<br>
+CCM=AES+CTR操作模式（2.5节提过）+CMAC认证算法</p>
+<p>认证和加密一直是被设计成两种单独的服务的，前者保证可靠性（完整性），后者保证机密性</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230130735.png" alt=""></p>
+<p>感觉有点改进后的散列算法的味道，最后送出的是加密的消息+加密的标签（由消息生成）</p>
 <h2 id="3-4-公钥密码原理"><a class="header-anchor" href="#3-4-公钥密码原理">¶</a>3.4 公钥密码原理</h2>
 <h3 id="3-4-1-公钥密码思想"><a class="header-anchor" href="#3-4-1-公钥密码思想">¶</a>3.4.1 公钥密码思想</h3>
-<p>公钥密码基于数学函数，可以用于消息认证、密钥分发</p>
-<h4 id="常见误解"><a class="header-anchor" href="#常见误解">¶</a>常见误解</h4>
-<p>公钥比对称密码更安全</p>
+<p>公钥密码基于数学函数，可以用于加密、消息认证、密钥分发</p>
+<h4 id="（1）常见误解"><a class="header-anchor" href="#（1）常见误解">¶</a>（1）常见误解</h4>
+<ul>
+<li>公钥比对称密码更安全</li>
+<li>公钥密码淘汰了传统密码</li>
+<li>公钥密码实现的密钥分发比传统密码简单的多</li>
+</ul>
+<p>以上，都是错的</p>
+<h4 id="（2）公钥密码的组成"><a class="header-anchor" href="#（2）公钥密码的组成">¶</a>（2）公钥密码的组成</h4>
+<ul>
+<li>明文、密文</li>
+<li>公钥、私钥</li>
+<li>加密算法、解密算法</li>
+</ul>
+<p>都是成双成对哒~</p>
+<h4 id="（3）公钥密码算法基本流程"><a class="header-anchor" href="#（3）公钥密码算法基本流程">¶</a>（3）公钥密码算法基本流程</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230132126.png" alt=""></p>
+<h3 id="3-4-2-公钥密码系统的应用"><a class="header-anchor" href="#3-4-2-公钥密码系统的应用">¶</a>3.4.2 公钥密码系统的应用</h3>
+<p>发送者用什么，有三种情况：</p>
+<ul>
+<li>用自己私钥：数字签名1</li>
+<li>用对方公钥：加密/解密2</li>
+<li>两者都用</li>
+</ul>
+<p>3密钥交换：双方互换会话密钥</p>
+<p>123是公钥密码的三种应用，不同的算法对这几种应用的支持也不同</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230132641.png" alt=""></p>
+<h3 id="3-4-3-公钥密码的要求"><a class="header-anchor" href="#3-4-3-公钥密码的要求">¶</a>3.4.3 公钥密码的要求</h3>
+<p>见书P63</p>
 <h2 id="3-5-公钥密码算法"><a class="header-anchor" href="#3-5-公钥密码算法">¶</a>3.5 公钥密码算法</h2>
+<p>本节重点介绍RSA+DH，简要介绍DSS+椭圆曲线</p>
+<h3 id="3-5-1-RSA"><a class="header-anchor" href="#3-5-1-RSA">¶</a>3.5.1 RSA</h3>
+<p>基于大数分解的困难</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230140625.png" alt=""></p>
+<h3 id="3-5-2-Diffie-Hellman"><a class="header-anchor" href="#3-5-2-Diffie-Hellman">¶</a>3.5.2 Diffie-Hellman</h3>
+<p>基于离散对数计算的困难</p>
+<p>由于DH只有密钥交换的应用，所以通常被叫做DH密钥交换</p>
+<h4 id="（1）算法"><a class="header-anchor" href="#（1）算法">¶</a>（1）算法</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230141939.png" alt=""></p>
+<p>这种会受到中间人攻击，见（3）</p>
+<h4 id="（2）使用DH的另外一个例子"><a class="header-anchor" href="#（2）使用DH的另外一个例子">¶</a>（2）使用DH的另外一个例子</h4>
+<p>见书P68</p>
+<h4 id="（3）DH的中间人攻击"><a class="header-anchor" href="#（3）DH的中间人攻击">¶</a>（3）DH的中间人攻击</h4>
+<p>见书P68-69</p>
+<h3 id="3-5-3-其他公钥密码算法"><a class="header-anchor" href="#3-5-3-其他公钥密码算法">¶</a>3.5.3 其他公钥密码算法</h3>
+<h4 id="（1）ECC"><a class="header-anchor" href="#（1）ECC">¶</a>（1）ECC</h4>
+<h4 id="（2）DSS"><a class="header-anchor" href="#（2）DSS">¶</a>（2）DSS</h4>
+<h2 id="3-6-数字签名"><a class="header-anchor" href="#3-6-数字签名">¶</a>3.6 数字签名</h2>
+<p>应用场景：Bob希望给Alice发送消息，消息保不保密不重要，但是需要Alice能确认这条消息确实来自于他；所以用Bob的私钥加密的消息就叫做数字签名</p>
+<p>数字签名保证可靠性+完整性（没有Bob的私钥是不能篡改消息的）</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -399,7 +486,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E6%96%B9%E6%B3%95"><span class="nav-text">3.1 消息认证方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-0-%E5%BC%95%E8%A8%80"><span class="nav-text">3.1.0 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-%E5%88%A9%E7%94%A8%E5%B8%B8%E8%A7%84%E5%8A%A0%E5%AF%86%E7%9A%84%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81"><span class="nav-text">3.1.1 利用常规加密的消息认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-%E9%9D%9E%E5%8A%A0%E5%AF%86%E7%9A%84%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81"><span class="nav-text">3.1.2 非加密的消息认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E8%AE%A4%E8%AF%81%E4%B8%8E%E5%8A%A0%E5%AF%86"><span class="nav-text">（1）认证与加密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%8F%AF%E4%BB%A5%E4%B8%8D%E5%8A%A0%E5%AF%86%E5%8F%AA%E8%AE%A4%E8%AF%81%E5%91%A2%EF%BC%9F"><span class="nav-text">（2）什么时候可以不加密只认证呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81MAC"><span class="nav-text">（3）消息认证码MAC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E5%8D%95%E5%90%91%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">（4）单向散列函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%AE%89%E5%85%A8%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">3.2 安全散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0%E7%9A%84%E8%A6%81%E6%B1%82"><span class="nav-text">3.2.1 散列函数的要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-text">3.2.2 散列函数的安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E7%AE%80%E5%8D%95%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">3.2.3 简单散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-text">（1）散列函数基本原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4-SHA%E5%AE%89%E5%85%A8%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">3.2.4 SHA安全散列函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81"><span class="nav-text">3.3 消息认证码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-HMAC"><span class="nav-text">3.3.1 HMAC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89HMAC%E5%91%A2%EF%BC%9F"><span class="nav-text">为什么会有HMAC呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HMAC%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87"><span class="nav-text">HMAC的设计目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HMAC%E7%9A%84%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1"><span class="nav-text">HMAC的算法设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-%E5%9F%BA%E4%BA%8E%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E7%9A%84MAC"><span class="nav-text">3.3.2 基于分组密码的MAC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%AF%86%E6%96%87%E7%9A%84%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81CMAC"><span class="nav-text">基于密文的消息认证码CMAC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E6%9C%89%E5%AF%86%E7%A0%81%E5%9D%97%E9%93%BE%E5%BC%8F%E4%BF%A1%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="nav-text">具有密码块链式信息认证码的计数器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%8E%9F%E7%90%86"><span class="nav-text">3.4 公钥密码原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E6%80%9D%E6%83%B3"><span class="nav-text">3.4.1 公钥密码思想</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E8%AF%AF%E8%A7%A3"><span class="nav-text">常见误解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95"><span class="nav-text">3.5 公钥密码算法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E6%96%B9%E6%B3%95"><span class="nav-text">3.1 消息认证方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-0-%E5%BC%95%E8%A8%80"><span class="nav-text">3.1.0 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-%E5%88%A9%E7%94%A8%E5%B8%B8%E8%A7%84%E5%8A%A0%E5%AF%86%E7%9A%84%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81"><span class="nav-text">3.1.1 利用常规加密的消息认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-%E9%9D%9E%E5%8A%A0%E5%AF%86%E7%9A%84%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81"><span class="nav-text">3.1.2 非加密的消息认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E8%AE%A4%E8%AF%81%E4%B8%8E%E5%8A%A0%E5%AF%86"><span class="nav-text">（1）认证与加密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%8F%AF%E4%BB%A5%E4%B8%8D%E5%8A%A0%E5%AF%86%E5%8F%AA%E8%AE%A4%E8%AF%81%E5%91%A2%EF%BC%9F"><span class="nav-text">（2）什么时候可以不加密只认证呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81MAC"><span class="nav-text">（3）消息认证码MAC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E5%8D%95%E5%90%91%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">（4）单向散列函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%AE%89%E5%85%A8%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">3.2 安全散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0%E7%9A%84%E8%A6%81%E6%B1%82"><span class="nav-text">3.2.1 散列函数的要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-text">3.2.2 散列函数的安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E7%AE%80%E5%8D%95%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">3.2.3 简单散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-text">（1）散列函数基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E4%B8%80%E7%A7%8D%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">（2）一种最简单的散列函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4-SHA%E5%AE%89%E5%85%A8%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">3.2.4 SHA安全散列函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81MAC"><span class="nav-text">3.3 消息认证码MAC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-HMAC"><span class="nav-text">3.3.1 HMAC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89HMAC%E5%91%A2%EF%BC%9F"><span class="nav-text">（1）为什么会有HMAC呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89HMAC%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87"><span class="nav-text">（2）HMAC的设计目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89HMAC%E7%9A%84%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1"><span class="nav-text">（3）HMAC的算法设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-%E5%9F%BA%E4%BA%8E%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E7%9A%84MAC"><span class="nav-text">3.3.2 基于分组密码的MAC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%9F%BA%E4%BA%8E%E5%AF%86%E6%96%87%E7%9A%84%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81CMAC"><span class="nav-text">（1）基于密文的消息认证码CMAC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%85%B7%E6%9C%89%E5%AF%86%E7%A0%81%E5%9D%97%E9%93%BE%E5%BC%8F%E4%BF%A1%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8CCM"><span class="nav-text">（2）具有密码块链式信息认证码的计数器CCM</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%8E%9F%E7%90%86"><span class="nav-text">3.4 公钥密码原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E6%80%9D%E6%83%B3"><span class="nav-text">3.4.1 公钥密码思想</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%B8%B8%E8%A7%81%E8%AF%AF%E8%A7%A3"><span class="nav-text">（1）常见误解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E7%9A%84%E7%BB%84%E6%88%90"><span class="nav-text">（2）公钥密码的组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="nav-text">（3）公钥密码算法基本流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-2-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">3.4.2 公钥密码系统的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-3-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E7%9A%84%E8%A6%81%E6%B1%82"><span class="nav-text">3.4.3 公钥密码的要求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95"><span class="nav-text">3.5 公钥密码算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-1-RSA"><span class="nav-text">3.5.1 RSA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-2-Diffie-Hellman"><span class="nav-text">3.5.2 Diffie-Hellman</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E7%AE%97%E6%B3%95"><span class="nav-text">（1）算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E4%BD%BF%E7%94%A8DH%E7%9A%84%E5%8F%A6%E5%A4%96%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="nav-text">（2）使用DH的另外一个例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89DH%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB"><span class="nav-text">（3）DH的中间人攻击</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-3-%E5%85%B6%E4%BB%96%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95"><span class="nav-text">3.5.3 其他公钥密码算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89ECC"><span class="nav-text">（1）ECC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89DSS"><span class="nav-text">（2）DSS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D"><span class="nav-text">3.6 数字签名</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
