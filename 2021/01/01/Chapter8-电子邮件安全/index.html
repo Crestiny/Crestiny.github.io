@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="由于电子邮件应用太广泛了，所以有了两种安全方案：PGP和S&#x2F;MIME ¶8.1 PGP PGP可以提供保密和认证 ¶8.1.1 符号约定 ¶8.1.2 操作描述 PGP的实操包括如下服务：  ¶（1）认证  ¶（2）保密  ¶（3）保密与认证  ¶（4）压缩 ¶（5）电子邮件兼容性 总结一下PGP消息的的接收和发送流程如下：  ¶8.2 S&#x2F;MIME S&#x2F;MIME是对MIME的电子邮件格式做安全性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter8 电子邮件安全">
+<meta property="og:url" content="http://yoursite.com/2021/01/01/Chapter8-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="由于电子邮件应用太广泛了，所以有了两种安全方案：PGP和S&#x2F;MIME ¶8.1 PGP PGP可以提供保密和认证 ¶8.1.1 符号约定 ¶8.1.2 操作描述 PGP的实操包括如下服务：  ¶（1）认证  ¶（2）保密  ¶（3）保密与认证  ¶（4）压缩 ¶（5）电子邮件兼容性 总结一下PGP消息的的接收和发送流程如下：  ¶8.2 S&#x2F;MIME S&#x2F;MIME是对MIME的电子邮件格式做安全性">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101233530.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE130.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE131.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101235928.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102000654.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102105630.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102121624.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102123027.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE129.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/22RRV%7B8Y50AF0NZSN@N94R5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE128.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE125.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE126.png">
+<meta property="article:published_time" content="2021-01-01T14:45:35.000Z">
+<meta property="article:modified_time" content="2021-01-02T15:11:50.597Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101233530.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/01/01/Chapter8-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%AE%89%E5%85%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Chapter8 电子邮件安全 | Crestiny's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Crestiny's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Life is fantastic ! </p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/01/Chapter8-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%AE%89%E5%85%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Chapter8 电子邮件安全
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-01 22:45:35" itemprop="dateCreated datePublished" datetime="2021-01-01T22:45:35+08:00">2021-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-02 23:11:50" itemprop="dateModified" datetime="2021-01-02T23:11:50+08:00">2021-01-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>由于电子邮件应用太广泛了，所以有了两种安全方案：PGP和S/MIME</p>
+<h2 id="8-1-PGP"><a class="header-anchor" href="#8-1-PGP">¶</a>8.1 PGP</h2>
+<p>PGP可以提供保密和认证</p>
+<h3 id="8-1-1-符号约定"><a class="header-anchor" href="#8-1-1-符号约定">¶</a>8.1.1 符号约定</h3>
+<h3 id="8-1-2-操作描述"><a class="header-anchor" href="#8-1-2-操作描述">¶</a>8.1.2 操作描述</h3>
+<p>PGP的实操包括如下服务：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101233530.png" alt=""></p>
+<h4 id="（1）认证"><a class="header-anchor" href="#（1）认证">¶</a>（1）认证</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE130.png" alt=""></p>
+<h4 id="（2）保密"><a class="header-anchor" href="#（2）保密">¶</a>（2）保密</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE131.png" alt=""></p>
+<h4 id="（3）保密与认证"><a class="header-anchor" href="#（3）保密与认证">¶</a>（3）保密与认证</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101235928.png" alt=""></p>
+<h4 id="（4）压缩"><a class="header-anchor" href="#（4）压缩">¶</a>（4）压缩</h4>
+<h4 id="（5）电子邮件兼容性"><a class="header-anchor" href="#（5）电子邮件兼容性">¶</a>（5）电子邮件兼容性</h4>
+<p>总结一下PGP消息的的接收和发送流程如下：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102000654.png" alt=""></p>
+<h2 id="8-2-S-MIME"><a class="header-anchor" href="#8-2-S-MIME">¶</a>8.2 S/MIME</h2>
+<p>S/MIME是对MIME的电子邮件格式做安全性增强</p>
+<h3 id="8-2-1-RFC-5322"><a class="header-anchor" href="#8-2-1-RFC-5322">¶</a>8.2.1 RFC 5322</h3>
+<p>RFC 5322定义了一种电子邮件传输的文本消息格式：报头+空行+正文</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Date: Tue, 16 Jan 1998 10: 37:17(EST)</span><br><span class="line">From: "william stallings" ws@shore.netSubject: The Syntax in RFC 5322</span><br><span class="line">To: Smith@other-host.com</span><br><span class="line">cc: Jones@Yet-Another-Host.com</span><br><span class="line"></span><br><span class="line">Hello.This section begins the actual message body，which is delimited fromthe message heading by a blank line.</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="8-2-2-MIME"><a class="header-anchor" href="#8-2-2-MIME">¶</a>8.2.2 MIME</h3>
+<p>学名叫：多用途网际邮件扩展，是对RFC 5322的扩展，用于解决这个格式存在的问题、协议存在的问题等……</p>
+<p>MIME定义了：</p>
+<ul>
+<li>5种新报头域</li>
+<li>多种内容格式</li>
+<li>编码转换方式</li>
+</ul>
+<h4 id="（1）5种新报头域"><a class="header-anchor" href="#（1）5种新报头域">¶</a>（1）5种新报头域</h4>
+<p>MIME版本MIME-Version：其参数值必须为1.0，表明该消息符合RFC 2045和2046。<br>
+内容类型Content-Type：详细描述正文中包含的数据，使得用户代理可以选择合适的代理或机制表示数据或正确处理数据。<br>
+内容传输编码Content-Transfer-Encoding：将消息正文转换为可传输类型的转换方式。<br>
+内容ID  Content-ID：在多个上下文中唯一标识MIME实体的标识。<br>
+内容描述 Content-Description：正文对象的文本描述，在该对象不可读（如音频数据）时使用。</p>
+<h4 id="（2）多种内容格式"><a class="header-anchor" href="#（2）多种内容格式">¶</a>（2）多种内容格式</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102105630.png" alt=""></p>
+<h4 id="（3）编码转换方式"><a class="header-anchor" href="#（3）编码转换方式">¶</a>（3）编码转换方式</h4>
+<p>提供可靠的传输</p>
+<h3 id="8-2-3-S-MIME的功能"><a class="header-anchor" href="#8-2-3-S-MIME的功能">¶</a>8.2.3 S/MIME的功能</h3>
+<p>可以理解成在MIME的基础上多加了一些类型</p>
+<h4 id="（1）S-MIME的功能"><a class="header-anchor" href="#（1）S-MIME的功能">¶</a>（1）S/MIME的功能</h4>
+<ul>
+<li>封装数据：加密内容+接收方解密需要的密钥</li>
+<li>签名数据：内容—&gt;H—&gt;私钥加密，签名加内容再整个Base-64（没有S/MIME能力的不能看到内容，不能验证签名）</li>
+<li>透明签名数据：内容—&gt;H—&gt;私钥加密，只签名Base-64（没有S/MIME能力的能看到内容，不能验证签名）</li>
+<li>签名并封装数据：签名+加密</li>
+</ul>
+<h4 id="（2）加密算法"><a class="header-anchor" href="#（2）加密算法">¶</a>（2）加密算法</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102121624.png" alt=""></p>
+<p>如何选择加密算法？<br>
+书上有一些判断规则之类的</p>
+<h3 id="8-2-4-S-MIME消息"><a class="header-anchor" href="#8-2-4-S-MIME消息">¶</a>8.2.4 S/MIME消息</h3>
+<h4 id="（1）保护MIME实体"><a class="header-anchor" href="#（1）保护MIME实体">¶</a>（1）保护MIME实体</h4>
+<p>这里是要讲S/MIME准备消息的一般操作：</p>
+<ul>
+<li>首先我们用传统的MIME格式来生成MIME实体</li>
+<li>然后把MIME实体和安全相关数据交给S/MIME处理</li>
+<li>S/MIME的处理结果是PKCS对象（？）</li>
+<li>在将PKCS对象封装为MIME消息</li>
+</ul>
+<p>S/MIME的内容类型如下：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102123027.png" alt=""></p>
+<p>下面逐一介绍这些类型：</p>
+<h4 id="（2）封装数据"><a class="header-anchor" href="#（2）封装数据">¶</a>（2）封装数据</h4>
+<p>准备封装数据MIME实体的步骤如下：</p>
+<ul>
+<li>对对称算法生成伪随机的会话密钥</li>
+<li>用对方公钥加密会话密钥</li>
+<li>准备信息块</li>
+<li>用会话密钥加密消息</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE129.png" alt=""></p>
+<h4 id="（3）签名数据"><a class="header-anchor" href="#（3）签名数据">¶</a>（3）签名数据</h4>
+<p>MIME实体准备签名数据的步骤如下：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/22RRV%7B8Y50AF0NZSN@N94R5.png" alt=""></p>
+<h4 id="（4）透明签名"><a class="header-anchor" href="#（4）透明签名">¶</a>（4）透明签名</h4>
+<p>主要用在多部分的，消息与签名分离</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE128.png" alt=""></p>
+<h4 id="（5）注册请求"><a class="header-anchor" href="#（5）注册请求">¶</a>（5）注册请求</h4>
+<p>向CA申请公钥证书</p>
+<h4 id="（6）仅证书消息"><a class="header-anchor" href="#（6）仅证书消息">¶</a>（6）仅证书消息</h4>
+<p>在应答注册请求时发送，仅包含证书/CRL</p>
+<h3 id="8-2-5-S-MIME证书处理过程"><a class="header-anchor" href="#8-2-5-S-MIME证书处理过程">¶</a>8.2.5 S/MIME证书处理过程</h3>
+<p>S/MIME使用公钥证书的方式与X.509v3一致</p>
+<h4 id="（1）用户代理职责"><a class="header-anchor" href="#（1）用户代理职责">¶</a>（1）用户代理职责</h4>
+<p>S/MIME的用户要做的事</p>
+<h4 id="（2）VeriSign证书"><a class="header-anchor" href="#（2）VeriSign证书">¶</a>（2）VeriSign证书</h4>
+<p>VeriSign是提供CA服务的公司之一</p>
+<h3 id="8-2-6-增强的安全服务"><a class="header-anchor" href="#8-2-6-增强的安全服务">¶</a>8.2.6 增强的安全服务</h3>
+<h2 id="8-3-DKIM"><a class="header-anchor" href="#8-3-DKIM">¶</a>8.3 DKIM</h2>
+<p>学名叫：域名密钥识别邮件——是电子邮件信息密钥签名规范</p>
+<p>说人话：<br>
+受到这种信息的一方，可以查询其中的签名域，获取公钥，并且确定对方的身份可信</p>
+<h3 id="8-3-1-互联网邮件体系结构"><a class="header-anchor" href="#8-3-1-互联网邮件体系结构">¶</a>8.3.1 互联网邮件体系结构</h3>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE125.png" alt=""></p>
+<p>补充一个概念：行政管理域ADMD</p>
+<blockquote>
+<p>每个行政管理域可以用不同的决策，比如，组织内部的邮件交换处理，组织之间的……</p>
+</blockquote>
+<h3 id="8-3-2-E-mail威胁"><a class="header-anchor" href="#8-3-2-E-mail威胁">¶</a>8.3.2 E-mail威胁</h3>
+<h4 id="（1）攻击者的3个威胁等级"><a class="header-anchor" href="#（1）攻击者的3个威胁等级">¶</a>（1）攻击者的3个威胁等级</h4>
+<h4 id="（2）攻击者可能具备的能力"><a class="header-anchor" href="#（2）攻击者可能具备的能力">¶</a>（2）攻击者可能具备的能力</h4>
+<h4 id="（3）定位"><a class="header-anchor" href="#（3）定位">¶</a>（3）定位</h4>
+<p>（？）</p>
+<h3 id="8-3-3-DKIM策略"><a class="header-anchor" href="#8-3-3-DKIM策略">¶</a>8.3.3 DKIM策略</h3>
+<p>提供一种对终端用户透明的E-mail认证技术</p>
+<p>透明到底是啥意思（？）</p>
+<p>DKIM工作流程：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE126.png" alt=""></p>
+<p>基本架构和互联网邮件体系结构是一致的</p>
+<h3 id="8-3-4-DKIM的功能流程"><a class="header-anchor" href="#8-3-4-DKIM的功能流程">¶</a>8.3.4 DKIM的功能流程</h3>
+<p>上面是举了一个例子，现在有一份更详细的描述：</p>
+<p>好复杂，不太懂（？）</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/01/Chapter7-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="prev" title="Chapter7 无线网络安全">
+      <i class="fa fa-chevron-left"></i> Chapter7 无线网络安全
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/02/Chapter2-%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/" rel="next" title="Chapter2 内存寻址">
+      Chapter2 内存寻址 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-PGP"><span class="nav-text">8.1 PGP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-1-%E7%AC%A6%E5%8F%B7%E7%BA%A6%E5%AE%9A"><span class="nav-text">8.1.1 符号约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-2-%E6%93%8D%E4%BD%9C%E6%8F%8F%E8%BF%B0"><span class="nav-text">8.1.2 操作描述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E8%AE%A4%E8%AF%81"><span class="nav-text">（1）认证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E4%BF%9D%E5%AF%86"><span class="nav-text">（2）保密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E4%BF%9D%E5%AF%86%E4%B8%8E%E8%AE%A4%E8%AF%81"><span class="nav-text">（3）保密与认证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E5%8E%8B%E7%BC%A9"><span class="nav-text">（4）压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%885%EF%BC%89%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="nav-text">（5）电子邮件兼容性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-S-MIME"><span class="nav-text">8.2 S&#x2F;MIME</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-1-RFC-5322"><span class="nav-text">8.2.1 RFC 5322</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-2-MIME"><span class="nav-text">8.2.2 MIME</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%895%E7%A7%8D%E6%96%B0%E6%8A%A5%E5%A4%B4%E5%9F%9F"><span class="nav-text">（1）5种新报头域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%A4%9A%E7%A7%8D%E5%86%85%E5%AE%B9%E6%A0%BC%E5%BC%8F"><span class="nav-text">（2）多种内容格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2%E6%96%B9%E5%BC%8F"><span class="nav-text">（3）编码转换方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-3-S-MIME%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-text">8.2.3 S&#x2F;MIME的功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89S-MIME%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-text">（1）S&#x2F;MIME的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95"><span class="nav-text">（2）加密算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-4-S-MIME%E6%B6%88%E6%81%AF"><span class="nav-text">8.2.4 S&#x2F;MIME消息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%BF%9D%E6%8A%A4MIME%E5%AE%9E%E4%BD%93"><span class="nav-text">（1）保护MIME实体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%B0%81%E8%A3%85%E6%95%B0%E6%8D%AE"><span class="nav-text">（2）封装数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E7%AD%BE%E5%90%8D%E6%95%B0%E6%8D%AE"><span class="nav-text">（3）签名数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E9%80%8F%E6%98%8E%E7%AD%BE%E5%90%8D"><span class="nav-text">（4）透明签名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%885%EF%BC%89%E6%B3%A8%E5%86%8C%E8%AF%B7%E6%B1%82"><span class="nav-text">（5）注册请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%886%EF%BC%89%E4%BB%85%E8%AF%81%E4%B9%A6%E6%B6%88%E6%81%AF"><span class="nav-text">（6）仅证书消息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-5-S-MIME%E8%AF%81%E4%B9%A6%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B"><span class="nav-text">8.2.5 S&#x2F;MIME证书处理过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E7%94%A8%E6%88%B7%E4%BB%A3%E7%90%86%E8%81%8C%E8%B4%A3"><span class="nav-text">（1）用户代理职责</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89VeriSign%E8%AF%81%E4%B9%A6"><span class="nav-text">（2）VeriSign证书</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-6-%E5%A2%9E%E5%BC%BA%E7%9A%84%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1"><span class="nav-text">8.2.6 增强的安全服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-DKIM"><span class="nav-text">8.3 DKIM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-1-%E4%BA%92%E8%81%94%E7%BD%91%E9%82%AE%E4%BB%B6%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-text">8.3.1 互联网邮件体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-2-E-mail%E5%A8%81%E8%83%81"><span class="nav-text">8.3.2 E-mail威胁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%94%BB%E5%87%BB%E8%80%85%E7%9A%843%E4%B8%AA%E5%A8%81%E8%83%81%E7%AD%89%E7%BA%A7"><span class="nav-text">（1）攻击者的3个威胁等级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%94%BB%E5%87%BB%E8%80%85%E5%8F%AF%E8%83%BD%E5%85%B7%E5%A4%87%E7%9A%84%E8%83%BD%E5%8A%9B"><span class="nav-text">（2）攻击者可能具备的能力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%AE%9A%E4%BD%8D"><span class="nav-text">（3）定位</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-3-DKIM%E7%AD%96%E7%95%A5"><span class="nav-text">8.3.3 DKIM策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-4-DKIM%E7%9A%84%E5%8A%9F%E8%83%BD%E6%B5%81%E7%A8%8B"><span class="nav-text">8.3.4 DKIM的功能流程</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CrestinyCoco</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CrestinyCoco</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

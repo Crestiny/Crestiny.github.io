@@ -157,7 +157,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/31/Chapter4-%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/02/Chapter2-%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -171,7 +171,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/12/31/Chapter4-%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B/" class="post-title-link" itemprop="url">Chapter4 需求工程</a>
+            <a href="/2021/01/02/Chapter2-%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/" class="post-title-link" itemprop="url">Chapter2 内存寻址</a>
         </h2>
 
         <div class="post-meta">
@@ -182,7 +182,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-12-31 16:12:42 / 修改时间：16:28:09" itemprop="dateCreated datePublished" datetime="2020-12-31T16:12:42+08:00">2020-12-31</time>
+              <time title="创建时间：2021-01-02 15:24:26 / 修改时间：22:16:20" itemprop="dateCreated datePublished" datetime="2021-01-02T15:24:26+08:00">2021-01-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -190,11 +190,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件工程原理》</span></a>
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                  <a href="/categories/Courses/%E3%80%8ALinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8-E2-%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《Linux操作系统原理与应用(E2)》</span></a>
                 </span>
             </span>
 
@@ -209,21 +209,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="4-1-软件需求面临的挑战"><a class="header-anchor" href="#4-1-软件需求面临的挑战">¶</a>4.1 软件需求面临的挑战</h2>
-<p>见书P96</p>
-<h2 id="4-2-需求工程的概念"><a class="header-anchor" href="#4-2-需求工程的概念">¶</a>4.2 需求工程的概念</h2>
-<h3 id="4-2-1-软件需求"><a class="header-anchor" href="#4-2-1-软件需求">¶</a>4.2.1 软件需求</h3>
-<p>需求=系统要有的条件+能力</p>
-<p>我们常用FURPS+模型定义软件需求：</p>
+          <h2 id="2-1-内存寻址"><a class="header-anchor" href="#2-1-内存寻址">¶</a>2.1 内存寻址</h2>
+<h3 id="2-1-1-Intel-x86-CPU寻址的演变"><a class="header-anchor" href="#2-1-1-Intel-x86-CPU寻址的演变">¶</a>2.1.1 Intel x86 CPU寻址的演变</h3>
+<h3 id="2-1-2-80x86寄存器简介"><a class="header-anchor" href="#2-1-2-80x86寄存器简介">¶</a>2.1.2 80x86寄存器简介</h3>
+<h4 id="（1）8个32位通用寄存器"><a class="header-anchor" href="#（1）8个32位通用寄存器">¶</a>（1）8个32位通用寄存器</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102161511.png" alt=""></p>
+<h4 id="（2）4个16位段寄存器"><a class="header-anchor" href="#（2）4个16位段寄存器">¶</a>（2）4个16位段寄存器</h4>
 <ul>
-<li>F——Functionality：功能、安全性</li>
-<li>U——Usability：实现“用户友好”的因素</li>
-<li>R——Reliability：保证软件可以无故障运行一段时间</li>
-<li>P——Performance：效率、吞吐量等衡量标准</li>
-<li>S——Supportability：（这个我懂得比较少诶）表明进行系统测试、安装、移植等工作量的大小</li>
-<li>+——一些补充的需求：见书P98</li>
+<li>CS：代码段</li>
+<li>DS：数据段</li>
+<li>SS：堆栈段</li>
+<li>ES：其他段</li>
 </ul>
-<p>F为功能性需求，URPS为非功能性需求，+为补充需求</p>
+<p>放的都是基地址</p>
+<h4 id="（3）指令指针寄存器和标志寄存器"><a class="header-anchor" href="#（3）指令指针寄存器和标志寄存器">¶</a>（3）指令指针寄存器和标志寄存器</h4>
+<ul>
+<li>EIP：下一条要执行的指令的offset（相对CS），低16位叫IP寄存器</li>
+<li>EFLAGS：控制等</li>
+</ul>
+<h4 id="（4）控制寄存器"><a class="header-anchor" href="#（4）控制寄存器">¶</a>（4）控制寄存器</h4>
+<p>CR系列，主要用于分页机制</p>
+<h3 id="2-1-3-物理地址、虚拟地址、线性地址"><a class="header-anchor" href="#2-1-3-物理地址、虚拟地址、线性地址">¶</a>2.1.3 物理地址、虚拟地址、线性地址</h3>
+<p>物理内存条提供的内存空间就是物理内存空间，每个内存单元的实际地址就是物理地址；而程序员看到的内存空间定义为虚拟地址空间，叫虚拟地址或者逻辑地址</p>
+<p>内存管理单元MMU负责把虚拟地址映射为物理地址，线性地址是指一段连续不分段的地址空间（大小在0~4GB）</p>
+<h2 id="2-2-段机制"><a class="header-anchor" href="#2-2-段机制">¶</a>2.2 段机制</h2>
+<p><strong>段是虚拟地址空间的基本单位</strong></p>
+<h3 id="2-2-1-段描述符"><a class="header-anchor" href="#2-2-1-段描述符">¶</a>2.2.1 段描述符</h3>
+<p>是一个数据结构，包括：</p>
+<ul>
+<li>基地址</li>
+<li>界限</li>
+<li>保护属性</li>
+</ul>
+<p>可以用下图描述：</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -261,7 +279,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/29/Chapter3-%E8%BD%AF%E4%BB%B6%E5%BB%BA%E6%A8%A1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/01/Chapter8-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%AE%89%E5%85%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -275,7 +293,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/12/29/Chapter3-%E8%BD%AF%E4%BB%B6%E5%BB%BA%E6%A8%A1/" class="post-title-link" itemprop="url">Chapter3 软件建模</a>
+            <a href="/2021/01/01/Chapter8-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%AE%89%E5%85%A8/" class="post-title-link" itemprop="url">Chapter8 电子邮件安全</a>
         </h2>
 
         <div class="post-meta">
@@ -285,14 +303,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-29 14:56:07" itemprop="dateCreated datePublished" datetime="2020-12-29T14:56:07+08:00">2020-12-29</time>
+              <time title="创建时间：2021-01-01 22:45:35" itemprop="dateCreated datePublished" datetime="2021-01-01T22:45:35+08:00">2021-01-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-30 00:30:38" itemprop="dateModified" datetime="2020-12-30T00:30:38+08:00">2020-12-30</time>
+                <time title="修改时间：2021-01-02 23:11:50" itemprop="dateModified" datetime="2021-01-02T23:11:50+08:00">2021-01-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -300,11 +318,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件工程原理》</span></a>
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
                 </span>
             </span>
 
@@ -319,178 +337,121 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="3-1-模型和建模"><a class="header-anchor" href="#3-1-模型和建模">¶</a>3.1 模型和建模</h2>
-<h3 id="3-1-1-模型"><a class="header-anchor" href="#3-1-1-模型">¶</a>3.1.1 模型</h3>
-<p>模型可以帮助我们抓住问题本质，按需取用不同的语言来描述，一般有如下作用：</p>
+          <p>由于电子邮件应用太广泛了，所以有了两种安全方案：PGP和S/MIME</p>
+<h2 id="8-1-PGP"><a class="header-anchor" href="#8-1-PGP">¶</a>8.1 PGP</h2>
+<p>PGP可以提供保密和认证</p>
+<h3 id="8-1-1-符号约定"><a class="header-anchor" href="#8-1-1-符号约定">¶</a>8.1.1 符号约定</h3>
+<h3 id="8-1-2-操作描述"><a class="header-anchor" href="#8-1-2-操作描述">¶</a>8.1.2 操作描述</h3>
+<p>PGP的实操包括如下服务：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101233530.png" alt=""></p>
+<h4 id="（1）认证"><a class="header-anchor" href="#（1）认证">¶</a>（1）认证</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE130.png" alt=""></p>
+<h4 id="（2）保密"><a class="header-anchor" href="#（2）保密">¶</a>（2）保密</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE131.png" alt=""></p>
+<h4 id="（3）保密与认证"><a class="header-anchor" href="#（3）保密与认证">¶</a>（3）保密与认证</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101235928.png" alt=""></p>
+<h4 id="（4）压缩"><a class="header-anchor" href="#（4）压缩">¶</a>（4）压缩</h4>
+<h4 id="（5）电子邮件兼容性"><a class="header-anchor" href="#（5）电子邮件兼容性">¶</a>（5）电子邮件兼容性</h4>
+<p>总结一下PGP消息的的接收和发送流程如下：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102000654.png" alt=""></p>
+<h2 id="8-2-S-MIME"><a class="header-anchor" href="#8-2-S-MIME">¶</a>8.2 S/MIME</h2>
+<p>S/MIME是对MIME的电子邮件格式做安全性增强</p>
+<h3 id="8-2-1-RFC-5322"><a class="header-anchor" href="#8-2-1-RFC-5322">¶</a>8.2.1 RFC 5322</h3>
+<p>RFC 5322定义了一种电子邮件传输的文本消息格式：报头+空行+正文</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Date: Tue, 16 Jan 1998 10: 37:17(EST)</span><br><span class="line">From: "william stallings" ws@shore.netSubject: The Syntax in RFC 5322</span><br><span class="line">To: Smith@other-host.com</span><br><span class="line">cc: Jones@Yet-Another-Host.com</span><br><span class="line"></span><br><span class="line">Hello.This section begins the actual message body，which is delimited fromthe message heading by a blank line.</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="8-2-2-MIME"><a class="header-anchor" href="#8-2-2-MIME">¶</a>8.2.2 MIME</h3>
+<p>学名叫：多用途网际邮件扩展，是对RFC 5322的扩展，用于解决这个格式存在的问题、协议存在的问题等……</p>
+<p>MIME定义了：</p>
 <ul>
-<li>降低风险</li>
-<li>比较不同方案</li>
-<li>用于交流</li>
-<li>指导工程</li>
+<li>5种新报头域</li>
+<li>多种内容格式</li>
+<li>编码转换方式</li>
 </ul>
-<h3 id="3-1-2-软件模型的3个层次：CIM、PIM和PSM"><a class="header-anchor" href="#3-1-2-软件模型的3个层次：CIM、PIM和PSM">¶</a>3.1.2 软件模型的3个层次：CIM、PIM和PSM</h3>
-<p>它们的关系可以用下图描述：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229150729.png" alt=""></p>
-<h3 id="3-1-3-软件建模方法"><a class="header-anchor" href="#3-1-3-软件建模方法">¶</a>3.1.3 软件建模方法</h3>
-<p>软件越来越大，单打独斗不现实了，我们需要理论和方法论支撑。接下来将分别介绍：</p>
+<h4 id="（1）5种新报头域"><a class="header-anchor" href="#（1）5种新报头域">¶</a>（1）5种新报头域</h4>
+<p>MIME版本MIME-Version：其参数值必须为1.0，表明该消息符合RFC 2045和2046。<br>
+内容类型Content-Type：详细描述正文中包含的数据，使得用户代理可以选择合适的代理或机制表示数据或正确处理数据。<br>
+内容传输编码Content-Transfer-Encoding：将消息正文转换为可传输类型的转换方式。<br>
+内容ID  Content-ID：在多个上下文中唯一标识MIME实体的标识。<br>
+内容描述 Content-Description：正文对象的文本描述，在该对象不可读（如音频数据）时使用。</p>
+<h4 id="（2）多种内容格式"><a class="header-anchor" href="#（2）多种内容格式">¶</a>（2）多种内容格式</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102105630.png" alt=""></p>
+<h4 id="（3）编码转换方式"><a class="header-anchor" href="#（3）编码转换方式">¶</a>（3）编码转换方式</h4>
+<p>提供可靠的传输</p>
+<h3 id="8-2-3-S-MIME的功能"><a class="header-anchor" href="#8-2-3-S-MIME的功能">¶</a>8.2.3 S/MIME的功能</h3>
+<p>可以理解成在MIME的基础上多加了一些类型</p>
+<h4 id="（1）S-MIME的功能"><a class="header-anchor" href="#（1）S-MIME的功能">¶</a>（1）S/MIME的功能</h4>
 <ul>
-<li>结构化方法</li>
-<li>面向对象方法</li>
-<li>基于构件的开发方法</li>
-<li>面向服务方法</li>
-<li>模型驱动开发方法</li>
-<li>形式化方法</li>
-<li>敏捷建模方法</li>
+<li>封装数据：加密内容+接收方解密需要的密钥</li>
+<li>签名数据：内容—&gt;H—&gt;私钥加密，签名加内容再整个Base-64（没有S/MIME能力的不能看到内容，不能验证签名）</li>
+<li>透明签名数据：内容—&gt;H—&gt;私钥加密，只签名Base-64（没有S/MIME能力的能看到内容，不能验证签名）</li>
+<li>签名并封装数据：签名+加密</li>
 </ul>
-<h2 id="3-2-结构化方法"><a class="header-anchor" href="#3-2-结构化方法">¶</a>3.2 结构化方法</h2>
-<p>结构化方法的核心思想：模块化+“自顶向下，逐步求精”</p>
-<p>其实这是一套方法，包括：</p>
+<h4 id="（2）加密算法"><a class="header-anchor" href="#（2）加密算法">¶</a>（2）加密算法</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102121624.png" alt=""></p>
+<p>如何选择加密算法？<br>
+书上有一些判断规则之类的</p>
+<h3 id="8-2-4-S-MIME消息"><a class="header-anchor" href="#8-2-4-S-MIME消息">¶</a>8.2.4 S/MIME消息</h3>
+<h4 id="（1）保护MIME实体"><a class="header-anchor" href="#（1）保护MIME实体">¶</a>（1）保护MIME实体</h4>
+<p>这里是要讲S/MIME准备消息的一般操作：</p>
 <ul>
-<li>建模技术
+<li>首先我们用传统的MIME格式来生成MIME实体</li>
+<li>然后把MIME实体和安全相关数据交给S/MIME处理</li>
+<li>S/MIME的处理结果是PKCS对象（？）</li>
+<li>在将PKCS对象封装为MIME消息</li>
+</ul>
+<p>S/MIME的内容类型如下：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102123027.png" alt=""></p>
+<p>下面逐一介绍这些类型：</p>
+<h4 id="（2）封装数据"><a class="header-anchor" href="#（2）封装数据">¶</a>（2）封装数据</h4>
+<p>准备封装数据MIME实体的步骤如下：</p>
 <ul>
-<li>结构化分析</li>
-<li>结构化设计</li>
+<li>对对称算法生成伪随机的会话密钥</li>
+<li>用对方公钥加密会话密钥</li>
+<li>准备信息块</li>
+<li>用会话密钥加密消息</li>
 </ul>
-</li>
-<li>编程技术
-<ul>
-<li>结构化编程</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-2-1-结构化分析"><a class="header-anchor" href="#3-2-1-结构化分析">¶</a>3.2.1 结构化分析</h3>
-<p>结构化分析可以得到这样的模型：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229154400.png" alt=""></p>
-<h4 id="（1）怎么画分层DFD"><a class="header-anchor" href="#（1）怎么画分层DFD">¶</a>（1）怎么画分层DFD</h4>
-<p>步骤：</p>
-<ul>
-<li>顶层图：以系统为中心，画出所有数据源和目的地，以及之间的数据流向</li>
-<li>0层图：把系统分解一次</li>
-<li>1层图：把上面的再分解</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229160046.png" alt=""></p>
-<p>直到每个加工都足够简单，就可以结束</p>
-<p>分层DFD应该遵循如下原则：</p>
-<ul>
-<li>父图与子图平衡：对应数据流保持一致</li>
-<li>数据守恒：
-<ul>
-<li>输出的数据流必然来自输入数据流的原样/加工</li>
-<li>没有多余数据流，都是用了的</li>
-</ul>
-</li>
-<li>完整性：
-<ul>
-<li>每个加工过程至少有一个输入、一个输出数据流</li>
-<li>对于文件，至少有一个加工读它、一个加工写它</li>
-<li>数据流和文件都必须命名，并保持与数据字典一致</li>
-<li>不可再分解的加工过程应该有加工说明（后面有写）</li>
-</ul>
-</li>
-</ul>
-<h4 id="（2）怎么定义数据字典DD"><a class="header-anchor" href="#（2）怎么定义数据字典DD">¶</a>（2）怎么定义数据字典DD</h4>
-<p>有了DFD以后，我们从最低一层看，把所有的数据流（箭头上的）和数据文件（双杠）拎出来，写出其组成，一般都是等式右边用加号连接的形式，如下图：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229161237.png" alt=""></p>
-<p>值得注意的是，这里写出来的组成并不依赖于DFD，并不是从图里读出来的；其中使用到的表达方式如下：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229161424.png" alt=""></p>
-<p>写出数据组成以后，配合DFD信息，配合其他信息，我们可以为每一项数据流/文件写出如下数据字典：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229161817.png" alt=""></p>
-<h4 id="（3）定义加工说明"><a class="header-anchor" href="#（3）定义加工说明">¶</a>（3）定义加工说明</h4>
-<p>加工说明包括：经典IPO<br>
-这个P不用太详细，写清楚“What”而不是“How”</p>
-<p>加工说明可以有多种表达方式，下面一一介绍：</p>
-<ul>
-<li>
-<p>结构化语言：感觉有点像伪代码的味道<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229162801.png" alt=""></p>
-</li>
-<li>
-<p>判定表/判定树：都适用于比较复杂的逻辑<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229164224.png" alt=""></p>
-</li>
-</ul>
-<h4 id="（4）画实体-关系图"><a class="header-anchor" href="#（4）画实体-关系图">¶</a>（4）画实体-关系图</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229170652.png" alt=""></p>
-<p>（？）0:m和0:1什么意思？</p>
-<h3 id="3-2-2-结构化设计"><a class="header-anchor" href="#3-2-2-结构化设计">¶</a>3.2.2 结构化设计</h3>
-<p><strong>目的：DFD表示的分析模型——&gt;结构图SC表示的设计模型</strong></p>
-<h4 id="（1）鉴别DFD的类别"><a class="header-anchor" href="#（1）鉴别DFD的类别">¶</a>（1）鉴别DFD的类别</h4>
-<ul>
-<li>变换型结构：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229171907.png" alt=""></li>
-<li>事务型结构：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229201517.png" alt=""></li>
-</ul>
-<h4 id="（2）把DFD映射到SC"><a class="header-anchor" href="#（2）把DFD映射到SC">¶</a>（2）把DFD映射到SC</h4>
-<p>先简单介绍一下SC：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229202147.png" alt=""></p>
-<p>对于上面两种结构，分别有对应的映射方法：<br>
-（？）有点疑问</p>
-<ul>
-<li>
-<p>变换映射：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE77.png" alt=""></p>
-</li>
-<li>
-<p>事务映射：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE98.png" alt=""></p>
-</li>
-</ul>
-<h4 id="（3）优化结构设计"><a class="header-anchor" href="#（3）优化结构设计">¶</a>（3）优化结构设计</h4>
-<ul>
-<li>降低耦合度，提高内聚度</li>
-<li>低扇出，高扇入</li>
-<li>模块的作用域限制在该模块的控制域范围内</li>
-</ul>
-<h4 id="（4）详细设计"><a class="header-anchor" href="#（4）详细设计">¶</a>（4）详细设计</h4>
-<p>对于SC中的每个模块给出足够详细的过程性描述，表达工具包括：</p>
-<ul>
-<li>程序流程图</li>
-<li>PAD图</li>
-<li>N-S图</li>
-<li>伪代码</li>
-</ul>
-<h2 id="3-3-面向对象方法"><a class="header-anchor" href="#3-3-面向对象方法">¶</a>3.3 面向对象方法</h2>
-<h3 id="3-3-1-面向对象的基本概念"><a class="header-anchor" href="#3-3-1-面向对象的基本概念">¶</a>3.3.1 面向对象的基本概念</h3>
-<ul>
-<li>对象</li>
-<li>类</li>
-<li>继承</li>
-<li>消息：对象预期外界世界相关联的唯一途径</li>
-</ul>
-<h3 id="3-3-2-面向对象的基本原则"><a class="header-anchor" href="#3-3-2-面向对象的基本原则">¶</a>3.3.2 面向对象的基本原则</h3>
-<ul>
-<li>抽象</li>
-<li>封装：将对象特征的实现方式隐藏在一个公共接口之后的黑盒中</li>
-<li>模块化</li>
-<li>层次原则：不同级别的抽象组成树形结构</li>
-</ul>
-<h3 id="3-3-3-面向对象的分析和设计"><a class="header-anchor" href="#3-3-3-面向对象的分析和设计">¶</a>3.3.3 面向对象的分析和设计</h3>
-<p>突然觉得分析=说清楚我们要解决什么问题；设计=基于分析的结果，确定我们要怎么解决问题</p>
-<h4 id="（1）面向对象的分析OOA"><a class="header-anchor" href="#（1）面向对象的分析OOA">¶</a>（1）面向对象的分析OOA</h4>
-<p>OOA方法的基本步骤：</p>
-<ul>
-<li>用例建模</li>
-<li>识别出关键抽象（概念类），采用类图建立概念模型</li>
-<li>类图和交互图</li>
-</ul>
-<h4 id="（2）面向对象的设计OOD"><a class="header-anchor" href="#（2）面向对象的设计OOD">¶</a>（2）面向对象的设计OOD</h4>
-<p>令人开心的一点是，OOD和OOA采用相同的表示法和模型结构，所以从OOA——&gt;OOD不需要太多转换，只要稍作修改即可</p>
-<p>OOD的基本步骤：</p>
-<ul>
-<li>从多个视图设计软件的架构</li>
-<li>确定子系统之间的接口+子系统内部的设计</li>
-<li>类的设计和优化</li>
-</ul>
-<h4 id="（3）面向对象的模型"><a class="header-anchor" href="#（3）面向对象的模型">¶</a>（3）面向对象的模型</h4>
-<p>有14种图，超级全面，不过开发的时候不一定都会用到</p>
-<h3 id="3-3-4-结构化方法和面向对象方法的比较"><a class="header-anchor" href="#3-3-4-结构化方法和面向对象方法的比较">¶</a>3.3.4 结构化方法和面向对象方法的比较</h3>
-<p>见书P66-67</p>
-<h2 id="3-4-基于构件的开发方法"><a class="header-anchor" href="#3-4-基于构件的开发方法">¶</a>3.4 基于构件的开发方法</h2>
-<h2 id="3-5-面向服务方法"><a class="header-anchor" href="#3-5-面向服务方法">¶</a>3.5 面向服务方法</h2>
-<h2 id="3-6-模型驱动开发方法"><a class="header-anchor" href="#3-6-模型驱动开发方法">¶</a>3.6 模型驱动开发方法</h2>
-<h2 id="3-7-形式化方法"><a class="header-anchor" href="#3-7-形式化方法">¶</a>3.7 形式化方法</h2>
-<h2 id="3-8-敏捷建模方法"><a class="header-anchor" href="#3-8-敏捷建模方法">¶</a>3.8 敏捷建模方法</h2>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE129.png" alt=""></p>
+<h4 id="（3）签名数据"><a class="header-anchor" href="#（3）签名数据">¶</a>（3）签名数据</h4>
+<p>MIME实体准备签名数据的步骤如下：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/22RRV%7B8Y50AF0NZSN@N94R5.png" alt=""></p>
+<h4 id="（4）透明签名"><a class="header-anchor" href="#（4）透明签名">¶</a>（4）透明签名</h4>
+<p>主要用在多部分的，消息与签名分离</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE128.png" alt=""></p>
+<h4 id="（5）注册请求"><a class="header-anchor" href="#（5）注册请求">¶</a>（5）注册请求</h4>
+<p>向CA申请公钥证书</p>
+<h4 id="（6）仅证书消息"><a class="header-anchor" href="#（6）仅证书消息">¶</a>（6）仅证书消息</h4>
+<p>在应答注册请求时发送，仅包含证书/CRL</p>
+<h3 id="8-2-5-S-MIME证书处理过程"><a class="header-anchor" href="#8-2-5-S-MIME证书处理过程">¶</a>8.2.5 S/MIME证书处理过程</h3>
+<p>S/MIME使用公钥证书的方式与X.509v3一致</p>
+<h4 id="（1）用户代理职责"><a class="header-anchor" href="#（1）用户代理职责">¶</a>（1）用户代理职责</h4>
+<p>S/MIME的用户要做的事</p>
+<h4 id="（2）VeriSign证书"><a class="header-anchor" href="#（2）VeriSign证书">¶</a>（2）VeriSign证书</h4>
+<p>VeriSign是提供CA服务的公司之一</p>
+<h3 id="8-2-6-增强的安全服务"><a class="header-anchor" href="#8-2-6-增强的安全服务">¶</a>8.2.6 增强的安全服务</h3>
+<h2 id="8-3-DKIM"><a class="header-anchor" href="#8-3-DKIM">¶</a>8.3 DKIM</h2>
+<p>学名叫：域名密钥识别邮件——是电子邮件信息密钥签名规范</p>
+<p>说人话：<br>
+受到这种信息的一方，可以查询其中的签名域，获取公钥，并且确定对方的身份可信</p>
+<h3 id="8-3-1-互联网邮件体系结构"><a class="header-anchor" href="#8-3-1-互联网邮件体系结构">¶</a>8.3.1 互联网邮件体系结构</h3>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE125.png" alt=""></p>
+<p>补充一个概念：行政管理域ADMD</p>
+<blockquote>
+<p>每个行政管理域可以用不同的决策，比如，组织内部的邮件交换处理，组织之间的……</p>
+</blockquote>
+<h3 id="8-3-2-E-mail威胁"><a class="header-anchor" href="#8-3-2-E-mail威胁">¶</a>8.3.2 E-mail威胁</h3>
+<h4 id="（1）攻击者的3个威胁等级"><a class="header-anchor" href="#（1）攻击者的3个威胁等级">¶</a>（1）攻击者的3个威胁等级</h4>
+<h4 id="（2）攻击者可能具备的能力"><a class="header-anchor" href="#（2）攻击者可能具备的能力">¶</a>（2）攻击者可能具备的能力</h4>
+<h4 id="（3）定位"><a class="header-anchor" href="#（3）定位">¶</a>（3）定位</h4>
+<p>（？）</p>
+<h3 id="8-3-3-DKIM策略"><a class="header-anchor" href="#8-3-3-DKIM策略">¶</a>8.3.3 DKIM策略</h3>
+<p>提供一种对终端用户透明的E-mail认证技术</p>
+<p>透明到底是啥意思（？）</p>
+<p>DKIM工作流程：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE126.png" alt=""></p>
+<p>基本架构和互联网邮件体系结构是一致的</p>
+<h3 id="8-3-4-DKIM的功能流程"><a class="header-anchor" href="#8-3-4-DKIM的功能流程">¶</a>8.3.4 DKIM的功能流程</h3>
+<p>上面是举了一个例子，现在有一份更详细的描述：</p>
+<p>好复杂，不太懂（？）</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -528,7 +489,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/28/Chapter2-%E7%9F%A5%E8%AF%86%E8%A1%A8%E7%A4%BA/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/01/Chapter7-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -542,7 +503,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/12/28/Chapter2-%E7%9F%A5%E8%AF%86%E8%A1%A8%E7%A4%BA/" class="post-title-link" itemprop="url">Chapter2 知识表示</a>
+            <a href="/2021/01/01/Chapter7-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="post-title-link" itemprop="url">Chapter7 无线网络安全</a>
         </h2>
 
         <div class="post-meta">
@@ -553,92 +514,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-12-28 14:07:41 / 修改时间：14:08:08" itemprop="dateCreated datePublished" datetime="2020-12-28T14:07:41+08:00">2020-12-28</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>问题归约</h1>
-<h2 id="描述"><a class="header-anchor" href="#描述">¶</a>描述</h2>
-<p>三元组（G,O,P）</p>
-<ul>
-<li>G：初始问题描述</li>
-<li>O：把问题分解为子问题的操作符</li>
-<li>P：本原问题描述</li>
-</ul>
-<p><strong>问题归约法是更通用、更一般化的状态空间表示方法。</strong>（？？？）</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/28/Chapter6-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/28/Chapter6-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/" class="post-title-link" itemprop="url">Chapter6 传输层安全</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-12-28 10:44:01 / 修改时间：10:46:27" itemprop="dateCreated datePublished" datetime="2020-12-28T10:44:01+08:00">2020-12-28</time>
+              <time title="创建时间：2021-01-01 17:15:35 / 修改时间：22:44:31" itemprop="dateCreated datePublished" datetime="2021-01-01T17:15:35+08:00">2021-01-01</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -665,46 +541,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>本节将讨论到关注于传输层安全的三种标准模式：SSL/TLS、HTTPS、SSH</p>
-<h2 id="6-1-Web安全需求"><a class="header-anchor" href="#6-1-Web安全需求">¶</a>6.1 Web安全需求</h2>
-<p>万维网WWW，其实可以看做是运行在互联网上，并基于TCP/IP的C/S模式的应用系统。相关的安全问题就可以被称为<strong>Web安全问题</strong>。</p>
-<p>Web安全有如下挑战：</p>
+          <h2 id="7-1-无线安全"><a class="header-anchor" href="#7-1-无线安全">¶</a>7.1 无线安全</h2>
+<p>无线网络有一些有线网络中不会遇到的问题：</p>
+<p>无线网络的构成，三部分都有攻击切入点：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101172029.png" alt=""></p>
+<h3 id="7-1-1-无线网络安全威胁"><a class="header-anchor" href="#7-1-1-无线网络安全威胁">¶</a>7.1.1 无线网络安全威胁</h3>
+<h3 id="7-1-2-无线安全措施"><a class="header-anchor" href="#7-1-2-无线安全措施">¶</a>7.1.2 无线安全措施</h3>
+<p>根据上面的切入点，对应地，我们可以获得安全措施的三个切入点</p>
+<h4 id="（1）安全无线传输"><a class="header-anchor" href="#（1）安全无线传输">¶</a>（1）安全无线传输</h4>
+<p>对于监听攻击：</p>
 <ul>
-<li>互联网的发布环境是双向的</li>
-<li>Web成为企业商业平台，遭攻击会信誉受损</li>
-<li>Web底层软件复杂，可能隐藏安全缺陷</li>
-<li>Web作为公司核心，一旦出问题容易瘫一整片</li>
-<li>Web用户由于缺乏安全意识……</li>
+<li>信息隐藏技术：施工记者定位无线接入点变得困难</li>
+<li>加密</li>
 </ul>
-<h3 id="6-1-1-Web安全威胁"><a class="header-anchor" href="#6-1-1-Web安全威胁">¶</a>6.1.1 Web安全威胁</h3>
-<h4 id="（1）Web安全威胁分类"><a class="header-anchor" href="#（1）Web安全威胁分类">¶</a>（1）Web安全威胁分类</h4>
-<ul>
-<li>按主被动分类
-<ul>
-<li>主动攻击</li>
-<li>被动攻击</li>
-</ul>
-</li>
-<li>按威胁发生的位置分类
-<ul>
-<li>在Web服务器</li>
-<li>浏览器</li>
-<li>浏览器与服务器之间的网络通信</li>
-</ul>
-</li>
-</ul>
-<h4 id="（2）各类Web安全威胁的比较"><a class="header-anchor" href="#（2）各类Web安全威胁的比较">¶</a>（2）各类Web安全威胁的比较</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225334.png" alt=""></p>
-<h3 id="6-1-2-Web流量安全方法"><a class="header-anchor" href="#6-1-2-Web流量安全方法">¶</a>6.1.2 Web流量安全方法</h3>
-<p>按照安全设施的实现位置不同，可以分成以下三种：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225804.png" alt=""></p>
-<ul>
-<li>网络层：可以用IPSec，之后作详细介绍</li>
-<li>传输层：SSL或TLS</li>
-<li>应用层：有些特定的应用有特定的安全服务</li>
-</ul>
-<h2 id="6-2-安全套接字层SSL和传输层安全TLS"><a class="header-anchor" href="#6-2-安全套接字层SSL和传输层安全TLS">¶</a>6.2 安全套接字层SSL和传输层安全TLS</h2>
-<h3 id="6-2-1-SSL体系结构"><a class="header-anchor" href="#6-2-1-SSL体系结构">¶</a>6.2.1 SSL体系结构</h3>
+<h4 id="（2）安全的无线接入点"><a class="header-anchor" href="#（2）安全的无线接入点">¶</a>（2）安全的无线接入点</h4>
+<p>防止未认证入侵：对基于端口的网络访问进行控制</p>
+<h4 id="（3）安全的无线网络（路由器-终端）"><a class="header-anchor" href="#（3）安全的无线网络（路由器-终端）">¶</a>（3）安全的无线网络（路由器+终端）</h4>
+<p>加密、杀毒、改路由器密码等等</p>
+<h2 id="7-2-移动设备安全"><a class="header-anchor" href="#7-2-移动设备安全">¶</a>7.2 移动设备安全</h2>
+<p>以前设备少，网络边界很好定，现在太多了……</p>
+<h3 id="7-2-1-安全威胁"><a class="header-anchor" href="#7-2-1-安全威胁">¶</a>7.2.1 安全威胁</h3>
+<h4 id="（1）缺乏物理安全控制"><a class="header-anchor" href="#（1）缺乏物理安全控制">¶</a>（1）缺乏物理安全控制</h4>
+<p>比如手机被偷？</p>
+<h4 id="（2）"><a class="header-anchor" href="#（2）">¶</a>（2）</h4>
+<h3 id="7-2-2-移动设备安全策略"><a class="header-anchor" href="#7-2-2-移动设备安全策略">¶</a>7.2.2 移动设备安全策略</h3>
+<p>移动设备安全策略主要包括以下几种</p>
+<h4 id="（1）设备安全"><a class="header-anchor" href="#（1）设备安全">¶</a>（1）设备安全</h4>
+<p>在员工的个人设备访问企业资源的情况下，保证安全</p>
+<h4 id="（2）数据流安全"><a class="header-anchor" href="#（2）数据流安全">¶</a>（2）数据流安全</h4>
+<p>使用加密服务、认证服务</p>
+<h4 id="（3）屏障安全"><a class="header-anchor" href="#（3）屏障安全">¶</a>（3）屏障安全</h4>
+<p>设防火墙等等</p>
+<h2 id="7-3-IEEE-802-11-无线局域网概述"><a class="header-anchor" href="#7-3-IEEE-802-11-无线局域网概述">¶</a>7.3 IEEE 802.11 无线局域网概述</h2>
+<p>IEEE 802.11是个制定无线局域网协议和传输规范的工作组</p>
+<h3 id="7-3-1-WiFi联盟"><a class="header-anchor" href="#7-3-1-WiFi联盟">¶</a>7.3.1 WiFi联盟</h3>
+<p>WiFi联盟是个组织，为什么会出现这个组织呢？<br>
+首先就要谈到一个问题：不同供应商的产品之间不能呢个确定是否顺利连接，所以就需要互操作认证<br>
+WiFi联盟制定了一些认证过程、认证系统</p>
+<h3 id="7-3-2-IEEE-802-协议架构"><a class="header-anchor" href="#7-3-2-IEEE-802-协议架构">¶</a>7.3.2 IEEE 802 协议架构</h3>
+<p>IEEE 802.11协议栈如下图，其实和计算机网络中学到的差不多：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101195554.png" alt=""></p>
+<h3 id="7-3-3-IEEE-802-11-网络组成与架构模型"><a class="header-anchor" href="#7-3-3-IEEE-802-11-网络组成与架构模型">¶</a>7.3.3 IEEE 802.11 网络组成与架构模型</h3>
+<p>这是这个工作组设计的模型</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE115.png" alt=""></p>
+<h3 id="7-3-4-IEEE-802-11-服务"><a class="header-anchor" href="#7-3-4-IEEE-802-11-服务">¶</a>7.3.4 IEEE 802.11 服务</h3>
+<p>为了实现与有线局域网相同的功能，IEEE 802.11为无线局域网定义了以下9种服务：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE116.png" alt=""></p>
+<h2 id="7-4-IEEE-802-11i-无线局域网安全"><a class="header-anchor" href="#7-4-IEEE-802-11i-无线局域网安全">¶</a>7.4 IEEE 802.11i 无线局域网安全</h2>
+<p><em>突然发现老师的课件没怎么讲这一部分，先略过好了</em></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -742,7 +626,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/25/Chapter2-%E8%BD%AF%E4%BB%B6%E8%BF%87%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/31/Chapter11-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E4%BC%B0%E7%AE%97%E5%92%8C%E8%AE%A1%E5%88%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -756,7 +640,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/12/25/Chapter2-%E8%BD%AF%E4%BB%B6%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">Chapter2 软件过程</a>
+            <a href="/2020/12/31/Chapter11-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E4%BC%B0%E7%AE%97%E5%92%8C%E8%AE%A1%E5%88%92/" class="post-title-link" itemprop="url">Chapter11 软件项目估算和计划</a>
         </h2>
 
         <div class="post-meta">
@@ -766,795 +650,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-25 15:14:09" itemprop="dateCreated datePublished" datetime="2020-12-25T15:14:09+08:00">2020-12-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-29 14:54:03" itemprop="dateModified" datetime="2020-12-29T14:54:03+08:00">2020-12-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件工程原理》</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="2-1-软件过程的概念"><a class="header-anchor" href="#2-1-软件过程的概念">¶</a>2.1 软件过程的概念</h2>
-<p>软件（生存周期）过程：</p>
-<blockquote>
-<p>过程=活动的集合<br>
-活动=任务的集合<br>
-任务=input-&gt;process-&gt;output</p>
-</blockquote>
-<h3 id="2-1-2-软件过程的分类"><a class="header-anchor" href="#2-1-2-软件过程的分类">¶</a>2.1.2 软件过程的分类</h3>
-<p>软件与系统有很多关系，这里分别阐述“系统过程”和“软件过程”。左三列是系统过程，右两列是软件过程</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%B3%BB%E7%BB%9F%E8%BF%87%E7%A8%8B%E4%B8%8E%E8%BD%AF%E4%BB%B6%E8%BF%87%E7%A8%8B.png" alt=""></p>
-<h3 id="2-1-3-软件过程的核心元素"><a class="header-anchor" href="#2-1-3-软件过程的核心元素">¶</a>2.1.3 软件过程的核心元素</h3>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201225171541.png" alt=""></p>
-<h2 id="2-2-软件生命周期模型（软件开发模型）"><a class="header-anchor" href="#2-2-软件生命周期模型（软件开发模型）">¶</a>2.2 软件生命周期模型（软件开发模型）</h2>
-<p>规定了软件<br>
-开发+运作+维护<br>
-所需的主要活动和任务</p>
-<h3 id="2-2-1-瀑布模型"><a class="header-anchor" href="#2-2-1-瀑布模型">¶</a>2.2.1 瀑布模型</h3>
-<h4 id="（1）介绍"><a class="header-anchor" href="#（1）介绍">¶</a>（1）介绍</h4>
-<p>著名的<strong>线性顺序模型</strong><br>
-一路往下滚，对前一阶段只评审，不在实践中检验</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201225172109.png" alt=""></p>
-<h4 id="（2）优点"><a class="header-anchor" href="#（2）优点">¶</a>（2）优点</h4>
-<ul>
-<li>解决复杂问题很有作用</li>
-<li>有效保证软件质量</li>
-</ul>
-<h4 id="（3）缺点"><a class="header-anchor" href="#（3）缺点">¶</a>（3）缺点</h4>
-<ul>
-<li>没在实践中验证</li>
-</ul>
-<h4 id="（4）不适用场景"><a class="header-anchor" href="#（4）不适用场景">¶</a>（4）不适用场景</h4>
-<p>见书</p>
-<h3 id="2-2-2-增量模型"><a class="header-anchor" href="#2-2-2-增量模型">¶</a>2.2.2 增量模型</h3>
-<h4 id="（1）介绍-v2"><a class="header-anchor" href="#（1）介绍-v2">¶</a>（1）介绍</h4>
-<p>版本后推，每次多加一些需求进去</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201225173117.png" alt=""></p>
-<h4 id="（2）优点-v2"><a class="header-anchor" href="#（2）优点-v2">¶</a>（2）优点</h4>
-<ul>
-<li>多个版本可以并行开发</li>
-<li>每个版本都可以独立运行</li>
-<li>可以将功能有计划地分为若干增量来逐步实现</li>
-</ul>
-<h4 id="（3）缺点-v2"><a class="header-anchor" href="#（3）缺点-v2">¶</a>（3）缺点</h4>
-<p>需求不明确的时候，可能影响不止一个版本</p>
-<h4 id="（4）不适用的场景"><a class="header-anchor" href="#（4）不适用的场景">¶</a>（4）不适用的场景</h4>
-<p>见书</p>
-<h4 id="（5）适用的场景"><a class="header-anchor" href="#（5）适用的场景">¶</a>（5）适用的场景</h4>
-<p>见书</p>
-<h3 id="2-2-3-演化模型"><a class="header-anchor" href="#2-2-3-演化模型">¶</a>2.2.3 演化模型</h3>
-<h4 id="（1）介绍-v3"><a class="header-anchor" href="#（1）介绍-v3">¶</a>（1）介绍</h4>
-<ul>
-<li>能很好地适应随时间演化的产品的开发</li>
-<li>是迭代的过程模型</li>
-<li>也支持并行开发</li>
-<li>目前采用最广泛的模型</li>
-<li>用于统一过程和许多敏捷过程</li>
-</ul>
-<p>我觉得演化模型和增量模型的区别在于：</p>
-<ul>
-<li>增量模型感觉是已经知道一些需求，然后有计划地主动地把它划分到不同开发轮次里面</li>
-<li>演化模型，后来加入的需求并不是因为之前没把它排进去，而是因为这个需求是随市场变化而来的</li>
-</ul>
-<h4 id="（2）优点-v3"><a class="header-anchor" href="#（2）优点-v3">¶</a>（2）优点</h4>
-<ul>
-<li>可以先开发一部分已明确的需求</li>
-<li>可以面对需求变更</li>
-</ul>
-<h4 id="（3）缺点-v3"><a class="header-anchor" href="#（3）缺点-v3">¶</a>（3）缺点</h4>
-<ul>
-<li>复杂，迭代的规划和控制是难点</li>
-</ul>
-<h4 id="（4）两种实例：原型模型和螺旋模型"><a class="header-anchor" href="#（4）两种实例：原型模型和螺旋模型">¶</a>（4）两种实例：原型模型和螺旋模型</h4>
-<ul>
-<li>原型模型
-<ul>
-<li>定义：迭代次数为2的演化模型<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201226215738.png" alt=""></li>
-<li>适用情境：用户说不出详细需求/开发者不能确定一些技术细节</li>
-<li>目标：识别软件需求/分析技术风险</li>
-<li>达到目标后对原型的处理：
-<ul>
-<li>抛弃式原型</li>
-<li>演化式原型：作为产品的一部分</li>
-</ul>
-</li>
-<li>存在的问题：
-<ul>
-<li>原型可能带给用户不切实际的期望</li>
-<li>建立原型耗时太长</li>
-<li>原型设计欠佳带坏整个软件开发方向</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>螺旋模型
-<ul>
-<li>定义：迭代的特征+线性模型的特征+风险分析（每次迭代都有）<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201226224513.png" alt=""><br>
-<em>看这个图，需要意识到，每次迭代其实完成的事情是不一样的，并不是说每一次的内部任务都一样。比如原型2是负责确认软件需求，原型3是负责软件产品设计等等</em></li>
-<li>使用原型来降低风险，并且需要相应的风险评估的专门技术</li>
-</ul>
-</li>
-</ul>
-<p><em>小疑惑：什么是原型？</em>（？）<br>
-以下是维基百科的定义，虽然不是针对软件工程领域的，但是也能让人了解到一些：</p>
-<blockquote>
-<p>原型（英语：Prototype）是指某种新技术在投入量产之前的所作的模型，用以检测产品质素，保障正常运行。在电子技术、机械工程、车辆工程、航空工程及建筑工程等方面广泛运用，实验产品相应地被称为样机，样车等。广义上来讲，通过计算机模拟技术也可以实现这一目的。<br>
-一般来说，原型的创建与最终产品的创建有所不同，一些基本的分别方式：</p>
-</blockquote>
-<ul>
-<li>材料：最终产品使用的材料可能是昂贵的或不易制造的，因此，用不同于最终产品的材料来制做原型。有时候甚至最终产品的材料都还在开发中，还没办法用在原型。</li>
-<li>过程：批量生产不适合制造少量零件。因此，原型可能使用与最终产品不同的制程来制作。例如，通过塑料射出成型制成的最终产品，需要昂贵的成型模具。因此，为节省费用，可以通过机械加工或3D打印来制造原型。</li>
-<li>验证：最终产品可能需要进行多项品质测试，以验证是否符合设计或规格。通常假设一些调整或返工，为制造过程的一部分。原型也可以免除适用于最终产品的一些要求。</li>
-</ul>
-<blockquote>
-<p>工程师和原型专家试图尽量减少这些差异对原型的影响。例如，如果视觉原型不能使用与最终产品相同的材料，他们将尝试使用具能模拟最终材料的替代材料。</p>
-</blockquote>
-<h3 id="2-2-4-迭代过程"><a class="header-anchor" href="#2-2-4-迭代过程">¶</a>2.2.4 迭代过程</h3>
-<p>迭代式处理不确定的复杂问题的有效手段<br>
-后一次迭代受益于前一次的经验</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201226214642.png" alt=""></p>
-<h4 id="（1）原则一"><a class="header-anchor" href="#（1）原则一">¶</a>（1）原则一</h4>
-<blockquote>
-<p>每次迭代都要产生一个可执行软件版本<br>
-每次迭代=计划+建模+需求+分析+设计+实现+测试+评估</p>
-</blockquote>
-<p>从此原则，我们可以知道迭代过程中的内部某一次，其实和瀑布模型有一定的相似之处；区别在于迭代中的各任务可以并行进行</p>
-<h4 id="（2）原则二"><a class="header-anchor" href="#（2）原则二">¶</a>（2）原则二</h4>
-<blockquote>
-<p>要有计划地迭代</p>
-</blockquote>
-<p>迭代化开发，要求在最开始就确定迭代次数、每次迭代的时间……这样才不会使迭代由于无计划而失控</p>
-<h2 id="2-3-统一软件过程UP"><a class="header-anchor" href="#2-3-统一软件过程UP">¶</a>2.3 统一软件过程UP</h2>
-<p>是目前最广泛接受的<strong>软件过程</strong></p>
-<p>包括三大组成部分：</p>
-<ul>
-<li>开发软件原理+实践</li>
-<li>过程模型+模板库（？）</li>
-<li>过程定义工具</li>
-</ul>
-<p>整体框架如下图所示：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201226225323.png" alt=""></p>
-<ul>
-<li>横着看，是以时间为变量的，软件生命周期</li>
-<li>竖着看，是一个阶段里的过程</li>
-</ul>
-<h3 id="2-3-1-阶段"><a class="header-anchor" href="#2-3-1-阶段">¶</a>2.3.1 阶段</h3>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201226233019.png" alt=""></p>
-<p>由上图可知，UP把软件生命周期分为四个阶段：</p>
-<ul>
-<li>先启：目标里程碑，对项目目标达成共识，以规避某些风险（如需求风险）</li>
-<li>精化：架构里程碑，建立软件架构的基线</li>
-<li>构建：软件初始能力里程碑，基于架构进行开发</li>
-<li>产品化：软件产品发布里程碑，做点小事情以确保用户可用（比如安装、配置等）</li>
-</ul>
-<h3 id="2-3-2-迭代"><a class="header-anchor" href="#2-3-2-迭代">¶</a>2.3.2 迭代</h3>
-<p>UP的每个阶段都可以用多次迭代来实现，迭代有如下策略：</p>
-<ul>
-<li>增量式
-<ul>
-<li>适用于：项目架构风险较小</li>
-<li>精化1次迭代+构建多次迭代（每次加一部分功能，和增量模型很像）</li>
-</ul>
-</li>
-<li>演进式
-<ul>
-<li>适用于：项目架构的风险较大</li>
-<li>精化多次+构建1次</li>
-</ul>
-</li>
-<li>增量提交
-<ul>
-<li>适用于：项目不难，但需求不断变化</li>
-<li>后一次迭代使用前一次迭代+用户反馈来改进</li>
-<li>适应需求变化要求架构稳定，而架构的稳定性可以通过多个原型来评估验证（？）</li>
-</ul>
-</li>
-<li>单次迭代
-<ul>
-<li>只有一次迭代，即<strong>退化为</strong>瀑布模型</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-3-3-过程规范"><a class="header-anchor" href="#2-3-3-过程规范">¶</a>2.3.3 过程规范</h3>
-<p>UP把软件生命周期分为6个核心规范和3个支持规范：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229085723.png" alt=""></p>
-<h2 id="2-4-敏捷过程"><a class="header-anchor" href="#2-4-敏捷过程">¶</a>2.4 敏捷过程</h2>
-<blockquote>
-<p>敏捷过程=<br>
-以人为本（？）+<br>
-快速响应需求和变化+<br>
-注意力集中到项目的主要目标——做出可用软件+<br>
-文档、度量适度（前提是保证质量）</p>
-</blockquote>
-<p>敏捷过程比较注重人的沟通，发挥人的能动性和创造性，而不是机械地做事；所以这种软件过程适合如下场景：</p>
-<ul>
-<li>需求不确定、易挥发</li>
-<li>有责任感和积极向上的开发人员</li>
-<li>用户容易沟通并能参与（？）</li>
-<li>团队人数&lt;10</li>
-</ul>
-<h3 id="2-4-1-敏捷过程的价值观和原则"><a class="header-anchor" href="#2-4-1-敏捷过程的价值观和原则">¶</a>2.4.1 敏捷过程的价值观和原则</h3>
-<p>敏捷过程的框架分为四个层次：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229093511.png" alt=""></p>
-<p>下面介绍三种具体的敏捷过程：</p>
-<table>
-<thead>
-<tr>
-<th>XP</th>
-<th>Scrum</th>
-<th>MSF</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>敏捷开发技术</td>
-<td>敏捷开发管理</td>
-<td>敏捷开发过程框架</td>
-</tr>
-</tbody>
-</table>
-<h3 id="2-4-2-极限编程XP"><a class="header-anchor" href="#2-4-2-极限编程XP">¶</a>2.4.2 极限编程XP</h3>
-<p>是一种敏捷过程方法</p>
-<h4 id="（1）4个价值目标"><a class="header-anchor" href="#（1）4个价值目标">¶</a>（1）4个价值目标</h4>
-<ul>
-<li>沟通</li>
-<li>简化</li>
-<li>反馈</li>
-<li>勇气</li>
-</ul>
-<h4 id="（2）XP项目状态变迁图"><a class="header-anchor" href="#（2）XP项目状态变迁图">¶</a>（2）XP项目状态变迁图</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229122726.png" alt=""></p>
-<p>XP项目的大概开发流程是：</p>
-<ul>
-<li>首先探索出架构</li>
-<li>根据用户需求发布规划，并且发布的规划可以根据用户新需求的加入来迭代</li>
-<li>根据规划做软件，做出的软件根据测试结果打回去迭代；测试的场景可以来自用户</li>
-<li>测试完了可以交给用户验收，可以的话就进行小型发布</li>
-</ul>
-<h4 id="（3）XP的一些核心思想"><a class="header-anchor" href="#（3）XP的一些核心思想">¶</a>（3）XP的一些核心思想</h4>
-<ul>
-<li>先开发最重要的特性，只关注当下</li>
-<li>其它新需求和变化靠重构来实现</li>
-<li>不对未来投入过多</li>
-</ul>
-<p>代码重构部分可以用下图表示：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229124026.png" alt=""></p>
-<h4 id="（4）XP的使用条件"><a class="header-anchor" href="#（4）XP的使用条件">¶</a>（4）XP的使用条件</h4>
-<p>根据XP的特点我们可以知道，假如重构比事先充分设计的开销要大，那就不值得用XP了</p>
-<h4 id="（5）XP的核心内容（12条实践做法）"><a class="header-anchor" href="#（5）XP的核心内容（12条实践做法）">¶</a>（5）XP的核心内容（12条实践做法）</h4>
-<p>前面说了XP的一些理论层面的内容，接下来谈谈这些理论在实践中表现为什么。以下是12条准则，<strong>不过并非XP特有</strong>：</p>
-<ul>
-<li>计划博弈：做简短的计划，快速确定下次迭代的发布范围</li>
-<li>小型发布：small releases先投入使用，之后再改</li>
-<li>系统隐喻：（？）太抽象了吧</li>
-<li>简化设计：到恰好满足需求的程度</li>
-<li>测试驱动：<strong>XP要求“先写测试，后编码”，用失败的测试驱动编码（？）</strong></li>
-<li>重构：重构以简化系统</li>
-<li>结对编程：两人一起，一人写一人看——<strong>同级评审</strong></li>
-<li>代码全体拥有：大家都能改</li>
-<li>持续集成：每当完成一个任务，都集成一次成品；可能一天有好几次，并不断回归测试</li>
-<li>每周40小时工作制</li>
-<li>现场客户：加入开发环节</li>
-<li>代码规范：为了减少文档</li>
-</ul>
-<h3 id="2-4-3-Scrum"><a class="header-anchor" href="#2-4-3-Scrum">¶</a>2.4.3 Scrum</h3>
-<h4 id="（1）Scrum特点"><a class="header-anchor" href="#（1）Scrum特点">¶</a>（1）Scrum特点</h4>
-<p>类比于橄榄球争球：</p>
-<ul>
-<li>迅速</li>
-<li>适应性</li>
-<li>自组织</li>
-</ul>
-<h4 id="（2）Scrum核心思想"><a class="header-anchor" href="#（2）Scrum核心思想">¶</a>（2）Scrum核心思想</h4>
-<p>Scrum认为软件更多地是<strong>经验性的过程</strong>，而非确定性的过程</p>
-<ul>
-<li>经验性：中间是黑箱，只定两头输入输出，然后根据经验调控黑箱（黑箱里面是分析、设计、实现这些步骤）</li>
-<li>确定性：如一个具体的软件过程模型</li>
-</ul>
-<p>所以Scrum更有适应性和创造力，没有卡得那么死</p>
-<h4 id="（3）Scrum核心准则"><a class="header-anchor" href="#（3）Scrum核心准则">¶</a>（3）Scrum核心准则</h4>
-<ul>
-<li>自我管理：每个Scrum团队都有3种角色，没有中心，可以自组织，跨职能；十分灵活</li>
-<li>迭代开发：<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229143834.png" alt=""></li>
-</ul>
-<h4 id="4-Scrum的一系列规则"><a class="header-anchor" href="#4-Scrum的一系列规则">¶</a>(4) Scrum的一系列规则</h4>
-<p>书P36-37</p>
-<h3 id="2-4-4-微软解决方案框架MSF-（？）"><a class="header-anchor" href="#2-4-4-微软解决方案框架MSF-（？）">¶</a>2.4.4 微软解决方案框架MSF （？）</h3>
-<p>包括两个过程：</p>
-<ul>
-<li>MSF敏捷开发过程</li>
-<li>MSF for CMMI过程</li>
-</ul>
-<h2 id="2-5-软件过程的选择、裁剪、评估和改进"><a class="header-anchor" href="#2-5-软件过程的选择、裁剪、评估和改进">¶</a>2.5 软件过程的选择、裁剪、评估和改进</h2>
-<h3 id="2-5-1-软件过程的选择和裁剪"><a class="header-anchor" href="#2-5-1-软件过程的选择和裁剪">¶</a>2.5.1 软件过程的选择和裁剪</h3>
-<p><strong>其实可以不止使用一个软件过程，可以融合</strong></p>
-<h4 id="（1）选择"><a class="header-anchor" href="#（1）选择">¶</a>（1）选择</h4>
-<p>书P38，3条考虑</p>
-<h4 id="（2）裁剪"><a class="header-anchor" href="#（2）裁剪">¶</a>（2）裁剪</h4>
-<p>书P38-39，3条考虑</p>
-<h3 id="2-5-2-软件过程的评估"><a class="header-anchor" href="#2-5-2-软件过程的评估">¶</a>2.5.2 软件过程的评估</h3>
-<p>用来考察以下问题：</p>
-<ul>
-<li>用的软件过程适合本团队吗？</li>
-<li>过程绩效如何？</li>
-<li>软件过程能力成熟度为几级？</li>
-<li>做的好与不好之处？</li>
-</ul>
-<h4 id="（1）参考模型"><a class="header-anchor" href="#（1）参考模型">¶</a>（1）参考模型</h4>
-<ul>
-<li>CMM/CMMI</li>
-<li>ISO/IEC 15504</li>
-<li>ISO/IEC 20000</li>
-</ul>
-<h4 id="（2）评估方法"><a class="header-anchor" href="#（2）评估方法">¶</a>（2）评估方法</h4>
-<p>以上模型还提供了配套的评估方法</p>
-<h3 id="2-5-3-软件过程的改进"><a class="header-anchor" href="#2-5-3-软件过程的改进">¶</a>2.5.3 软件过程的改进</h3>
-<p>惊讶的是，软件工程的知识完备到，连软件过程的改进也有一些生命周期模型<br>
-一般切入点是找要素，比如人、技术、方法等等；<br>
-软件过程、过程评估、过程改进三者关系如下：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201229145317.png" alt=""></p>
-<h4 id="（1）PDCA循环"><a class="header-anchor" href="#（1）PDCA循环">¶</a>（1）PDCA循环</h4>
-<h4 id="（2）IDEAL模型"><a class="header-anchor" href="#（2）IDEAL模型">¶</a>（2）IDEAL模型</h4>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/25/Reading-Report-for-Adversarial-Roubustness-vs-Model-Compression-or-Both/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/25/Reading-Report-for-Adversarial-Roubustness-vs-Model-Compression-or-Both/" class="post-title-link" itemprop="url">Reading Report for Adversarial Roubustness vs. Model Compression, or Both?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-12-25 12:21:10 / 修改时间：13:49:33" itemprop="dateCreated datePublished" datetime="2020-12-25T12:21:10+08:00">2020-12-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Research-Group/" itemprop="url" rel="index"><span itemprop="name">Research Group</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="0-Abstract"><a class="header-anchor" href="#0-Abstract">¶</a>0. Abstract</h2>
-<ul>
-<li>DNN is vulnerable to adversarial attacks</li>
-<li>adversarial robustness requires larger capacity of the network than normal</li>
-<li>This paper proposed a training framework to achieve both model compression and adversarial attacks</li>
-<li>This paper studied 2 hypotheses:
-<ul>
-<li>under adversarial setting, weight pruning is essential for reducing the model size</li>
-<li>train a small model from scratch cannot achieve neither compression and adversarial robustness</li>
-</ul>
-</li>
-</ul>
-<h2 id="1-Introduction"><a class="header-anchor" href="#1-Introduction">¶</a>1. Introduction</h2>
-<h3 id="1-1-Background"><a class="header-anchor" href="#1-1-Background">¶</a>1.1 Background</h3>
-<ul>
-<li>Listing several bad results brought by DNN’s vulnerability</li>
-<li>brief introduction of adversarial attack and 2 types of it (black and white box)</li>
-</ul>
-<h3 id="1-2-Existing-conclusions"><a class="header-anchor" href="#1-2-Existing-conclusions">¶</a>1.2 Existing conclusions</h3>
-<ul>
-<li>So there are many denfense mechanisms, such as adversarial training using min-max robust optimization</li>
-<li>Increase the capacity of a network may provide a better trade off between  standard accuracy of an adversarially trained model and its adversarial robustness</li>
-<li>But large network capacity required in adversarial training may limit its use in resource constrained application systems.</li>
-<li>Some studies work on the relationship between adversarial robustness and weight sparsity, one of them concludes that moderate spasity can help with adversarial robustness, still vulnerable though.</li>
-</ul>
-<h3 id="1-3-Our-contribution"><a class="header-anchor" href="#1-3-Our-contribution">¶</a>1.3 Our contribution</h3>
-<ul>
-<li>This paper investigated whether and how weight sparsity can facilitate an active defense technique. And got following observations:
-<ul>
-<li>smaller model size leads to both lower accuarcy and robustness
-<ul>
-<li>so pre-pruning before training isn’t useful</li>
-</ul>
-</li>
-<li>adversarially trained model is less sparse
-<ul>
-<li>harder to prune an adversarially trained network</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Based on above observations, this paper tries to enable <strong>security-critical applications in resource constrained systems</strong> by integrating weight pruning with the adversarial robustness and model compression together.</li>
-<li>We studied 2 hypotheses (mentioned above)</li>
-<li>We build a framework to achieve both, for details:
-<ul>
-<li>ADMM based pruning (because it’s compatible with adversarial training)</li>
-<li>can switch between different pruning schemes</li>
-</ul>
-</li>
-<li>We find that the irregular pruning is best for achieving both</li>
-</ul>
-<h2 id="2-Related-Work"><a class="header-anchor" href="#2-Related-Work">¶</a>2. Related Work</h2>
-<h3 id="2-1-Adversarial-Trainning"><a class="header-anchor" href="#2-1-Adversarial-Trainning">¶</a>2.1 Adversarial Trainning</h3>
-<h3 id="2-2-Weight-Pruning"><a class="header-anchor" href="#2-2-Weight-Pruning">¶</a>2.2 Weight Pruning</h3>
-<h2 id="3-Concurrent-Adversarial-Training-and-Weight-Pruning"><a class="header-anchor" href="#3-Concurrent-Adversarial-Training-and-Weight-Pruning">¶</a>3. Concurrent Adversarial Training and Weight Pruning</h2>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/25/Chapter1-%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E7%BB%AA%E8%AE%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/25/Chapter1-%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E7%BB%AA%E8%AE%BA/" class="post-title-link" itemprop="url">Chapter1 软件工程绪论</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-12-25 02:17:06" itemprop="dateCreated datePublished" datetime="2020-12-25T02:17:06+08:00">2020-12-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件工程原理》</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本章将从软件和工程两个方面来探讨软件工程的<strong>本质</strong>和<strong>基本原理</strong></p>
-<h2 id="1-1-软件"><a class="header-anchor" href="#1-1-软件">¶</a>1.1 软件</h2>
-<h3 id="1-1-1-软件的作用和特性"><a class="header-anchor" href="#1-1-1-软件的作用和特性">¶</a>1.1.1 软件的作用和特性</h3>
-<h4 id="（1）软件定义："><a class="header-anchor" href="#（1）软件定义：">¶</a>（1）软件定义：</h4>
-<blockquote>
-<p>软件是计算机系统中与硬件相互依存的另一部分<br>
-软件=程序+相关数据+说明文档</p>
-</blockquote>
-<h4 id="（2）软件和硬件区别："><a class="header-anchor" href="#（2）软件和硬件区别：">¶</a>（2）软件和硬件区别：</h4>
-<ul>
-<li>软件开发不同于硬件设计</li>
-<li>软件生产不同于硬件制造</li>
-<li>软件维护不同于硬件维修</li>
-</ul>
-<h3 id="1-1-2-软件的发展和面临的新挑战"><a class="header-anchor" href="#1-1-2-软件的发展和面临的新挑战">¶</a>1.1.2 软件的发展和面临的新挑战</h3>
-<p>挑战：</p>
-<ul>
-<li>软件复杂性增加</li>
-<li>软件规模的扩大</li>
-<li>软件环境的变化</li>
-<li>遗留系统的集成和复用</li>
-<li>软件开发的高质量和敏捷性要求</li>
-<li>分散的开发团队的协同</li>
-</ul>
-<h3 id="1-1-3-软件危机"><a class="header-anchor" href="#1-1-3-软件危机">¶</a>1.1.3 软件危机</h3>
-<h4 id="（1）软件危机定义"><a class="header-anchor" href="#（1）软件危机定义">¶</a>（1）软件危机定义</h4>
-<p>指的是软件开发过程中面临的一系列问题：</p>
-<ul>
-<li>不符合需求</li>
-<li>出错</li>
-<li>鲁棒性差</li>
-<li>使用不方便</li>
-<li>工期超时</li>
-<li>成本超预算</li>
-</ul>
-<h4 id="（2）软件开发不成熟的原因"><a class="header-anchor" href="#（2）软件开发不成熟的原因">¶</a>（2）软件开发不成熟的原因</h4>
-<ul>
-<li>软件本身复杂</li>
-<li>软件开发维护的方法、工具等等不恰当</li>
-</ul>
-<h2 id="1-2-工程"><a class="header-anchor" href="#1-2-工程">¶</a>1.2 工程</h2>
-<h3 id="1-2-1-软件开发与艺术、科学和工程的关系"><a class="header-anchor" href="#1-2-1-软件开发与艺术、科学和工程的关系">¶</a>1.2.1 软件开发与艺术、科学和工程的关系</h3>
-<p>科学（真）、工程（善）、艺术（美），软件开发三者兼备</p>
-<h3 id="1-2-2-工程的定义和特性"><a class="header-anchor" href="#1-2-2-工程的定义和特性">¶</a>1.2.2 工程的定义和特性</h3>
-<h4 id="（1）定义"><a class="header-anchor" href="#（1）定义">¶</a>（1）定义</h4>
-<p><strong>组织</strong>良好+<strong>管理</strong>严密+各类人员协同配合<strong>共同</strong>完成工作<br>
-的学科</p>
-<h4 id="（2）特性"><a class="header-anchor" href="#（2）特性">¶</a>（2）特性</h4>
-<ul>
-<li>以价值为目标</li>
-<li>高度的组织管理性</li>
-<li>多种学科的综合</li>
-<li>高度的实践性。工程实践一般包括如下步骤：
-<ul>
-<li>理解问题——需求分析</li>
-<li>规划方案——设计</li>
-<li>实施计划——编码</li>
-<li>验证结果的准确性——测试和质量保证</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-2-3-工程的准则"><a class="header-anchor" href="#1-2-3-工程的准则">¶</a>1.2.3 工程的准则</h3>
-<p>见书</p>
-<h2 id="1-3-软件工程"><a class="header-anchor" href="#1-3-软件工程">¶</a>1.3 软件工程</h2>
-<p>即把工程的方法应用于软件开发<br>
-是工程师解决“软件危机”的探索</p>
-<h3 id="1-3-1-软件工程的概念和知识域"><a class="header-anchor" href="#1-3-1-软件工程的概念和知识域">¶</a>1.3.1 软件工程的概念和知识域</h3>
-<h4 id="（1）概念"><a class="header-anchor" href="#（1）概念">¶</a>（1）概念</h4>
-<p>为了<strong>经济地</strong>获得<strong>可靠的</strong>且能在实际机器上<strong>高效运行</strong>的软件<br>
-而建立和使用的<br>
-工程原理</p>
-<h4 id="（2）软件工程知识域"><a class="header-anchor" href="#（2）软件工程知识域">¶</a>（2）软件工程知识域</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201225144907.png" alt=""></p>
-<h3 id="1-3-2-软件工程的金三角"><a class="header-anchor" href="#1-3-2-软件工程的金三角">¶</a>1.3.2 软件工程的金三角</h3>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201225145134.png" alt=""></p>
-<ul>
-<li>人：软件开发和维护的主体，最重要的因素</li>
-<li>技术：解决“如何做”的问题<br>
-软件工程核心技术环节：
-<ul>
-<li>系统工程：了解软件所处系统的方法</li>
-<li>软件需求：确定软件的目标和范围</li>
-<li>软件设计：从需求到代码的桥梁</li>
-<li>软件构造/编码：就是写代码啦</li>
-<li>软件测试：</li>
-<li>软件维护<br>
-记住上面这个顺序……这个思路很常见</li>
-</ul>
-</li>
-<li>管理：我国大企业不多</li>
-<li>过程：=人+技术+管理</li>
-</ul>
-<h3 id="1-3-3-控制软件开发的复杂性"><a class="header-anchor" href="#1-3-3-控制软件开发的复杂性">¶</a>1.3.3 控制软件开发的复杂性</h3>
-<h4 id="（1）软件复杂在哪？"><a class="header-anchor" href="#（1）软件复杂在哪？">¶</a>（1）软件复杂在哪？</h4>
-<ul>
-<li>技术复杂</li>
-<li>需求复杂</li>
-<li>人复杂</li>
-</ul>
-<h4 id="（2）控制复杂性的方法"><a class="header-anchor" href="#（2）控制复杂性的方法">¶</a>（2）控制复杂性的方法</h4>
-<p>把复杂的问题转变为计算机能处理的简单问题</p>
-<ul>
-<li>抽象：含义你懂的，程序设计中主要用到两种：
-<ul>
-<li>过程抽象：i.e.类的方法</li>
-<li>数据抽象：i.e.类的属性</li>
-</ul>
-</li>
-<li>分解：复杂问题——&gt;简单子问题</li>
-<li>迭代：比如多次试验以获取足够多的经验</li>
-</ul>
-<h3 id="1-3-4-软件工程经济学"><a class="header-anchor" href="#1-3-4-软件工程经济学">¶</a>1.3.4 软件工程经济学</h3>
-<p>研究软件价值及提高的方法</p>
-<h2 id="1-4-案例概述"><a class="header-anchor" href="#1-4-案例概述">¶</a>1.4 案例概述</h2>
-<p>4S店与软件工程比对</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/24/Chapter1-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%BB%AA%E8%AE%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/24/Chapter1-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%BB%AA%E8%AE%BA/" class="post-title-link" itemprop="url">Chapter1 人工智能绪论</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-12-24 15:11:29" itemprop="dateCreated datePublished" datetime="2020-12-24T15:11:29+08:00">2020-12-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/%E3%80%8A%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《人工智能及其应用》</span></a>
-                </span>
+              <time title="创建时间：2020-12-31 21:28:21" itemprop="dateCreated datePublished" datetime="2020-12-31T21:28:21+08:00">2020-12-31</time>
             </span>
 
           
@@ -1605,7 +701,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/24/Chapter7-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/31/Chapter10-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1619,7 +715,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/12/24/Chapter7-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">Chapter7 机器学习</a>
+            <a href="/2020/12/31/Chapter10-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">Chapter10 软件项目管理</a>
         </h2>
 
         <div class="post-meta">
@@ -1629,27 +725,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-24 14:07:30" itemprop="dateCreated datePublished" datetime="2020-12-24T14:07:30+08:00">2020-12-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/%E3%80%8A%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《人工智能及其应用》</span></a>
-                </span>
+              <time title="创建时间：2020-12-31 21:28:04" itemprop="dateCreated datePublished" datetime="2020-12-31T21:28:04+08:00">2020-12-31</time>
             </span>
 
           
@@ -1663,56 +739,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="7-1-机器学习的定义和发展历史"><a class="header-anchor" href="#7-1-机器学习的定义和发展历史">¶</a>7.1 机器学习的定义和发展历史</h2>
-<h3 id="7-1-1-机器学习的定义"><a class="header-anchor" href="#7-1-1-机器学习的定义">¶</a>7.1.1 机器学习的定义</h3>
-<p>书上首先介绍了很多很多大师的定义，最后提出了一个为了便于学科研究的定义：</p>
-<blockquote>
-<p>机器学习是研究机器<strong>模拟人类</strong>的学习活动、<strong>获取知识和技能</strong>的理论和方法，以<strong>改善系统性能</strong>的学科</p>
-</blockquote>
-<h3 id="7-1-2-机器学习的发展史"><a class="header-anchor" href="#7-1-2-机器学习的发展史">¶</a>7.1.2 机器学习的发展史</h3>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201224142728.png" alt=""></p>
-<p>另外书中还提到机器学习进入新阶段的重要表现（6条）</p>
-<h2 id="7-2-机器学习的主要策略与基本结构"><a class="header-anchor" href="#7-2-机器学习的主要策略与基本结构">¶</a>7.2 机器学习的主要策略与基本结构</h2>
-<h3 id="7-2-1-机器学习的主要策略"><a class="header-anchor" href="#7-2-1-机器学习的主要策略">¶</a>7.2.1 机器学习的主要策略</h3>
-<p>分为四种，所需要的推理能力从低到高：</p>
-<ul>
-<li>机械学习：即记忆，外界知识表示方式与系统内部表示方式完全一致，不需要任何处理与转换</li>
-<li>示教学习：表达方式不完全一致，需要一定的推理、翻译和转化工作</li>
-<li>类比学习：去发现已知任务和当前任务的相似之处，由此为当前任务制定解决方案</li>
-<li>示例学习：对具体的工作例子及工作经验进行分析总结和推广，得到完成任务的一般性规律</li>
-</ul>
-<h3 id="7-2-2-机器学习系统的基本结构"><a class="header-anchor" href="#7-2-2-机器学习系统的基本结构">¶</a>7.2.2 机器学习系统的基本结构</h3>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/0E13DC29D62D538FC2881F61451D6AD0.png" alt=""></p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/0E13DC29D62D538FC2881F61451D6AD0.png">
-<p>注意到知识库中知识的表示多种多样，所以书中提到了四条选择原则：</p>
-<ol>
-<li>表达能力强</li>
-<li>易于推理：学习系统计算代价较低</li>
-<li>容易修改知识库：难点在于——修改某一知识的时候，可能关联到其他的知识，需要全面检查</li>
-<li>知识表示易于扩展：发展以来，一个系统可能变得需要多种知识表示方式</li>
-</ol>
-<h2 id="7-3-归纳学习"><a class="header-anchor" href="#7-3-归纳学习">¶</a>7.3 归纳学习</h2>
-<p>归纳学习定义：</p>
-<blockquote>
-<p>是应用<strong>归纳推理</strong>进行学习的一种方法</p>
-</blockquote>
-<p>分类（根据有无教师指导）：</p>
-<ul>
-<li>示例学习：有师学习</li>
-<li>观察与发现学习：无师学习</li>
-</ul>
-<h3 id="7-3-1-归纳学习的模式和规则"><a class="header-anchor" href="#7-3-1-归纳学习的模式和规则">¶</a>7.3.1 归纳学习的模式和规则</h3>
-<p>归纳学习的一些特点：<br>
-这里把归纳学习分成有穷归纳、数学归纳和一般归纳<br>
-除去前两者以外，一般归纳其实推理结论只**“保假”**</p>
-<blockquote>
-<p>保假的意思：当归纳前提是错误时，我们可以肯定地说结论也是错的；但是前提是正确的时候就不一定了</p>
-</blockquote>
-<p>其实人类的知识也是存在很强的<strong>可证伪性</strong></p>
-<h4 id="1-归纳学习的模式"><a class="header-anchor" href="#1-归纳学习的模式">¶</a>1. 归纳学习的模式</h4>
-<p>（从这里开始不讲人话了）</p>
-<h4 id="2-归纳概括规则"><a class="header-anchor" href="#2-归纳概括规则">¶</a>2. 归纳概括规则</h4>
-<script>
+          <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -1749,7 +776,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/21/Chapter8-%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/31/Chapter9-%E8%BD%AF%E4%BB%B6%E6%BC%94%E5%8C%96%E5%92%8C%E8%BD%AF%E4%BB%B6%E7%BB%B4%E6%8A%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1763,7 +790,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/12/21/Chapter8-%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">Chapter8 恶意代码检测与分析</a>
+            <a href="/2020/12/31/Chapter9-%E8%BD%AF%E4%BB%B6%E6%BC%94%E5%8C%96%E5%92%8C%E8%BD%AF%E4%BB%B6%E7%BB%B4%E6%8A%A4/" class="post-title-link" itemprop="url">Chapter9 软件演化和软件维护</a>
         </h2>
 
         <div class="post-meta">
@@ -1773,14 +800,314 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-21 15:35:49" itemprop="dateCreated datePublished" datetime="2020-12-21T15:35:49+08:00">2020-12-21</time>
+              <time title="创建时间：2020-12-31 21:27:43" itemprop="dateCreated datePublished" datetime="2020-12-31T21:27:43+08:00">2020-12-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/31/Chapter8-%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/31/Chapter8-%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">Chapter8 软件测试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-31 21:27:26" itemprop="dateCreated datePublished" datetime="2020-12-31T21:27:26+08:00">2020-12-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/31/Chapter7-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%BB%BA%E6%A8%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/31/Chapter7-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%BB%BA%E6%A8%A1/" class="post-title-link" itemprop="url">Chapter7 面向对象的设计建模</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-31 21:27:10" itemprop="dateCreated datePublished" datetime="2020-12-31T21:27:10+08:00">2020-12-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/31/Chapter6-%E8%AE%BE%E8%AE%A1%E5%B7%A5%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/31/Chapter6-%E8%AE%BE%E8%AE%A1%E5%B7%A5%E7%A8%8B/" class="post-title-link" itemprop="url">Chapter6 设计工程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-31 21:26:21" itemprop="dateCreated datePublished" datetime="2020-12-31T21:26:21+08:00">2020-12-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/31/Chapter5-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%86%E6%9E%90%E5%BB%BA%E6%A8%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/31/Chapter5-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%86%E6%9E%90%E5%BB%BA%E6%A8%A1/" class="post-title-link" itemprop="url">Chapter5 面向对象的分析建模</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-31 21:14:53" itemprop="dateCreated datePublished" datetime="2020-12-31T21:14:53+08:00">2020-12-31</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 15:37:33" itemprop="dateModified" datetime="2020-12-28T15:37:33+08:00">2020-12-28</time>
+                <time title="修改时间：2021-01-03 00:31:15" itemprop="dateModified" datetime="2021-01-03T00:31:15+08:00">2021-01-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1788,11 +1115,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件安全分析与应用》</span></a>
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件工程原理》</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
                 </span>
             </span>
 
@@ -1807,50 +1134,67 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="8-1-恶意代码分析基础"><a class="header-anchor" href="#8-1-恶意代码分析基础">¶</a>8.1 恶意代码分析基础</h2>
-<h3 id="8-1-1-恶意代码分类"><a class="header-anchor" href="#8-1-1-恶意代码分类">¶</a>8.1.1 恶意代码分类</h3>
-<p>恶意代码分析过程总结</p>
-<ol>
-<li>将exe文件上传至</li>
-</ol>
-<h2 id="8-3-动态分析"><a class="header-anchor" href="#8-3-动态分析">¶</a>8.3 动态分析</h2>
-<p>有效的简单动态分析步骤：</p>
+          <p>这章好重要！有UML！</p>
+<h2 id="5-1-面向对象的分析模型UML"><a class="header-anchor" href="#5-1-面向对象的分析模型UML">¶</a>5.1 面向对象的分析模型UML</h2>
+<p>先说一下学到这里了，感受到的关于“分析”和“设计”的一些知识：</p>
 <ul>
-<li>准备：有效的目标+安全的运行环境+尽量真实的网络环境配置</li>
-<li>运行恶意代码</li>
-<li>使用监视工具</li>
-<li>综合分析</li>
+<li>分析解决的是What的问题，产生的分析模型是平台无关模型</li>
+<li>设计解决的是How的问题，产生的设计模型是平台相关模型</li>
 </ul>
-<h3 id="8-3-1-动态分析环境构建"><a class="header-anchor" href="#8-3-1-动态分析环境构建">¶</a>8.3.1 动态分析环境构建</h3>
-<h4 id="（1）环境构建要考虑的重点问题"><a class="header-anchor" href="#（1）环境构建要考虑的重点问题">¶</a>（1）环境构建要考虑的重点问题</h4>
-<p>不破坏/影响外部环境</p>
-<h4 id="（2）做法"><a class="header-anchor" href="#（2）做法">¶</a>（2）做法</h4>
-<p>在受控的隔离环境里面进行动态分析，可以做到：</p>
+<p>面向对象的分析模型是包括许多图的，这些图从不同的角度来描述软件系统要解决的问题</p>
+<h3 id="5-1-1-用例图"><a class="header-anchor" href="#5-1-1-用例图">¶</a>5.1.1 用例图</h3>
+<h4 id="（1）作用"><a class="header-anchor" href="#（1）作用">¶</a>（1）作用</h4>
+<p>描述系统的功能以及交互情况</p>
+<h4 id="（2）示例"><a class="header-anchor" href="#（2）示例">¶</a>（2）示例</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE256.png" alt=""></p>
+<h3 id="5-1-2-活动图"><a class="header-anchor" href="#5-1-2-活动图">¶</a>5.1.2 活动图</h3>
+<h4 id="（1）作用-v2"><a class="header-anchor" href="#（1）作用-v2">¶</a>（1）作用</h4>
 <ul>
-<li>影响限制到一定范围内</li>
-<li>可以快速恢复环境而不影响后续分析</li>
+<li>描述一个系统/子系统的工作流程</li>
+<li>描述用例内部数据流</li>
 </ul>
-<h4 id="（3）构建环境的工具"><a class="header-anchor" href="#（3）构建环境的工具">¶</a>（3）构建环境的工具</h4>
-<p>按采用的技术方法的不同，做如下分类:</p>
+<h4 id="（2）示例-v2"><a class="header-anchor" href="#（2）示例-v2">¶</a>（2）示例</h4>
+<p>感觉长的好像流程图：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103000434.png" alt=""></p>
+<h4 id="（3）活动图元素分组"><a class="header-anchor" href="#（3）活动图元素分组">¶</a>（3）活动图元素分组</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103000550.png" alt=""></p>
+<h3 id="5-1-3-类图"><a class="header-anchor" href="#5-1-3-类图">¶</a>5.1.3 类图</h3>
+<p>先介绍类，再介绍其各种关系</p>
+<h4 id="（1）类"><a class="header-anchor" href="#（1）类">¶</a>（1）类</h4>
+<p>UML定义了4种类型的可见性：</p>
 <ul>
-<li>
-<p>沙箱程序：</p>
-<ul>
-<li>作用：比如可以按照用户指定的安全策略来限制程序行为等，是一种可以运行在</li>
-<li></li>
+<li>public</li>
+<li>protected</li>
+<li>private</li>
+<li>package</li>
 </ul>
-</li>
-<li>
-<p>虚拟化软件（如VMware/VirtualBox）：</p>
-</li>
-<li>
-<p>硬件模拟器：</p>
-</li>
-</ul>
-<h3 id="8-3-2-动态行为分析"><a class="header-anchor" href="#8-3-2-动态行为分析">¶</a>8.3.2 动态行为分析</h3>
-<h3 id="8-3-3-动态调试分析"><a class="header-anchor" href="#8-3-3-动态调试分析">¶</a>8.3.3 动态调试分析</h3>
-<h3 id="8-3-4-反虚拟化分析对抗"><a class="header-anchor" href="#8-3-4-反虚拟化分析对抗">¶</a>8.3.4 反虚拟化分析对抗</h3>
-<h3 id="8-3-5-反自动化分析对抗"><a class="header-anchor" href="#8-3-5-反自动化分析对抗">¶</a>8.3.5 反自动化分析对抗</h3>
+<h4 id="（2）继承-泛化"><a class="header-anchor" href="#（2）继承-泛化">¶</a>（2）继承/泛化</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103002839.png" alt=""></p>
+<p>李氏替换准则：在继承时，子类应该能够替换父类</p>
+<h4 id="（3）关联"><a class="header-anchor" href="#（3）关联">¶</a>（3）关联</h4>
+<p>A类的实例与B类的实例中的特例有固定关系的话，这就叫关联关系<br>
+就好像圆这个类和点这个类的关系一样</p>
+<h3 id="5-1-4-时序图"><a class="header-anchor" href="#5-1-4-时序图">¶</a>5.1.4 时序图</h3>
+<h3 id="5-1-5-通信图"><a class="header-anchor" href="#5-1-5-通信图">¶</a>5.1.5 通信图</h3>
+<h3 id="5-1-6-包图"><a class="header-anchor" href="#5-1-6-包图">¶</a>5.1.6 包图</h3>
+<h2 id="5-2-分析建模的步骤"><a class="header-anchor" href="#5-2-分析建模的步骤">¶</a>5.2 分析建模的步骤</h2>
+<h2 id="5-3-用例建模"><a class="header-anchor" href="#5-3-用例建模">¶</a>5.3 用例建模</h2>
+<h3 id="5-3-1-执行者的识别"><a class="header-anchor" href="#5-3-1-执行者的识别">¶</a>5.3.1 执行者的识别</h3>
+<h3 id="5-3-2-用例的识别"><a class="header-anchor" href="#5-3-2-用例的识别">¶</a>5.3.2 用例的识别</h3>
+<h3 id="5-3-3-用例图的构建"><a class="header-anchor" href="#5-3-3-用例图的构建">¶</a>5.3.3 用例图的构建</h3>
+<h3 id="5-3-4-用例规约撰写"><a class="header-anchor" href="#5-3-4-用例规约撰写">¶</a>5.3.4 用例规约撰写</h3>
+<h3 id="5-3-5-用例模型的优化"><a class="header-anchor" href="#5-3-5-用例模型的优化">¶</a>5.3.5 用例模型的优化</h3>
+<h2 id="5-4-建立概念模型"><a class="header-anchor" href="#5-4-建立概念模型">¶</a>5.4 建立概念模型</h2>
+<h2 id="5-5-用例实现的识别"><a class="header-anchor" href="#5-5-用例实现的识别">¶</a>5.5 用例实现的识别</h2>
+<h2 id="5-6-分析类的识别"><a class="header-anchor" href="#5-6-分析类的识别">¶</a>5.6 分析类的识别</h2>
+<h3 id="5-6-1-3种分析类"><a class="header-anchor" href="#5-6-1-3种分析类">¶</a>5.6.1 3种分析类</h3>
+<h3 id="5-6-2-识别边界类"><a class="header-anchor" href="#5-6-2-识别边界类">¶</a>5.6.2 识别边界类</h3>
+<h3 id="5-6-3-识别控制类"><a class="header-anchor" href="#5-6-3-识别控制类">¶</a>5.6.3 识别控制类</h3>
+<h3 id="5-6-4-识别实体类"><a class="header-anchor" href="#5-6-4-识别实体类">¶</a>5.6.4 识别实体类</h3>
+<h2 id="5-7-用例分析"><a class="header-anchor" href="#5-7-用例分析">¶</a>5.7 用例分析</h2>
+<h3 id="5-7-1-职责分配通用原则"><a class="header-anchor" href="#5-7-1-职责分配通用原则">¶</a>5.7.1 职责分配通用原则</h3>
+<h3 id="5-7-2-时序图和通信图的构建"><a class="header-anchor" href="#5-7-2-时序图和通信图的构建">¶</a>5.7.2 时序图和通信图的构建</h3>
+<h3 id="5-7-3-类图的构建"><a class="header-anchor" href="#5-7-3-类图的构建">¶</a>5.7.3 类图的构建</h3>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1887,7 +1231,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1953,7 +1297,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1966,7 +1310,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1993,7 +1337,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

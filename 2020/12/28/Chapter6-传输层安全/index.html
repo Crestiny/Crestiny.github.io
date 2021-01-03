@@ -29,10 +29,15 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225334.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225804.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE31.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101142842.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE77.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101154055.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101161117.png">
 <meta property="article:published_time" content="2020-12-28T02:44:01.000Z">
-<meta property="article:modified_time" content="2020-12-28T02:46:27.694Z">
+<meta property="article:modified_time" content="2021-01-01T09:17:29.853Z">
 <meta property="article:author" content="CrestinyCoco">
-<meta property="article:tag" content="Web Securtiy">
+<meta property="article:tag" content="Transport Layer Security">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225334.png">
 
@@ -188,10 +193,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-12-28 10:44:01 / 修改时间：10:46:27" itemprop="dateCreated datePublished" datetime="2020-12-28T10:44:01+08:00">2020-12-28</time>
+              <time title="创建时间：2020-12-28 10:44:01" itemprop="dateCreated datePublished" datetime="2020-12-28T10:44:01+08:00">2020-12-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-01 17:17:29" itemprop="dateModified" datetime="2021-01-01T17:17:29+08:00">2021-01-01</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -257,6 +268,133 @@
 </ul>
 <h2 id="6-2-安全套接字层SSL和传输层安全TLS"><a class="header-anchor" href="#6-2-安全套接字层SSL和传输层安全TLS">¶</a>6.2 安全套接字层SSL和传输层安全TLS</h2>
 <h3 id="6-2-1-SSL体系结构"><a class="header-anchor" href="#6-2-1-SSL体系结构">¶</a>6.2.1 SSL体系结构</h3>
+<h4 id="（1）SSL协议组成"><a class="header-anchor" href="#（1）SSL协议组成">¶</a>（1）SSL协议组成</h4>
+<p>SSL是用TCP提供的端到端的安全服务，由两层协议组成：</p>
+<h4 id="（2）SSL协议两个重要概念"><a class="header-anchor" href="#（2）SSL协议两个重要概念">¶</a>（2）SSL协议两个重要概念</h4>
+<ul>
+<li>连接：一种提供合适服务类型的传输，每个连接与一个会话关联</li>
+<li>会话：通过握手协议来创建会话</li>
+</ul>
+<p>每个会话有若干个状态</p>
+<p>SSL协议：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE31.png" alt=""></p>
+<h2 id="6-3-传输层安全TLS"><a class="header-anchor" href="#6-3-传输层安全TLS">¶</a>6.3 传输层安全TLS</h2>
+<p>TLS目标是编写SSL的互联网标准版本，RFC 5246中定义的TLS非常接近于SSLv3，这里着重介绍区别</p>
+<h3 id="6-3-1-版本号"><a class="header-anchor" href="#6-3-1-版本号">¶</a>6.3.1 版本号</h3>
+<p>TLS记录格式与SSL记录格式完全相同</p>
+<h3 id="6-3-2-消息认证码"><a class="header-anchor" href="#6-3-2-消息认证码">¶</a>6.3.2 消息认证码</h3>
+<p>SSL和TLS的MAC方案不同在于：</p>
+<ul>
+<li>使用的算法</li>
+<li>MAC值的计算范围</li>
+</ul>
+<h3 id="6-3-3-伪随机函数"><a class="header-anchor" href="#6-3-3-伪随机函数">¶</a>6.3.3 伪随机函数</h3>
+<p>（？）<br>
+TLS使用伪随机函数的目的：使用相对较小的共享密钥值，生成较长的数据块</p>
+<h3 id="6-3-4-警报码"><a class="header-anchor" href="#6-3-4-警报码">¶</a>6.3.4 警报码</h3>
+<p>TLS支持一些SSLv3以外的警报码</p>
+<h3 id="6-3-5-密码套件"><a class="header-anchor" href="#6-3-5-密码套件">¶</a>6.3.5 密码套件</h3>
+<p>可用的密码套件之间有些小区别</p>
+<h3 id="6-3-6-客户端证书类型"><a class="header-anchor" href="#6-3-6-客户端证书类型">¶</a>6.3.6 客户端证书类型</h3>
+<p>客户端可请求的证书有区别</p>
+<h3 id="6-3-7-certificate-verify和finished消息"><a class="header-anchor" href="#6-3-7-certificate-verify和finished消息">¶</a>6.3.7 certificate_verify和finished消息</h3>
+<h3 id="6-3-8-密码计算"><a class="header-anchor" href="#6-3-8-密码计算">¶</a>6.3.8 密码计算</h3>
+<p>预备主密码的计算</p>
+<h3 id="6-3-9-填充"><a class="header-anchor" href="#6-3-9-填充">¶</a>6.3.9 填充</h3>
+<h2 id="6-4-HTTPS"><a class="header-anchor" href="#6-4-HTTPS">¶</a>6.4 HTTPS</h2>
+<p>HTTPS=HTTP+SSL/TLS，以实现浏览器和服务器之间的安全通信</p>
+<p>HTTPS协议中需要被加密的元素：</p>
+<ul>
+<li>URL</li>
+<li>请求的文件内容</li>
+<li>浏览器表单内容</li>
+<li>（双向）cookie</li>
+<li>HTTP报头内容</li>
+</ul>
+<h3 id="6-4-1-连接初始化"><a class="header-anchor" href="#6-4-1-连接初始化">¶</a>6.4.1 连接初始化</h3>
+<p>HTTPS连接初始化过程：</p>
+<ul>
+<li>用户向服务器请求连接</li>
+<li>交换TLS信息</li>
+<li>发起第一次HTTP请求，是以TLS应用数据的形式发送的</li>
+<li>HTTP的传统操作仍然保持</li>
+</ul>
+<p>HTTPS连接中的三层不同意思：</p>
+<ul>
+<li>对于HTTP的部分来说，它觉得自己是向下一层发送了一个连接请求，下一层帮它连接到服务器了；对HTTP，下层是TCP，对HTTPS，下层是SSL/TLS</li>
+<li>对于SSL/TLS的部分来说，它觉得自己是在TLS用户和TLS服务器之间建立了会话；建立一个SSL/TLS连接=建立了一个TCP连接</li>
+</ul>
+<h3 id="6-4-2-连接关闭"><a class="header-anchor" href="#6-4-2-连接关闭">¶</a>6.4.2 连接关闭</h3>
+<p>HTTPS要求关闭TLS——&gt;关闭TLS要求关闭TCP连接</p>
+<h2 id="6-5-SSH（Secure-Shell）"><a class="header-anchor" href="#6-5-SSH（Secure-Shell）">¶</a>6.5 SSH（Secure Shell）</h2>
+<p>SSH是个简单又安全的通信协议，用于远程登录、隧道等</p>
+<p>SSH协议栈：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101142842.png" alt=""></p>
+<p>接下来分别介绍SSH传输层协议、SSH用户认证协议、SSH连接协议</p>
+<h3 id="6-5-1-传输层协议"><a class="header-anchor" href="#6-5-1-传输层协议">¶</a>6.5.1 传输层协议</h3>
+<h4 id="（1）主机密钥"><a class="header-anchor" href="#（1）主机密钥">¶</a>（1）主机密钥</h4>
+<p>主机密钥用于服务器认证，也就是让用户在密钥交换后可以确认这个服务器身份的意思<br>
+那用户拿到服务器讼案例的主机密钥之后又怎么验证呢？两种方式：</p>
+<ul>
+<li>用户有个数据库，存了服务器和主机密钥的映射关系</li>
+<li>用户到CA去认证，那里存了主机名和密钥对</li>
+</ul>
+<h4 id="（2）分组交换"><a class="header-anchor" href="#（2）分组交换">¶</a>（2）分组交换</h4>
+<h4 id="（3）SSH传输层协议流程"><a class="header-anchor" href="#（3）SSH传输层协议流程">¶</a>（3）SSH传输层协议流程</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE77.png" alt=""></p>
+<h3 id="6-5-2-用户身份认证呢个协议"><a class="header-anchor" href="#6-5-2-用户身份认证呢个协议">¶</a>6.5.2 用户身份认证呢个协议</h3>
+<p>是用户向服务器证明自己的身份</p>
+<h4 id="（1）消息类型和格式"><a class="header-anchor" href="#（1）消息类型和格式">¶</a>（1）消息类型和格式</h4>
+<ul>
+<li>用户请求服务器帮自己做个认证的格式</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">byte SSH_MSG_USERAUTH_REQUEST (50)</span><br><span class="line">string user name</span><br><span class="line">string server name</span><br><span class="line">string method name</span><br><span class="line">... method specific fields</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>服务器拒绝帮用户做认证或者需要它提供更多信息的话，会发这种格式的</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">byte SSH_MSG_USERAUTH_FAILURE (51)</span><br><span class="line">name-list authentications that can continue</span><br><span class="line">boolean partial success</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>服务器同意帮你认证</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">byte SSH_MSG_USERAUTH_SUCEESS（52）</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="（2）消息交换"><a class="header-anchor" href="#（2）消息交换">¶</a>（2）消息交换</h4>
+<p>流程如下：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101154055.png" alt=""></p>
+<h4 id="（3）身份认证方式"><a class="header-anchor" href="#（3）身份认证方式">¶</a>（3）身份认证方式</h4>
+<p>说的是上图中认证方法列表的内容？</p>
+<h3 id="6-5-3-连接协议"><a class="header-anchor" href="#6-5-3-连接协议">¶</a>6.5.3 连接协议</h3>
+<p>这里顺带一提：SSH协议栈的三个协议，用法大概是——先做SSH用户身份验证协议，再做SSH连接协议，这两个都是基于SSH传输协议的</p>
+<p>有个前提假设是：使用了安全的认证连接</p>
+<blockquote>
+<p>安全的认证连接：连接协议用一个通道虚拟出多条逻辑通道</p>
+</blockquote>
+<h4 id="（1）信道机制"><a class="header-anchor" href="#（1）信道机制">¶</a>（1）信道机制</h4>
+<p>通过窗口机制进行流控，信道的生命周期有3个阶段：</p>
+<ul>
+<li>
+<p>开启信道：</p>
+<ul>
+<li>某一方想开了，给信道分配一个本地序列号，发这种消息：</li>
+</ul>
+  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">byte SSH_MSG_CHANNEL_OPEN</span><br><span class="line">string channel type</span><br><span class="line">uint32 sender channel</span><br><span class="line">uint32 initial window size</span><br><span class="line">uint32 maximum packet size</span><br><span class="line">... channel type specific data follows</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>另一方同意或不同意，如果同意则开启信道</li>
+</ul>
+</li>
+<li>
+<p>关闭信道：</p>
+<ul>
+<li>任意一方想关闭信道，发消息</li>
+</ul>
+</li>
+</ul>
+<p>过程如下图：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101161117.png" alt=""></p>
+<h4 id="（2）信道类型"><a class="header-anchor" href="#（2）信道类型">¶</a>（2）信道类型</h4>
+<p>4种</p>
+<h4 id="（3）端口转发（即SSH隧道）"><a class="header-anchor" href="#（3）端口转发（即SSH隧道）">¶</a>（3）端口转发（即SSH隧道）</h4>
+<p>可以将不安全的TCP连接转换为安全的SSH连接，转发可以分为本地的和远程的</p>
+<p>没看懂（？）</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -284,7 +422,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Web-Securtiy/" rel="tag"># Web Securtiy</a>
+              <a href="/tags/Transport-Layer-Security/" rel="tag"># Transport Layer Security</a>
           </div>
 
         
@@ -358,7 +496,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-Web%E5%AE%89%E5%85%A8%E9%9C%80%E6%B1%82"><span class="nav-text">6.1 Web安全需求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-Web%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81"><span class="nav-text">6.1.1 Web安全威胁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89Web%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81%E5%88%86%E7%B1%BB"><span class="nav-text">（1）Web安全威胁分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%90%84%E7%B1%BBWeb%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-text">（2）各类Web安全威胁的比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-Web%E6%B5%81%E9%87%8F%E5%AE%89%E5%85%A8%E6%96%B9%E6%B3%95"><span class="nav-text">6.1.2 Web流量安全方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-%E5%AE%89%E5%85%A8%E5%A5%97%E6%8E%A5%E5%AD%97%E5%B1%82SSL%E5%92%8C%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8TLS"><span class="nav-text">6.2 安全套接字层SSL和传输层安全TLS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-1-SSL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-text">6.2.1 SSL体系结构</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-Web%E5%AE%89%E5%85%A8%E9%9C%80%E6%B1%82"><span class="nav-text">6.1 Web安全需求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-Web%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81"><span class="nav-text">6.1.1 Web安全威胁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89Web%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81%E5%88%86%E7%B1%BB"><span class="nav-text">（1）Web安全威胁分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%90%84%E7%B1%BBWeb%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-text">（2）各类Web安全威胁的比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-Web%E6%B5%81%E9%87%8F%E5%AE%89%E5%85%A8%E6%96%B9%E6%B3%95"><span class="nav-text">6.1.2 Web流量安全方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-%E5%AE%89%E5%85%A8%E5%A5%97%E6%8E%A5%E5%AD%97%E5%B1%82SSL%E5%92%8C%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8TLS"><span class="nav-text">6.2 安全套接字层SSL和传输层安全TLS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-1-SSL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-text">6.2.1 SSL体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89SSL%E5%8D%8F%E8%AE%AE%E7%BB%84%E6%88%90"><span class="nav-text">（1）SSL协议组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89SSL%E5%8D%8F%E8%AE%AE%E4%B8%A4%E4%B8%AA%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5"><span class="nav-text">（2）SSL协议两个重要概念</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8TLS"><span class="nav-text">6.3 传输层安全TLS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-1-%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="nav-text">6.3.1 版本号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-2-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81"><span class="nav-text">6.3.2 消息认证码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-3-%E4%BC%AA%E9%9A%8F%E6%9C%BA%E5%87%BD%E6%95%B0"><span class="nav-text">6.3.3 伪随机函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-4-%E8%AD%A6%E6%8A%A5%E7%A0%81"><span class="nav-text">6.3.4 警报码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-5-%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6"><span class="nav-text">6.3.5 密码套件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-6-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%81%E4%B9%A6%E7%B1%BB%E5%9E%8B"><span class="nav-text">6.3.6 客户端证书类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-7-certificate-verify%E5%92%8Cfinished%E6%B6%88%E6%81%AF"><span class="nav-text">6.3.7 certificate_verify和finished消息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-8-%E5%AF%86%E7%A0%81%E8%AE%A1%E7%AE%97"><span class="nav-text">6.3.8 密码计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-9-%E5%A1%AB%E5%85%85"><span class="nav-text">6.3.9 填充</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-HTTPS"><span class="nav-text">6.4 HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-1-%E8%BF%9E%E6%8E%A5%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">6.4.1 连接初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-2-%E8%BF%9E%E6%8E%A5%E5%85%B3%E9%97%AD"><span class="nav-text">6.4.2 连接关闭</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5-SSH%EF%BC%88Secure-Shell%EF%BC%89"><span class="nav-text">6.5 SSH（Secure Shell）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-1-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-text">6.5.1 传输层协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%B8%BB%E6%9C%BA%E5%AF%86%E9%92%A5"><span class="nav-text">（1）主机密钥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="nav-text">（2）分组交换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89SSH%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE%E6%B5%81%E7%A8%8B"><span class="nav-text">（3）SSH传输层协议流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-2-%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E5%91%A2%E4%B8%AA%E5%8D%8F%E8%AE%AE"><span class="nav-text">6.5.2 用户身份认证呢个协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%A0%BC%E5%BC%8F"><span class="nav-text">（1）消息类型和格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%B6%88%E6%81%AF%E4%BA%A4%E6%8D%A2"><span class="nav-text">（2）消息交换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="nav-text">（3）身份认证方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-3-%E8%BF%9E%E6%8E%A5%E5%8D%8F%E8%AE%AE"><span class="nav-text">6.5.3 连接协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%BF%A1%E9%81%93%E6%9C%BA%E5%88%B6"><span class="nav-text">（1）信道机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E4%BF%A1%E9%81%93%E7%B1%BB%E5%9E%8B"><span class="nav-text">（2）信道类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%EF%BC%88%E5%8D%B3SSH%E9%9A%A7%E9%81%93%EF%BC%89"><span class="nav-text">（3）端口转发（即SSH隧道）</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -372,7 +510,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -385,7 +523,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -412,7 +550,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

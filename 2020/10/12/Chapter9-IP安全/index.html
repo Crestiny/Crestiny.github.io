@@ -20,18 +20,24 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="防重放攻击，一般通过序列号或者时间戳 9.1 IP安全概述 在IP中加入认证和加密机制来保障终端用户安全 ¶9.1.1 IPSec的应用 ¶IPSec适用范围 LAN、专用和公用WAN、互联网 ¶用途  通过互联网安全分支机构接入： 通过互联网进行安全远程访问： 与合作者建立企业间联网和企业内联网接入： 加强电子商务安全性：  ¶9.1.2 IPSec的好处 ¶9.1.3 路由应用 IPSec其实">
+  <meta name="description" content="防重放攻击，一般通过序列号或者时间戳 ¶9.1 IP安全概述 之前学的Kerberos、TLS&#x2F;SSL、S&#x2F;MIME、PGP，都是用来保护应用安全的，其实协议安全也很重要 在IP中加入认证和加密机制来保障终端用户安全，这样的话，即便上层没有安全机制也可以保证安全 IP层安全包括：  认证 保密 密钥管理机制：保证密钥交换安全  ¶9.1.1 IPSec的应用 ¶（1）IPSec适用范围 LAN、专">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Chapter9 IP安全">
 <meta property="og:url" content="http://yoursite.com/2020/10/12/Chapter9-IP%E5%AE%89%E5%85%A8/index.html">
 <meta property="og:site_name" content="Crestiny&#39;s Blog">
-<meta property="og:description" content="防重放攻击，一般通过序列号或者时间戳 9.1 IP安全概述 在IP中加入认证和加密机制来保障终端用户安全 ¶9.1.1 IPSec的应用 ¶IPSec适用范围 LAN、专用和公用WAN、互联网 ¶用途  通过互联网安全分支机构接入： 通过互联网进行安全远程访问： 与合作者建立企业间联网和企业内联网接入： 加强电子商务安全性：  ¶9.1.2 IPSec的好处 ¶9.1.3 路由应用 IPSec其实">
+<meta property="og:description" content="防重放攻击，一般通过序列号或者时间戳 ¶9.1 IP安全概述 之前学的Kerberos、TLS&#x2F;SSL、S&#x2F;MIME、PGP，都是用来保护应用安全的，其实协议安全也很重要 在IP中加入认证和加密机制来保障终端用户安全，这样的话，即便上层没有安全机制也可以保证安全 IP层安全包括：  认证 保密 密钥管理机制：保证密钥交换安全  ¶9.1.1 IPSec的应用 ¶（1）IPSec适用范围 LAN、专">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102220557.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103125634.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE278.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE277.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE276.png">
 <meta property="article:published_time" content="2020-10-12T01:14:17.000Z">
-<meta property="article:modified_time" content="2020-12-24T12:11:01.953Z">
+<meta property="article:modified_time" content="2021-01-03T06:13:07.015Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta property="article:tag" content="IP Security">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102220557.png">
 
 <link rel="canonical" href="http://yoursite.com/2020/10/12/Chapter9-IP%E5%AE%89%E5%85%A8/">
 
@@ -193,7 +199,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
+                <time title="修改时间：2021-01-03 14:13:07" itemprop="dateModified" datetime="2021-01-03T14:13:07+08:00">2021-01-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,20 +227,29 @@
 
       
         <p>防重放攻击，一般通过序列号或者时间戳</p>
-<h1>9.1 IP安全概述</h1>
-<p>在IP中加入认证和加密机制来保障终端用户安全</p>
-<h2 id="9-1-1-IPSec的应用"><a class="header-anchor" href="#9-1-1-IPSec的应用">¶</a>9.1.1 IPSec的应用</h2>
-<h5 id="IPSec适用范围"><a class="header-anchor" href="#IPSec适用范围">¶</a>IPSec适用范围</h5>
+<h2 id="9-1-IP安全概述"><a class="header-anchor" href="#9-1-IP安全概述">¶</a>9.1 IP安全概述</h2>
+<p>之前学的Kerberos、TLS/SSL、S/MIME、PGP，都是用来保护应用安全的，其实协议安全也很重要<br>
+在IP中加入认证和加密机制来保障终端用户安全，这样的话，即便上层没有安全机制也可以保证安全</p>
+<p>IP层安全包括：</p>
+<ul>
+<li>认证</li>
+<li>保密</li>
+<li>密钥管理机制：保证密钥交换安全</li>
+</ul>
+<h3 id="9-1-1-IPSec的应用"><a class="header-anchor" href="#9-1-1-IPSec的应用">¶</a>9.1.1 IPSec的应用</h3>
+<h4 id="（1）IPSec适用范围"><a class="header-anchor" href="#（1）IPSec适用范围">¶</a>（1）IPSec适用范围</h4>
 <p>LAN、专用和公用WAN、互联网</p>
-<h5 id="用途"><a class="header-anchor" href="#用途">¶</a>用途</h5>
+<h4 id="（2）用途"><a class="header-anchor" href="#（2）用途">¶</a>（2）用途</h4>
 <ul>
 <li>通过互联网安全分支机构接入：</li>
 <li>通过互联网进行安全远程访问：</li>
 <li>与合作者建立企业间联网和企业内联网接入：</li>
 <li>加强电子商务安全性：</li>
 </ul>
-<h2 id="9-1-2-IPSec的好处"><a class="header-anchor" href="#9-1-2-IPSec的好处">¶</a>9.1.2 IPSec的好处</h2>
-<h2 id="9-1-3-路由应用"><a class="header-anchor" href="#9-1-3-路由应用">¶</a>9.1.3 路由应用</h2>
+<h4 id="（3）IPSec典型方案"><a class="header-anchor" href="#（3）IPSec典型方案">¶</a>（3）IPSec典型方案</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102220557.png" alt=""></p>
+<h3 id="9-1-2-IPSec的好处"><a class="header-anchor" href="#9-1-2-IPSec的好处">¶</a>9.1.2 IPSec的好处</h3>
+<h3 id="9-1-3-路由应用"><a class="header-anchor" href="#9-1-3-路由应用">¶</a>9.1.3 路由应用</h3>
 <p>IPSec其实在互联网的路由结构中也有很重要的作用，例如它可以确保：</p>
 <ul>
 <li>路由器广播来自授权的路由器</li>
@@ -242,8 +257,106 @@
 <li>重定向报文</li>
 <li>路由更新未被伪造</li>
 </ul>
-<h1>9.2 IP安全策略</h1>
-<h2 id="9-2-1-安全关联"><a class="header-anchor" href="#9-2-1-安全关联">¶</a>9.2.1 安全关联</h2>
+<h3 id="9-1-4-IPSec文档"><a class="header-anchor" href="#9-1-4-IPSec文档">¶</a>9.1.4 IPSec文档</h3>
+<h3 id="9-1-5-IPSec服务"><a class="header-anchor" href="#9-1-5-IPSec服务">¶</a>9.1.5 IPSec服务</h3>
+<p>IPSec提供以下服务：</p>
+<ul>
+<li>访问控制</li>
+<li>无连接完整性</li>
+<li>数据源认证</li>
+<li>拒绝重放包</li>
+<li>保密性</li>
+<li>受限制的流量保密性</li>
+</ul>
+<p>有两种协议可以提供安全性：</p>
+<ul>
+<li>AH：用于提供消息认证的扩展头</li>
+<li>ESP：加密与认证结合的协议</li>
+</ul>
+<h3 id="9-1-6-传输模式和隧道模式"><a class="header-anchor" href="#9-1-6-传输模式和隧道模式">¶</a>9.1.6 传输模式和隧道模式</h3>
+<p>AH和ESP都用两种模式，这里做个简介：</p>
+<ul>
+<li>传输模式：为上层协议提供保护，也就是对IP数据包的载荷进行保护
+<ul>
+<li>AH：认证IP载荷+IP报头选中的部分</li>
+<li>ESP：加密和认证IP载荷</li>
+</ul>
+</li>
+<li>隧道模式：对整个IP包提供保护，把原来的包+安全域，一起作为载荷套在新的IP包内
+<ul>
+<li>AH：认证整个内部IP包+外部IP报头被选中的部分</li>
+<li>ESP：加密和认证整个内部IP包</li>
+</ul>
+</li>
+</ul>
+<h2 id="9-2-IP安全策略"><a class="header-anchor" href="#9-2-IP安全策略">¶</a>9.2 IP安全策略</h2>
+<h3 id="9-2-1-安全关联"><a class="header-anchor" href="#9-2-1-安全关联">¶</a>9.2.1 安全关联</h3>
+<p>IPSec安全策略实际上由两个交互的数据库确定：安全关联数据库SAD和安全策略数据库SPD</p>
+<p>那个图看不太懂（？）</p>
+<p>安全关联SA：发送端与接收端之间用于对它们之间传递的<strong>数据流提供安全服务</strong>的一个单向逻辑连接，如果要双向，就要两个SA<br>
+SA提供的安全服务取决于使用的安全协议AH/ESP</p>
+<p>一个SA由三个参数确定：</p>
+<ul>
+<li>安全参数索引SPI：</li>
+<li>IP目的地址：目的端点地址</li>
+<li>安全协议标识：AH/ESP</li>
+</ul>
+<h3 id="9-2-2-安全关联数据库SAD"><a class="header-anchor" href="#9-2-2-安全关联数据库SAD">¶</a>9.2.2 安全关联数据库SAD</h3>
+<p>每个IPSec的实现中都有一个名义的SAD，所谓名义，是说：<br>
+SAD说明IPSec需要具备的功能，不负责定义具体实现，这个由IPSec自己决定</p>
+<p>SAD中的SA用以下参数定义：</p>
+<p>不同SA的不同组合可以使用户获得自己理想的配置</p>
+<h3 id="9-2-3-安全策略数据库SPD"><a class="header-anchor" href="#9-2-3-安全策略数据库SPD">¶</a>9.2.3 安全策略数据库SPD</h3>
+<p>（突然感觉这个好像防火墙啊！）（？）</p>
+<p>SPD中说明了IP流量与什么SA相关联</p>
+<p>如何用SPD处理IP数据包？</p>
+<ul>
+<li>取IP数据包中的信息（字段值）判断，看符合哪个SPD入口</li>
+<li>如果该数据包存在SA，那就根据对应的入口确定SA</li>
+<li>执行所需的IPSec处理（AH或ESP处理）</li>
+</ul>
+<p>判断字段值可以用选择器，一般依据是IP地址、下层协议等等</p>
+<p>某主机上SPD的一个例子：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103125634.png" alt=""></p>
+<h3 id="9-2-4-IP通信进程"><a class="header-anchor" href="#9-2-4-IP通信进程">¶</a>9.2.4 IP通信进程</h3>
+<h4 id="（1）IPSec作用位置"><a class="header-anchor" href="#（1）IPSec作用位置">¶</a>（1）IPSec作用位置</h4>
+<p>IPSec的作用单位：IP包，如果是往外面发的，则发之前要IPSec处理；如果是收进来的，往上层传的时候要处理</p>
+<h4 id="（2）出站报文"><a class="header-anchor" href="#（2）出站报文">¶</a>（2）出站报文</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE278.png" alt=""></p>
+<h4 id="（3）入站报文"><a class="header-anchor" href="#（3）入站报文">¶</a>（3）入站报文</h4>
+<p>和出站报文的处理不太一样，这里是SAD和SPD二者选其一的</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE277.png" alt=""></p>
+<h2 id="9-3-封装安全载荷ESP"><a class="header-anchor" href="#9-3-封装安全载荷ESP">¶</a>9.3 封装安全载荷ESP</h2>
+<p>这章是对ESP的详解</p>
+<p>ESP可以提供的服务包括：</p>
+<ul>
+<li>机密性</li>
+<li>数据源认证</li>
+<li>中断连接后的完整性</li>
+<li>一次抗重放攻击服务</li>
+<li>流量机密性</li>
+</ul>
+<p>具体提供哪些要看SA的选择</p>
+<h3 id="9-3-1-ESP格式"><a class="header-anchor" href="#9-3-1-ESP格式">¶</a>9.3.1 ESP格式</h3>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE276.png" alt=""></p>
+<h3 id="9-3-2-加密和认证算法"><a class="header-anchor" href="#9-3-2-加密和认证算法">¶</a>9.3.2 加密和认证算法</h3>
+<p>IV</p>
+<p>ICV</p>
+<h3 id="9-3-3-填充"><a class="header-anchor" href="#9-3-3-填充">¶</a>9.3.3 填充</h3>
+<p>填充域有如下几个作用：</p>
+<h3 id="9-3-4-防止重放服务"><a class="header-anchor" href="#9-3-4-防止重放服务">¶</a>9.3.4 防止重放服务</h3>
+<p>IPSec规定了一种窗口模式</p>
+<h3 id="9-3-5-传输模式和隧道模式"><a class="header-anchor" href="#9-3-5-传输模式和隧道模式">¶</a>9.3.5 传输模式和隧道模式</h3>
+<h4 id="（1）两种模式的比较"><a class="header-anchor" href="#（1）两种模式的比较">¶</a>（1）两种模式的比较</h4>
+<h4 id="（2）传输模式ESP"><a class="header-anchor" href="#（2）传输模式ESP">¶</a>（2）传输模式ESP</h4>
+<h4 id="（3）隧道模式ESP"><a class="header-anchor" href="#（3）隧道模式ESP">¶</a>（3）隧道模式ESP</h4>
+<h2 id="9-4-安全关联组合"><a class="header-anchor" href="#9-4-安全关联组合">¶</a>9.4 安全关联组合</h2>
+<h3 id="9-4-1-认证和加密"><a class="header-anchor" href="#9-4-1-认证和加密">¶</a>9.4.1 认证和加密</h3>
+<h3 id="9-4-2-安全关联的基本组合"><a class="header-anchor" href="#9-4-2-安全关联的基本组合">¶</a>9.4.2 安全关联的基本组合</h3>
+<h2 id="9-5-因特网密钥交换"><a class="header-anchor" href="#9-5-因特网密钥交换">¶</a>9.5 因特网密钥交换</h2>
+<h3 id="9-5-1-密钥确定协议"><a class="header-anchor" href="#9-5-1-密钥确定协议">¶</a>9.5.1 密钥确定协议</h3>
+<h3 id="9-5-2-报头和载荷格式"><a class="header-anchor" href="#9-5-2-报头和载荷格式">¶</a>9.5.2 报头和载荷格式</h3>
+<h2 id="9-6-密码套件"><a class="header-anchor" href="#9-6-密码套件">¶</a>9.6 密码套件</h2>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -345,7 +458,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">9.1 IP安全概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-1-IPSec%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">9.1.1 IPSec的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#IPSec%E9%80%82%E7%94%A8%E8%8C%83%E5%9B%B4"><span class="nav-text">IPSec适用范围</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E9%80%94"><span class="nav-text">用途</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-2-IPSec%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="nav-text">9.1.2 IPSec的好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-3-%E8%B7%AF%E7%94%B1%E5%BA%94%E7%94%A8"><span class="nav-text">9.1.3 路由应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">9.2 IP安全策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-1-%E5%AE%89%E5%85%A8%E5%85%B3%E8%81%94"><span class="nav-text">9.2.1 安全关联</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-IP%E5%AE%89%E5%85%A8%E6%A6%82%E8%BF%B0"><span class="nav-text">9.1 IP安全概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-1-IPSec%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">9.1.1 IPSec的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89IPSec%E9%80%82%E7%94%A8%E8%8C%83%E5%9B%B4"><span class="nav-text">（1）IPSec适用范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E7%94%A8%E9%80%94"><span class="nav-text">（2）用途</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89IPSec%E5%85%B8%E5%9E%8B%E6%96%B9%E6%A1%88"><span class="nav-text">（3）IPSec典型方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-2-IPSec%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="nav-text">9.1.2 IPSec的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-3-%E8%B7%AF%E7%94%B1%E5%BA%94%E7%94%A8"><span class="nav-text">9.1.3 路由应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-4-IPSec%E6%96%87%E6%A1%A3"><span class="nav-text">9.1.4 IPSec文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-5-IPSec%E6%9C%8D%E5%8A%A1"><span class="nav-text">9.1.5 IPSec服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-6-%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F%E5%92%8C%E9%9A%A7%E9%81%93%E6%A8%A1%E5%BC%8F"><span class="nav-text">9.1.6 传输模式和隧道模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-IP%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5"><span class="nav-text">9.2 IP安全策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-1-%E5%AE%89%E5%85%A8%E5%85%B3%E8%81%94"><span class="nav-text">9.2.1 安全关联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-2-%E5%AE%89%E5%85%A8%E5%85%B3%E8%81%94%E6%95%B0%E6%8D%AE%E5%BA%93SAD"><span class="nav-text">9.2.2 安全关联数据库SAD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-3-%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E6%95%B0%E6%8D%AE%E5%BA%93SPD"><span class="nav-text">9.2.3 安全策略数据库SPD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-4-IP%E9%80%9A%E4%BF%A1%E8%BF%9B%E7%A8%8B"><span class="nav-text">9.2.4 IP通信进程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89IPSec%E4%BD%9C%E7%94%A8%E4%BD%8D%E7%BD%AE"><span class="nav-text">（1）IPSec作用位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%87%BA%E7%AB%99%E6%8A%A5%E6%96%87"><span class="nav-text">（2）出站报文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%85%A5%E7%AB%99%E6%8A%A5%E6%96%87"><span class="nav-text">（3）入站报文</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3-%E5%B0%81%E8%A3%85%E5%AE%89%E5%85%A8%E8%BD%BD%E8%8D%B7ESP"><span class="nav-text">9.3 封装安全载荷ESP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-1-ESP%E6%A0%BC%E5%BC%8F"><span class="nav-text">9.3.1 ESP格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-2-%E5%8A%A0%E5%AF%86%E5%92%8C%E8%AE%A4%E8%AF%81%E7%AE%97%E6%B3%95"><span class="nav-text">9.3.2 加密和认证算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-3-%E5%A1%AB%E5%85%85"><span class="nav-text">9.3.3 填充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-4-%E9%98%B2%E6%AD%A2%E9%87%8D%E6%94%BE%E6%9C%8D%E5%8A%A1"><span class="nav-text">9.3.4 防止重放服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-5-%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F%E5%92%8C%E9%9A%A7%E9%81%93%E6%A8%A1%E5%BC%8F"><span class="nav-text">9.3.5 传输模式和隧道模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-text">（1）两种模式的比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8FESP"><span class="nav-text">（2）传输模式ESP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E9%9A%A7%E9%81%93%E6%A8%A1%E5%BC%8FESP"><span class="nav-text">（3）隧道模式ESP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-4-%E5%AE%89%E5%85%A8%E5%85%B3%E8%81%94%E7%BB%84%E5%90%88"><span class="nav-text">9.4 安全关联组合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-1-%E8%AE%A4%E8%AF%81%E5%92%8C%E5%8A%A0%E5%AF%86"><span class="nav-text">9.4.1 认证和加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-2-%E5%AE%89%E5%85%A8%E5%85%B3%E8%81%94%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E5%90%88"><span class="nav-text">9.4.2 安全关联的基本组合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-5-%E5%9B%A0%E7%89%B9%E7%BD%91%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2"><span class="nav-text">9.5 因特网密钥交换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-5-1-%E5%AF%86%E9%92%A5%E7%A1%AE%E5%AE%9A%E5%8D%8F%E8%AE%AE"><span class="nav-text">9.5.1 密钥确定协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-5-2-%E6%8A%A5%E5%A4%B4%E5%92%8C%E8%BD%BD%E8%8D%B7%E6%A0%BC%E5%BC%8F"><span class="nav-text">9.5.2 报头和载荷格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-6-%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6"><span class="nav-text">9.6 密码套件</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -359,7 +472,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -372,7 +485,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -399,7 +512,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
