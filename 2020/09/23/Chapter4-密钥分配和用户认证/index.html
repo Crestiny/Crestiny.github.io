@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231153605.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231193813.png">
 <meta property="article:published_time" content="2020-09-23T02:42:15.000Z">
-<meta property="article:modified_time" content="2020-12-31T11:40:28.647Z">
+<meta property="article:modified_time" content="2021-01-05T17:07:21.707Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE60.png">
@@ -203,7 +203,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-31 19:40:28" itemprop="dateModified" datetime="2020-12-31T19:40:28+08:00">2020-12-31</time>
+                <time title="修改时间：2021-01-06 01:07:21" itemprop="dateModified" datetime="2021-01-06T01:07:21+08:00">2021-01-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -355,17 +355,18 @@
 <p>多个CA会是什么情况呢？假如A从X1那里拿了证书，B从X2；然后A去看B的证书，能获取是能获取，但是拿到手上也没用，因为A没有X2的公钥，不能验证里面的签名，也就不能确定这个是B的证书……</p>
 <p>一种解决方案是，X1和X2事先交换过公钥，然后就可以：</p>
 <ol>
-<li>A在目录中拿到X1签名的X2证书（X2的公钥证书，把X2当成一个普通用户的话）,即X1&lt;<x2>&gt;</x2></li>
-<li>A有X1的公钥，所以A从X1&lt;<x2>&gt;——&gt;X2，也就是拿到了X2的公钥</x2></li>
-<li>A去拿由X2签名的B的证书，即X2&lt;<b>&gt;，解密拿到B，也就是知道了B的公钥</b></li><b>
-</b></ol><b>
+<li>A在目录中拿到X1签名的X2证书（X2的公钥证书，把X2当成一个普通用户的话）,即<code>X1&lt;&lt;X2&gt;&gt;</code></li>
+<li>A有X1的公钥，所以A从<code>X1&lt;&lt;X2&gt;&gt;——&gt;X2</code>，也就是拿到了X2的公钥</li>
+<li>A去拿由X2签名的B的证书，即<code>X2&lt;&lt;B&gt;&gt;</code>，解密拿到B，也就是知道了B的公钥</li>
+</ol>
 <p>A获取B的公钥的过程可以描述为：X1&lt;<x2>&gt;X2&lt;<b>&gt;<br>
-同理，B获取A的公钥的过程为：X2&lt;<x1>&gt;X1&lt;<a>&gt;</a></x1></b></x2></p><b><a>
-<p>更普遍的过程可以描述为：<br>
-X1&lt;<x2>&gt;X2&lt;<x3>&gt;…XN&lt;<b>&gt;<br>
-相邻的两个X应该互相生成过证书，为了更明确这个关系，我们用下图来描述：</b></x3></x2></p><b>
+同理，B获取A的公钥的过程为：<code>X2&lt;&lt;X1&gt;&gt;X1&lt;&lt;A&gt;&gt;</code></b></x2></p><b>
+<p>更普遍的过程可以描述为：</p>
+<pre><code>X1&lt;&lt;X2&gt;&gt;X2&lt;&lt;X3&gt;&gt;...XN&lt;&lt;B&gt;&gt;
+</code></pre>
+<p>相邻的两个X应该互相生成过证书，为了更明确这个关系，我们用下图来描述：</p>
 <p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE138.png" alt=""></p>
-</b></a><b><h4 id="（5）证书撤销"><a></a><a class="header-anchor" href="#（5）证书撤销">¶</a>（5）证书撤销</h4>
+<h4 id="（5）证书撤销"><a class="header-anchor" href="#（5）证书撤销">¶</a>（5）证书撤销</h4>
 <p>一般都是自然过期，不过有以下情况需要提前撤销：<br>
 见书P98</p>
 <p>用户从消息中取得证书的时候，需要确认它是否被取消</p>
@@ -436,11 +437,17 @@ X1&lt;<x2>&gt;X2&lt;<x3>&gt;…XN&lt;<b>&gt;<br>
 <h4 id="（2）联合身份管理的实体与数据流"><a class="header-anchor" href="#（2）联合身份管理的实体与数据流">¶</a>（2）联合身份管理的实体与数据流</h4>
 <p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231193813.png" alt=""></p>
 <h4 id="（3）标准"><a class="header-anchor" href="#（3）标准">¶</a>（3）标准</h4>
-<p>联合身份管理使用了一些标准，作为系统的构件，实现在不同的域之间进行安全身份交换的要求</p>
+<p>联合身份管理使用了一些标准，作为系统的构件，实现在不同的域之间进行安全身份交换的要求：</p>
+<ul>
+<li>可扩展标记语言XML</li>
+<li>简单对象访问协议SOAP</li>
+<li>WS-安全</li>
+<li>安全断言标记语言SAML：可以传递用户认证信息</li>
+</ul>
 <p>见书P103-104</p>
 <h4 id="（4）例子"><a class="header-anchor" href="#（4）例子">¶</a>（4）例子</h4>
 <p>见书P104-105</p>
-</b></b></b><script>
+</b><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -552,7 +559,7 @@ X1&lt;<x2>&gt;X2&lt;<x3>&gt;…XN&lt;<b>&gt;<br>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -565,7 +572,7 @@ X1&lt;<x2>&gt;X2&lt;<x3>&gt;…XN&lt;<b>&gt;<br>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
