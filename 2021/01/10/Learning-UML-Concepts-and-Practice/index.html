@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="¶1. 类图 ¶1.1 类内部 UML定义了4种类型的可见性，分别在对应的字段&#x2F;方法前面加小符号：  public（+） protected（#） private（-） package（~）：只对同一包声明的其他类可见  注意还要标注数据类型&#x2F;返回值类型，一个类的表示大概长这样：  ¶1.2 类与类之间 有以下几种关系可以把它们联系起来：  分别解释一下： ¶1.2.1 继承&#x2F;泛化 A指向B&#x3D;A继">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Learning UML: Concepts and Practice">
+<meta property="og:url" content="http://yoursite.com/2021/01/10/Learning-UML-Concepts-and-Practice/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="¶1. 类图 ¶1.1 类内部 UML定义了4种类型的可见性，分别在对应的字段&#x2F;方法前面加小符号：  public（+） protected（#） private（-） package（~）：只对同一包声明的其他类可见  注意还要标注数据类型&#x2F;返回值类型，一个类的表示大概长这样：  ¶1.2 类与类之间 有以下几种关系可以把它们联系起来：  分别解释一下： ¶1.2.1 继承&#x2F;泛化 A指向B&#x3D;A继">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110120012.png">
+<meta property="og:image" content="https://img-blog.csdn.net/20170718142514420?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDY0ODU1NQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110120706.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210106193748.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210106193854.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210106193042.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110121551.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110121700.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110121954.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE256.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110131015.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110131322.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110131439.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110131525.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE255.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210107001406.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110132655.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103000550.png">
+<meta property="article:published_time" content="2021-01-09T18:00:02.000Z">
+<meta property="article:modified_time" content="2021-01-10T06:04:20.883Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta property="article:tag" content="UML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110120012.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/01/10/Learning-UML-Concepts-and-Practice/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Learning UML: Concepts and Practice | Crestiny's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Crestiny's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Life is fantastic ! </p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/10/Learning-UML-Concepts-and-Practice/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Learning UML: Concepts and Practice
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-10 02:00:02 / 修改时间：14:04:20" itemprop="dateCreated datePublished" datetime="2021-01-10T02:00:02+08:00">2021-01-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件工程原理》</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E3%80%8B/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-类图"><a class="header-anchor" href="#1-类图">¶</a>1. 类图</h2>
+<h3 id="1-1-类内部"><a class="header-anchor" href="#1-1-类内部">¶</a>1.1 类内部</h3>
+<p>UML定义了4种类型的可见性，分别在对应的字段/方法前面加小符号：</p>
+<ul>
+<li>public（+）</li>
+<li>protected（#）</li>
+<li>private（-）</li>
+<li>package（~）：只对同一包声明的其他类可见</li>
+</ul>
+<p>注意还要标注数据类型/返回值类型，一个类的表示大概长这样：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110120012.png" alt=""></p>
+<h3 id="1-2-类与类之间"><a class="header-anchor" href="#1-2-类与类之间">¶</a>1.2 类与类之间</h3>
+<p>有以下几种关系可以把它们联系起来：</p>
+<p><img src="https://img-blog.csdn.net/20170718142514420?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDY0ODU1NQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>分别解释一下：</p>
+<h4 id="1-2-1-继承-泛化"><a class="header-anchor" href="#1-2-1-继承-泛化">¶</a>1.2.1 继承/泛化</h4>
+<p><strong>A指向B=A继承了B</strong></p>
+<h4 id="1-2-2-实现"><a class="header-anchor" href="#1-2-2-实现">¶</a>1.2.2 实现</h4>
+<p><strong>A指向B=A实现了B</strong><br>
+实现关系就是java中的一个类和接口之间的关系，接口中一般是没有成员变量。所有操作都是抽象的，只有声明没有具体的实现。</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110120706.png" alt=""></p>
+<p>有两种表示方法：</p>
+<ul>
+<li>实现关系：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210106193748.png" alt=""></li>
+<li>棒棒糖表示法：
+<ul>
+<li>需要接口：使用了这个接口提供的服务</li>
+<li>提供接口：完全就是用这个定义的数据结构/行为<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210106193854.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h4 id="1-2-3-依赖"><a class="header-anchor" href="#1-2-3-依赖">¶</a>1.2.3 依赖</h4>
+<p>临时、非结构性、单向性<br>
+依赖关系是类与类之间最弱的关系，A元素变化会影响B元素，反之不成立。说简单点就是一个类使用了另一个类，这种关系具有临时性特征，一个类的改变由于另一类而受影响。</p>
+<p>UML模型中的依赖关系有如下这些：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210106193042.png" alt=""></p>
+<h4 id="1-2-4-关联"><a class="header-anchor" href="#1-2-4-关联">¶</a>1.2.4 关联</h4>
+<p>永久、结构性、双向性<br>
+关联关系表示一个类和另一类有联系，它使一个类知道另一个类的属性和方法，被关联的元素间通常可以被独立的考虑。</p>
+<p>当箭头上有奇怪的数字标注：</p>
+<ul>
+<li>1…1表示另一个类的一个对象只与该类的一个对象有关系</li>
+<li>0…* 表示另一个类的一个对象与该类的零个或多个对象有关系</li>
+<li>1…* 表示另一个类的一个对象与该类的一个或多个对象有关系</li>
+<li>0…1表示另一个类的一个对象没有或只与该类的一个对象有关系</li>
+</ul>
+<p>注：假设表示A和B的关系,在贴近A的一端标注0…<em>，在这个关系中表示A可以有0个以上（包括0）；如果在B端标注1…</em>，就表示在这个关系中表示B可以有1个以上（包括1）</p>
+<h4 id="1-2-5-聚合"><a class="header-anchor" href="#1-2-5-聚合">¶</a>1.2.5 聚合</h4>
+<p>是关联关系的一种<br>
+聚合关系是整体和部分的关系，是一种强的关系，但是部分可以脱离整体而存在</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110121551.png" alt=""></p>
+<h4 id="1-2-6-组合"><a class="header-anchor" href="#1-2-6-组合">¶</a>1.2.6 组合</h4>
+<p>是关联关系的一种，也是聚合关系的一种变种，是更强的聚合关系，它要求整体的对象代表部分对象的生命周期<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110121700.png" alt=""></p>
+<h3 id="1-3-整个类图示例"><a class="header-anchor" href="#1-3-整个类图示例">¶</a>1.3 整个类图示例</h3>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110121954.png" alt=""></p>
+<h2 id="2-用例图"><a class="header-anchor" href="#2-用例图">¶</a>2. 用例图</h2>
+<h3 id="2-1-用例图示例"><a class="header-anchor" href="#2-1-用例图示例">¶</a>2.1 用例图示例</h3>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE256.png" alt=""></p>
+<h3 id="2-2-几种关系的解释"><a class="header-anchor" href="#2-2-几种关系的解释">¶</a>2.2 几种关系的解释</h3>
+<h4 id="2-2-1-执行者与执行者之间的泛化"><a class="header-anchor" href="#2-2-1-执行者与执行者之间的泛化">¶</a>2.2.1 执行者与执行者之间的泛化</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110131015.png" alt=""></p>
+<h4 id="2-2-2-执行者与用例之间的关联"><a class="header-anchor" href="#2-2-2-执行者与用例之间的关联">¶</a>2.2.2 执行者与用例之间的关联</h4>
+<p>线条是指参与者与用例之间线条，有三种：无箭头，指向用例的箭头，指向执行者的箭头。一般来说，箭头的尾部用来表示启动交互的一方，头部用来表示被启动的一方。</p>
+<h4 id="2-2-3-用例与用例之间的包含"><a class="header-anchor" href="#2-2-3-用例与用例之间的包含">¶</a>2.2.3 用例与用例之间的包含</h4>
+<p>（突然想起来我在PPT上学过！！）<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110131322.png" alt=""></p>
+<h4 id="2-2-4-用例与用例之间的扩展"><a class="header-anchor" href="#2-2-4-用例与用例之间的扩展">¶</a>2.2.4 用例与用例之间的扩展</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110131439.png" alt=""></p>
+<h4 id="2-2-5-用例与用例之间的泛化"><a class="header-anchor" href="#2-2-5-用例与用例之间的泛化">¶</a>2.2.5 用例与用例之间的泛化</h4>
+<p>有点像类之间的继承/泛化	<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110131525.png" alt=""></p>
+<h2 id="3-对象图"><a class="header-anchor" href="#3-对象图">¶</a>3. 对象图</h2>
+<p>对象图则是类图的一个实例，使用的标识几乎与类图一致，但是其生命周期有限，只能在系统中某一时间段内存在。<br>
+（老记得PPT上这部分知识，一会找一下）</p>
+<h2 id="4-时序图"><a class="header-anchor" href="#4-时序图">¶</a>4. 时序图</h2>
+<p>系统当然还有动态的性质，从两个角度刻画：</p>
+<ul>
+<li>对象内部：状态机图</li>
+<li>对象之间：时序图（顺序图/序列图）、通信图</li>
+</ul>
+<h4 id="4-1-时序图定义"><a class="header-anchor" href="#4-1-时序图定义">¶</a>4.1 时序图定义</h4>
+<p>描述了多个对象之间发送消息的时间顺序，图中的每条消息可以是：</p>
+<ul>
+<li>类的操作</li>
+<li>状态机图中引起状态转换的触发事件</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE255.png" alt=""></p>
+<h4 id="4-2-序列片段"><a class="header-anchor" href="#4-2-序列片段">¶</a>4.2 序列片段</h4>
+<p>其中详解一下序列片段，有四种：</p>
+<ul>
+<li>交互使用（ref标签）：复用已定义的交互场景</li>
+<li>循环（loop标签）：用[get next item]来控制执行</li>
+<li>条件（alt标签）：里面有方括号表示的分支</li>
+<li>并发（par标签）：</li>
+</ul>
+<h2 id="5-通信图"><a class="header-anchor" href="#5-通信图">¶</a>5. 通信图</h2>
+<p>其实可以和时序图互相转换，强调的是发送和接收消息的对象之间的组织结构；而时序图强调的是时间顺序，实际中可以利用两者优势……</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210107001406.png" alt=""></p>
+<h2 id="6-状态机图"><a class="header-anchor" href="#6-状态机图">¶</a>6. 状态机图</h2>
+<p>用于描述类的行为性特征</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE5.png" alt=""></p>
+<h2 id="7-构件图"><a class="header-anchor" href="#7-构件图">¶</a>7. 构件图</h2>
+<p>构件是对类的更高层次的抽象和封装<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE3.png" alt=""></p>
+<h2 id="8-部署图"><a class="header-anchor" href="#8-部署图">¶</a>8. 部署图</h2>
+<p>部署图定义了将软件制品部署到节点上的系统执行架构</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE4.png" alt=""></p>
+<h2 id="9-活动图"><a class="header-anchor" href="#9-活动图">¶</a>9. 活动图</h2>
+<h3 id="9-1-作用"><a class="header-anchor" href="#9-1-作用">¶</a>9.1 作用</h3>
+<ul>
+<li>描述一个系统/子系统的工作流程</li>
+<li>描述用例内部数据流</li>
+</ul>
+<h3 id="9-2-示例"><a class="header-anchor" href="#9-2-示例">¶</a>9.2 示例</h3>
+<p>感觉长的好像流程图，但是在线的处理上有些不一样：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210110132655.png" alt=""></p>
+<ul>
+<li>开始：实心圆</li>
+<li>结束：小灯泡</li>
+<li>条件分支：菱形</li>
+<li>操作：圆角矩形</li>
+</ul>
+<h3 id="9-3-活动图元素分组"><a class="header-anchor" href="#9-3-活动图元素分组">¶</a>9.3 活动图元素分组</h3>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103000550.png" alt=""></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UML/" rel="tag"># UML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/10/Design-Patterns/" rel="prev" title="Design Patterns">
+      <i class="fa fa-chevron-left"></i> Design Patterns
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/10/Architecture-Style/" rel="next" title="Architecture Style">
+      Architecture Style <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%B1%BB%E5%9B%BE"><span class="nav-text">1. 类图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E7%B1%BB%E5%86%85%E9%83%A8"><span class="nav-text">1.1 类内部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E7%B1%BB%E4%B8%8E%E7%B1%BB%E4%B9%8B%E9%97%B4"><span class="nav-text">1.2 类与类之间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-%E7%BB%A7%E6%89%BF-%E6%B3%9B%E5%8C%96"><span class="nav-text">1.2.1 继承&#x2F;泛化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-%E5%AE%9E%E7%8E%B0"><span class="nav-text">1.2.2 实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-%E4%BE%9D%E8%B5%96"><span class="nav-text">1.2.3 依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-4-%E5%85%B3%E8%81%94"><span class="nav-text">1.2.4 关联</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-5-%E8%81%9A%E5%90%88"><span class="nav-text">1.2.5 聚合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-6-%E7%BB%84%E5%90%88"><span class="nav-text">1.2.6 组合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E6%95%B4%E4%B8%AA%E7%B1%BB%E5%9B%BE%E7%A4%BA%E4%BE%8B"><span class="nav-text">1.3 整个类图示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%94%A8%E4%BE%8B%E5%9B%BE"><span class="nav-text">2. 用例图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%94%A8%E4%BE%8B%E5%9B%BE%E7%A4%BA%E4%BE%8B"><span class="nav-text">2.1 用例图示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%87%A0%E7%A7%8D%E5%85%B3%E7%B3%BB%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-text">2.2 几种关系的解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-%E6%89%A7%E8%A1%8C%E8%80%85%E4%B8%8E%E6%89%A7%E8%A1%8C%E8%80%85%E4%B9%8B%E9%97%B4%E7%9A%84%E6%B3%9B%E5%8C%96"><span class="nav-text">2.2.1 执行者与执行者之间的泛化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-%E6%89%A7%E8%A1%8C%E8%80%85%E4%B8%8E%E7%94%A8%E4%BE%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E8%81%94"><span class="nav-text">2.2.2 执行者与用例之间的关联</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-%E7%94%A8%E4%BE%8B%E4%B8%8E%E7%94%A8%E4%BE%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%85%E5%90%AB"><span class="nav-text">2.2.3 用例与用例之间的包含</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-%E7%94%A8%E4%BE%8B%E4%B8%8E%E7%94%A8%E4%BE%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E6%89%A9%E5%B1%95"><span class="nav-text">2.2.4 用例与用例之间的扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-5-%E7%94%A8%E4%BE%8B%E4%B8%8E%E7%94%A8%E4%BE%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E6%B3%9B%E5%8C%96"><span class="nav-text">2.2.5 用例与用例之间的泛化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AF%B9%E8%B1%A1%E5%9B%BE"><span class="nav-text">3. 对象图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%97%B6%E5%BA%8F%E5%9B%BE"><span class="nav-text">4. 时序图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-%E6%97%B6%E5%BA%8F%E5%9B%BE%E5%AE%9A%E4%B9%89"><span class="nav-text">4.1 时序图定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-%E5%BA%8F%E5%88%97%E7%89%87%E6%AE%B5"><span class="nav-text">4.2 序列片段</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%80%9A%E4%BF%A1%E5%9B%BE"><span class="nav-text">5. 通信图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E7%8A%B6%E6%80%81%E6%9C%BA%E5%9B%BE"><span class="nav-text">6. 状态机图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E6%9E%84%E4%BB%B6%E5%9B%BE"><span class="nav-text">7. 构件图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E9%83%A8%E7%BD%B2%E5%9B%BE"><span class="nav-text">8. 部署图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E6%B4%BB%E5%8A%A8%E5%9B%BE"><span class="nav-text">9. 活动图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-%E4%BD%9C%E7%94%A8"><span class="nav-text">9.1 作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-%E7%A4%BA%E4%BE%8B"><span class="nav-text">9.2 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-%E6%B4%BB%E5%8A%A8%E5%9B%BE%E5%85%83%E7%B4%A0%E5%88%86%E7%BB%84"><span class="nav-text">9.3 活动图元素分组</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CrestinyCoco</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CrestinyCoco</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
