@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102151334.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE171.png">
 <meta property="article:published_time" content="2020-09-23T12:22:32.000Z">
-<meta property="article:modified_time" content="2021-01-02T07:39:11.194Z">
+<meta property="article:modified_time" content="2021-02-18T03:31:32.475Z">
 <meta property="article:author" content="CrestinyCoco">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -200,7 +200,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-02 15:39:11" itemprop="dateModified" datetime="2021-01-02T15:39:11+08:00">2021-01-02</time>
+                <time title="修改时间：2021-02-18 11:31:32" itemprop="dateModified" datetime="2021-02-18T11:31:32+08:00">2021-02-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,21 +252,40 @@
 <p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE173.png" alt=""></p>
 <h2 id="1-2-开放源代码的UNIX-Linux操作系统"><a class="header-anchor" href="#1-2-开放源代码的UNIX-Linux操作系统">¶</a>1.2 开放源代码的UNIX/Linux操作系统</h2>
 <h3 id="1-2-1-UNIX诞生和发展"><a class="header-anchor" href="#1-2-1-UNIX诞生和发展">¶</a>1.2.1 UNIX诞生和发展</h3>
+<p>最开始想开发MULTICS，多年以后成功了……后来又因为想要运行一个游戏，为它重写了一套操作系统UNIX（后来用C语言全部重写了）</p>
 <h3 id="1-2-2-Linux诞生"><a class="header-anchor" href="#1-2-2-Linux诞生">¶</a>1.2.2 Linux诞生</h3>
+<p>UNIX有点贵，芬兰小伙写出了Linux改变了这个局面</p>
 <h3 id="1-2-3-操作系统标准POSIX"><a class="header-anchor" href="#1-2-3-操作系统标准POSIX">¶</a>1.2.3 操作系统标准POSIX</h3>
+<p>POSIX全称叫：可移植操作系统接口；它是一套标准，任何符合POSIX标准的操作系统，就可以运行UNIX程序</p>
 <h3 id="1-2-4-GNU和Linux"><a class="header-anchor" href="#1-2-4-GNU和Linux">¶</a>1.2.4 GNU和Linux</h3>
+<p>Linux系统=Linux内核+GNU工具+一些自由软件</p>
 <h3 id="1-2-5-Linux的开发模式"><a class="header-anchor" href="#1-2-5-Linux的开发模式">¶</a>1.2.5 Linux的开发模式</h3>
+<p>以互联网为纽带，世界各地共同参与</p>
 <h2 id="1-3-Linux内核"><a class="header-anchor" href="#1-3-Linux内核">¶</a>1.3 Linux内核</h2>
 <h3 id="1-3-1-Linux内核的技术特点"><a class="header-anchor" href="#1-3-1-Linux内核的技术特点">¶</a>1.3.1 Linux内核的技术特点</h3>
+<ul>
+<li>单内核：把整个内核作为一个大过程来实现，将进程管理、内存管理等拆成一个个模块（微内核：只实现基本的内存管理、进程间通信机制、I/O操作等等，剩下更高级的功能，通过与文件管理等上层模块的通信来解决）</li>
+<li>支持动态加载内核模块</li>
+<li>被动地提供服务（以用户的请求来驱动）</li>
+<li>用了虚存</li>
+<li>抽象文件模型——虚拟文件系统VFS</li>
+<li>延迟执行机制</li>
+</ul>
 <h3 id="1-3-2-Linux内核的位置"><a class="header-anchor" href="#1-3-2-Linux内核的位置">¶</a>1.3.2 Linux内核的位置</h3>
 <p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102150309.png" alt=""></p>
+<p>​	中间括起来的是Linux内核</p>
 <h3 id="1-3-3-Linux内核体系结构"><a class="header-anchor" href="#1-3-3-Linux内核体系结构">¶</a>1.3.3 Linux内核体系结构</h3>
 <p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE172.png" alt=""></p>
 <h2 id="1-4-Linux内核源代码"><a class="header-anchor" href="#1-4-Linux内核源代码">¶</a>1.4 Linux内核源代码</h2>
 <h3 id="1-3-1-Linux内核版本"><a class="header-anchor" href="#1-3-1-Linux内核版本">¶</a>1.3.1 Linux内核版本</h3>
+<p>​	其实用.分割的三四个数字是各自有含义的！</p>
 <h3 id="1-3-2-Linux内核源代码的结构"><a class="header-anchor" href="#1-3-2-Linux内核源代码的结构">¶</a>1.3.2 Linux内核源代码的结构</h3>
 <p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102151334.png" alt=""></p>
 <h3 id="1-3-3-Linux内核源代码分析工具"><a class="header-anchor" href="#1-3-3-Linux内核源代码分析工具">¶</a>1.3.3 Linux内核源代码分析工具</h3>
+<ul>
+<li>Linux的LXR</li>
+<li>Windows下的source insight（需要先把Linux的源代码放到Windows系统下，直接把/usr/src下的内容拷贝过来就好了）</li>
+</ul>
 <h2 id="1-5-Linux内核模块编程入门"><a class="header-anchor" href="#1-5-Linux内核模块编程入门">¶</a>1.5 Linux内核模块编程入门</h2>
 <p>内核模块=模块=动态可加载内核模块LKM</p>
 <p>模块机制是一个插口，实现可扩展性，弥补单内核的缺陷</p>
@@ -281,12 +300,32 @@
 <p>插入和移除就不说了，说下printk</p>
 <p>可以用tail /var/log/message查看日志</p>
 <h3 id="1-5-3-应用程序与内核模块的比较"><a class="header-anchor" href="#1-5-3-应用程序与内核模块的比较">¶</a>1.5.3 应用程序与内核模块的比较</h3>
+<p>​	模块编程属于内核编程。</p>
+<p>​	书上有一张应用程序与内核模块程序的比较</p>
 <h2 id="1-6-Linux内核中链表的实现及应用"><a class="header-anchor" href="#1-6-Linux内核中链表的实现及应用">¶</a>1.6 Linux内核中链表的实现及应用</h2>
 <p>链表是Linux内核中最简单、最常用的一种数据结构</p>
-<p><strong>值得注意的是，它们的内存无需占用连续的单元</strong></p>
+<p><strong>值得注意的是，它们的内存无需占用连续的单元</strong>，每个元素都包含一个指向下一个元素的指针，当有元素加入时，只要改变这个指针即可</p>
 <h3 id="1-6-1-链表的演化"><a class="header-anchor" href="#1-6-1-链表的演化">¶</a>1.6.1 链表的演化</h3>
+<p>C语言中最基本的双向链表结构：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_List</span>{</span></span><br><span class="line">    <span class="keyword">void</span> *mydata;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">my_List</span> *<span class="title">next</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">my_list</span> *<span class="title">prev</span>;</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>在此基础上做一些变化，可以得到二叉树、循环链表以及更多复杂的树状结构</p>
 <h3 id="1-6-2-链表的定义和操作"><a class="header-anchor" href="#1-6-2-链表的定义和操作">¶</a>1.6.2 链表的定义和操作</h3>
+<p>来看下Linux内核的实现方式​​</p>
+<h4 id="（1）链表的定义"><a class="header-anchor" href="#（1）链表的定义">¶</a>（1）链表的定义</h4>
+<p>首先定义一个不含数据域的链表结点</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">list_head</span>{</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> *<span class="title">next</span>, *<span class="title">prev</span>;</span><span class="comment">//注意写的时候prev前面要加*</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>我们把这个嵌入到别的结构中，来形成具有数据域的链表：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_List</span>{</span></span><br><span class="line">    <span class="keyword">void</span> *mydata;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">list</span>;</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="（2）链表的声明和初始化宏"><a class="header-anchor" href="#（2）链表的声明和初始化宏">¶</a>（2）链表的声明和初始化宏</h4>
+<p>在list.h中定义了宏来实现声明和初始化的操作，所以我们可以方便地使用<code>LIST_HEAD(my_listhead)</code>来创造一个空链表，头指针就是<code>my_listhead</code></p>
+<h4 id="（3）在链表中增加一个结点"><a class="header-anchor" href="#（3）在链表中增加一个结点">¶</a>（3）在链表中增加一个结点</h4>
+<p><strong>在内核代码中，函数名前加两个下划线表示内部函数</strong></p>
+<p>list.h中增加结点的函数是：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">list_add</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">list_add_tail</span><span class="params">()</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="（4）遍历链表"><a class="header-anchor" href="#（4）遍历链表">¶</a>（4）遍历链表</h4>
+<p>有点没看懂，用到的时候再回头看吧</p>
 <h3 id="1-6-3-链表的应用"><a class="header-anchor" href="#1-6-3-链表的应用">¶</a>1.6.3 链表的应用</h3>
+<p>比如，可以利用list.h中的函数，编写用以创建、增加、删除和遍历一个双向链表的Linux内核模块</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -388,7 +427,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E8%AE%A4%E8%AF%86%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-text">1.1 认识操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-%E4%BB%8E%E4%BD%BF%E7%94%A8%E8%80%85%E8%A7%92%E5%BA%A6%E7%9C%8B"><span class="nav-text">1.1.1 从使用者角度看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-%E4%BB%8E%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84%E8%A7%92%E5%BA%A6%E7%9C%8B"><span class="nav-text">1.1.2 从程序开发者的角度看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-%E4%BB%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9C%A8%E6%95%B4%E4%B8%AA%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%89%80%E5%A4%84%E7%9A%84%E4%BD%8D%E7%BD%AE%E7%9C%8B"><span class="nav-text">1.1.3 从操作系统在整个计算机系统所处的位置看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-4-%E4%BB%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E8%80%85%E7%9A%84%E8%A7%92%E5%BA%A6%E7%9C%8B"><span class="nav-text">1.1.4 从操作系统设计者的角度看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-5-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%84%E6%88%90"><span class="nav-text">1.1.5 操作系统组成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%BC%80%E6%94%BE%E6%BA%90%E4%BB%A3%E7%A0%81%E7%9A%84UNIX-Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-text">1.2 开放源代码的UNIX&#x2F;Linux操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-UNIX%E8%AF%9E%E7%94%9F%E5%92%8C%E5%8F%91%E5%B1%95"><span class="nav-text">1.2.1 UNIX诞生和发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-Linux%E8%AF%9E%E7%94%9F"><span class="nav-text">1.2.2 Linux诞生</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A0%87%E5%87%86POSIX"><span class="nav-text">1.2.3 操作系统标准POSIX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-GNU%E5%92%8CLinux"><span class="nav-text">1.2.4 GNU和Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-5-Linux%E7%9A%84%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F"><span class="nav-text">1.2.5 Linux的开发模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Linux%E5%86%85%E6%A0%B8"><span class="nav-text">1.3 Linux内核</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E6%8A%80%E6%9C%AF%E7%89%B9%E7%82%B9"><span class="nav-text">1.3.1 Linux内核的技术特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-text">1.3.2 Linux内核的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-Linux%E5%86%85%E6%A0%B8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-text">1.3.3 Linux内核体系结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81"><span class="nav-text">1.4 Linux内核源代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-Linux%E5%86%85%E6%A0%B8%E7%89%88%E6%9C%AC"><span class="nav-text">1.3.1 Linux内核版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-text">1.3.2 Linux内核源代码的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7"><span class="nav-text">1.3.3 Linux内核源代码分析工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8"><span class="nav-text">1.5 Linux内核模块编程入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text">1.5.1 模块的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="nav-text">1.5.2 编写一个简单的模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E7%A8%8B%E5%BA%8F%E4%B8%BE%E4%BE%8B"><span class="nav-text">（1）程序举例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E7%BC%96%E8%AF%91"><span class="nav-text">（2）编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E8%BF%90%E8%A1%8C"><span class="nav-text">（3）运行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-3-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%8E%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-text">1.5.3 应用程序与内核模块的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-Linux%E5%86%85%E6%A0%B8%E4%B8%AD%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="nav-text">1.6 Linux内核中链表的实现及应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-1-%E9%93%BE%E8%A1%A8%E7%9A%84%E6%BC%94%E5%8C%96"><span class="nav-text">1.6.1 链表的演化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-2-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E6%93%8D%E4%BD%9C"><span class="nav-text">1.6.2 链表的定义和操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-3-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">1.6.3 链表的应用</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E8%AE%A4%E8%AF%86%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-text">1.1 认识操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-%E4%BB%8E%E4%BD%BF%E7%94%A8%E8%80%85%E8%A7%92%E5%BA%A6%E7%9C%8B"><span class="nav-text">1.1.1 从使用者角度看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-%E4%BB%8E%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84%E8%A7%92%E5%BA%A6%E7%9C%8B"><span class="nav-text">1.1.2 从程序开发者的角度看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-%E4%BB%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9C%A8%E6%95%B4%E4%B8%AA%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%89%80%E5%A4%84%E7%9A%84%E4%BD%8D%E7%BD%AE%E7%9C%8B"><span class="nav-text">1.1.3 从操作系统在整个计算机系统所处的位置看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-4-%E4%BB%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E8%80%85%E7%9A%84%E8%A7%92%E5%BA%A6%E7%9C%8B"><span class="nav-text">1.1.4 从操作系统设计者的角度看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-5-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%84%E6%88%90"><span class="nav-text">1.1.5 操作系统组成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%BC%80%E6%94%BE%E6%BA%90%E4%BB%A3%E7%A0%81%E7%9A%84UNIX-Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-text">1.2 开放源代码的UNIX&#x2F;Linux操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-UNIX%E8%AF%9E%E7%94%9F%E5%92%8C%E5%8F%91%E5%B1%95"><span class="nav-text">1.2.1 UNIX诞生和发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-Linux%E8%AF%9E%E7%94%9F"><span class="nav-text">1.2.2 Linux诞生</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A0%87%E5%87%86POSIX"><span class="nav-text">1.2.3 操作系统标准POSIX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-GNU%E5%92%8CLinux"><span class="nav-text">1.2.4 GNU和Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-5-Linux%E7%9A%84%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F"><span class="nav-text">1.2.5 Linux的开发模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Linux%E5%86%85%E6%A0%B8"><span class="nav-text">1.3 Linux内核</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E6%8A%80%E6%9C%AF%E7%89%B9%E7%82%B9"><span class="nav-text">1.3.1 Linux内核的技术特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-Linux%E5%86%85%E6%A0%B8%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-text">1.3.2 Linux内核的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-Linux%E5%86%85%E6%A0%B8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-text">1.3.3 Linux内核体系结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81"><span class="nav-text">1.4 Linux内核源代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-Linux%E5%86%85%E6%A0%B8%E7%89%88%E6%9C%AC"><span class="nav-text">1.3.1 Linux内核版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-text">1.3.2 Linux内核源代码的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-Linux%E5%86%85%E6%A0%B8%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7"><span class="nav-text">1.3.3 Linux内核源代码分析工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8"><span class="nav-text">1.5 Linux内核模块编程入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text">1.5.1 模块的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="nav-text">1.5.2 编写一个简单的模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E7%A8%8B%E5%BA%8F%E4%B8%BE%E4%BE%8B"><span class="nav-text">（1）程序举例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E7%BC%96%E8%AF%91"><span class="nav-text">（2）编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E8%BF%90%E8%A1%8C"><span class="nav-text">（3）运行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-3-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%8E%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-text">1.5.3 应用程序与内核模块的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-Linux%E5%86%85%E6%A0%B8%E4%B8%AD%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="nav-text">1.6 Linux内核中链表的实现及应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-1-%E9%93%BE%E8%A1%A8%E7%9A%84%E6%BC%94%E5%8C%96"><span class="nav-text">1.6.1 链表的演化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-2-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E6%93%8D%E4%BD%9C"><span class="nav-text">1.6.2 链表的定义和操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text">（1）链表的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E9%93%BE%E8%A1%A8%E7%9A%84%E5%A3%B0%E6%98%8E%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%8F"><span class="nav-text">（2）链表的声明和初始化宏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%9C%A8%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%A2%9E%E5%8A%A0%E4%B8%80%E4%B8%AA%E7%BB%93%E7%82%B9"><span class="nav-text">（3）在链表中增加一个结点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E9%81%8D%E5%8E%86%E9%93%BE%E8%A1%A8"><span class="nav-text">（4）遍历链表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-3-%E9%93%BE%E8%A1%A8%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">1.6.3 链表的应用</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -402,7 +441,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -415,7 +454,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

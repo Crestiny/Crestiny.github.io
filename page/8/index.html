@@ -157,6 +157,244 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/03/Model-Decomposition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/03/Model-Decomposition/" class="post-title-link" itemprop="url">Model Decomposition</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-03 15:05:35" itemprop="dateCreated datePublished" datetime="2020-09-03T15:05:35+08:00">2020-09-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-07 09:47:10" itemprop="dateModified" datetime="2020-09-07T09:47:10+08:00">2020-09-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2>关系的一个分解</h2>
+![](\Model-Decomposition\definition.png)
+说人话：
+分解以后的关系，它们的属性集合并起来应该和原关系的属性集相等，此外呢，分解出来的各子关系，它们的属性集之间不能有包含关系
+那么如何确定某个子关系上的函数依赖呢？
+在原关系函数依赖的闭包上找，要左右两边的属性合并起来在此子关系的属性集内就可以纳入这个子关系的函数依赖中~
+<h2>模式分解的三种等价形式</h2>
+![](\Model-Decomposition\3.png)
+<h3>什么是“无损连接性”？</h3>
+个人理解：要从分解后的子关系恢复到原关系，一般是通过自然连接来实现的；假如分解后再用自然连接得到的关系并非原关系，而是一个“元组增加了，信息丢失了”的关系，这种就是有损连接性的分解
+<h3>什么是“保持函数依赖”？</h3>
+个人理解：原关系的各种函数依赖，每个应该在某子关系中出现至少一次
+<h2>引理</h2>
+<h3>记号定义</h3>
+![](\Model-Decomposition\ydefinition.png)
+<h3>相关性质</h3>
+![](\Model-Decomposition\p.png)
+<h2>无损连接性</h2>
+<h3>定义</h3>
+![](\Model-Decomposition\wdefinition.png)
+<h3>判别算法</h3>
+![](\Model-Decomposition\algorithm.png)
+<h3>说人话</h3>
+- 第一步：画一张初始表，所有属性按列排开，分解的有几个关系就几行
+- 第二步：填初始数据，一行行看，在每个关系模式的U包含的属性列那里写上a(j)，否则写b(ij)
+- 第三步：遍历所有FD，对于每个，左边X所在的那些列里面，找出填了相同值的那些行；这些行里面，再去看右边Y对应的属性下标对应的列，看里面是否有a(li)这个元素，有的话，全部改为a(li)
+注：假如有b相关的值在上一句的操作里被改掉了，那这一列所有这个值都要被改
+- 第四步：知道有一行是a1，a2，a3.....，就说明是无损连接性的
+<h3>特殊地</h3>
+![](\Model-Decomposition\adefinition.png)
+<h3>说人话</h3>
+如果是分解成两个关系要判别是否无损连接性，写出“U1交U2->U1-U2(谁先谁后看情况)”，看看这个函数依赖是否在F的闭包内，在的话就……
+<h2>保持函数依赖</h2>
+<h3>定义</h3>
+![](\Model-Decomposition\depend.png)
+根据这个定义，我们再加上判断两个函数依赖集是否相等就可以完整地作为一个“保持函数依赖”的判别算法了！
+即：（原F的闭包）要和（分解后F们的并集的闭包）相等
+<h2>模式分解的算法</h2>
+<h3>关于模式分解结果的几种情况</h3>
+1. 如果保持了“无损连接性”，则分解后的关系一定是4NF的
+2. 如果保持了“保持函数依赖性”，则分解后的关系一定是3NF的，不一定能到BCNF
+3. 如果保持了“无损连接性”和“保持函数依赖性”，则分解后的关系一定是3NF的，不一定能到BCNF（？？？）
+<h3>“保持函数依赖性”+3NF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a1.png)
+<h4>说人话</h4>
+- 第一步：极小化F
+- 第二步：在U中去掉F中不包含的属性
+*注：接下来讨论的都是处理后的F和U了！！！*
+- 第三步：假如F中有函数依赖能使左右两边合并起来恰好是U，那没事了，R不用作分解，算法终止；不是的话就转第四步
+- 第四步：把F按照相同左边X的规则分组成几个小的函数依赖集F'(i)，对应地有它的U(i)，再用U(i)在F上找到对应的F(i)，R就这样被分解了
+<h3>“保持函数依赖性”+“无损连接性”+3NF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a2.png)
+<h4>说人话</h4>
+- 第一步：先做算法6.3，也就是先让分解后的模式“保持函数依赖性”。
+- 第二步：找到原关系R的码X，和它在F上的闭包，形成一个对应关系R(x)
+- 第三步：在先前得到的几个子关系R(i)中，寻找一下有没有对应的U(i)包含了X的，要是有，那么这个R(x)就不用加到分解出的子关系里面了，反之是需要的
+<h3>“无损连接性”+BCNF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a3.png)
+<h4>说人话</h4>
+<ul>
+<li>第一步：初始的状态就是从原关系R开始，</li>
+<li>第二步：检查一下当前分解中是不是每个关系都符合BCNF了，如果是，就可以终止了；如果不是，跳第三步</li>
+<li>第三步：对于那些不符合BCNF的关系，我们找到某个函数依赖——它的左边X并非此关系的码。我们把这个函数依赖的左右两边合并，这是一个属性集；然后在此关系属性集里面剔除“此函数依赖的右边Y”就形成另一个属性集。有了分解后的两个属性集，根据它们生成对应的F就好啦。这样就把这个关系分解好了。跳第二步</li>
+</ul>
+<h3>“无损连接性”+4NF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a4.png)
+<h4>说人话</h4>
+- 第一步：用算法6.5做到“无损连接性”+BCNF
+- 第二步：考察分解中那些不符合4NF的关系，用定理6.6的方法分解
+- 第三步：分解中的每个子关系都属于4NF即可终止
+<h4>补充：什么是传说中的定理6.6呢？</h4>
+![](\Model-Decomposition\d1.png)
+这个定理的意思就是，既然这个关系不符合4NF吧，那就是有非平凡非函数依赖的多值依赖，也就是X-->Y。有了它我们把关系分成（X,Y）和（X,Z），有点奇怪的是，为什么关系可以这样表示啊？
+<h2>完整版数据依赖的公理系统</h2>
+<h3>8条公理</h3>
+![](\Model-Decomposition\g1.png)
+<h3>4条推理规则</h3>
+![](\Model-Decomposition\g2.png)
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/02/Axiom-System-of-Data-Dependency/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/02/Axiom-System-of-Data-Dependency/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-02 14:33:49" itemprop="dateCreated datePublished" datetime="2020-09-02T14:33:49+08:00">2020-09-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>—title: Axiom System of Data Dependencydate: 2020-09-02 14:33:49tags:- Databasecategories:- Courses—## Armstrong公理系统### 什么是逻辑蕴含？<img src="%5CAxiom-System-of-Data-Dependency%5Clogical.png" alt=""><br><br>### 如何确定一个函数依赖是否为F所蕴含？<img src="%5CAxiom-System-of-Data-Dependency%5CArmstrong.png" alt=""><em>注：XZ表示X并Z</em>对于Armstrong公理的简要说明：1. 自反律：其实这个和F无关，我们只要有一个大集合X和它的子集Y，就会有X-&gt;Y2. 增广率：需要推出XZ-&gt;YZ，也就是证明，如果有两个元组在XZ上的值相等，那么在YZ上的值也会相等；对于前半句：这个条件就给出两个元组在X上值相等，且在Z上值相等；根据X-&gt;Y，它们在Y上的值相等，和Z的一合并，就推出了这两个元组在YZ上的值也会相等3. 传递率：你懂的顺带导出了3条推理规则：1. 合并规则：X-&gt;Y与X-&gt;Z可得X-&gt;YZ2. 伪传递规则：X-&gt;Y与WY-&gt;Z可得XW-&gt;Z3. 分解规则：X-&gt;Y与Z包含于Y可得X-&gt;Z还顺带有个小引理：就是X-&gt;ABCDEF…与右边的分开写，是互为充要条件的<br><br>### 关于闭包函数依赖集F的闭包：是指运用Armstrong公理系统推导出来的所有F可蕴含的函数依赖，结果形式应该是一个函数依赖组成的集合属性集X关于函数依赖集F的闭包：有个推导算法可以用，结果形式应该是一个属性组成的集合算法如下：<img src="%5CAxiom-System-of-Data-Dependency%5Calgorithm.png" alt="">### 极小函数依赖集#### 定义<img src="%5CAxiom-System-of-Data-Dependency%5Cdefinition.png" alt=""><em>注：两个函数依赖集等价，就是函数依赖集的闭包相等</em>#### 化简为极小函数依赖集（亦为判定）<img src="%5CAxiom-System-of-Data-Dependency%5Cmin.png" alt=""><br><br><br><br><br></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/27/Without-Faith/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1226,271 +1464,6 @@ I've learned concepts including:
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/21/Merge-Two-Binary-Trees-Leetcode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/21/Merge-Two-Binary-Trees-Leetcode/" class="post-title-link" itemprop="url">Merge Two Binary Trees //Leetcode</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-21 20:42:36" itemprop="dateCreated datePublished" datetime="2020-08-21T20:42:36+08:00">2020-08-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-30 19:12:46" itemprop="dateModified" datetime="2020-09-30T19:12:46+08:00">2020-09-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Leetcode-Top-100-Liked-Questions/" itemprop="url" rel="index"><span itemprop="name">Leetcode Top 100 Liked Questions</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>Description</h1>
-<blockquote>
-<p>Given two binary trees and imagine that when you put one of them to cover the other, some nodes of the two trees are overlapped while the others are not.</p>
-<p>You need to merge them into a new binary tree. The merge rule is that if two nodes overlap, then sum node values up as the new value of the merged node. Otherwise, the NOT null node will be used as the node of new tree.</p>
-</blockquote>
-<h1>Input</h1>
-<p><img src="/2020/08/21/Merge-Two-Binary-Trees-Leetcode/%5CMerge-Two-Binary-Trees-Leetcode%5Cinput.png" alt=""></p>
-<h1>Output</h1>
-<p><img src="/2020/08/21/Merge-Two-Binary-Trees-Leetcode/%5CMerge-Two-Binary-Trees-Leetcode%5Coutput.png" alt=""></p>
-<h1>Analysis</h1>
-<h3 id="题意"><a class="header-anchor" href="#题意">¶</a>题意</h3>
-<p>默认代码中给出了“TreeNode”数据结构的定义。每个节点有一个值，这个值可以通过两种函数给出，之后就把它们叫函数1和函数2。<br>
-我们先来想想不用代码自己手动合并的话会怎么做——核心问题在于怎么算出一个结点的值，以及确定结果树的结构（哪里有结点哪里没有）。<br>
-好的，先考虑第一个问题，对于一个结点，假如它没有左右孩子，那么它的值应该用函数1计算，也就是直接赋值——因此，我们应该对那些叶节点直接赋值；除这种情况以外，剩下的用函数2计算结点值。说得程序化一点会是什么样呢？处理树可以用递归与循环两种方式来考虑。</p>
-<h1>WAY1：Recursion</h1>
-<h2 id="Explanation"><a class="header-anchor" href="#Explanation">¶</a>Explanation</h2>
-<p>既然用递归，我们可以想象这个调用过程大概是：从两棵树的头部开始，一直往下往下，到叶子节点开始向上返回，两两合并组在一起。<br>
-编写一个mergeTrees函数，输入是两个结点。<br>
-假如其中一个是空的，合并结果就是另一个，直接返回就好了<br>
-假如两者都不空，就应该此处结点的值赋为两个相加，然后此结点的左子树等于参数1的左子树+参数2的左子树，右子树等于参数1的右子树+参数2的右子树。这个+其实就是在调用mergeTrees函数，所以是递归。</p>
-<h2 id="Code"><a class="header-anchor" href="#Code">¶</a>Code</h2>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode {</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode() {}</span><br><span class="line"> *     TreeNode(int val) { this.val = val; }</span><br><span class="line"> *     TreeNode(int val, TreeNode left, TreeNode right) {</span><br><span class="line"> *         this.val = val;</span><br><span class="line"> *         this.left = left;</span><br><span class="line"> *         this.right = right;</span><br><span class="line"> *     }</span><br><span class="line"> * }</span><br><span class="line"> */</span><br><span class="line">class Solution {</span><br><span class="line">    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {</span><br><span class="line">        if (t1==null){</span><br><span class="line">            return t2;</span><br><span class="line">        }</span><br><span class="line">        if (t2==null){</span><br><span class="line">            return t1;</span><br><span class="line">        }</span><br><span class="line">        t1.val+=t2.val;</span><br><span class="line">        t1.left=mergeTrees(t1.left,t2.left);</span><br><span class="line">        t1.right=mergeTrees(t1.right,t2.right);</span><br><span class="line">		return t1;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="Complexity"><a class="header-anchor" href="#Complexity">¶</a>Complexity</h2>
-<h2 id="Attention"><a class="header-anchor" href="#Attention">¶</a>Attention</h2>
-<ol>
-<li>一个函数如果作为主要的递归函数，应该在每个条件分支处都有return</li>
-<li>多画图还是很有帮助的</li>
-</ol>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/18/How-to-start-Markdown/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/18/How-to-start-Markdown/" class="post-title-link" itemprop="url">How to start Markdown</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-18 16:29:14" itemprop="dateCreated datePublished" datetime="2020-08-18T16:29:14+08:00">2020-08-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#一、快捷键</p>
-<p><strong>加粗ctrl+B</strong></p>
-<p><em>斜体</em></p>
-<blockquote>
-<p>引用</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014061630/article/details/81359144">链接</a></p>
-<pre><code>代码
-</code></pre>
-<p>图片</p>
-<p>提升标题</p>
-<p>有序列表</p>
-<hr>
-<p>#二、基本语法</p>
-<p>#一级标题</p>
-<h1>一级标题</h1>
-<p>##二级标题</p>
-<h2 id="二级标题"><a class="header-anchor" href="#二级标题">¶</a>二级标题</h2>
-<p>本地图片</p>
-<p><img src="/%E5%9B%BE%E7%89%87.png" alt="链接"></p>
-<p>互联网图片</p>
-<p><img src="https://img-blog.csdn.net/20180802154402427?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTQwNjE2MzA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="链接"></p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/10aa8ba19802">https://www.jianshu.com/p/10aa8ba19802</a></p>
-<hr>
-<hr>
-<hr>
-<p>行内代码：<code>code</code></p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code here</span><br></pre></td></tr></tbody></table></figure>
-<pre><code>code here
-</code></pre>
-<ul>
-<li>
-<p>无序列表1</p>
-</li>
-<li>
-<p>无序列表2</p>
-</li>
-</ul>
-<p>1</p>
-<ol>
-<li>为什么没有1</li>
-<li>原来中间要隔字</li>
-</ol>
-<p>对策<br>
-我</p>
-<table>
-<thead>
-<tr>
-<th>学号</th>
-<th>姓名</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>820810203</td>
-<td>胡可</td>
-</tr>
-</tbody>
-</table>
-<p>#三、常用技巧</p>
-<p>换行是要在后面加两个空格的！</p>
-<font color="#87CEFA" size="7" face="楷体">
-很漂亮
-</font>  
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1560,7 +1533,7 @@ I've learned concepts including:
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1573,7 +1546,7 @@ I've learned concepts including:
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

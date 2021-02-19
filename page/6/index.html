@@ -157,6 +157,563 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/23/Chapter3-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%92%8C%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/23/Chapter3-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%92%8C%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81/" class="post-title-link" itemprop="url">Chapter3 公钥密码和消息认证</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-23 12:06:11" itemprop="dateCreated datePublished" datetime="2020-09-23T12:06:11+08:00">2020-09-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-04 16:24:56" itemprop="dateModified" datetime="2021-01-04T16:24:56+08:00">2021-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="3-1-消息认证方法"><a class="header-anchor" href="#3-1-消息认证方法">¶</a>3.1 消息认证方法</h2>
+<h3 id="3-1-0-引言"><a class="header-anchor" href="#3-1-0-引言">¶</a>3.1.0 引言</h3>
+<p>加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。<br>
+首先，什么是可信？<br>
+可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。<br>
+对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等</p>
+<h3 id="3-1-1-利用常规加密的消息认证"><a class="header-anchor" href="#3-1-1-利用常规加密的消息认证">¶</a>3.1.1 利用常规加密的消息认证</h3>
+<p>常规就是说简单的对称加密这样子，但是对于分组对称加密会出现问题。<br>
+假如攻击者想换动消息流之间的顺序，那么由于是分组的，所以B还是能每组都正常解密……<br>
+但通常情况下，分组的重排其实还是能算是一种威胁</p>
+<h3 id="3-1-2-非加密的消息认证"><a class="header-anchor" href="#3-1-2-非加密的消息认证">¶</a>3.1.2 非加密的消息认证</h3>
+<h4 id="（1）认证与加密"><a class="header-anchor" href="#（1）认证与加密">¶</a>（1）认证与加密</h4>
+<p>把这两个词放一起的时候，我常常感觉……很迷糊，现在理一理：<br>
+一般来说认证和加密是两个功能，说一句话可能会让关系更明白：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如我们有一个对消息作处理的算法，这里面可以包含两步操作：先对消息加密，再打上认证标签；这样我们就可以说：把消息的认证和保密结合起来了</span><br></pre></td></tr></tbody></table></figure>
+<p>在满足安全需求这件事上，认证和加密是各有应用场景的</p>
+<h4 id="（2）什么时候可以不加密只认证呢？"><a class="header-anchor" href="#（2）什么时候可以不加密只认证呢？">¶</a>（2）什么时候可以不加密只认证呢？</h4>
+<ol>
+<li>相同消息广播时，只由一端负责监控的系统执行认证（不是很理解，直观是什么样的？）</li>
+<li>交换信息时，某一端负载太大不能全部解密，就会随机抽一些进行认证</li>
+<li>程序可以用明文+认证标签，节省处理器解密的消耗</li>
+</ol>
+<h4 id="（3）消息认证码MAC"><a class="header-anchor" href="#（3）消息认证码MAC">¶</a>（3）消息认证码MAC</h4>
+<p>定义：用私钥产生一小块数据，它可以作为MAC<br>
+工作流程：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/MAC.png" alt=""></p>
+<ul>
+<li>A和B共享一个密钥K</li>
+<li>A给B发消息的时候，A用(消息+K)生成MAC，再把消息和MAC一起发给B</li>
+<li>B收到以后，算一算MAC对不对</li>
+</ul>
+<p><em>值得注意的是，认证算法不需要可逆，因为B验证的时候和A是一样的操作（与加密相比更不容易被破）</em></p>
+<h4 id="（4）单向散列函数"><a class="header-anchor" href="#（4）单向散列函数">¶</a>（4）单向散列函数</h4>
+<p>这是MAC的一种替代品，不同之处在于：<strong>MAC需要密钥而单向散列不需要</strong>，它只是输入M得到H(M)而已。</p>
+<p>H函数可以有以下三种形式：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/HASH.png" alt=""></p>
+<ul>
+<li>传统加密：先hash再加密</li>
+<li>公钥加密：先hash再用公钥加密</li>
+<li>秘密值加密：原消息与秘密值Secret一起hash，结果和原消息拼接</li>
+</ul>
+<p>（详细见P50-51）</p>
+<h2 id="3-2-安全散列函数"><a class="header-anchor" href="#3-2-安全散列函数">¶</a>3.2 安全散列函数</h2>
+<h3 id="3-2-1-散列函数的要求"><a class="header-anchor" href="#3-2-1-散列函数的要求">¶</a>3.2.1 散列函数的要求</h3>
+<ol>
+<li>输入长度不受限制</li>
+<li>输出长度固定</li>
+<li>从x——&gt;H(x)容易计算</li>
+<li>单向性/抗原像攻击性：从H(x)——&gt;x计算上不可行</li>
+<li>抗弱碰撞攻击性/抗第二原像攻击性：对于x，找一个和它哈希值相同的y从计算上不可行</li>
+<li>抗碰撞性/抗强碰撞性：找到任意一对哈希值相同的x，y计算上不可行（可以防止生日攻击）</li>
+</ol>
+<h3 id="3-2-2-散列函数的安全性"><a class="header-anchor" href="#3-2-2-散列函数的安全性">¶</a>3.2.2 散列函数的安全性</h3>
+<p>攻击方法：密码分析法+蛮力攻击法<br>
+前者利用密码算法的缺陷，后者是要付出指数级代价的（不过2004年王小云教授破了MD5！）</p>
+<h3 id="3-2-3-简单散列函数"><a class="header-anchor" href="#3-2-3-简单散列函数">¶</a>3.2.3 简单散列函数</h3>
+<h4 id="（1）散列函数基本原理"><a class="header-anchor" href="#（1）散列函数基本原理">¶</a>（1）散列函数基本原理</h4>
+<p>把消息按照n比特每块划分，迭代地每次处理一块，最后生成n比特的散列函数</p>
+<h4 id="（2）一种最简单的散列函数"><a class="header-anchor" href="#（2）一种最简单的散列函数">¶</a>（2）一种最简单的散列函数</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230095511.png" alt=""></p>
+<p>对于随机数据的完整性校验很有效，书上有一些数学推导和改进；但是这些改进并不是很有效……</p>
+<p>举个例子，如果我们想替换一个假消息上去，为了让散列函数不变，我们可以根据需要附加一个n比特的数据块，想怎么调怎么调，非常容易生成相同的散列码……所以我们可以考虑散列码拼在消息后面以后，对整个进行加密</p>
+<h3 id="3-2-4-SHA安全散列函数"><a class="header-anchor" href="#3-2-4-SHA安全散列函数">¶</a>3.2.4 SHA安全散列函数</h3>
+<p>SHA-1有时候也叫加密散列码，码和函数貌似差不多，不要纠结<br>
+经过一段时间的发展，现在主要是用SHA-2：</p>
+<blockquote>
+<p>SHA-2，名称来自于安全散列算法2（英语：Secure Hash Algorithm 2）的缩写，一种密码散列函数算法标准，由美国国家安全局研发[3]，由美国国家标准与技术研究院（NIST）在2001年发布。属于SHA算法之一，是SHA-1的后继者。其下又可再分为六个不同的算法标准，包括了  ：SHA-224、SHA-256、SHA-384、SHA-512、SHA-512/224、SHA-512/256。<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230104252.png" alt=""></p>
+</blockquote>
+<p>这里介绍一下SHA-512：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE2.png" alt=""></p>
+<p>（？）M和K是干嘛的？</p>
+<p>书上有些安全性的数学表达</p>
+<h2 id="3-3-消息认证码MAC"><a class="header-anchor" href="#3-3-消息认证码MAC">¶</a>3.3 消息认证码MAC</h2>
+<h3 id="3-3-1-HMAC"><a class="header-anchor" href="#3-3-1-HMAC">¶</a>3.3.1 HMAC</h3>
+<h4 id="（1）为什么会有HMAC呢？"><a class="header-anchor" href="#（1）为什么会有HMAC呢？">¶</a>（1）为什么会有HMAC呢？</h4>
+<p>首先，由于SHA-1软件实现速度快、有许多共享的Hash函数代码库等优点，人们逐渐将它用于MAC。但是为了<strong>把密钥合并到散列算法</strong>中（本身做散列函数是不需要密钥的），人们开发出了HMAC</p>
+<h4 id="（2）HMAC的设计目标"><a class="header-anchor" href="#（2）HMAC的设计目标">¶</a>（2）HMAC的设计目标</h4>
+<ul>
+<li>不用大改散列函数</li>
+<li>嵌入的散列函数可移植，便于二次开发</li>
+<li>保持性能</li>
+<li>使用、处理密钥简单</li>
+<li>知散列函数强度——&gt;知HMAC强度</li>
+</ul>
+<p><strong>把散列函数模块化是个不错的做法</strong></p>
+<h4 id="（3）HMAC的算法设计"><a class="header-anchor" href="#（3）HMAC的算法设计">¶</a>（3）HMAC的算法设计</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE12.png" alt=""></p>
+<h3 id="3-3-2-基于分组密码的MAC"><a class="header-anchor" href="#3-3-2-基于分组密码的MAC">¶</a>3.3.2 基于分组密码的MAC</h3>
+<h4 id="（1）基于密文的消息认证码CMAC"><a class="header-anchor" href="#（1）基于密文的消息认证码CMAC">¶</a>（1）基于密文的消息认证码CMAC</h4>
+<p>适用于AES和3DES</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230125126.png" alt=""></p>
+<h4 id="（2）具有密码块链式信息认证码的计数器CCM"><a class="header-anchor" href="#（2）具有密码块链式信息认证码的计数器CCM">¶</a>（2）具有密码块链式信息认证码的计数器CCM</h4>
+<p>（？）好迷惑的名字</p>
+<p>又叫认证加密模式<br>
+CCM=AES+CTR操作模式（2.5节提过）+CMAC认证算法</p>
+<p>认证和加密一直是被设计成两种单独的服务的，前者保证可靠性（完整性），后者保证机密性</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230130735.png" alt=""></p>
+<p>感觉有点改进后的散列算法的味道，最后送出的是加密的消息+加密的标签（由消息生成）</p>
+<h2 id="3-4-公钥密码原理"><a class="header-anchor" href="#3-4-公钥密码原理">¶</a>3.4 公钥密码原理</h2>
+<h3 id="3-4-1-公钥密码思想"><a class="header-anchor" href="#3-4-1-公钥密码思想">¶</a>3.4.1 公钥密码思想</h3>
+<p>公钥密码基于数学函数，可以用于加密、消息认证、密钥分发</p>
+<h4 id="（1）常见误解"><a class="header-anchor" href="#（1）常见误解">¶</a>（1）常见误解</h4>
+<ul>
+<li>公钥比对称密码更安全</li>
+<li>公钥密码淘汰了传统密码</li>
+<li>公钥密码实现的密钥分发比传统密码简单的多</li>
+</ul>
+<p>以上，都是错的</p>
+<h4 id="（2）公钥密码的组成"><a class="header-anchor" href="#（2）公钥密码的组成">¶</a>（2）公钥密码的组成</h4>
+<ul>
+<li>明文、密文</li>
+<li>公钥、私钥</li>
+<li>加密算法、解密算法</li>
+</ul>
+<p>都是成双成对哒~</p>
+<h4 id="（3）公钥密码算法基本流程"><a class="header-anchor" href="#（3）公钥密码算法基本流程">¶</a>（3）公钥密码算法基本流程</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230132126.png" alt=""></p>
+<h3 id="3-4-2-公钥密码系统的应用"><a class="header-anchor" href="#3-4-2-公钥密码系统的应用">¶</a>3.4.2 公钥密码系统的应用</h3>
+<p>发送者用什么，有三种情况：</p>
+<ul>
+<li>用自己私钥：数字签名1</li>
+<li>用对方公钥：加密/解密2</li>
+<li>两者都用</li>
+</ul>
+<p>3密钥交换：双方互换会话密钥</p>
+<p>123是公钥密码的三种应用，不同的算法对这几种应用的支持也不同</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230132641.png" alt=""></p>
+<h3 id="3-4-3-公钥密码的要求"><a class="header-anchor" href="#3-4-3-公钥密码的要求">¶</a>3.4.3 公钥密码的要求</h3>
+<p>见书P63</p>
+<h2 id="3-5-公钥密码算法"><a class="header-anchor" href="#3-5-公钥密码算法">¶</a>3.5 公钥密码算法</h2>
+<p>本节重点介绍RSA+DH，简要介绍DSS+椭圆曲线</p>
+<h3 id="3-5-1-RSA"><a class="header-anchor" href="#3-5-1-RSA">¶</a>3.5.1 RSA</h3>
+<p>基于大数分解的困难</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230140625.png" alt=""></p>
+<h3 id="3-5-2-Diffie-Hellman"><a class="header-anchor" href="#3-5-2-Diffie-Hellman">¶</a>3.5.2 Diffie-Hellman</h3>
+<p>基于离散对数计算的困难</p>
+<p>由于DH只有密钥交换的应用，所以通常被叫做DH密钥交换</p>
+<h4 id="（1）算法"><a class="header-anchor" href="#（1）算法">¶</a>（1）算法</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230141939.png" alt=""></p>
+<p>这种会受到中间人攻击，见（3）</p>
+<h4 id="（2）使用DH的另外一个例子"><a class="header-anchor" href="#（2）使用DH的另外一个例子">¶</a>（2）使用DH的另外一个例子</h4>
+<p>见书P68</p>
+<h4 id="（3）DH的中间人攻击"><a class="header-anchor" href="#（3）DH的中间人攻击">¶</a>（3）DH的中间人攻击</h4>
+<p>见书P68-69</p>
+<h3 id="3-5-3-其他公钥密码算法"><a class="header-anchor" href="#3-5-3-其他公钥密码算法">¶</a>3.5.3 其他公钥密码算法</h3>
+<h4 id="（1）ECC"><a class="header-anchor" href="#（1）ECC">¶</a>（1）ECC</h4>
+<h4 id="（2）DSS"><a class="header-anchor" href="#（2）DSS">¶</a>（2）DSS</h4>
+<h2 id="3-6-数字签名"><a class="header-anchor" href="#3-6-数字签名">¶</a>3.6 数字签名</h2>
+<p>应用场景：Bob希望给Alice发送消息，消息保不保密不重要，但是需要Alice能确认这条消息确实来自于他；所以用Bob的私钥加密的消息就叫做数字签名</p>
+<p>数字签名保证可靠性+完整性（没有Bob的私钥是不能篡改消息的）</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/23/Chapter4-%E5%AF%86%E9%92%A5%E5%88%86%E9%85%8D%E5%92%8C%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/23/Chapter4-%E5%AF%86%E9%92%A5%E5%88%86%E9%85%8D%E5%92%8C%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/" class="post-title-link" itemprop="url">Chapter4 密钥分配和用户认证</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-23 10:42:15" itemprop="dateCreated datePublished" datetime="2020-09-23T10:42:15+08:00">2020-09-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-06 01:07:21" itemprop="dateModified" datetime="2021-01-06T01:07:21+08:00">2021-01-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="4-1-基于对称加密的密钥分配"><a class="header-anchor" href="#4-1-基于对称加密的密钥分配">¶</a>4.1 基于对称加密的密钥分配</h2>
+<p>在对称加密的情境下，双方需要共享同一个密钥，并且只能他两知道。A，B有这几种选择：</p>
+<ol>
+<li>A选密钥，物理方法传给B</li>
+<li>第三方选密钥，物理方法传给A、B</li>
+<li>（A、B不久前用过一个共同密钥）A/B把旧密钥加密的新密钥给B/A</li>
+<li>（A、B各有到达第三方C的加密链路）C在加密链路上传给A、B</li>
+</ol>
+<p>主要讲讲第四种，其中需要两种密钥：</p>
+<ul>
+<li>会话密钥：一次性的，双方想说话的时候才有，用完就销毁</li>
+<li>永久密钥：用于分发会话密钥（注意不是只有一个，是KDC与A之间有一个，KDC与B之间有一个的概念）</li>
+</ul>
+<p>其中提到的第三方C其实有个学名：密钥分发中心KDC，它有如下任务：</p>
+<ul>
+<li>决定哪些系统之间可以通信</li>
+<li>可以的话，负责分发会话密钥</li>
+</ul>
+<p>KDC的操作过程：</p>
+<ol>
+<li>A想和B说话了</li>
+<li>A用主密钥（？）（只有A和KDC共享），给KDC发请求包</li>
+<li>KDC判断允不允许，允许的话则产生一次性会话密钥
+<ul>
+<li>用永久密钥（KDC与A）加密会话密钥，发给A</li>
+<li>用永久密钥（KDC与B）加密会话密钥，发给A</li>
+</ul>
+</li>
+<li>A、B可以通话了！</li>
+</ol>
+<p>实现了上述操作过程的一种服务是Kerberos</p>
+<h2 id="4-2-Kerberos"><a class="header-anchor" href="#4-2-Kerberos">¶</a>4.2 Kerberos</h2>
+<h3 id="4-2-0-引言"><a class="header-anchor" href="#4-2-0-引言">¶</a>4.2.0 引言</h3>
+<h4 id="（1）要解决的问题"><a class="header-anchor" href="#（1）要解决的问题">¶</a>（1）要解决的问题</h4>
+<p>分布式环境中，控制访问权限，为用户<strong>提供认证服务</strong></p>
+<h4 id="（2）三种威胁"><a class="header-anchor" href="#（2）三种威胁">¶</a>（2）三种威胁</h4>
+<ol>
+<li>用户可以伪装成其他用户</li>
+<li>伪造网络地址发消息</li>
+<li>监听消息/重放攻击</li>
+</ol>
+<p>Kerberos<strong>仅依赖于对称加密</strong>；此外，版本4逐渐被淘汰，现在常用版本5</p>
+<h3 id="4-2-1-Kerberos版本4"><a class="header-anchor" href="#4-2-1-Kerberos版本4">¶</a>4.2.1 Kerberos版本4</h3>
+<p>接下来逐步介绍到协议</p>
+<h4 id="（1）一个简单的认证会话"><a class="header-anchor" href="#（1）一个简单的认证会话">¶</a>（1）一个简单的认证会话</h4>
+<p>来看下面这个会话：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE60.png" alt=""></p>
+<p>书上说明了第（3）步中消息每一部分的必要性</p>
+<h4 id="（2）一个更安全的认证会话"><a class="header-anchor" href="#（2）一个更安全的认证会话">¶</a>（2）一个更安全的认证会话</h4>
+<p>上述方式仍然存在问题：</p>
+<ul>
+<li>用户可能访问不同服务器，甚至多次访问同一服务器时，都要重新输入密码</li>
+<li>消息（1）是明文传送口令的，被窃听了就完了QWQ</li>
+</ul>
+<p>为了解决上述问题，我们作如下改进：</p>
+<ul>
+<li>引入票据服务器TGS</li>
+<li>提出避免明文传口令的方案</li>
+</ul>
+<p>具体流程如下：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230230940.png" alt=""></p>
+<h4 id="（3）真正的Kerbores认证对话！"><a class="header-anchor" href="#（3）真正的Kerbores认证对话！">¶</a>（3）真正的Kerbores认证对话！</h4>
+<p>没想到吧……上面的图已经那么完备了却还是存在缺陷……那么问题在哪呢？</p>
+<ul>
+<li>票据的有效期太长也不好，太短也不好；根本问题是，服务器要能判断持有票据的是正确的人</li>
+<li>服务器也有被假冒的风险，所以它要向用户证明自己的身份</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE112.png" alt=""></p>
+<h3 id="4-2-1-Kerberos版本5"><a class="header-anchor" href="#4-2-1-Kerberos版本5">¶</a>4.2.1 Kerberos版本5</h3>
+<h4 id="（1）版本4与版本5的不同"><a class="header-anchor" href="#（1）版本4与版本5的不同">¶</a>（1）版本4与版本5的不同</h4>
+<h4 id="（2）版本5的认证对话"><a class="header-anchor" href="#（2）版本5的认证对话">¶</a>（2）版本5的认证对话</h4>
+<h2 id="4-3-基于非对称加密的密钥分配"><a class="header-anchor" href="#4-3-基于非对称加密的密钥分配">¶</a>4.3 基于非对称加密的密钥分配</h2>
+<h3 id="4-3-0-引言"><a class="header-anchor" href="#4-3-0-引言">¶</a>4.3.0 引言</h3>
+<p>公钥加密一个重要作用：处理密钥分发（公钥的分发+使用公钥加密分发私钥）</p>
+<h3 id="4-3-1-公钥证书"><a class="header-anchor" href="#4-3-1-公钥证书">¶</a>4.3.1 公钥证书</h3>
+<ul>
+<li>为什么要有公钥证书？<br>
+就像邮箱、银行卡号这种公钥，它们是广而告之的；但是你怎么知道他说这是就是呢？万一伪造了呢？所以我们引入第三方、公钥证书这些来验证。</li>
+<li>X.509标准是人们广泛接受的公钥证书格式</li>
+</ul>
+<h3 id="4-3-2-基于公钥密码的秘密密钥分发"><a class="header-anchor" href="#4-3-2-基于公钥密码的秘密密钥分发">¶</a>4.3.2 基于公钥密码的秘密密钥分发</h3>
+<p>对称密钥中，任何一对通信者之间共享唯一密钥是前提，之后才能安全通信<br>
+我们会想到之前提过的DH密钥交换，但是这不能认证双方；所以这里提出“公钥证书”的概念<br>
+考虑如下操作步骤（当B想要发消息给A的时候）：</p>
+<ul>
+<li>使用一次性+传统的+会话密钥，加密消息</li>
+<li>用A的公钥加密会话密钥（问题所在：B怎么得到A的公钥的？——&gt;通过A的公钥证书）</li>
+<li>把加密后的会话密钥和加密后的消息放在一起送给A</li>
+</ul>
+<h2 id="4-4-X-509证书"><a class="header-anchor" href="#4-4-X-509证书">¶</a>4.4 X.509证书</h2>
+<h3 id="4-4-0-引言"><a class="header-anchor" href="#4-4-0-引言">¶</a>4.4.0 引言</h3>
+<p>X.500是一个系列推荐标准(?)，定义了一套目录服务：</p>
+<blockquote>
+<p>目录服务就是，有用于维护用户信息数据库的一个或一组分布式服务器。信息包括：用户名到网络地址的映射，以及用户其他信息</p>
+</blockquote>
+<p>X.509是X.500推荐标准系列中的一部分，定义了一个使用X.500目录向用户提供认证服务的框架，</p>
+<ul>
+<li>该目录就可以作为公钥证书存储库（公钥证书=用户的公钥+可信任的认证中心的私钥签名）</li>
+<li>X.509还定义了一个基于公钥证书的认证协议</li>
+</ul>
+<p>下图表示了公钥证书的产生：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231110704.png" alt=""></p>
+<h3 id="4-4-1-证书"><a class="header-anchor" href="#4-4-1-证书">¶</a>4.4.1 证书</h3>
+<h4 id="（1）公钥证书使用步骤"><a class="header-anchor" href="#（1）公钥证书使用步骤">¶</a>（1）公钥证书使用步骤</h4>
+<ul>
+<li>可信任的认证中心CA为用户创建证书</li>
+<li>CA/用户把证书放到目录服务器</li>
+<li>目录服务器提供一个方便访问证书的场所</li>
+</ul>
+<h4 id="（2）X-509定义的公钥证书格式"><a class="header-anchor" href="#（2）X-509定义的公钥证书格式">¶</a>（2）X.509定义的公钥证书格式</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231130854.png" alt=""></p>
+<p><strong>CA用自己的私钥对证书签名，用户知道CA的公钥的话，就可以解密，验证证书是否合法</strong></p>
+<p>这其实是一个典型的数字签名过程，可以如下描述：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231130247.png" alt=""></p>
+<h4 id="（3）CA生成的公钥证书的特征"><a class="header-anchor" href="#（3）CA生成的公钥证书的特征">¶</a>（3）CA生成的公钥证书的特征</h4>
+<ul>
+<li>用户可以用CA的公钥去解密证书，看里面的用户公钥，以验证</li>
+<li>只有CA才可以修改用户证书；证书不可伪造，所以放到目录服务器里不需要采取额外保护措施</li>
+</ul>
+<h4 id="（4）证书链"><a class="header-anchor" href="#（4）证书链">¶</a>（4）证书链</h4>
+<p>先来看一种情境，假如一个CA负责了很多用户的证书，那么它要给所有用户发一个自己的公钥的副本，以便他们可以用这个公钥去解密证书以验证其合法性。<br>
+那么如果，有一个假CA出来，用自己的私钥签了证书，并给用户自己的公钥；这个私钥和公钥仍然是匹配的，又由于用户只看能不能解密来证明其合法性……所以说，太多用户的时候，可以使用多个CA</p>
+<p>多个CA会是什么情况呢？假如A从X1那里拿了证书，B从X2；然后A去看B的证书，能获取是能获取，但是拿到手上也没用，因为A没有X2的公钥，不能验证里面的签名，也就不能确定这个是B的证书……</p>
+<p>一种解决方案是，X1和X2事先交换过公钥，然后就可以：</p>
+<ol>
+<li>A在目录中拿到X1签名的X2证书（X2的公钥证书，把X2当成一个普通用户的话）,即<code>X1&lt;&lt;X2&gt;&gt;</code></li>
+<li>A有X1的公钥，所以A从<code>X1&lt;&lt;X2&gt;&gt;——&gt;X2</code>，也就是拿到了X2的公钥</li>
+<li>A去拿由X2签名的B的证书，即<code>X2&lt;&lt;B&gt;&gt;</code>，解密拿到B，也就是知道了B的公钥</li>
+</ol>
+<p>A获取B的公钥的过程可以描述为：X1&lt;<x2>&gt;X2&lt;<b>&gt;<br>
+同理，B获取A的公钥的过程为：<code>X2&lt;&lt;X1&gt;&gt;X1&lt;&lt;A&gt;&gt;</code></b></x2></p><b>
+<p>更普遍的过程可以描述为：</p>
+<pre><code>X1&lt;&lt;X2&gt;&gt;X2&lt;&lt;X3&gt;&gt;...XN&lt;&lt;B&gt;&gt;
+</code></pre>
+<p>相邻的两个X应该互相生成过证书，为了更明确这个关系，我们用下图来描述：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE138.png" alt=""></p>
+<h4 id="（5）证书撤销"><a class="header-anchor" href="#（5）证书撤销">¶</a>（5）证书撤销</h4>
+<p>一般都是自然过期，不过有以下情况需要提前撤销：<br>
+见书P98</p>
+<p>用户从消息中取得证书的时候，需要确认它是否被取消</p>
+<h3 id="4-4-2-X-509版本3"><a class="header-anchor" href="#4-4-2-X-509版本3">¶</a>4.4.2 X.509版本3</h3>
+<h4 id="（1）X-509版本2没有满足的要求"><a class="header-anchor" href="#（1）X-509版本2没有满足的要求">¶</a>（1）X.509版本2没有满足的要求</h4>
+<p>见书P98</p>
+<h4 id="（2）X-509版本3的改变"><a class="header-anchor" href="#（2）X-509版本3的改变">¶</a>（2）X.509版本3的改变</h4>
+<p>加入扩展部分，更加灵活</p>
+<p>扩展=一个扩展标识+一个危险指示符+一个扩展值<br>
+危险指示符：标识一个扩展是否可以被安全地忽略，True则可</p>
+<p>证书扩展可以分为三个主要类型：</p>
+<ul>
+<li>密钥和策略信息</li>
+<li>主体和发放者属性</li>
+<li>认证路径约束</li>
+</ul>
+<h4 id="（3）密钥和策略信息"><a class="header-anchor" href="#（3）密钥和策略信息">¶</a>（3）密钥和策略信息</h4>
+<p>用处：指示证书对于（一个特定的具有相同安全需求的团体、应用类别）的适用性</p>
+<p>域的内容见书P99</p>
+<h4 id="（4）主体和发放者属性"><a class="header-anchor" href="#（4）主体和发放者属性">¶</a>（4）主体和发放者属性</h4>
+<p>用处：附加一些属性，让别人更相信这个证书是某个人的</p>
+<p>域的内容见书P99</p>
+<h4 id="（5）认证路径约束"><a class="header-anchor" href="#（5）认证路径约束">¶</a>（5）认证路径约束</h4>
+<p>用处：限制主体CA可以发放的证书类型，或限制在认证链中随后可以出现的证书类型</p>
+<p>域的内容见书P99</p>
+<h2 id="4-5-公钥基础设施KPI"><a class="header-anchor" href="#4-5-公钥基础设施KPI">¶</a>4.5 公钥基础设施KPI</h2>
+<h3 id="4-5-0-引言"><a class="header-anchor" href="#4-5-0-引言">¶</a>4.5.0 引言</h3>
+<ul>
+<li>PKI是什么？<br>
+之所以叫基础设施：包含了硬件+软件+人员+策略+过程</li>
+<li>那是干什么的基础设施？<br>
+公钥密码中，用于生成+管理+存储+分配+撤销数字证书</li>
+<li>PKIX是什么？<br>
+基于X.509的PKI</li>
+<li>所以具体来说，PKIX包括些什么呢？</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231152633.png" alt=""></p>
+<h3 id="4-5-1-PKIX管理功能"><a class="header-anchor" href="#4-5-1-PKIX管理功能">¶</a>4.5.1 PKIX管理功能</h3>
+<ul>
+<li>注册：注册开始了一个PKI中的登记过程</li>
+<li>初始化：客户端安装密钥资料</li>
+<li>认证：CA发证书</li>
+<li>密钥对恢复：</li>
+<li>密钥对更新：</li>
+<li>撤销申请：CA撤销</li>
+<li>交叉认证：两个CA之间</li>
+</ul>
+<p>上图中粉红色部分</p>
+<h3 id="4-5-2-PKIX管理协议"><a class="header-anchor" href="#4-5-2-PKIX管理协议">¶</a>4.5.2 PKIX管理协议</h3>
+<p>用来支持上一节列出的管理功能</p>
+<h2 id="4-6-联合身份管理"><a class="header-anchor" href="#4-6-联合身份管理">¶</a>4.6 联合身份管理</h2>
+<h3 id="4-6-1-身份管理"><a class="header-anchor" href="#4-6-1-身份管理">¶</a>4.6.1 身份管理</h3>
+<h4 id="（1）作用"><a class="header-anchor" href="#（1）作用">¶</a>（1）作用</h4>
+<p>验证身份以后给对应的资源接口，基于单点登录SSO</p>
+<h4 id="（2）基本要素"><a class="header-anchor" href="#（2）基本要素">¶</a>（2）基本要素</h4>
+<p>见书P102</p>
+<p>值得注意的是，Kerberos包含身份管理系统的许多要素</p>
+<h4 id="（3）通用的身份管理系统"><a class="header-anchor" href="#（3）通用的身份管理系统">¶</a>（3）通用的身份管理系统</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231153605.png" alt=""></p>
+<h3 id="4-6-2-身份联合"><a class="header-anchor" href="#4-6-2-身份联合">¶</a>4.6.2 身份联合</h3>
+<p>身份联合就是将身份管理扩展到多个安全域，也就是说，多个域之间共享用户的数字身份，使得用户只要一次认证就可以接入多个域的应用及其资源</p>
+<h4 id="（1）联合身份管理的作用"><a class="header-anchor" href="#（1）联合身份管理的作用">¶</a>（1）联合身份管理的作用</h4>
+<ul>
+<li>单点登录SSO</li>
+<li>表示属性的标准方法：属性可以指口令、生物特征信息、文件所有权等等</li>
+<li>身份映射：同一个用户在不同的域中身份和属性可能不同，身份映射可以将一个域的身份和属性映射到另一个域的要求</li>
+</ul>
+<h4 id="（2）联合身份管理的实体与数据流"><a class="header-anchor" href="#（2）联合身份管理的实体与数据流">¶</a>（2）联合身份管理的实体与数据流</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231193813.png" alt=""></p>
+<h4 id="（3）标准"><a class="header-anchor" href="#（3）标准">¶</a>（3）标准</h4>
+<p>联合身份管理使用了一些标准，作为系统的构件，实现在不同的域之间进行安全身份交换的要求：</p>
+<ul>
+<li>可扩展标记语言XML</li>
+<li>简单对象访问协议SOAP</li>
+<li>WS-安全</li>
+<li>安全断言标记语言SAML：可以传递用户认证信息</li>
+</ul>
+<p>见书P103-104</p>
+<h4 id="（4）例子"><a class="header-anchor" href="#（4）例子">¶</a>（4）例子</h4>
+<p>见书P104-105</p>
+</b><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1409,514 +1966,6 @@ Cookie（复数形态Cookies），又称为“小甜饼”。类型为“小型�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/18/Common-Web-Vulnerabilities-Causes-Damage-and-Defense/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/18/Common-Web-Vulnerabilities-Causes-Damage-and-Defense/" class="post-title-link" itemprop="url">Common Web Vulnerabilities: Causes, Damage and Defense</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-18 18:17:49" itemprop="dateCreated datePublished" datetime="2020-09-18T18:17:49+08:00">2020-09-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-Security/" itemprop="url" rel="index"><span itemprop="name">Web Security</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="注入Injection"><a class="header-anchor" href="#注入Injection">¶</a>注入Injection</h2>
-<p>Injection flaws, such as <strong>SQL</strong>, <strong>NoSQL</strong>, <strong>OS</strong>, and <strong>LDAP</strong> injection, occur when untrusted data is sent to an interpreter as part of a command or query. The attacker’s hostile(怀有敌意的) data can trick the interpreter into <strong>executing unintended commands</strong> or <strong>accessing data without proper authorization</strong>.</p>
-<h3 id="Causes"><a class="header-anchor" href="#Causes">¶</a>Causes</h3>
-<p>刚刚讲过当我们访问动态网页时, Web 服务器会向数据访问层发起 Sql 查询请求，如果权限验证通过就会执行 Sql 语句。<br>
-这种网站<strong>内部直接发送的Sql请求一般不会有危险</strong>，但实际情况是很多时候需要<strong>结合用户的输入数据动态构造 Sql 语句</strong>，如果用户输入的数据被构造成恶意 Sql 代码，Web 应用又未对动态构造的 Sql 语句使用的参数进行审查，则会带来意想不到的危险。<br>
-程序开发过程中不注意规范书写sql语句和对特殊字符进行过滤，导致客户端可以通过全局变量POST和GET提交一些sql语句正常执行。</p>
-<p>具体可阐述如下：</p>
-<ol>
-<li>WEB开发人员无法保证所有的输入都已经过滤</li>
-<li>攻击者利用发送给SQL服务器的输入参数构造可执行的SQL代码（可加入到get请求、post请求、http头信息、cookie中）</li>
-<li>数据库未做相应的安全配置</li>
-</ol>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人总结：</span><br><span class="line">网页需要根据用户输入动态构造SQL语句的时候，如果过滤之类的安全工作没做好，就会导致恶意代码执行、绕过认证、数据泄露等危害。</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="Damage"><a class="header-anchor" href="#Damage">¶</a>Damage</h3>
-<ul>
-<li>数据库信息泄漏：数据库中存放的用户的隐私信息的泄露。猜解后台数据库，这是利用最多的方式，盗取网站的敏感信息。</li>
-<li>绕过认证，列如绕过验证登录网站后台。</li>
-<li>注入可以借助数据库的存储过程进行提权等操作</li>
-<li>网页篡改：通过操作数据库对特定网页进行篡改。</li>
-<li>网站被挂马，传播恶意软件：修改数据库一些字段的值，嵌入网马链接，进行挂马攻击。</li>
-<li>数据库被恶意操作：数据库服务器被攻击，数据库的系统管理员帐户被窜改。</li>
-<li>服务器被远程控制，被安装后门。经由数据库服务器提供的操作系统支持，让黑客得以修改或控制操作系统。</li>
-<li>破坏硬盘数据，瘫痪全系统。</li>
-</ul>
-<h3 id="Defense"><a class="header-anchor" href="#Defense">¶</a>Defense</h3>
-<p>是开发人员应该思考的问题，作为测试人员，了解如何预防SQL注入，可以在发现注入攻击bug时，对bug产生原因进行定位。</p>
-<ol>
-<li>
-<p>严格检查输入变量的类型和格式<br>
-对于整数参数，加判断条件：不能为空、参数类型必须为数字<br>
-对于字符串参数，可以使用正则表达式进行过滤：如：必须为[0-9a-zA-Z]范围内的字符串</p>
-</li>
-<li>
-<p>过滤和转义特殊字符<br>
-例如：引号、双引号、斜杠、反斜杠、冒号、 空字符等的字符<br>
-过滤的对象: 用户的输入 | 提交的URL请求中的参数部分 | 从cookie中得到的数据<br>
-在username这个变量前进行转义，对’、"、\等特殊字符进行转义，如：php中的addslashes()函数对username参数进行转义</p>
-</li>
-<li>
-<p>利用mysql的预编译机制<br>
-把sql语句的模板（变量采用占位符进行占位）发送给mysql服务器，mysql服务器对sql语句的模板进行编译，编译之后根据语句的优化分析对相应的索引进行优化，在最终绑定参数时把相应的参数传送给mysql服务器，直接进行执行，节省了sql查询时间，以及mysql服务器的资源，达到一次编译、多次执行的目的，除此之外，还可以防止SQL注入。具体是怎样防止SQL注入的呢？实际上当将绑定的参数传到mysql服务器，mysql服务器对参数进行编译，即填充到相应的占位符的过程中，做了转义操作。</p>
-</li>
-<li>
-<p>监测方面目前大多都是日志监控+WAF（统一的filter）,部署防SQL注入系统或脚本</p>
-</li>
-<li>
-<p>数据库日志容易解析,语法出错的、语法读Info表的建立黑白名单机制</p>
-</li>
-</ol>
-<h3 id="References"><a class="header-anchor" href="#References">¶</a>References</h3>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/github_36032947/article/details/78442189?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160042717419195162113454%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=160042717419195162113454&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_blog_v1-1-78442189.pc_v2_rank_blog_v1&amp;utm_term=SQL%E6%B3%A8%E5%85%A5&amp;spm=1018.2118.3001.4187">SQL注入攻击常见方式及测试方法</a><br>
-<a href=""></a></p>
-<h2 id="失效的身份认证Broken-Authentication"><a class="header-anchor" href="#失效的身份认证Broken-Authentication">¶</a>失效的身份认证Broken Authentication</h2>
-<p>Application functions related to authentication and session management are often implemented incorrectly, allowing attackers to compromise passwords, keys, or session tokens, or to exploit other implementation flaws to assume(篡夺) other users’ identities temporarily or permanently.</p>
-<h3 id="前言：名词解释"><a class="header-anchor" href="#前言：名词解释">¶</a>前言：名词解释</h3>
-<p>Web应用程序使用的HTTP协议是一种<strong>无连接</strong>，<strong>无状态</strong>协议。</p>
-<p>无连接是指限制每次连接只处理一个请求，服务器处理完成客户的请求，收到客户的应答之后，即断开连接，可以节省传输时间</p>
-<p>无状态是指对于事物处理没有记忆功能，服务器不知道客户端是什么状态。即用户给服务器发送HTTP请求之后，服务器根据请求，将数据发送给用户，但是发送完成之后，不会记录任何信息。</p>
-<p>也就是说，服务器无法保留连接到网站的每个客户端（用户）的身份/活动的内存。那么试想，每次我们登录一个网站，如果意外关闭了，就得重新登录，使用起来会非常不便。<strong>Cookie和Session因此诞生，解决无记录状态的问题</strong>。</p>
-<h4 id="Session"><a class="header-anchor" href="#Session">¶</a>Session</h4>
-<p>Session负责在<strong>服务器端</strong>记录用户信息，在一个用户完成身份认证之后，存储所需要的用户资料，用于持久保存网站的活动。<strong>服务器使用唯一的会话令牌产生对应的会话ID</strong></p>
-<h4 id="Cookie"><a class="header-anchor" href="#Cookie">¶</a>Cookie</h4>
-<p>Cookie由服务器发送并存储在<strong>客户端</strong>，在用户访问网站的时候创建，<strong>用以跟踪用户在网站中的活动</strong>，每次请求客户端都需要把它发送给服务器。当用户意外中断后，由于Cookie的存在就可以从中断的地方继续。</p>
-<h4 id="身份认证"><a class="header-anchor" href="#身份认证">¶</a>身份认证</h4>
-<p>身份认证最常用于系统登录，形式一般为<strong>用户名和密码登录</strong>方式，在安全性要求较高的情况下，还有验证码、客户端证书、Ukey等</p>
-<h4 id="会话管理"><a class="header-anchor" href="#会话管理">¶</a>会话管理</h4>
-<p><strong>HTTP利用会话机制来实现身份认证</strong>，HTTP身份认证的结果往往是<strong>获得一个令牌并放在cookie中，之后的身份识别只需读授权令牌，而无需再次进行登录认证</strong></p>
-<h3 id="Causes-v2"><a class="header-anchor" href="#Causes-v2">¶</a>Causes</h3>
-<ul>
-<li>用户身份验证凭据在存储时不受保护</li>
-<li>登录凭证可以被猜测或重写</li>
-<li>会话ID直接暴露在URL中</li>
-<li>会话ID容易收到会话固定攻击</li>
-<li>会话ID不会超时失效，或者用户会话或身份验证令牌在注销时未失效</li>
-<li>会话ID在登录成功之后不会轮换</li>
-<li>密码，会话ID或者其他的登录凭据未经过加密传输</li>
-</ul>
-<h3 id="Attack"><a class="header-anchor" href="#Attack">¶</a>Attack</h3>
-<ul>
-<li>
-<p>弱口令：弱口令的危害不言而喻，通常指的是仅包含简单的数字和字母组合的口令</p>
-</li>
-<li>
-<p>口令破解：掌握了口令的组合方式或是加密细节</p>
-</li>
-<li>
-<p>Cookie窃取&amp;伪造&amp;绕过：因为Cookie是存储在客户端的，相对而言容易被攻击者窃取</p>
-</li>
-<li>
-<p>越权访问：分为垂直越权访问和水平越权访问，垂直越前访问是指不同用户级别之间的越权，比如普通用户能够执行管理员用户的权限。水平越权即同一级别用户之间的越权操作</p>
-</li>
-<li>
-<p>会话固定：一种诱骗受害者使用攻击者拟定的Session ID的攻击手段，通过让合法用户使用攻击者设置的Session ID进行登录，使得web应用不在生成新的Session ID</p>
-</li>
-<li>
-<p>会话劫持：就是在一次正常的通信过程中，攻击者作为第三方参与到其中，或者是在数据里加入其他信息，甚至将双方的通信模式暗中改变，即从直接联系变成有攻击者参与的联系。简单的说，就是攻击者把自己插入到受害者和目标机器之间，并设法让受害者和目标机器之间的数据通道变为受害者和目标机器之间存在一个看起来像“中转站”的代理机器（攻击者的机器）的数据通道，从而干涉两台机器之间的数据传输，例如监听敏感数据、替换数据等。由于攻击者已经介入其中，他能轻易知道双方传输的数据内容，还能根据自己的意愿去左右它。这个“中转站”可以是逻辑上的，也可以是物理上的，关键在于它能否获取到通信双方的数据。</p>
-</li>
-</ul>
-<h3 id="Damage-v2"><a class="header-anchor" href="#Damage-v2">¶</a>Damage</h3>
-<ul>
-<li>窃取用户凭证和会话信息</li>
-<li>恶意用户冒充用户身份查看或者变更记录，甚至执行事务</li>
-<li>访问未授权的页面和资源</li>
-<li>执行超越权限操作</li>
-</ul>
-<h3 id="Defense-v2"><a class="header-anchor" href="#Defense-v2">¶</a>Defense</h3>
-<ul>
-<li>在可能的情况下，实现多因素身份验证，以防止自动、凭证填充、暴力破解和被盗凭据再利用攻击。</li>
-<li>不要使用发送或部署默认的凭证，特别是管理员用户。</li>
-<li>执行弱密码检查，例如测试新或变更的密码，以纠正“排名前10000个弱密码” 列表。</li>
-<li>将密码长度、复杂性和循环策略与NIST-800-63 B的指导方针的5.1.1章节-记住秘密，或其他现代的基于证据的密码策略相一致。</li>
-<li>确认注册、凭据恢复和API路径，通过对所有输出结果使用相同的消息，用以抵御账户枚举攻击。</li>
-<li>限制或逐渐延迟失败的登录尝试。记录所有失败信息并在凭据填充、暴力破解或其他攻击被检测时提醒管理员。</li>
-<li>使用服务器端安全的内置会话管理器，在登录后生成高度复杂的新随机会话ID。会话ID不能在URL中，可以安全地存储和当登出、闲置、绝对超时后使其失效。</li>
-</ul>
-<h3 id="References-v2"><a class="header-anchor" href="#References-v2">¶</a>References</h3>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/CH42e/p/13162177.html">A2 失效的身份认证和会话管理</a></p>
-<h2 id="敏感数据泄露Sensitive-Data-Exposure"><a class="header-anchor" href="#敏感数据泄露Sensitive-Data-Exposure">¶</a>敏感数据泄露Sensitive Data Exposure</h2>
-<p>Many web applications and APIs do not properly protect sensitive data, such as financial, healthcare, and PII. Attackers may steal or modify such weakly protected data to conduct credit card fraud, identity theft, or other crimes. Sensitive data may be compromised without extra protection, such as encryption at rest or in transit, and requires special precautions when exchanged with the browser.</p>
-<h3 id="Causes-v3"><a class="header-anchor" href="#Causes-v3">¶</a>Causes</h3>
-<p>对敏感数据的弱保护，具体原因如：</p>
-<ul>
-<li>错误的云存储配置</li>
-<li>未受保护的代码存储库</li>
-<li>易受攻击的开源软件</li>
-</ul>
-<h3 id="Damage-v3"><a class="header-anchor" href="#Damage-v3">¶</a>Damage</h3>
-<p>利用敏感信息可以：</p>
-<ul>
-<li>信用卡欺诈</li>
-<li>身份偷窃</li>
-<li>等等</li>
-</ul>
-<h3 id="Defense-v3"><a class="header-anchor" href="#Defense-v3">¶</a>Defense</h3>
-<p>对一些需要加密的敏感数据，应该起码做到以下几点：</p>
-<ul>
-<li>对系统处理、存储或传输的数据分类，并根据分类进行访问控制。</li>
-<li>熟悉与敏感数据保护相关的法律和条例，并根据每项法规要求保护敏感数据。</li>
-<li>对于没必要存放的、重要的敏感数据，应当尽快清除，或者通过PCI DSS标记或拦截。未存储的数据不能被窃取。</li>
-<li>确保存储的所有敏感数据被加密。</li>
-<li>确保使用了最新的、强大的标准算法或密码、参数、协议和密匙，并且密钥管理到位。</li>
-<li>确保传输过程中的数据被加密，如：使用TLS。确保数据加密被强制执行，如：使用HTTP严格安全传输协议（HSTS ）。</li>
-<li>禁止缓存对包含敏感数据的响应。</li>
-<li>确保使用密码专用算法存储密码，如：Argon2 、 scrypt 、bcrypt 或者PBKDF2 。将工作因素（延迟因素）设置在可接受范围。</li>
-<li>单独验证每个安全配置项的有效性。</li>
-</ul>
-<h2 id="XML外部实体-XML-External-Entities-XXE"><a class="header-anchor" href="#XML外部实体-XML-External-Entities-XXE">¶</a>XML外部实体 XML External Entities (XXE)</h2>
-<p>Many older or poorly configured XML processors evaluate external entity references within XML documents. External entities can be used to disclose internal files using the file URI handler, internal file shares, internal port scanning, remote code execution, and denial of service attacks.<br>
-XML外部实体攻击是一种针对解析XML格式应用程序的攻击类型之一。此类攻击发生在当配置不当的XML解析器处理指向外部实体的文档时，可能会导致敏感文件泄露、拒绝服务攻击、服务器端请求伪造、端口扫描（解析器所在域）和其他系统影响。</p>
-<h3 id="What-is-XML？"><a class="header-anchor" href="#What-is-XML？">¶</a>What is XML？</h3>
-<p>XML由3个部分构成，它们分别是：文档类型定义（Document Type Definition，DTD），即XML的布局语言；可扩展的样式语言（Extensible Style Language，XSL），即XML的样式表语言；以及可扩展链接语言（Extensible Link Language，XLL）。</p>
-<p>XML:可扩展标记语言，标准通用标记语言的子集，是一种用于标记电子文件使其具有结构性的标记语言。它被设计用来传输和存储数据(而不是储存数据),可扩展标记语言是一种很像超文本标记语言的标记语言。它的设计宗旨是传输数据，而不是显示数据。它的标签没有被预定义。您需要自行定义标签。它被设计为具有自我描述性。它是W3C的推荐标准。</p>
-<p>可扩展标记语言(XML)和超文本标记语言(HTML)为不同的目的而设计</p>
-<p>它被设计用来传输和存储数据，其<strong>焦点是数据的内容</strong>。</p>
-<p>超文本标记语言被设计用来显示数据，其焦点是数据的外观</p>
-<p>XML使用元素和属性来描述数据。在数据传送过程中，XML始终保留了诸如父/子关系这样的数据结构。几个应用程序 可以共享和解析同一个XML文件，不必使用传统的字符串解析或拆解过程。 相反，普通文件不对每个数据段做描述(除了在头文件中)，也不保留数据关系结构。使用XML做数据交换可以使应用程序更具有弹性，因为可以用位置(与普通文件一样)或用元素名(从数据库)来存取XML数据。</p>
-<h3 id="XML的实体"><a class="header-anchor" href="#XML的实体">¶</a>XML的实体</h3>
-<p>XML 中的实体分为以下五种：字符实体，命名实体，外部实体，参数实体，内部实体，普通实体和参数实体都分为内部实体和外部实体两种，外部实体定义需要加上** SYSTEM关键字**，其内容是URL所指向的外部文件实际的内容。如果不加SYSTEM关键字，则为内部实体，表示实体指代内容为字符串。</p>
-<h3 id="Causes-v4"><a class="header-anchor" href="#Causes-v4">¶</a>Causes</h3>
-<p>XXE注入，即XML External Entity，XML外部实体注入。通过 XML 实体，”SYSTEM”关键词导致 XML 解析器可以从本地文件或者远程 URI 中读取数据。所以攻击者可以通过 XML 实体传递自己构造的恶意值，是处理程序解析它。当引用外部实体时，通过构造恶意内容，可导致读取任意文件、执行系统命令、探测内网端口、攻击内网网站等危害。</p>
-<p>既然XML可以从外部读取DTD文件，那我们就自然地想到了如果将路径换成另一个文件的路径，那么服务器在解析这个XML的时候就会把那个文件的内容赋值给SYSTEM前面的根元素中，只要我们在XML中让前面的根元素的内容显示出来，不就可以读取那个文件的内容了。这就造成了一个任意文件读取的漏洞。</p>
-<p>那如果我们指向的是一个内网主机的端口呢？是否会给出错误信息，我们是不是可以从错误信息上来判断内网主机这个端口是否开放，这就造成了一个内部端口被探测的问题。另外，一般来说，服务器解析XML有两种方式，一种是一次性将整个XML加载进内存中，进行解析；另一种是一部分一部分的、“流式”地加载、解析。如果我们递归地调用XML定义，一次性调用巨量的定义，那么服务器的内存就会被消耗完，造成了拒绝服务攻击。</p>
-<h3 id="Damage-v4"><a class="header-anchor" href="#Damage-v4">¶</a>Damage</h3>
-<ul>
-<li>
-<p>检索文件，其中定义了包含文件内容的外部实体，并在应用程序的响应中返回。</p>
-</li>
-<li>
-<p>执行SSRF攻击，其中外部实体是基于后端系统的URL定义的，如：</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY xxe SYSTEM "http://127.0.0.1:8080" &gt;探测端口；</span><br><span class="line"></span><br><span class="line"> &lt;!ENTITY xxe SYSTEM "expect://id" &gt;执行命令；</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>
-<p>敏感文件泄露:无回显读取本地敏感文件(Blind OOB XXE)，敏感数据从应用服务器传输到攻击者的服务器上。</p>
-</li>
-<li>
-<p>通过Blind XXE错误消息检索数据是否存在，攻击者可以触发包含敏感数据的解析错误消息。<br>
-具体的攻击手段和场景在案例中说明。</p>
-</li>
-<li>
-<p>拒绝服务攻击</p>
-</li>
-<li>
-<p>服务器端请求伪造</p>
-</li>
-<li>
-<p>端口扫描（解析器所在域）</p>
-</li>
-</ul>
-<h3 id="Defense-v4"><a class="header-anchor" href="#Defense-v4">¶</a>Defense</h3>
-<p>开发人员培训是识别和减少XXE缺陷的关键，此外，防止XXE 缺陷还需要：</p>
-<ul>
-<li>尽可能使用简单的数据格式（如：JSON），避免对敏感数据进行序列化。</li>
-<li>及时修复或更新应用程序或底层操作系统使用的所有XML处理器和库。同时，通过依赖项检测，将SOAP更新到1.2版本或更高版本。</li>
-<li>参考《 OWASP Cheat Sheet ‘XXE Prevention‘ 》，在应用程序的所有XML解析器中禁用XML外部实体和DTD进程。</li>
-<li>在服务器端实施积极的（“白名单”）输入验证、过滤和清理，以防止在XML文档、标题或节点中出现恶意数据。</li>
-<li>验证XML或XSL文件上传功能是否使用XSD验证或其他类似验证方法来验证上传的XML文件。</li>
-<li>尽管在许多集成环境中，手动代码审查是大型、复杂应用程序的最佳选择，但是SAST 工具可以检测源代码中的XXE漏洞。</li>
-<li>如果无法实现这些控制，请考虑使用虚拟修复程序、API安全网关或Web应用程序防火墙（ WAF ）来检测、监控和防止XXE攻击。</li>
-</ul>
-<h3 id="References-v3"><a class="header-anchor" href="#References-v3">¶</a>References</h3>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/backlion/p/9302528.html">https://www.cnblogs.com/backlion/p/9302528.html</a></p>
-<h2 id="失效的访问控制Broken-Access-Control"><a class="header-anchor" href="#失效的访问控制Broken-Access-Control">¶</a>失效的访问控制Broken Access Control</h2>
-<p>Restrictions on what authenticated users are allowed to do are often not properly enforced. Attackers can exploit these flaws to access unauthorized functionality and/or data, such as access other users’ accounts, view sensitive files, modify other users’ data, change access rights, etc.</p>
-<h3 id="Causes-v5"><a class="header-anchor" href="#Causes-v5">¶</a>Causes</h3>
-<p>大多数Web页面需要验证功能级别的访问权限。但是，服务器需要在每个功能被访问时在服务器端执行相同的访问控制检查。如果请求没有被验证，攻击者能够伪造请求以在未经适当授权时访问某些页面。</p>
-<h3 id="Damage-v5"><a class="header-anchor" href="#Damage-v5">¶</a>Damage</h3>
-<ul>
-<li>访问其他用户的账号</li>
-<li>浏览敏感文件：文件包含/目录遍历<br>
-许多web应用使用文件管理作为它们日常操作的一部分。但他们使用没有被好好设计的输入验证方法，攻击者可以利用（这个漏洞）来修改或写入文件，甚至执行任意代码。</li>
-<li>修改其他用户数据</li>
-<li>改变访问权限、权限绕过（水平越权）<br>
-用户未经过身份验证访问资源，或注销后仍可访问资源，对不同用户访问的资源没有做很好的校验，如标准用户可访问管理员资源，或访问其他用户私有资源等。</li>
-<li>权限提升（垂直越权）<br>
-权限提升是指用户权限从一个阶段提升到另一个阶段的问题，当用户访问的资源比通常情况下访问到的资源更多时，就发生了权限提示漏洞，应用程序应该阻止该权限提升或更改。权限提升一般是由于应用程序自身的缺陷引起的，最后导致程序执行的操作拥有比开发人员或系统管理员预期更多的权限。</li>
-<li>不安全直接对象的引用<br>
-当应用程序根据用户提供的输入提供对对象的直接访问时，会发生不安全的直接对象引用。 攻击者可以直接绕过授权并访问系统中的资源，例如数据库记录或文件。</li>
-</ul>
-<p>由于应用程序获取用户提供的输入并使用它来检索对象而不执行足够的授权检查。不安全的直接对象引用允许攻击者通过修改用于直接指向对象的参数值来直接绕过授权和访问资源。这些资源可以是属于其他用户的数据库条目，系统中的文件等。</p>
-<h3 id="Defense-v5"><a class="header-anchor" href="#Defense-v5">¶</a>Defense</h3>
-<p>访问控制只有在受信服务器端代码或没有服务器的 API 中有效，这样这样攻击者才无法修改访问控制检查或元数据。</p>
-<ul>
-<li>除公有资源外，默认情况下拒绝访问。</li>
-<li>使用一次性的访问控制机制，并在整个应用程序中不断重用它们，包括最小化CORS使用。</li>
-<li>建立访问控制模型以强制执行所有权记录，而不是接受用户创建、读取、更新或删除的任何记录。</li>
-<li>域访问控制对每个应用程序都是唯一的，但业务限制要求应由域模型强制执行。</li>
-<li>禁用 Web服务器目录列表，并确保文件元数据（如：git）不存在于 Web的根目录中。</li>
-<li>记录失败的访问控制，并在适当时向管理员告警（如：重复故障）。</li>
-<li>对API和控制器的访问进行速率限制，以最大限度地降低自动化攻击工具的危害。</li>
-<li>当用户注销后，服务器上的JWT令牌应失效。开发人员和 QA人员应包括功能访问控制单元和集成测试人员。</li>
-<li>基于角色的访问控制（RBAC）<br>
-在基于角色的访问控制（RBAC）中，访问决策基于个人在组织或用户群中的角色和职责。<br>
-定义角色的过程通常基于分析组织的基本目标和结构，并且通常与安全策略相关联。例如，在医疗机构中，用户的不同角色可能包括医生，护士，服务员，护士，患者等等。显然，这些成员需要不同级别的访问才能执行其功能，但也需要根据安全政策和任何相关法规（HIPAA，Gramm-Leach-Bliley等）。<br>
-RBAC访问控制框架应该为Web应用程序安全管理员提供确定的“谁可以执行哪些操作，何时，从何处，以何种顺序以及在某些情况下在什么关系环境下“执行操作的能力。</li>
-</ul>
-<h2 id="安全配置错误Security-Misconfiguration"><a class="header-anchor" href="#安全配置错误Security-Misconfiguration">¶</a>安全配置错误Security Misconfiguration</h2>
-<p>Security misconfiguration is the most commonly seen issue. This is commonly a result of insecure default configurations, incomplete or ad hoc configurations, open cloud storage, misconfigured HTTP headers, and verbose error messages containing sensitive information. Not only must all operating systems, frameworks, libraries, and applications be securely configured, but they must be patched/upgraded in a timely fashion.</p>
-<h3 id="Causes-v6"><a class="header-anchor" href="#Causes-v6">¶</a>Causes</h3>
-<ul>
-<li>不安全的默认配置</li>
-<li>不完整的或自组织配置</li>
-<li>开放云存储</li>
-<li>HTTP头的错误配置</li>
-<li>包含敏感信息的冗余错误信息</li>
-</ul>
-<h3 id="Damage-v6"><a class="header-anchor" href="#Damage-v6">¶</a>Damage</h3>
-<p>这些漏洞使攻击者能经常访问一些未授权的系统数据或功能。有时，这些漏洞导致系统的完全攻破。业务影响取决于应用程序和数据的保护需求。</p>
-<h3 id="Defense-v6"><a class="header-anchor" href="#Defense-v6">¶</a>Defense</h3>
-<p>应实施安全的安装过程，包括：</p>
-<ul>
-<li>一个可以快速且易于部署在另一个锁定环境的可重复的加固过程。开发、质量保证和生产环境都应该进行相同配置，并且，在每个环境中使用不同的密码。这个过程应该是自动化的，以尽量减少<br>
-安装一个新安全环境的耗费。</li>
-<li>搭建最小化平台，该平台不包含任何不必要的功能、组件、文档和示例。移除或不安装不适用的功能和框架。</li>
-<li>检查和修复安全配置项来适应最新的安全说明、更新和补丁，并将其作为更新管理过程的一部分，（参见A9：2017-使用含有已知漏洞的组件）。在检查过程中，应特别注意云存储权限（如：S3桶权限）。</li>
-<li>一个能在组件和用户间提供有效的分离和安全性的分段应用程序架构，包括：分段、容器化和云安全组。</li>
-<li>向客户端发送安全指令，如：安全标头。</li>
-<li>在所有环境中能够进行正确安全配置和设置的自动化过程。</li>
-</ul>
-<h2 id="跨站脚本Cross-Site-Scripting（XSS）"><a class="header-anchor" href="#跨站脚本Cross-Site-Scripting（XSS）">¶</a>跨站脚本Cross-Site Scripting（XSS）</h2>
-<p>XSS flaws occur whenever an application <strong>includes untrusted data in a new web page without proper validation or escaping</strong>, or updates an existing web page with user-supplied data using a browser API that can create HTML or JavaScript. XSS allows attackers to execute scripts in the victim’s browser which can hijack（劫持） user sessions, deface web sites, or redirect the user to malicious sites.</p>
-<h3 id="Causes-v7"><a class="header-anchor" href="#Causes-v7">¶</a>Causes</h3>
-<p>在一个新网页中不带验证和绕过地包含不信任的数据，或者用用户提供的数据通过浏览器接口来更新已有网页（可以创建HTML或JS）</p>
-<h3 id="Damage-v7"><a class="header-anchor" href="#Damage-v7">¶</a>Damage</h3>
-<ul>
-<li>劫持用户会话</li>
-<li>毁坏网站</li>
-<li>将用户重定向到恶意网站</li>
-</ul>
-<h3 id="Defense-v7"><a class="header-anchor" href="#Defense-v7">¶</a>Defense</h3>
-<p>防止XSS需要将不可信数据与动态的浏览器内容区分开。这可以通过如下步骤实现：</p>
-<ul>
-<li>使用设计上就会自动编码来解决XSS问题的框架，如：Ruby 3.0或 React JS。了解每个框架的XSS保护的局限性，并适当地处理未覆盖的用例。</li>
-<li>为了避免反射式或存储式的XSS漏洞，最好的办法是根据HTML输出的上下文（包括：主体、属性、JavaScript、CSS或URL）</li>
-<li>对所有不可信的HTTP请求数据进行恰当的转义 。更多关于数据转义技术的信息见：《OWASP Cheat Sheet ‘XSS Prevention’》</li>
-<li>在客户端修改浏览器文档时，为了避免DOM XSS攻击，最好的选择是实施上下文敏感数据编码。如果这种情况不能避免，可以采用《OWASP Cheat Sheet ‘DOM based XSS Prevention ‘》描述的类似上下文敏感的转义技术应用于浏览器API。</li>
-<li>使用内容安全策略（CSP）是对抗XSS的深度防御策略。如果不存在可以通过本地文件放置恶意代码的其他漏洞（例如：路径遍历覆盖和允许在网络中传输的易受攻击的库），则该策略是有效的。</li>
-</ul>
-<h2 id="不安全的反序列化Insecure-Deserialization"><a class="header-anchor" href="#不安全的反序列化Insecure-Deserialization">¶</a>不安全的反序列化Insecure Deserialization</h2>
-<p>Insecure deserialization often leads to remote code execution. Even if deserialization flaws do not result in remote code execution, they can be used to perform attacks, including replay attacks, injection attacks, and privilege escalation attacks.</p>
-<h3 id="什么是序列化-反序列化？"><a class="header-anchor" href="#什么是序列化-反序列化？">¶</a>什么是序列化/反序列化？</h3>
-<p>序列化（serialization）在计算机科学的资料处理中，是指将数据结构或对象状态转换成可取用格式（例如存成文件，存于缓冲，或经由网络中发送），以留待后续在相同或另一台计算机环境中，能恢复原先状态的过程。依照序列化格式重新获取字节的结果时，可以利用它来产生与原始对象相同语义的副本。对于许多对象，像是使用大量引用的复杂对象，这种序列化重建的过程并不容易。面向对象中的对象序列化，并不概括之前原始对象所关系的函数。这种过程也称为对象编组（marshalling）。从一系列字节提取数据结构的反向操作，是反序列化（也称为解编组、deserialization、unmarshalling）。</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人理解：</span><br><span class="line">序列化：对象到字节流；反序列化：字节流到对象</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="Causes-v8"><a class="header-anchor" href="#Causes-v8">¶</a>Causes</h3>
-<p>PHP 的反序列化漏洞也叫PHP 对象注⼊，是⼀个⾮常常⻅的漏洞，这种漏洞充某些场景下虽然有些难以利⽤，但是⼀旦利⽤成功就会造成⾮常危险的后果。</p>
-<p>漏洞形成的根本原因就是程序没有对⽤户输⼊的反序列化字符串进⾏检测，导致反序列化过程可以被恶意控制，进⽽造成代码执⾏、GetShell 等⼀系列不可控的后果。反序列化漏洞并不是PHP 特有的，也存在与Java、Python 语⾔中。其原理基本相同。在Java反序列化中，会调用被反序列化的readObject方法，当readObject方法书写不当时就会引发漏洞</p>
-<h3 id="Damage-v8"><a class="header-anchor" href="#Damage-v8">¶</a>Damage</h3>
-<ul>
-<li>远程代码执行</li>
-<li>重放攻击</li>
-<li>注入攻击</li>
-<li>提权攻击</li>
-</ul>
-<h3 id="Defense-v8"><a class="header-anchor" href="#Defense-v8">¶</a>Defense</h3>
-<p>唯一安全的架构模式是不接受来自不受信源的序列化对象，或使用只允许原始数据类型的序列化媒体。<br>
-如果上述不可能的话，考虑使用下述方法：</p>
-<ul>
-<li>执行完整性检查，如：任何序列化对象的数字签名，以防止恶意对象创建或数据篡改。</li>
-<li>在创建对象之前强制执行严格的类型约束，因为代码通常被期望成一组可定义的类。绕过这种技术的方法已经被证明，所以完全依赖于它是不可取的。</li>
-<li>如果可能，隔离运行那些在低特权环境中反序列化的代码。</li>
-<li>记录反序列化的例外情况和失败信息，如：传入的类型不是预期的类型，或者反序列处理引发的例外情况。</li>
-<li>限制或监视来自于容器或服务器传入和传出的反序列化网络连接。</li>
-<li>监控反序列化，当用户持续进行反序列化时，对用户进行警告。</li>
-</ul>
-<h2 id="使用含有已知漏洞的组件"><a class="header-anchor" href="#使用含有已知漏洞的组件">¶</a>使用含有已知漏洞的组件</h2>
-<p>Using Components with Known Vulnerabilities<br>
-Using Components with Known Vulnerabilities<br>
-Using Components with Known Vulnerabilities<br>
-Using Components with Known Vulnerabilities</p>
-<p>Components, such as libraries, frameworks, and other software modules, run with the same privileges as the application. If a vulnerable component is exploited, such an attack can facilitate serious data loss or server takeover. Applications and APIs using components with known vulnerabilities may undermine application defenses and enable various attacks and impacts.</p>
-<h3 id="Causes-v9"><a class="header-anchor" href="#Causes-v9">¶</a>Causes</h3>
-<p>用了含有漏洞的库、框架、软件模块等等</p>
-<h3 id="Damage-v9"><a class="header-anchor" href="#Damage-v9">¶</a>Damage</h3>
-<p>破坏应用程序的安全防护，让各种攻击得以执行</p>
-<h3 id="Defense-v9"><a class="header-anchor" href="#Defense-v9">¶</a>Defense</h3>
-<p>应该制定一个补丁管理流程：</p>
-<ol>
-<li>移除不使用的依赖、不需要的功能、组件、文件和文档。</li>
-<li>利用如 versions、DependencyCheck 、retire.js等工具来持续的记录客户端和服务器端以及它们的依赖库的版本信息。持续监控如CVE 和 NVD等是否发布已使用组件的漏洞信息，可以使用软件分析工具来自动完成此功能。订阅关于使用组件安全漏洞的警告邮件。</li>
-<li>仅从官方渠道安全的获取组件，并使用签名机制来降低组件被篡改或加入恶意漏洞的风险</li>
-<li>监控那些不再维护或者不发布安全补丁的库和组件。如果不能打补丁，可以考虑部署虚拟补丁来监控、检测或保护。</li>
-<li>每个组织都应该制定相应的计划，对整个软件生命周期进行监控、评审、升级或更改配置。</li>
-</ol>
-<h2 id="不足的日志记录和监控Insufficient-Logging-Monitoring"><a class="header-anchor" href="#不足的日志记录和监控Insufficient-Logging-Monitoring">¶</a>不足的日志记录和监控Insufficient Logging &amp; Monitoring</h2>
-<p>Insufficient logging and monitoring, coupled with missing or ineffective integration with incident response, allows attackers to further attack systems, maintain persistence, pivot（以……为中心旋转） to more systems, and tamper, extract, or destroy data. Most breach studies show time to detect a breach is over 200 days, typically detected by external parties rather than internal processes or monitoring.</p>
-<h3 id="Causes-v10"><a class="header-anchor" href="#Causes-v10">¶</a>Causes</h3>
-<p>不足的日志和监控系统，缺失的或无效的事件相应</p>
-<h3 id="Damage-v10"><a class="header-anchor" href="#Damage-v10">¶</a>Damage</h3>
-<p>让攻击者可以更深入地攻击系统，毁坏数据</p>
-<h3 id="Defense-v10"><a class="header-anchor" href="#Defense-v10">¶</a>Defense</h3>
-<p>根据应用程序存储或处理的数据的风险：:</p>
-<ul>
-<li>确保所有登录、访问控制失败、输入验证失败能够被记录到日志中去，并保留足够的用户上下文信息，以识别可疑或恶意帐户，并为后期取证预留足够时间。</li>
-<li>确保日志以一种能被集中日志管理解决方案使用的形式生成</li>
-<li>确保高额交易有完整性控制的审计信息，以防止篡改或删除，例如审计信息保存在只能进行记录增加的数据库表中。</li>
-<li>建立有效的监控和告警机制，使可疑活动在可接受的时间内被发现和应对。</li>
-<li>建立或采取一个应急响应机制和恢复计划，例如：NIST 800-61 rev 2或更新版本。</li>
-</ul>
-<p>目前已有商业的和开源的应用程序防护框架（例如：OWASP AppSensor）、Web应用防火墙（例如 ：Modsecurity with the OWASP Core Rule Set）、带有自定义仪表盘和告警功能的日志关联软件。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/Software-Security-First-Class/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/14/Software-Security-First-Class/" class="post-title-link" itemprop="url">Software Security First Class</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-14 14:14:46" itemprop="dateCreated datePublished" datetime="2020-09-14T14:14:46+08:00">2020-09-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-17 16:34:02" itemprop="dateModified" datetime="2020-09-17T16:34:02+08:00">2020-09-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4>课外小说与视频</h4>
-零日
-<h4>调研报告</h4>
-暗网
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1986,7 +2035,7 @@ Using Components with Known Vulnerabilities</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1999,7 +2048,7 @@ Using Components with Known Vulnerabilities</p>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

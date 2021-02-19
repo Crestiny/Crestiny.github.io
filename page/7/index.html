@@ -157,6 +157,514 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/18/Common-Web-Vulnerabilities-Causes-Damage-and-Defense/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/18/Common-Web-Vulnerabilities-Causes-Damage-and-Defense/" class="post-title-link" itemprop="url">Common Web Vulnerabilities: Causes, Damage and Defense</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-18 18:17:49" itemprop="dateCreated datePublished" datetime="2020-09-18T18:17:49+08:00">2020-09-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-Security/" itemprop="url" rel="index"><span itemprop="name">Web Security</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="注入Injection"><a class="header-anchor" href="#注入Injection">¶</a>注入Injection</h2>
+<p>Injection flaws, such as <strong>SQL</strong>, <strong>NoSQL</strong>, <strong>OS</strong>, and <strong>LDAP</strong> injection, occur when untrusted data is sent to an interpreter as part of a command or query. The attacker’s hostile(怀有敌意的) data can trick the interpreter into <strong>executing unintended commands</strong> or <strong>accessing data without proper authorization</strong>.</p>
+<h3 id="Causes"><a class="header-anchor" href="#Causes">¶</a>Causes</h3>
+<p>刚刚讲过当我们访问动态网页时, Web 服务器会向数据访问层发起 Sql 查询请求，如果权限验证通过就会执行 Sql 语句。<br>
+这种网站<strong>内部直接发送的Sql请求一般不会有危险</strong>，但实际情况是很多时候需要<strong>结合用户的输入数据动态构造 Sql 语句</strong>，如果用户输入的数据被构造成恶意 Sql 代码，Web 应用又未对动态构造的 Sql 语句使用的参数进行审查，则会带来意想不到的危险。<br>
+程序开发过程中不注意规范书写sql语句和对特殊字符进行过滤，导致客户端可以通过全局变量POST和GET提交一些sql语句正常执行。</p>
+<p>具体可阐述如下：</p>
+<ol>
+<li>WEB开发人员无法保证所有的输入都已经过滤</li>
+<li>攻击者利用发送给SQL服务器的输入参数构造可执行的SQL代码（可加入到get请求、post请求、http头信息、cookie中）</li>
+<li>数据库未做相应的安全配置</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人总结：</span><br><span class="line">网页需要根据用户输入动态构造SQL语句的时候，如果过滤之类的安全工作没做好，就会导致恶意代码执行、绕过认证、数据泄露等危害。</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="Damage"><a class="header-anchor" href="#Damage">¶</a>Damage</h3>
+<ul>
+<li>数据库信息泄漏：数据库中存放的用户的隐私信息的泄露。猜解后台数据库，这是利用最多的方式，盗取网站的敏感信息。</li>
+<li>绕过认证，列如绕过验证登录网站后台。</li>
+<li>注入可以借助数据库的存储过程进行提权等操作</li>
+<li>网页篡改：通过操作数据库对特定网页进行篡改。</li>
+<li>网站被挂马，传播恶意软件：修改数据库一些字段的值，嵌入网马链接，进行挂马攻击。</li>
+<li>数据库被恶意操作：数据库服务器被攻击，数据库的系统管理员帐户被窜改。</li>
+<li>服务器被远程控制，被安装后门。经由数据库服务器提供的操作系统支持，让黑客得以修改或控制操作系统。</li>
+<li>破坏硬盘数据，瘫痪全系统。</li>
+</ul>
+<h3 id="Defense"><a class="header-anchor" href="#Defense">¶</a>Defense</h3>
+<p>是开发人员应该思考的问题，作为测试人员，了解如何预防SQL注入，可以在发现注入攻击bug时，对bug产生原因进行定位。</p>
+<ol>
+<li>
+<p>严格检查输入变量的类型和格式<br>
+对于整数参数，加判断条件：不能为空、参数类型必须为数字<br>
+对于字符串参数，可以使用正则表达式进行过滤：如：必须为[0-9a-zA-Z]范围内的字符串</p>
+</li>
+<li>
+<p>过滤和转义特殊字符<br>
+例如：引号、双引号、斜杠、反斜杠、冒号、 空字符等的字符<br>
+过滤的对象: 用户的输入 | 提交的URL请求中的参数部分 | 从cookie中得到的数据<br>
+在username这个变量前进行转义，对’、"、\等特殊字符进行转义，如：php中的addslashes()函数对username参数进行转义</p>
+</li>
+<li>
+<p>利用mysql的预编译机制<br>
+把sql语句的模板（变量采用占位符进行占位）发送给mysql服务器，mysql服务器对sql语句的模板进行编译，编译之后根据语句的优化分析对相应的索引进行优化，在最终绑定参数时把相应的参数传送给mysql服务器，直接进行执行，节省了sql查询时间，以及mysql服务器的资源，达到一次编译、多次执行的目的，除此之外，还可以防止SQL注入。具体是怎样防止SQL注入的呢？实际上当将绑定的参数传到mysql服务器，mysql服务器对参数进行编译，即填充到相应的占位符的过程中，做了转义操作。</p>
+</li>
+<li>
+<p>监测方面目前大多都是日志监控+WAF（统一的filter）,部署防SQL注入系统或脚本</p>
+</li>
+<li>
+<p>数据库日志容易解析,语法出错的、语法读Info表的建立黑白名单机制</p>
+</li>
+</ol>
+<h3 id="References"><a class="header-anchor" href="#References">¶</a>References</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/github_36032947/article/details/78442189?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160042717419195162113454%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=160042717419195162113454&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_blog_v1-1-78442189.pc_v2_rank_blog_v1&amp;utm_term=SQL%E6%B3%A8%E5%85%A5&amp;spm=1018.2118.3001.4187">SQL注入攻击常见方式及测试方法</a><br>
+<a href=""></a></p>
+<h2 id="失效的身份认证Broken-Authentication"><a class="header-anchor" href="#失效的身份认证Broken-Authentication">¶</a>失效的身份认证Broken Authentication</h2>
+<p>Application functions related to authentication and session management are often implemented incorrectly, allowing attackers to compromise passwords, keys, or session tokens, or to exploit other implementation flaws to assume(篡夺) other users’ identities temporarily or permanently.</p>
+<h3 id="前言：名词解释"><a class="header-anchor" href="#前言：名词解释">¶</a>前言：名词解释</h3>
+<p>Web应用程序使用的HTTP协议是一种<strong>无连接</strong>，<strong>无状态</strong>协议。</p>
+<p>无连接是指限制每次连接只处理一个请求，服务器处理完成客户的请求，收到客户的应答之后，即断开连接，可以节省传输时间</p>
+<p>无状态是指对于事物处理没有记忆功能，服务器不知道客户端是什么状态。即用户给服务器发送HTTP请求之后，服务器根据请求，将数据发送给用户，但是发送完成之后，不会记录任何信息。</p>
+<p>也就是说，服务器无法保留连接到网站的每个客户端（用户）的身份/活动的内存。那么试想，每次我们登录一个网站，如果意外关闭了，就得重新登录，使用起来会非常不便。<strong>Cookie和Session因此诞生，解决无记录状态的问题</strong>。</p>
+<h4 id="Session"><a class="header-anchor" href="#Session">¶</a>Session</h4>
+<p>Session负责在<strong>服务器端</strong>记录用户信息，在一个用户完成身份认证之后，存储所需要的用户资料，用于持久保存网站的活动。<strong>服务器使用唯一的会话令牌产生对应的会话ID</strong></p>
+<h4 id="Cookie"><a class="header-anchor" href="#Cookie">¶</a>Cookie</h4>
+<p>Cookie由服务器发送并存储在<strong>客户端</strong>，在用户访问网站的时候创建，<strong>用以跟踪用户在网站中的活动</strong>，每次请求客户端都需要把它发送给服务器。当用户意外中断后，由于Cookie的存在就可以从中断的地方继续。</p>
+<h4 id="身份认证"><a class="header-anchor" href="#身份认证">¶</a>身份认证</h4>
+<p>身份认证最常用于系统登录，形式一般为<strong>用户名和密码登录</strong>方式，在安全性要求较高的情况下，还有验证码、客户端证书、Ukey等</p>
+<h4 id="会话管理"><a class="header-anchor" href="#会话管理">¶</a>会话管理</h4>
+<p><strong>HTTP利用会话机制来实现身份认证</strong>，HTTP身份认证的结果往往是<strong>获得一个令牌并放在cookie中，之后的身份识别只需读授权令牌，而无需再次进行登录认证</strong></p>
+<h3 id="Causes-v2"><a class="header-anchor" href="#Causes-v2">¶</a>Causes</h3>
+<ul>
+<li>用户身份验证凭据在存储时不受保护</li>
+<li>登录凭证可以被猜测或重写</li>
+<li>会话ID直接暴露在URL中</li>
+<li>会话ID容易收到会话固定攻击</li>
+<li>会话ID不会超时失效，或者用户会话或身份验证令牌在注销时未失效</li>
+<li>会话ID在登录成功之后不会轮换</li>
+<li>密码，会话ID或者其他的登录凭据未经过加密传输</li>
+</ul>
+<h3 id="Attack"><a class="header-anchor" href="#Attack">¶</a>Attack</h3>
+<ul>
+<li>
+<p>弱口令：弱口令的危害不言而喻，通常指的是仅包含简单的数字和字母组合的口令</p>
+</li>
+<li>
+<p>口令破解：掌握了口令的组合方式或是加密细节</p>
+</li>
+<li>
+<p>Cookie窃取&amp;伪造&amp;绕过：因为Cookie是存储在客户端的，相对而言容易被攻击者窃取</p>
+</li>
+<li>
+<p>越权访问：分为垂直越权访问和水平越权访问，垂直越前访问是指不同用户级别之间的越权，比如普通用户能够执行管理员用户的权限。水平越权即同一级别用户之间的越权操作</p>
+</li>
+<li>
+<p>会话固定：一种诱骗受害者使用攻击者拟定的Session ID的攻击手段，通过让合法用户使用攻击者设置的Session ID进行登录，使得web应用不在生成新的Session ID</p>
+</li>
+<li>
+<p>会话劫持：就是在一次正常的通信过程中，攻击者作为第三方参与到其中，或者是在数据里加入其他信息，甚至将双方的通信模式暗中改变，即从直接联系变成有攻击者参与的联系。简单的说，就是攻击者把自己插入到受害者和目标机器之间，并设法让受害者和目标机器之间的数据通道变为受害者和目标机器之间存在一个看起来像“中转站”的代理机器（攻击者的机器）的数据通道，从而干涉两台机器之间的数据传输，例如监听敏感数据、替换数据等。由于攻击者已经介入其中，他能轻易知道双方传输的数据内容，还能根据自己的意愿去左右它。这个“中转站”可以是逻辑上的，也可以是物理上的，关键在于它能否获取到通信双方的数据。</p>
+</li>
+</ul>
+<h3 id="Damage-v2"><a class="header-anchor" href="#Damage-v2">¶</a>Damage</h3>
+<ul>
+<li>窃取用户凭证和会话信息</li>
+<li>恶意用户冒充用户身份查看或者变更记录，甚至执行事务</li>
+<li>访问未授权的页面和资源</li>
+<li>执行超越权限操作</li>
+</ul>
+<h3 id="Defense-v2"><a class="header-anchor" href="#Defense-v2">¶</a>Defense</h3>
+<ul>
+<li>在可能的情况下，实现多因素身份验证，以防止自动、凭证填充、暴力破解和被盗凭据再利用攻击。</li>
+<li>不要使用发送或部署默认的凭证，特别是管理员用户。</li>
+<li>执行弱密码检查，例如测试新或变更的密码，以纠正“排名前10000个弱密码” 列表。</li>
+<li>将密码长度、复杂性和循环策略与NIST-800-63 B的指导方针的5.1.1章节-记住秘密，或其他现代的基于证据的密码策略相一致。</li>
+<li>确认注册、凭据恢复和API路径，通过对所有输出结果使用相同的消息，用以抵御账户枚举攻击。</li>
+<li>限制或逐渐延迟失败的登录尝试。记录所有失败信息并在凭据填充、暴力破解或其他攻击被检测时提醒管理员。</li>
+<li>使用服务器端安全的内置会话管理器，在登录后生成高度复杂的新随机会话ID。会话ID不能在URL中，可以安全地存储和当登出、闲置、绝对超时后使其失效。</li>
+</ul>
+<h3 id="References-v2"><a class="header-anchor" href="#References-v2">¶</a>References</h3>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/CH42e/p/13162177.html">A2 失效的身份认证和会话管理</a></p>
+<h2 id="敏感数据泄露Sensitive-Data-Exposure"><a class="header-anchor" href="#敏感数据泄露Sensitive-Data-Exposure">¶</a>敏感数据泄露Sensitive Data Exposure</h2>
+<p>Many web applications and APIs do not properly protect sensitive data, such as financial, healthcare, and PII. Attackers may steal or modify such weakly protected data to conduct credit card fraud, identity theft, or other crimes. Sensitive data may be compromised without extra protection, such as encryption at rest or in transit, and requires special precautions when exchanged with the browser.</p>
+<h3 id="Causes-v3"><a class="header-anchor" href="#Causes-v3">¶</a>Causes</h3>
+<p>对敏感数据的弱保护，具体原因如：</p>
+<ul>
+<li>错误的云存储配置</li>
+<li>未受保护的代码存储库</li>
+<li>易受攻击的开源软件</li>
+</ul>
+<h3 id="Damage-v3"><a class="header-anchor" href="#Damage-v3">¶</a>Damage</h3>
+<p>利用敏感信息可以：</p>
+<ul>
+<li>信用卡欺诈</li>
+<li>身份偷窃</li>
+<li>等等</li>
+</ul>
+<h3 id="Defense-v3"><a class="header-anchor" href="#Defense-v3">¶</a>Defense</h3>
+<p>对一些需要加密的敏感数据，应该起码做到以下几点：</p>
+<ul>
+<li>对系统处理、存储或传输的数据分类，并根据分类进行访问控制。</li>
+<li>熟悉与敏感数据保护相关的法律和条例，并根据每项法规要求保护敏感数据。</li>
+<li>对于没必要存放的、重要的敏感数据，应当尽快清除，或者通过PCI DSS标记或拦截。未存储的数据不能被窃取。</li>
+<li>确保存储的所有敏感数据被加密。</li>
+<li>确保使用了最新的、强大的标准算法或密码、参数、协议和密匙，并且密钥管理到位。</li>
+<li>确保传输过程中的数据被加密，如：使用TLS。确保数据加密被强制执行，如：使用HTTP严格安全传输协议（HSTS ）。</li>
+<li>禁止缓存对包含敏感数据的响应。</li>
+<li>确保使用密码专用算法存储密码，如：Argon2 、 scrypt 、bcrypt 或者PBKDF2 。将工作因素（延迟因素）设置在可接受范围。</li>
+<li>单独验证每个安全配置项的有效性。</li>
+</ul>
+<h2 id="XML外部实体-XML-External-Entities-XXE"><a class="header-anchor" href="#XML外部实体-XML-External-Entities-XXE">¶</a>XML外部实体 XML External Entities (XXE)</h2>
+<p>Many older or poorly configured XML processors evaluate external entity references within XML documents. External entities can be used to disclose internal files using the file URI handler, internal file shares, internal port scanning, remote code execution, and denial of service attacks.<br>
+XML外部实体攻击是一种针对解析XML格式应用程序的攻击类型之一。此类攻击发生在当配置不当的XML解析器处理指向外部实体的文档时，可能会导致敏感文件泄露、拒绝服务攻击、服务器端请求伪造、端口扫描（解析器所在域）和其他系统影响。</p>
+<h3 id="What-is-XML？"><a class="header-anchor" href="#What-is-XML？">¶</a>What is XML？</h3>
+<p>XML由3个部分构成，它们分别是：文档类型定义（Document Type Definition，DTD），即XML的布局语言；可扩展的样式语言（Extensible Style Language，XSL），即XML的样式表语言；以及可扩展链接语言（Extensible Link Language，XLL）。</p>
+<p>XML:可扩展标记语言，标准通用标记语言的子集，是一种用于标记电子文件使其具有结构性的标记语言。它被设计用来传输和存储数据(而不是储存数据),可扩展标记语言是一种很像超文本标记语言的标记语言。它的设计宗旨是传输数据，而不是显示数据。它的标签没有被预定义。您需要自行定义标签。它被设计为具有自我描述性。它是W3C的推荐标准。</p>
+<p>可扩展标记语言(XML)和超文本标记语言(HTML)为不同的目的而设计</p>
+<p>它被设计用来传输和存储数据，其<strong>焦点是数据的内容</strong>。</p>
+<p>超文本标记语言被设计用来显示数据，其焦点是数据的外观</p>
+<p>XML使用元素和属性来描述数据。在数据传送过程中，XML始终保留了诸如父/子关系这样的数据结构。几个应用程序 可以共享和解析同一个XML文件，不必使用传统的字符串解析或拆解过程。 相反，普通文件不对每个数据段做描述(除了在头文件中)，也不保留数据关系结构。使用XML做数据交换可以使应用程序更具有弹性，因为可以用位置(与普通文件一样)或用元素名(从数据库)来存取XML数据。</p>
+<h3 id="XML的实体"><a class="header-anchor" href="#XML的实体">¶</a>XML的实体</h3>
+<p>XML 中的实体分为以下五种：字符实体，命名实体，外部实体，参数实体，内部实体，普通实体和参数实体都分为内部实体和外部实体两种，外部实体定义需要加上** SYSTEM关键字**，其内容是URL所指向的外部文件实际的内容。如果不加SYSTEM关键字，则为内部实体，表示实体指代内容为字符串。</p>
+<h3 id="Causes-v4"><a class="header-anchor" href="#Causes-v4">¶</a>Causes</h3>
+<p>XXE注入，即XML External Entity，XML外部实体注入。通过 XML 实体，”SYSTEM”关键词导致 XML 解析器可以从本地文件或者远程 URI 中读取数据。所以攻击者可以通过 XML 实体传递自己构造的恶意值，是处理程序解析它。当引用外部实体时，通过构造恶意内容，可导致读取任意文件、执行系统命令、探测内网端口、攻击内网网站等危害。</p>
+<p>既然XML可以从外部读取DTD文件，那我们就自然地想到了如果将路径换成另一个文件的路径，那么服务器在解析这个XML的时候就会把那个文件的内容赋值给SYSTEM前面的根元素中，只要我们在XML中让前面的根元素的内容显示出来，不就可以读取那个文件的内容了。这就造成了一个任意文件读取的漏洞。</p>
+<p>那如果我们指向的是一个内网主机的端口呢？是否会给出错误信息，我们是不是可以从错误信息上来判断内网主机这个端口是否开放，这就造成了一个内部端口被探测的问题。另外，一般来说，服务器解析XML有两种方式，一种是一次性将整个XML加载进内存中，进行解析；另一种是一部分一部分的、“流式”地加载、解析。如果我们递归地调用XML定义，一次性调用巨量的定义，那么服务器的内存就会被消耗完，造成了拒绝服务攻击。</p>
+<h3 id="Damage-v4"><a class="header-anchor" href="#Damage-v4">¶</a>Damage</h3>
+<ul>
+<li>
+<p>检索文件，其中定义了包含文件内容的外部实体，并在应用程序的响应中返回。</p>
+</li>
+<li>
+<p>执行SSRF攻击，其中外部实体是基于后端系统的URL定义的，如：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY xxe SYSTEM "http://127.0.0.1:8080" &gt;探测端口；</span><br><span class="line"></span><br><span class="line"> &lt;!ENTITY xxe SYSTEM "expect://id" &gt;执行命令；</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>
+<p>敏感文件泄露:无回显读取本地敏感文件(Blind OOB XXE)，敏感数据从应用服务器传输到攻击者的服务器上。</p>
+</li>
+<li>
+<p>通过Blind XXE错误消息检索数据是否存在，攻击者可以触发包含敏感数据的解析错误消息。<br>
+具体的攻击手段和场景在案例中说明。</p>
+</li>
+<li>
+<p>拒绝服务攻击</p>
+</li>
+<li>
+<p>服务器端请求伪造</p>
+</li>
+<li>
+<p>端口扫描（解析器所在域）</p>
+</li>
+</ul>
+<h3 id="Defense-v4"><a class="header-anchor" href="#Defense-v4">¶</a>Defense</h3>
+<p>开发人员培训是识别和减少XXE缺陷的关键，此外，防止XXE 缺陷还需要：</p>
+<ul>
+<li>尽可能使用简单的数据格式（如：JSON），避免对敏感数据进行序列化。</li>
+<li>及时修复或更新应用程序或底层操作系统使用的所有XML处理器和库。同时，通过依赖项检测，将SOAP更新到1.2版本或更高版本。</li>
+<li>参考《 OWASP Cheat Sheet ‘XXE Prevention‘ 》，在应用程序的所有XML解析器中禁用XML外部实体和DTD进程。</li>
+<li>在服务器端实施积极的（“白名单”）输入验证、过滤和清理，以防止在XML文档、标题或节点中出现恶意数据。</li>
+<li>验证XML或XSL文件上传功能是否使用XSD验证或其他类似验证方法来验证上传的XML文件。</li>
+<li>尽管在许多集成环境中，手动代码审查是大型、复杂应用程序的最佳选择，但是SAST 工具可以检测源代码中的XXE漏洞。</li>
+<li>如果无法实现这些控制，请考虑使用虚拟修复程序、API安全网关或Web应用程序防火墙（ WAF ）来检测、监控和防止XXE攻击。</li>
+</ul>
+<h3 id="References-v3"><a class="header-anchor" href="#References-v3">¶</a>References</h3>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/backlion/p/9302528.html">https://www.cnblogs.com/backlion/p/9302528.html</a></p>
+<h2 id="失效的访问控制Broken-Access-Control"><a class="header-anchor" href="#失效的访问控制Broken-Access-Control">¶</a>失效的访问控制Broken Access Control</h2>
+<p>Restrictions on what authenticated users are allowed to do are often not properly enforced. Attackers can exploit these flaws to access unauthorized functionality and/or data, such as access other users’ accounts, view sensitive files, modify other users’ data, change access rights, etc.</p>
+<h3 id="Causes-v5"><a class="header-anchor" href="#Causes-v5">¶</a>Causes</h3>
+<p>大多数Web页面需要验证功能级别的访问权限。但是，服务器需要在每个功能被访问时在服务器端执行相同的访问控制检查。如果请求没有被验证，攻击者能够伪造请求以在未经适当授权时访问某些页面。</p>
+<h3 id="Damage-v5"><a class="header-anchor" href="#Damage-v5">¶</a>Damage</h3>
+<ul>
+<li>访问其他用户的账号</li>
+<li>浏览敏感文件：文件包含/目录遍历<br>
+许多web应用使用文件管理作为它们日常操作的一部分。但他们使用没有被好好设计的输入验证方法，攻击者可以利用（这个漏洞）来修改或写入文件，甚至执行任意代码。</li>
+<li>修改其他用户数据</li>
+<li>改变访问权限、权限绕过（水平越权）<br>
+用户未经过身份验证访问资源，或注销后仍可访问资源，对不同用户访问的资源没有做很好的校验，如标准用户可访问管理员资源，或访问其他用户私有资源等。</li>
+<li>权限提升（垂直越权）<br>
+权限提升是指用户权限从一个阶段提升到另一个阶段的问题，当用户访问的资源比通常情况下访问到的资源更多时，就发生了权限提示漏洞，应用程序应该阻止该权限提升或更改。权限提升一般是由于应用程序自身的缺陷引起的，最后导致程序执行的操作拥有比开发人员或系统管理员预期更多的权限。</li>
+<li>不安全直接对象的引用<br>
+当应用程序根据用户提供的输入提供对对象的直接访问时，会发生不安全的直接对象引用。 攻击者可以直接绕过授权并访问系统中的资源，例如数据库记录或文件。</li>
+</ul>
+<p>由于应用程序获取用户提供的输入并使用它来检索对象而不执行足够的授权检查。不安全的直接对象引用允许攻击者通过修改用于直接指向对象的参数值来直接绕过授权和访问资源。这些资源可以是属于其他用户的数据库条目，系统中的文件等。</p>
+<h3 id="Defense-v5"><a class="header-anchor" href="#Defense-v5">¶</a>Defense</h3>
+<p>访问控制只有在受信服务器端代码或没有服务器的 API 中有效，这样这样攻击者才无法修改访问控制检查或元数据。</p>
+<ul>
+<li>除公有资源外，默认情况下拒绝访问。</li>
+<li>使用一次性的访问控制机制，并在整个应用程序中不断重用它们，包括最小化CORS使用。</li>
+<li>建立访问控制模型以强制执行所有权记录，而不是接受用户创建、读取、更新或删除的任何记录。</li>
+<li>域访问控制对每个应用程序都是唯一的，但业务限制要求应由域模型强制执行。</li>
+<li>禁用 Web服务器目录列表，并确保文件元数据（如：git）不存在于 Web的根目录中。</li>
+<li>记录失败的访问控制，并在适当时向管理员告警（如：重复故障）。</li>
+<li>对API和控制器的访问进行速率限制，以最大限度地降低自动化攻击工具的危害。</li>
+<li>当用户注销后，服务器上的JWT令牌应失效。开发人员和 QA人员应包括功能访问控制单元和集成测试人员。</li>
+<li>基于角色的访问控制（RBAC）<br>
+在基于角色的访问控制（RBAC）中，访问决策基于个人在组织或用户群中的角色和职责。<br>
+定义角色的过程通常基于分析组织的基本目标和结构，并且通常与安全策略相关联。例如，在医疗机构中，用户的不同角色可能包括医生，护士，服务员，护士，患者等等。显然，这些成员需要不同级别的访问才能执行其功能，但也需要根据安全政策和任何相关法规（HIPAA，Gramm-Leach-Bliley等）。<br>
+RBAC访问控制框架应该为Web应用程序安全管理员提供确定的“谁可以执行哪些操作，何时，从何处，以何种顺序以及在某些情况下在什么关系环境下“执行操作的能力。</li>
+</ul>
+<h2 id="安全配置错误Security-Misconfiguration"><a class="header-anchor" href="#安全配置错误Security-Misconfiguration">¶</a>安全配置错误Security Misconfiguration</h2>
+<p>Security misconfiguration is the most commonly seen issue. This is commonly a result of insecure default configurations, incomplete or ad hoc configurations, open cloud storage, misconfigured HTTP headers, and verbose error messages containing sensitive information. Not only must all operating systems, frameworks, libraries, and applications be securely configured, but they must be patched/upgraded in a timely fashion.</p>
+<h3 id="Causes-v6"><a class="header-anchor" href="#Causes-v6">¶</a>Causes</h3>
+<ul>
+<li>不安全的默认配置</li>
+<li>不完整的或自组织配置</li>
+<li>开放云存储</li>
+<li>HTTP头的错误配置</li>
+<li>包含敏感信息的冗余错误信息</li>
+</ul>
+<h3 id="Damage-v6"><a class="header-anchor" href="#Damage-v6">¶</a>Damage</h3>
+<p>这些漏洞使攻击者能经常访问一些未授权的系统数据或功能。有时，这些漏洞导致系统的完全攻破。业务影响取决于应用程序和数据的保护需求。</p>
+<h3 id="Defense-v6"><a class="header-anchor" href="#Defense-v6">¶</a>Defense</h3>
+<p>应实施安全的安装过程，包括：</p>
+<ul>
+<li>一个可以快速且易于部署在另一个锁定环境的可重复的加固过程。开发、质量保证和生产环境都应该进行相同配置，并且，在每个环境中使用不同的密码。这个过程应该是自动化的，以尽量减少<br>
+安装一个新安全环境的耗费。</li>
+<li>搭建最小化平台，该平台不包含任何不必要的功能、组件、文档和示例。移除或不安装不适用的功能和框架。</li>
+<li>检查和修复安全配置项来适应最新的安全说明、更新和补丁，并将其作为更新管理过程的一部分，（参见A9：2017-使用含有已知漏洞的组件）。在检查过程中，应特别注意云存储权限（如：S3桶权限）。</li>
+<li>一个能在组件和用户间提供有效的分离和安全性的分段应用程序架构，包括：分段、容器化和云安全组。</li>
+<li>向客户端发送安全指令，如：安全标头。</li>
+<li>在所有环境中能够进行正确安全配置和设置的自动化过程。</li>
+</ul>
+<h2 id="跨站脚本Cross-Site-Scripting（XSS）"><a class="header-anchor" href="#跨站脚本Cross-Site-Scripting（XSS）">¶</a>跨站脚本Cross-Site Scripting（XSS）</h2>
+<p>XSS flaws occur whenever an application <strong>includes untrusted data in a new web page without proper validation or escaping</strong>, or updates an existing web page with user-supplied data using a browser API that can create HTML or JavaScript. XSS allows attackers to execute scripts in the victim’s browser which can hijack（劫持） user sessions, deface web sites, or redirect the user to malicious sites.</p>
+<h3 id="Causes-v7"><a class="header-anchor" href="#Causes-v7">¶</a>Causes</h3>
+<p>在一个新网页中不带验证和绕过地包含不信任的数据，或者用用户提供的数据通过浏览器接口来更新已有网页（可以创建HTML或JS）</p>
+<h3 id="Damage-v7"><a class="header-anchor" href="#Damage-v7">¶</a>Damage</h3>
+<ul>
+<li>劫持用户会话</li>
+<li>毁坏网站</li>
+<li>将用户重定向到恶意网站</li>
+</ul>
+<h3 id="Defense-v7"><a class="header-anchor" href="#Defense-v7">¶</a>Defense</h3>
+<p>防止XSS需要将不可信数据与动态的浏览器内容区分开。这可以通过如下步骤实现：</p>
+<ul>
+<li>使用设计上就会自动编码来解决XSS问题的框架，如：Ruby 3.0或 React JS。了解每个框架的XSS保护的局限性，并适当地处理未覆盖的用例。</li>
+<li>为了避免反射式或存储式的XSS漏洞，最好的办法是根据HTML输出的上下文（包括：主体、属性、JavaScript、CSS或URL）</li>
+<li>对所有不可信的HTTP请求数据进行恰当的转义 。更多关于数据转义技术的信息见：《OWASP Cheat Sheet ‘XSS Prevention’》</li>
+<li>在客户端修改浏览器文档时，为了避免DOM XSS攻击，最好的选择是实施上下文敏感数据编码。如果这种情况不能避免，可以采用《OWASP Cheat Sheet ‘DOM based XSS Prevention ‘》描述的类似上下文敏感的转义技术应用于浏览器API。</li>
+<li>使用内容安全策略（CSP）是对抗XSS的深度防御策略。如果不存在可以通过本地文件放置恶意代码的其他漏洞（例如：路径遍历覆盖和允许在网络中传输的易受攻击的库），则该策略是有效的。</li>
+</ul>
+<h2 id="不安全的反序列化Insecure-Deserialization"><a class="header-anchor" href="#不安全的反序列化Insecure-Deserialization">¶</a>不安全的反序列化Insecure Deserialization</h2>
+<p>Insecure deserialization often leads to remote code execution. Even if deserialization flaws do not result in remote code execution, they can be used to perform attacks, including replay attacks, injection attacks, and privilege escalation attacks.</p>
+<h3 id="什么是序列化-反序列化？"><a class="header-anchor" href="#什么是序列化-反序列化？">¶</a>什么是序列化/反序列化？</h3>
+<p>序列化（serialization）在计算机科学的资料处理中，是指将数据结构或对象状态转换成可取用格式（例如存成文件，存于缓冲，或经由网络中发送），以留待后续在相同或另一台计算机环境中，能恢复原先状态的过程。依照序列化格式重新获取字节的结果时，可以利用它来产生与原始对象相同语义的副本。对于许多对象，像是使用大量引用的复杂对象，这种序列化重建的过程并不容易。面向对象中的对象序列化，并不概括之前原始对象所关系的函数。这种过程也称为对象编组（marshalling）。从一系列字节提取数据结构的反向操作，是反序列化（也称为解编组、deserialization、unmarshalling）。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人理解：</span><br><span class="line">序列化：对象到字节流；反序列化：字节流到对象</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="Causes-v8"><a class="header-anchor" href="#Causes-v8">¶</a>Causes</h3>
+<p>PHP 的反序列化漏洞也叫PHP 对象注⼊，是⼀个⾮常常⻅的漏洞，这种漏洞充某些场景下虽然有些难以利⽤，但是⼀旦利⽤成功就会造成⾮常危险的后果。</p>
+<p>漏洞形成的根本原因就是程序没有对⽤户输⼊的反序列化字符串进⾏检测，导致反序列化过程可以被恶意控制，进⽽造成代码执⾏、GetShell 等⼀系列不可控的后果。反序列化漏洞并不是PHP 特有的，也存在与Java、Python 语⾔中。其原理基本相同。在Java反序列化中，会调用被反序列化的readObject方法，当readObject方法书写不当时就会引发漏洞</p>
+<h3 id="Damage-v8"><a class="header-anchor" href="#Damage-v8">¶</a>Damage</h3>
+<ul>
+<li>远程代码执行</li>
+<li>重放攻击</li>
+<li>注入攻击</li>
+<li>提权攻击</li>
+</ul>
+<h3 id="Defense-v8"><a class="header-anchor" href="#Defense-v8">¶</a>Defense</h3>
+<p>唯一安全的架构模式是不接受来自不受信源的序列化对象，或使用只允许原始数据类型的序列化媒体。<br>
+如果上述不可能的话，考虑使用下述方法：</p>
+<ul>
+<li>执行完整性检查，如：任何序列化对象的数字签名，以防止恶意对象创建或数据篡改。</li>
+<li>在创建对象之前强制执行严格的类型约束，因为代码通常被期望成一组可定义的类。绕过这种技术的方法已经被证明，所以完全依赖于它是不可取的。</li>
+<li>如果可能，隔离运行那些在低特权环境中反序列化的代码。</li>
+<li>记录反序列化的例外情况和失败信息，如：传入的类型不是预期的类型，或者反序列处理引发的例外情况。</li>
+<li>限制或监视来自于容器或服务器传入和传出的反序列化网络连接。</li>
+<li>监控反序列化，当用户持续进行反序列化时，对用户进行警告。</li>
+</ul>
+<h2 id="使用含有已知漏洞的组件"><a class="header-anchor" href="#使用含有已知漏洞的组件">¶</a>使用含有已知漏洞的组件</h2>
+<p>Using Components with Known Vulnerabilities<br>
+Using Components with Known Vulnerabilities<br>
+Using Components with Known Vulnerabilities<br>
+Using Components with Known Vulnerabilities</p>
+<p>Components, such as libraries, frameworks, and other software modules, run with the same privileges as the application. If a vulnerable component is exploited, such an attack can facilitate serious data loss or server takeover. Applications and APIs using components with known vulnerabilities may undermine application defenses and enable various attacks and impacts.</p>
+<h3 id="Causes-v9"><a class="header-anchor" href="#Causes-v9">¶</a>Causes</h3>
+<p>用了含有漏洞的库、框架、软件模块等等</p>
+<h3 id="Damage-v9"><a class="header-anchor" href="#Damage-v9">¶</a>Damage</h3>
+<p>破坏应用程序的安全防护，让各种攻击得以执行</p>
+<h3 id="Defense-v9"><a class="header-anchor" href="#Defense-v9">¶</a>Defense</h3>
+<p>应该制定一个补丁管理流程：</p>
+<ol>
+<li>移除不使用的依赖、不需要的功能、组件、文件和文档。</li>
+<li>利用如 versions、DependencyCheck 、retire.js等工具来持续的记录客户端和服务器端以及它们的依赖库的版本信息。持续监控如CVE 和 NVD等是否发布已使用组件的漏洞信息，可以使用软件分析工具来自动完成此功能。订阅关于使用组件安全漏洞的警告邮件。</li>
+<li>仅从官方渠道安全的获取组件，并使用签名机制来降低组件被篡改或加入恶意漏洞的风险</li>
+<li>监控那些不再维护或者不发布安全补丁的库和组件。如果不能打补丁，可以考虑部署虚拟补丁来监控、检测或保护。</li>
+<li>每个组织都应该制定相应的计划，对整个软件生命周期进行监控、评审、升级或更改配置。</li>
+</ol>
+<h2 id="不足的日志记录和监控Insufficient-Logging-Monitoring"><a class="header-anchor" href="#不足的日志记录和监控Insufficient-Logging-Monitoring">¶</a>不足的日志记录和监控Insufficient Logging &amp; Monitoring</h2>
+<p>Insufficient logging and monitoring, coupled with missing or ineffective integration with incident response, allows attackers to further attack systems, maintain persistence, pivot（以……为中心旋转） to more systems, and tamper, extract, or destroy data. Most breach studies show time to detect a breach is over 200 days, typically detected by external parties rather than internal processes or monitoring.</p>
+<h3 id="Causes-v10"><a class="header-anchor" href="#Causes-v10">¶</a>Causes</h3>
+<p>不足的日志和监控系统，缺失的或无效的事件相应</p>
+<h3 id="Damage-v10"><a class="header-anchor" href="#Damage-v10">¶</a>Damage</h3>
+<p>让攻击者可以更深入地攻击系统，毁坏数据</p>
+<h3 id="Defense-v10"><a class="header-anchor" href="#Defense-v10">¶</a>Defense</h3>
+<p>根据应用程序存储或处理的数据的风险：:</p>
+<ul>
+<li>确保所有登录、访问控制失败、输入验证失败能够被记录到日志中去，并保留足够的用户上下文信息，以识别可疑或恶意帐户，并为后期取证预留足够时间。</li>
+<li>确保日志以一种能被集中日志管理解决方案使用的形式生成</li>
+<li>确保高额交易有完整性控制的审计信息，以防止篡改或删除，例如审计信息保存在只能进行记录增加的数据库表中。</li>
+<li>建立有效的监控和告警机制，使可疑活动在可接受的时间内被发现和应对。</li>
+<li>建立或采取一个应急响应机制和恢复计划，例如：NIST 800-61 rev 2或更新版本。</li>
+</ul>
+<p>目前已有商业的和开源的应用程序防护框架（例如：OWASP AppSensor）、Web应用防火墙（例如 ：Modsecurity with the OWASP Core Rule Set）、带有自定义仪表盘和告警功能的日志关联软件。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/Software-Security-First-Class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/14/Software-Security-First-Class/" class="post-title-link" itemprop="url">Software Security First Class</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-14 14:14:46" itemprop="dateCreated datePublished" datetime="2020-09-14T14:14:46+08:00">2020-09-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-17 16:34:02" itemprop="dateModified" datetime="2020-09-17T16:34:02+08:00">2020-09-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4>课外小说与视频</h4>
+零日
+<h4>调研报告</h4>
+暗网
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/Chapter1-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%BC%95%E8%A8%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1403,244 +1911,6 @@ SQL语句主变量：内容是一句SQL语句</p>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/03/Model-Decomposition/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/03/Model-Decomposition/" class="post-title-link" itemprop="url">Model Decomposition</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-03 15:05:35" itemprop="dateCreated datePublished" datetime="2020-09-03T15:05:35+08:00">2020-09-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-07 09:47:10" itemprop="dateModified" datetime="2020-09-07T09:47:10+08:00">2020-09-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2>关系的一个分解</h2>
-![](\Model-Decomposition\definition.png)
-说人话：
-分解以后的关系，它们的属性集合并起来应该和原关系的属性集相等，此外呢，分解出来的各子关系，它们的属性集之间不能有包含关系
-那么如何确定某个子关系上的函数依赖呢？
-在原关系函数依赖的闭包上找，要左右两边的属性合并起来在此子关系的属性集内就可以纳入这个子关系的函数依赖中~
-<h2>模式分解的三种等价形式</h2>
-![](\Model-Decomposition\3.png)
-<h3>什么是“无损连接性”？</h3>
-个人理解：要从分解后的子关系恢复到原关系，一般是通过自然连接来实现的；假如分解后再用自然连接得到的关系并非原关系，而是一个“元组增加了，信息丢失了”的关系，这种就是有损连接性的分解
-<h3>什么是“保持函数依赖”？</h3>
-个人理解：原关系的各种函数依赖，每个应该在某子关系中出现至少一次
-<h2>引理</h2>
-<h3>记号定义</h3>
-![](\Model-Decomposition\ydefinition.png)
-<h3>相关性质</h3>
-![](\Model-Decomposition\p.png)
-<h2>无损连接性</h2>
-<h3>定义</h3>
-![](\Model-Decomposition\wdefinition.png)
-<h3>判别算法</h3>
-![](\Model-Decomposition\algorithm.png)
-<h3>说人话</h3>
-- 第一步：画一张初始表，所有属性按列排开，分解的有几个关系就几行
-- 第二步：填初始数据，一行行看，在每个关系模式的U包含的属性列那里写上a(j)，否则写b(ij)
-- 第三步：遍历所有FD，对于每个，左边X所在的那些列里面，找出填了相同值的那些行；这些行里面，再去看右边Y对应的属性下标对应的列，看里面是否有a(li)这个元素，有的话，全部改为a(li)
-注：假如有b相关的值在上一句的操作里被改掉了，那这一列所有这个值都要被改
-- 第四步：知道有一行是a1，a2，a3.....，就说明是无损连接性的
-<h3>特殊地</h3>
-![](\Model-Decomposition\adefinition.png)
-<h3>说人话</h3>
-如果是分解成两个关系要判别是否无损连接性，写出“U1交U2->U1-U2(谁先谁后看情况)”，看看这个函数依赖是否在F的闭包内，在的话就……
-<h2>保持函数依赖</h2>
-<h3>定义</h3>
-![](\Model-Decomposition\depend.png)
-根据这个定义，我们再加上判断两个函数依赖集是否相等就可以完整地作为一个“保持函数依赖”的判别算法了！
-即：（原F的闭包）要和（分解后F们的并集的闭包）相等
-<h2>模式分解的算法</h2>
-<h3>关于模式分解结果的几种情况</h3>
-1. 如果保持了“无损连接性”，则分解后的关系一定是4NF的
-2. 如果保持了“保持函数依赖性”，则分解后的关系一定是3NF的，不一定能到BCNF
-3. 如果保持了“无损连接性”和“保持函数依赖性”，则分解后的关系一定是3NF的，不一定能到BCNF（？？？）
-<h3>“保持函数依赖性”+3NF&emsp;模式分解算法</h3>
-<h4>教科书式定义</h4>
-![](\Model-Decomposition\a1.png)
-<h4>说人话</h4>
-- 第一步：极小化F
-- 第二步：在U中去掉F中不包含的属性
-*注：接下来讨论的都是处理后的F和U了！！！*
-- 第三步：假如F中有函数依赖能使左右两边合并起来恰好是U，那没事了，R不用作分解，算法终止；不是的话就转第四步
-- 第四步：把F按照相同左边X的规则分组成几个小的函数依赖集F'(i)，对应地有它的U(i)，再用U(i)在F上找到对应的F(i)，R就这样被分解了
-<h3>“保持函数依赖性”+“无损连接性”+3NF&emsp;模式分解算法</h3>
-<h4>教科书式定义</h4>
-![](\Model-Decomposition\a2.png)
-<h4>说人话</h4>
-- 第一步：先做算法6.3，也就是先让分解后的模式“保持函数依赖性”。
-- 第二步：找到原关系R的码X，和它在F上的闭包，形成一个对应关系R(x)
-- 第三步：在先前得到的几个子关系R(i)中，寻找一下有没有对应的U(i)包含了X的，要是有，那么这个R(x)就不用加到分解出的子关系里面了，反之是需要的
-<h3>“无损连接性”+BCNF&emsp;模式分解算法</h3>
-<h4>教科书式定义</h4>
-![](\Model-Decomposition\a3.png)
-<h4>说人话</h4>
-<ul>
-<li>第一步：初始的状态就是从原关系R开始，</li>
-<li>第二步：检查一下当前分解中是不是每个关系都符合BCNF了，如果是，就可以终止了；如果不是，跳第三步</li>
-<li>第三步：对于那些不符合BCNF的关系，我们找到某个函数依赖——它的左边X并非此关系的码。我们把这个函数依赖的左右两边合并，这是一个属性集；然后在此关系属性集里面剔除“此函数依赖的右边Y”就形成另一个属性集。有了分解后的两个属性集，根据它们生成对应的F就好啦。这样就把这个关系分解好了。跳第二步</li>
-</ul>
-<h3>“无损连接性”+4NF&emsp;模式分解算法</h3>
-<h4>教科书式定义</h4>
-![](\Model-Decomposition\a4.png)
-<h4>说人话</h4>
-- 第一步：用算法6.5做到“无损连接性”+BCNF
-- 第二步：考察分解中那些不符合4NF的关系，用定理6.6的方法分解
-- 第三步：分解中的每个子关系都属于4NF即可终止
-<h4>补充：什么是传说中的定理6.6呢？</h4>
-![](\Model-Decomposition\d1.png)
-这个定理的意思就是，既然这个关系不符合4NF吧，那就是有非平凡非函数依赖的多值依赖，也就是X-->Y。有了它我们把关系分成（X,Y）和（X,Z），有点奇怪的是，为什么关系可以这样表示啊？
-<h2>完整版数据依赖的公理系统</h2>
-<h3>8条公理</h3>
-![](\Model-Decomposition\g1.png)
-<h3>4条推理规则</h3>
-![](\Model-Decomposition\g2.png)
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/02/Axiom-System-of-Data-Dependency/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/02/Axiom-System-of-Data-Dependency/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-02 14:33:49" itemprop="dateCreated datePublished" datetime="2020-09-02T14:33:49+08:00">2020-09-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>—title: Axiom System of Data Dependencydate: 2020-09-02 14:33:49tags:- Databasecategories:- Courses—## Armstrong公理系统### 什么是逻辑蕴含？<img src="%5CAxiom-System-of-Data-Dependency%5Clogical.png" alt=""><br><br>### 如何确定一个函数依赖是否为F所蕴含？<img src="%5CAxiom-System-of-Data-Dependency%5CArmstrong.png" alt=""><em>注：XZ表示X并Z</em>对于Armstrong公理的简要说明：1. 自反律：其实这个和F无关，我们只要有一个大集合X和它的子集Y，就会有X-&gt;Y2. 增广率：需要推出XZ-&gt;YZ，也就是证明，如果有两个元组在XZ上的值相等，那么在YZ上的值也会相等；对于前半句：这个条件就给出两个元组在X上值相等，且在Z上值相等；根据X-&gt;Y，它们在Y上的值相等，和Z的一合并，就推出了这两个元组在YZ上的值也会相等3. 传递率：你懂的顺带导出了3条推理规则：1. 合并规则：X-&gt;Y与X-&gt;Z可得X-&gt;YZ2. 伪传递规则：X-&gt;Y与WY-&gt;Z可得XW-&gt;Z3. 分解规则：X-&gt;Y与Z包含于Y可得X-&gt;Z还顺带有个小引理：就是X-&gt;ABCDEF…与右边的分开写，是互为充要条件的<br><br>### 关于闭包函数依赖集F的闭包：是指运用Armstrong公理系统推导出来的所有F可蕴含的函数依赖，结果形式应该是一个函数依赖组成的集合属性集X关于函数依赖集F的闭包：有个推导算法可以用，结果形式应该是一个属性组成的集合算法如下：<img src="%5CAxiom-System-of-Data-Dependency%5Calgorithm.png" alt="">### 极小函数依赖集#### 定义<img src="%5CAxiom-System-of-Data-Dependency%5Cdefinition.png" alt=""><em>注：两个函数依赖集等价，就是函数依赖集的闭包相等</em>#### 化简为极小函数依赖集（亦为判定）<img src="%5CAxiom-System-of-Data-Dependency%5Cmin.png" alt=""><br><br><br><br><br></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1710,7 +1980,7 @@ SQL语句主变量：内容是一句SQL语句</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1723,7 +1993,7 @@ SQL语句主变量：内容是一句SQL语句</p>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
