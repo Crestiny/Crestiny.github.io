@@ -157,7 +157,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/23/Chapter3-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%92%8C%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/21/Chapter8-%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -171,7 +171,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/23/Chapter3-%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%92%8C%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81/" class="post-title-link" itemprop="url">Chapter3 公钥密码和消息认证</a>
+            <a href="/2020/12/21/Chapter8-%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">Chapter8 恶意代码检测与分析</a>
         </h2>
 
         <div class="post-meta">
@@ -181,14 +181,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-09-23 12:06:11" itemprop="dateCreated datePublished" datetime="2020-09-23T12:06:11+08:00">2020-09-23</time>
+              <time title="创建时间：2020-12-21 15:35:49" itemprop="dateCreated datePublished" datetime="2020-12-21T15:35:49+08:00">2020-12-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-04 16:24:56" itemprop="dateModified" datetime="2021-01-04T16:24:56+08:00">2021-01-04</time>
+                <time title="修改时间：2020-12-28 15:37:33" itemprop="dateModified" datetime="2020-12-28T15:37:33+08:00">2020-12-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -196,11 +196,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件安全分析与应用》</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
                 </span>
             </span>
 
@@ -215,156 +215,50 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="3-1-消息认证方法"><a class="header-anchor" href="#3-1-消息认证方法">¶</a>3.1 消息认证方法</h2>
-<h3 id="3-1-0-引言"><a class="header-anchor" href="#3-1-0-引言">¶</a>3.1.0 引言</h3>
-<p>加密这个手段，自然的就可以防止被动攻击了；不过我们还需要满足防止主动攻击（伪造数据和业务）的需求————对应的办法就是消息认证。<br>
-首先，什么是可信？<br>
-可信就是，数据真实且来自合法来源，消息认证就是认证数据可不可信的。<br>
-对应着可信的两方面定义，认证要做的就是判断消息被篡改与否+来源合法与否，此外还有可能要验证数据时效性、消息流顺序等等</p>
-<h3 id="3-1-1-利用常规加密的消息认证"><a class="header-anchor" href="#3-1-1-利用常规加密的消息认证">¶</a>3.1.1 利用常规加密的消息认证</h3>
-<p>常规就是说简单的对称加密这样子，但是对于分组对称加密会出现问题。<br>
-假如攻击者想换动消息流之间的顺序，那么由于是分组的，所以B还是能每组都正常解密……<br>
-但通常情况下，分组的重排其实还是能算是一种威胁</p>
-<h3 id="3-1-2-非加密的消息认证"><a class="header-anchor" href="#3-1-2-非加密的消息认证">¶</a>3.1.2 非加密的消息认证</h3>
-<h4 id="（1）认证与加密"><a class="header-anchor" href="#（1）认证与加密">¶</a>（1）认证与加密</h4>
-<p>把这两个词放一起的时候，我常常感觉……很迷糊，现在理一理：<br>
-一般来说认证和加密是两个功能，说一句话可能会让关系更明白：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如我们有一个对消息作处理的算法，这里面可以包含两步操作：先对消息加密，再打上认证标签；这样我们就可以说：把消息的认证和保密结合起来了</span><br></pre></td></tr></tbody></table></figure>
-<p>在满足安全需求这件事上，认证和加密是各有应用场景的</p>
-<h4 id="（2）什么时候可以不加密只认证呢？"><a class="header-anchor" href="#（2）什么时候可以不加密只认证呢？">¶</a>（2）什么时候可以不加密只认证呢？</h4>
+          <h2 id="8-1-恶意代码分析基础"><a class="header-anchor" href="#8-1-恶意代码分析基础">¶</a>8.1 恶意代码分析基础</h2>
+<h3 id="8-1-1-恶意代码分类"><a class="header-anchor" href="#8-1-1-恶意代码分类">¶</a>8.1.1 恶意代码分类</h3>
+<p>恶意代码分析过程总结</p>
 <ol>
-<li>相同消息广播时，只由一端负责监控的系统执行认证（不是很理解，直观是什么样的？）</li>
-<li>交换信息时，某一端负载太大不能全部解密，就会随机抽一些进行认证</li>
-<li>程序可以用明文+认证标签，节省处理器解密的消耗</li>
+<li>将exe文件上传至</li>
 </ol>
-<h4 id="（3）消息认证码MAC"><a class="header-anchor" href="#（3）消息认证码MAC">¶</a>（3）消息认证码MAC</h4>
-<p>定义：用私钥产生一小块数据，它可以作为MAC<br>
-工作流程：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/MAC.png" alt=""></p>
+<h2 id="8-3-动态分析"><a class="header-anchor" href="#8-3-动态分析">¶</a>8.3 动态分析</h2>
+<p>有效的简单动态分析步骤：</p>
 <ul>
-<li>A和B共享一个密钥K</li>
-<li>A给B发消息的时候，A用(消息+K)生成MAC，再把消息和MAC一起发给B</li>
-<li>B收到以后，算一算MAC对不对</li>
+<li>准备：有效的目标+安全的运行环境+尽量真实的网络环境配置</li>
+<li>运行恶意代码</li>
+<li>使用监视工具</li>
+<li>综合分析</li>
 </ul>
-<p><em>值得注意的是，认证算法不需要可逆，因为B验证的时候和A是一样的操作（与加密相比更不容易被破）</em></p>
-<h4 id="（4）单向散列函数"><a class="header-anchor" href="#（4）单向散列函数">¶</a>（4）单向散列函数</h4>
-<p>这是MAC的一种替代品，不同之处在于：<strong>MAC需要密钥而单向散列不需要</strong>，它只是输入M得到H(M)而已。</p>
-<p>H函数可以有以下三种形式：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/HASH.png" alt=""></p>
+<h3 id="8-3-1-动态分析环境构建"><a class="header-anchor" href="#8-3-1-动态分析环境构建">¶</a>8.3.1 动态分析环境构建</h3>
+<h4 id="（1）环境构建要考虑的重点问题"><a class="header-anchor" href="#（1）环境构建要考虑的重点问题">¶</a>（1）环境构建要考虑的重点问题</h4>
+<p>不破坏/影响外部环境</p>
+<h4 id="（2）做法"><a class="header-anchor" href="#（2）做法">¶</a>（2）做法</h4>
+<p>在受控的隔离环境里面进行动态分析，可以做到：</p>
 <ul>
-<li>传统加密：先hash再加密</li>
-<li>公钥加密：先hash再用公钥加密</li>
-<li>秘密值加密：原消息与秘密值Secret一起hash，结果和原消息拼接</li>
+<li>影响限制到一定范围内</li>
+<li>可以快速恢复环境而不影响后续分析</li>
 </ul>
-<p>（详细见P50-51）</p>
-<h2 id="3-2-安全散列函数"><a class="header-anchor" href="#3-2-安全散列函数">¶</a>3.2 安全散列函数</h2>
-<h3 id="3-2-1-散列函数的要求"><a class="header-anchor" href="#3-2-1-散列函数的要求">¶</a>3.2.1 散列函数的要求</h3>
-<ol>
-<li>输入长度不受限制</li>
-<li>输出长度固定</li>
-<li>从x——&gt;H(x)容易计算</li>
-<li>单向性/抗原像攻击性：从H(x)——&gt;x计算上不可行</li>
-<li>抗弱碰撞攻击性/抗第二原像攻击性：对于x，找一个和它哈希值相同的y从计算上不可行</li>
-<li>抗碰撞性/抗强碰撞性：找到任意一对哈希值相同的x，y计算上不可行（可以防止生日攻击）</li>
-</ol>
-<h3 id="3-2-2-散列函数的安全性"><a class="header-anchor" href="#3-2-2-散列函数的安全性">¶</a>3.2.2 散列函数的安全性</h3>
-<p>攻击方法：密码分析法+蛮力攻击法<br>
-前者利用密码算法的缺陷，后者是要付出指数级代价的（不过2004年王小云教授破了MD5！）</p>
-<h3 id="3-2-3-简单散列函数"><a class="header-anchor" href="#3-2-3-简单散列函数">¶</a>3.2.3 简单散列函数</h3>
-<h4 id="（1）散列函数基本原理"><a class="header-anchor" href="#（1）散列函数基本原理">¶</a>（1）散列函数基本原理</h4>
-<p>把消息按照n比特每块划分，迭代地每次处理一块，最后生成n比特的散列函数</p>
-<h4 id="（2）一种最简单的散列函数"><a class="header-anchor" href="#（2）一种最简单的散列函数">¶</a>（2）一种最简单的散列函数</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230095511.png" alt=""></p>
-<p>对于随机数据的完整性校验很有效，书上有一些数学推导和改进；但是这些改进并不是很有效……</p>
-<p>举个例子，如果我们想替换一个假消息上去，为了让散列函数不变，我们可以根据需要附加一个n比特的数据块，想怎么调怎么调，非常容易生成相同的散列码……所以我们可以考虑散列码拼在消息后面以后，对整个进行加密</p>
-<h3 id="3-2-4-SHA安全散列函数"><a class="header-anchor" href="#3-2-4-SHA安全散列函数">¶</a>3.2.4 SHA安全散列函数</h3>
-<p>SHA-1有时候也叫加密散列码，码和函数貌似差不多，不要纠结<br>
-经过一段时间的发展，现在主要是用SHA-2：</p>
-<blockquote>
-<p>SHA-2，名称来自于安全散列算法2（英语：Secure Hash Algorithm 2）的缩写，一种密码散列函数算法标准，由美国国家安全局研发[3]，由美国国家标准与技术研究院（NIST）在2001年发布。属于SHA算法之一，是SHA-1的后继者。其下又可再分为六个不同的算法标准，包括了  ：SHA-224、SHA-256、SHA-384、SHA-512、SHA-512/224、SHA-512/256。<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230104252.png" alt=""></p>
-</blockquote>
-<p>这里介绍一下SHA-512：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE2.png" alt=""></p>
-<p>（？）M和K是干嘛的？</p>
-<p>书上有些安全性的数学表达</p>
-<h2 id="3-3-消息认证码MAC"><a class="header-anchor" href="#3-3-消息认证码MAC">¶</a>3.3 消息认证码MAC</h2>
-<h3 id="3-3-1-HMAC"><a class="header-anchor" href="#3-3-1-HMAC">¶</a>3.3.1 HMAC</h3>
-<h4 id="（1）为什么会有HMAC呢？"><a class="header-anchor" href="#（1）为什么会有HMAC呢？">¶</a>（1）为什么会有HMAC呢？</h4>
-<p>首先，由于SHA-1软件实现速度快、有许多共享的Hash函数代码库等优点，人们逐渐将它用于MAC。但是为了<strong>把密钥合并到散列算法</strong>中（本身做散列函数是不需要密钥的），人们开发出了HMAC</p>
-<h4 id="（2）HMAC的设计目标"><a class="header-anchor" href="#（2）HMAC的设计目标">¶</a>（2）HMAC的设计目标</h4>
+<h4 id="（3）构建环境的工具"><a class="header-anchor" href="#（3）构建环境的工具">¶</a>（3）构建环境的工具</h4>
+<p>按采用的技术方法的不同，做如下分类:</p>
 <ul>
-<li>不用大改散列函数</li>
-<li>嵌入的散列函数可移植，便于二次开发</li>
-<li>保持性能</li>
-<li>使用、处理密钥简单</li>
-<li>知散列函数强度——&gt;知HMAC强度</li>
-</ul>
-<p><strong>把散列函数模块化是个不错的做法</strong></p>
-<h4 id="（3）HMAC的算法设计"><a class="header-anchor" href="#（3）HMAC的算法设计">¶</a>（3）HMAC的算法设计</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE12.png" alt=""></p>
-<h3 id="3-3-2-基于分组密码的MAC"><a class="header-anchor" href="#3-3-2-基于分组密码的MAC">¶</a>3.3.2 基于分组密码的MAC</h3>
-<h4 id="（1）基于密文的消息认证码CMAC"><a class="header-anchor" href="#（1）基于密文的消息认证码CMAC">¶</a>（1）基于密文的消息认证码CMAC</h4>
-<p>适用于AES和3DES</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230125126.png" alt=""></p>
-<h4 id="（2）具有密码块链式信息认证码的计数器CCM"><a class="header-anchor" href="#（2）具有密码块链式信息认证码的计数器CCM">¶</a>（2）具有密码块链式信息认证码的计数器CCM</h4>
-<p>（？）好迷惑的名字</p>
-<p>又叫认证加密模式<br>
-CCM=AES+CTR操作模式（2.5节提过）+CMAC认证算法</p>
-<p>认证和加密一直是被设计成两种单独的服务的，前者保证可靠性（完整性），后者保证机密性</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230130735.png" alt=""></p>
-<p>感觉有点改进后的散列算法的味道，最后送出的是加密的消息+加密的标签（由消息生成）</p>
-<h2 id="3-4-公钥密码原理"><a class="header-anchor" href="#3-4-公钥密码原理">¶</a>3.4 公钥密码原理</h2>
-<h3 id="3-4-1-公钥密码思想"><a class="header-anchor" href="#3-4-1-公钥密码思想">¶</a>3.4.1 公钥密码思想</h3>
-<p>公钥密码基于数学函数，可以用于加密、消息认证、密钥分发</p>
-<h4 id="（1）常见误解"><a class="header-anchor" href="#（1）常见误解">¶</a>（1）常见误解</h4>
+<li>
+<p>沙箱程序：</p>
 <ul>
-<li>公钥比对称密码更安全</li>
-<li>公钥密码淘汰了传统密码</li>
-<li>公钥密码实现的密钥分发比传统密码简单的多</li>
+<li>作用：比如可以按照用户指定的安全策略来限制程序行为等，是一种可以运行在</li>
+<li></li>
 </ul>
-<p>以上，都是错的</p>
-<h4 id="（2）公钥密码的组成"><a class="header-anchor" href="#（2）公钥密码的组成">¶</a>（2）公钥密码的组成</h4>
-<ul>
-<li>明文、密文</li>
-<li>公钥、私钥</li>
-<li>加密算法、解密算法</li>
+</li>
+<li>
+<p>虚拟化软件（如VMware/VirtualBox）：</p>
+</li>
+<li>
+<p>硬件模拟器：</p>
+</li>
 </ul>
-<p>都是成双成对哒~</p>
-<h4 id="（3）公钥密码算法基本流程"><a class="header-anchor" href="#（3）公钥密码算法基本流程">¶</a>（3）公钥密码算法基本流程</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230132126.png" alt=""></p>
-<h3 id="3-4-2-公钥密码系统的应用"><a class="header-anchor" href="#3-4-2-公钥密码系统的应用">¶</a>3.4.2 公钥密码系统的应用</h3>
-<p>发送者用什么，有三种情况：</p>
-<ul>
-<li>用自己私钥：数字签名1</li>
-<li>用对方公钥：加密/解密2</li>
-<li>两者都用</li>
-</ul>
-<p>3密钥交换：双方互换会话密钥</p>
-<p>123是公钥密码的三种应用，不同的算法对这几种应用的支持也不同</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230132641.png" alt=""></p>
-<h3 id="3-4-3-公钥密码的要求"><a class="header-anchor" href="#3-4-3-公钥密码的要求">¶</a>3.4.3 公钥密码的要求</h3>
-<p>见书P63</p>
-<h2 id="3-5-公钥密码算法"><a class="header-anchor" href="#3-5-公钥密码算法">¶</a>3.5 公钥密码算法</h2>
-<p>本节重点介绍RSA+DH，简要介绍DSS+椭圆曲线</p>
-<h3 id="3-5-1-RSA"><a class="header-anchor" href="#3-5-1-RSA">¶</a>3.5.1 RSA</h3>
-<p>基于大数分解的困难</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230140625.png" alt=""></p>
-<h3 id="3-5-2-Diffie-Hellman"><a class="header-anchor" href="#3-5-2-Diffie-Hellman">¶</a>3.5.2 Diffie-Hellman</h3>
-<p>基于离散对数计算的困难</p>
-<p>由于DH只有密钥交换的应用，所以通常被叫做DH密钥交换</p>
-<h4 id="（1）算法"><a class="header-anchor" href="#（1）算法">¶</a>（1）算法</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230141939.png" alt=""></p>
-<p>这种会受到中间人攻击，见（3）</p>
-<h4 id="（2）使用DH的另外一个例子"><a class="header-anchor" href="#（2）使用DH的另外一个例子">¶</a>（2）使用DH的另外一个例子</h4>
-<p>见书P68</p>
-<h4 id="（3）DH的中间人攻击"><a class="header-anchor" href="#（3）DH的中间人攻击">¶</a>（3）DH的中间人攻击</h4>
-<p>见书P68-69</p>
-<h3 id="3-5-3-其他公钥密码算法"><a class="header-anchor" href="#3-5-3-其他公钥密码算法">¶</a>3.5.3 其他公钥密码算法</h3>
-<h4 id="（1）ECC"><a class="header-anchor" href="#（1）ECC">¶</a>（1）ECC</h4>
-<h4 id="（2）DSS"><a class="header-anchor" href="#（2）DSS">¶</a>（2）DSS</h4>
-<h2 id="3-6-数字签名"><a class="header-anchor" href="#3-6-数字签名">¶</a>3.6 数字签名</h2>
-<p>应用场景：Bob希望给Alice发送消息，消息保不保密不重要，但是需要Alice能确认这条消息确实来自于他；所以用Bob的私钥加密的消息就叫做数字签名</p>
-<p>数字签名保证可靠性+完整性（没有Bob的私钥是不能篡改消息的）</p>
+<h3 id="8-3-2-动态行为分析"><a class="header-anchor" href="#8-3-2-动态行为分析">¶</a>8.3.2 动态行为分析</h3>
+<h3 id="8-3-3-动态调试分析"><a class="header-anchor" href="#8-3-3-动态调试分析">¶</a>8.3.3 动态调试分析</h3>
+<h3 id="8-3-4-反虚拟化分析对抗"><a class="header-anchor" href="#8-3-4-反虚拟化分析对抗">¶</a>8.3.4 反虚拟化分析对抗</h3>
+<h3 id="8-3-5-反自动化分析对抗"><a class="header-anchor" href="#8-3-5-反自动化分析对抗">¶</a>8.3.5 反自动化分析对抗</h3>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -402,7 +296,7 @@ CCM=AES+CTR操作模式（2.5节提过）+CMAC认证算法</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/23/Chapter4-%E5%AF%86%E9%92%A5%E5%88%86%E9%85%8D%E5%92%8C%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/21/Chapter7-%E6%B1%A1%E7%82%B9%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -416,7 +310,7 @@ CCM=AES+CTR操作模式（2.5节提过）+CMAC认证算法</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/23/Chapter4-%E5%AF%86%E9%92%A5%E5%88%86%E9%85%8D%E5%92%8C%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/" class="post-title-link" itemprop="url">Chapter4 密钥分配和用户认证</a>
+            <a href="/2020/12/21/Chapter7-%E6%B1%A1%E7%82%B9%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">Chapter7 污点传播分析</a>
         </h2>
 
         <div class="post-meta">
@@ -426,639 +320,14 @@ CCM=AES+CTR操作模式（2.5节提过）+CMAC认证算法</p>
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-09-23 10:42:15" itemprop="dateCreated datePublished" datetime="2020-09-23T10:42:15+08:00">2020-09-23</time>
+              <time title="创建时间：2020-12-21 14:24:31" itemprop="dateCreated datePublished" datetime="2020-12-21T14:24:31+08:00">2020-12-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-06 01:07:21" itemprop="dateModified" datetime="2021-01-06T01:07:21+08:00">2021-01-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="4-1-基于对称加密的密钥分配"><a class="header-anchor" href="#4-1-基于对称加密的密钥分配">¶</a>4.1 基于对称加密的密钥分配</h2>
-<p>在对称加密的情境下，双方需要共享同一个密钥，并且只能他两知道。A，B有这几种选择：</p>
-<ol>
-<li>A选密钥，物理方法传给B</li>
-<li>第三方选密钥，物理方法传给A、B</li>
-<li>（A、B不久前用过一个共同密钥）A/B把旧密钥加密的新密钥给B/A</li>
-<li>（A、B各有到达第三方C的加密链路）C在加密链路上传给A、B</li>
-</ol>
-<p>主要讲讲第四种，其中需要两种密钥：</p>
-<ul>
-<li>会话密钥：一次性的，双方想说话的时候才有，用完就销毁</li>
-<li>永久密钥：用于分发会话密钥（注意不是只有一个，是KDC与A之间有一个，KDC与B之间有一个的概念）</li>
-</ul>
-<p>其中提到的第三方C其实有个学名：密钥分发中心KDC，它有如下任务：</p>
-<ul>
-<li>决定哪些系统之间可以通信</li>
-<li>可以的话，负责分发会话密钥</li>
-</ul>
-<p>KDC的操作过程：</p>
-<ol>
-<li>A想和B说话了</li>
-<li>A用主密钥（？）（只有A和KDC共享），给KDC发请求包</li>
-<li>KDC判断允不允许，允许的话则产生一次性会话密钥
-<ul>
-<li>用永久密钥（KDC与A）加密会话密钥，发给A</li>
-<li>用永久密钥（KDC与B）加密会话密钥，发给A</li>
-</ul>
-</li>
-<li>A、B可以通话了！</li>
-</ol>
-<p>实现了上述操作过程的一种服务是Kerberos</p>
-<h2 id="4-2-Kerberos"><a class="header-anchor" href="#4-2-Kerberos">¶</a>4.2 Kerberos</h2>
-<h3 id="4-2-0-引言"><a class="header-anchor" href="#4-2-0-引言">¶</a>4.2.0 引言</h3>
-<h4 id="（1）要解决的问题"><a class="header-anchor" href="#（1）要解决的问题">¶</a>（1）要解决的问题</h4>
-<p>分布式环境中，控制访问权限，为用户<strong>提供认证服务</strong></p>
-<h4 id="（2）三种威胁"><a class="header-anchor" href="#（2）三种威胁">¶</a>（2）三种威胁</h4>
-<ol>
-<li>用户可以伪装成其他用户</li>
-<li>伪造网络地址发消息</li>
-<li>监听消息/重放攻击</li>
-</ol>
-<p>Kerberos<strong>仅依赖于对称加密</strong>；此外，版本4逐渐被淘汰，现在常用版本5</p>
-<h3 id="4-2-1-Kerberos版本4"><a class="header-anchor" href="#4-2-1-Kerberos版本4">¶</a>4.2.1 Kerberos版本4</h3>
-<p>接下来逐步介绍到协议</p>
-<h4 id="（1）一个简单的认证会话"><a class="header-anchor" href="#（1）一个简单的认证会话">¶</a>（1）一个简单的认证会话</h4>
-<p>来看下面这个会话：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE60.png" alt=""></p>
-<p>书上说明了第（3）步中消息每一部分的必要性</p>
-<h4 id="（2）一个更安全的认证会话"><a class="header-anchor" href="#（2）一个更安全的认证会话">¶</a>（2）一个更安全的认证会话</h4>
-<p>上述方式仍然存在问题：</p>
-<ul>
-<li>用户可能访问不同服务器，甚至多次访问同一服务器时，都要重新输入密码</li>
-<li>消息（1）是明文传送口令的，被窃听了就完了QWQ</li>
-</ul>
-<p>为了解决上述问题，我们作如下改进：</p>
-<ul>
-<li>引入票据服务器TGS</li>
-<li>提出避免明文传口令的方案</li>
-</ul>
-<p>具体流程如下：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230230940.png" alt=""></p>
-<h4 id="（3）真正的Kerbores认证对话！"><a class="header-anchor" href="#（3）真正的Kerbores认证对话！">¶</a>（3）真正的Kerbores认证对话！</h4>
-<p>没想到吧……上面的图已经那么完备了却还是存在缺陷……那么问题在哪呢？</p>
-<ul>
-<li>票据的有效期太长也不好，太短也不好；根本问题是，服务器要能判断持有票据的是正确的人</li>
-<li>服务器也有被假冒的风险，所以它要向用户证明自己的身份</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE112.png" alt=""></p>
-<h3 id="4-2-1-Kerberos版本5"><a class="header-anchor" href="#4-2-1-Kerberos版本5">¶</a>4.2.1 Kerberos版本5</h3>
-<h4 id="（1）版本4与版本5的不同"><a class="header-anchor" href="#（1）版本4与版本5的不同">¶</a>（1）版本4与版本5的不同</h4>
-<h4 id="（2）版本5的认证对话"><a class="header-anchor" href="#（2）版本5的认证对话">¶</a>（2）版本5的认证对话</h4>
-<h2 id="4-3-基于非对称加密的密钥分配"><a class="header-anchor" href="#4-3-基于非对称加密的密钥分配">¶</a>4.3 基于非对称加密的密钥分配</h2>
-<h3 id="4-3-0-引言"><a class="header-anchor" href="#4-3-0-引言">¶</a>4.3.0 引言</h3>
-<p>公钥加密一个重要作用：处理密钥分发（公钥的分发+使用公钥加密分发私钥）</p>
-<h3 id="4-3-1-公钥证书"><a class="header-anchor" href="#4-3-1-公钥证书">¶</a>4.3.1 公钥证书</h3>
-<ul>
-<li>为什么要有公钥证书？<br>
-就像邮箱、银行卡号这种公钥，它们是广而告之的；但是你怎么知道他说这是就是呢？万一伪造了呢？所以我们引入第三方、公钥证书这些来验证。</li>
-<li>X.509标准是人们广泛接受的公钥证书格式</li>
-</ul>
-<h3 id="4-3-2-基于公钥密码的秘密密钥分发"><a class="header-anchor" href="#4-3-2-基于公钥密码的秘密密钥分发">¶</a>4.3.2 基于公钥密码的秘密密钥分发</h3>
-<p>对称密钥中，任何一对通信者之间共享唯一密钥是前提，之后才能安全通信<br>
-我们会想到之前提过的DH密钥交换，但是这不能认证双方；所以这里提出“公钥证书”的概念<br>
-考虑如下操作步骤（当B想要发消息给A的时候）：</p>
-<ul>
-<li>使用一次性+传统的+会话密钥，加密消息</li>
-<li>用A的公钥加密会话密钥（问题所在：B怎么得到A的公钥的？——&gt;通过A的公钥证书）</li>
-<li>把加密后的会话密钥和加密后的消息放在一起送给A</li>
-</ul>
-<h2 id="4-4-X-509证书"><a class="header-anchor" href="#4-4-X-509证书">¶</a>4.4 X.509证书</h2>
-<h3 id="4-4-0-引言"><a class="header-anchor" href="#4-4-0-引言">¶</a>4.4.0 引言</h3>
-<p>X.500是一个系列推荐标准(?)，定义了一套目录服务：</p>
-<blockquote>
-<p>目录服务就是，有用于维护用户信息数据库的一个或一组分布式服务器。信息包括：用户名到网络地址的映射，以及用户其他信息</p>
-</blockquote>
-<p>X.509是X.500推荐标准系列中的一部分，定义了一个使用X.500目录向用户提供认证服务的框架，</p>
-<ul>
-<li>该目录就可以作为公钥证书存储库（公钥证书=用户的公钥+可信任的认证中心的私钥签名）</li>
-<li>X.509还定义了一个基于公钥证书的认证协议</li>
-</ul>
-<p>下图表示了公钥证书的产生：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231110704.png" alt=""></p>
-<h3 id="4-4-1-证书"><a class="header-anchor" href="#4-4-1-证书">¶</a>4.4.1 证书</h3>
-<h4 id="（1）公钥证书使用步骤"><a class="header-anchor" href="#（1）公钥证书使用步骤">¶</a>（1）公钥证书使用步骤</h4>
-<ul>
-<li>可信任的认证中心CA为用户创建证书</li>
-<li>CA/用户把证书放到目录服务器</li>
-<li>目录服务器提供一个方便访问证书的场所</li>
-</ul>
-<h4 id="（2）X-509定义的公钥证书格式"><a class="header-anchor" href="#（2）X-509定义的公钥证书格式">¶</a>（2）X.509定义的公钥证书格式</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231130854.png" alt=""></p>
-<p><strong>CA用自己的私钥对证书签名，用户知道CA的公钥的话，就可以解密，验证证书是否合法</strong></p>
-<p>这其实是一个典型的数字签名过程，可以如下描述：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231130247.png" alt=""></p>
-<h4 id="（3）CA生成的公钥证书的特征"><a class="header-anchor" href="#（3）CA生成的公钥证书的特征">¶</a>（3）CA生成的公钥证书的特征</h4>
-<ul>
-<li>用户可以用CA的公钥去解密证书，看里面的用户公钥，以验证</li>
-<li>只有CA才可以修改用户证书；证书不可伪造，所以放到目录服务器里不需要采取额外保护措施</li>
-</ul>
-<h4 id="（4）证书链"><a class="header-anchor" href="#（4）证书链">¶</a>（4）证书链</h4>
-<p>先来看一种情境，假如一个CA负责了很多用户的证书，那么它要给所有用户发一个自己的公钥的副本，以便他们可以用这个公钥去解密证书以验证其合法性。<br>
-那么如果，有一个假CA出来，用自己的私钥签了证书，并给用户自己的公钥；这个私钥和公钥仍然是匹配的，又由于用户只看能不能解密来证明其合法性……所以说，太多用户的时候，可以使用多个CA</p>
-<p>多个CA会是什么情况呢？假如A从X1那里拿了证书，B从X2；然后A去看B的证书，能获取是能获取，但是拿到手上也没用，因为A没有X2的公钥，不能验证里面的签名，也就不能确定这个是B的证书……</p>
-<p>一种解决方案是，X1和X2事先交换过公钥，然后就可以：</p>
-<ol>
-<li>A在目录中拿到X1签名的X2证书（X2的公钥证书，把X2当成一个普通用户的话）,即<code>X1&lt;&lt;X2&gt;&gt;</code></li>
-<li>A有X1的公钥，所以A从<code>X1&lt;&lt;X2&gt;&gt;——&gt;X2</code>，也就是拿到了X2的公钥</li>
-<li>A去拿由X2签名的B的证书，即<code>X2&lt;&lt;B&gt;&gt;</code>，解密拿到B，也就是知道了B的公钥</li>
-</ol>
-<p>A获取B的公钥的过程可以描述为：X1&lt;<x2>&gt;X2&lt;<b>&gt;<br>
-同理，B获取A的公钥的过程为：<code>X2&lt;&lt;X1&gt;&gt;X1&lt;&lt;A&gt;&gt;</code></b></x2></p><b>
-<p>更普遍的过程可以描述为：</p>
-<pre><code>X1&lt;&lt;X2&gt;&gt;X2&lt;&lt;X3&gt;&gt;...XN&lt;&lt;B&gt;&gt;
-</code></pre>
-<p>相邻的两个X应该互相生成过证书，为了更明确这个关系，我们用下图来描述：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE138.png" alt=""></p>
-<h4 id="（5）证书撤销"><a class="header-anchor" href="#（5）证书撤销">¶</a>（5）证书撤销</h4>
-<p>一般都是自然过期，不过有以下情况需要提前撤销：<br>
-见书P98</p>
-<p>用户从消息中取得证书的时候，需要确认它是否被取消</p>
-<h3 id="4-4-2-X-509版本3"><a class="header-anchor" href="#4-4-2-X-509版本3">¶</a>4.4.2 X.509版本3</h3>
-<h4 id="（1）X-509版本2没有满足的要求"><a class="header-anchor" href="#（1）X-509版本2没有满足的要求">¶</a>（1）X.509版本2没有满足的要求</h4>
-<p>见书P98</p>
-<h4 id="（2）X-509版本3的改变"><a class="header-anchor" href="#（2）X-509版本3的改变">¶</a>（2）X.509版本3的改变</h4>
-<p>加入扩展部分，更加灵活</p>
-<p>扩展=一个扩展标识+一个危险指示符+一个扩展值<br>
-危险指示符：标识一个扩展是否可以被安全地忽略，True则可</p>
-<p>证书扩展可以分为三个主要类型：</p>
-<ul>
-<li>密钥和策略信息</li>
-<li>主体和发放者属性</li>
-<li>认证路径约束</li>
-</ul>
-<h4 id="（3）密钥和策略信息"><a class="header-anchor" href="#（3）密钥和策略信息">¶</a>（3）密钥和策略信息</h4>
-<p>用处：指示证书对于（一个特定的具有相同安全需求的团体、应用类别）的适用性</p>
-<p>域的内容见书P99</p>
-<h4 id="（4）主体和发放者属性"><a class="header-anchor" href="#（4）主体和发放者属性">¶</a>（4）主体和发放者属性</h4>
-<p>用处：附加一些属性，让别人更相信这个证书是某个人的</p>
-<p>域的内容见书P99</p>
-<h4 id="（5）认证路径约束"><a class="header-anchor" href="#（5）认证路径约束">¶</a>（5）认证路径约束</h4>
-<p>用处：限制主体CA可以发放的证书类型，或限制在认证链中随后可以出现的证书类型</p>
-<p>域的内容见书P99</p>
-<h2 id="4-5-公钥基础设施KPI"><a class="header-anchor" href="#4-5-公钥基础设施KPI">¶</a>4.5 公钥基础设施KPI</h2>
-<h3 id="4-5-0-引言"><a class="header-anchor" href="#4-5-0-引言">¶</a>4.5.0 引言</h3>
-<ul>
-<li>PKI是什么？<br>
-之所以叫基础设施：包含了硬件+软件+人员+策略+过程</li>
-<li>那是干什么的基础设施？<br>
-公钥密码中，用于生成+管理+存储+分配+撤销数字证书</li>
-<li>PKIX是什么？<br>
-基于X.509的PKI</li>
-<li>所以具体来说，PKIX包括些什么呢？</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231152633.png" alt=""></p>
-<h3 id="4-5-1-PKIX管理功能"><a class="header-anchor" href="#4-5-1-PKIX管理功能">¶</a>4.5.1 PKIX管理功能</h3>
-<ul>
-<li>注册：注册开始了一个PKI中的登记过程</li>
-<li>初始化：客户端安装密钥资料</li>
-<li>认证：CA发证书</li>
-<li>密钥对恢复：</li>
-<li>密钥对更新：</li>
-<li>撤销申请：CA撤销</li>
-<li>交叉认证：两个CA之间</li>
-</ul>
-<p>上图中粉红色部分</p>
-<h3 id="4-5-2-PKIX管理协议"><a class="header-anchor" href="#4-5-2-PKIX管理协议">¶</a>4.5.2 PKIX管理协议</h3>
-<p>用来支持上一节列出的管理功能</p>
-<h2 id="4-6-联合身份管理"><a class="header-anchor" href="#4-6-联合身份管理">¶</a>4.6 联合身份管理</h2>
-<h3 id="4-6-1-身份管理"><a class="header-anchor" href="#4-6-1-身份管理">¶</a>4.6.1 身份管理</h3>
-<h4 id="（1）作用"><a class="header-anchor" href="#（1）作用">¶</a>（1）作用</h4>
-<p>验证身份以后给对应的资源接口，基于单点登录SSO</p>
-<h4 id="（2）基本要素"><a class="header-anchor" href="#（2）基本要素">¶</a>（2）基本要素</h4>
-<p>见书P102</p>
-<p>值得注意的是，Kerberos包含身份管理系统的许多要素</p>
-<h4 id="（3）通用的身份管理系统"><a class="header-anchor" href="#（3）通用的身份管理系统">¶</a>（3）通用的身份管理系统</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231153605.png" alt=""></p>
-<h3 id="4-6-2-身份联合"><a class="header-anchor" href="#4-6-2-身份联合">¶</a>4.6.2 身份联合</h3>
-<p>身份联合就是将身份管理扩展到多个安全域，也就是说，多个域之间共享用户的数字身份，使得用户只要一次认证就可以接入多个域的应用及其资源</p>
-<h4 id="（1）联合身份管理的作用"><a class="header-anchor" href="#（1）联合身份管理的作用">¶</a>（1）联合身份管理的作用</h4>
-<ul>
-<li>单点登录SSO</li>
-<li>表示属性的标准方法：属性可以指口令、生物特征信息、文件所有权等等</li>
-<li>身份映射：同一个用户在不同的域中身份和属性可能不同，身份映射可以将一个域的身份和属性映射到另一个域的要求</li>
-</ul>
-<h4 id="（2）联合身份管理的实体与数据流"><a class="header-anchor" href="#（2）联合身份管理的实体与数据流">¶</a>（2）联合身份管理的实体与数据流</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231193813.png" alt=""></p>
-<h4 id="（3）标准"><a class="header-anchor" href="#（3）标准">¶</a>（3）标准</h4>
-<p>联合身份管理使用了一些标准，作为系统的构件，实现在不同的域之间进行安全身份交换的要求：</p>
-<ul>
-<li>可扩展标记语言XML</li>
-<li>简单对象访问协议SOAP</li>
-<li>WS-安全</li>
-<li>安全断言标记语言SAML：可以传递用户认证信息</li>
-</ul>
-<p>见书P103-104</p>
-<h4 id="（4）例子"><a class="header-anchor" href="#（4）例子">¶</a>（4）例子</h4>
-<p>见书P104-105</p>
-</b><script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/" class="post-title-link" itemprop="url">Chapter2 对称加密和消息机密性</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-21 08:03:01" itemprop="dateCreated datePublished" datetime="2020-09-21T08:03:01+08:00">2020-09-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 13:15:11" itemprop="dateModified" datetime="2020-12-28T13:15:11+08:00">2020-12-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《网络安全基础：应用与标准（E5）》</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="2-1-对称加密原理"><a class="header-anchor" href="#2-1-对称加密原理">¶</a>2.1 对称加密原理</h2>
-<h3 id="2-1-0-对称加密简介"><a class="header-anchor" href="#2-1-0-对称加密简介">¶</a>2.1.0 对称加密简介</h3>
-<h4 id="（1）一个对称加密算法的组成"><a class="header-anchor" href="#（1）一个对称加密算法的组成">¶</a>（1）一个对称加密算法的组成</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/model.png" alt=""></p>
-<h4 id="（2）对称加密算法的安全性"><a class="header-anchor" href="#（2）对称加密算法的安全性">¶</a>（2）对称加密算法的安全性</h4>
-<p>需要达到以下两个要求：</p>
-<ul>
-<li>强加密算法：（一个很强的条件）攻击者知道算法且有很多密文+密文对应的明文，却不能破译密文，或者解出密钥</li>
-<li>密钥安全：Alice和Bob的密钥收发仅两人可得。（因为如果别人得到了他们的密钥，所有使用此密钥的通信都可读）</li>
-</ul>
-<p><strong>注：对称加密的安全取决于密钥的保密性，算法可公开</strong></p>
-<h3 id="2-1-1-密码体制"><a class="header-anchor" href="#2-1-1-密码体制">¶</a>2.1.1 密码体制</h3>
-<p>密码体制有以下三个分类标准：</p>
-<h4 id="1-明文转换成密文的操作类型"><a class="header-anchor" href="#1-明文转换成密文的操作类型">¶</a>1. 明文转换成密文的操作类型</h4>
-<ul>
-<li>替换：明文映射到……</li>
-<li>换位：明文再排列</li>
-</ul>
-<p>（注：上述两种操作可以以比特、字母等等为单位）</p>
-<h4 id="2-使用的密钥数"><a class="header-anchor" href="#2-使用的密钥数">¶</a>2. 使用的密钥数</h4>
-<ul>
-<li>AB同一密钥：对称/单钥/秘密密钥/传统加密</li>
-<li>AB不同密钥：不对称/双钥/公钥加密</li>
-</ul>
-<h4 id="3-明文的处理方式"><a class="header-anchor" href="#3-明文的处理方式">¶</a>3. 明文的处理方式</h4>
-<ul>
-<li>一次处理一个分组：分组密码</li>
-<li>明文输入过程中连续处理：流密码</li>
-</ul>
-<h3 id="2-1-2-密码分析"><a class="header-anchor" href="#2-1-2-密码分析">¶</a>2.1.2 密码分析</h3>
-<p>密码分析或破译：找出明文或密钥</p>
-<p>根据攻击者掌握的信息量，可将攻击类型分类如下：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/attack.png" alt=""></p>
-<h4 id="1-惟密文攻击"><a class="header-anchor" href="#1-惟密文攻击">¶</a>1. 惟密文攻击</h4>
-<p>或许只能穷举……但是也有一些小技巧，比如统计测试（前提是对明文的类型有一个大致的了解）</p>
-<h4 id="2-已知明文攻击"><a class="header-anchor" href="#2-已知明文攻击">¶</a>2. 已知明文攻击</h4>
-<p>比如某种文件可能有些固定的内容……<br>
-<strong>一般密码算法会被设计成能抵挡已知明文攻击的程度</strong></p>
-<h4 id="3-选择明文"><a class="header-anchor" href="#3-选择明文">¶</a>3. 选择明文</h4>
-<p>攻击者能得到源系统，可以插入自己选定的消息（选定明文，查看密文）</p>
-<h4 id="4-选择密文"><a class="header-anchor" href="#4-选择密文">¶</a>4. 选择密文</h4>
-<p>是选择明文的反向，不过不太常见</p>
-<h4 id="5-选择文本"><a class="header-anchor" href="#5-选择文本">¶</a>5. 选择文本</h4>
-<p>选择明文+选择密文的能力，不过不太常见</p>
-<p>计算安全的加密方案（妙啊！）：</p>
-<ul>
-<li>破解密文的代价&gt;明文的价值</li>
-<li>破解密文的时间&gt;信息的有用寿命</li>
-</ul>
-<h3 id="2-1-3-Feistel密码结构"><a class="header-anchor" href="#2-1-3-Feistel密码结构">¶</a>2.1.3 Feistel密码结构</h3>
-<h4 id="可以看做是对称密码算法的通用结构"><a class="header-anchor" href="#可以看做是对称密码算法的通用结构">¶</a>可以看做是对称密码算法的通用结构</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/Fiestel.png" alt=""></p>
-<h4 id="其中有些可以调整的参数："><a class="header-anchor" href="#其中有些可以调整的参数：">¶</a>其中有些可以调整的参数：</h4>
-<ul>
-<li>分组大小：折中128bit一组比较常见</li>
-<li>密钥大小：越长——越安全——加解密越慢</li>
-<li>迭代轮数：典型16</li>
-<li>子密钥产生算法：越复杂越安全</li>
-<li>轮函数：同上</li>
-</ul>
-<h4 id="设计算法还需考虑"><a class="header-anchor" href="#设计算法还需考虑">¶</a>设计算法还需考虑</h4>
-<ul>
-<li>软件执行速度比较快</li>
-<li>容易分析——容易找到弱点——随即加固</li>
-</ul>
-<p><strong>对称密码算法的加解密本质上是相同的过程，不需要实现两个不同的算法</strong></p>
-<h2 id="2-2-对称分组加密算法"><a class="header-anchor" href="#2-2-对称分组加密算法">¶</a>2.2 对称分组加密算法</h2>
-<h3 id="2-2-1-数据加密标准DES"><a class="header-anchor" href="#2-2-1-数据加密标准DES">¶</a>2.2.1 数据加密标准DES</h3>
-<p>说实话，我总是不能把数据加密标准和DES联系在一起，这两个名字，一个像标准，一个像算法哈哈哈哈；但是仔细研究一下发现，其实我的直觉没错<br>
-DES准确来说是一种标准，数据加密标准；算法本身其实叫做DEA，略感陌生；一般都直接说DES了</p>
-<h4 id="DEA算法描述"><a class="header-anchor" href="#DEA算法描述">¶</a>DEA算法描述</h4>
-<p>基本沿用Fiestel结构，参数如下：</p>
-<ul>
-<li>分组大小：64</li>
-<li>密钥大小：56</li>
-<li>迭代轮数：典型16</li>
-<li>子密钥产生算法：越复杂越安全</li>
-<li>轮函数：同上</li>
-</ul>
-<h4 id="DES的强度"><a class="header-anchor" href="#DES的强度">¶</a>DES的强度</h4>
-<ul>
-<li>算法本身：至今还没人指出弱点</li>
-<li>密钥长度：一定范围内，蛮力攻击还是可行的（所以后来有改进的算法来替代它，如3DES和AES）</li>
-</ul>
-<h3 id="2-2-2-三重DES"><a class="header-anchor" href="#2-2-2-三重DES">¶</a>2.2.2 三重DES</h3>
-<h4 id="3DES流程"><a class="header-anchor" href="#3DES流程">¶</a>3DES流程</h4>
-<p>使用三次DES，加密——解密——加密</p>
-<h4 id="3DES优点"><a class="header-anchor" href="#3DES优点">¶</a>3DES优点</h4>
-<ul>
-<li>底层算法与DES相同，之前说过无弱点了</li>
-<li>密钥长度168bit，解决了被穷举的问题</li>
-</ul>
-<h4 id="3DES缺点"><a class="header-anchor" href="#3DES缺点">¶</a>3DES缺点</h4>
-<p>软件运行慢</p>
-<h3 id="2-2-3-高级加密标准AES"><a class="header-anchor" href="#2-2-3-高级加密标准AES">¶</a>2.2.3 高级加密标准AES</h3>
-<p>替代3DES，安全性&gt;=，效率&gt;=</p>
-<h4 id="AES流程"><a class="header-anchor" href="#AES流程">¶</a>AES流程</h4>
-<p>值得注意的是，它不是Feistel结构<br>
-（具体可见书30—31页）</p>
-<h2 id="2-3-随机数和伪随机数"><a class="header-anchor" href="#2-3-随机数和伪随机数">¶</a>2.3 随机数和伪随机数</h2>
-<h3 id="2-3-1-随机数的应用"><a class="header-anchor" href="#2-3-1-随机数的应用">¶</a>2.3.1 随机数的应用</h3>
-<h4 id="（1）基于随机数的安全算法"><a class="header-anchor" href="#（1）基于随机数的安全算法">¶</a>（1）基于随机数的安全算法</h4>
-<p>RSA、对称流密码的密钥流的生成、密钥分配方案……</p>
-<h4 id="（2）应用对随机数的需求"><a class="header-anchor" href="#（2）应用对随机数的需求">¶</a>（2）应用对随机数的需求</h4>
-<ol>
-<li>随机性：有两个验证标准<br>
-（1）均匀分布：一串中，0与1出现概率大致相同<br>
-（2）独立：统一序列上，没有数字能影响别人</li>
-<li>不可预测性</li>
-</ol>
-<h3 id="2-3-2-真随机数发生器TRNG、伪随机数生成器PRNG和伪随机函数PRF"><a class="header-anchor" href="#2-3-2-真随机数发生器TRNG、伪随机数生成器PRNG和伪随机函数PRF">¶</a>2.3.2 真随机数发生器TRNG、伪随机数生成器PRNG和伪随机函数PRF</h3>
-<p>首先要明白，什么是统计上的随机性？（？）</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/random.png" alt=""></p>
-<p>伪随机数发生器和伪随机函数的区别在于产生的比特数不同</p>
-<h3 id="2-3-3-算法设计"><a class="header-anchor" href="#2-3-3-算法设计">¶</a>2.3.3 算法设计</h3>
-<p>PRNG的算法可以分为两类：</p>
-<h4 id="1-为特定目的构造的算法"><a class="header-anchor" href="#1-为特定目的构造的算法">¶</a>1. 为特定目的构造的算法</h4>
-<ul>
-<li>用于PRNG应用程序</li>
-<li>有些算法专门被设计用在流密码中（如流密码）</li>
-</ul>
-<h4 id="2-基于现存密码算法的算法-、"><a class="header-anchor" href="#2-基于现存密码算法的算法-、">¶</a>2. 基于现存密码算法的算法          、</h4>
-<p>有些密码算法可以嵌在PRNG应用中，作为其核心算法，比如：</p>
-<ul>
-<li>对称的分组密码</li>
-<li>不对称的密码</li>
-<li>散列函数和消息认证码</li>
-</ul>
-<h2 id="2-4-流密码和RC4"><a class="header-anchor" href="#2-4-流密码和RC4">¶</a>2.4 流密码和RC4</h2>
-<p>分组密码更普遍，但对于特定应用还是要用流密码的。<br>
-流密码就是一次产生一个输出元素，我觉得和分组密码的区别就像：前者是python命令行一句句解释，后者是python IDE一整个程序给个解释<br>
-最对称的流密码可以说是RC4了哈哈哈哈</p>
-<h3 id="2-4-1-流密码结构"><a class="header-anchor" href="#2-4-1-流密码结构">¶</a>2.4.1 流密码结构</h3>
-<h4 id="（1）流密码结构示意图"><a class="header-anchor" href="#（1）流密码结构示意图">¶</a>（1）流密码结构示意图</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/flow.png" alt=""></p>
-<p>解释一下：首先呢，你要先有个密钥K，把它投入伪随机字节生成器里面得到密钥流k；k和明文异或就得到密文字节流啦。由于是对称的，加密解密用同一个密钥</p>
-<h4 id="2-设计流密码的考虑因素"><a class="header-anchor" href="#2-设计流密码的考虑因素">¶</a>(2)设计流密码的考虑因素</h4>
-<ul>
-<li>加密序列有个长周期：意思是，其实伪随机字节生成器生成的是周期性循环的确定字节流，如果周期太短容易被破</li>
-<li>生成的密钥流最好能通过随机数检测那些</li>
-<li>PRNG的输入要足够长以便不会被穷举</li>
-</ul>
-<h4 id="3-流密码优点"><a class="header-anchor" href="#3-流密码优点">¶</a>(3)流密码优点</h4>
-<ul>
-<li>比分组密码快，代码少</li>
-</ul>
-<h4 id="4-分组密码优点"><a class="header-anchor" href="#4-分组密码优点">¶</a>(4)分组密码优点</h4>
-<ul>
-<li>分组密码可以重复使用密钥，但是流密码的密钥最好不要重复用不然容易被破<br>
-若已知两个密文流，将它们进行异或，结果=对应两个明文流的异或</li>
-</ul>
-<h3 id="2-4-2-RC4算法"><a class="header-anchor" href="#2-4-2-RC4算法">¶</a>2.4.2 RC4算法</h3>
-<h4 id="1-RC4算法"><a class="header-anchor" href="#1-RC4算法">¶</a>(1)RC4算法</h4>
-<ul>
-<li>初始化
-<ul>
-<li>S是个状态向量，有256维，刚开始从0-255维依次设为0-255；</li>
-<li>K为密钥（1-256字节可变）；</li>
-<li>T为临时向量（256维），T的赋值即将K循环利用填充进去</li>
-</ul>
-</li>
-<li>S的初始置换：</li>
-</ul>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">j=0;</span><br><span class="line">for(i=0;i&lt;=255;i++){</span><br><span class="line">	j=(j+S[i]+T[i])mod 256;</span><br><span class="line">	swap(S[i],S[j]);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>密钥流产生：感觉只有对S的置换操作，因为一旦完成S向量的初始置换，就不在需要输入密要了</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/a1.png" alt=""></p>
-<h4 id="2-RC4强度"><a class="header-anchor" href="#2-RC4强度">¶</a>(2)RC4强度</h4>
-<p>有些特定的攻击方法，但是当密钥长度&gt;128bit时，没有可以成功的。<br>
-另外有个有趣的点是：我们发现WEP协议易受攻击从而导致RC4易受攻击，这说明了一条安全系统设计的困难性所在：</p>
-<blockquote>
-<p>密码算法要安全还不够，密码函数所处的协议也要安全，比如考虑输入输出上下游的安全等等</p>
-</blockquote>
-<h2 id="2-5-分组密码工作模式"><a class="header-anchor" href="#2-5-分组密码工作模式">¶</a>2.5 分组密码工作模式</h2>
-<p>NIST提出了五种工作模式，希望覆盖“用分组密码做加密”的所有应用场景，这里列出了以下四种：</p>
-<h3 id="2-5-1-电子密码本ECB模式"><a class="header-anchor" href="#2-5-1-电子密码本ECB模式">¶</a>2.5.1 电子密码本ECB模式</h3>
-<h4 id="1-原理"><a class="header-anchor" href="#1-原理">¶</a>(1)原理</h4>
-<p>假设明文被分成b比特一组，每个分组都是同一密钥加密的。每个分组对于一个给定的密钥会有一个密文（唯一的结果），但是如果一段明文里有两个完全相同的分组……它们对应的密文也是相同的……</p>
-<h4 id="2-不足"><a class="header-anchor" href="#2-不足">¶</a>(2)不足</h4>
-<p>如果明文过长以至于出现两个分组重复，就不安全。所以我们希望有上述情况的话，它们会对应两个不同的密文。</p>
-<h3 id="2-5-2-密码分组链接CBC模式"><a class="header-anchor" href="#2-5-2-密码分组链接CBC模式">¶</a>2.5.2 密码分组链接CBC模式</h3>
-<h4 id="1-原理-v2"><a class="header-anchor" href="#1-原理-v2">¶</a>(1)原理</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/CBC.png" alt=""></p>
-<ul>
-<li>输入：每组明文和上一组密文的异或</li>
-<li>处理：所有分组用同一密钥</li>
-</ul>
-<h4 id="2-数学推导说明的一些东西"><a class="header-anchor" href="#2-数学推导说明的一些东西">¶</a>(2)数学推导说明的一些东西</h4>
-<p>见书P39，说明在接收者收数据准备解密之前，如果Attacker有机会改变初始向量IV，那么P1也会被改变，也就是接收者会解出错误的明文</p>
-<h3 id="2-5-3-密码反馈CFB模式"><a class="header-anchor" href="#2-5-3-密码反馈CFB模式">¶</a>2.5.3 密码反馈CFB模式</h3>
-<h4 id="（1）作用"><a class="header-anchor" href="#（1）作用">¶</a>（1）作用</h4>
-<p>将任意分组密码转化为流密码，为什么要转换呢？是由于有些应用场景下比较适合用流密码：</p>
-<ul>
-<li>流密码不需要将消息填充为分组大小的整数倍</li>
-<li>流密码可以实时操作，也就是说，如果传送字符流，流密码可以使我们及时加密并传送每个字符</li>
-<li>流密码的密文长度=明文长度，由于传输能力是一个比较宝贵的资源，我们用分组密码可能导致密文比明文长，从而浪费传输能力</li>
-</ul>
-<h4 id="（2）原理"><a class="header-anchor" href="#（2）原理">¶</a>（2）原理</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201228130754.png" alt=""></p>
-<h3 id="2-5-4-计数器模式CTR"><a class="header-anchor" href="#2-5-4-计数器模式CTR">¶</a>2.5.4 计数器模式CTR</h3>
-<h4 id="（1）应用"><a class="header-anchor" href="#（1）应用">¶</a>（1）应用</h4>
-<p>（？）</p>
-<ul>
-<li>异步传输模式的网络安全中</li>
-<li>IPSec中</li>
-</ul>
-<h4 id="（2）原理-v2"><a class="header-anchor" href="#（2）原理-v2">¶</a>（2）原理</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201228130708.png" alt=""></p>
-<h4 id="（3）CTR模式优点"><a class="header-anchor" href="#（3）CTR模式优点">¶</a>（3）CTR模式优点</h4>
-<ul>
-<li>硬件效率：各明文单元可以并行计算</li>
-<li>软件效率：由于CTR允许并行计算，所以可以用一些有“并行特征”的指令</li>
-<li>预处理：加密部分可以预处理</li>
-<li>随机访问：对于只需要解密一部分密文的情况，CTR由于无链接，所以各块之间独立，想解密哪一块并不需要之前的信息</li>
-<li>可证明的安全性</li>
-<li>简单性：加解密算法完全相同</li>
-</ul>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/" class="post-title-link" itemprop="url">Chapter1 软件安全绪论</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-19 22:00:55" itemprop="dateCreated datePublished" datetime="2020-09-19T22:00:55+08:00">2020-09-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 14:01:28" itemprop="dateModified" datetime="2020-12-28T14:01:28+08:00">2020-12-28</time>
+                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1081,150 +350,16 @@ DES准确来说是一种标准，数据加密标准；算法本身其实叫做DE
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-1-引言"><a class="header-anchor" href="#1-1-引言">¶</a>1.1 引言</h2>
-<p>为什么会出现安全问题？</p>
-<ul>
-<li>软件变复杂，规模变大</li>
-<li>软件承载的利益，让某些人利用软件安全问题来获取利益</li>
-</ul>
-<h2 id="1-2-典型安全问题"><a class="header-anchor" href="#1-2-典型安全问题">¶</a>1.2 典型安全问题</h2>
-<p>为什么软件安全问题日渐复杂？</p>
-<ul>
-<li>随着科技发展、研究与分析的深入,我们注意到软件安全的问题非常多样化</li>
-<li>试图利用软件安全问题获利的各类组织机构也在不断发展，针对软件安全问题的利用、破坏技术手段，造成软件安全问题日趋复杂</li>
-</ul>
-<h4 id="1-2-1-恶意软件"><a class="header-anchor" href="#1-2-1-恶意软件">¶</a>1.2.1 恶意软件</h4>
-<h4 id="1-传统恶意软件"><a class="header-anchor" href="#1-传统恶意软件">¶</a>1. 传统恶意软件</h4>
-<ul>
-<li>传统的恶意软件包括：病毒、僵木蠕、间谍软件等</li>
-<li>破坏：窃取信息、远程控制、实施破坏等</li>
-<li>传统恶意软件需要发展的能力：</li>
-</ul>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">渗透与扩散：突破防御+感染目标</span><br><span class="line">隐蔽能力：隐蔽特征避免被发现+被发现了能保护操纵者身份</span><br><span class="line">破坏能力：搜集信息+实施破坏</span><br></pre></td></tr></tbody></table></figure>
-<h4 id="2-恶意软件发展历程"><a class="header-anchor" href="#2-恶意软件发展历程">¶</a>2. 恶意软件发展历程</h4>
-<p>单机传播——网络传播——协同攻击<br>
-APT攻击（高可持续性威胁）：针对特定目标+高技术</p>
-<h4 id="1-2-2-软件漏洞"><a class="header-anchor" href="#1-2-2-软件漏洞">¶</a>1.2.2 软件漏洞</h4>
-<p>说的是程序设计错误导致的</p>
-<h4 id="1-漏洞为什么越来越多？"><a class="header-anchor" href="#1-漏洞为什么越来越多？">¶</a>1. 漏洞为什么越来越多？</h4>
-<ul>
-<li>软件更复杂</li>
-<li>漏洞多样化</li>
-<li>软件开发周期变短</li>
-</ul>
-<h4 id="1-2-3-软件后门"><a class="header-anchor" href="#1-2-3-软件后门">¶</a>1.2.3 软件后门</h4>
-<p>开发人员刻意设计，但对用户隐瞒的功能。为什么算在软件安全问题中呢？因为有的攻击者，开发软件的时候，会留下后门，将其设计为此软件的漏洞。<br>
-举个栗子：建城墙的人留了个暗道，工程交付以后，保护城墙的人不一定能找出来它，但是工人却一清二楚，可以通过暗道做些坏事。而且，工人更懂怎么利用城墙的设计藏好这个暗道。</p>
-<h4 id="1-将软件后门设计为软件漏洞，此方法优势："><a class="header-anchor" href="#1-将软件后门设计为软件漏洞，此方法优势：">¶</a>1. 将软件后门设计为软件漏洞，此方法优势：</h4>
-<ul>
-<li>难发现</li>
-<li>易利用</li>
-<li>难取证：后门代码其实不在软件的产品代码中，而是攻击者利用漏洞动态加载的（被发现了说成设计错误就完事儿了，不是故意的哈哈哈）</li>
-</ul>
-<h2 id="1-3-软件安全性分析的目标"><a class="header-anchor" href="#1-3-软件安全性分析的目标">¶</a>1.3 软件安全性分析的目标</h2>
-<h3 id="1-3-1-软件安全性分析要解决的问题"><a class="header-anchor" href="#1-3-1-软件安全性分析要解决的问题">¶</a>1.3.1 软件安全性分析要解决的问题</h3>
-<ol>
-<li>
-<p>存在问题<br>
-“是否”的问题：有恶意功能/漏洞/后门吗？</p>
-</li>
-<li>
-<p>机理问题<br>
-“为什么”的问题：分析下此问题出现的原因/原理/工作流程之类的，具体问题具体分析</p>
-</li>
-<li>
-<p>对策问题<br>
-“怎么办”的问题：防御</p>
-</li>
-</ol>
-<h3 id="1-3-2-无源码时对软件逆向分析的挑战"><a class="header-anchor" href="#1-3-2-无源码时对软件逆向分析的挑战">¶</a>1.3.2 无源码时对软件逆向分析的挑战</h3>
-<ol>
-<li>
-<p>指令代码的理解<br>
-从可执行文件或指令执行序列等，理解到操作语义很困难</p>
-</li>
-<li>
-<p>关联关系的抽取<br>
-操作之间的数据传递、计算，数据/指令之间的依赖关系，很难有直观的认识</p>
-</li>
-<li>
-<p>对策问题<br>
-“怎么办”的问题：防御</p>
-</li>
-</ol>
-<h2 id="1-4-主要方法与技术"><a class="header-anchor" href="#1-4-主要方法与技术">¶</a>1.4 主要方法与技术</h2>
-<h3 id="1-4-0-软件逆向分析方法分类"><a class="header-anchor" href="#1-4-0-软件逆向分析方法分类">¶</a>1.4.0 软件逆向分析方法分类</h3>
-<p>主要有两大类：静态分析和动态分析</p>
-<h4 id="1-静态分析"><a class="header-anchor" href="#1-静态分析">¶</a>1. 静态分析</h4>
-<p>感觉就像通过反汇编或反编译的手段，对软件的可执行代码进行分析<br>
-（1）优点：比较全面、整体<br>
-（2）缺点：一方面，软件代码规模大了或者复杂了就不好搞；另一方面，如果软件做了加壳保护那就不能反汇编等等</p>
-<h4 id="2-动态分析"><a class="header-anchor" href="#2-动态分析">¶</a>2. 动态分析</h4>
-<p>通过直接运行软件，监测软件运行过程进行分析。<br>
-（1）优点：分析过程中可根据软件的运行过程直接获得在各个指令执行后的结果数据，减少推理分析<br>
-（2）缺点：每次分析只能针对动态执行的一条路径执行，整体性较差（所以说，如何构造多条执行路径也是动态分析需要研究的一个重要问题）</p>
-<p><strong>现在一般：动态为主，静态为辅</strong></p>
-<h3 id="1-4-1-反汇编与反编译"><a class="header-anchor" href="#1-4-1-反汇编与反编译">¶</a>1.4.1 反汇编与反编译</h3>
-<p>通常是逆向分析的第一步（静态动态都是）</p>
-<h4 id="作用"><a class="header-anchor" href="#作用">¶</a>作用</h4>
-<p>二进制exe文件（完全不可读）——&gt;汇编代码——&gt;其他高级语言代码（基本可读）<br>
-第一个箭头是反汇编，第二个是反编译；做到<strong>功能等价</strong>就行</p>
-<h3 id="1-4-2-程序调试"><a class="header-anchor" href="#1-4-2-程序调试">¶</a>1.4.2 程序调试</h3>
-<p>动态分析</p>
-<h4 id="定义"><a class="header-anchor" href="#定义">¶</a>定义</h4>
-<p>用一些工具，通过断点、单步执行等方式<br>
-内核代码的调试需要虚拟化技术+多台设备</p>
-<h4 id="优缺点"><a class="header-anchor" href="#优缺点">¶</a>优缺点</h4>
-<p>优缺点基本同“动态分析”中所写，此外，软件自保护技术可能阻碍调试，且数据量和复杂度都挺恐怖的</p>
-<h3 id="1-4-3-程序切片"><a class="header-anchor" href="#1-4-3-程序切片">¶</a>1.4.3 程序切片</h3>
-<h4 id="作用-v2"><a class="header-anchor" href="#作用-v2">¶</a>作用</h4>
-<p>解决软件代码规模超大带来的理解困难，比如分析出了汇编代码，对汇编代码切片……</p>
-<h4 id="基本思想"><a class="header-anchor" href="#基本思想">¶</a>基本思想</h4>
-<p>分析指令的相关性，从而提取用户“感兴趣”的代码</p>
-<p>主要用于静态分析，也可用于动态分析，有差异：<br>
-（1）静态分析：通过计算操作数<strong>可能的影响范围</strong>（要考虑各种可能的执行路径）来计算指令的关联关系<br>
-（2）动态分析：更有针对性，对某条路径某个操作数来分析指令关联</p>
-<h4 id="缺点"><a class="header-anchor" href="#缺点">¶</a>缺点</h4>
-<p>对局部代码还不错，但代码多了照样难受</p>
-<h3 id="1-4-4-污点传播分析"><a class="header-anchor" href="#1-4-4-污点传播分析">¶</a>1.4.4 污点传播分析</h3>
-<p>静态动态都有，<strong>数据流分析方法</strong></p>
-<h4 id="基本思想-v2"><a class="header-anchor" href="#基本思想-v2">¶</a>基本思想</h4>
-<p>将感兴趣的数据标记，根据每条指令的污点传播过程，分析数据的传递关系</p>
-<h4 id="实现方式"><a class="header-anchor" href="#实现方式">¶</a>实现方式</h4>
-<p>按照“如何获得后台执行过程中具体每一条指令和指令执行前后状态”，可以分为：<br>
-基于插桩/硬件/编译器扩展/硬件模拟器等等</p>
-<h4 id="存在问题"><a class="header-anchor" href="#存在问题">¶</a>存在问题</h4>
-<p>由于控制依赖、查表操作等引入的隐式污点传播无法简单地引入或去除</p>
-<h3 id="1-4-5-符号执行"><a class="header-anchor" href="#1-4-5-符号执行">¶</a>1.4.5 符号执行</h3>
-<p>静态动态都有</p>
-<h3 id="1-4-6-模糊测试"><a class="header-anchor" href="#1-4-6-模糊测试">¶</a>1.4.6 模糊测试</h3>
-<p>动态分析</p>
-<h4 id="作用-v3"><a class="header-anchor" href="#作用-v3">¶</a>作用</h4>
-<p>本来是构造许多奇怪数据来看软件鲁棒性的，但现在是为了触发不同的执行路径</p>
-<h4 id="存在问题-v2"><a class="header-anchor" href="#存在问题-v2">¶</a>存在问题</h4>
-<p>提高测试数据生成的针对性——&gt;提高模糊测试效率</p>
-<h2 id="1-5-主要分析应用"><a class="header-anchor" href="#1-5-主要分析应用">¶</a>1.5 主要分析应用</h2>
-<h3 id="1-5-1-恶意软件分析"><a class="header-anchor" href="#1-5-1-恶意软件分析">¶</a>1.5.1 恶意软件分析</h3>
-<h5 id="对恶意软件的分析目标"><a class="header-anchor" href="#对恶意软件的分析目标">¶</a>对恶意软件的分析目标</h5>
-<ul>
-<li>分析出主要功能</li>
-<li>提取代码或行为特征，更新防御配置</li>
-<li>分析实现机理，研发清除手段</li>
-</ul>
-<h5 id="网络协议逆向分析"><a class="header-anchor" href="#网络协议逆向分析">¶</a>网络协议逆向分析</h5>
-<p>方法：</p>
-<ul>
-<li>基于网络流量统计特征展开分析</li>
-<li>直接通过逆向软件分析<br>
-优点：准确、分析能力强<br>
-基本思路：对代码静态+动态逆向分析，提取出协议中的数据包格式/关键字/协议状态机等</li>
-</ul>
-<h5 id="软件漏洞分析与利用"><a class="header-anchor" href="#软件漏洞分析与利用">¶</a>软件漏洞分析与利用</h5>
-<p>如何发现软件漏洞？</p>
-<ul>
-<li>模糊测试工具</li>
-<li>典型漏洞的代码特征</li>
-</ul>
+          <p>污点分析是属于<strong>数据流分析方法</strong>的一种。<br>
+<strong>主要思想</strong>是：标记程序中的数据为污点，跟踪它的去向，看它是不是到了什么敏感的地方（重要的控制决策变量之类的）等等。<br>
+<strong>应用领域</strong>：恶意代码检测、软件漏洞挖掘、用户隐私保护</p>
+<h2 id="7-1-概述"><a class="header-anchor" href="#7-1-概述">¶</a>7.1 概述</h2>
+<h3 id="7-1-1-发展简史"><a class="header-anchor" href="#7-1-1-发展简史">¶</a>7.1.1 发展简史</h3>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201221152906.png" alt=""></p>
+<h3 id="7-1-2-应用领域"><a class="header-anchor" href="#7-1-2-应用领域">¶</a>7.1.2 应用领域</h3>
+<h4 id="1-恶意代码检测"><a class="header-anchor" href="#1-恶意代码检测">¶</a>1. 恶意代码检测</h4>
+<h4 id="2-软件漏洞挖掘"><a class="header-anchor" href="#2-软件漏洞挖掘">¶</a>2. 软件漏洞挖掘</h4>
+<h4 id="3-敏感数据泄露分析方面"><a class="header-anchor" href="#3-敏感数据泄露分析方面">¶</a>3. 敏感数据泄露分析方面</h4>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1262,7 +397,7 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Day1-in-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7-PHP-Audit/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/21/Chapter2-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1276,7 +411,7 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/19/Day1-in-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7-PHP-Audit/" class="post-title-link" itemprop="url">Day1 - in_array函数缺陷//PHP Audit</a>
+            <a href="/2020/12/21/Chapter2-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">Chapter2 基础知识</a>
         </h2>
 
         <div class="post-meta">
@@ -1286,7 +421,687 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术</p>
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-09-19 17:27:15" itemprop="dateCreated datePublished" datetime="2020-09-19T17:27:15+08:00">2020-09-19</time>
+              <time title="创建时间：2020-12-21 13:58:42" itemprop="dateCreated datePublished" datetime="2020-12-21T13:58:42+08:00">2020-12-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-03 16:55:44" itemprop="dateModified" datetime="2021-01-03T16:55:44+08:00">2021-01-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件安全分析与应用》</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本章的基础知识是指：在恶意代码分析、软件漏洞分析中需要的基础知识</p>
+<h2 id="2-1-处理器硬件架构基础"><a class="header-anchor" href="#2-1-处理器硬件架构基础">¶</a>2.1 处理器硬件架构基础</h2>
+<p>了解硬件知识有利于了解操作系统原理和软件漏洞</p>
+<h3 id="2-1-1-CPU结构介绍"><a class="header-anchor" href="#2-1-1-CPU结构介绍">¶</a>2.1.1 CPU结构介绍</h3>
+<h4 id="（1）CPU结构示意图"><a class="header-anchor" href="#（1）CPU结构示意图">¶</a>（1）CPU结构示意图</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201228142159.png" alt=""></p>
+<p>包括：寄存器+算术逻辑单元ALU+控制器+内部总线</p>
+<ul>
+<li>寄存器：暂存运算数据与结果</li>
+<li>ALU：多种运算功能</li>
+<li>控制器：取指、译码、执行</li>
+<li>内部总线：连接各部分，提供通信</li>
+</ul>
+<p><strong>由于寄存器记录了操作系统关键数据结构的入口，所以我们重点关注它</strong></p>
+<h4 id="（2）CPU寄存器详解"><a class="header-anchor" href="#（2）CPU寄存器详解">¶</a>（2）CPU寄存器详解</h4>
+<p>以32位系统为例：</p>
+<ul>
+<li>指令指针寄存器EIP：存储当前执行指令的地址；操作系统从根据EIP内容寻址，然后取指、译码、执行</li>
+<li>通用数据寄存器EAX/ECX/EDX/EBX：各自有一些常见用法；16位的表示为AX/CX/DX/BX，8位的表示为AL/CL/DL/BL
+<ul>
+<li>ECX：存储循环次数</li>
+<li>EAX/EDX：乘除法的隐含操作数</li>
+</ul>
+</li>
+<li>地址指针寄存器ESP/EBP：
+<ul>
+<li>ESP：当前函数栈顶</li>
+<li>EBP：当前函数栈底</li>
+</ul>
+</li>
+<li>变址指针寄存器ESI/EDI：
+<ul>
+<li>ESI：操作数源地址</li>
+<li>EDI：操作数目的地址</li>
+</ul>
+</li>
+<li>标志位寄存器EFLAGS，具体见书：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103143555.png" alt=""></li>
+<li>段寄存器：CS/DS/SS/ES/FS/GS</li>
+<li>控制寄存器:CR0/CR1/CR2/CR3/CR4</li>
+</ul>
+<h3 id="2-1-2-保护模式"><a class="header-anchor" href="#2-1-2-保护模式">¶</a>2.1.2 保护模式</h3>
+<h4 id="（1）实模式与保护模式区别"><a class="header-anchor" href="#（1）实模式与保护模式区别">¶</a>（1）实模式与保护模式区别</h4>
+<table>
+<thead>
+<tr>
+<th>实模式</th>
+<th>保护模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不支持多线程；不实现权限分级</td>
+<td>可以多线程、多任务；实现内存分页/分段和权限分级</td>
+</tr>
+</tbody>
+</table>
+<h4 id="（2）分页与分段"><a class="header-anchor" href="#（2）分页与分段">¶</a>（2）分页与分段</h4>
+<ul>
+<li>分页由CR3寄存器支持</li>
+<li>分段由内存管理寄存器支持（GDTR/IDTR/LDTR/TR）</li>
+</ul>
+<h3 id="2-1-3-特权级"><a class="header-anchor" href="#2-1-3-特权级">¶</a>2.1.3 特权级</h3>
+<p>4个特权级：Ring0/1/2/3</p>
+<p>校验代码段、数据段的特权级，需要三种类型的特权级支持：</p>
+<ul>
+<li>当前特权级CPL</li>
+<li>描述符特权级DPL</li>
+<li>请求特权级RPL</li>
+</ul>
+<p>常用特权级指令（只能运行在Ring0）：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103144440.png" alt=""></p>
+<h3 id="2-1-4-中断和异常处理"><a class="header-anchor" href="#2-1-4-中断和异常处理">¶</a>2.1.4 中断和异常处理</h3>
+<ul>
+<li>中断是在程序执行期间发生的，分为
+<ul>
+<li>硬件中断</li>
+<li>软件中断</li>
+</ul>
+</li>
+<li>异常是在处理器执行指令过程中发生错误了
+<ul>
+<li>程序错误异常</li>
+<li>软件产生异常</li>
+<li>机器检测异常</li>
+</ul>
+</li>
+</ul>
+<p>异常和中断都有唯一的识别码——中断向量</p>
+<h3 id="2-1-5-调试支持"><a class="header-anchor" href="#2-1-5-调试支持">¶</a>2.1.5 调试支持</h3>
+<p>EFLAGS中的IF、TF用于调试模式的开启</p>
+<p>8个调试寄存器DR0-DR7</p>
+<h3 id="2-1-6-虚拟化支持"><a class="header-anchor" href="#2-1-6-虚拟化支持">¶</a>2.1.6 虚拟化支持</h3>
+<h2 id="2-2-反汇编及对抗技术"><a class="header-anchor" href="#2-2-反汇编及对抗技术">¶</a>2.2 反汇编及对抗技术</h2>
+<h3 id="2-2-1-汇编语言"><a class="header-anchor" href="#2-2-1-汇编语言">¶</a>2.2.1 汇编语言</h3>
+<h4 id="（1）寻址方式"><a class="header-anchor" href="#（1）寻址方式">¶</a>（1）寻址方式</h4>
+<h4 id="（2）常用的汇编指令"><a class="header-anchor" href="#（2）常用的汇编指令">¶</a>（2）常用的汇编指令</h4>
+<h3 id="2-2-2-反汇编"><a class="header-anchor" href="#2-2-2-反汇编">¶</a>2.2.2 反汇编</h3>
+<h4 id="（1）反汇编流程"><a class="header-anchor" href="#（1）反汇编流程">¶</a>（1）反汇编流程</h4>
+<p>基本的反汇编包括4个步骤：</p>
+<ul>
+<li>区分出程序的代码段、数据段</li>
+<li>确定程序的代码入口，解码出所有操作数</li>
+<li>反汇编</li>
+<li>重复上述</li>
+</ul>
+<h4 id="（2）线性扫描算法"><a class="header-anchor" href="#（2）线性扫描算法">¶</a>（2）线性扫描算法</h4>
+<h4 id="（3）递归下降扫描算法"><a class="header-anchor" href="#（3）递归下降扫描算法">¶</a>（3）递归下降扫描算法</h4>
+<h3 id="2-2-3-代码混淆"><a class="header-anchor" href="#2-2-3-代码混淆">¶</a>2.2.3 代码混淆</h3>
+<p>代码混淆是将计算机程序转换成更难读懂的变形</p>
+<p>分类：</p>
+<ul>
+<li>程序源代码混淆</li>
+<li>二进制代码混淆
+<ul>
+<li>反反汇编的混淆
+<ul>
+<li>对抗静态反汇编：如混淆和加壳</li>
+<li>对抗动态反汇编</li>
+</ul>
+</li>
+<li>指令控制流混淆</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-4-反调试"><a class="header-anchor" href="#2-2-4-反调试">¶</a>2.2.4 反调试</h3>
+<p>由于程序逆向分析行业中有动态调试方法，所以对抗地有了反调试技术</p>
+<h4 id="（1）基于调试特征检测的反调试"><a class="header-anchor" href="#（1）基于调试特征检测的反调试">¶</a>（1）基于调试特征检测的反调试</h4>
+<h4 id="（2）基于调试特征隐藏代码"><a class="header-anchor" href="#（2）基于调试特征隐藏代码">¶</a>（2）基于调试特征隐藏代码</h4>
+<h2 id="2-3-Windows操作系统基础"><a class="header-anchor" href="#2-3-Windows操作系统基础">¶</a>2.3 Windows操作系统基础</h2>
+<h3 id="2-3-1-PE文件结构"><a class="header-anchor" href="#2-3-1-PE文件结构">¶</a>2.3.1 PE文件结构</h3>
+<p>可以把博客打印出来看<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE298.png" alt=""></p>
+<h3 id="2-3-2-进程管理"><a class="header-anchor" href="#2-3-2-进程管理">¶</a>2.3.2 进程管理</h3>
+<p>Windows的进程由一个EPROCESS块来表示，包含了PCB、PEB的<strong>指针</strong>等等<br>
+EPROCESS位于系统内核空间中，<strong>PEB位于进程地址空间中</strong>，其中有一些需要<strong>用户模式</strong>的代码修改的信息</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE297.png" alt=""></p>
+<h3 id="2-3-3-线程管理"><a class="header-anchor" href="#2-3-3-线程管理">¶</a>2.3.3 线程管理</h3>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE296.png" alt=""></p>
+<h3 id="2-3-4-内存管理"><a class="header-anchor" href="#2-3-4-内存管理">¶</a>2.3.4 内存管理</h3>
+<p>内存分为系统态的和用户态的</p>
+<p>Windows内存管理器对内存进行管理，主要有两个功能：</p>
+<ul>
+<li>虚存地址转实存地址：分页寻址，找页表地址——&gt;找页地址——&gt;取数据</li>
+<li>内存不足时将数据换页到物理磁盘：按需换页，等页错误时，挑一种方法来换页</li>
+</ul>
+<h3 id="2-3-5-对象与句柄管理"><a class="header-anchor" href="#2-3-5-对象与句柄管理">¶</a>2.3.5 对象与句柄管理</h3>
+<h3 id="2-3-6-文件系统"><a class="header-anchor" href="#2-3-6-文件系统">¶</a>2.3.6 文件系统</h3>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/15/Scraps-of-Study-or-Life-Skills/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/15/Scraps-of-Study-or-Life-Skills/" class="post-title-link" itemprop="url">Scraps of Study or Life Skills</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-15 17:13:34" itemprop="dateCreated datePublished" datetime="2020-12-15T17:13:34+08:00">2020-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-16 10:15:53" itemprop="dateModified" datetime="2020-12-16T10:15:53+08:00">2020-12-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tiny-Skills/" itemprop="url" rel="index"><span itemprop="name">Tiny Skills</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Convert ppt to pdf automatically</h1>
+<p><a target="_blank" rel="noopener" href="https://sspai.com/post/44122">一键批量将PPT/Word文档转为PDF</a></p>
+<h1>你需要来自xxx的权限才能更改……</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lanluyug/article/details/76559748">你需要来自XXX的权限才能对此文件夹进行更改 win10</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/14/Chapter-4-%E7%A8%8B%E5%BA%8F%E5%88%87%E7%89%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/14/Chapter-4-%E7%A8%8B%E5%BA%8F%E5%88%87%E7%89%87/" class="post-title-link" itemprop="url">Chapter4 程序切片</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-14 14:05:14" itemprop="dateCreated datePublished" datetime="2020-12-14T14:05:14+08:00">2020-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-03 19:44:35" itemprop="dateModified" datetime="2021-01-03T19:44:35+08:00">2021-01-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《软件安全分析与应用》</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="4-1-概述"><a class="header-anchor" href="#4-1-概述">¶</a>4.1 概述</h2>
+<h4 id="（1）程序切片定义"><a class="header-anchor" href="#（1）程序切片定义">¶</a>（1）程序切片定义</h4>
+<ul>
+<li>一种重要的程序分解技术</li>
+<li>从程序中提取</li>
+</ul>
+<h4 id="（2）“分解”在软工中的运用"><a class="header-anchor" href="#（2）“分解”在软工中的运用">¶</a>（2）“分解”在软工中的运用</h4>
+<p>见书P99-100</p>
+<h2 id="4-2-程序切片初探"><a class="header-anchor" href="#4-2-程序切片初探">¶</a>4.2 程序切片初探</h2>
+<h3 id="4-2-1-切片相关基础知识"><a class="header-anchor" href="#4-2-1-切片相关基础知识">¶</a>4.2.1 切片相关基础知识</h3>
+<h4 id="（1）控制流"><a class="header-anchor" href="#（1）控制流">¶</a>（1）控制流</h4>
+<p>程序中一系列指令（语句、函数调用）执行的顺序<br>
+程序指令分类：</p>
+<ul>
+<li>具备一定独立性的<strong>功能性指令</strong></li>
+<li>对指令执行顺序进行<strong>控制的指令</strong>——&gt;形成特定的控制结构</li>
+</ul>
+<h4 id="（2）控制结构"><a class="header-anchor" href="#（2）控制结构">¶</a>（2）控制结构</h4>
+<p>三种基本结构：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201214144554.png" alt=""></p>
+<h4 id="（3）数据流"><a class="header-anchor" href="#（3）数据流">¶</a>（3）数据流</h4>
+<p>数据在指令间变化（产生、传递、复制和消失）的过程</p>
+<h4 id="1-控制流分析"><a class="header-anchor" href="#1-控制流分析">¶</a>1. 控制流分析</h4>
+<h4 id="（1）基本块的定义"><a class="header-anchor" href="#（1）基本块的定义">¶</a>（1）基本块的定义</h4>
+<ul>
+<li>程序只能从第一条指令进入该基本块</li>
+<li>离开该基本块前的最后一条指令必须是基本块的最后一条指令</li>
+</ul>
+<h4 id="（2）基本块的计算方法"><a class="header-anchor" href="#（2）基本块的计算方法">¶</a>（2）基本块的计算方法</h4>
+<ul>
+<li>遍历所有指令，如果指令是：整个程序的入口指令/函数入口指令/跳转指令的目的指令，则纳入“入口指令集合”</li>
+<li>遍历所有指令，如果该指令是：
+<ul>
+<li>入口指令：为它初始化一个基本块，往后收指令直到遇到的指令是入口指令</li>
+<li>其他指令：纳入当前在扩展的基本块</li>
+</ul>
+</li>
+</ul>
+<h4 id="（3）控制流图CFG构造算法"><a class="header-anchor" href="#（3）控制流图CFG构造算法">¶</a>（3）控制流图CFG构造算法</h4>
+<p>对于每个基本块：</p>
+<ul>
+<li>找到最后一条指令，如果它是：
+<ul>
+<li>跳转指令：则在此指令所在基本块和它跳往的基本块之间添加边</li>
+<li>非跳转指令：则在此指令所在基本块和它后继的基本块之间添加边</li>
+</ul>
+</li>
+</ul>
+<p>另外说下CFG中几个概念：</p>
+<ul>
+<li>直接前驱/直接后继：有边相连的</li>
+<li>如果从entry到b的所有路径都经过a，那么a支配b，且a为b的前必经结点，若a!=b，还可以说是严格前必经结点……</li>
+<li>后必经结点：</li>
+</ul>
+<h4 id="2-数据流分析"><a class="header-anchor" href="#2-数据流分析">¶</a>2.数据流分析</h4>
+<p>对于一条语句，有两种分析：</p>
+<ul>
+<li>可到达定义分析：该语句中引用的变量是哪些语句定义的</li>
+<li>变量活性定义：该语句定义的变量在后续哪些语句被重新定义/引用</li>
+</ul>
+<h4 id="3-可到达定义"><a class="header-anchor" href="#3-可到达定义">¶</a>3.可到达定义</h4>
+<h4 id="（1）路径的定义"><a class="header-anchor" href="#（1）路径的定义">¶</a>（1）路径的定义</h4>
+<p>给每条语句的前后都标号，直白点说，就是插在各语句之间，然后用P来描述路径<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103185730.png" alt=""></p>
+<h4 id="（2）可到达定义的概念"><a class="header-anchor" href="#（2）可到达定义的概念">¶</a>（2）可到达定义的概念</h4>
+<p>见书</p>
+<h4 id="（3）可到达定义的计算方法"><a class="header-anchor" href="#（3）可到达定义的计算方法">¶</a>（3）可到达定义的计算方法</h4>
+<p>首先，对于语句s，我们有四个概念需要知道，这些集合的元素都是语句：</p>
+<ul>
+<li>Gen(s)：s给出变量定义</li>
+<li>Kill(s)：覆盖了某某语句对某变量的定义，这个某某语句就是被消灭的</li>
+<li>In(s)：在s语句前有效的定义语句集合</li>
+<li>Out(s)：Out(s)=In(s)+s产生的语句-s消灭的语句</li>
+</ul>
+<p>算法：</p>
+<ul>
+<li>遍历所有基本块：In设为空集，Out=Gen</li>
+<li>设置变量Change为true</li>
+<li>while Change：
+<ul>
+<li>遍历所有基本块，对于b：
+<ul>
+<li>In(b)=b的前驱基本块的Out集的并集</li>
+<li>记录OldOut=Out(b),OldIn=In(b)</li>
+<li>Out(b)=Gen(b)∪(In(b)-Kill(b))</li>
+<li>如果现在的Out和In与OldOut和OldIn都完全相同
+<ul>
+<li>设置Change=false //也就是收敛了</li>
+</ul>
+</li>
+<li>否则
+<ul>
+<li>设置Change=true</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>以上流程可以执行很多次，值得注意的是，只有In和Out在变：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103193925.png" alt=""></p>
+<p>注意两个要点：</p>
+<ul>
+<li>计算时用的In、Out都是最新的</li>
+<li>Kill的计算有点迷惑（？）</li>
+</ul>
+<h4 id="4-活性分析"><a class="header-anchor" href="#4-活性分析">¶</a>4.活性分析</h4>
+<h4 id="（1）变量是否活跃"><a class="header-anchor" href="#（1）变量是否活跃">¶</a>（1）变量是否活跃</h4>
+<p>对于语句p中的变量x，如果p所在的路径上的语句有某一条<strong>用</strong>了x，x在p上是活的</p>
+<h4 id="（2）变量在哪个范围内保持活跃——活性范围"><a class="header-anchor" href="#（2）变量在哪个范围内保持活跃——活性范围">¶</a>（2）变量在哪个范围内保持活跃——活性范围</h4>
+<p>不太懂（？）</p>
+<h4 id="5-程序依赖图"><a class="header-anchor" href="#5-程序依赖图">¶</a>5.程序依赖图</h4>
+<p>在介绍之前，我们来辨析一下各种“关系”：</p>
+<ul>
+<li>两个语句之间的依赖关系：控制流分析和数据流分析</li>
+<li>基本块（或者语句）之间的关系：控制依赖关系和数据依赖关系</li>
+</ul>
+<h4 id="（1）控制依赖关系"><a class="header-anchor" href="#（1）控制依赖关系">¶</a>（1）控制依赖关系</h4>
+<h4 id="（2）数据依赖关系"><a class="header-anchor" href="#（2）数据依赖关系">¶</a>（2）数据依赖关系</h4>
+<h2 id="4-2-2-切片的基本原理"><a class="header-anchor" href="#4-2-2-切片的基本原理">¶</a>4.2.2 切片的基本原理</h2>
+<h2 id="切片作用之一"><a class="header-anchor" href="#切片作用之一">¶</a>切片作用之一</h2>
+<p>调试的时候，为了排除不相干的代码的影响，我们需要有一些条件来过滤出我们感兴趣的代码<br>
+这个条件就叫“切片准则”</p>
+<h3 id="切片准则"><a class="header-anchor" href="#切片准则">¶</a>切片准则</h3>
+<ul>
+<li>切片准则包含两个要素：目标变量和开始切片的代码位置</li>
+<li>所以切片准则用形式化定义可以表示为一个二元组：&lt;n,V&gt;</li>
+<li>针对动态切片，可以是三元组：&lt;n,V,p&gt;；其中p为一个输入序列</li>
+</ul>
+<h3 id="程序切片技术的发展历程"><a class="header-anchor" href="#程序切片技术的发展历程">¶</a>程序切片技术的发展历程</h3>
+<p>见书P100</p>
+<h3 id="程序切片的步骤与细分类"><a class="header-anchor" href="#程序切片的步骤与细分类">¶</a>程序切片的步骤与细分类</h3>
+<ol>
+<li>程序依赖关系提取：考察控制流和数据流信息</li>
+<li>切片规则制定</li>
+<li>切片生成</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201214142921.png" alt=""></p>
+<h3 id="程序切片的应用"><a class="header-anchor" href="#程序切片的应用">¶</a>程序切片的应用</h3>
+<h3 id="符号执行"><a class="header-anchor" href="#符号执行">¶</a>符号执行</h3>
+<p>核心思想：用符号指来表示程序的输入数据，并将程序的运算过程逐指令或逐语句地转换为数学表达式；在CFG的基础上构建<strong>符号执行树</strong></p>
+<h3 id="动态污点标记和非法操作检测"><a class="header-anchor" href="#动态污点标记和非法操作检测">¶</a>动态污点标记和非法操作检测</h3>
+<h2 id="4-3-静态程序切片"><a class="header-anchor" href="#4-3-静态程序切片">¶</a>4.3 静态程序切片</h2>
+<p>以下是静态程序切片的主要两种方法：</p>
+<h3 id="4-3-1-基于数据流方程的切片方法"><a class="header-anchor" href="#4-3-1-基于数据流方程的切片方法">¶</a>4.3.1 基于数据流方程的切片方法</h3>
+<h4 id="Mark-Weiser数据流切片算法"><a class="header-anchor" href="#Mark-Weiser数据流切片算法">¶</a><strong>Mark Weiser数据流切片算法</strong></h4>
+<h3 id="4-3-2-基于图可达性算法的切片方法"><a class="header-anchor" href="#4-3-2-基于图可达性算法的切片方法">¶</a>4.3.2 基于图可达性算法的切片方法</h3>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/14/Learning-about-Caffe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/14/Learning-about-Caffe/" class="post-title-link" itemprop="url">Learning about Caffe</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-14 01:16:45" itemprop="dateCreated datePublished" datetime="2020-12-14T01:16:45+08:00">2020-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-21 14:43:47" itemprop="dateModified" datetime="2020-12-21T14:43:47+08:00">2020-12-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Research-Group/" itemprop="url" rel="index"><span itemprop="name">Research Group</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Learning References</h1>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/27982282">深度学习caffe的代码怎么读？</a></p>
+<h1>Setup Caffe</h1>
+<p><a target="_blank" rel="noopener" href="https://alberthg.github.io/2018/04/12/Caffe-Windows-%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/">Caffe Windows 配置</a></p>
+<p><a target="_blank" rel="noopener" href="https://software.intel.com/content/www/cn/zh/develop/articles/installation-and-configuration-of-bvlc-caffe-under-windows-the-caffe-learning-notes-part1.html">里面有各个版本caffe介绍</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zb1165048017/article/details/51355143?utm_medium=distribute.pc_relevant.none-task-blog-OPENSEARCH-5.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-OPENSEARCH-5.control">【caffe-Windows】caffe+VS2013+Windows无GPU快速配置教程</a></p>
+<h1>Several Questions</h1>
+<h2 id="What-is-CUDA"><a class="header-anchor" href="#What-is-CUDA">¶</a>What is CUDA?</h2>
+<blockquote>
+<p>CUDA（Compute Unified Device Architecture），是显卡厂商NVIDIA推出的运算平台。 CUDA™是一种由NVIDIA推出的通用并行计算架构，该架构使GPU能够解决复杂的计算问题。 它包含了CUDA指令集架构（ISA）以及GPU内部的并行计算引擎。 开发人员可以使用C语言来为CUDA™架构编写程序，C语言是应用最广泛的一种高级编程语言。所编写出的程序可以在支持CUDA™的处理器上以超高性能运行。CUDA3.0已经开始支持C++和FORTRAN。</p>
+</blockquote>
+<p>哦……原来是让GPU解决问题的啊……我这台没有GPU的电脑难怪在安装CUDA的时候会出错了……</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/14/Gradually-Build-up-my-own-Blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/14/Gradually-Build-up-my-own-Blog/" class="post-title-link" itemprop="url">Gradually Build up my own Blog</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-14 00:53:11" itemprop="dateCreated datePublished" datetime="2020-12-14T00:53:11+08:00">2020-12-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1295,6 +1110,104 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术</p>
                 <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tiny-Skills/" itemprop="url" rel="index"><span itemprop="name">Tiny Skills</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Turn off the Auto-created Folder</h1>
+<ul>
+<li>find “_config.yml”</li>
+<li>in the file, find “post_asset…”</li>
+<li>set it to be “false”</li>
+</ul>
+<h1>Turn off auto-number</h1>
+<ul>
+<li>find “_config.yml” in /themes/next</li>
+<li>find “number”</li>
+<li>set it to be “false”</li>
+</ul>
+<h2 id="References"><a class="header-anchor" href="#References">¶</a>References</h2>
+<p><a target="_blank" rel="noopener" href="https://io-oi.me/tech/hexo-next-optimization/">打造个性超赞博客 Hexo + NexT + GitHub Pages 的超深度优化</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/14/Learning-about-ResNet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/14/Learning-about-ResNet/" class="post-title-link" itemprop="url">Learning about ResNet</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-14 00:47:14" itemprop="dateCreated datePublished" datetime="2020-12-14T00:47:14+08:00">2020-12-14</time>
+            </span>
 
           
 
@@ -1344,7 +1257,7 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Sqlmap-Mannal/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/14/Fix-My-Long-broken-Python-Environment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1358,7 +1271,7 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/19/Sqlmap-Mannal/" class="post-title-link" itemprop="url">Sqlmap Mannal</a>
+            <a href="/2020/12/14/Fix-My-Long-broken-Python-Environment/" class="post-title-link" itemprop="url">Fix My Long-broken Python Environment</a>
         </h2>
 
         <div class="post-meta">
@@ -1368,214 +1281,14 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术</p>
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-09-19 16:22:40" itemprop="dateCreated datePublished" datetime="2020-09-19T16:22:40+08:00">2020-09-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/%E8%9A%81%E5%89%91-Mannal/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/19/%E8%9A%81%E5%89%91-Mannal/" class="post-title-link" itemprop="url">蚁剑 Mannal</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-09-19 16:22:20 / 修改时间：17:46:26" itemprop="dateCreated datePublished" datetime="2020-09-19T16:22:20+08:00">2020-09-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-Security/" itemprop="url" rel="index"><span itemprop="name">Web Security</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.fujieace.com/hacker/tools/antsword.html">中国蚁剑下载、安装、使用教程</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av86179526/">https://www.bilibili.com/video/av86179526/</a></p>
-<center><h1>Webshell</h1></center>
-理解 webshell 我们可以从字面上去理解，将其拆分成 web 和 shell 来分别进行理解，web 在百度百科的解释如下：
-<p>web（World Wide Web）即全球广域网，也称为万维网，它是一种基于超文本和 HTTP 的、全球性的、动态交互的、跨平台的分布式图形信息系统。<br>
-是建立在 Internet 上的一种网络服务，为浏览者在 Internet 上查找和浏览信息提供了图形化的、易于访问的直观界面，其中的文档及超级链接将 Internet 上的信息节点组织成一个互为关联的网状结构。</p>
-<p>web 对于我们来说都不陌生，是从事安全行业的同僚接触最多，也是入门必学的基础，为什么会是必学的基础呢？</p>
-<p>因为这个在企业中是应用最广泛，也是最容易暴露在攻击者面前的东西，任何人都能找到任何企业暴露在外面可供入侵者攻击的应用，所以学习 web 安全没有错。</p>
-<p>那么 shell 是什么呢？百度百科的解释如下：</p>
-<p>在计算机科学中，Shell 俗称壳（用来区别于核），是指“提供使用者使用界面”的软件（命令解析器）。它类似于 DOS <a target="_blank" rel="noopener" href="http://xn--command-nw3k6121a.com">下的command.com</a> 和后来的 cmd.exe。<br>
-它接收用户命令，然后调用相应的应用程序。</p>
-<p>对于 shell 的理解，我们也可以理解为一个接口，用来管理某些应用程序。</p>
-<p>webshell 就是两者的集合，合起来的意思可以理解为 web 应用管理工具，正常情况下，运维人员可以通过 webshell 针对 web 服务器进行日常的运维管理以及系统上线更新等，那么攻击者也可以通过 webshell 来管理 web 应用服务器。</p>
-<p><strong>两者在使用上并没有太多区别，但是在叫法上可能就不大一样了，管理员使用可以叫服务器管理工具，而在攻击者手里就可以叫做后门程序了。</strong></p>
-<center><h1>一句话木马</h1></center>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php eval($_POST[&quot;kxc&quot;]);?&gt;</span><br></pre></td></tr></table></figure>
-<p>php的eval()函数：eval($str)函数是把$str当做PHP代码执行。</p>
-<p>这是php的一句话后门中最普遍的一种。它的工作原理是：<br>
-首先存在一个名为shell的变量，shell的取值为HTTP的POST方式。Web服务器对shell取值以后，然后通过eval()函数执行shell里面的内容。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Wireshark-Mannal/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/19/Wireshark-Mannal/" class="post-title-link" itemprop="url">Wireshark Mannal</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-19 16:21:42" itemprop="dateCreated datePublished" datetime="2020-09-19T16:21:42+08:00">2020-09-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Burpsuite-Mannal/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CrestinyCoco">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Crestiny's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/19/Burpsuite-Mannal/" class="post-title-link" itemprop="url">Burpsuite Mannal</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-19 16:21:19" itemprop="dateCreated datePublished" datetime="2020-09-19T16:21:19+08:00">2020-09-19</time>
+              <time title="创建时间：2020-12-14 00:46:34" itemprop="dateCreated datePublished" datetime="2020-12-14T00:46:34+08:00">2020-12-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-28 02:13:13" itemprop="dateModified" datetime="2020-12-28T02:13:13+08:00">2020-12-28</time>
+                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1583,7 +1296,7 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术</p>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-Sercurity/" itemprop="url" rel="index"><span itemprop="name">Web Sercurity</span></a>
+                  <a href="/categories/Research-Group/" itemprop="url" rel="index"><span itemprop="name">Research Group</span></a>
                 </span>
             </span>
 
@@ -1598,45 +1311,22 @@ APT攻击（高可持续性威胁）：针对特定目标+高技术</p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Proxy"><a class="header-anchor" href="#Proxy">¶</a>Proxy</h2>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">forward：传输本次数据</span><br><span class="line">drop：丢弃本次数据</span><br><span class="line">Intercepton/off：拦截开启/关闭</span><br><span class="line">Action：提供功能选项</span><br></pre></td></tr></tbody></table></figure>
-<p>当Burp Suite拦截的客户端和服务器交互之后，我们可以在Burp Suite的消息分析选项卡中查看这次请求的实体内容、消息头、请求参数等信息。</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Raw：视图主要显示web请求的raw格式，包含请求地址、http协议版本、主机头、浏览器信息、Accept可接受的内容类型、字符集、编码方式、cookie等。我们可以通过手工修改这些信息，对服务器端进行渗透测试。</span><br><span class="line"></span><br><span class="line">params ：视图主要显示客户端请求的参数信息、包括GET或者POST请求的参数、Cookie参数。渗透人员可以通过修改这些请求参数来完成对服务器端的渗透测试。</span><br><span class="line"></span><br><span class="line">headers：视图显示的信息和Raw的信息类似，只不过在这个视图中，展示得更直观、友好。</span><br><span class="line"></span><br><span class="line">Hex ：视图显示Raw的二进制内容，你可以通过hex编辑器对请求的内容进行修改。</span><br></pre></td></tr></tbody></table></figure>
-<p>Burpproxy所拦截的消息可在Fitter（过滤器）中根据需要进行修改</p>
-<p>所有流经burpproxy的消息都会在 http history中记录下来，我们可以通过历史选项卡，查看传输的数据内容，对交互的数据进行测试和验证，同时，我们可以通过右击来弹出菜单，发送内容到burp的其他组件进行处理（类似于Action的功能）</p>
-<p>comment：对拦截的消息添加备注，在一次渗透测试中，你通常会遇到一连串的请求消息，为了便于区分，在某个关键的请求消息上，你可以添加备注信息。</p>
-<p>Highlight的功能与Comment功能有点类似，即对当前拦截的消息设置高亮，以便于其他的请求消息相区分。</p>
-<p>可选项配置Options</p>
-<p>从界面上看，主要有以下几大板块</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">▪客户端请求消息拦截（Interceptclient requests）</span><br><span class="line"></span><br><span class="line">▪服务器端返回消息拦截（intercept server responses）</span><br><span class="line"></span><br><span class="line">▪服务器返回消息修改（response modification）</span><br><span class="line"></span><br><span class="line">▪正则表达式配置（match and replace）</span><br><span class="line"></span><br><span class="line">▪其他配置项（miscellaneous）</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="Intruder"><a class="header-anchor" href="#Intruder">¶</a>Intruder</h2>
-<p>工作原理：<br>
-Intruder在原始请求数据的基础上，通过修改各种请求参数，以获取不同的请求应答。每一次请求中，Intruder通常会携带一个或多个有效攻击载荷（Payload),在不同的位置进行攻击重放，通过应答数据的比对分析来获得需要的特征数据。<br>
-(在我的使用经验中，主要用于爆破)</p>
-<p>应用场景：</p>
-<ol>
-<li>标识符枚举 Web应用程序经常使用标识符来引用用户、账户、资产等数据信息。例如，用户名，文件ID和账户号码。</li>
-<li>提取有用的数据在某些场景下，而不是简单地识别有效标识符，你需要通过简单标识符提取一些其他的数据。比如说，你想通过用户的个人空间id，获取所有用户在个人空间标准的昵称和年龄。</li>
-<li>模糊测试很多输入型的漏洞，如SQL注入，跨站点脚本和文件路径遍历可以通过请求参数提交各种测试字符串，并分析错误消息和其他异常情况，来对应用程序进行检测。由于的应用程序的大小和复杂性，手动执行这个测试是一个耗时且繁琐的过程。这样的场景，您可以设置Payload，通过Burp Intruder自动化地对Web应用程序进行模糊测试。</li>
-</ol>
-<p>测试步骤：</p>
-<ol>
-<li>确认Burp Suite安装正确并正常启动，且完成了浏览器的代理设置。</li>
-<li>进入Burp Proxy选项卡，关闭代理拦截功能。</li>
-<li>进行历史日志（History）子选项卡，查找可能存在问题的请求日志，并通过右击菜单，发送到Intruder。</li>
-<li>进行Intruder选项卡，打开Target和Positions子选项卡。这时，你会看到上一步发送过来的请求消息。</li>
-<li>因为我们了解到Burp Intruder攻击的基础是围绕刚刚发送过来的原始请求信息，在原始信息指定的位置上设置一定数量的攻击载荷Payload，通过Payload来发送请求获取应答消息。在默认情况下，所有的请求参数和cookie参数都会被设置为添加载荷<br>
-6.点击clear清除默认载荷（如果需要），圈定需要设置载荷的参数，点击add</li>
-<li>当我们打开Payload子选项卡，选择Payload的生成或者选择策略，默认情况下选择“Simplelist",当然你也可以通过下拉选择其他Payload类型或者手工添加。</li>
-<li>之后点击start attack发动攻击，此时burp 会自动打开一个新的界面，包含执行攻击的情况，http状态码、长度等信息的结果。我们还可以选择其中某一次通信消息，查看请求消息和应答消息的详细</li>
-</ol>
-<p>在很多时候，为了更好的标明应答消息中是否包含有我们需要的信息，通常在进行攻击前，会进行Options选项的相关配置，使用最多的为正则表达式匹配（Grep - Match）。</p>
-<p>或者我们选择结果选项卡中的过滤器，对结果进行过滤筛选。同时，结果选项卡中所展示的列我们是可以进行指定的，我们可以在菜单columns进行设置。</p>
-<p>最后选择我们需要的列，点击save按钮，对攻击结果进行保存。（也可以对保存对的内容进行设置</p>
-<h2 id="Repeater"><a class="header-anchor" href="#Repeater">¶</a>Repeater</h2>
-<p>Repeater是一个重放攻击器。<br>
-我们可以在这里对数据包的参数进行修改，以此来进行请求与响应的消息验证分析。<br>
-<img src="https://img-blog.csdn.net/20170805164656913?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzU1NDQzNzk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+          <h1>Use Anaconda to Manage Python Environments</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014628771/article/details/80066624">Anaconda 查看、创建、管理和使用python环境</a></p>
+<p>If <code>conda activate your-env-name</code> won’t work, we can use <code>activate your-env-name</code></p>
+<h1>Pip install time-out</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sxf1061926959/article/details/54091748">pip和conda安装源更改</a></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pandas</span><br></pre></td></tr></tbody></table></figure>
+<h1>Unable to pip install pickle</h1>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/48477949/not-able-to-pip-install-pickle-in-python-3-6/48477988">Not able to pip install pickle in python 3.6</a></p>
+<p>try to add <code>D:\anaconda3\envs\python38</code> to <code>Path</code>.</p>
+<h1>PyCharm远程连接到服务器</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yeler082/article/details/83818771?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.control">https://blog.csdn.net/yeler082/article/details/83818771?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.control</a></p>
+<h1>PyTorch中指定使用的GPU</h1>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.environ["CUDA_VISIBLE_DEVICES"] = "2"</span><br></pre></td></tr></tbody></table></figure>
+<h1>调用另一个python文件中的代码</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010412719/article/details/47089883">如何调用另一个python文件中的代码</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42159393/article/details/107188710">暴力解</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1674,7 +1364,7 @@ Intruder在原始请求数据的基础上，通过修改各种请求参数，以
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/Understanding-HTTP-Deeply/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/08/HongYi-Lee-Model-Compression-Lecture/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1688,7 +1378,7 @@ Intruder在原始请求数据的基础上，通过修改各种请求参数，以
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/19/Understanding-HTTP-Deeply/" class="post-title-link" itemprop="url">Understanding HTTP Deeply</a>
+            <a href="/2020/11/08/HongYi-Lee-Model-Compression-Lecture/" class="post-title-link" itemprop="url">HongYi Lee: Model Compression Lecture</a>
         </h2>
 
         <div class="post-meta">
@@ -1697,17 +1387,23 @@ Intruder在原始请求数据的基础上，通过修改各种请求参数，以
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-09-19 14:38:31 / 修改时间：16:54:47" itemprop="dateCreated datePublished" datetime="2020-09-19T14:38:31+08:00">2020-09-19</time>
+              <time title="创建时间：2020-11-08 00:40:12" itemprop="dateCreated datePublished" datetime="2020-11-08T00:40:12+08:00">2020-11-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-24 20:11:01" itemprop="dateModified" datetime="2020-12-24T20:11:01+08:00">2020-12-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-Sercurity/" itemprop="url" rel="index"><span itemprop="name">Web Sercurity</span></a>
+                  <a href="/categories/Research-Group/" itemprop="url" rel="index"><span itemprop="name">Research Group</span></a>
                 </span>
             </span>
 
@@ -1722,236 +1418,112 @@ Intruder在原始请求数据的基础上，通过修改各种请求参数，以
     <div class="post-body" itemprop="articleBody">
 
       
-          <center><h1>简介</h1></center>
-HTTP协议是Hyper Text Transfer Protocol（超文本传输协议）的缩写,是用于从万维网（WWW:World Wide Web ）服务器传输超文本到本地浏览器的传送协议。
-<p>HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件, 查询结果等）。</p>
-<p>HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。目前在WWW中使用的是HTTP/1.0的第六版，HTTP/1.1的规范化工作正在进行之中，而且HTTP-NG(Next Generation of HTTP)的建议已经提出。</p>
-<p>HTTP协议工作于客户端-服务端架构为上。浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。Web服务器根据接收到的请求后，向客户端发送响应信息。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/2964446-5a35e17f298a48e1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/551/format/webp" alt></p>
-<center><h1>特点</h1></center>
-HTTP协议的主要特点可概括如下：
-1.支持客户/服务器模式。
-2.简单快速：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。
-3.灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记。
-4.无连接：无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间。
-5.无状态：HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。
-<center><h1>URL</h1></center>
-HTTP使用统一资源标识符（Uniform Resource Identifiers, URI）来传输数据和建立连接。URL是一种特殊类型的URI，包含了用于查找某个资源的足够的信息
-<p>URL,全称是UniformResourceLocator, 中文叫统一资源定位符,是互联网上用来标识某一处资源的地址。以下面这个URL为例，介绍下普通URL的各部分组成：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;www.aspxfans.com:8080&#x2F;news&#x2F;index.asp?boardID&#x3D;5&amp;ID&#x3D;24618&amp;page&#x3D;1#name</span><br></pre></td></tr></table></figure>
-<p>从上面的URL可以看出，一个完整的URL包括以下几部分：</p>
+          <h2 id="Network-Pruning"><a class="header-anchor" href="#Network-Pruning">¶</a>Network Pruning</h2>
+<h5 id="What’s-it-for"><a class="header-anchor" href="#What’s-it-for">¶</a>What’s it for?</h5>
+<p>Deleting some neurons or weights to make the model smaller.</p>
+<h5 id="Why-can-we-do-that-without-affecting-the-accuracy"><a class="header-anchor" href="#Why-can-we-do-that-without-affecting-the-accuracy">¶</a>Why can we do that(without affecting the accuracy)?</h5>
+<p>We usually believe the network is over-parameterized,<br>
+That is to say, many neurons’ outputs often turn out to be zero.</p>
+<h5 id="How-about-simply-train-a-smaller-network-at-the-beginning"><a class="header-anchor" href="#How-about-simply-train-a-smaller-network-at-the-beginning">¶</a>How about simply train a smaller network at the beginning?</h5>
+<ul>
+<li>It’s proved that larger network is easier to be optimized.(the problem of local minimum and saddle point become less severe)</li>
+<li>Lottery Ticket Hypothesis<br>
+When we follow these steps, we’ll get a parameterized pruned network.<br>
+If we want to train it futher, we shouldn’t give it a random initialization, instead, we should copy the weight from the original initialization of the larger network.And start from this.(Because this initialization is proved to be trainable, so we should still use it.)<br>
+(Though this seems to be reasonable, another paper put forward a contrast idea.)</li>
+</ul>
+<h5 id="To-drop-neuron-or-drop-weight"><a class="header-anchor" href="#To-drop-neuron-or-drop-weight">¶</a>To drop neuron or drop weight?</h5>
+<h6 id="Weight-pruning"><a class="header-anchor" href="#Weight-pruning">¶</a>Weight pruning</h6>
+<p>We may get an irregular network:</p>
+<ul>
+<li>hard to implement</li>
+<li>hard to speedup(Because GPU’s speedup is based on  matrix manipulation.)</li>
+</ul>
+<p>To solve “irregular”, we may remain those weights and set them to be zero rather than drop them out. But this is meaningless from the perspective of storage.</p>
+<h6 id="Neuron-pruning"><a class="header-anchor" href="#Neuron-pruning">¶</a>Neuron pruning</h6>
+<ul>
+<li>regular</li>
+<li>easy to implement</li>
+<li>easy to speedup</li>
+</ul>
+<h2 id="Knowledge-Distillation"><a class="header-anchor" href="#Knowledge-Distillation">¶</a>Knowledge Distillation</h2>
+<h5 id="How-to-do"><a class="header-anchor" href="#How-to-do">¶</a>How to do?</h5>
+<p>Let a student model learn from a teacher model.<br>
+Note that the student model doesn’t learn from real data, it learns from outputs of the teacher model which may be wrong.</p>
+<h5 id="Why-is-it-useful"><a class="header-anchor" href="#Why-is-it-useful">¶</a>Why is it useful?</h5>
+<p>Because data from the teacher model may be richer than labels, the student model may be able to classify the piture which it has never seen.</p>
+<h5 id="One-application-for-knowledge-distillation"><a class="header-anchor" href="#One-application-for-knowledge-distillation">¶</a>One application for knowledge distillation</h5>
+<p>Sometimes we use ensemble models to get better performance, but the model maybe too large to be deployed on mobile device.<br>
+So we can use the average of models’ output as a teacher model 's output to train our student network</p>
+<h2 id="Parameter-Quantization"><a class="header-anchor" href="#Parameter-Quantization">¶</a>Parameter Quantization</h2>
+<h5 id="Ways-to-quantize-weights"><a class="header-anchor" href="#Ways-to-quantize-weights">¶</a>Ways to quantize weights</h5>
+<ul>
+<li>using less bits to represnt a value</li>
+<li>Weight clustering<br>
+divide weights into groups, for each group, we use the average value to represent members.</li>
+<li>Huffman encoding</li>
+</ul>
+<h5 id="Binary-Weights"><a class="header-anchor" href="#Binary-Weights">¶</a>Binary Weights</h5>
+<ul>
+<li>First of all, we have a network with real value weights and a network with binary weights.</li>
+<li>We randomly initialize “real network”</li>
+<li>Choose the closest binary weight, do gradient descent, follow the direction to update our real weight(to another real weight)</li>
+<li>iterative</li>
+<li>finally arrive at a real weight and we’ll choose the closest binary weight as our result.</li>
+</ul>
+<h2 id="Architecture-Design"><a class="header-anchor" href="#Architecture-Design">¶</a>Architecture Design</h2>
+<h5 id="Low-rank-approximation"><a class="header-anchor" href="#Low-rank-approximation">¶</a>Low rank approximation</h5>
+<p>insert a hidden linear layer with K neuron<br>
+if well-designed, weights will be less<br>
+（Not so intuitive，we need some computation to prove that）</p>
+<h5 id="Depthwise-Separable-Convolution"><a class="header-anchor" href="#Depthwise-Separable-Convolution">¶</a>Depthwise Separable Convolution</h5>
+<p>Divide convolution into two steps:</p>
 <ol>
 <li>
-<p>协议部分：该URL的协议部分为“http：”，这代表网页使用的是HTTP协议。在Internet中可以使用多种协议，如HTTP，FTP等等本例中使用的是HTTP协议。在&quot;HTTP&quot;后面的“//”为分隔符</p>
+<p>Depthwise Convolution<br>
+——the number of filters=the number of channels<br>
+——filters is not three-dimensional<br>
+——each filter considers one channel</p>
 </li>
 <li>
-<p>域名部分：该URL的域名部分为“<a target="_blank" rel="noopener" href="http://www.aspxfans.com">www.aspxfans.com</a>”。一个URL中，也可以使用IP地址作为域名使用</p>
-</li>
-<li>
-<p>端口部分：跟在域名后面的是端口，域名和端口之间使用“:”作为分隔符。端口不是一个URL必须的部分，如果省略端口部分，将采用默认端口</p>
-</li>
-<li>
-<p>虚拟目录部分：从域名后的第一个“/”开始到最后一个“/”为止，是虚拟目录部分。虚拟目录也不是一个URL必须的部分。本例中的虚拟目录是“/news/”</p>
-</li>
-<li>
-<p>文件名部分：从域名后的最后一个“/”开始到“？”为止，是文件名部分，如果没有“?”,则是从域名后的最后一个“/”开始到“#”为止，是文件部分，如果没有“？”和“#”，那么从域名后的最后一个“/”开始到结束，都是文件名部分。本例中的文件名是“index.asp”。文件名部分也不是一个URL必须的部分，如果省略该部分，则使用默认的文件名</p>
-</li>
-<li>
-<p>锚部分：从“#”开始到最后，都是锚部分。本例中的锚部分是“name”。锚部分也不是一个URL必须的部分</p>
-</li>
-<li>
-<p>参数部分：从“？”开始到“#”为止之间的部分为参数部分，又称搜索部分、查询部分。本例中的参数部分为“boardID=5&amp;ID=24618&amp;page=1”。参数可以允许有多个参数，参数与参数之间用“&amp;”作为分隔符。</p>
+<p>Pointwise Convolution<br>
+——just like the normal convolution<br>
+——filter is 1*1<br>
+——the height of the filter=the number of channels</p>
 </li>
 </ol>
-<center><h1>URI和URL的区别</h1></center>
-<h2>URI</h2>
-URI，是uniform resource identifier，统一资源标识符，用来唯一的标识一个资源。
-Web上可用的每种资源如HTML文档、图像、视频片段、程序等都是一个来URI来定位的
-URI一般由三部组成：
-①访问资源的命名机制
-②存放资源的主机名
-③资源自身的名称，由路径表示，着重强调于资源。
-<h2>URL</h2>
-URL是uniform resource locator，统一资源定位器，它是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源。
-URL是Internet上用来描述信息资源的字符串，主要用在各种WWW客户程序和服务器程序上，特别是著名的Mosaic。
-采用URL可以用一种统一的格式来描述各种信息资源，包括文件、服务器的地址和目录等。URL一般由三部组成：
-①协议(或称为服务方式)
-②存有该资源的主机IP地址(有时也包括端口号)
-③主机资源的具体地址。如目录和文件名等
-<h2>URN</h2>
-URN，uniform resource name，统一资源命名，是通过名字来标识资源，比如mailto:java-net@java.sun.com。
-URI是以一种抽象的，高层次概念定义统一资源标识，而URL和URN则是具体的资源标识的方式。URL和URN都是一种URI。笼统地说，每个 URL 都是 URI，但不一定每个 URI 都是 URL。这是因为 URI 还包括一个子类，即统一资源名称 (URN)，它命名资源但不指定如何定位资源。上面的 mailto、news 和 isbn URI 都是 URN 的示例。
-<p>在Java的URI中，一个URI实例可以代表绝对的，也可以是相对的，只要它符合URI的语法规则。而URL类则不仅符合语义，还包含了定位该资源的信息，因此它不能是相对的。<br>
-在Java类库中，URI类不包含任何访问资源的方法，它唯一的作用就是解析。<br>
-相反的是，URL类可以打开一个到达资源的流。</p>
-<center><h1>请求消息Request</h1></center>
-客户端发送一个HTTP请求到服务器的请求消息包括以下格式：
-**请求行（request line）**、**请求头部（header）**、**空行**和**请求数据**四个部分。
-<p><img src="https://upload-images.jianshu.io/upload_images/2964446-fdfb1a8fce8de946.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/466/format/webp" alt></p>
-<h2>GET请求例子</h2>
-<pre>
-GET /562f25980001b1b106000338.jpg HTTP/1.1
-Host    img.mukewang.com
-User-Agent  Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36
-Accept  image/webp,image/*,*/(为了让后面不要变成斜体，此处删去了一个星号);q=0.8
-Referer http://www.imooc.com/
-Accept-Encoding gzip, deflate, sdch
-Accept-Language zh-CN,zh;q=0.8
-
-</pre>
-<h3>第一部分：请求行</h3>
-用来说明请求类型,要访问的资源以及所使用的HTTP版本.
-GET说明请求类型为GET,[/562f25980001b1b106000338.jpg]为要访问的资源，该行的最后一部分说明使用的是HTTP1.1版本。
-<h3>第二部分：请求头部</h3>
-紧接着请求行（即第一行）之后的部分，用来说明服务器要使用的附加信息
-从第二行起为请求头部，HOST将指出请求的目的地.User-Agent,服务器端和客户端脚本都能访问它,它是浏览器类型检测逻辑的重要基础.该信息由你的浏览器来定义,并且在每个请求中自动发送等等
-<h3>第三部分：空行</h3>
-请求头部后面的空行是必须的
-即使第四部分的请求数据为空，也必须有空行。(注意此例中是有空行的)
-<h3>第四部分：请求数据</h3>
-也叫主体，可以添加任意的其他数据。
-这个例子的请求数据为空。
-<h2>POST请求例子</h2>
-<pre>POST / HTTP1.1
-Host:www.wrox.com
-User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022)
-Content-Type:application/x-www-form-urlencoded
-Content-Length:40
-Connection: Keep-Alive
-
-name=Professional%20Ajax&publisher=Wiley
-</pre>
-<p>第一部分：请求行，第一行明了是post请求，以及http1.1版本。<br>
-第二部分：请求头部，第二行至第六行。<br>
-第三部分：空行，第七行的空行。<br>
-第四部分：请求数据，第八行。</p>
-<center><h1>响应消息Response</h1></center>
-一般情况下，服务器接收并处理客户端发过来的请求后会返回一个HTTP的响应消息。
-HTTP响应也由四个部分组成，分别是：**状态行**、**消息报头**、**空行**和**响应正文**。
-<p><img src="https://upload-images.jianshu.io/upload_images/2964446-1c4cab46f270d8ee.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/683/format/webp" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 200 OK</span><br><span class="line">Date: Fri, 22 May 2009 06:07:21 GMT</span><br><span class="line">Content-Type: text&#x2F;html; charset&#x3D;UTF-8</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">      &lt;head&gt;&lt;&#x2F;head&gt;</span><br><span class="line">      &lt;body&gt;</span><br><span class="line">            &lt;!--body goes here--&gt;</span><br><span class="line">      &lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
-<h3>第一部分：状态行</h3>
-由HTTP协议版本号， 状态码， 状态消息 三部分组成。
-第一行为状态行，（HTTP/1.1）表明HTTP版本为1.1版本，状态码为200，状态消息为（ok）
-<h3>第二部分：消息报头</h3>
-用来说明客户端要使用的一些附加信息
-第二行和第三行为消息报头，
-Date:生成响应的日期和时间；Content-Type:指定了MIME类型的HTML(text/html),编码类型是UTF-8
-<h3>第三部分：空行</h3>
-消息报头后面的空行是必须的
-<h3>第四部分：响应正文</h3>
-服务器返回给客户端的文本信息。
-空行后面的html部分为响应正文。
-<center><h1>状态码</h1></center>
-状态代码有三位数字组成，第一个数字定义了响应的类别，共分五种类别:
-<p>1xx：指示信息–表示请求已接收，继续处理<br>
-2xx：成功–表示请求已被成功接收、理解、接受<br>
-3xx：重定向–要完成请求必须进行更进一步的操作<br>
-4xx：客户端错误–请求有语法错误或请求无法实现<br>
-5xx：服务器端错误–服务器未能实现合法的请求</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">常见状态码：</span><br><span class="line">200 OK                        &#x2F;&#x2F;客户端请求成功</span><br><span class="line">400 Bad Request               &#x2F;&#x2F;客户端请求有语法错误，不能被服务器所理解</span><br><span class="line">401 Unauthorized              &#x2F;&#x2F;请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用 </span><br><span class="line">403 Forbidden                 &#x2F;&#x2F;服务器收到请求，但是拒绝提供服务</span><br><span class="line">404 Not Found                 &#x2F;&#x2F;请求资源不存在，eg：输入了错误的URL</span><br><span class="line">500 Internal Server Error     &#x2F;&#x2F;服务器发生不可预期的错误</span><br><span class="line">503 Server Unavailable        &#x2F;&#x2F;服务器当前不能处理客户端的请求，一段时间后可能恢复正常</span><br></pre></td></tr></table></figure>
-<center><h1>请求方法</h1></center>
-根据HTTP标准，HTTP请求可以使用多种请求方法。
-HTTP1.0定义了三种请求方法： GET, POST 和 HEAD方法。
-HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT 方法。
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET  请求指定的页面信息，并返回实体主体。</span><br><span class="line">HEAD     类似于get请求，只不过返回的响应中没有具体的内容，用于获取报头</span><br><span class="line">POST     向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的建立和&#x2F;或已有资源的修改。</span><br><span class="line">PUT  从客户端向服务器传送的数据取代指定的文档的内容。</span><br><span class="line">DELETE   请求服务器删除指定的页面。</span><br><span class="line">CONNECT  HTTP&#x2F;1.1协议中预留给能够将连接改为管道方式的代理服务器。</span><br><span class="line">OPTIONS  允许客户端查看服务器的性能。</span><br><span class="line">TRACE    回显服务器收到的请求，主要用于测试或诊断。</span><br></pre></td></tr></table></figure>
-<center><h1>工作原理</h1></center>
-HTTP协议定义Web客户端如何从Web服务器请求Web页面，以及服务器如何把Web页面传送给客户端。HTTP协议采用了请求/响应模型。客户端向服务器发送一个请求报文，请求报文包含请求的方法、URL、协议版本、请求头部和请求数据。服务器以一个状态行作为响应，响应的内容包括协议的版本、成功或者错误代码、服务器信息、响应头部和响应数据。
-<p><strong>以下是 HTTP 请求/响应的步骤：</strong><br>
-1、客户端连接到Web服务器<br>
-一个HTTP客户端，通常是浏览器，与Web服务器的HTTP端口（默认为80）建立一个TCP套接字连接。例如，<a target="_blank" rel="noopener" href="http://www.oakcms.cn">http://www.oakcms.cn</a>。</p>
-<p>2、发送HTTP请求<br>
-通过TCP套接字，客户端向Web服务器发送一个文本的请求报文，一个请求报文由请求行、请求头部、空行和请求数据4部分组成。</p>
-<p>3、服务器接受请求并返回HTTP响应<br>
-Web服务器解析请求，定位请求资源。服务器将资源复本写到TCP套接字，由客户端读取。一个响应由状态行、响应头部、空行和响应数据4部分组成。</p>
-<p>4、释放连接TCP连接<br>
-若connection 模式为close，则服务器主动关闭TCP连接，客户端被动关闭连接，释放TCP连接;若connection 模式为keepalive，则该连接会保持一段时间，在该时间内可以继续接收请求;</p>
-<p>5、客户端浏览器解析HTML内容<br>
-客户端浏览器首先解析状态行，查看表明请求是否成功的状态代码。然后解析每一个响应头，响应头告知以下为若干字节的HTML文档和文档的字符集。客户端浏览器读取响应数据HTML，根据HTML的语法对其进行格式化，并在浏览器窗口中显示。</p>
-<p>例如：在浏览器地址栏键入URL，按下回车之后会经历以下流程：</p>
-<ol>
-<li>
-<p>浏览器向 DNS 服务器请求解析该 URL 中的域名所对应的 IP 地址;</p>
-</li>
-<li>
-<p>解析出 IP 地址后，根据该 IP 地址和默认端口 80，和服务器建立TCP连接;</p>
-</li>
-<li>
-<p>浏览器发出读取文件(URL 中域名后面部分对应的文件)的HTTP 请求，该请求报文作为 TCP 三次握手的第三个报文的数据发送给服务器;</p>
-</li>
-<li>
-<p>服务器对浏览器请求作出响应，并把对应的 html 文本发送给浏览器;</p>
-</li>
-<li>
-<p>释放 TCP连接;</p>
-</li>
-<li>
-<p>浏览器将该 html 文本并显示内容;</p>
-</li>
-</ol>
-<center><h1>GET和POST请求的区别</h1></center>
-<p>GET请求：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;books&#x2F;?sex&#x3D;man&amp;name&#x3D;Professional HTTP&#x2F;1.1</span><br><span class="line">Host: www.wrox.com</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.6)</span><br><span class="line">Gecko&#x2F;20050225 Firefox&#x2F;1.0.1</span><br><span class="line">Connection: Keep-Alive</span><br></pre></td></tr></table></figure>
-<p>POST请求：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">POST &#x2F; HTTP&#x2F;1.1</span><br><span class="line">Host: www.wrox.com</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.6)</span><br><span class="line">Gecko&#x2F;20050225 Firefox&#x2F;1.0.1</span><br><span class="line">Content-Type: application&#x2F;x-www-form-urlencoded</span><br><span class="line">Content-Length: 40</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line"></span><br><span class="line">name&#x3D;Professional%20Ajax&amp;publisher&#x3D;Wiley</span><br></pre></td></tr></table></figure>
-<h3>提交数据的位置</h3>
-- GET提交，请求的数据会附在URL之后（就是把数据放置在HTTP协议头中），以?分割URL和传输数据，多个参数用&连接；例 如：`login.action?name=hyddd&password=idontknow&verify=%E4%BD%A0 %E5%A5%BD`
-如果数据是英文字母/数字，原样发送，如果是空格，转换为+，如果是中文/其他字符，则直接把字符串用BASE64加密，得出如： %E4%BD%A0%E5%A5%BD，其中％XX中的XX为该符号以16进制表示的ASCII。
+<h5 id="The-connections-between-normal-convolution-and-Depthwise-Separable-Convolution"><a class="header-anchor" href="#The-connections-between-normal-convolution-and-Depthwise-Separable-Convolution">¶</a>The connections between normal convolution and Depthwise Separable Convolution</h5>
 <ul>
-<li>POST提交：把提交的数据放置在是HTTP包的包体中。上文示例中红色字体标明的就是实际的传输数据</li>
+<li>Depthwise Separable Convolution has common ground with inserting a hidden linear layer</li>
+<li>After analyzing the origin of each output, we may discover that the first step of DSC has “weights sharing”.(keep the same performance with less parameters)</li>
 </ul>
-<p><strong>因此，GET提交的数据会在地址栏中显示出来，而POST提交，地址栏不会改变</strong></p>
-<h3>传输数据的大小</h3>
-首先声明：HTTP协议没有对传输的数据大小进行限制，HTTP协议规范也没有对URL长度进行限制。而在实际开发中存在的限制主要有：
+<h2 id="Dynamic-Computation"><a class="header-anchor" href="#Dynamic-Computation">¶</a>Dynamic Computation</h2>
+<p>Possible Solutions:</p>
 <ul>
-<li>
-<p>GET:特定浏览器和服务器对URL长度有限制，例如 IE对URL长度的限制是2083字节(2K+35)。对于其他浏览器，如Netscape、FireFox等，理论上没有长度限制，其限制取决于操作系 统的支持。因此对于GET提交时，传输数据就会受到URL长度的限制。</p>
-</li>
-<li>
-<p>POST:由于不是通过URL传值，理论上数据不受限。但实际各个WEB服务器会规定对post提交数据大小进行限制，Apache、IIS6都有各自的配置。</p>
-</li>
+<li>Train multiple classifiers:<br>
+from small to large, and choose the suitable one according to the computational power of the device</li>
+<li>Classifiers at the intermedia layer:<br>
+Instead of using the final output, we use the output at the intermedia layer.(But the performance is not good always &amp;&amp; classifiers near the input layer will decrease the perfomance(it forces layers to learn more complicate features than before))</li>
 </ul>
-<h3>安全性</h3>
-<p>POST的安全性要比GET的安全性高。比如：通过GET提交数据，用户名和密码将明文出现在URL上，因为(1)登录页面有可能被浏览器缓存；(2)其他人查看浏览器的历史纪录，那么别人就可以拿到你的账号和密码了，除此之外，使用GET提交数据还可能会造成Cross-site request forgery攻击</p>
-<h3>Http get,post,soap协议都是在http上运行的</h3>
-<ul>
-<li>
-<p>get：请求参数是作为一个key/value对的序列（查询字符串）附加到URL上的<br>
-查询字符串的长度受到web浏览器和web服务器的限制（如IE最多支持2048个字符），不适合传输大型数据集同时，它很不安全</p>
-</li>
-<li>
-<p>post：请求参数是在http标题的一个不同部分（名为entity body）传输的，这一部分用来传输表单信息，因此必须将Content-type设置为:application/x-www-form- urlencoded。post设计用来支持web窗体上的用户字段，其参数也是作为key/value对传输。<br>
-但是：它不支持复杂数据类型，因为post没有定义传输数据结构的语义和规则。</p>
-</li>
-<li>
-<p>soap：是http post的一个专用版本，遵循一种特殊的xml消息格式<br>
-Content-type设置为: text/xml 任何数据都可以xml化。</p>
-</li>
-</ul>
-<p>Http协议定义了很多与服务器交互的方法，最基本的有4种，分别是GET,POST,PUT,DELETE. 一个URL地址用于描述一个网络上的资源，而HTTP中的GET, POST, PUT, DELETE就对应着对这个资源的查，改，增，删4个操作。 我们最常见的就是GET和POST了。<strong>GET一般用于获取/查询资源信息，而POST一般用于更新资源信息.</strong></p>
-<h3>GET和POST的区别总结</h3>
-<ul>
-<li>
-<p>GET提交的数据会放在URL之后，以?分割URL和传输数据，参数之间以&amp;相连，如EditPosts.aspx?name=test1&amp;id=123456. POST方法是把提交的数据放在HTTP包的Body中.</p>
-</li>
-<li>
-<p>GET提交的数据大小有限制（因为浏览器对URL的长度有限制），而POST方法提交的数据没有限制.</p>
-</li>
-<li>
-<p>GET方式需要使用Request.QueryString来取得变量的值，而POST方式通过Request.Form来获取变量的值。</p>
-</li>
-<li>
-<p>GET方式提交数据，会带来安全问题，比如一个登录页面，通过GET方式提交数据时，用户名和密码将出现在URL上，如果页面可以被缓存或者其他人可以访问这台机器，就可以从历史记录获得该用户的账号和密码.</p>
-</li>
-</ul>
-<center><h1>Cookie</h1></center>
-Cookie（复数形态Cookies），又称为“小甜饼”。类型为“小型文本文件”[1]，指某些网站为了辨别用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。由网景公司的前雇员卢·蒙特利在1993年3月发明[2]。最初定义于RFC 2109。目前使用最广泛的 Cookie标准却不是RFC中定义的任何一个，而是在网景公司制定的标准上进行扩展后的产物。
-<p>因为HTTP协议是无状态的，即服务器不知道用户上一次做了什么，这严重阻碍了交互式Web应用程序的实现。在典型的网上购物场景中，用户浏览了几个页面，买了一盒饼干和两瓶饮料。最后结帐时，由于HTTP的无状态性，不通过额外的手段，服务器并不知道用户到底买了什么，所以Cookie就是用来绕开HTTP的无状态性的“额外手段”之一。服务器可以设置或读取Cookies中包含信息，借此维护用户跟服务器会话中的状态。</p>
-<p>在刚才的购物场景中，当用户选购了第一项商品，服务器在向用户发送网页的同时，还发送了一段Cookie，记录着那项商品的信息。当用户访问另一个页面，浏览器会把Cookie发送给服务器，于是服务器知道他之前选购了什么。用户继续选购饮料，服务器就在原来那段Cookie里追加新的商品信息。结帐时，服务器读取发送来的Cookie就行了。</p>
-<p>Cookie另一个典型的应用是当登录一个网站时，网站往往会请求用户输入用户名和密码，并且用户可以勾选“下次自动登录”。如果勾选了，那么下次访问同一网站时，用户会发现没输入用户名和密码就已经登录了。这正是因为前一次登录时，服务器<strong>发送了包含登录凭据（用户名加密码的某种加密形式）的Cookie到用户的硬盘上</strong>。第二次登录时，如果该Cookie尚未到期，浏览器会发送该Cookie，服务器验证凭据，于是不必输入用户名和密码就让用户登录了。</p>
-<center><h1>Session</h1></center>
-由于HTTP协议是无状态的协议，所以服务端需要记录用户的状态时，就需要用某种机制来识具体的用户，这个机制就是Session
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
       
     </div>
 
@@ -1969,7 +1541,7 @@ Cookie（复数形态Cookies），又称为“小甜饼”。类型为“小型�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2035,20 +1607,20 @@ Cookie（复数形态Cookies），又称为“小甜饼”。类型为“小型�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">51</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

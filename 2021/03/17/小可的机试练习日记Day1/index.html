@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="2.1 枚举 ¶abc ¶题目  ¶代码 1234567891011121314151617#include &lt;stdio.h&gt;#include &lt;iostream&gt;using namespace std; int main (void){    for(int a&#x3D;0;a&lt;&#x3D;9;a++){        for(int b&#x3D;0;b&lt;&#x3D;9;b++){">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小可的机试练习日记Day1-暴力求解">
+<meta property="og:url" content="http://yoursite.com/2021/03/17/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day1/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="2.1 枚举 ¶abc ¶题目  ¶代码 1234567891011121314151617#include &lt;stdio.h&gt;#include &lt;iostream&gt;using namespace std; int main (void){    for(int a&#x3D;0;a&lt;&#x3D;9;a++){        for(int b&#x3D;0;b&lt;&#x3D;9;b++){">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317163140496.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317171702872.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317173741382.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317175727463.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317181808685.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317190431356.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317195033703.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317195937218.png">
+<meta property="article:published_time" content="2021-03-17T08:29:39.000Z">
+<meta property="article:modified_time" content="2021-03-17T15:41:27.378Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta property="article:tag" content="暴力求解">
+<meta property="article:tag" content="枚举">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317163140496.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/03/17/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>小可的机试练习日记Day1-暴力求解 | Crestiny's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Crestiny's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Life is fantastic ! </p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/17/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          小可的机试练习日记Day1-暴力求解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-17 16:29:39 / 修改时间：23:41:27" itemprop="dateCreated datePublished" datetime="2021-03-17T16:29:39+08:00">2021-03-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">机试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>2.1 枚举</h1>
+<h2 id="abc"><a class="header-anchor" href="#abc">¶</a>abc</h2>
+<h3 id="题目"><a class="header-anchor" href="#题目">¶</a>题目</h3>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317163140496.png" alt="image-20210317163140496" style="width:800px">
+<h3 id="代码"><a class="header-anchor" href="#代码">¶</a>代码</h3>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> a=<span class="number">0</span>;a&lt;=<span class="number">9</span>;a++){</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> b=<span class="number">0</span>;b&lt;=<span class="number">9</span>;b++){</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> c=<span class="number">0</span>;c&lt;=<span class="number">9</span>;c++){</span><br><span class="line">                <span class="keyword">if</span>(((a*<span class="number">100</span>+b*<span class="number">10</span>+c)+(b*<span class="number">100</span>+c*<span class="number">10</span>+c))==<span class="number">532</span>){</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="string">" "</span>&lt;&lt;b&lt;&lt;<span class="string">" "</span>&lt;&lt;c&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="运行效率"><a class="header-anchor" href="#运行效率">¶</a>运行效率</h3>
+<p>运行时间：3ms<br>
+超过24.02%用C++提交的代码</p>
+<p>占用内存：376KB<br>
+超过36.02%用C++提交的代码</p>
+<h3 id="错误点、经验、总结"><a class="header-anchor" href="#错误点、经验、总结">¶</a>错误点、经验、总结</h3>
+<p>之前写错的代码长这样：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line"><span class="keyword">int</span> a=<span class="number">0</span>,b=<span class="number">0</span>,c=<span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(;a&lt;=<span class="number">9</span>;a++){</span><br><span class="line">        <span class="keyword">for</span>(;b&lt;=<span class="number">9</span>;b++){</span><br><span class="line">            <span class="keyword">for</span>(;c&lt;=<span class="number">9</span>;c++){</span><br><span class="line">                <span class="keyword">if</span>(((a*<span class="number">100</span>+b*<span class="number">10</span>+c)+(b*<span class="number">100</span>+c*<span class="number">10</span>+c))==<span class="number">532</span>){</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="string">" "</span>&lt;&lt;b&lt;&lt;<span class="string">" "</span>&lt;&lt;c&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>本来以为这种只是省事的操作，但这个代码会运行30次，而正确的代码会运行10^3次。</p>
+<p>在for循环里面重新初始化变量还是很有必要的，可以通过debug发现问题。</p>
+<h3 id="优化"><a class="header-anchor" href="#优化">¶</a>优化</h3>
+<ul>
+<li>既然题目说是三位数，那么a和b应该从1开始也可以：</li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> a=<span class="number">1</span>;a&lt;=<span class="number">9</span>;a++){</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> b=<span class="number">1</span>;b&lt;=<span class="number">9</span>;b++){</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> c=<span class="number">0</span>;c&lt;=<span class="number">9</span>;c++){</span><br><span class="line">                <span class="keyword">if</span>(((a*<span class="number">100</span>+b*<span class="number">10</span>+c)+(b*<span class="number">100</span>+c*<span class="number">10</span>+c))==<span class="number">532</span>){</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="string">" "</span>&lt;&lt;b&lt;&lt;<span class="string">" "</span>&lt;&lt;c&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>​		运行时间：3ms<br>
+​		超过24.02%用C++提交的代码</p>
+<p>​		占用内存：360KB<br>
+​		超过64.06%用C++提交的代码</p>
+<ul>
+<li>
+<p>书上对于if里面的计算进行了合并同类项：</p>
+<p><code>if(a*100+b*110+c*12==532)</code></p>
+<p>运行时间：3ms<br>
+超过24.02%用C++提交的代码</p>
+<p>占用内存：344KB<br>
+超过88.52%用C++提交的代码</p>
+</li>
+</ul>
+<h2 id="反序数"><a class="header-anchor" href="#反序数">¶</a>反序数</h2>
+<h3 id="题目-v2"><a class="header-anchor" href="#题目-v2">¶</a>题目</h3>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317171702872.png" alt="image-20210317171702872" style="width:800px">
+<h3 id="分析"><a class="header-anchor" href="#分析">¶</a>分析</h3>
+<p>互为反序数的两个数的位数应该是一样的，所以最大的4位数位9999，也就是说N不会超过1111，从1000到1111遍历即可？</p>
+<h3 id="代码-v2"><a class="header-anchor" href="#代码-v2">¶</a>代码</h3>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">    <span class="keyword">int</span> N9;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> N=<span class="number">1000</span>;N&lt;=<span class="number">1111</span>;N++){</span><br><span class="line">        N9=<span class="number">9</span>*N;</span><br><span class="line">        <span class="keyword">if</span>((N%<span class="number">10</span>==N9/<span class="number">1000</span>)&amp;&amp;((N/<span class="number">10</span>)%<span class="number">10</span>==(N9/<span class="number">100</span>)%<span class="number">10</span>)&amp;&amp;((N/<span class="number">100</span>)%<span class="number">10</span>==(N9/<span class="number">10</span>)%<span class="number">10</span>)&amp;&amp;(N/<span class="number">1000</span>==N9%<span class="number">10</span>)){</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;N&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="运行效率-v2"><a class="header-anchor" href="#运行效率-v2">¶</a>运行效率</h3>
+<p>运行时间：4ms<br>
+超过6.63%用C++提交的代码（为什么我的每次运行都好慢qwq）</p>
+<p>占用内存：352KB<br>
+超过74.14%用C++提交的代码</p>
+<h3 id="思考"><a class="header-anchor" href="#思考">¶</a>思考</h3>
+<p>书上的代码看起来像另一个思路：遍历1000-9999，对每个数，算它的反序数是不是它的九倍：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Reverse</span><span class="params">(<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> revx=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(x!=<span class="number">0</span>){</span><br><span class="line">		revx*=<span class="number">10</span>;	<span class="comment">//revx右边补0 </span></span><br><span class="line">		revx+=x%<span class="number">10</span>;	<span class="comment">//revx加上x现在的个位数 </span></span><br><span class="line">		x/=<span class="number">10</span>;	<span class="comment">//x抹掉现在的个位 </span></span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> revx; </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1000</span>;i&lt;=<span class="number">9999</span>;i++){</span><br><span class="line">		<span class="keyword">if</span>(i*<span class="number">9</span>==Reverse(i)){</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,i);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">} </span><br></pre></td></tr></tbody></table></figure>
+<p>值得学习的是有注释的那三行代码：<strong>在进制转换中很常用。</strong></p>
+<p>运行时间：3ms<br>
+超过27.96%用C++提交的代码</p>
+<p>占用内存：376KB<br>
+超过25.06%用C++提交的代码</p>
+<h2 id="对称平方数1"><a class="header-anchor" href="#对称平方数1">¶</a>对称平方数1</h2>
+<h3 id="题目-v3"><a class="header-anchor" href="#题目-v3">¶</a>题目</h3>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317173741382.png" alt="image-20210317173741382" style="width:800px">
+<h3 id="分析-v2"><a class="header-anchor" href="#分析-v2">¶</a>分析</h3>
+<p>因为数字不超过256，所以其平方不会超过65536，也就是在五位数及之内。</p>
+<p>我觉得要先看这个数的平方有多少位，然后根据具体位数来编码，有点硬编码的意思？</p>
+<h3 id="代码-v3"><a class="header-anchor" href="#代码-v3">¶</a>代码</h3>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sym</span><span class="params">(<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">    <span class="keyword">if</span>(x&gt;=<span class="number">10000</span>){</span><br><span class="line">            <span class="keyword">if</span>((x/<span class="number">10000</span>==x%<span class="number">10</span>)&amp;&amp;((x/<span class="number">1000</span>)%<span class="number">10</span>==(x/<span class="number">10</span>)%<span class="number">10</span>)){</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            }    	</span><br><span class="line">	}<span class="keyword">else</span> <span class="keyword">if</span>(x&gt;=<span class="number">1000</span>&amp;&amp;x&lt;<span class="number">10000</span>){</span><br><span class="line">            <span class="keyword">if</span>((x/<span class="number">1000</span>==x%<span class="number">10</span>)&amp;&amp;((x/<span class="number">100</span>)%<span class="number">10</span>==(x/<span class="number">10</span>)%<span class="number">10</span>)){</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            }		</span><br><span class="line">	}<span class="keyword">else</span> <span class="keyword">if</span>(x&gt;=<span class="number">100</span>&amp;&amp;x&lt;<span class="number">1000</span>){</span><br><span class="line">            <span class="keyword">if</span>((x/<span class="number">100</span>==x%<span class="number">10</span>)){</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            }		</span><br><span class="line">	}<span class="keyword">else</span> <span class="keyword">if</span>(x&gt;=<span class="number">10</span>&amp;&amp;x&lt;<span class="number">100</span>){</span><br><span class="line">            <span class="keyword">if</span>((x/<span class="number">10</span>==x%<span class="number">10</span>)){</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            }		</span><br><span class="line">	}<span class="keyword">else</span> <span class="keyword">if</span>(x&gt;=<span class="number">0</span>&amp;&amp;x&lt;<span class="number">10</span>){</span><br><span class="line">		    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	}<span class="keyword">else</span>{</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">256</span>;i++){</span><br><span class="line">        <span class="keyword">if</span>(sym(<span class="built_in">pow</span>(i,<span class="number">2</span>))){</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="运行效率-v3"><a class="header-anchor" href="#运行效率-v3">¶</a>运行效率</h3>
+<p>运行时间：3ms<br>
+超过23.95%用C++提交的代码</p>
+<p>占用内存：376KB<br>
+超过27.01%用C++提交的代码</p>
+<h3 id="错误"><a class="header-anchor" href="#错误">¶</a>错误</h3>
+<ul>
+<li>误用switch：</li>
+</ul>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sym</span><span class="params">(<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">    <span class="keyword">switch</span> (x){</span><br><span class="line">        <span class="keyword">case</span> x&gt;=<span class="number">10000</span>:</span><br><span class="line">            <span class="keyword">if</span>((x/<span class="number">10000</span>==x%<span class="number">10</span>)&amp;&amp;((x/<span class="number">1000</span>)%<span class="number">10</span>==(x/<span class="number">10</span>)%<span class="number">10</span>)){</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            }</span><br><span class="line">        <span class="keyword">case</span> x&gt;=<span class="number">1000</span>&amp;&amp;x&lt;<span class="number">10000</span>:</span><br><span class="line">            <span class="keyword">if</span>((x/<span class="number">1000</span>==x%<span class="number">10</span>)&amp;&amp;((x/<span class="number">100</span>)%<span class="number">10</span>==(x/<span class="number">10</span>)%<span class="number">10</span>)){</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            }</span><br><span class="line">        <span class="keyword">case</span> x&gt;=<span class="number">100</span>&amp;&amp;x&lt;<span class="number">1000</span>:</span><br><span class="line">            <span class="keyword">if</span>((x/<span class="number">100</span>==x%<span class="number">10</span>)){</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            }</span><br><span class="line">        <span class="keyword">case</span> x&gt;=<span class="number">10</span>&amp;&amp;x&lt;<span class="number">100</span>:</span><br><span class="line">            <span class="keyword">if</span>((x/<span class="number">10</span>==x%<span class="number">10</span>)){</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            }</span><br><span class="line">        <span class="keyword">case</span> x&gt;=<span class="number">0</span>&amp;&amp;x&lt;<span class="number">10</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">256</span>;i++){</span><br><span class="line">        <span class="keyword">if</span>(sym(i**<span class="number">2</span>)){</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>​	不知道为什么，当时可能脑子犯抽了，就想着用switch case的结构，但是case后面要的是常量表达式啊！也就是只能表达x==10000这种意思；这种范围的，还是乖乖用if-else比较好<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8">😂</span></p>
+<ul>
+<li>编译报错：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317175727463.png" alt="image-20210317175727463"></p>
+<p>​	其实代码在devcpp里面是没有问题的，但是牛客网的线上编译器说并不是所有控制流都有返回值……所以我又补了一个else在最后。</p>
+<h3 id="优化-v2"><a class="header-anchor" href="#优化-v2">¶</a>优化</h3>
+<p>看到书上的解法……我瞬间觉得我上一题白做了哈哈哈哈<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f61d.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f61d.png?v8">😝</span></p>
+<p>反序数这道题中编写了一个求反序数的函数，与这道题的关联在于：</p>
+<p>对称数等价于一个数与它的反序数相等！</p>
+<p>所以我们来看看书上的解法：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Reverse</span><span class="params">(<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> revx=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(x!=<span class="number">0</span>){</span><br><span class="line">		revx*=<span class="number">10</span>;	<span class="comment">//revx右边补0 </span></span><br><span class="line">		revx+=x%<span class="number">10</span>;	<span class="comment">//revx加上x现在的个位数 </span></span><br><span class="line">		x/=<span class="number">10</span>;	<span class="comment">//x抹掉现在的个位 </span></span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> revx; </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">256</span>;i++){</span><br><span class="line">		<span class="keyword">if</span>(i*i==Reverse(i*i)){</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,i);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>运行时间：3ms<br>
+超过23.86%用C++提交的代码</p>
+<p>占用内存：376KB<br>
+超过26.88%用C++提交的代码</p>
+<p>（啊哈哈哈时间内存也没有好太多，但是代码优雅多了<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8">😂</span>）</p>
+<h2 id="与七无关的数"><a class="header-anchor" href="#与七无关的数">¶</a>与七无关的数</h2>
+<h3 id="题目-v4"><a class="header-anchor" href="#题目-v4">¶</a>题目</h3>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317181808685.png" alt="image-20210317181808685" style="width:80%;">
+<h3 id="分析-v3"><a class="header-anchor" href="#分析-v3">¶</a>分析</h3>
+<p>如何处理这种有多个案例的情况？（没有输入终止条件）</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/chch1996/article/details/106317493%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E6%84%9F%E8%A7%89%E4%B8%8D%E9%94%99">https://blog.csdn.net/chch1996/article/details/106317493这个博客感觉不错</a></p>
+<p>这里先试下while(cin&gt;&gt;n)吧</p>
+<h3 id="代码-v4"><a class="header-anchor" href="#代码-v4">¶</a>代码</h3>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">contain7</span><span class="params">(<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">	<span class="keyword">while</span>(x!=<span class="number">0</span>){</span><br><span class="line">		<span class="keyword">if</span>(x%<span class="number">10</span>==<span class="number">7</span>){</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">			x=x/<span class="number">10</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n){</span><br><span class="line">		<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++){</span><br><span class="line">			<span class="keyword">if</span>(!(i%<span class="number">7</span>==<span class="number">0</span>||contain7(i))){</span><br><span class="line">				sum+=i*i;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;sum&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	}</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="运行效率-v4"><a class="header-anchor" href="#运行效率-v4">¶</a>运行效率</h3>
+<p>运行时间：9ms<br>
+超过6.51%用C++提交的代码</p>
+<p>占用内存：504KB<br>
+超过37.68%用C++提交的代码</p>
+<h2 id="百鸡问题"><a class="header-anchor" href="#百鸡问题">¶</a>百鸡问题</h2>
+<h3 id="题目-v5"><a class="header-anchor" href="#题目-v5">¶</a>题目</h3>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317190431356.png" alt="image-20210317190431356"></p>
+<h3 id="分析-v4"><a class="header-anchor" href="#分析-v4">¶</a>分析</h3>
+<p>首先，我们可以用总钱数n去除以每种鸡的单价，确定一个上限，方便搜索</p>
+<h3 id="代码-v5"><a class="header-anchor" href="#代码-v5">¶</a>代码</h3>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n){</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">0</span>;x&lt;=n/<span class="number">5</span>&amp;&amp;x&lt;=<span class="number">100</span>;x++){</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> y=<span class="number">0</span>;y&lt;=n/<span class="number">3</span>&amp;&amp;y&lt;=<span class="number">100</span>;y++){</span><br><span class="line">            	<span class="keyword">if</span>(<span class="number">100</span>-x-y&gt;=<span class="number">0</span>){</span><br><span class="line">                	<span class="keyword">if</span>((<span class="number">14</span>*x+<span class="number">8</span>*y+<span class="number">100</span>)&lt;=n*<span class="number">3</span>){</span><br><span class="line">                    	<span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;x&lt;&lt;<span class="string">",y="</span>&lt;&lt;y&lt;&lt;<span class="string">",z="</span>&lt;&lt;<span class="number">100</span>-x-y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                	}            		</span><br><span class="line">				}</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="运行效率-v5"><a class="header-anchor" href="#运行效率-v5">¶</a>运行效率</h3>
+<p>运行时间：13ms<br>
+超过11.00%用C++提交的代码</p>
+<p>占用内存：384KB<br>
+超过67.51%用C++提交的代码</p>
+<h3 id="错误-v2"><a class="header-anchor" href="#错误-v2">¶</a>错误</h3>
+<p>这道题多了好多次，每次都挺有趣的……</p>
+<ul>
+<li>
+<p>想当然而写错了数：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n){</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">0</span>;x&lt;=n/<span class="number">5</span>;x++){</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> y=<span class="number">0</span>;y&lt;=n/<span class="number">3</span>;y++){</span><br><span class="line">                <span class="keyword">if</span>((<span class="number">14</span>*x+<span class="number">8</span>*y+<span class="number">100</span>)/<span class="number">3</span>&lt;=<span class="number">100</span>){	<span class="comment">//这里不应该是100，应该是n啊！！！</span></span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;x&lt;&lt;<span class="string">",y="</span>&lt;&lt;y&lt;&lt;<span class="string">",z="</span>&lt;&lt;<span class="number">100</span>-x-y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>计算出错：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n){</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">0</span>;x&lt;=n/<span class="number">5</span>;x++){</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> y=<span class="number">0</span>;y&lt;=n/<span class="number">3</span>;y++){</span><br><span class="line">                <span class="keyword">if</span>((<span class="number">14</span>*x+<span class="number">8</span>*y+<span class="number">100</span>)/<span class="number">3</span>&lt;=n){	</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;x&lt;&lt;<span class="string">",y="</span>&lt;&lt;y&lt;&lt;<span class="string">",z="</span>&lt;&lt;<span class="number">100</span>-x-y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>这个错在哪呢？其实比较细节，我们来看一下答案的对比：</p>
+<p>你期望输出的第 1 至 4 行与实际输出的第 1 至 5 行有不同</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>你期望的输出</th>
+<th></th>
+<th>实际输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>x=0,y=0,z=100</td>
+<td>1</td>
+<td>x=0,y=0,z=100</td>
+</tr>
+<tr>
+<td>2</td>
+<td>x=0,y=1,z=99</td>
+<td>2</td>
+<td>x=0,y=1,z=99</td>
+</tr>
+<tr>
+<td>3</td>
+<td>x=0,y=2,z=98</td>
+<td>3</td>
+<td>x=0,y=2,z=98</td>
+</tr>
+<tr>
+<td>4</td>
+<td>x=1,y=0,z=99</td>
+<td>4</td>
+<td>x=1,y=0,z=99</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>5</td>
+<td><strong>x=1,y=1,z=98</strong></td>
+</tr>
+</tbody>
+</table>
+<p>我们来算下：5*1+3*1+1/3 * 98=40.666666</p>
+<p>那看来是整除计算的问题了，我们把除3移到右边去乘3</p>
+</li>
+<li>
+<p>在n=500的时候又不能过了：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317195033703.png" alt="image-20210317195033703"></p>
+<p>注意到z变为了负值，所以我们应该限制x、y都在100以内，且z不能小于0</p>
+</li>
+</ul>
+<h2 id="Old-Bill"><a class="header-anchor" href="#Old-Bill">¶</a>Old Bill</h2>
+<h3 id="题目-v6"><a class="header-anchor" href="#题目-v6">¶</a>题目</h3>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317195937218.png" alt="image-20210317195937218"></p>
+<h3 id="分析-v5"><a class="header-anchor" href="#分析-v5">¶</a>分析</h3>
+<p>填上的两个数需要使补全之后的五位数可以整除火鸡的数量，那么就用一个双重循环来试吧</p>
+<h3 id="代码-v6"><a class="header-anchor" href="#代码-v6">¶</a>代码</h3>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> N,X,Y,Z;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;N&gt;&gt;X&gt;&gt;Y&gt;&gt;Z){</span><br><span class="line">		<span class="keyword">int</span> <span class="built_in">max</span>=<span class="number">0</span>,max_X=<span class="number">0</span>,max_Y;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">9</span>;i++){</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=<span class="number">9</span>;j++){</span><br><span class="line">				<span class="keyword">if</span>((i*<span class="number">10000</span>+X*<span class="number">1000</span>+Y*<span class="number">100</span>+Z*<span class="number">10</span>+j)%N==<span class="number">0</span>){</span><br><span class="line">					<span class="keyword">if</span>((i*<span class="number">10000</span>+X*<span class="number">1000</span>+Y*<span class="number">100</span>+Z*<span class="number">10</span>+j)/N&gt;<span class="built_in">max</span>){</span><br><span class="line">						<span class="built_in">max</span>=(i*<span class="number">10000</span>+X*<span class="number">1000</span>+Y*<span class="number">100</span>+Z*<span class="number">10</span>+j)/N;</span><br><span class="line">						max_X=i;</span><br><span class="line">						max_Y=j;</span><br><span class="line">					}	</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">		} </span><br><span class="line">		<span class="keyword">if</span>(max_X==<span class="number">0</span>){</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="number">0</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;max_X&lt;&lt;<span class="string">" "</span>&lt;&lt;max_Y&lt;&lt;<span class="string">" "</span>&lt;&lt;<span class="built_in">max</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		}</span><br><span class="line">	</span><br><span class="line">	}	 </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="运行效率-v6"><a class="header-anchor" href="#运行效率-v6">¶</a>运行效率</h3>
+<p>运行时间：6ms<br>
+超过21.77%用C++提交的代码</p>
+<p>占用内存：540KB<br>
+超过21.25%用C++提交的代码</p>
+<h3 id="错误-v3"><a class="header-anchor" href="#错误-v3">¶</a>错误</h3>
+<p>这道题比较坑的是没说什么时候输出0，还是我自己翻题解区才找到的qwq</p>
+<p>就是自己很巧妙的加了个cout&lt;&lt;0的地方，用初始化值来判断一下有没有进if里面</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9A%B4%E5%8A%9B%E6%B1%82%E8%A7%A3/" rel="tag"># 暴力求解</a>
+              <a href="/tags/%E6%9E%9A%E4%B8%BE/" rel="tag"># 枚举</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/17/%E5%85%B3%E4%BA%8E%E4%B8%AD%E6%96%AD%E7%9A%84%E5%87%A0%E4%B8%AA%E6%A6%82%E5%BF%B5/" rel="prev" title="关于中断的几个概念">
+      <i class="fa fa-chevron-left"></i> 关于中断的几个概念
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/22/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day4-%E6%8E%92%E5%BA%8F/" rel="next" title="小可的机试练习日记Day4-排序">
+      小可的机试练习日记Day4-排序 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">2.1 枚举</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#abc"><span class="nav-text">abc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87"><span class="nav-text">运行效率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E7%82%B9%E3%80%81%E7%BB%8F%E9%AA%8C%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-text">错误点、经验、总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%BA%8F%E6%95%B0"><span class="nav-text">反序数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE-v2"><span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-v2"><span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87-v2"><span class="nav-text">运行效率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-text">思考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%B9%B3%E6%96%B9%E6%95%B01"><span class="nav-text">对称平方数1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE-v3"><span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90-v2"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-v3"><span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87-v3"><span class="nav-text">运行效率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF"><span class="nav-text">错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96-v2"><span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8E%E4%B8%83%E6%97%A0%E5%85%B3%E7%9A%84%E6%95%B0"><span class="nav-text">与七无关的数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE-v4"><span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90-v3"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-v4"><span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87-v4"><span class="nav-text">运行效率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BE%E9%B8%A1%E9%97%AE%E9%A2%98"><span class="nav-text">百鸡问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE-v5"><span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90-v4"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-v5"><span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87-v5"><span class="nav-text">运行效率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF-v2"><span class="nav-text">错误</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Old-Bill"><span class="nav-text">Old Bill</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE-v6"><span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90-v5"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-v6"><span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87-v6"><span class="nav-text">运行效率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF-v3"><span class="nav-text">错误</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CrestinyCoco</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CrestinyCoco</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

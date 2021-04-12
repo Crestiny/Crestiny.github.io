@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[TOC] ¶1. Basics of Python ¶1.1 Basic data types ¶1.1.1 Numbers 认识一下这个type函数的用法，其它加减乘除的操作符和其他语言基本相同： 12345x &#x3D; 3print(x, type(x))&#x2F;&#x2F; 输出3 &lt;class &#39;int&#39;&gt;	&#x2F;&#x2F;中间有空格 值得注意的：Note that unlike many languages">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Numpy学习">
+<meta property="og:url" content="http://yoursite.com/2021/03/12/Python-Numpy%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="[TOC] ¶1. Basics of Python ¶1.1 Basic data types ¶1.1.1 Numbers 认识一下这个type函数的用法，其它加减乘除的操作符和其他语言基本相同： 12345x &#x3D; 3print(x, type(x))&#x2F;&#x2F; 输出3 &lt;class &#39;int&#39;&gt;	&#x2F;&#x2F;中间有空格 值得注意的：Note that unlike many languages">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317153915137.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317154029547.png">
+<meta property="article:published_time" content="2021-03-12T07:02:06.000Z">
+<meta property="article:modified_time" content="2021-03-17T07:41:19.287Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Numpy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317153915137.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/03/12/Python-Numpy%E5%AD%A6%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python Numpy学习 | Crestiny's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Crestiny's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Life is fantastic ! </p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/12/Python-Numpy%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python Numpy学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-12 15:02:06" itemprop="dateCreated datePublished" datetime="2021-03-12T15:02:06+08:00">2021-03-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-17 15:41:19" itemprop="dateModified" datetime="2021-03-17T15:41:19+08:00">2021-03-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/ML/" itemprop="url" rel="index"><span itemprop="name">ML</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[TOC]</p>
+<h2 id="1-Basics-of-Python"><a class="header-anchor" href="#1-Basics-of-Python">¶</a>1. Basics of Python</h2>
+<h3 id="1-1-Basic-data-types"><a class="header-anchor" href="#1-1-Basic-data-types">¶</a>1.1 Basic data types</h3>
+<h4 id="1-1-1-Numbers"><a class="header-anchor" href="#1-1-1-Numbers">¶</a>1.1.1 Numbers</h4>
+<p>认识一下这个type函数的用法，其它加减乘除的操作符和其他语言基本相同：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">3</span></span><br><span class="line">print(x, type(x))</span><br><span class="line"></span><br><span class="line">// 输出</span><br><span class="line"><span class="number">3</span> &lt;<span class="class"><span class="keyword">class</span> '<span class="title">int</span>'&gt;	//中间有空格</span></span><br></pre></td></tr></tbody></table></figure>
+<p>值得注意的：Note that unlike many languages, Python <strong>does not</strong> have unary increment (<strong>x++</strong>) or decrement (<strong>x–</strong>) operators.</p>
+<h4 id="1-1-2-Booleans"><a class="header-anchor" href="#1-1-2-Booleans">¶</a>1.1.2 Booleans</h4>
+<p>Python implements all of the usual operators for Boolean logic, but uses <strong>English words</strong> rather than symbols (<code>&amp;&amp;</code>, <code>||</code>, etc.):</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">t, f = <span class="literal">True</span>, <span class="literal">False</span></span><br><span class="line">print(type(t))</span><br><span class="line">print(t <span class="keyword">and</span> f) <span class="comment"># Logical AND;</span></span><br><span class="line">print(t <span class="keyword">or</span> f)  <span class="comment"># Logical OR;</span></span><br><span class="line">print(<span class="keyword">not</span> t)   <span class="comment"># Logical NOT;</span></span><br><span class="line">print(t != f)  <span class="comment"># Logical XOR;</span></span><br><span class="line"></span><br><span class="line">//输出</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">bool</span>'&gt;</span></span><br><span class="line"><span class="class"><span class="title">False</span></span></span><br><span class="line"><span class="class"><span class="title">True</span></span></span><br><span class="line"><span class="class"><span class="title">False</span></span></span><br><span class="line"><span class="class"><span class="title">True</span></span></span><br></pre></td></tr></tbody></table></figure>
+<p>这里额外探究一下布尔值和0/1的关系：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="literal">True</span> == <span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="literal">True</span> == <span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="literal">False</span> == <span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="literal">False</span> == <span class="number">2</span>)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="1-1-3-Strings"><a class="header-anchor" href="#1-1-3-Strings">¶</a>1.1.3 Strings</h4>
+<p>单引号双引号皆可，拼接字符串可以直接用＋号：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hw = hello + <span class="string">' '</span> + world  <span class="comment"># String concatenation</span></span><br><span class="line">print(hw)</span><br><span class="line"></span><br><span class="line">//输出</span><br><span class="line">hello world</span><br></pre></td></tr></tbody></table></figure>
+<p>另：可以用len(str)来输出字符串长度。</p>
+<p>字符串有很多函数可以用：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"hello"</span></span><br><span class="line">print(s.capitalize())  <span class="comment"># Capitalize a string</span></span><br><span class="line">print(s.upper())       <span class="comment"># Convert a string to uppercase; prints "HELLO"</span></span><br><span class="line">print(s.rjust(<span class="number">7</span>))      <span class="comment"># Right-justify a string, padding with spaces</span></span><br><span class="line">print(s.center(<span class="number">7</span>))     <span class="comment"># Center a string, padding with spaces</span></span><br><span class="line">print(s.replace(<span class="string">'l'</span>, <span class="string">'(ell)'</span>))  <span class="comment"># Replace all instances of one substring with another</span></span><br><span class="line">print(<span class="string">'  world '</span>.strip())  <span class="comment"># Strip leading and trailing whitespace</span></span><br><span class="line"></span><br><span class="line">//输出</span><br><span class="line">Hello</span><br><span class="line">HELLO</span><br><span class="line">  hello</span><br><span class="line"> hello </span><br><span class="line">he(ell)(ell)o</span><br><span class="line">world</span><br></pre></td></tr></tbody></table></figure>
+<p>格式化字符串：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hw12 = <span class="string">'{} {} {}'</span>.format(hello, world, <span class="number">12</span>)  <span class="comment"># string formatting</span></span><br><span class="line">print(hw12)</span><br><span class="line"></span><br><span class="line">//输出</span><br><span class="line">hello world <span class="number">12</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="1-2-Containers"><a class="header-anchor" href="#1-2-Containers">¶</a>1.2 Containers</h3>
+<h4 id="1-2-1-Lists"><a class="header-anchor" href="#1-2-1-Lists">¶</a>1.2.1 Lists</h4>
+<p>列表在Python中相当于数组，但可以调整大小，并可以包含不同类型的元素:</p>
+<h4 id="1-2-2-Slicing"><a class="header-anchor" href="#1-2-2-Slicing">¶</a>1.2.2 Slicing</h4>
+<p>除了一次访问一个列表元素之外，Python还提供了简洁的语法来访问子列表;这就是所谓的<strong>切片:</strong></p>
+<h4 id="1-2-3-Loops"><a class="header-anchor" href="#1-2-3-Loops">¶</a>1.2.3 Loops</h4>
+<p>可以用for循环遍历列表元素</p>
+<h4 id="1-2-4-List-comprehensions"><a class="header-anchor" href="#1-2-4-List-comprehensions">¶</a>1.2.4 List comprehensions</h4>
+<p>可以用来简化代码：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nums = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">squares = [x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> nums]</span><br><span class="line">print(squares)</span><br><span class="line"></span><br><span class="line">//输出</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="1-2-5-Dictionaries"><a class="header-anchor" href="#1-2-5-Dictionaries">¶</a>1.2.5 Dictionaries</h4>
+<p>A dictionary stores <strong>(key, value) pairs</strong>, similar to a <code>Map</code> in Java or an object in Javascript.</p>
+<h4 id="1-2-6-Sets"><a class="header-anchor" href="#1-2-6-Sets">¶</a>1.2.6 Sets</h4>
+<p>集合是不同元素的无序集合。</p>
+<h4 id="1-2-7-Tuples"><a class="header-anchor" href="#1-2-7-Tuples">¶</a>1.2.7 Tuples</h4>
+<p>元组是一个(不可变的)有序的值列表。元组在很多方面与列表相似;最重要的区别之一是元组可以用作字典中的键，也可以用作集合的元素，而列表不能。</p>
+<h3 id="1-3-Functions"><a class="header-anchor" href="#1-3-Functions">¶</a>1.3 Functions</h3>
+<p>Python functions are defined using the <code>def</code> keyword.</p>
+<h3 id="1-4-Classes"><a class="header-anchor" href="#1-4-Classes">¶</a>1.4 Classes</h3>
+<p>看个例子就懂了：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeter</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Constructor</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name  <span class="comment"># Create an instance variable</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Instance method</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">greet</span>(<span class="params">self, loud=False</span>):</span></span><br><span class="line">        <span class="keyword">if</span> loud:</span><br><span class="line">          print(<span class="string">'HELLO, {}'</span>.format(self.name.upper()))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">          print(<span class="string">'Hello, {}!'</span>.format(self.name))</span><br><span class="line"></span><br><span class="line">g = Greeter(<span class="string">'Fred'</span>)  <span class="comment"># Construct an instance of the Greeter class</span></span><br><span class="line">g.greet()            <span class="comment"># Call an instance method; prints "Hello, Fred"</span></span><br><span class="line">g.greet(loud=<span class="literal">True</span>)   <span class="comment"># Call an instance method; prints "HELLO, FRED!"</span></span><br><span class="line"></span><br><span class="line">//输出</span><br><span class="line">Hello, Fred!</span><br><span class="line">HELLO, FRED</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="2-Numpy"><a class="header-anchor" href="#2-Numpy">¶</a>2. Numpy</h2>
+<p>Numpy是Python中用于<strong>科学计算</strong>的核心库。它提供了一个高性能的<strong>多维数组对象</strong>，以及用于<strong>处理这些数组的工具</strong>。</p>
+<p>使用的话，首先要<code>import numpy as np</code></p>
+<h3 id="2-1-Arrays"><a class="header-anchor" href="#2-1-Arrays">¶</a>2.1 Arrays</h3>
+<p>A numpy array is a grid of values, all of <strong>the same type</strong>, and is indexed by a tuple of <strong>nonnegative integers.</strong> The number of dimensions is the rank of the array; <strong>the shape of an array is a tuple of integers giving the size of the array along each dimension.</strong></p>
+<p>初始化与元素访问：</p>
+<p>We can initialize numpy arrays from <strong>nested Python lists</strong>, and access elements using <strong>square brackets:</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])  <span class="comment"># Create a rank 1 array</span></span><br><span class="line">print(type(a), a.shape, a[<span class="number">0</span>], a[<span class="number">1</span>], a[<span class="number">2</span>])</span><br><span class="line">a[<span class="number">0</span>] = <span class="number">5</span>                 <span class="comment"># Change an element of the array</span></span><br><span class="line">print(a)</span><br><span class="line"></span><br><span class="line">//输出</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">numpy</span>.<span class="title">ndarray</span>'&gt; (<span class="params"><span class="number">3</span>,</span>) 1 2 3</span></span><br><span class="line"><span class="class">[5 2 3]</span></span><br></pre></td></tr></tbody></table></figure>
+<p>这里shape只有一个数——3，因为这里定义的array就只有第一维，且元素个数为3</p>
+<p>再来看另一个数组的shape：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">b = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]])   <span class="comment"># Create a rank 2 array</span></span><br><span class="line">print(b)</span><br><span class="line">print(b.shape)</span><br><span class="line">print(b[<span class="number">0</span>, <span class="number">0</span>], b[<span class="number">0</span>, <span class="number">1</span>], b[<span class="number">1</span>, <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">//输出</span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]</span><br><span class="line">(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">4</span></span><br></pre></td></tr></tbody></table></figure>
+<p>shape为（2,3），因为第一维（行）有2行，第二维（列）有3列</p>
+<p>除了这种初始化方法，还有别的函数可以实现：比如np.zeros、np.ones等等</p>
+<h3 id="2-2-Array-indexing"><a class="header-anchor" href="#2-2-Array-indexing">¶</a>2.2 Array indexing</h3>
+<ul>
+<li>
+<p>Slicing: Similar to Python lists, numpy arrays can be sliced. Since arrays may be multidimensional, you must specify a slice for <strong>each dimension of the array</strong>:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create the following rank 2 array with shape (3, 4)</span></span><br><span class="line"><span class="comment"># [[ 1  2  3  4]</span></span><br><span class="line"><span class="comment">#  [ 5  6  7  8]</span></span><br><span class="line"><span class="comment">#  [ 9 10 11 12]]</span></span><br><span class="line">a = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>], [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>], [<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Use slicing to pull out the subarray consisting of the first 2 rows</span></span><br><span class="line"><span class="comment"># and columns 1 and 2; b is the following array of shape (2, 2):</span></span><br><span class="line"><span class="comment"># [[2 3]</span></span><br><span class="line"><span class="comment">#  [6 7]]</span></span><br><span class="line">b = a[:<span class="number">2</span>, <span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">print(b)</span><br><span class="line"></span><br><span class="line">//输出</span><br><span class="line">[[<span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">6</span> <span class="number">7</span>]]</span><br></pre></td></tr></tbody></table></figure>
+<p>A slice of an array is a view into the same data, so modifying it will <strong>modify the original array</strong>.（好奇妙也有点危险的性质<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8">😄</span>）</p>
+</li>
+<li>
+<p>Integer array indexing: When you index into numpy arrays using slicing, the resulting array view will always be a subarray of the original array. <strong>In contrast, integer array indexing allows you to construct arbitrary arrays using the data from another array.</strong></p>
+</li>
+</ul>
+<h3 id="2-3-Datatypes"><a class="header-anchor" href="#2-3-Datatypes">¶</a>2.3 Datatypes</h3>
+<p>每个numpy数组都是由相同类型的元素组成的网格。Numpy提供了大量的数字数据类型，您可以使用它们来构造数组。Numpy在创建数组时尝试猜测数据类型，但是构造数组的函数通常还包含一个可选参数来显式指定数据类型。下面是一个例子:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">1</span>, <span class="number">2</span>])  <span class="comment"># Let numpy choose the datatype</span></span><br><span class="line">y = np.array([<span class="number">1.0</span>, <span class="number">2.0</span>])  <span class="comment"># Let numpy choose the datatype</span></span><br><span class="line">z = np.array([<span class="number">1</span>, <span class="number">2</span>], dtype=np.int64)  <span class="comment"># Force a particular datatype</span></span><br><span class="line"></span><br><span class="line">print(x.dtype, y.dtype, z.dtype)</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="2-4-Array-math"><a class="header-anchor" href="#2-4-Array-math">¶</a>2.4 Array math</h3>
+<p>有些操作符可以直接对两个数组作运算，还有一些numpy的函数也可以用来进行数组间的运算。</p>
+<h3 id="2-5-Broadcasting"><a class="header-anchor" href="#2-5-Broadcasting">¶</a>2.5 Broadcasting</h3>
+<p>Broadcasting is a powerful mechanism that allows numpy to work with arrays of different shapes when performing arithmetic operations. Frequently we have a smaller array and a larger array, and we want to use the smaller array multiple times to perform some operation on the larger array.</p>
+<h2 id="3-Matplotlib"><a class="header-anchor" href="#3-Matplotlib">¶</a>3. Matplotlib</h2>
+<p>使用：<code>import matplotlib.pyplot as plt</code></p>
+<h3 id="3-1-Plotting"><a class="header-anchor" href="#3-1-Plotting">¶</a>3.1 Plotting</h3>
+<p>The most important function in <code>matplotlib</code> is <strong>plot</strong>, which allows you to plot 2D data. Here is a simple example:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Compute the x and y coordinates for points on a sine curve</span></span><br><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">3</span> * np.pi, <span class="number">0.1</span>)</span><br><span class="line">y = np.sin(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot the points using matplotlib</span></span><br><span class="line">plt.plot(x, y)</span><br></pre></td></tr></tbody></table></figure>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317153915137.png" alt="image-20210317153915137" style="width:500px">
+<h3 id="3-2-Subplots"><a class="header-anchor" href="#3-2-Subplots">¶</a>3.2 Subplots</h3>
+<p>You can <strong>plot different things in the same figure</strong> using the subplot function. Here is an example:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Compute the x and y coordinates for points on sine and cosine curves</span></span><br><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">3</span> * np.pi, <span class="number">0.1</span>)</span><br><span class="line">y_sin = np.sin(x)</span><br><span class="line">y_cos = np.cos(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set up a subplot grid that has height 2 and width 1,</span></span><br><span class="line"><span class="comment"># and set the first such subplot as active.</span></span><br><span class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Make the first plot</span></span><br><span class="line">plt.plot(x, y_sin)</span><br><span class="line">plt.title(<span class="string">'Sine'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set the second subplot as active, and make the second plot.</span></span><br><span class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">plt.plot(x, y_cos)</span><br><span class="line">plt.title(<span class="string">'Cosine'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Show the figure.</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></tbody></table></figure>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210317154029547.png" alt="image-20210317154029547" style="width:500px">
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Numpy/" rel="tag"># Numpy</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/05/Chapter1-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%B7%A5%E7%A8%8B%E4%B8%8E%E7%AE%A1%E7%90%86-%E7%BB%AA%E8%AE%BA/" rel="prev" title="Chapter1 信息安全工程与管理-绪论">
+      <i class="fa fa-chevron-left"></i> Chapter1 信息安全工程与管理-绪论
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/17/%E5%85%B3%E4%BA%8E%E4%B8%AD%E6%96%AD%E7%9A%84%E5%87%A0%E4%B8%AA%E6%A6%82%E5%BF%B5/" rel="next" title="关于中断的几个概念">
+      关于中断的几个概念 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Basics-of-Python"><span class="nav-text">1. Basics of Python</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Basic-data-types"><span class="nav-text">1.1 Basic data types</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-Numbers"><span class="nav-text">1.1.1 Numbers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-2-Booleans"><span class="nav-text">1.1.2 Booleans</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-3-Strings"><span class="nav-text">1.1.3 Strings</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Containers"><span class="nav-text">1.2 Containers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-Lists"><span class="nav-text">1.2.1 Lists</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-Slicing"><span class="nav-text">1.2.2 Slicing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-Loops"><span class="nav-text">1.2.3 Loops</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-4-List-comprehensions"><span class="nav-text">1.2.4 List comprehensions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-5-Dictionaries"><span class="nav-text">1.2.5 Dictionaries</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-6-Sets"><span class="nav-text">1.2.6 Sets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-7-Tuples"><span class="nav-text">1.2.7 Tuples</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Functions"><span class="nav-text">1.3 Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-Classes"><span class="nav-text">1.4 Classes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Numpy"><span class="nav-text">2. Numpy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Arrays"><span class="nav-text">2.1 Arrays</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Array-indexing"><span class="nav-text">2.2 Array indexing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Datatypes"><span class="nav-text">2.3 Datatypes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Array-math"><span class="nav-text">2.4 Array math</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-Broadcasting"><span class="nav-text">2.5 Broadcasting</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Matplotlib"><span class="nav-text">3. Matplotlib</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Plotting"><span class="nav-text">3.1 Plotting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Subplots"><span class="nav-text">3.2 Subplots</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CrestinyCoco</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CrestinyCoco</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

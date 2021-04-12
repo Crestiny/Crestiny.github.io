@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="¶4.1 Linux的内存管理概述 Linux是多用户多任务的，并实现了虚存技术 ¶4.1.1 虚拟内存、内核空间和用户空间 Linux简化了分段机制，使得虚拟地址和线性地址总是一致的。 虚拟地址空间是4GB，最高1GB是内核空间（放的是内核代码和数据），下面3GB是用户空间（放的是用户代码和数据）。内核空间是所有进程共享的，结构示意图如下：  任何一个时刻CPU上只有一个进程在运行，所以每一时刻">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter4 内存寻址">
+<meta property="og:url" content="http://yoursite.com/2021/02/24/Chapter4-%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="¶4.1 Linux的内存管理概述 Linux是多用户多任务的，并实现了虚存技术 ¶4.1.1 虚拟内存、内核空间和用户空间 Linux简化了分段机制，使得虚拟地址和线性地址总是一致的。 虚拟地址空间是4GB，最高1GB是内核空间（放的是内核代码和数据），下面3GB是用户空间（放的是用户代码和数据）。内核空间是所有进程共享的，结构示意图如下：  任何一个时刻CPU上只有一个进程在运行，所以每一时刻">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224165919056.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224172008342.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224173830494.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224231527062.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210225001310006.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210225143752072.png">
+<meta property="article:published_time" content="2021-02-24T01:58:54.000Z">
+<meta property="article:modified_time" content="2021-02-26T08:38:58.457Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224165919056.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/02/24/Chapter4-%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Chapter4 内存寻址 | Crestiny's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Crestiny's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Life is fantastic ! </p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/24/Chapter4-%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrestinyCoco">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Crestiny's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Chapter4 内存寻址
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-24 09:58:54" itemprop="dateCreated datePublished" datetime="2021-02-24T09:58:54+08:00">2021-02-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-26 16:38:58" itemprop="dateModified" datetime="2021-02-26T16:38:58+08:00">2021-02-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index"><span itemprop="name">Courses</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/%E3%80%8ALinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8-E2-%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《Linux操作系统原理与应用(E2)》</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="4-1-Linux的内存管理概述"><a class="header-anchor" href="#4-1-Linux的内存管理概述">¶</a>4.1 Linux的内存管理概述</h2>
+<p>Linux是多用户多任务的，并实现了虚存技术</p>
+<h3 id="4-1-1-虚拟内存、内核空间和用户空间"><a class="header-anchor" href="#4-1-1-虚拟内存、内核空间和用户空间">¶</a>4.1.1 虚拟内存、内核空间和用户空间</h3>
+<p>Linux简化了分段机制，使得虚拟地址和线性地址总是一致的。</p>
+<p>虚拟地址空间是4GB，最高1GB是内核空间（放的是内核代码和数据），下面3GB是用户空间（放的是用户代码和数据）。内核空间是所有进程共享的，结构示意图如下：</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224165919056.png" alt="image-20210224165919056" style="height:250px;width:500px">
+<p>任何一个时刻CPU上只有一个进程在运行，所以每一时刻系统都只有一个4GB的虚拟地址空间。</p>
+<p>**用户空间不是被进程共享的，而是被进程隔离的。**不同的进程的同一个地址对应的是不同的内容哦。这是为什么呢？</p>
+<p>因为CPU将虚拟地址转换为物理地址，靠的是每个进程的页表；既然每个进程的页表不同，那么转换的结果也就不同了。</p>
+<p><strong>内核空间中的内核程序，和用户空间中的用户程序，它们编译链接后形成的地址空间是一个虚拟地址空间。</strong></p>
+<h4 id="1-内核空间到物理内存的映射"><a class="header-anchor" href="#1-内核空间到物理内存的映射">¶</a>1. 内核空间到物理内存的映射</h4>
+<p>见下图：</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224172008342.png" alt="image-20210224172008342" style="height:400px;width:430px">
+<h4 id="2-内核映像"><a class="header-anchor" href="#2-内核映像">¶</a>2. 内核映像</h4>
+<p>内核映像这个词听起来比较抽象，它其实是：内核的代码和数据。</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224173830494.png" alt="image-20210224173830494" style="height:150px;width:700px">
+<p>（这一段我看的好晕QWQ）</p>
+<h3 id="4-1-2-虚拟内存实现机制间的关系"><a class="header-anchor" href="#4-1-2-虚拟内存实现机制间的关系">¶</a>4.1.2 虚拟内存实现机制间的关系</h3>
+<p>实现虚存需要很多机制的支持，比如：</p>
+<ul>
+<li>地址映射机制</li>
+<li>请页机制</li>
+<li>内存分配和回收机制</li>
+<li>交换机制</li>
+<li>缓存和刷新机制</li>
+</ul>
+<p>它们之间的关系如下图所示：</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224231527062.png" alt="image-20210224231527062" style="height:330px;width:700px">
+<h2 id="4-2-进程的用户空间管理"><a class="header-anchor" href="#4-2-进程的用户空间管理">¶</a>4.2 进程的用户空间管理</h2>
+<p>每个进程最大可以拥有3GB的私有虚存空间，那么这3GB是如何划分的？如下图所示：</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210225001310006.png" alt="image-20210225001310006" style="height:500px;width:200px">
+<p>BSS=Block Started by Symbol，是未初始化的数据段。</p>
+<p>内核在创建进程时，并不是为整个用户空间都分配物理空间，而是采用请页的方法（按需调页）</p>
+<h3 id="4-2-1-进程用户空间的描述"><a class="header-anchor" href="#4-2-1-进程用户空间的描述">¶</a>4.2.1 进程用户空间的描述</h3>
+<p>用两个数据结构来描述：</p>
+<ul>
+<li>mm_struct内存描述符：描述一个进程的虚拟地址空间</li>
+<li>VM_AREA_STRUCT：用来描述进程用户空间的一个虚拟内存区间（虚存区=代码区+未初始化数据区+数据区+堆栈区）</li>
+</ul>
+<p>这两个结构之间也是有关系的</p>
+<h3 id="4-2-2-进程用户空间的创建"><a class="header-anchor" href="#4-2-2-进程用户空间的创建">¶</a>4.2.2 进程用户空间的创建</h3>
+<ul>
+<li>进程的用户空间创建，是fork()来完成的</li>
+<li>对于用户进程，子进程采用<strong>写时复制</strong>的方法逐渐建立完全属于自己的用户空间；内核进程，子进程继承父进程的用户空间</li>
+</ul>
+<h3 id="4-2-3-虚存映射"><a class="header-anchor" href="#4-2-3-虚存映射">¶</a>4.2.3 虚存映射</h3>
+<p>什么是虚存映射？</p>
+<p>首先来捋一下概念，程序运行时，它的代码数据等等（可执行映像），会从磁盘装入内存，但是内存分为有两种说法，一种是虚拟内存（用户空间、线性地址），一种是物理内存；Linux的实际做法，是把可执行映像装入虚存中，也就是用户空间。</p>
+<p>这样操作之后，对磁盘上文件的访问，就变成了对虚存区的访问，这就叫<strong>虚存映射</strong>。</p>
+<p>虚存映射分为三类：</p>
+<ul>
+<li>共享映射：几个进程共享这一映射（比如几个进程都用到同一文件，这份文件对应的虚存被大家共享？），一个进程对虚存区写，会改变磁盘文件，且其他进程能“看到”</li>
+<li>私有映射：这种映射只有读文件的功能，效率比共享映射高</li>
+<li>匿名映射：映射与文件无关（？？？）</li>
+</ul>
+<h3 id="4-2-4-进程的虚存区举例"><a class="header-anchor" href="#4-2-4-进程的虚存区举例">¶</a>4.2.4 进程的虚存区举例</h3>
+<h3 id="4-2-5-与用户空间相关的系统调用"><a class="header-anchor" href="#4-2-5-与用户空间相关的系统调用">¶</a>4.2.5 与用户空间相关的系统调用</h3>
+<ul>
+<li>fork()</li>
+<li>mmap()</li>
+<li>munmap()</li>
+<li>exec()</li>
+<li>Exit()</li>
+</ul>
+<h2 id="4-3-请页机制"><a class="header-anchor" href="#4-3-请页机制">¶</a>4.3 请页机制</h2>
+<p>为了节约物理内存，用户空间中的少量页才会被调入物理内存。当对应的虚存页面没有被装入物理内存时，就会报告页故障。页故障有以下三个产生原因：</p>
+<ul>
+<li>程序出错。例如要访问的虚地址超过用户空间范围</li>
+<li>缺页异常。就是虚地址有效但对应的物理页面不在范围内</li>
+<li>保护错误。要访问的虚地址被“写保护”，根据不同情况，处理方法不同</li>
+</ul>
+<p>缺页异常整个处理流程（简单版和完整版）：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210225143752072.png" alt="image-20210225143752072"></p>
+<h3 id="4-3-2-请求调页"><a class="header-anchor" href="#4-3-2-请求调页">¶</a>4.3.2 请求调页</h3>
+<p>请求调页大部分还是好处多多的，但是也要付出额外的开销：浪费CPU的周期去处理缺页异常。不过幸好，按规律来说，缺页异常算是稀有事件。</p>
+<p>有两种情况，被寻址的页面可以不在物理内存中：（？？？）</p>
+<ul>
+<li>进程永远也没有访问到这个页</li>
+<li>进程已经访问过这个页，但这个页的内容被临时保存在磁盘上</li>
+</ul>
+<h3 id="4-3-3-写时复制"><a class="header-anchor" href="#4-3-3-写时复制">¶</a>4.3.3 写时复制</h3>
+<p>写时复制是一种可以推迟甚至免除拷贝数据的技术</p>
+<h2 id="4-4-物理内存分配与回收"><a class="header-anchor" href="#4-4-物理内存分配与回收">¶</a>4.4 物理内存分配与回收</h2>
+<h3 id="4-4-1-页描述符"><a class="header-anchor" href="#4-4-1-页描述符">¶</a>4.4.1 页描述符</h3>
+<p>从虚存的角度来看，页就是最小单位。</p>
+<p>内核用struct page结构来表示系统中的每个物理页（也叫作页描述符）</p>
+<h3 id="4-4-2-伙伴算法"><a class="header-anchor" href="#4-4-2-伙伴算法">¶</a>4.4.2 伙伴算法</h3>
+<p>看不太懂</p>
+<h3 id="4-4-3-物理页面的分配"><a class="header-anchor" href="#4-4-3-物理页面的分配">¶</a>4.4.3 物理页面的分配</h3>
+<p>Linux使用伙伴算法有效地分配和回收物理页块</p>
+<h3 id="4-4-4-物理页面的回收"><a class="header-anchor" href="#4-4-4-物理页面的回收">¶</a>4.4.4 物理页面的回收</h3>
+<p>页回收的过程与页分配的过程相反，只要可能，它就把小页块合并成大的页块</p>
+<h3 id="4-4-5-Slab分配机制"><a class="header-anchor" href="#4-4-5-Slab分配机制">¶</a>4.4.5 Slab分配机制</h3>
+<p>伙伴算法来做页分配的话，每次一个页面起步；但如果需要更少的空间，就用Slab</p>
+<h3 id="4-4-6-内核空间非连续内存区的分配"><a class="header-anchor" href="#4-4-6-内核空间非连续内存区的分配">¶</a>4.4.6 内核空间非连续内存区的分配</h3>
+<p>非连续内存位于3GB-4GB之间，是内核空间</p>
+<p>什么时候才会分配非连续的内存呢？</p>
+<h3 id="4-4-7-物理内存分配举例"><a class="header-anchor" href="#4-4-7-物理内存分配举例">¶</a>4.4.7 物理内存分配举例</h3>
+<ul>
+<li>伙伴算法的_get_free_pages()能分配一个或多个连续的物理页面</li>
+<li>kmalloc()可以为不足一个页面的需求分配内存</li>
+<li>vmalloc()可以获得大块的内存区</li>
+</ul>
+<h2 id="4-5-交换机制"><a class="header-anchor" href="#4-5-交换机制">¶</a>4.5 交换机制</h2>
+<p>当物理内存不足时，Linux内存管理子系统需要释放部分物理内存页面</p>
+<h3 id="4-5-1-交换的基本原理"><a class="header-anchor" href="#4-5-1-交换的基本原理">¶</a>4.5.1 交换的基本原理</h3>
+<p>页面交换是用时间换空间，要考虑以下三个因素：</p>
+<ul>
+<li>哪种页面被换出</li>
+<li>如何在交换区中存放页面</li>
+<li>如何选择被交换出的页面</li>
+</ul>
+<h4 id="1-哪种页面被换出"><a class="header-anchor" href="#1-哪种页面被换出">¶</a>1. 哪种页面被换出</h4>
+<p>映射到用户空间的页面可以被换出，内核空间的不会被换出</p>
+<h4 id="2-如何在交换区中存放页面"><a class="header-anchor" href="#2-如何在交换区中存放页面">¶</a>2. 如何在交换区中存放页面</h4>
+<p>交换区也是被划分成页面大小的一块一块的，每一块叫一个页插槽；也就是说，一个物理页面插入一个插槽中。</p>
+<p>存到交换区中时，要尽量把页面放在相邻的插槽中。</p>
+<h4 id="3-如何选择被交换出的页面"><a class="header-anchor" href="#3-如何选择被交换出的页面">¶</a>3. 如何选择被交换出的页面</h4>
+<p>有几种不同的策略可供讨论：</p>
+<ul>
+<li>需要时才交换：每当缺页异常发生时，就给它分配一个物理页面</li>
+<li>系统空闲时才交换：（这是积极的交换策略）预先腾出一些页面，维持空闲区域，使得发生缺页的时候总有位置可用</li>
+<li>换出但不立即释放：将释放推迟到必要时才进行</li>
+<li>把页面换出推迟到不能再推迟为止：</li>
+</ul>
+<h3 id="4-5-2-页面交换守护进程kswapd"><a class="header-anchor" href="#4-5-2-页面交换守护进程kswapd">¶</a>4.5.2 页面交换守护进程kswapd</h3>
+<p>为了避免在换页的时候临时去处理从而增加CPU的负担，所以提前用这个进程来定期将页面换出</p>
+<h2 id="4-6-内存管理实例"><a class="header-anchor" href="#4-6-内存管理实例">¶</a>4.6 内存管理实例</h2>
+<p>这一节中我们要做的：</p>
+<p>将内核的一部分虚拟内存映射到用户空间</p>
+<h3 id="4-6-1-相关背景知识"><a class="header-anchor" href="#4-6-1-相关背景知识">¶</a>4.6.1 相关背景知识</h3>
+<p>在内核空间中，用kmalloc()分配连续物理空间，用vmalloc()分配非连续物理空间</p>
+<p><strong>内核虚地址-PAGE_OFFSET=实际的物理地址</strong></p>
+<h3 id="4-6-2-代码体系结构介绍"><a class="header-anchor" href="#4-6-2-代码体系结构介绍">¶</a>4.6.2 代码体系结构介绍</h3>
+<p>虚拟字符设备驱动程序，可以将系统内核空间映射到用户空间，这其中包括了两步：</p>
+<ol>
+<li>找到内核空间的地址对应的物理地址</li>
+<li>建立新的用户页表项</li>
+</ol>
+<p>经过以上两步，可以使得用户空间和内核空间映射到同一物理地址；物理地址作为中介的话，访问用户空间就等于访问了内核空间</p>
+<p>【未完待续】</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/19/Chapter3-%E8%BF%9B%E7%A8%8B/" rel="prev" title="Chapter3 进程">
+      <i class="fa fa-chevron-left"></i> Chapter3 进程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/26/Chapter5-%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8/" rel="next" title="Chapter5 中断和异常">
+      Chapter5 中断和异常 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Linux%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%A6%82%E8%BF%B0"><span class="nav-text">4.1 Linux的内存管理概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-1-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E3%80%81%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4%E5%92%8C%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4"><span class="nav-text">4.1.1 虚拟内存、内核空间和用户空间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4%E5%88%B0%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E7%9A%84%E6%98%A0%E5%B0%84"><span class="nav-text">1. 内核空间到物理内存的映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%86%85%E6%A0%B8%E6%98%A0%E5%83%8F"><span class="nav-text">2. 内核映像</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-2-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">4.1.2 虚拟内存实现机制间的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86"><span class="nav-text">4.2 进程的用户空间管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-%E8%BF%9B%E7%A8%8B%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E7%9A%84%E6%8F%8F%E8%BF%B0"><span class="nav-text">4.2.1 进程用户空间的描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-%E8%BF%9B%E7%A8%8B%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-text">4.2.2 进程用户空间的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3-%E8%99%9A%E5%AD%98%E6%98%A0%E5%B0%84"><span class="nav-text">4.2.3 虚存映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-4-%E8%BF%9B%E7%A8%8B%E7%9A%84%E8%99%9A%E5%AD%98%E5%8C%BA%E4%B8%BE%E4%BE%8B"><span class="nav-text">4.2.4 进程的虚存区举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-5-%E4%B8%8E%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E7%9B%B8%E5%85%B3%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="nav-text">4.2.5 与用户空间相关的系统调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E8%AF%B7%E9%A1%B5%E6%9C%BA%E5%88%B6"><span class="nav-text">4.3 请页机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-%E8%AF%B7%E6%B1%82%E8%B0%83%E9%A1%B5"><span class="nav-text">4.3.2 请求调页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-%E5%86%99%E6%97%B6%E5%A4%8D%E5%88%B6"><span class="nav-text">4.3.3 写时复制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6"><span class="nav-text">4.4 物理内存分配与回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-1-%E9%A1%B5%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-text">4.4.1 页描述符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-2-%E4%BC%99%E4%BC%B4%E7%AE%97%E6%B3%95"><span class="nav-text">4.4.2 伙伴算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-3-%E7%89%A9%E7%90%86%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%88%86%E9%85%8D"><span class="nav-text">4.4.3 物理页面的分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-4-%E7%89%A9%E7%90%86%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%9B%9E%E6%94%B6"><span class="nav-text">4.4.4 物理页面的回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-5-Slab%E5%88%86%E9%85%8D%E6%9C%BA%E5%88%B6"><span class="nav-text">4.4.5 Slab分配机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-6-%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4%E9%9D%9E%E8%BF%9E%E7%BB%AD%E5%86%85%E5%AD%98%E5%8C%BA%E7%9A%84%E5%88%86%E9%85%8D"><span class="nav-text">4.4.6 内核空间非连续内存区的分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-7-%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%BE%E4%BE%8B"><span class="nav-text">4.4.7 物理内存分配举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%88%B6"><span class="nav-text">4.5 交换机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-1-%E4%BA%A4%E6%8D%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-text">4.5.1 交换的基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%93%AA%E7%A7%8D%E9%A1%B5%E9%9D%A2%E8%A2%AB%E6%8D%A2%E5%87%BA"><span class="nav-text">1. 哪种页面被换出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%A6%82%E4%BD%95%E5%9C%A8%E4%BA%A4%E6%8D%A2%E5%8C%BA%E4%B8%AD%E5%AD%98%E6%94%BE%E9%A1%B5%E9%9D%A2"><span class="nav-text">2. 如何在交换区中存放页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E8%A2%AB%E4%BA%A4%E6%8D%A2%E5%87%BA%E7%9A%84%E9%A1%B5%E9%9D%A2"><span class="nav-text">3. 如何选择被交换出的页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-2-%E9%A1%B5%E9%9D%A2%E4%BA%A4%E6%8D%A2%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8Bkswapd"><span class="nav-text">4.5.2 页面交换守护进程kswapd</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%AE%9E%E4%BE%8B"><span class="nav-text">4.6 内存管理实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-1-%E7%9B%B8%E5%85%B3%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86"><span class="nav-text">4.6.1 相关背景知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-2-%E4%BB%A3%E7%A0%81%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E4%BB%8B%E7%BB%8D"><span class="nav-text">4.6.2 代码体系结构介绍</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CrestinyCoco</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CrestinyCoco</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
