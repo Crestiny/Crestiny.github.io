@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#24367d"><meta name="author" content="CrestinyCoco"><meta name="copyright" content="CrestinyCoco"><meta name="generator" content="Hexo 6.0.0"><meta name="theme" content="hexo-theme-yun"><title>Chapter9 设备驱动 | Crestiny's Blog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/qie.ico"><link rel="mask-icon" href="/qie.ico" color="#24367d"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"crestiny.github.io","root":"/","title":["汉","月","沦","西","海"],"version":"1.6.2","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"search here","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"D:/sentences.json"},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="我们的目标是：控制设备就像操作普通文件一样简单 ¶9.1 概述 Linux系统的设计中有一个概念：把设备看成文件；具有以下含义：  每个设备对应一个文件名 对文件操作的系统调用大都适用于设备文件 设备文件逻辑上的空间是一个线性空间  对于一个具体的设备而言，文件操作和设备驱动是一个事物的不同层次；所以，一个系统可以被划分为三个层次：  应用  文件系统  设备驱动      详解一下这三个层次：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter9 设备驱动">
+<meta property="og:url" content="https://crestiny.github.io/2021/03/04/Chapter9-%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="我们的目标是：控制设备就像操作普通文件一样简单 ¶9.1 概述 Linux系统的设计中有一个概念：把设备看成文件；具有以下含义：  每个设备对应一个文件名 对文件操作的系统调用大都适用于设备文件 设备文件逻辑上的空间是一个线性空间  对于一个具体的设备而言，文件操作和设备驱动是一个事物的不同层次；所以，一个系统可以被划分为三个层次：  应用  文件系统  设备驱动      详解一下这三个层次：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210304205612407.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210304211006642.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210306192757023.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210306200956303.png">
+<meta property="article:published_time" content="2021-03-04T11:01:01.000Z">
+<meta property="article:modified_time" content="2021-03-06T16:31:56.383Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210304205612407.png"><script src="/js/ui/mode.js"></script><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info mickey-mouse"><a class="site-author-avatar" href="/about/" title="CrestinyCoco"><img width="96" loading="lazy" src="/images/sakura.jpg" alt="CrestinyCoco"><span class="site-author-status" title="Life is fantastic!"></span></a><div class="site-author-name"><a href="/about/">CrestinyCoco</a></div><span class="site-name">Crestiny's Blog</span><sub class="site-subtitle">Life is fantastic ! </sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">123</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">25</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">67</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=910426929&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/Crestiny" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:1043729366@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://m.weibo.cn/u/6869522716?uid=6869522716&amp;t=0&amp;luicode=10000011&amp;lfid=100103type%3D1%26q%3Dforeverwildsummer" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=1484676321" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/xi-shang-qin-heng" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/13347719" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/mmqrcode1658050168755.png" title="微信" target="_blank" style="color:#1AAD19"><i class="ri:wechat-2-line"></i></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/about/white-qrcode-and-search.jpg" title="微信公众号" target="_blank" style="color:#1AAD19"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat-2-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://twitter.com/YunYouJun" title="Twitter" target="_blank" style="color:#1da1f2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-twitter-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://t.me/elpsycn" title="Telegram Channel" target="_blank" style="color:#0088CC"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-telegram-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:me@yunyoujun.cn" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://travellings.link" title="Travelling" target="_blank" style="color:var(--hty-text-color)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-train-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:#e6c35c"><i class="ri:folder-user-line"></i></a><a class="links-item hty-icon-button" href="/albums/" title="相册集" style="color:#00008b"><i class="ri:book-mark-line"></i></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">9.1 概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6"><span class="toc-number">2.</span> <span class="toc-text">9.2 设备驱动程序框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-I-O%E7%A9%BA%E9%97%B4%E7%9A%84%E7%AE%A1%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">9.3 I&#x2F;O空间的管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-1-I-O%E7%AB%AF%E5%8F%A3%E5%92%8CI-O%E5%86%85%E5%AD%98"><span class="toc-number">3.1.</span> <span class="toc-text">9.3.1 I&#x2F;O端口和I&#x2F;O内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-2-I-O%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text">9.3.2 I&#x2F;O资源管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Linux%E5%AF%B9I-O%E8%B5%84%E6%BA%90%E7%9A%84%E6%8F%8F%E8%BF%B0"><span class="toc-number">3.2.1.</span> <span class="toc-text">1. Linux对I&#x2F;O资源的描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%AE%A1%E7%90%86I-O%E5%8C%BA%E5%9F%9F%E8%B5%84%E6%BA%90"><span class="toc-number">3.2.2.</span> <span class="toc-text">2. 管理I&#x2F;O区域资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%AE%A1%E7%90%86I-O%E7%AB%AF%E5%8F%A3%E8%B5%84%E6%BA%90"><span class="toc-number">3.2.3.</span> <span class="toc-text">3. 管理I&#x2F;O端口资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%AE%A1%E7%90%86I-O%E5%86%85%E5%AD%98%E8%B5%84%E6%BA%90"><span class="toc-number">3.2.4.</span> <span class="toc-text">4. 管理I&#x2F;O内存资源</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-3-%E8%AE%BF%E9%97%AEI-O%E7%AB%AF%E5%8F%A3%E7%A9%BA%E9%97%B4"><span class="toc-number">3.3.</span> <span class="toc-text">9.3.3 访问I&#x2F;O端口空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-4-%E8%AE%BF%E9%97%AEI-O%E5%86%85%E5%AD%98%E8%B5%84%E6%BA%90"><span class="toc-number">3.4.</span> <span class="toc-text">9.3.4 访问I&#x2F;O内存资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-4-%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F"><span class="toc-number">4.</span> <span class="toc-text">9.4 字符设备驱动程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-1-%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84struct-cdev"><span class="toc-number">4.1.</span> <span class="toc-text">9.4.1 字符设备的数据结构struct cdev</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-2-%E5%88%86%E9%85%8D%E5%92%8C%E9%87%8A%E6%94%BE%E8%AE%BE%E5%A4%87%E5%8F%B7"><span class="toc-number">4.2.</span> <span class="toc-text">9.4.2 分配和释放设备号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-3-%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">4.3.</span> <span class="toc-text">9.4.3 字符设备驱动的组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-4-%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%8D%B8%E8%BD%BD%E5%87%BD%E6%95%B0"><span class="toc-number">4.4.</span> <span class="toc-text">9.4.4 加载和卸载函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-5-%E5%AE%9E%E7%8E%B0file-operations%E4%B8%AD%E5%AE%9A%E4%B9%89%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">4.5.</span> <span class="toc-text">9.4.5 实现file_operations中定义的函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-5-%E5%9D%97%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F"><span class="toc-number">5.</span> <span class="toc-text">9.5 块驱动程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-5-1-%E5%9D%97%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%B3%A8%E5%86%8C"><span class="toc-number">5.1.</span> <span class="toc-text">9.5.1 块驱动程序的注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-5-2-%E5%9D%97%E8%AE%BE%E5%A4%87%E8%AF%B7%E6%B1%82"><span class="toc-number">5.2.</span> <span class="toc-text">9.5.2 块设备请求</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://crestiny.github.io/2021/03/04/Chapter9-%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="CrestinyCoco"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Crestiny's Blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Chapter9 设备驱动</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2021-03-04 19:01:01" itemprop="dateCreated datePublished" datetime="2021-03-04T19:01:01+08:00">2021-03-04</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <time title="修改时间：2021-03-07 00:31:56" itemprop="dateModified" datetime="2021-03-07T00:31:56+08:00">2021-03-07</time></div><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><i class="ri:eye-line"></i> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Courses/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Courses</span></a></span> > <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Courses/%E3%80%8ALinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8-E2-%E3%80%8B/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">《Linux操作系统原理与应用(E2)》</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Linux/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Linux</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#24367d;"><p>我们的目标是：控制设备就像操作普通文件一样简单</p>
+<h2 id="9-1-概述"><a class="header-anchor" href="#9-1-概述">¶</a>9.1 概述</h2>
+<p>Linux系统的设计中有一个概念：<strong>把设备看成文件</strong>；具有以下含义：</p>
+<ul>
+<li>每个设备对应一个文件名</li>
+<li>对文件操作的系统调用大都适用于设备文件</li>
+<li>设备文件逻辑上的空间是一个线性空间</li>
+</ul>
+<p>对于一个具体的设备而言，<strong>文件操作和设备驱动是一个事物的不同层次</strong>；所以，一个系统可以被划分为三个层次：</p>
+<ul>
+<li>应用
+<ul>
+<li>文件系统
+<ul>
+<li>设备驱动</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>详解一下这三个层次：</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210304205612407.png" alt="image-20210304205612407" style="height:500px;width:800px">
+<p>Linux将设备分成三大类：</p>
+<ul>
+<li>块设备</li>
+<li>字符设备</li>
+<li>网络设备</li>
+</ul>
+<p><strong>对于不同的设备，其文件系统层的厚度不同</strong></p>
+<p><strong>Linux驱动在本质上就是一种软件程序</strong>：上层软件可以<strong>不需要了解硬件特性</strong>，仅通过驱动提供的接口与计算机硬件进行通信</p>
+<p><strong>系统调用</strong>是内核和应用程序之间的接口；<strong>驱动程序</strong>是内核和硬件之间的接口</p>
+<p>下图说明了用户进程请求设备进行输入/输出的简单流程：</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210304211006642.png" alt="image-20210304211006642" style="height:360px;width:400px">
+<p><strong>上一层的抽象屏蔽了下一层的特性</strong></p>
+<h2 id="9-2-设备驱动程序框架"><a class="header-anchor" href="#9-2-设备驱动程序框架">¶</a>9.2 设备驱动程序框架</h2>
+<p>设备驱动程序，一头连了外设，一头连了内核；后者由DDI/DKI规范来规范（好拗口<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8">😂</span>）</p>
+<p>Linux的设备驱动程序与外设的接口可以分为以下三个部分：</p>
+<p>（1）驱动程序与<strong>内核</strong>的接口：通过数据结构file_operations来完成——驱动程序的核心部分</p>
+<p>（2）驱动程序与<strong>系统引导</strong>的接口：利用驱动程序对设备进行初始化</p>
+<p>（3）驱动程序与<strong>设备</strong>的接口：描述了驱动设备如何与设备进行交互，这与具体设备密切相关</p>
+<p>用户进程是通过file结构与<strong>文件或者设备</strong>进行交互的——因为设备也是纳入到文件系统的框架之下的</p>
+<p>这边研究一下框架，有点点没搞懂——<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f61b.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f61b.png?v8">😛</span></p>
+<ul>
+<li>
+<p>file结构：用户进程是通过file结构与<strong>文件或者设备</strong>进行交互的</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">file</span> {</span></span><br><span class="line">    ...</span><br><span class="line">        <span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span> *<span class="title">f_op</span>;</span></span><br><span class="line">    ...</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>file_operation结构：file中的一部分</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span>{</span></span><br><span class="line">    <span class="keyword">int</span> (*open) (struct inode*, struct file*);	<span class="comment">//打开</span></span><br><span class="line">    <span class="keyword">int</span> (*close) (struct inode*, struct file*);	  <span class="comment">//关闭</span></span><br><span class="line">    <span class="keyword">loff_t</span> (*llseek) (struct file*, <span class="keyword">loff_t</span>, <span class="keyword">int</span>);	<span class="comment">//修改文件当前的读写位置</span></span><br><span class="line">    <span class="keyword">ssize_t</span> (*read) (struct file*, <span class="keyword">char</span> *, <span class="keyword">size_t</span>, <span class="keyword">loff_t</span> *); 	<span class="comment">//从设备中同步读取数据</span></span><br><span class="line">    <span class="keyword">ssize_t</span>  (*write) (struct file*,<span class="keyword">const</span> <span class="keyword">char</span>*, <span class="keyword">size_t</span>, <span class="keyword">loff_t</span> * );	<span class="comment">//向设备中发送数据</span></span><br><span class="line">    <span class="keyword">int</span> (*mmap) (struct file*, struct vm_area_struct *);	<span class="comment">//将设备的内存映射到进程地址空间</span></span><br><span class="line">  <span class="keyword">int</span> (*ioctl) (struct inode*, struct file *, <span class="keyword">unsigned</span> <span class="keyword">int</span>, <span class="keyword">unsigned</span> <span class="keyword">long</span>);	<span class="comment">//执行设备上的I/O控制指令</span></span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="title">int</span> <span class="params">(*poll)</span> <span class="params">(struct file*, struct poll_table_struct *)</span></span>;	<span class="comment">//轮询，判断是否可以进行非阻塞的读取或者写入</span></span><br><span class="line">    ...</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>可以看出file_operation结构中对文件操作的函数只给出了定义，实现是留给具体的驱动程序来完成的。</p>
+<p><span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/2753.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/2753.png?v8">❓</span>听不懂<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8">😢</span></p>
+<p>下面是字符设备驱动程序打开、读、写以及I/O控制函数的模板：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">char_open</span><span class="params">(struct inode* inode, struct file* filp)</span></span>{	<span class="comment">//filp是文件结构的指针</span></span><br><span class="line">    ...</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">xxx_read</span><span class="params">(struct file* filp, char_user *buf, <span class="keyword">size_t</span> count, <span class="keyword">loff_t</span> *f_pos)</span></span>{		<span class="comment">//count是要读的字节数，f_pos是读的位置相对于文件开头的偏移量</span></span><br><span class="line">    																	   <span class="comment">//buf是用户空间的内存地址，在内核空间不能直接读写，所以调用了那两个copy函数</span></span><br><span class="line">    ...</span><br><span class="line">        copy_to_user(buf, ...,count);	<span class="comment">//原型：unsigned long copy_from_user(void* to, count void_user *from, unsigned long count);</span></span><br><span class="line">    ...</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">xxx_write</span><span class="params">(struct file* filp, char_user *buf, <span class="keyword">size_t</span> count, <span class="keyword">loff_t</span> *f_pos)</span></span>{</span><br><span class="line">    ...</span><br><span class="line">        copy_from_user(..., buf, count);	<span class="comment">//原型：unsigned long copy_to_user(void _user *to, count void *from, unsigned long count);</span></span><br><span class="line">    ...</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">xxx_ioctl</span><span class="params">(struct inode *inode, struct filr* filp, <span class="keyword">unsigned</span> <span class="keyword">int</span> cmd, <span class="keyword">unsigned</span> <span class="keyword">long</span> arg)</span></span>{</span><br><span class="line">    ...</span><br><span class="line">        <span class="keyword">switch</span>(cmd){</span><br><span class="line">                <span class="keyword">case</span> xxx_cmd1;</span><br><span class="line">                ...</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> xxx_cmd2;</span><br><span class="line">                ...</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:			<span class="comment">//不支持的命令</span></span><br><span class="line">                <span class="keyword">return</span> -enotty;</span><br><span class="line">        }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>这里研究一下书上的简单字符驱动程序mycdev.c：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210306192757023.png" alt="image-20210306192757023"></p>
+<p>​	看起来就是个模块源代码而已啊！什么是字符设备呢？</p>
+<blockquote>
+<p>字符设备是指在I/O传输过程中以字符为单位进行传输的设备，例如键盘，打印机等。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="9-3-I-O空间的管理"><a class="header-anchor" href="#9-3-I-O空间的管理">¶</a>9.3 I/O空间的管理</h2>
+<p>设备会提供一组寄存器来控制设备、读写设备以及获取设备的状态。这些寄存器就是控制寄存器、数据寄存器和状态寄存器（对应地）</p>
+<p>这些寄存器所在之处有两种情况：</p>
+<ul>
+<li>位于I/O空间时，被称为I/O端口</li>
+<li>位于内存空间时，被称为I/O内存</li>
+</ul>
+<h3 id="9-3-1-I-O端口和I-O内存"><a class="header-anchor" href="#9-3-1-I-O端口和I-O内存">¶</a>9.3.1 I/O端口和I/O内存</h3>
+<p>每个设备的I/O端口都要被组织成下图这样：</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210306200956303.png" alt="image-20210306200956303" style="height:300px;width:460px">
+<p>用法是这样子：</p>
+<ul>
+<li>CPU把要发给设备的命令写入<strong>控制寄存器</strong>，并从<strong>状态寄存器</strong>中读出表示设备内部状态的值</li>
+<li>CPU可以通过读取<strong>输入寄存器</strong>的内容从设备取得数据</li>
+<li>也可以通过向<strong>输出寄存器</strong>中写入字节而把数据输出到设备</li>
+</ul>
+<p>CPU要对外设I/O端口物理地址编址，方式有两种：</p>
+<ul>
+<li>I/O端口：CPU为外设专门实现了一个单独的地址空间，称为“I/O端口空间”；CPU通过设立专门的I/O指令来访问这一空间中的地址单元</li>
+<li>I/O内存：CPU只实现一个物理地址空间，外设I/O端口的物理地址就被映射到CPU的单一物理地址空间中，成为内存的一部分——CPU可以像访问一个内存单元那样访问外设I/O端口</li>
+</ul>
+<h3 id="9-3-2-I-O资源管理"><a class="header-anchor" href="#9-3-2-I-O资源管理">¶</a>9.3.2 I/O资源管理</h3>
+<p><strong>Linux将基于I/O端口和I/O内存的映射方式统称为“I/O区域”。</strong></p>
+<h4 id="1-Linux对I-O资源的描述"><a class="header-anchor" href="#1-Linux对I-O资源的描述">¶</a>1. Linux对I/O资源的描述</h4>
+<p>用resource数据结构</p>
+<h4 id="2-管理I-O区域资源"><a class="header-anchor" href="#2-管理I-O区域资源">¶</a>2. 管理I/O<strong>区域</strong>资源</h4>
+<p>有三个接口函数：</p>
+<ul>
+<li>_request_region()：I/O区域的分配</li>
+<li>_release_region()：I/O区域的释放</li>
+<li>_check_region()：检查指定的I/O区域是否已被占用</li>
+</ul>
+<h4 id="3-管理I-O端口资源"><a class="header-anchor" href="#3-管理I-O端口资源">¶</a>3. 管理I/O<strong>端口</strong>资源</h4>
+<p>三个接口函数：</p>
+<ul>
+<li></li>
+</ul>
+<h4 id="4-管理I-O内存资源"><a class="header-anchor" href="#4-管理I-O内存资源">¶</a>4. 管理I/O<strong>内存</strong>资源</h4>
+<p>三个接口函数：</p>
+<h3 id="9-3-3-访问I-O端口空间"><a class="header-anchor" href="#9-3-3-访问I-O端口空间">¶</a>9.3.3 访问I/O端口空间</h3>
+<p>讲的是读写I/O端口的一些事情</p>
+<h3 id="9-3-4-访问I-O内存资源"><a class="header-anchor" href="#9-3-4-访问I-O内存资源">¶</a>9.3.4 访问I/O内存资源</h3>
+<p>讲的是读写I/O内存的一些事情，在此之前貌似有一个将I/O内存的物理地址映射成内核虚地址的操作</p>
+<h2 id="9-4-字符设备驱动程序"><a class="header-anchor" href="#9-4-字符设备驱动程序">¶</a>9.4 字符设备驱动程序</h2>
+<p><strong>Linux下的应用程序在访问字符设备时，一般都是通过设备文件访问的（在/dev目录下）</strong></p>
+<h3 id="9-4-1-字符设备的数据结构struct-cdev"><a class="header-anchor" href="#9-4-1-字符设备的数据结构struct-cdev">¶</a>9.4.1 字符设备的数据结构struct cdev</h3>
+<p>Linux内核中使用struct cdev来表示一个字符设备</p>
+<h3 id="9-4-2-分配和释放设备号"><a class="header-anchor" href="#9-4-2-分配和释放设备号">¶</a>9.4.2 分配和释放设备号</h3>
+<p>对于每一个设备，必须有一个唯一的设备号与之相对应；通常的情况是：<strong>多个设备共用一个主设备号，而每个设备都唯一拥有一个次设备号。</strong></p>
+<p>有一些定义设备号的宏……有一些申请设备号的函数……</p>
+<h3 id="9-4-3-字符设备驱动的组成"><a class="header-anchor" href="#9-4-3-字符设备驱动的组成">¶</a>9.4.3 字符设备驱动的组成</h3>
+<p>一个基本的字符设备驱动由以下几个部分组成：</p>
+<ul>
+<li>字符设备驱动模块的加载</li>
+<li>卸载函数</li>
+<li>file_operations结构中的成员函数</li>
+</ul>
+<h3 id="9-4-4-加载和卸载函数"><a class="header-anchor" href="#9-4-4-加载和卸载函数">¶</a>9.4.4 加载和卸载函数</h3>
+<p>加载又可以分为以下几步：</p>
+<ul>
+<li>设备号的申请</li>
+<li>cdev的注册</li>
+</ul>
+<p>卸载也可以分为：</p>
+<ul>
+<li>将cdev从系统中注销</li>
+<li>释放设备结构体所占用的内存空间</li>
+<li>释放设备号</li>
+</ul>
+<h3 id="9-4-5-实现file-operations中定义的函数"><a class="header-anchor" href="#9-4-5-实现file-operations中定义的函数">¶</a>9.4.5 实现file_operations中定义的函数</h3>
+<p>file_operations中最基本的包括：open()、release()、read()、write()等函数</p>
+<h2 id="9-5-块驱动程序"><a class="header-anchor" href="#9-5-块驱动程序">¶</a>9.5 块驱动程序</h2>
+<h3 id="9-5-1-块驱动程序的注册"><a class="header-anchor" href="#9-5-1-块驱动程序的注册">¶</a>9.5.1 块驱动程序的注册</h3>
+<p>块驱动程序的数据总是具有固定大小的块，典型的块设备就是磁盘驱动器</p>
+<h3 id="9-5-2-块设备请求"><a class="header-anchor" href="#9-5-2-块设备请求">¶</a>9.5.2 块设备请求</h3>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><i class="ri:alipay-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><i class="ri:qq-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><i class="ri:wechat-pay-line"></i></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>CrestinyCoco</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://crestiny.github.io/2021/03/04/Chapter9-%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/" title="Chapter9 设备驱动">https://crestiny.github.io/2021/03/04/Chapter9-%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2021/03/05/Chapter1-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%B7%A5%E7%A8%8B%E4%B8%8E%E7%AE%A1%E7%90%86-%E7%BB%AA%E8%AE%BA/" rel="prev" title="Chapter1 信息安全工程与管理-绪论"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">Chapter1 信息安全工程与管理-绪论</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2021/03/03/Chapter2-ARM%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0/" rel="next" title="Chapter2 ARM技术概述"><span class="post-nav-text">Chapter2 ARM技术概述</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>要不要和我说些什么？</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><i class="ri:cloud-line"></i></span><span class="author"> CrestinyCoco</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.0.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.2</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2022-07-13T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div><div id="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv" title="总访客量"><span><i class="ri:user-line"></i></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><i class="ri:eye-line"></i></span><span id="busuanzi_value_site_pv"></span></span></div></footer><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#24367d" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search-line"></use></svg></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="/js/search/local-search.js" defer></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close-line"></use></svg></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="search here" value=""></div><div id="local-search-result"></div></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

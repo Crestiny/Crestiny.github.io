@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#24367d"><meta name="author" content="CrestinyCoco"><meta name="copyright" content="CrestinyCoco"><meta name="generator" content="Hexo 6.0.0"><meta name="theme" content="hexo-theme-yun"><title>Chapter2 内存寻址 | Crestiny's Blog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/qie.ico"><link rel="mask-icon" href="/qie.ico" color="#24367d"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"crestiny.github.io","root":"/","title":["汉","月","沦","西","海"],"version":"1.6.2","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"search here","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"D:/sentences.json"},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="¶2.1 内存寻址 ¶2.1.1 Intel x86 CPU寻址的演变 ¶2.1.2 80x86寄存器简介 ¶（1）8个32位通用寄存器 8个32位通用寄存器指的是：EAX&#x2F;EBX&#x2F;ECX&#x2F;EDX&#x2F;EBP&#x2F;ESP&#x2F;ESI&#x2F;EDI 他们低16位可以当做8个寄存器：AX&#x2F;BX&#x2F;CX&#x2F;DX&#x2F;BP&#x2F;SP&#x2F;SI&#x2F;DI 其中AX&#x2F;BX&#x2F;CX&#x2F;DX又可以分为8位一组的低字节和高字节两部分，作为8个8位寄存器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter2 内存寻址">
+<meta property="og:url" content="https://crestiny.github.io/2021/01/02/Chapter2-%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="¶2.1 内存寻址 ¶2.1.1 Intel x86 CPU寻址的演变 ¶2.1.2 80x86寄存器简介 ¶（1）8个32位通用寄存器 8个32位通用寄存器指的是：EAX&#x2F;EBX&#x2F;ECX&#x2F;EDX&#x2F;EBP&#x2F;ESP&#x2F;ESI&#x2F;EDI 他们低16位可以当做8个寄存器：AX&#x2F;BX&#x2F;CX&#x2F;DX&#x2F;BP&#x2F;SP&#x2F;SI&#x2F;DI 其中AX&#x2F;BX&#x2F;CX&#x2F;DX又可以分为8位一组的低字节和高字节两部分，作为8个8位寄存器">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102161511.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218140252969.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218144256015.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218170045854.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218223210873.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218223320249.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210219000620882.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210219001957454.png">
+<meta property="article:published_time" content="2021-01-02T07:24:26.000Z">
+<meta property="article:modified_time" content="2021-02-19T00:33:54.393Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102161511.png"><script src="/js/ui/mode.js"></script><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info mickey-mouse"><a class="site-author-avatar" href="/about/" title="CrestinyCoco"><img width="96" loading="lazy" src="/images/sakura.jpg" alt="CrestinyCoco"><span class="site-author-status" title="Life is fantastic!"></span></a><div class="site-author-name"><a href="/about/">CrestinyCoco</a></div><span class="site-name">Crestiny's Blog</span><sub class="site-subtitle">Life is fantastic ! </sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">123</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">25</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">67</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=910426929&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/Crestiny" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:1043729366@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://m.weibo.cn/u/6869522716?uid=6869522716&amp;t=0&amp;luicode=10000011&amp;lfid=100103type%3D1%26q%3Dforeverwildsummer" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=1484676321" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/xi-shang-qin-heng" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/13347719" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/mmqrcode1658050168755.png" title="微信" target="_blank" style="color:#1AAD19"><i class="ri:wechat-2-line"></i></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/about/white-qrcode-and-search.jpg" title="微信公众号" target="_blank" style="color:#1AAD19"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat-2-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://twitter.com/YunYouJun" title="Twitter" target="_blank" style="color:#1da1f2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-twitter-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://t.me/elpsycn" title="Telegram Channel" target="_blank" style="color:#0088CC"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-telegram-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:me@yunyoujun.cn" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://travellings.link" title="Travelling" target="_blank" style="color:var(--hty-text-color)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-train-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:#e6c35c"><i class="ri:folder-user-line"></i></a><a class="links-item hty-icon-button" href="/albums/" title="相册集" style="color:#00008b"><i class="ri:book-mark-line"></i></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80"><span class="toc-number">1.</span> <span class="toc-text">2.1 内存寻址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-Intel-x86-CPU%E5%AF%BB%E5%9D%80%E7%9A%84%E6%BC%94%E5%8F%98"><span class="toc-number">1.1.</span> <span class="toc-text">2.1.1 Intel x86 CPU寻址的演变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-80x86%E5%AF%84%E5%AD%98%E5%99%A8%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.</span> <span class="toc-text">2.1.2 80x86寄存器简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%898%E4%B8%AA32%E4%BD%8D%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">（1）8个32位通用寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%894%E4%B8%AA16%E4%BD%8D%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">（2）4个16位段寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E6%8C%87%E4%BB%A4%E6%8C%87%E9%92%88%E5%AF%84%E5%AD%98%E5%99%A8%E5%92%8C%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">（3）指令指针寄存器和标志寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E6%8E%A7%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.2.4.</span> <span class="toc-text">（4）控制寄存器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E3%80%81%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E3%80%81%E7%BA%BF%E6%80%A7%E5%9C%B0%E5%9D%80"><span class="toc-number">1.3.</span> <span class="toc-text">2.1.3 物理地址、虚拟地址、线性地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%AE%B5%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">2.2 段机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-%E6%AE%B5%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="toc-number">2.1.</span> <span class="toc-text">2.2.1 段描述符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E5%8F%8A%E4%BF%9D%E6%8A%A4"><span class="toc-number">2.2.</span> <span class="toc-text">2.2.2 地址转换及保护</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-Linux%E4%B8%AD%E7%9A%84%E6%AE%B5"><span class="toc-number">2.3.</span> <span class="toc-text">2.2.3 Linux中的段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E5%88%86%E9%A1%B5%E6%9C%BA%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">2.3 分页机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-%E9%A1%B5%E4%B8%8E%E9%A1%B5%E8%A1%A8"><span class="toc-number">3.1.</span> <span class="toc-text">2.3.1 页与页表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%A1%B5%E3%80%81%E7%89%A9%E7%90%86%E9%A1%B5%E9%9D%A2%E5%8F%8A%E9%A1%B5%E5%A4%A7%E5%B0%8F"><span class="toc-number">3.1.1.</span> <span class="toc-text">1. 页、物理页面及页大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%A1%B5%E8%A1%A8"><span class="toc-number">3.1.2.</span> <span class="toc-text">2.页表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%B8%A4%E7%BA%A7%E9%A1%B5%E8%A1%A8"><span class="toc-number">3.1.3.</span> <span class="toc-text">3. 两级页表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%A1%B5%E8%A1%A8%E9%A1%B9%E7%BB%93%E6%9E%84"><span class="toc-number">3.1.4.</span> <span class="toc-text">4. 页表项结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E7%A1%AC%E4%BB%B6%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6"><span class="toc-number">3.1.5.</span> <span class="toc-text">5. 硬件保护机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-%E7%BA%BF%E6%80%A7%E5%9C%B0%E5%9D%80%E5%88%B0%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.2.</span> <span class="toc-text">2.3.2 线性地址到物理地址的转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-%E5%88%86%E9%A1%B5%E4%B8%BE%E4%BE%8B"><span class="toc-number">3.3.</span> <span class="toc-text">2.3.3 分页举例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-4-%E9%A1%B5%E9%9D%A2%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98"><span class="toc-number">3.4.</span> <span class="toc-text">2.3.4 页面高速缓存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Linux%E4%B8%AD%E7%9A%84%E5%88%86%E9%A1%B5%E6%9C%BA%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">2.4 Linux中的分页机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-Linux%E4%B8%AD%E7%9A%84%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80"><span class="toc-number">5.</span> <span class="toc-text">2.5 Linux中的汇编语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-Linux%E7%B3%BB%E7%BB%9F%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E4%B8%BE%E4%BE%8B"><span class="toc-number">6.</span> <span class="toc-text">2.6 Linux系统地址映射举例</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://crestiny.github.io/2021/01/02/Chapter2-%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="CrestinyCoco"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Crestiny's Blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Chapter2 内存寻址</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2021-01-02 15:24:26" itemprop="dateCreated datePublished" datetime="2021-01-02T15:24:26+08:00">2021-01-02</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <time title="修改时间：2021-02-19 08:33:54" itemprop="dateModified" datetime="2021-02-19T08:33:54+08:00">2021-02-19</time></div><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><i class="ri:eye-line"></i> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Courses/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Courses</span></a></span> > <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Courses/%E3%80%8ALinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8-E2-%E3%80%8B/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">《Linux操作系统原理与应用(E2)》</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Linux/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Linux</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#24367d;"><h2 id="2-1-内存寻址"><a class="header-anchor" href="#2-1-内存寻址">¶</a>2.1 内存寻址</h2>
+<h3 id="2-1-1-Intel-x86-CPU寻址的演变"><a class="header-anchor" href="#2-1-1-Intel-x86-CPU寻址的演变">¶</a>2.1.1 Intel x86 CPU寻址的演变</h3>
+<h3 id="2-1-2-80x86寄存器简介"><a class="header-anchor" href="#2-1-2-80x86寄存器简介">¶</a>2.1.2 80x86寄存器简介</h3>
+<h4 id="（1）8个32位通用寄存器"><a class="header-anchor" href="#（1）8个32位通用寄存器">¶</a>（1）8个32位通用寄存器</h4>
+<p>8个32位通用寄存器指的是：EAX/EBX/ECX/EDX/EBP/ESP/ESI/EDI</p>
+<p>他们低16位可以当做8个寄存器：AX/BX/CX/DX/BP/SP/SI/DI</p>
+<p>其中AX/BX/CX/DX又可以分为8位一组的低字节和高字节两部分，作为8个8位寄存器</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102161511.png" style="width:800px;height:400px">
+<h4 id="（2）4个16位段寄存器"><a class="header-anchor" href="#（2）4个16位段寄存器">¶</a>（2）4个16位段寄存器</h4>
+<p>分别用于存放几个段的段地址</p>
+<ul>
+<li>CS：代码段</li>
+<li>DS：数据段</li>
+<li>SS：堆栈段</li>
+<li>ES：其他段</li>
+</ul>
+<p>放的都是基地址</p>
+<h4 id="（3）指令指针寄存器和标志寄存器"><a class="header-anchor" href="#（3）指令指针寄存器和标志寄存器">¶</a>（3）指令指针寄存器和标志寄存器</h4>
+<ul>
+<li>EIP：下一条要执行的指令的offset（相对CS），低16位叫IP寄存器</li>
+<li>EFLAGS：控制等</li>
+</ul>
+<h4 id="（4）控制寄存器"><a class="header-anchor" href="#（4）控制寄存器">¶</a>（4）控制寄存器</h4>
+<p>CR系列，主要用于分页机制；4个32位的控制寄存器：CR0/CR1/CR2/CR3</p>
+<h3 id="2-1-3-物理地址、虚拟地址、线性地址"><a class="header-anchor" href="#2-1-3-物理地址、虚拟地址、线性地址">¶</a>2.1.3 物理地址、虚拟地址、线性地址</h3>
+<p>物理内存条提供的内存空间就是物理内存空间，每个内存单元的实际地址就是物理地址；而程序员看到的内存空间定义为虚拟地址空间，叫虚拟地址或者逻辑地址</p>
+<p>内存管理单元MMU（它是一种硬件电路）负责把虚拟地址映射为物理地址，线性地址是指一段连续不分段的地址空间（大小在0~4GB）</p>
+<h2 id="2-2-段机制"><a class="header-anchor" href="#2-2-段机制">¶</a>2.2 段机制</h2>
+<p><strong>段是虚拟地址空间的基本单位</strong></p>
+<h3 id="2-2-1-段描述符"><a class="header-anchor" href="#2-2-1-段描述符">¶</a>2.2.1 段描述符</h3>
+<p>由于一个段有不少相关信息，所以是一个数据结构，包括：</p>
+<ul>
+<li>基地址</li>
+<li>界限</li>
+<li>保护属性</li>
+</ul>
+<p>可以用下图描述：</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218140252969.png" alt="image-20210218140252969" style="width:500px;height:500px">
+<p>​	每个段可以用下图这样的段描述符来表示，多个段描述符就可以组成段描述符表；存取权字节不同位有不同的作用。</p>
+<p>​	我们分实模式和保护模式来考虑，后者会更复杂一些，引入了4个特权级来实现保护</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218144256015.png" alt="image-20210218144256015" style="width:800px;height:500px">
+<p>​	在保护模式下，段寄存器也叫作选择符，它其中存的数据是这样的：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">索引（3-15位）</th>
+<th style="text-align:center">TI（第2位）</th>
+<th style="text-align:center">RPL（0-1位）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">表示对应的段描述符在描述符表中的位置</td>
+<td style="text-align:center">选择域，TI=0表示从全局描述符表中选择，TI=1表示从局部描述符表中选择相应的段描述符</td>
+<td style="text-align:center">表示请求者的特权级，用0/1/2/3表示，0对应内核态，是最高特权级</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-2-2-地址转换及保护"><a class="header-anchor" href="#2-2-2-地址转换及保护">¶</a>2.2.2 地址转换及保护</h3>
+<p>​	通过一些步骤，可以将虚拟地址（表示方式——选择符：偏移量，选择符就是段寄存器）转换为线性地址；其中有两个方面实现了对段的保护</p>
+<h3 id="2-2-3-Linux中的段"><a class="header-anchor" href="#2-2-3-Linux中的段">¶</a>2.2.3 Linux中的段</h3>
+<p>​	说明了Linux定义段的方式的内涵（即为什么）</p>
+<h2 id="2-3-分页机制"><a class="header-anchor" href="#2-3-分页机制">¶</a>2.3 分页机制</h2>
+<p>​	分页机制在段机制之后进行，实现线性地址$\rightarrow$物理地址的转换；段机制是实现虚拟地址$\rightarrow$线性地址。如果操作系统不支持分页的话，线性地址=物理地址</p>
+<h3 id="2-3-1-页与页表"><a class="header-anchor" href="#2-3-1-页与页表">¶</a>2.3.1 页与页表</h3>
+<h4 id="1-页、物理页面及页大小"><a class="header-anchor" href="#1-页、物理页面及页大小">¶</a>1. 页、物理页面及页大小</h4>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218170045854.png" alt="image-20210218170045854" style="width:500px;height:500px">
+<p>​	线性地址被分为页，物理地址被分为页面，两者大小相等；标准页大小为4KB</p>
+<h4 id="2-页表"><a class="header-anchor" href="#2-页表">¶</a>2.页表</h4>
+<p>​	页表是把线性地址映射成物理地址的一种数据结构，那么页表的每一项需要包含什么内容呢？</p>
+<pre><code>- 物理页面的基地址
+- 页的属性
+</code></pre>
+<p>​    根据计算，这些信息只需要32位就足够存放了，即每个页表项占4个字节就足够了。</p>
+<p>​	当页数过多导致页表项占用的空间过多，我们可以使用两级页表来解决这个问题。</p>
+<h4 id="3-两级页表"><a class="header-anchor" href="#3-两级页表">¶</a>3. 两级页表</h4>
+<p>​	两级页表就是对页表再分页；下图左边是两级页表，右边是两级页表的地址结构：先找到页目录项，看看其中的内容（也就是第二级页表的序号）；找到了第二级页表，根据“页”里面的内容（就是第几页），去找对应的页，然后根据页内偏移量，在此页内偏移找到需要的东西</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218223210873.png" alt="image-20210218223210873"></p>
+<h4 id="4-页表项结构"><a class="header-anchor" href="#4-页表项结构">¶</a>4. 页表项结构</h4>
+<p>​	页表的每一项占4个字节，内容如下图分配：</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218223320249.png" alt="image-20210218223320249" style="width:500px;height:280px">
+<h4 id="5-硬件保护机制"><a class="header-anchor" href="#5-硬件保护机制">¶</a>5. 硬件保护机制</h4>
+<p>​	用一些位来控制存取权限、寻址权限等等</p>
+<h3 id="2-3-2-线性地址到物理地址的转换"><a class="header-anchor" href="#2-3-2-线性地址到物理地址的转换">¶</a>2.3.2 线性地址到物理地址的转换</h3>
+<p>​	这个转换，解决的是“如何把32位的线性地址通过分页机制转为32位物理地址”的问题；过程~~如下图所示：~~有亿点点复杂，咱就先不研究了<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8">😆</span></p>
+<h3 id="2-3-3-分页举例"><a class="header-anchor" href="#2-3-3-分页举例">¶</a>2.3.3 分页举例</h3>
+<h3 id="2-3-4-页面高速缓存"><a class="header-anchor" href="#2-3-4-页面高速缓存">¶</a>2.3.4 页面高速缓存</h3>
+<p>​	页表放在内存中，所以CPU每次取用一个数据，都至少要访问两次内存，大大降低了访问的速度；所以就有了TLB</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210219000620882.png" alt="image-20210219000620882" style="width:500px;height:280px">
+<h2 id="2-4-Linux中的分页机制"><a class="header-anchor" href="#2-4-Linux中的分页机制">¶</a>2.4 Linux中的分页机制</h2>
+<p>​	Linux有分页也有分段；先分段，使得虚拟地址可以转换为线性地址；再分页，使线性地址可以转换为物理地址。Linux采用三级分页地址，如下图：</p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210219001957454.png" alt="image-20210219001957454" style="width:600px;height:320px">
+<h2 id="2-5-Linux中的汇编语言"><a class="header-anchor" href="#2-5-Linux中的汇编语言">¶</a>2.5 Linux中的汇编语言</h2>
+<p>​	Linux的源代码中，有C语言编写的、汇编语言（AT&amp;T的i386汇编语言）编写的、还有C语言里面嵌汇编语言的</p>
+<p>​	这一节就是在介绍汇编语言的语法等等</p>
+<h2 id="2-6-Linux系统地址映射举例"><a class="header-anchor" href="#2-6-Linux系统地址映射举例">¶</a>2.6 Linux系统地址映射举例</h2>
+<p>​	拿了一个程序来举例，感觉还挺有意思的（挺有知识的），有空可以回头补一下</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><i class="ri:alipay-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><i class="ri:qq-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><i class="ri:wechat-pay-line"></i></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>CrestinyCoco</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://crestiny.github.io/2021/01/02/Chapter2-%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/" title="Chapter2 内存寻址">https://crestiny.github.io/2021/01/02/Chapter2-%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2021/01/03/Chapter10-%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6/" rel="prev" title="Chapter10 恶意软件"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">Chapter10 恶意软件</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2021/01/01/Chapter8-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%AE%89%E5%85%A8/" rel="next" title="Chapter8 电子邮件安全"><span class="post-nav-text">Chapter8 电子邮件安全</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>要不要和我说些什么？</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><i class="ri:cloud-line"></i></span><span class="author"> CrestinyCoco</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.0.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.2</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2022-07-13T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div><div id="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv" title="总访客量"><span><i class="ri:user-line"></i></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><i class="ri:eye-line"></i></span><span id="busuanzi_value_site_pv"></span></span></div></footer><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#24367d" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search-line"></use></svg></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="/js/search/local-search.js" defer></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close-line"></use></svg></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="search here" value=""></div><div id="local-search-result"></div></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#24367d"><meta name="author" content="CrestinyCoco"><meta name="copyright" content="CrestinyCoco"><meta name="generator" content="Hexo 6.0.0"><meta name="theme" content="hexo-theme-yun"><title>Chapter1 软件安全绪论 | Crestiny's Blog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/qie.ico"><link rel="mask-icon" href="/qie.ico" color="#24367d"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"crestiny.github.io","root":"/","title":["汉","月","沦","西","海"],"version":"1.6.2","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"search here","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"D:/sentences.json"},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="¶1.1 引言 为什么会出现安全问题？  软件变复杂，规模变大 软件承载的利益，让某些人利用软件安全问题来获取利益  ¶1.2 典型安全问题 为什么软件安全问题日渐复杂？  随着科技发展、研究与分析的深入,我们注意到软件安全的问题非常多样化 试图利用软件安全问题获利的各类组织机构也在不断发展，针对软件安全问题的利用、破坏技术手段，造成软件安全问题日趋复杂  ¶1.2.1 恶意软件 ¶1. 传统恶意">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter1 软件安全绪论">
+<meta property="og:url" content="https://crestiny.github.io/2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="¶1.1 引言 为什么会出现安全问题？  软件变复杂，规模变大 软件承载的利益，让某些人利用软件安全问题来获取利益  ¶1.2 典型安全问题 为什么软件安全问题日渐复杂？  随着科技发展、研究与分析的深入,我们注意到软件安全的问题非常多样化 试图利用软件安全问题获利的各类组织机构也在不断发展，针对软件安全问题的利用、破坏技术手段，造成软件安全问题日趋复杂  ¶1.2.1 恶意软件 ¶1. 传统恶意">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-19T14:00:55.000Z">
+<meta property="article:modified_time" content="2020-12-28T06:01:28.889Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta name="twitter:card" content="summary"><script src="/js/ui/mode.js"></script><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info mickey-mouse"><a class="site-author-avatar" href="/about/" title="CrestinyCoco"><img width="96" loading="lazy" src="/images/sakura.jpg" alt="CrestinyCoco"><span class="site-author-status" title="Life is fantastic!"></span></a><div class="site-author-name"><a href="/about/">CrestinyCoco</a></div><span class="site-name">Crestiny's Blog</span><sub class="site-subtitle">Life is fantastic ! </sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">123</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">25</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">67</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=910426929&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/Crestiny" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:1043729366@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://m.weibo.cn/u/6869522716?uid=6869522716&amp;t=0&amp;luicode=10000011&amp;lfid=100103type%3D1%26q%3Dforeverwildsummer" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=1484676321" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/xi-shang-qin-heng" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/13347719" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/mmqrcode1658050168755.png" title="微信" target="_blank" style="color:#1AAD19"><i class="ri:wechat-2-line"></i></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/about/white-qrcode-and-search.jpg" title="微信公众号" target="_blank" style="color:#1AAD19"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat-2-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://twitter.com/YunYouJun" title="Twitter" target="_blank" style="color:#1da1f2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-twitter-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://t.me/elpsycn" title="Telegram Channel" target="_blank" style="color:#0088CC"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-telegram-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:me@yunyoujun.cn" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://travellings.link" title="Travelling" target="_blank" style="color:var(--hty-text-color)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-train-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:#e6c35c"><i class="ri:folder-user-line"></i></a><a class="links-item hty-icon-button" href="/albums/" title="相册集" style="color:#00008b"><i class="ri:book-mark-line"></i></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">1.1 引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%85%B8%E5%9E%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">1.2 典型安全问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-1-%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6"><span class="toc-number">2.0.1.</span> <span class="toc-text">1.2.1 恶意软件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%BC%A0%E7%BB%9F%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6"><span class="toc-number">2.0.2.</span> <span class="toc-text">1. 传统恶意软件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-number">2.0.3.</span> <span class="toc-text">2. 恶意软件发展历程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-2-%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.0.4.</span> <span class="toc-text">1.2.2 软件漏洞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%BC%8F%E6%B4%9E%E4%B8%BA%E4%BB%80%E4%B9%88%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%A4%9A%EF%BC%9F"><span class="toc-number">2.0.5.</span> <span class="toc-text">1. 漏洞为什么越来越多？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-3-%E8%BD%AF%E4%BB%B6%E5%90%8E%E9%97%A8"><span class="toc-number">2.0.6.</span> <span class="toc-text">1.2.3 软件后门</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%B0%86%E8%BD%AF%E4%BB%B6%E5%90%8E%E9%97%A8%E8%AE%BE%E8%AE%A1%E4%B8%BA%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%EF%BC%8C%E6%AD%A4%E6%96%B9%E6%B3%95%E4%BC%98%E5%8A%BF%EF%BC%9A"><span class="toc-number">2.0.7.</span> <span class="toc-text">1. 将软件后门设计为软件漏洞，此方法优势：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E6%80%A7%E5%88%86%E6%9E%90%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="toc-number">3.</span> <span class="toc-text">1.3 软件安全性分析的目标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E6%80%A7%E5%88%86%E6%9E%90%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">3.1.</span> <span class="toc-text">1.3.1 软件安全性分析要解决的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-%E6%97%A0%E6%BA%90%E7%A0%81%E6%97%B6%E5%AF%B9%E8%BD%AF%E4%BB%B6%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E7%9A%84%E6%8C%91%E6%88%98"><span class="toc-number">3.2.</span> <span class="toc-text">1.3.2 无源码时对软件逆向分析的挑战</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8A%80%E6%9C%AF"><span class="toc-number">4.</span> <span class="toc-text">1.4 主要方法与技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-0-%E8%BD%AF%E4%BB%B6%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E5%88%86%E7%B1%BB"><span class="toc-number">4.1.</span> <span class="toc-text">1.4.0 软件逆向分析方法分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90"><span class="toc-number">4.1.1.</span> <span class="toc-text">1. 静态分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%8A%A8%E6%80%81%E5%88%86%E6%9E%90"><span class="toc-number">4.1.2.</span> <span class="toc-text">2. 动态分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-1-%E5%8F%8D%E6%B1%87%E7%BC%96%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91"><span class="toc-number">4.2.</span> <span class="toc-text">1.4.1 反汇编与反编译</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8"><span class="toc-number">4.2.1.</span> <span class="toc-text">作用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-2-%E7%A8%8B%E5%BA%8F%E8%B0%83%E8%AF%95"><span class="toc-number">4.3.</span> <span class="toc-text">1.4.2 程序调试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">4.3.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">4.3.2.</span> <span class="toc-text">优缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-3-%E7%A8%8B%E5%BA%8F%E5%88%87%E7%89%87"><span class="toc-number">4.4.</span> <span class="toc-text">1.4.3 程序切片</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8-v2"><span class="toc-number">4.4.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="toc-number">4.4.2.</span> <span class="toc-text">基本思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">4.4.3.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-4-%E6%B1%A1%E7%82%B9%E4%BC%A0%E6%92%AD%E5%88%86%E6%9E%90"><span class="toc-number">4.5.</span> <span class="toc-text">1.4.4 污点传播分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3-v2"><span class="toc-number">4.5.1.</span> <span class="toc-text">基本思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">4.5.2.</span> <span class="toc-text">实现方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%9C%A8%E9%97%AE%E9%A2%98"><span class="toc-number">4.5.3.</span> <span class="toc-text">存在问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-5-%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C"><span class="toc-number">4.6.</span> <span class="toc-text">1.4.5 符号执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-6-%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95"><span class="toc-number">4.7.</span> <span class="toc-text">1.4.6 模糊测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8-v3"><span class="toc-number">4.7.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%9C%A8%E9%97%AE%E9%A2%98-v2"><span class="toc-number">4.7.2.</span> <span class="toc-text">存在问题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E4%B8%BB%E8%A6%81%E5%88%86%E6%9E%90%E5%BA%94%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">1.5 主要分析应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-1-%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%86%E6%9E%90"><span class="toc-number">5.1.</span> <span class="toc-text">1.5.1 恶意软件分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%B9%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%88%86%E6%9E%90%E7%9B%AE%E6%A0%87"><span class="toc-number">5.1.0.1.</span> <span class="toc-text">对恶意软件的分析目标</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E9%80%86%E5%90%91%E5%88%86%E6%9E%90"><span class="toc-number">5.1.0.2.</span> <span class="toc-text">网络协议逆向分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E5%88%A9%E7%94%A8"><span class="toc-number">5.1.0.3.</span> <span class="toc-text">软件漏洞分析与利用</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://crestiny.github.io/2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="CrestinyCoco"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Crestiny's Blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Chapter1 软件安全绪论</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2020-09-19 22:00:55" itemprop="dateCreated datePublished" datetime="2020-09-19T22:00:55+08:00">2020-09-19</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <time title="修改时间：2020-12-28 14:01:28" itemprop="dateModified" datetime="2020-12-28T14:01:28+08:00">2020-12-28</time></div><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><i class="ri:eye-line"></i> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E3%80%8A%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E4%B8%8E%E5%BA%94%E7%94%A8%E3%80%8B/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">《软件安全分析与应用》</span></a></span></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#24367d;"><h2 id="1-1-引言"><a class="header-anchor" href="#1-1-引言">¶</a>1.1 引言</h2>
+<p>为什么会出现安全问题？</p>
+<ul>
+<li>软件变复杂，规模变大</li>
+<li>软件承载的利益，让某些人利用软件安全问题来获取利益</li>
+</ul>
+<h2 id="1-2-典型安全问题"><a class="header-anchor" href="#1-2-典型安全问题">¶</a>1.2 典型安全问题</h2>
+<p>为什么软件安全问题日渐复杂？</p>
+<ul>
+<li>随着科技发展、研究与分析的深入,我们注意到软件安全的问题非常多样化</li>
+<li>试图利用软件安全问题获利的各类组织机构也在不断发展，针对软件安全问题的利用、破坏技术手段，造成软件安全问题日趋复杂</li>
+</ul>
+<h4 id="1-2-1-恶意软件"><a class="header-anchor" href="#1-2-1-恶意软件">¶</a>1.2.1 恶意软件</h4>
+<h4 id="1-传统恶意软件"><a class="header-anchor" href="#1-传统恶意软件">¶</a>1. 传统恶意软件</h4>
+<ul>
+<li>传统的恶意软件包括：病毒、僵木蠕、间谍软件等</li>
+<li>破坏：窃取信息、远程控制、实施破坏等</li>
+<li>传统恶意软件需要发展的能力：</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">渗透与扩散：突破防御+感染目标</span><br><span class="line">隐蔽能力：隐蔽特征避免被发现+被发现了能保护操纵者身份</span><br><span class="line">破坏能力：搜集信息+实施破坏</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2-恶意软件发展历程"><a class="header-anchor" href="#2-恶意软件发展历程">¶</a>2. 恶意软件发展历程</h4>
+<p>单机传播——网络传播——协同攻击<br>
+APT攻击（高可持续性威胁）：针对特定目标+高技术</p>
+<h4 id="1-2-2-软件漏洞"><a class="header-anchor" href="#1-2-2-软件漏洞">¶</a>1.2.2 软件漏洞</h4>
+<p>说的是程序设计错误导致的</p>
+<h4 id="1-漏洞为什么越来越多？"><a class="header-anchor" href="#1-漏洞为什么越来越多？">¶</a>1. 漏洞为什么越来越多？</h4>
+<ul>
+<li>软件更复杂</li>
+<li>漏洞多样化</li>
+<li>软件开发周期变短</li>
+</ul>
+<h4 id="1-2-3-软件后门"><a class="header-anchor" href="#1-2-3-软件后门">¶</a>1.2.3 软件后门</h4>
+<p>开发人员刻意设计，但对用户隐瞒的功能。为什么算在软件安全问题中呢？因为有的攻击者，开发软件的时候，会留下后门，将其设计为此软件的漏洞。<br>
+举个栗子：建城墙的人留了个暗道，工程交付以后，保护城墙的人不一定能找出来它，但是工人却一清二楚，可以通过暗道做些坏事。而且，工人更懂怎么利用城墙的设计藏好这个暗道。</p>
+<h4 id="1-将软件后门设计为软件漏洞，此方法优势："><a class="header-anchor" href="#1-将软件后门设计为软件漏洞，此方法优势：">¶</a>1. 将软件后门设计为软件漏洞，此方法优势：</h4>
+<ul>
+<li>难发现</li>
+<li>易利用</li>
+<li>难取证：后门代码其实不在软件的产品代码中，而是攻击者利用漏洞动态加载的（被发现了说成设计错误就完事儿了，不是故意的哈哈哈）</li>
+</ul>
+<h2 id="1-3-软件安全性分析的目标"><a class="header-anchor" href="#1-3-软件安全性分析的目标">¶</a>1.3 软件安全性分析的目标</h2>
+<h3 id="1-3-1-软件安全性分析要解决的问题"><a class="header-anchor" href="#1-3-1-软件安全性分析要解决的问题">¶</a>1.3.1 软件安全性分析要解决的问题</h3>
+<ol>
+<li>
+<p>存在问题<br>
+“是否”的问题：有恶意功能/漏洞/后门吗？</p>
+</li>
+<li>
+<p>机理问题<br>
+“为什么”的问题：分析下此问题出现的原因/原理/工作流程之类的，具体问题具体分析</p>
+</li>
+<li>
+<p>对策问题<br>
+“怎么办”的问题：防御</p>
+</li>
+</ol>
+<h3 id="1-3-2-无源码时对软件逆向分析的挑战"><a class="header-anchor" href="#1-3-2-无源码时对软件逆向分析的挑战">¶</a>1.3.2 无源码时对软件逆向分析的挑战</h3>
+<ol>
+<li>
+<p>指令代码的理解<br>
+从可执行文件或指令执行序列等，理解到操作语义很困难</p>
+</li>
+<li>
+<p>关联关系的抽取<br>
+操作之间的数据传递、计算，数据/指令之间的依赖关系，很难有直观的认识</p>
+</li>
+<li>
+<p>对策问题<br>
+“怎么办”的问题：防御</p>
+</li>
+</ol>
+<h2 id="1-4-主要方法与技术"><a class="header-anchor" href="#1-4-主要方法与技术">¶</a>1.4 主要方法与技术</h2>
+<h3 id="1-4-0-软件逆向分析方法分类"><a class="header-anchor" href="#1-4-0-软件逆向分析方法分类">¶</a>1.4.0 软件逆向分析方法分类</h3>
+<p>主要有两大类：静态分析和动态分析</p>
+<h4 id="1-静态分析"><a class="header-anchor" href="#1-静态分析">¶</a>1. 静态分析</h4>
+<p>感觉就像通过反汇编或反编译的手段，对软件的可执行代码进行分析<br>
+（1）优点：比较全面、整体<br>
+（2）缺点：一方面，软件代码规模大了或者复杂了就不好搞；另一方面，如果软件做了加壳保护那就不能反汇编等等</p>
+<h4 id="2-动态分析"><a class="header-anchor" href="#2-动态分析">¶</a>2. 动态分析</h4>
+<p>通过直接运行软件，监测软件运行过程进行分析。<br>
+（1）优点：分析过程中可根据软件的运行过程直接获得在各个指令执行后的结果数据，减少推理分析<br>
+（2）缺点：每次分析只能针对动态执行的一条路径执行，整体性较差（所以说，如何构造多条执行路径也是动态分析需要研究的一个重要问题）</p>
+<p><strong>现在一般：动态为主，静态为辅</strong></p>
+<h3 id="1-4-1-反汇编与反编译"><a class="header-anchor" href="#1-4-1-反汇编与反编译">¶</a>1.4.1 反汇编与反编译</h3>
+<p>通常是逆向分析的第一步（静态动态都是）</p>
+<h4 id="作用"><a class="header-anchor" href="#作用">¶</a>作用</h4>
+<p>二进制exe文件（完全不可读）——&gt;汇编代码——&gt;其他高级语言代码（基本可读）<br>
+第一个箭头是反汇编，第二个是反编译；做到<strong>功能等价</strong>就行</p>
+<h3 id="1-4-2-程序调试"><a class="header-anchor" href="#1-4-2-程序调试">¶</a>1.4.2 程序调试</h3>
+<p>动态分析</p>
+<h4 id="定义"><a class="header-anchor" href="#定义">¶</a>定义</h4>
+<p>用一些工具，通过断点、单步执行等方式<br>
+内核代码的调试需要虚拟化技术+多台设备</p>
+<h4 id="优缺点"><a class="header-anchor" href="#优缺点">¶</a>优缺点</h4>
+<p>优缺点基本同“动态分析”中所写，此外，软件自保护技术可能阻碍调试，且数据量和复杂度都挺恐怖的</p>
+<h3 id="1-4-3-程序切片"><a class="header-anchor" href="#1-4-3-程序切片">¶</a>1.4.3 程序切片</h3>
+<h4 id="作用-v2"><a class="header-anchor" href="#作用-v2">¶</a>作用</h4>
+<p>解决软件代码规模超大带来的理解困难，比如分析出了汇编代码，对汇编代码切片……</p>
+<h4 id="基本思想"><a class="header-anchor" href="#基本思想">¶</a>基本思想</h4>
+<p>分析指令的相关性，从而提取用户“感兴趣”的代码</p>
+<p>主要用于静态分析，也可用于动态分析，有差异：<br>
+（1）静态分析：通过计算操作数<strong>可能的影响范围</strong>（要考虑各种可能的执行路径）来计算指令的关联关系<br>
+（2）动态分析：更有针对性，对某条路径某个操作数来分析指令关联</p>
+<h4 id="缺点"><a class="header-anchor" href="#缺点">¶</a>缺点</h4>
+<p>对局部代码还不错，但代码多了照样难受</p>
+<h3 id="1-4-4-污点传播分析"><a class="header-anchor" href="#1-4-4-污点传播分析">¶</a>1.4.4 污点传播分析</h3>
+<p>静态动态都有，<strong>数据流分析方法</strong></p>
+<h4 id="基本思想-v2"><a class="header-anchor" href="#基本思想-v2">¶</a>基本思想</h4>
+<p>将感兴趣的数据标记，根据每条指令的污点传播过程，分析数据的传递关系</p>
+<h4 id="实现方式"><a class="header-anchor" href="#实现方式">¶</a>实现方式</h4>
+<p>按照“如何获得后台执行过程中具体每一条指令和指令执行前后状态”，可以分为：<br>
+基于插桩/硬件/编译器扩展/硬件模拟器等等</p>
+<h4 id="存在问题"><a class="header-anchor" href="#存在问题">¶</a>存在问题</h4>
+<p>由于控制依赖、查表操作等引入的隐式污点传播无法简单地引入或去除</p>
+<h3 id="1-4-5-符号执行"><a class="header-anchor" href="#1-4-5-符号执行">¶</a>1.4.5 符号执行</h3>
+<p>静态动态都有</p>
+<h3 id="1-4-6-模糊测试"><a class="header-anchor" href="#1-4-6-模糊测试">¶</a>1.4.6 模糊测试</h3>
+<p>动态分析</p>
+<h4 id="作用-v3"><a class="header-anchor" href="#作用-v3">¶</a>作用</h4>
+<p>本来是构造许多奇怪数据来看软件鲁棒性的，但现在是为了触发不同的执行路径</p>
+<h4 id="存在问题-v2"><a class="header-anchor" href="#存在问题-v2">¶</a>存在问题</h4>
+<p>提高测试数据生成的针对性——&gt;提高模糊测试效率</p>
+<h2 id="1-5-主要分析应用"><a class="header-anchor" href="#1-5-主要分析应用">¶</a>1.5 主要分析应用</h2>
+<h3 id="1-5-1-恶意软件分析"><a class="header-anchor" href="#1-5-1-恶意软件分析">¶</a>1.5.1 恶意软件分析</h3>
+<h5 id="对恶意软件的分析目标"><a class="header-anchor" href="#对恶意软件的分析目标">¶</a>对恶意软件的分析目标</h5>
+<ul>
+<li>分析出主要功能</li>
+<li>提取代码或行为特征，更新防御配置</li>
+<li>分析实现机理，研发清除手段</li>
+</ul>
+<h5 id="网络协议逆向分析"><a class="header-anchor" href="#网络协议逆向分析">¶</a>网络协议逆向分析</h5>
+<p>方法：</p>
+<ul>
+<li>基于网络流量统计特征展开分析</li>
+<li>直接通过逆向软件分析<br>
+优点：准确、分析能力强<br>
+基本思路：对代码静态+动态逆向分析，提取出协议中的数据包格式/关键字/协议状态机等</li>
+</ul>
+<h5 id="软件漏洞分析与利用"><a class="header-anchor" href="#软件漏洞分析与利用">¶</a>软件漏洞分析与利用</h5>
+<p>如何发现软件漏洞？</p>
+<ul>
+<li>模糊测试工具</li>
+<li>典型漏洞的代码特征</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><i class="ri:alipay-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><i class="ri:qq-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><i class="ri:wechat-pay-line"></i></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>CrestinyCoco</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://crestiny.github.io/2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/" title="Chapter1 软件安全绪论">https://crestiny.github.io/2020/09/19/Chapter1-%E7%BB%AA%E8%AE%BA-Reading-Notes/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2020/09/21/Chapter2-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%92%8C%E6%B6%88%E6%81%AF%E6%9C%BA%E5%AF%86%E6%80%A7/" rel="prev" title="Chapter2 对称加密和消息机密性"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">Chapter2 对称加密和消息机密性</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2020/09/19/Day1-in-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7-PHP-Audit/" rel="next" title="Day1 - in_array函数缺陷//PHP Audit"><span class="post-nav-text">Day1 - in_array函数缺陷//PHP Audit</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>要不要和我说些什么？</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><i class="ri:cloud-line"></i></span><span class="author"> CrestinyCoco</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.0.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.2</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2022-07-13T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div><div id="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv" title="总访客量"><span><i class="ri:user-line"></i></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><i class="ri:eye-line"></i></span><span id="busuanzi_value_site_pv"></span></span></div></footer><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#24367d" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search-line"></use></svg></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="/js/search/local-search.js" defer></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close-line"></use></svg></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="search here" value=""></div><div id="local-search-result"></div></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

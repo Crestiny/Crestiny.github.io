@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#24367d"><meta name="author" content="CrestinyCoco"><meta name="copyright" content="CrestinyCoco"><meta name="generator" content="Hexo 6.0.0"><meta name="theme" content="hexo-theme-yun"><title>Chapter9 IP安全 | Crestiny's Blog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/qie.ico"><link rel="mask-icon" href="/qie.ico" color="#24367d"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"crestiny.github.io","root":"/","title":["汉","月","沦","西","海"],"version":"1.6.2","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"search here","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"D:/sentences.json"},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="防重放攻击，一般通过序列号或者时间戳 ¶9.1 IP安全概述 之前学的Kerberos、TLS&#x2F;SSL、S&#x2F;MIME、PGP，都是用来保护应用安全的，其实协议安全也很重要 在IP中加入认证和加密机制来保障终端用户安全，这样的话，即便上层没有安全机制也可以保证安全 IP层安全包括：  认证 保密 密钥管理机制：保证密钥交换安全  ¶9.1.1 IPSec的应用 ¶（1）IPSec适用范围 LAN、专">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter9 IP安全">
+<meta property="og:url" content="https://crestiny.github.io/2020/10/12/Chapter9-IP%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="防重放攻击，一般通过序列号或者时间戳 ¶9.1 IP安全概述 之前学的Kerberos、TLS&#x2F;SSL、S&#x2F;MIME、PGP，都是用来保护应用安全的，其实协议安全也很重要 在IP中加入认证和加密机制来保障终端用户安全，这样的话，即便上层没有安全机制也可以保证安全 IP层安全包括：  认证 保密 密钥管理机制：保证密钥交换安全  ¶9.1.1 IPSec的应用 ¶（1）IPSec适用范围 LAN、专">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102220557.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103125634.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE278.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE277.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE276.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103195235.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE275.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103232118.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE274.png">
+<meta property="article:published_time" content="2020-10-12T01:14:17.000Z">
+<meta property="article:modified_time" content="2021-01-04T06:49:47.122Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta property="article:tag" content="IP Security">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102220557.png"><script src="/js/ui/mode.js"></script><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info mickey-mouse"><a class="site-author-avatar" href="/about/" title="CrestinyCoco"><img width="96" loading="lazy" src="/images/sakura.jpg" alt="CrestinyCoco"><span class="site-author-status" title="Life is fantastic!"></span></a><div class="site-author-name"><a href="/about/">CrestinyCoco</a></div><span class="site-name">Crestiny's Blog</span><sub class="site-subtitle">Life is fantastic ! </sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">123</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">25</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">67</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=910426929&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/Crestiny" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:1043729366@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://m.weibo.cn/u/6869522716?uid=6869522716&amp;t=0&amp;luicode=10000011&amp;lfid=100103type%3D1%26q%3Dforeverwildsummer" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=1484676321" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/xi-shang-qin-heng" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/13347719" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/mmqrcode1658050168755.png" title="微信" target="_blank" style="color:#1AAD19"><i class="ri:wechat-2-line"></i></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/about/white-qrcode-and-search.jpg" title="微信公众号" target="_blank" style="color:#1AAD19"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat-2-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://twitter.com/YunYouJun" title="Twitter" target="_blank" style="color:#1da1f2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-twitter-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://t.me/elpsycn" title="Telegram Channel" target="_blank" style="color:#0088CC"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-telegram-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:me@yunyoujun.cn" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://travellings.link" title="Travelling" target="_blank" style="color:var(--hty-text-color)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-train-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:#e6c35c"><i class="ri:folder-user-line"></i></a><a class="links-item hty-icon-button" href="/albums/" title="相册集" style="color:#00008b"><i class="ri:book-mark-line"></i></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-IP%E5%AE%89%E5%85%A8%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">9.1 IP安全概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-1-IPSec%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">9.1.1 IPSec的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89IPSec%E9%80%82%E7%94%A8%E8%8C%83%E5%9B%B4"><span class="toc-number">1.1.1.</span> <span class="toc-text">（1）IPSec适用范围</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%94%A8%E9%80%94"><span class="toc-number">1.1.2.</span> <span class="toc-text">（2）用途</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89IPSec%E5%85%B8%E5%9E%8B%E6%96%B9%E6%A1%88"><span class="toc-number">1.1.3.</span> <span class="toc-text">（3）IPSec典型方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-2-IPSec%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-number">1.2.</span> <span class="toc-text">9.1.2 IPSec的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-3-%E8%B7%AF%E7%94%B1%E5%BA%94%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">9.1.3 路由应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-4-IPSec%E6%96%87%E6%A1%A3"><span class="toc-number">1.4.</span> <span class="toc-text">9.1.4 IPSec文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-5-IPSec%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.5.</span> <span class="toc-text">9.1.5 IPSec服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-6-%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F%E5%92%8C%E9%9A%A7%E9%81%93%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.6.</span> <span class="toc-text">9.1.6 传输模式和隧道模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-IP%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5"><span class="toc-number">2.</span> <span class="toc-text">9.2 IP安全策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-1-%E5%AE%89%E5%85%A8%E5%85%B3%E8%81%94"><span class="toc-number">2.1.</span> <span class="toc-text">9.2.1 安全关联</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-2-%E5%AE%89%E5%85%A8%E5%85%B3%E8%81%94%E6%95%B0%E6%8D%AE%E5%BA%93SAD"><span class="toc-number">2.2.</span> <span class="toc-text">9.2.2 安全关联数据库SAD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-3-%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E6%95%B0%E6%8D%AE%E5%BA%93SPD"><span class="toc-number">2.3.</span> <span class="toc-text">9.2.3 安全策略数据库SPD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-4-IP%E9%80%9A%E4%BF%A1%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.4.</span> <span class="toc-text">9.2.4 IP通信进程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89IPSec%E4%BD%9C%E7%94%A8%E4%BD%8D%E7%BD%AE"><span class="toc-number">2.4.1.</span> <span class="toc-text">（1）IPSec作用位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%87%BA%E7%AB%99%E6%8A%A5%E6%96%87"><span class="toc-number">2.4.2.</span> <span class="toc-text">（2）出站报文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%85%A5%E7%AB%99%E6%8A%A5%E6%96%87"><span class="toc-number">2.4.3.</span> <span class="toc-text">（3）入站报文</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-%E5%B0%81%E8%A3%85%E5%AE%89%E5%85%A8%E8%BD%BD%E8%8D%B7ESP"><span class="toc-number">3.</span> <span class="toc-text">9.3 封装安全载荷ESP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-1-ESP%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.1.</span> <span class="toc-text">9.3.1 ESP格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-2-%E5%8A%A0%E5%AF%86%E5%92%8C%E8%AE%A4%E8%AF%81%E7%AE%97%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">9.3.2 加密和认证算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-3-%E5%A1%AB%E5%85%85"><span class="toc-number">3.3.</span> <span class="toc-text">9.3.3 填充</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-4-%E9%98%B2%E6%AD%A2%E9%87%8D%E6%94%BE%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.4.</span> <span class="toc-text">9.3.4 防止重放服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-5-%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F%E5%92%8C%E9%9A%A7%E9%81%93%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.5.</span> <span class="toc-text">9.3.5 传输模式和隧道模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">3.5.1.</span> <span class="toc-text">（1）两种模式的比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8FESP"><span class="toc-number">3.5.2.</span> <span class="toc-text">（2）传输模式ESP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E9%9A%A7%E9%81%93%E6%A8%A1%E5%BC%8FESP"><span class="toc-number">3.5.3.</span> <span class="toc-text">（3）隧道模式ESP</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-4-%E5%AE%89%E5%85%A8%E5%85%B3%E8%81%94%E7%BB%84%E5%90%88"><span class="toc-number">4.</span> <span class="toc-text">9.4 安全关联组合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-1-%E8%AE%A4%E8%AF%81%E5%92%8C%E5%8A%A0%E5%AF%86"><span class="toc-number">4.1.</span> <span class="toc-text">9.4.1 认证和加密</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%B8%A6%E8%AE%A4%E8%AF%81%E9%80%89%E9%A1%B9%E7%9A%84ESP"><span class="toc-number">4.1.1.</span> <span class="toc-text">（1）带认证选项的ESP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%BC%A0%E8%BE%93%E9%82%BB%E6%8E%A5"><span class="toc-number">4.1.2.</span> <span class="toc-text">（2）传输邻接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E4%BC%A0%E8%BE%93-%E9%9A%A7%E9%81%93%E6%9D%9F"><span class="toc-number">4.1.3.</span> <span class="toc-text">（3）传输-隧道束</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-2-%E5%AE%89%E5%85%A8%E5%85%B3%E8%81%94%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E5%90%88"><span class="toc-number">4.2.</span> <span class="toc-text">9.4.2 安全关联的基本组合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-5-%E5%9B%A0%E7%89%B9%E7%BD%91%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2"><span class="toc-number">5.</span> <span class="toc-text">9.5 因特网密钥交换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-5-1-%E5%AF%86%E9%92%A5%E7%A1%AE%E5%AE%9A%E5%8D%8F%E8%AE%AE"><span class="toc-number">5.1.</span> <span class="toc-text">9.5.1 密钥确定协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89DH%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="toc-number">5.1.1.</span> <span class="toc-text">（1）DH算法流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89DH%E7%AE%97%E6%B3%95%E4%BC%98%E7%82%B9"><span class="toc-number">5.1.2.</span> <span class="toc-text">（2）DH算法优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89DH%E7%AE%97%E6%B3%95%E5%BC%B1%E7%82%B9"><span class="toc-number">5.1.3.</span> <span class="toc-text">（3）DH算法弱点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%884%EF%BC%89IKE%E5%AF%86%E9%92%A5%E7%A1%AE%E5%AE%9A"><span class="toc-number">5.1.4.</span> <span class="toc-text">（4）IKE密钥确定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%885%EF%BC%89IKEv2%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2"><span class="toc-number">5.1.5.</span> <span class="toc-text">（5）IKEv2密钥交换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-5-2-%E6%8A%A5%E5%A4%B4%E5%92%8C%E8%BD%BD%E8%8D%B7%E6%A0%BC%E5%BC%8F"><span class="toc-number">5.2.</span> <span class="toc-text">9.5.2 报头和载荷格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-6-%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">9.6 密码套件</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://crestiny.github.io/2020/10/12/Chapter9-IP%E5%AE%89%E5%85%A8/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="CrestinyCoco"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Crestiny's Blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Chapter9 IP安全</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2020-10-12 09:14:17" itemprop="dateCreated datePublished" datetime="2020-10-12T09:14:17+08:00">2020-10-12</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <time title="修改时间：2021-01-04 14:49:47" itemprop="dateModified" datetime="2021-01-04T14:49:47+08:00">2021-01-04</time></div><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><i class="ri:eye-line"></i> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Courses/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Courses</span></a></span> > <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">《网络安全基础：应用与标准（E5）》</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/IP-Security/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">IP Security</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#24367d;"><p>防重放攻击，一般通过序列号或者时间戳</p>
+<h2 id="9-1-IP安全概述"><a class="header-anchor" href="#9-1-IP安全概述">¶</a>9.1 IP安全概述</h2>
+<p>之前学的Kerberos、TLS/SSL、S/MIME、PGP，都是用来保护应用安全的，其实协议安全也很重要<br>
+在IP中加入认证和加密机制来保障终端用户安全，这样的话，即便上层没有安全机制也可以保证安全</p>
+<p>IP层安全包括：</p>
+<ul>
+<li>认证</li>
+<li>保密</li>
+<li>密钥管理机制：保证密钥交换安全</li>
+</ul>
+<h3 id="9-1-1-IPSec的应用"><a class="header-anchor" href="#9-1-1-IPSec的应用">¶</a>9.1.1 IPSec的应用</h3>
+<h4 id="（1）IPSec适用范围"><a class="header-anchor" href="#（1）IPSec适用范围">¶</a>（1）IPSec适用范围</h4>
+<p>LAN、专用和公用WAN、互联网</p>
+<h4 id="（2）用途"><a class="header-anchor" href="#（2）用途">¶</a>（2）用途</h4>
+<ul>
+<li>通过互联网安全分支机构接入：</li>
+<li>通过互联网进行安全远程访问：</li>
+<li>与合作者建立企业间联网和企业内联网接入：</li>
+<li>加强电子商务安全性：</li>
+</ul>
+<h4 id="（3）IPSec典型方案"><a class="header-anchor" href="#（3）IPSec典型方案">¶</a>（3）IPSec典型方案</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102220557.png" alt=""></p>
+<h3 id="9-1-2-IPSec的好处"><a class="header-anchor" href="#9-1-2-IPSec的好处">¶</a>9.1.2 IPSec的好处</h3>
+<h3 id="9-1-3-路由应用"><a class="header-anchor" href="#9-1-3-路由应用">¶</a>9.1.3 路由应用</h3>
+<p>IPSec其实在互联网的路由结构中也有很重要的作用，例如它可以确保：</p>
+<ul>
+<li>路由器广播来自授权的路由器</li>
+<li>邻居广播来自授权的路由器</li>
+<li>重定向报文</li>
+<li>路由更新未被伪造</li>
+</ul>
+<h3 id="9-1-4-IPSec文档"><a class="header-anchor" href="#9-1-4-IPSec文档">¶</a>9.1.4 IPSec文档</h3>
+<h3 id="9-1-5-IPSec服务"><a class="header-anchor" href="#9-1-5-IPSec服务">¶</a>9.1.5 IPSec服务</h3>
+<p>IPSec提供以下服务：</p>
+<ul>
+<li>访问控制</li>
+<li>无连接完整性</li>
+<li>数据源认证</li>
+<li>拒绝重放包</li>
+<li>保密性</li>
+<li>受限制的流量保密性</li>
+</ul>
+<p>有两种协议可以提供安全性：</p>
+<ul>
+<li>AH：用于提供消息认证的扩展头</li>
+<li>ESP：加密与认证结合的协议</li>
+</ul>
+<h3 id="9-1-6-传输模式和隧道模式"><a class="header-anchor" href="#9-1-6-传输模式和隧道模式">¶</a>9.1.6 传输模式和隧道模式</h3>
+<p>AH和ESP都用两种模式，这里做个简介：</p>
+<ul>
+<li>传输模式：为上层协议提供保护，也就是对IP数据包的载荷进行保护
+<ul>
+<li>AH：认证IP载荷+IP报头选中的部分</li>
+<li>ESP：加密和认证IP载荷</li>
+</ul>
+</li>
+<li>隧道模式：对整个IP包提供保护，把原来的包+安全域，一起作为载荷套在新的IP包内
+<ul>
+<li>AH：认证整个内部IP包+外部IP报头被选中的部分</li>
+<li>ESP：加密和认证整个内部IP包</li>
+</ul>
+</li>
+</ul>
+<h2 id="9-2-IP安全策略"><a class="header-anchor" href="#9-2-IP安全策略">¶</a>9.2 IP安全策略</h2>
+<h3 id="9-2-1-安全关联"><a class="header-anchor" href="#9-2-1-安全关联">¶</a>9.2.1 安全关联</h3>
+<p>IPSec安全策略实际上由两个交互的数据库确定：安全关联数据库SAD和安全策略数据库SPD</p>
+<p>那个图看不太懂（？）</p>
+<p>安全关联SA：发送端与接收端之间用于对它们之间传递的<strong>数据流提供安全服务</strong>的一个单向逻辑连接，如果要双向，就要两个SA<br>
+SA提供的安全服务取决于使用的安全协议AH/ESP</p>
+<p>一个SA由三个参数确定：</p>
+<ul>
+<li>安全参数索引SPI：</li>
+<li>IP目的地址：目的端点地址</li>
+<li>安全协议标识：AH/ESP</li>
+</ul>
+<p>IPSec使用SA协商的参数（密码算法，相关的参数等等），有一部分在ESP数据包中传送，IPSec感觉定义的是一种“工作流程”？</p>
+<h3 id="9-2-2-安全关联数据库SAD"><a class="header-anchor" href="#9-2-2-安全关联数据库SAD">¶</a>9.2.2 安全关联数据库SAD</h3>
+<p>每个IPSec的实现中都有一个名义的SAD，所谓名义，是说：<br>
+SAD说明IPSec需要具备的功能，不负责定义具体实现，这个由IPSec自己决定</p>
+<p>SAD中的SA用以下参数定义：</p>
+<p>不同SA的不同组合可以使用户获得自己理想的配置</p>
+<h3 id="9-2-3-安全策略数据库SPD"><a class="header-anchor" href="#9-2-3-安全策略数据库SPD">¶</a>9.2.3 安全策略数据库SPD</h3>
+<p>（突然感觉这个好像防火墙啊！）（？）</p>
+<p>SPD中说明了IP流量与什么SA相关联</p>
+<p>如何用SPD处理IP数据包？</p>
+<ul>
+<li>取IP数据包中的信息（字段值）判断，看符合哪个SPD入口</li>
+<li>如果该数据包存在SA，那就根据对应的入口确定SA</li>
+<li>执行所需的IPSec处理（AH或ESP处理）</li>
+</ul>
+<p>判断字段值可以用选择器，一般依据是IP地址、下层协议等等</p>
+<p>某主机上SPD的一个例子：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103125634.png" alt=""></p>
+<h3 id="9-2-4-IP通信进程"><a class="header-anchor" href="#9-2-4-IP通信进程">¶</a>9.2.4 IP通信进程</h3>
+<h4 id="（1）IPSec作用位置"><a class="header-anchor" href="#（1）IPSec作用位置">¶</a>（1）IPSec作用位置</h4>
+<p>IPSec的作用单位：IP包，如果是往外面发的，则发之前要IPSec处理；如果是收进来的，往上层传的时候要处理</p>
+<h4 id="（2）出站报文"><a class="header-anchor" href="#（2）出站报文">¶</a>（2）出站报文</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE278.png" alt=""></p>
+<h4 id="（3）入站报文"><a class="header-anchor" href="#（3）入站报文">¶</a>（3）入站报文</h4>
+<p>和出站报文的处理不太一样，这里是SAD和SPD二者选其一的</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE277.png" alt=""></p>
+<h2 id="9-3-封装安全载荷ESP"><a class="header-anchor" href="#9-3-封装安全载荷ESP">¶</a>9.3 封装安全载荷ESP</h2>
+<p>这章是对ESP的详解</p>
+<p>ESP可以提供的服务包括：</p>
+<ul>
+<li>机密性</li>
+<li>数据源认证</li>
+<li>中断连接后的完整性</li>
+<li>一次抗重放攻击服务</li>
+<li>流量机密性</li>
+</ul>
+<p>具体提供哪些要看SA的选择</p>
+<h3 id="9-3-1-ESP格式"><a class="header-anchor" href="#9-3-1-ESP格式">¶</a>9.3.1 ESP格式</h3>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE276.png" alt=""></p>
+<h3 id="9-3-2-加密和认证算法"><a class="header-anchor" href="#9-3-2-加密和认证算法">¶</a>9.3.2 加密和认证算法</h3>
+<p>IV</p>
+<p>ICV</p>
+<h3 id="9-3-3-填充"><a class="header-anchor" href="#9-3-3-填充">¶</a>9.3.3 填充</h3>
+<p>填充域有如下几个作用：</p>
+<h3 id="9-3-4-防止重放服务"><a class="header-anchor" href="#9-3-4-防止重放服务">¶</a>9.3.4 防止重放服务</h3>
+<p>IPSec规定了一种窗口模式</p>
+<h3 id="9-3-5-传输模式和隧道模式"><a class="header-anchor" href="#9-3-5-传输模式和隧道模式">¶</a>9.3.5 传输模式和隧道模式</h3>
+<h4 id="（1）两种模式的比较"><a class="header-anchor" href="#（1）两种模式的比较">¶</a>（1）两种模式的比较</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103195235.png" alt=""></p>
+<h4 id="（2）传输模式ESP"><a class="header-anchor" href="#（2）传输模式ESP">¶</a>（2）传输模式ESP</h4>
+<p>传输模式操作流程：</p>
+<ul>
+<li>先加密后认证（认证可选）</li>
+<li>数据包路由到目的地，不需要检查密文部分</li>
+<li>目的节点经检查ESP报头中的SPI，解密数据包</li>
+</ul>
+<h4 id="（3）隧道模式ESP"><a class="header-anchor" href="#（3）隧道模式ESP">¶</a>（3）隧道模式ESP</h4>
+<p>新的IP报头中的信息，可以为路由提供足够信息，但不为流量分析提供信息</p>
+<p>隧道模式操作流程：</p>
+<ul>
+<li>对以ESP为前缀的原IP包，进行加密、认证，封装新的IP报头</li>
+<li>将外部IP包路由，中间路由器和防火墙只检查外部的</li>
+<li>目的地节点解密，把明文数据包在内网中传送，送到目的地主机</li>
+</ul>
+<p>总结一下这两种模式：</p>
+<ul>
+<li>传输模式适合保护（支持ESP特性的）主机之间的连接</li>
+<li>隧道模式在含有防火墙的情况下，可以用来让可信数据包穿过防火墙</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE275.png" alt=""></p>
+<h2 id="9-4-安全关联组合"><a class="header-anchor" href="#9-4-安全关联组合">¶</a>9.4 安全关联组合</h2>
+<p>同一个流量，可能要多个SA组合才能得到想要的IPSec服务，这些SA就叫安全关联束</p>
+<p>SA之间怎么组合成安全关联束呢？</p>
+<ul>
+<li>传输邻接：（？）</li>
+<li>隧道迭代：多层嵌套</li>
+</ul>
+<h3 id="9-4-1-认证和加密"><a class="header-anchor" href="#9-4-1-认证和加密">¶</a>9.4.1 认证和加密</h3>
+<p>下面讨论一下几种实现认证加保密的方法：</p>
+<h4 id="（1）带认证选项的ESP"><a class="header-anchor" href="#（1）带认证选项的ESP">¶</a>（1）带认证选项的ESP</h4>
+<p>先用ESP，然后认证</p>
+<p>（？）IPSec、AH、ESP、SAD、SPD之间的关系是什么？</p>
+<p>认证的是密文而不是明文</p>
+<h4 id="（2）传输邻接"><a class="header-anchor" href="#（2）传输邻接">¶</a>（2）传输邻接</h4>
+<p>加密之后，添加两个报头，内部是ESP，外部是AH</p>
+<h4 id="（3）传输-隧道束"><a class="header-anchor" href="#（3）传输-隧道束">¶</a>（3）传输-隧道束</h4>
+<p>加密之后，添加两个报头，内部是AH，外部是ESP</p>
+<h3 id="9-4-2-安全关联的基本组合"><a class="header-anchor" href="#9-4-2-安全关联的基本组合">¶</a>9.4.2 安全关联的基本组合</h3>
+<p>介绍了IPSec文档中要求的主机必须有的4种SA组合</p>
+<h2 id="9-5-因特网密钥交换"><a class="header-anchor" href="#9-5-因特网密钥交换">¶</a>9.5 因特网密钥交换</h2>
+<p>一个典型的要求：4个密钥——发送者公钥私钥+接收者公钥私钥</p>
+<p>IPSec文档要求支持的密钥管理类型：</p>
+<ul>
+<li>手动类型</li>
+<li>自动类型</li>
+</ul>
+<p>IKE是什么——因特网密钥交换协议</p>
+<p>自动类型的密钥管理默认有：</p>
+<ul>
+<li>Oakley协议</li>
+<li>ISAKMP协议</li>
+</ul>
+<h3 id="9-5-1-密钥确定协议"><a class="header-anchor" href="#9-5-1-密钥确定协议">¶</a>9.5.1 密钥确定协议</h3>
+<p>IKE密钥确定是DH密钥交换算法的细化</p>
+<h4 id="（1）DH算法流程"><a class="header-anchor" href="#（1）DH算法流程">¶</a>（1）DH算法流程</h4>
+<ul>
+<li>选定两个全局参数</li>
+<li>A选一个x，传一个y；B也一样</li>
+<li>每一方都可以算出同一个值</li>
+</ul>
+<h4 id="（2）DH算法优点"><a class="header-anchor" href="#（2）DH算法优点">¶</a>（2）DH算法优点</h4>
+<ul>
+<li>仅在需要时生成密钥</li>
+<li>仅需要全局参数一致</li>
+</ul>
+<h4 id="（3）DH算法弱点"><a class="header-anchor" href="#（3）DH算法弱点">¶</a>（3）DH算法弱点</h4>
+<ul>
+<li>没有认证双方</li>
+<li>易受中间人攻击</li>
+<li>密集型计算易受拥塞攻击</li>
+</ul>
+<h4 id="（4）IKE密钥确定"><a class="header-anchor" href="#（4）IKE密钥确定">¶</a>（4）IKE密钥确定</h4>
+<p>有5点特性：</p>
+<p>2点是原来DH的性质：</p>
+<ul>
+<li>双方协商得到一个组</li>
+<li>双方交换公钥</li>
+</ul>
+<p>3点是防攻击：</p>
+<ul>
+<li>Cookie防拥塞</li>
+<li>随机数防重放</li>
+<li>认证，从而阻止中间人攻击</li>
+</ul>
+<p>接下来是一些细节</p>
+<h4 id="（5）IKEv2密钥交换"><a class="header-anchor" href="#（5）IKEv2密钥交换">¶</a>（5）IKEv2密钥交换</h4>
+<p>感觉是先做密钥交换，再开始交换信息</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210103232118.png" alt=""></p>
+<h3 id="9-5-2-报头和载荷格式"><a class="header-anchor" href="#9-5-2-报头和载荷格式">¶</a>9.5.2 报头和载荷格式</h3>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE274.png" alt=""></p>
+<h2 id="9-6-密码套件"><a class="header-anchor" href="#9-6-密码套件">¶</a>9.6 密码套件</h2>
+<p>IPSec和IKE依赖多种密码算法，而且每个算法的参数又多</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><i class="ri:alipay-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><i class="ri:qq-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><i class="ri:wechat-pay-line"></i></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>CrestinyCoco</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://crestiny.github.io/2020/10/12/Chapter9-IP%E5%AE%89%E5%85%A8/" title="Chapter9 IP安全">https://crestiny.github.io/2020/10/12/Chapter9-IP%E5%AE%89%E5%85%A8/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2020/11/08/HongYi-Lee-Model-Compression-Lecture/" rel="prev" title="HongYi Lee: Model Compression Lecture"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">HongYi Lee: Model Compression Lecture</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2020/10/12/Chapter5-%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%92%8C%E4%BA%91%E5%AE%89%E5%85%A8/" rel="next" title="Chapter5 网络访问控制和云安全"><span class="post-nav-text">Chapter5 网络访问控制和云安全</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>要不要和我说些什么？</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><i class="ri:cloud-line"></i></span><span class="author"> CrestinyCoco</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.0.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.2</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2022-07-13T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div><div id="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv" title="总访客量"><span><i class="ri:user-line"></i></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><i class="ri:eye-line"></i></span><span id="busuanzi_value_site_pv"></span></span></div></footer><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#24367d" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search-line"></use></svg></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="/js/search/local-search.js" defer></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close-line"></use></svg></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="search here" value=""></div><div id="local-search-result"></div></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

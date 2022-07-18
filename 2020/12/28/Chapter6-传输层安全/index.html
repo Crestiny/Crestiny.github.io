@@ -1,0 +1,254 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#24367d"><meta name="author" content="CrestinyCoco"><meta name="copyright" content="CrestinyCoco"><meta name="generator" content="Hexo 6.0.0"><meta name="theme" content="hexo-theme-yun"><title>Chapter6 传输层安全 | Crestiny's Blog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/qie.ico"><link rel="mask-icon" href="/qie.ico" color="#24367d"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"crestiny.github.io","root":"/","title":["汉","月","沦","西","海"],"version":"1.6.2","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"search here","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"D:/sentences.json"},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="本节将讨论到关注于传输层安全的三种标准模式：SSL&#x2F;TLS、HTTPS、SSH ¶6.1 Web安全需求 万维网WWW，其实可以看做是运行在互联网上，并基于TCP&#x2F;IP的C&#x2F;S模式的应用系统。相关的安全问题就可以被称为Web安全问题。 Web安全有如下挑战：  互联网的发布环境是双向的 Web成为企业商业平台，遭攻击会信誉受损 Web底层软件复杂，可能隐藏安全缺陷 Web作为公司核心，一旦出问题容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter6 传输层安全">
+<meta property="og:url" content="https://crestiny.github.io/2020/12/28/Chapter6-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="本节将讨论到关注于传输层安全的三种标准模式：SSL&#x2F;TLS、HTTPS、SSH ¶6.1 Web安全需求 万维网WWW，其实可以看做是运行在互联网上，并基于TCP&#x2F;IP的C&#x2F;S模式的应用系统。相关的安全问题就可以被称为Web安全问题。 Web安全有如下挑战：  互联网的发布环境是双向的 Web成为企业商业平台，遭攻击会信誉受损 Web底层软件复杂，可能隐藏安全缺陷 Web作为公司核心，一旦出问题容">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225334.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225804.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE31.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101142842.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE77.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101154055.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101161117.png">
+<meta property="article:published_time" content="2020-12-28T02:44:01.000Z">
+<meta property="article:modified_time" content="2021-01-05T17:29:38.998Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta property="article:tag" content="Transport Layer Security">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225334.png"><script src="/js/ui/mode.js"></script><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info mickey-mouse"><a class="site-author-avatar" href="/about/" title="CrestinyCoco"><img width="96" loading="lazy" src="/images/sakura.jpg" alt="CrestinyCoco"><span class="site-author-status" title="Life is fantastic!"></span></a><div class="site-author-name"><a href="/about/">CrestinyCoco</a></div><span class="site-name">Crestiny's Blog</span><sub class="site-subtitle">Life is fantastic ! </sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">123</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">25</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">67</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=910426929&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/Crestiny" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:1043729366@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://m.weibo.cn/u/6869522716?uid=6869522716&amp;t=0&amp;luicode=10000011&amp;lfid=100103type%3D1%26q%3Dforeverwildsummer" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=1484676321" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/xi-shang-qin-heng" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/13347719" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/mmqrcode1658050168755.png" title="微信" target="_blank" style="color:#1AAD19"><i class="ri:wechat-2-line"></i></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/about/white-qrcode-and-search.jpg" title="微信公众号" target="_blank" style="color:#1AAD19"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat-2-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://twitter.com/YunYouJun" title="Twitter" target="_blank" style="color:#1da1f2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-twitter-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://t.me/elpsycn" title="Telegram Channel" target="_blank" style="color:#0088CC"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-telegram-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:me@yunyoujun.cn" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://travellings.link" title="Travelling" target="_blank" style="color:var(--hty-text-color)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-train-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:#e6c35c"><i class="ri:folder-user-line"></i></a><a class="links-item hty-icon-button" href="/albums/" title="相册集" style="color:#00008b"><i class="ri:book-mark-line"></i></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-Web%E5%AE%89%E5%85%A8%E9%9C%80%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">6.1 Web安全需求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-1-Web%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81"><span class="toc-number">1.1.</span> <span class="toc-text">6.1.1 Web安全威胁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89Web%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.1.</span> <span class="toc-text">（1）Web安全威胁分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%90%84%E7%B1%BBWeb%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">1.1.2.</span> <span class="toc-text">（2）各类Web安全威胁的比较</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-2-Web%E6%B5%81%E9%87%8F%E5%AE%89%E5%85%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">6.1.2 Web流量安全方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-%E5%AE%89%E5%85%A8%E5%A5%97%E6%8E%A5%E5%AD%97%E5%B1%82SSL%E5%92%8C%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8TLS"><span class="toc-number">2.</span> <span class="toc-text">6.2 安全套接字层SSL和传输层安全TLS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-1-SSL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">6.2.1 SSL体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89SSL%E5%8D%8F%E8%AE%AE%E7%BB%84%E6%88%90"><span class="toc-number">2.1.1.</span> <span class="toc-text">（1）SSL协议组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89SSL%E5%8D%8F%E8%AE%AE%E4%B8%A4%E4%B8%AA%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.2.</span> <span class="toc-text">（2）SSL协议两个重要概念</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8TLS"><span class="toc-number">3.</span> <span class="toc-text">6.3 传输层安全TLS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-1-%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="toc-number">3.1.</span> <span class="toc-text">6.3.1 版本号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-2-%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81"><span class="toc-number">3.2.</span> <span class="toc-text">6.3.2 消息认证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-3-%E4%BC%AA%E9%9A%8F%E6%9C%BA%E5%87%BD%E6%95%B0"><span class="toc-number">3.3.</span> <span class="toc-text">6.3.3 伪随机函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-4-%E8%AD%A6%E6%8A%A5%E7%A0%81"><span class="toc-number">3.4.</span> <span class="toc-text">6.3.4 警报码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-5-%E5%AF%86%E7%A0%81%E5%A5%97%E4%BB%B6"><span class="toc-number">3.5.</span> <span class="toc-text">6.3.5 密码套件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-6-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%81%E4%B9%A6%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.6.</span> <span class="toc-text">6.3.6 客户端证书类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-7-certificate-verify%E5%92%8Cfinished%E6%B6%88%E6%81%AF"><span class="toc-number">3.7.</span> <span class="toc-text">6.3.7 certificate_verify和finished消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-8-%E5%AF%86%E7%A0%81%E8%AE%A1%E7%AE%97"><span class="toc-number">3.8.</span> <span class="toc-text">6.3.8 密码计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-9-%E5%A1%AB%E5%85%85"><span class="toc-number">3.9.</span> <span class="toc-text">6.3.9 填充</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-HTTPS"><span class="toc-number">4.</span> <span class="toc-text">6.4 HTTPS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-1-%E8%BF%9E%E6%8E%A5%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">4.1.</span> <span class="toc-text">6.4.1 连接初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-2-%E8%BF%9E%E6%8E%A5%E5%85%B3%E9%97%AD"><span class="toc-number">4.2.</span> <span class="toc-text">6.4.2 连接关闭</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-5-SSH%EF%BC%88Secure-Shell%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">6.5 SSH（Secure Shell）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-1-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="toc-number">5.1.</span> <span class="toc-text">6.5.1 传输层协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E4%B8%BB%E6%9C%BA%E5%AF%86%E9%92%A5"><span class="toc-number">5.1.1.</span> <span class="toc-text">（1）主机密钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="toc-number">5.1.2.</span> <span class="toc-text">（2）分组交换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89SSH%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE%E6%B5%81%E7%A8%8B"><span class="toc-number">5.1.3.</span> <span class="toc-text">（3）SSH传输层协议流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-2-%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E5%8D%8F%E8%AE%AE"><span class="toc-number">5.2.</span> <span class="toc-text">6.5.2 用户身份认证协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%A0%BC%E5%BC%8F"><span class="toc-number">5.2.1.</span> <span class="toc-text">（1）消息类型和格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E6%B6%88%E6%81%AF%E4%BA%A4%E6%8D%A2"><span class="toc-number">5.2.2.</span> <span class="toc-text">（2）消息交换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="toc-number">5.2.3.</span> <span class="toc-text">（3）身份认证方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-3-%E8%BF%9E%E6%8E%A5%E5%8D%8F%E8%AE%AE"><span class="toc-number">5.3.</span> <span class="toc-text">6.5.3 连接协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E4%BF%A1%E9%81%93%E6%9C%BA%E5%88%B6"><span class="toc-number">5.3.1.</span> <span class="toc-text">（1）信道机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%BF%A1%E9%81%93%E7%B1%BB%E5%9E%8B"><span class="toc-number">5.3.2.</span> <span class="toc-text">（2）信道类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%EF%BC%88%E5%8D%B3SSH%E9%9A%A7%E9%81%93%EF%BC%89"><span class="toc-number">5.3.3.</span> <span class="toc-text">（3）端口转发（即SSH隧道）</span></a></li></ol></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://crestiny.github.io/2020/12/28/Chapter6-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="CrestinyCoco"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Crestiny's Blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Chapter6 传输层安全</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2020-12-28 10:44:01" itemprop="dateCreated datePublished" datetime="2020-12-28T10:44:01+08:00">2020-12-28</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <time title="修改时间：2021-01-06 01:29:38" itemprop="dateModified" datetime="2021-01-06T01:29:38+08:00">2021-01-06</time></div><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><i class="ri:eye-line"></i> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Courses/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Courses</span></a></span> > <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Courses/%E3%80%8A%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B8%8E%E6%A0%87%E5%87%86%EF%BC%88E5%EF%BC%89%E3%80%8B/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">《网络安全基础：应用与标准（E5）》</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Transport-Layer-Security/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Transport Layer Security</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#24367d;"><p>本节将讨论到关注于传输层安全的三种标准模式：SSL/TLS、HTTPS、SSH</p>
+<h2 id="6-1-Web安全需求"><a class="header-anchor" href="#6-1-Web安全需求">¶</a>6.1 Web安全需求</h2>
+<p>万维网WWW，其实可以看做是运行在互联网上，并基于TCP/IP的C/S模式的应用系统。相关的安全问题就可以被称为<strong>Web安全问题</strong>。</p>
+<p>Web安全有如下挑战：</p>
+<ul>
+<li>互联网的发布环境是双向的</li>
+<li>Web成为企业商业平台，遭攻击会信誉受损</li>
+<li>Web底层软件复杂，可能隐藏安全缺陷</li>
+<li>Web作为公司核心，一旦出问题容易瘫一整片</li>
+<li>Web用户由于缺乏安全意识……</li>
+</ul>
+<h3 id="6-1-1-Web安全威胁"><a class="header-anchor" href="#6-1-1-Web安全威胁">¶</a>6.1.1 Web安全威胁</h3>
+<h4 id="（1）Web安全威胁分类"><a class="header-anchor" href="#（1）Web安全威胁分类">¶</a>（1）Web安全威胁分类</h4>
+<ul>
+<li>按主被动分类
+<ul>
+<li>主动攻击</li>
+<li>被动攻击</li>
+</ul>
+</li>
+<li>按威胁发生的位置分类
+<ul>
+<li>在Web服务器</li>
+<li>浏览器</li>
+<li>浏览器与服务器之间的网络通信</li>
+</ul>
+</li>
+</ul>
+<h4 id="（2）各类Web安全威胁的比较"><a class="header-anchor" href="#（2）各类Web安全威胁的比较">¶</a>（2）各类Web安全威胁的比较</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225334.png" alt=""></p>
+<h3 id="6-1-2-Web流量安全方法"><a class="header-anchor" href="#6-1-2-Web流量安全方法">¶</a>6.1.2 Web流量安全方法</h3>
+<p>按照安全设施的实现位置不同，可以分成以下三种：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225804.png" alt=""></p>
+<ul>
+<li>网络层：可以用IPSec，之后作详细介绍</li>
+<li>传输层：SSL或TLS</li>
+<li>应用层：有些特定的应用有特定的安全服务</li>
+</ul>
+<h2 id="6-2-安全套接字层SSL和传输层安全TLS"><a class="header-anchor" href="#6-2-安全套接字层SSL和传输层安全TLS">¶</a>6.2 安全套接字层SSL和传输层安全TLS</h2>
+<h3 id="6-2-1-SSL体系结构"><a class="header-anchor" href="#6-2-1-SSL体系结构">¶</a>6.2.1 SSL体系结构</h3>
+<h4 id="（1）SSL协议组成"><a class="header-anchor" href="#（1）SSL协议组成">¶</a>（1）SSL协议组成</h4>
+<p>SSL是用TCP提供的端到端的安全服务，由两层协议组成：</p>
+<h4 id="（2）SSL协议两个重要概念"><a class="header-anchor" href="#（2）SSL协议两个重要概念">¶</a>（2）SSL协议两个重要概念</h4>
+<ul>
+<li>连接：一种提供合适服务类型的传输，每个连接与一个会话关联</li>
+<li>会话：通过握手协议来创建会话</li>
+</ul>
+<p>每个会话有若干个状态</p>
+<p>SSL协议：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE31.png" alt=""></p>
+<h2 id="6-3-传输层安全TLS"><a class="header-anchor" href="#6-3-传输层安全TLS">¶</a>6.3 传输层安全TLS</h2>
+<p>TLS目标是编写SSL的互联网标准版本，RFC 5246中定义的TLS非常接近于SSLv3，这里着重介绍区别</p>
+<h3 id="6-3-1-版本号"><a class="header-anchor" href="#6-3-1-版本号">¶</a>6.3.1 版本号</h3>
+<p>TLS记录格式与SSL记录格式完全相同</p>
+<h3 id="6-3-2-消息认证码"><a class="header-anchor" href="#6-3-2-消息认证码">¶</a>6.3.2 消息认证码</h3>
+<p>SSL和TLS的MAC方案不同在于：</p>
+<ul>
+<li>使用的算法</li>
+<li>MAC值的计算范围</li>
+</ul>
+<h3 id="6-3-3-伪随机函数"><a class="header-anchor" href="#6-3-3-伪随机函数">¶</a>6.3.3 伪随机函数</h3>
+<p>（？）<br>
+TLS使用伪随机函数的目的：使用相对较小的共享密钥值，生成较长的数据块</p>
+<h3 id="6-3-4-警报码"><a class="header-anchor" href="#6-3-4-警报码">¶</a>6.3.4 警报码</h3>
+<p>TLS支持一些SSLv3以外的警报码</p>
+<h3 id="6-3-5-密码套件"><a class="header-anchor" href="#6-3-5-密码套件">¶</a>6.3.5 密码套件</h3>
+<p>可用的密码套件之间有些小区别</p>
+<h3 id="6-3-6-客户端证书类型"><a class="header-anchor" href="#6-3-6-客户端证书类型">¶</a>6.3.6 客户端证书类型</h3>
+<p>客户端可请求的证书有区别</p>
+<h3 id="6-3-7-certificate-verify和finished消息"><a class="header-anchor" href="#6-3-7-certificate-verify和finished消息">¶</a>6.3.7 certificate_verify和finished消息</h3>
+<h3 id="6-3-8-密码计算"><a class="header-anchor" href="#6-3-8-密码计算">¶</a>6.3.8 密码计算</h3>
+<p>预备主密码的计算</p>
+<h3 id="6-3-9-填充"><a class="header-anchor" href="#6-3-9-填充">¶</a>6.3.9 填充</h3>
+<h2 id="6-4-HTTPS"><a class="header-anchor" href="#6-4-HTTPS">¶</a>6.4 HTTPS</h2>
+<p>HTTPS=HTTP+SSL/TLS，以实现浏览器和服务器之间的安全通信</p>
+<p>HTTPS协议中需要被加密的元素：</p>
+<ul>
+<li>URL</li>
+<li>请求的文件内容</li>
+<li>浏览器表单内容</li>
+<li>（双向）cookie</li>
+<li>HTTP报头内容</li>
+</ul>
+<h3 id="6-4-1-连接初始化"><a class="header-anchor" href="#6-4-1-连接初始化">¶</a>6.4.1 连接初始化</h3>
+<p>HTTPS连接初始化过程：</p>
+<ul>
+<li>用户向服务器请求连接</li>
+<li>交换TLS信息</li>
+<li>发起第一次HTTP请求，是以TLS应用数据的形式发送的</li>
+<li>HTTP的传统操作仍然保持</li>
+</ul>
+<p>HTTPS连接中的三层不同意思：</p>
+<ul>
+<li>对于HTTP的部分来说，它觉得自己是向下一层发送了一个连接请求，下一层帮它连接到服务器了；对HTTP，下层是TCP，对HTTPS，下层是SSL/TLS</li>
+<li>对于SSL/TLS的部分来说，它觉得自己是在TLS用户和TLS服务器之间建立了会话；建立一个SSL/TLS连接=建立了一个TCP连接</li>
+</ul>
+<h3 id="6-4-2-连接关闭"><a class="header-anchor" href="#6-4-2-连接关闭">¶</a>6.4.2 连接关闭</h3>
+<p>HTTPS要求关闭TLS——&gt;关闭TLS要求关闭TCP连接</p>
+<h2 id="6-5-SSH（Secure-Shell）"><a class="header-anchor" href="#6-5-SSH（Secure-Shell）">¶</a>6.5 SSH（Secure Shell）</h2>
+<p>SSH是个简单又安全的通信协议，用于远程登录、隧道等</p>
+<p>SSH协议栈：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101142842.png" alt=""></p>
+<p>接下来分别介绍SSH传输层协议、SSH用户认证协议、SSH连接协议</p>
+<h3 id="6-5-1-传输层协议"><a class="header-anchor" href="#6-5-1-传输层协议">¶</a>6.5.1 传输层协议</h3>
+<h4 id="（1）主机密钥"><a class="header-anchor" href="#（1）主机密钥">¶</a>（1）主机密钥</h4>
+<p>主机密钥用于服务器认证，也就是让用户在密钥交换后可以确认这个服务器身份的意思<br>
+那用户拿到服务器讼案例的主机密钥之后又怎么验证呢？两种方式：</p>
+<ul>
+<li>用户有个数据库，存了服务器和主机密钥的映射关系</li>
+<li>用户到CA去认证，那里存了主机名和密钥对</li>
+</ul>
+<h4 id="（2）分组交换"><a class="header-anchor" href="#（2）分组交换">¶</a>（2）分组交换</h4>
+<h4 id="（3）SSH传输层协议流程"><a class="header-anchor" href="#（3）SSH传输层协议流程">¶</a>（3）SSH传输层协议流程</h4>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE77.png" alt=""></p>
+<h3 id="6-5-2-用户身份认证协议"><a class="header-anchor" href="#6-5-2-用户身份认证协议">¶</a>6.5.2 用户身份认证协议</h3>
+<p>是用户向服务器证明自己的身份</p>
+<h4 id="（1）消息类型和格式"><a class="header-anchor" href="#（1）消息类型和格式">¶</a>（1）消息类型和格式</h4>
+<ul>
+<li>用户请求服务器帮自己做个认证的格式</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">byte SSH_MSG_USERAUTH_REQUEST (50)</span><br><span class="line">string user name</span><br><span class="line">string server name</span><br><span class="line">string method name</span><br><span class="line">... method specific fields</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>服务器拒绝帮用户做认证或者需要它提供更多信息的话，会发这种格式的</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">byte SSH_MSG_USERAUTH_FAILURE (51)</span><br><span class="line">name-list authentications that can continue</span><br><span class="line">boolean partial success</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>服务器同意帮你认证</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">byte SSH_MSG_USERAUTH_SUCEESS（52）</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="（2）消息交换"><a class="header-anchor" href="#（2）消息交换">¶</a>（2）消息交换</h4>
+<p>流程如下：</p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101154055.png" alt=""></p>
+<h4 id="（3）身份认证方式"><a class="header-anchor" href="#（3）身份认证方式">¶</a>（3）身份认证方式</h4>
+<p>说的是上图中认证方法列表的内容？</p>
+<h3 id="6-5-3-连接协议"><a class="header-anchor" href="#6-5-3-连接协议">¶</a>6.5.3 连接协议</h3>
+<p>这里顺带一提：SSH协议栈的三个协议，用法大概是——先做SSH用户身份验证协议，再做SSH连接协议，这两个都是基于SSH传输协议的</p>
+<p>有个前提假设是：使用了安全的认证连接</p>
+<blockquote>
+<p>安全的认证连接：连接协议用一个通道虚拟出多条逻辑通道</p>
+</blockquote>
+<h4 id="（1）信道机制"><a class="header-anchor" href="#（1）信道机制">¶</a>（1）信道机制</h4>
+<p>通过窗口机制进行流控，信道的生命周期有3个阶段：</p>
+<ul>
+<li>
+<p>开启信道：</p>
+<ul>
+<li>某一方想开了，给信道分配一个本地序列号，发这种消息：</li>
+</ul>
+  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">byte SSH_MSG_CHANNEL_OPEN</span><br><span class="line">string channel type</span><br><span class="line">uint32 sender channel</span><br><span class="line">uint32 initial window size</span><br><span class="line">uint32 maximum packet size</span><br><span class="line">... channel type specific data follows</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>另一方同意或不同意，如果同意则开启信道</li>
+</ul>
+</li>
+<li>
+<p>关闭信道：</p>
+<ul>
+<li>任意一方想关闭信道，发消息</li>
+</ul>
+</li>
+</ul>
+<p>过程如下图：<br>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101161117.png" alt=""></p>
+<h4 id="（2）信道类型"><a class="header-anchor" href="#（2）信道类型">¶</a>（2）信道类型</h4>
+<p>4种</p>
+<h4 id="（3）端口转发（即SSH隧道）"><a class="header-anchor" href="#（3）端口转发（即SSH隧道）">¶</a>（3）端口转发（即SSH隧道）</h4>
+<p>可以将不安全的TCP连接转换为安全的SSH连接，转发可以分为本地的和远程的</p>
+<p>没看懂（？）</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><i class="ri:alipay-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><i class="ri:qq-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><i class="ri:wechat-pay-line"></i></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>CrestinyCoco</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://crestiny.github.io/2020/12/28/Chapter6-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/" title="Chapter6 传输层安全">https://crestiny.github.io/2020/12/28/Chapter6-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2020/12/28/Chapter2-%E7%9F%A5%E8%AF%86%E8%A1%A8%E7%A4%BA/" rel="prev" title="Chapter2 知识表示"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">Chapter2 知识表示</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2020/12/25/Chapter2-%E8%BD%AF%E4%BB%B6%E8%BF%87%E7%A8%8B/" rel="next" title="Chapter2 软件过程"><span class="post-nav-text">Chapter2 软件过程</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>要不要和我说些什么？</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><i class="ri:cloud-line"></i></span><span class="author"> CrestinyCoco</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.0.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.2</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2022-07-13T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div><div id="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv" title="总访客量"><span><i class="ri:user-line"></i></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><i class="ri:eye-line"></i></span><span id="busuanzi_value_site_pv"></span></span></div></footer><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#24367d" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search-line"></use></svg></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="/js/search/local-search.js" defer></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close-line"></use></svg></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="search here" value=""></div><div id="local-search-result"></div></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#24367d"><meta name="author" content="CrestinyCoco"><meta name="copyright" content="CrestinyCoco"><meta name="generator" content="Hexo 6.0.0"><meta name="theme" content="hexo-theme-yun"><title>Model Decomposition | Crestiny's Blog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/qie.ico"><link rel="mask-icon" href="/qie.ico" color="#24367d"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"crestiny.github.io","root":"/","title":["汉","月","沦","西","海"],"version":"1.6.2","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"search here","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"D:/sentences.json"},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="关系的一个分解 ![](\Model-Decomposition\definition.png) 说人话： 分解以后的关系，它们的属性集合并起来应该和原关系的属性集相等，此外呢，分解出来的各子关系，它们的属性集之间不能有包含关系 那么如何确定某个子关系上的函数依赖呢？ 在原关系函数依赖的闭包上找，要左右两边的属性合并起来在此子关系的属性集内就可以纳入这个子关系的函数依赖中~ 模式分解的三种等价形式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Model Decomposition">
+<meta property="og:url" content="https://crestiny.github.io/2020/09/03/Model-Decomposition/index.html">
+<meta property="og:site_name" content="Crestiny&#39;s Blog">
+<meta property="og:description" content="关系的一个分解 ![](\Model-Decomposition\definition.png) 说人话： 分解以后的关系，它们的属性集合并起来应该和原关系的属性集相等，此外呢，分解出来的各子关系，它们的属性集之间不能有包含关系 那么如何确定某个子关系上的函数依赖呢？ 在原关系函数依赖的闭包上找，要左右两边的属性合并起来在此子关系的属性集内就可以纳入这个子关系的函数依赖中~ 模式分解的三种等价形式">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-03T07:05:35.000Z">
+<meta property="article:modified_time" content="2020-09-07T01:47:10.911Z">
+<meta property="article:author" content="CrestinyCoco">
+<meta property="article:tag" content="Database">
+<meta name="twitter:card" content="summary"><script src="/js/ui/mode.js"></script><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info mickey-mouse"><a class="site-author-avatar" href="/about/" title="CrestinyCoco"><img width="96" loading="lazy" src="/images/sakura.jpg" alt="CrestinyCoco"><span class="site-author-status" title="Life is fantastic!"></span></a><div class="site-author-name"><a href="/about/">CrestinyCoco</a></div><span class="site-name">Crestiny's Blog</span><sub class="site-subtitle">Life is fantastic ! </sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">123</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">25</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">67</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=910426929&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/Crestiny" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:1043729366@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://m.weibo.cn/u/6869522716?uid=6869522716&amp;t=0&amp;luicode=10000011&amp;lfid=100103type%3D1%26q%3Dforeverwildsummer" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=1484676321" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/xi-shang-qin-heng" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/13347719" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/mmqrcode1658050168755.png" title="微信" target="_blank" style="color:#1AAD19"><i class="ri:wechat-2-line"></i></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/about/white-qrcode-and-search.jpg" title="微信公众号" target="_blank" style="color:#1AAD19"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat-2-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://twitter.com/YunYouJun" title="Twitter" target="_blank" style="color:#1da1f2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-twitter-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://t.me/elpsycn" title="Telegram Channel" target="_blank" style="color:#0088CC"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-telegram-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:me@yunyoujun.cn" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://travellings.link" title="Travelling" target="_blank" style="color:var(--hty-text-color)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-train-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:#e6c35c"><i class="ri:folder-user-line"></i></a><a class="links-item hty-icon-button" href="/albums/" title="相册集" style="color:#00008b"><i class="ri:book-mark-line"></i></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">关系的一个分解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">模式分解的三种等价形式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">什么是“无损连接性”？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">什么是“保持函数依赖”？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">引理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text">记号定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text">相关性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">无损连接性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text">判别算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.</span> <span class="toc-text">说人话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.4.</span> <span class="toc-text">特殊地</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.5.</span> <span class="toc-text">说人话</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">保持函数依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">模式分解的算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.1.</span> <span class="toc-text">关于模式分解结果的几种情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.2.</span> <span class="toc-text">“保持函数依赖性”+3NF 模式分解算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">6.2.1.</span> <span class="toc-text">教科书式定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">6.2.2.</span> <span class="toc-text">说人话</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.3.</span> <span class="toc-text">“保持函数依赖性”+“无损连接性”+3NF 模式分解算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">6.3.1.</span> <span class="toc-text">教科书式定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">6.3.2.</span> <span class="toc-text">说人话</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.4.</span> <span class="toc-text">“无损连接性”+BCNF 模式分解算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">6.4.1.</span> <span class="toc-text">教科书式定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">6.4.2.</span> <span class="toc-text">说人话</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.5.</span> <span class="toc-text">“无损连接性”+4NF 模式分解算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">6.5.1.</span> <span class="toc-text">教科书式定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">6.5.2.</span> <span class="toc-text">说人话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">6.5.3.</span> <span class="toc-text">补充：什么是传说中的定理6.6呢？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">完整版数据依赖的公理系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.1.</span> <span class="toc-text">8条公理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.2.</span> <span class="toc-text">4条推理规则</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://crestiny.github.io/2020/09/03/Model-Decomposition/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="CrestinyCoco"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Crestiny's Blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Model Decomposition</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2020-09-03 15:05:35" itemprop="dateCreated datePublished" datetime="2020-09-03T15:05:35+08:00">2020-09-03</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <time title="修改时间：2020-09-07 09:47:10" itemprop="dateModified" datetime="2020-09-07T09:47:10+08:00">2020-09-07</time></div><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><i class="ri:eye-line"></i> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Courses/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Courses</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Database/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Database</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#24367d;"><h2>关系的一个分解</h2>
+![](\Model-Decomposition\definition.png)
+说人话：
+分解以后的关系，它们的属性集合并起来应该和原关系的属性集相等，此外呢，分解出来的各子关系，它们的属性集之间不能有包含关系
+那么如何确定某个子关系上的函数依赖呢？
+在原关系函数依赖的闭包上找，要左右两边的属性合并起来在此子关系的属性集内就可以纳入这个子关系的函数依赖中~
+<h2>模式分解的三种等价形式</h2>
+![](\Model-Decomposition\3.png)
+<h3>什么是“无损连接性”？</h3>
+个人理解：要从分解后的子关系恢复到原关系，一般是通过自然连接来实现的；假如分解后再用自然连接得到的关系并非原关系，而是一个“元组增加了，信息丢失了”的关系，这种就是有损连接性的分解
+<h3>什么是“保持函数依赖”？</h3>
+个人理解：原关系的各种函数依赖，每个应该在某子关系中出现至少一次
+<h2>引理</h2>
+<h3>记号定义</h3>
+![](\Model-Decomposition\ydefinition.png)
+<h3>相关性质</h3>
+![](\Model-Decomposition\p.png)
+<h2>无损连接性</h2>
+<h3>定义</h3>
+![](\Model-Decomposition\wdefinition.png)
+<h3>判别算法</h3>
+![](\Model-Decomposition\algorithm.png)
+<h3>说人话</h3>
+- 第一步：画一张初始表，所有属性按列排开，分解的有几个关系就几行
+- 第二步：填初始数据，一行行看，在每个关系模式的U包含的属性列那里写上a(j)，否则写b(ij)
+- 第三步：遍历所有FD，对于每个，左边X所在的那些列里面，找出填了相同值的那些行；这些行里面，再去看右边Y对应的属性下标对应的列，看里面是否有a(li)这个元素，有的话，全部改为a(li)
+注：假如有b相关的值在上一句的操作里被改掉了，那这一列所有这个值都要被改
+- 第四步：知道有一行是a1，a2，a3.....，就说明是无损连接性的
+<h3>特殊地</h3>
+![](\Model-Decomposition\adefinition.png)
+<h3>说人话</h3>
+如果是分解成两个关系要判别是否无损连接性，写出“U1交U2->U1-U2(谁先谁后看情况)”，看看这个函数依赖是否在F的闭包内，在的话就……
+<h2>保持函数依赖</h2>
+<h3>定义</h3>
+![](\Model-Decomposition\depend.png)
+根据这个定义，我们再加上判断两个函数依赖集是否相等就可以完整地作为一个“保持函数依赖”的判别算法了！
+即：（原F的闭包）要和（分解后F们的并集的闭包）相等
+<h2>模式分解的算法</h2>
+<h3>关于模式分解结果的几种情况</h3>
+1. 如果保持了“无损连接性”，则分解后的关系一定是4NF的
+2. 如果保持了“保持函数依赖性”，则分解后的关系一定是3NF的，不一定能到BCNF
+3. 如果保持了“无损连接性”和“保持函数依赖性”，则分解后的关系一定是3NF的，不一定能到BCNF（？？？）
+<h3>“保持函数依赖性”+3NF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a1.png)
+<h4>说人话</h4>
+- 第一步：极小化F
+- 第二步：在U中去掉F中不包含的属性
+*注：接下来讨论的都是处理后的F和U了！！！*
+- 第三步：假如F中有函数依赖能使左右两边合并起来恰好是U，那没事了，R不用作分解，算法终止；不是的话就转第四步
+- 第四步：把F按照相同左边X的规则分组成几个小的函数依赖集F'(i)，对应地有它的U(i)，再用U(i)在F上找到对应的F(i)，R就这样被分解了
+<h3>“保持函数依赖性”+“无损连接性”+3NF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a2.png)
+<h4>说人话</h4>
+- 第一步：先做算法6.3，也就是先让分解后的模式“保持函数依赖性”。
+- 第二步：找到原关系R的码X，和它在F上的闭包，形成一个对应关系R(x)
+- 第三步：在先前得到的几个子关系R(i)中，寻找一下有没有对应的U(i)包含了X的，要是有，那么这个R(x)就不用加到分解出的子关系里面了，反之是需要的
+<h3>“无损连接性”+BCNF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a3.png)
+<h4>说人话</h4>
+<ul>
+<li>第一步：初始的状态就是从原关系R开始，</li>
+<li>第二步：检查一下当前分解中是不是每个关系都符合BCNF了，如果是，就可以终止了；如果不是，跳第三步</li>
+<li>第三步：对于那些不符合BCNF的关系，我们找到某个函数依赖——它的左边X并非此关系的码。我们把这个函数依赖的左右两边合并，这是一个属性集；然后在此关系属性集里面剔除“此函数依赖的右边Y”就形成另一个属性集。有了分解后的两个属性集，根据它们生成对应的F就好啦。这样就把这个关系分解好了。跳第二步</li>
+</ul>
+<h3>“无损连接性”+4NF&emsp;模式分解算法</h3>
+<h4>教科书式定义</h4>
+![](\Model-Decomposition\a4.png)
+<h4>说人话</h4>
+- 第一步：用算法6.5做到“无损连接性”+BCNF
+- 第二步：考察分解中那些不符合4NF的关系，用定理6.6的方法分解
+- 第三步：分解中的每个子关系都属于4NF即可终止
+<h4>补充：什么是传说中的定理6.6呢？</h4>
+![](\Model-Decomposition\d1.png)
+这个定理的意思就是，既然这个关系不符合4NF吧，那就是有非平凡非函数依赖的多值依赖，也就是X-->Y。有了它我们把关系分成（X,Y）和（X,Z），有点奇怪的是，为什么关系可以这样表示啊？
+<h2>完整版数据依赖的公理系统</h2>
+<h3>8条公理</h3>
+![](\Model-Decomposition\g1.png)
+<h3>4条推理规则</h3>
+![](\Model-Decomposition\g2.png)
+</div><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><i class="ri:alipay-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><i class="ri:qq-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><i class="ri:wechat-pay-line"></i></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>CrestinyCoco</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://crestiny.github.io/2020/09/03/Model-Decomposition/" title="Model Decomposition">https://crestiny.github.io/2020/09/03/Model-Decomposition/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2020/09/04/Skills-for-Database-Exercises/" rel="prev" title="Skills for Database Exercises"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">Skills for Database Exercises</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2020/09/02/Axiom-System-of-Data-Dependency/" rel="next" title=""><span class="post-nav-text"></span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>要不要和我说些什么？</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><i class="ri:cloud-line"></i></span><span class="author"> CrestinyCoco</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.0.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.2</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2022-07-13T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div><div id="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv" title="总访客量"><span><i class="ri:user-line"></i></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><i class="ri:eye-line"></i></span><span id="busuanzi_value_site_pv"></span></span></div></footer><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#24367d" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search-line"></use></svg></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="/js/search/local-search.js" defer></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-close-line"></use></svg></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="search here" value=""></div><div id="local-search-result"></div></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
