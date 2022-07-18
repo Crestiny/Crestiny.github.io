@@ -41,7 +41,39 @@
 <ul>
 <li>Youtube的Tusha的</li>
 </ul>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">computePrefix</span><span class="params">(<span class="built_in">string</span> pat)</span></span>{</span><br><span class="line">    <span class="keyword">int</span> m = pat.<span class="built_in">size</span>();</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">longestPrefix</span><span class="params">(m)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>, k = <span class="number">0</span>; i &lt; m; i++){</span><br><span class="line">        <span class="keyword">while</span>(k &gt; <span class="number">0</span> &amp;&amp; pat[k] != pat[i]){</span><br><span class="line">            k = longestPrefix[k - <span class="number">1</span>];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(pat[i] == pat[k]){</span><br><span class="line">            longestPrefix[i] = ++k;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span>{</span><br><span class="line">            longestPrefix[i] = k;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> longestPrefix;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">KMP</span><span class="params">(<span class="built_in">string</span> str,<span class="built_in">string</span> pat)</span></span>{</span><br><span class="line">    <span class="keyword">int</span> n = str.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> m = pat.<span class="built_in">size</span>();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; longestPrefix = computePrefix(pat);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, k = <span class="number">0</span>; i &lt; n; i++){</span><br><span class="line">        <span class="keyword">while</span>(k &gt; <span class="number">0</span> &amp;&amp; pat[k] != str[i]){</span><br><span class="line">            k = longestPrefix[k - <span class="number">1</span>];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(str[i] == pat[k]){</span><br><span class="line">            k++;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(k == m){</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; i - m + <span class="number">1</span> &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">            k = longestPrefix[k - <span class="number">1</span>];</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">vector&lt;int&gt; computePrefix(string pat){
+    int m = pat.size();
+    vector&lt;int&gt; longestPrefix(m);
+    for(int i = 1, k = 0; i &lt; m; i++){
+        while(k &gt; 0 &amp;&amp; pat[k] != pat[i]){
+            k = longestPrefix[k - 1];
+        }
+        if(pat[i] == pat[k]){
+            longestPrefix[i] = ++k;
+        }
+        else{
+            longestPrefix[i] = k;
+        }
+    }
+    return longestPrefix;
+}
+void KMP(string str,string pat){
+    int n = str.size();
+    int m = pat.size();
+    vector&lt;int&gt; longestPrefix = computePrefix(pat);
+    for(int i = 0, k = 0; i &lt; n; i++){
+        while(k &gt; 0 &amp;&amp; pat[k] != str[i]){
+            k = longestPrefix[k - 1];
+        }
+        if(str[i] == pat[k]){
+            k++;
+        }
+        if(k == m){
+            cout &lt;&lt; i - m + 1 &lt;&lt; "\n";
+            k = longestPrefix[k - 1];
+        }
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>根据这个算法，实践一下——如何计算PMT：</p>
 <p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210418202513307.png" alt="image-20210418202513307" loading="lazy"></p>
 <p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210418202623962.png" alt="image-20210418202623962" loading="lazy"></p>
@@ -60,10 +92,157 @@
 <p>第一次交出现了Runtime Error(ACCESS_VIOLATION)的提示……</p>
 <p>可能是哪里越界了？</p>
 <p>好的，注意到了题目里面的数字范围，改了一下：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt; <span class="title">computePMT</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; pat,<span class="keyword">long</span> <span class="keyword">long</span> m)</span></span>{</span><br><span class="line">	<span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt; <span class="title">PMT</span><span class="params">(m)</span></span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i=<span class="number">1</span>,k=<span class="number">0</span>;i&lt;m;i++){</span><br><span class="line">		<span class="keyword">while</span>(k&gt;<span class="number">0</span>&amp;&amp;pat[i]!=pat[k]){</span><br><span class="line">			k=PMT[k<span class="number">-1</span>];</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(pat[i]==pat[k]){</span><br><span class="line">			PMT[i]=k+<span class="number">1</span>;</span><br><span class="line">			k++;</span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">			PMT[i]=k;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> PMT;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">KMP</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; str,<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; pat,<span class="keyword">long</span> <span class="keyword">long</span> n,<span class="keyword">long</span> <span class="keyword">long</span> m,<span class="built_in">vector</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt; PMT)</span></span>{</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> index=<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i=<span class="number">0</span>,k=<span class="number">0</span>;i&lt;n;i++){</span><br><span class="line">		<span class="keyword">while</span>(k&gt;<span class="number">0</span>&amp;&amp;str[i]!=pat[k]){</span><br><span class="line">			k=PMT[k<span class="number">-1</span>];</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(str[i]==pat[k]){</span><br><span class="line">			k++;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(k==m){<span class="comment">//如果k在模式串的最右端了 </span></span><br><span class="line">			index=i-m+<span class="number">2</span>;<span class="comment">//本来是+1的，但是这道题的索引是从1开始的 </span></span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;index&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">			k=PMT[k<span class="number">-1</span>];</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span>(index==<span class="number">-1</span>){</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> T;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--){</span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> n,m;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">		<span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">str</span><span class="params">(n)</span></span>;</span><br><span class="line">		<span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; <span class="title">pat</span><span class="params">(m)</span></span>;</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">string</span> temp;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i=<span class="number">0</span>;i&lt;n;i++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;temp;</span><br><span class="line">			str[i]=temp;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i=<span class="number">0</span>;i&lt;m;i++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;temp;</span><br><span class="line">			pat[i]=temp;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt; PMT;</span><br><span class="line">		PMT=computePMT(pat,m);</span><br><span class="line">		KMP(str,pat,n,m,PMT);		</span><br><span class="line">		</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+vector&lt;long long&gt; computePMT(vector&lt;string&gt; pat,long long m){
+	vector&lt;long long&gt; PMT(m);
+	for(long long i=1,k=0;i&lt;m;i++){
+		while(k&gt;0&amp;&amp;pat[i]!=pat[k]){
+			k=PMT[k-1];
+		}
+		
+		if(pat[i]==pat[k]){
+			PMT[i]=k+1;
+			k++;
+		}else{
+			PMT[i]=k;
+		}
+	}
+	
+	return PMT;
+}
+
+void KMP(vector&lt;string&gt; str,vector&lt;string&gt; pat,long long n,long long m,vector&lt;long long&gt; PMT){
+	long long index=-1;
+	for(long long i=0,k=0;i&lt;n;i++){
+		while(k&gt;0&amp;&amp;str[i]!=pat[k]){
+			k=PMT[k-1];
+		}
+		
+		if(str[i]==pat[k]){
+			k++;
+		}
+		
+		if(k==m){//如果k在模式串的最右端了 
+			index=i-m+2;//本来是+1的，但是这道题的索引是从1开始的 
+			cout&lt;&lt;index&lt;&lt;endl;
+			k=PMT[k-1];
+		}
+	}
+	if(index==-1){
+		cout&lt;&lt;-1&lt;&lt;endl;
+	}
+}
+
+int main(void){
+	int T;
+	cin&gt;&gt;T;
+	while(T--){
+		long long n,m;
+		cin&gt;&gt;n&gt;&gt;m;
+		vector&lt;string&gt; str(n);
+		vector&lt;string&gt; pat(m);
+		
+		string temp;
+		for(long long i=0;i&lt;n;i++){
+			cin&gt;&gt;temp;
+			str[i]=temp;
+		}
+		
+		for(long long i=0;i&lt;m;i++){
+			cin&gt;&gt;temp;
+			pat[i]=temp;
+		}
+		
+		vector&lt;long long&gt; PMT;
+		PMT=computePMT(pat,m);
+		KMP(str,pat,n,m,PMT);		
+		
+	}
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后由于用了太多vector，被制裁了——Memory Limit Exceeded</p>
 <p>改了str和pat的vector，然而又出问题了……</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_N 1000001</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_M 10001</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt; <span class="title">computePMT</span><span class="params">(<span class="built_in">string</span>* pat,<span class="keyword">long</span> <span class="keyword">long</span> m)</span></span>{</span><br><span class="line">	<span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt; <span class="title">PMT</span><span class="params">(m)</span></span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i=<span class="number">1</span>,k=<span class="number">0</span>;i&lt;m;i++){</span><br><span class="line">		<span class="keyword">while</span>(k&gt;<span class="number">0</span>&amp;&amp;pat[i]!=pat[k]){</span><br><span class="line">			k=PMT[k<span class="number">-1</span>];</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(pat[i]==pat[k]){</span><br><span class="line">			PMT[i]=k+<span class="number">1</span>;</span><br><span class="line">			k++;</span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">			PMT[i]=k;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> PMT;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">KMP</span><span class="params">(<span class="built_in">string</span>* str,<span class="built_in">string</span>* pat,<span class="keyword">long</span> <span class="keyword">long</span> n,<span class="keyword">long</span> <span class="keyword">long</span> m,<span class="built_in">vector</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt; PMT)</span></span>{</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> index=<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i=<span class="number">0</span>,k=<span class="number">0</span>;i&lt;n;i++){</span><br><span class="line">		<span class="keyword">while</span>(k&gt;<span class="number">0</span>&amp;&amp;str[i]!=pat[k]){</span><br><span class="line">			k=PMT[k<span class="number">-1</span>];</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(str[i]==pat[k]){</span><br><span class="line">			k++;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(k==m){<span class="comment">//如果k在模式串的最右端了 </span></span><br><span class="line">			index=i-m+<span class="number">2</span>;<span class="comment">//本来是+1的，但是这道题的索引是从1开始的 </span></span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;index&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">			k=PMT[k<span class="number">-1</span>];</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span>(index==<span class="number">-1</span>){</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> T;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--){</span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> n,m;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">		<span class="built_in">string</span> str[MAX_N];</span><br><span class="line">		<span class="built_in">string</span> pat[MAX_M];</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">string</span> temp;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i=<span class="number">0</span>;i&lt;n;i++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;temp;</span><br><span class="line">			str[i]=temp;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">long</span> <span class="keyword">long</span> i=<span class="number">0</span>;i&lt;m;i++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;temp;</span><br><span class="line">			pat[i]=temp;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="keyword">long</span> <span class="keyword">long</span>&gt; PMT;</span><br><span class="line">		PMT=computePMT(pat,m);</span><br><span class="line">		KMP(str,pat,n,m,PMT);		</span><br><span class="line">		</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+
+#define MAX_N 1000001
+#define MAX_M 10001
+
+using namespace std;
+
+vector&lt;long long&gt; computePMT(string* pat,long long m){
+	vector&lt;long long&gt; PMT(m);
+	for(long long i=1,k=0;i&lt;m;i++){
+		while(k&gt;0&amp;&amp;pat[i]!=pat[k]){
+			k=PMT[k-1];
+		}
+		
+		if(pat[i]==pat[k]){
+			PMT[i]=k+1;
+			k++;
+		}else{
+			PMT[i]=k;
+		}
+	}
+	
+	return PMT;
+}
+
+void KMP(string* str,string* pat,long long n,long long m,vector&lt;long long&gt; PMT){
+	long long index=-1;
+	for(long long i=0,k=0;i&lt;n;i++){
+		while(k&gt;0&amp;&amp;str[i]!=pat[k]){
+			k=PMT[k-1];
+		}
+		
+		if(str[i]==pat[k]){
+			k++;
+		}
+		
+		if(k==m){//如果k在模式串的最右端了 
+			index=i-m+2;//本来是+1的，但是这道题的索引是从1开始的 
+			cout&lt;&lt;index&lt;&lt;endl;
+			k=PMT[k-1];
+		}
+	}
+	if(index==-1){
+		cout&lt;&lt;-1&lt;&lt;endl;
+	}
+}
+
+int main(void){
+	int T;
+	cin&gt;&gt;T;
+	while(T--){
+		long long n,m;
+		cin&gt;&gt;n&gt;&gt;m;
+		string str[MAX_N];
+		string pat[MAX_M];
+		
+		string temp;
+		for(long long i=0;i&lt;n;i++){
+			cin&gt;&gt;temp;
+			str[i]=temp;
+		}
+		
+		for(long long i=0;i&lt;m;i++){
+			cin&gt;&gt;temp;
+			pat[i]=temp;
+		}
+		
+		vector&lt;long long&gt; PMT;
+		PMT=computePMT(pat,m);
+		KMP(str,pat,n,m,PMT);		
+		
+	}
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>调试了发现又是这个常见的老问题：</p>
 <img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210418224251946.png" alt="image-20210418224251946" style="width:50%;" loading="lazy">
 <p>下了一下断点，发现一开始甚至没输入数据就报了这个错……</p>

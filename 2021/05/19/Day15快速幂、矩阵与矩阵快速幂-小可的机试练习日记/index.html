@@ -6,12 +6,12 @@
 </script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/qie.ico"><link rel="mask-icon" href="/qie.ico" color="#24367d"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
     const Yun = window.Yun || {};
     window.CONFIG = {"hostname":"crestiny.github.io","root":"/","title":["汉","月","沦","西","海"],"version":"1.6.2","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"search here","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"D:/sentences.json"},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
-  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="快速幂 书上还是讲的挺明白的，这里总结一下：  ¶人见人爱A^B（较难） http:&#x2F;&#x2F;acm.hdu.edu.cn&#x2F;showproblem.php?pid&#x3D;2035  错误：没运行出来……  1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#inclu">
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="快速幂 书上还是讲的挺明白的，这里总结一下：  ¶人见人爱A^B（较难） http:&#x2F;&#x2F;acm.hdu.edu.cn&#x2F;showproblem.php?pid&#x3D;2035  错误：没运行出来……  #include &lt;iostream&gt; #include &lt;vector&gt; #include &lt;cmath&gt;  using namespace std;  vector&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Day15快速幂、矩阵与矩阵快速幂-小可的机试练习日记">
 <meta property="og:url" content="https://crestiny.github.io/2021/05/19/Day15%E5%BF%AB%E9%80%9F%E5%B9%82%E3%80%81%E7%9F%A9%E9%98%B5%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82-%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Crestiny&#39;s Blog">
-<meta property="og:description" content="快速幂 书上还是讲的挺明白的，这里总结一下：  ¶人见人爱A^B（较难） http:&#x2F;&#x2F;acm.hdu.edu.cn&#x2F;showproblem.php?pid&#x3D;2035  错误：没运行出来……  1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#inclu">
+<meta property="og:description" content="快速幂 书上还是讲的挺明白的，这里总结一下：  ¶人见人爱A^B（较难） http:&#x2F;&#x2F;acm.hdu.edu.cn&#x2F;showproblem.php?pid&#x3D;2035  错误：没运行出来……  #include &lt;iostream&gt; #include &lt;vector&gt; #include &lt;cmath&gt;  using namespace std;  vector&amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210519174457877.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210519185601843.png">
@@ -30,12 +30,76 @@
 <ul>
 <li>错误：没运行出来……</li>
 </ul>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">binary</span><span class="params">(<span class="keyword">int</span> B)</span></span>{</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">	<span class="keyword">while</span>(B!=<span class="number">0</span>){</span><br><span class="line">		result.push_back(B%<span class="number">2</span>);</span><br><span class="line">		B/=<span class="number">2</span>;</span><br><span class="line">	} </span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> A,B;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;A&gt;&gt;B){</span><br><span class="line">		<span class="keyword">if</span>(A==<span class="number">0</span>&amp;&amp;B==<span class="number">0</span>){</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; binB=binary(B);</span><br><span class="line">		<span class="keyword">int</span> base=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> base_index;</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; factor;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;binB.<span class="built_in">size</span>();i++){</span><br><span class="line">			<span class="keyword">if</span>(binB[i]!=<span class="number">0</span>){</span><br><span class="line">				<span class="keyword">if</span>(base==<span class="number">0</span>){<span class="comment">//如果这是第一个 </span></span><br><span class="line">					factor.push_back((<span class="keyword">int</span>)<span class="built_in">pow</span>(A,i)%<span class="number">1000</span>);</span><br><span class="line">					base=(<span class="keyword">int</span>)<span class="built_in">pow</span>(A,i)%<span class="number">1000</span>;</span><br><span class="line">					base_index=i;</span><br><span class="line">				}<span class="keyword">else</span>{<span class="comment">//如果不是第一个，就要基于base来计算 </span></span><br><span class="line">					<span class="keyword">int</span> temp=<span class="number">1</span>;</span><br><span class="line">					<span class="keyword">while</span>(i/base_index--){</span><br><span class="line">						temp*=base;</span><br><span class="line">					}</span><br><span class="line">					factor.push_back(temp%<span class="number">1000</span>);</span><br><span class="line">					base=temp%<span class="number">1000</span>;</span><br><span class="line">					base_index=i;</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;factor.<span class="built_in">size</span>();i++){</span><br><span class="line">			ans*=factor[i];</span><br><span class="line">			ans=ans%<span class="number">1000</span>;</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+vector&lt;int&gt; binary(int B){
+	vector&lt;int&gt; result;
+	while(B!=0){
+		result.push_back(B%2);
+		B/=2;
+	} 
+	return result;
+}
+
+int main(void){
+	int A,B;
+	while(cin&gt;&gt;A&gt;&gt;B){
+		if(A==0&amp;&amp;B==0){
+			break;
+		}
+		
+		vector&lt;int&gt; binB=binary(B);
+		int base=0;
+		int base_index;
+		vector&lt;int&gt; factor;
+		for(int i=0;i&lt;binB.size();i++){
+			if(binB[i]!=0){
+				if(base==0){//如果这是第一个 
+					factor.push_back((int)pow(A,i)%1000);
+					base=(int)pow(A,i)%1000;
+					base_index=i;
+				}else{//如果不是第一个，就要基于base来计算 
+					int temp=1;
+					while(i/base_index--){
+						temp*=base;
+					}
+					factor.push_back(temp%1000);
+					base=temp%1000;
+					base_index=i;
+				}
+			}
+		}
+		
+		int ans=1;
+		for(int i=0;i&lt;factor.size();i++){
+			ans*=factor[i];
+			ans=ans%1000;
+		}
+		cout&lt;&lt;ans&lt;&lt;endl;
+	}
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>
 <p>学习</p>
 <p>看看书上的答案吧</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FastExponentiation</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> mod)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(b!=<span class="number">0</span>){</span><br><span class="line">		<span class="keyword">if</span>(b%<span class="number">2</span>==<span class="number">1</span>){	<span class="comment">//如果是1，代表这一位的下标k，算出来的2^k，这个值是快速幂分解的指数之一，也就是a^(2^k)</span></span><br><span class="line">			ans*=a;	</span><br><span class="line">			ans%=mod;</span><br><span class="line">		}</span><br><span class="line">		b/=<span class="number">2</span>;	</span><br><span class="line">		a*=a;	<span class="comment">//a一直在自平方，直到累乘到现在的a是快速幂分解的因子之一，就在下一轮被ans乘起来</span></span><br><span class="line">		a%=mod;	</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">} </span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int FastExponentiation(int a, int b, int mod){
+	int ans=1;
+	while(b!=0){
+		if(b%2==1){	//如果是1，代表这一位的下标k，算出来的2^k，这个值是快速幂分解的指数之一，也就是a^(2^k)
+			ans*=a;	
+			ans%=mod;
+		}
+		b/=2;	
+		a*=a;	//a一直在自平方，直到累乘到现在的a是快速幂分解的因子之一，就在下一轮被ans乘起来
+		a%=mod;	
+	}
+	return ans;
+} <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>说实话，看不太懂……</p>
 <p>果然万事还是要动笔，动笔以后我好像有点懂了：</p>
 <img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210519185601843.png" alt="image-20210519185601843" style="zoom: 33%;" loading="lazy">
@@ -63,7 +127,20 @@
 </li>
 </ul>
 <p>总结一下快速幂取模的代码：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">quick</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">1</span>;   <span class="comment">//记录结果</span></span><br><span class="line">	a=a%c;   <span class="comment">//预处理，使得a处于c的数据范围之下</span></span><br><span class="line">	<span class="keyword">while</span>(b!=<span class="number">0</span>)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>){</span><br><span class="line">             ans=(ans*a)%c;   <span class="comment">//如果b的二进制位不是0，那么我们的结果是要参与运算的</span></span><br><span class="line">        }</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;    <span class="comment">//二进制的移位操作，相当于每次除以2，用二进制看，就是我们不断的遍历b的二进制位</span></span><br><span class="line">		a=(a*a)%c;   <span class="comment">//不断的加倍</span></span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int quick(int a,int b,int c)
+{
+	int ans=1;   //记录结果
+	a=a%c;   //预处理，使得a处于c的数据范围之下
+	while(b!=0)
+	{
+		if(b&amp;1){
+             ans=(ans*a)%c;   //如果b的二进制位不是0，那么我们的结果是要参与运算的
+        }
+		b&gt;&gt;=1;    //二进制的移位操作，相当于每次除以2，用二进制看，就是我们不断的遍历b的二进制位
+		a=(a*a)%c;   //不断的加倍
+	}
+	return ans;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <p>好的，引入了上述技术之后，回归本题看一下它的独特点：</p>
@@ -83,7 +160,94 @@
 <li>快速幂：ans初始为1</li>
 <li>矩阵快速幂：ans初始为单位矩阵</li>
 </ul>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_N 10 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span>{</span></span><br><span class="line">	<span class="keyword">int</span> row;</span><br><span class="line">	<span class="keyword">int</span> col;</span><br><span class="line">	<span class="keyword">int</span> matrix[MAX_N][MAX_N];<span class="comment">//直接开大数组，不“动态分配” </span></span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">//打印矩阵 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printMatrix</span><span class="params">(struct Matrix m)</span></span>{</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m.row;i++){</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;m.col;j++){</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d "</span>,m.matrix[i][j]);</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//矩阵相乘</span></span><br><span class="line"><span class="function">struct Matrix <span class="title">multiply</span><span class="params">(struct Matrix m,struct Matrix n)</span></span>{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span> <span class="title">ans</span>;</span></span><br><span class="line">	ans.row=m.row;</span><br><span class="line">	ans.col=n.col;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m.row;i++){</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n.col;j++){</span><br><span class="line">			<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;m.col;k++){</span><br><span class="line">				sum+=m.matrix[i][k]*n.matrix[k][j];</span><br><span class="line">			}</span><br><span class="line">			ans.matrix[i][j]=sum;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="comment">//矩阵快速幂</span></span><br><span class="line"><span class="function">struct Matrix <span class="title">fastExp</span><span class="params">(struct Matrix m,<span class="keyword">int</span> k)</span></span>{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span> <span class="title">ans</span>;</span></span><br><span class="line">	ans.row=m.row;</span><br><span class="line">	ans.col=m.col;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//ans矩阵初始化为单位矩阵 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ans.row;i++){</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;ans.col;j++){</span><br><span class="line">			<span class="keyword">if</span>(i==j){</span><br><span class="line">				ans.matrix[i][j]=<span class="number">1</span>;</span><br><span class="line">			}<span class="keyword">else</span>{</span><br><span class="line">				ans.matrix[i][j]=<span class="number">0</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//开始累乘快速幂</span></span><br><span class="line">	<span class="keyword">while</span>(k!=<span class="number">0</span>){</span><br><span class="line">		<span class="keyword">if</span>(k%<span class="number">2</span>==<span class="number">1</span>){</span><br><span class="line">			ans=multiply(ans,m);</span><br><span class="line">		}</span><br><span class="line">		k/=<span class="number">2</span>;</span><br><span class="line">		m=multiply(m,m);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> ans; </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> n,k;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k){</span><br><span class="line">		</span><br><span class="line">		<span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span> <span class="title">m</span>;</span></span><br><span class="line">		m.row=n;</span><br><span class="line">		m.col=n;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++){</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++){</span><br><span class="line">				<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;m.matrix[i][j]);</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span> <span class="title">ans</span>;</span></span><br><span class="line">		ans.row=n;</span><br><span class="line">		ans.col=n;</span><br><span class="line">		ans=fastExp(m,k);</span><br><span class="line">		printMatrix(ans); 			</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+
+#define MAX_N 10 
+
+using namespace std;
+
+struct Matrix{
+	int row;
+	int col;
+	int matrix[MAX_N][MAX_N];//直接开大数组，不“动态分配” 
+};
+
+//打印矩阵 
+void printMatrix(struct Matrix m){
+	for(int i=0;i&lt;m.row;i++){
+		for(int j=0;j&lt;m.col;j++){
+			printf("%d ",m.matrix[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+//矩阵相乘
+struct Matrix multiply(struct Matrix m,struct Matrix n){
+	struct Matrix ans;
+	ans.row=m.row;
+	ans.col=n.col;
+	for(int i=0;i&lt;m.row;i++){
+		for(int j=0;j&lt;n.col;j++){
+			int sum=0;
+			for(int k=0;k&lt;m.col;k++){
+				sum+=m.matrix[i][k]*n.matrix[k][j];
+			}
+			ans.matrix[i][j]=sum;
+		}
+	}
+	return ans;
+} 
+
+//矩阵快速幂
+struct Matrix fastExp(struct Matrix m,int k){
+	struct Matrix ans;
+	ans.row=m.row;
+	ans.col=m.col;
+	
+	//ans矩阵初始化为单位矩阵 
+	for(int i=0;i&lt;ans.row;i++){
+		for(int j=0;j&lt;ans.col;j++){
+			if(i==j){
+				ans.matrix[i][j]=1;
+			}else{
+				ans.matrix[i][j]=0;
+			}
+		}
+	}
+	
+	//开始累乘快速幂
+	while(k!=0){
+		if(k%2==1){
+			ans=multiply(ans,m);
+		}
+		k/=2;
+		m=multiply(m,m);
+	}
+	return ans; 
+} 
+
+int main(void){
+	int n,k;
+	while(cin&gt;&gt;n&gt;&gt;k){
+		
+		struct Matrix m;
+		m.row=n;
+		m.col=n;
+		for(int i=0;i&lt;n;i++){
+			for(int j=0;j&lt;n;j++){
+				scanf("%d",&amp;m.matrix[i][j]);
+			}
+		}
+		
+		struct Matrix ans;
+		ans.row=n;
+		ans.col=n;
+		ans=fastExp(m,k);
+		printMatrix(ans); 			
+	}
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="A-B-for-Matrices"><a class="header-anchor" href="#A-B-for-Matrices">¶</a>A+B for Matrices</h2>
 <p><a target="_blank" rel="noopener" href="http://t.cn/Aipb7GBG">http://t.cn/Aipb7GBG</a></p>
 <h3 id="题意"><a class="header-anchor" href="#题意">¶</a>题意</h3>

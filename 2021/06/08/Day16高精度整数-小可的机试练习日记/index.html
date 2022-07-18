@@ -6,12 +6,12 @@
 </script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/qie.ico"><link rel="mask-icon" href="/qie.ico" color="#24367d"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
     const Yun = window.Yun || {};
     window.CONFIG = {"hostname":"crestiny.github.io","root":"/","title":["汉","月","沦","西","海"],"version":"1.6.2","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"search here","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"D:/sentences.json"},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
-  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="高精度整数 书上有一个很长很长的板子，实现了各种运算   敲了很久很久的珍贵板子： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838">
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="高精度整数 书上有一个很长很长的板子，实现了各种运算   敲了很久很久的珍贵板子： &#x2F;&#x2F;高精度整数板子   const int MAXN&#x3D;10000;&#x2F;&#x2F;最多多少位  struct BigInteger{ 	int digit[MAXN]; 	int length; 	 	&#x2F;&#x2F;构造函数  	BigInteger(); 	BigInteger(int x); 	BigInteger(string s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Day16高精度整数-小可的机试练习日记">
 <meta property="og:url" content="https://crestiny.github.io/2021/06/08/Day16%E9%AB%98%E7%B2%BE%E5%BA%A6%E6%95%B4%E6%95%B0-%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Crestiny&#39;s Blog">
-<meta property="og:description" content="高精度整数 书上有一个很长很长的板子，实现了各种运算   敲了很久很久的珍贵板子： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838">
+<meta property="og:description" content="高精度整数 书上有一个很长很长的板子，实现了各种运算   敲了很久很久的珍贵板子： &#x2F;&#x2F;高精度整数板子   const int MAXN&#x3D;10000;&#x2F;&#x2F;最多多少位  struct BigInteger{ 	int digit[MAXN]; 	int length; 	 	&#x2F;&#x2F;构造函数  	BigInteger(); 	BigInteger(int x); 	BigInteger(string s">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-08T14:47:11.000Z">
 <meta property="article:modified_time" content="2021-06-10T07:46:35.392Z">
@@ -22,7 +22,263 @@
 <ul>
 <li>
 <p>敲了很久很久的珍贵板子：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//高精度整数板子</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN=<span class="number">10000</span>;<span class="comment">//最多多少位</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BigInteger</span>{</span></span><br><span class="line">	<span class="keyword">int</span> digit[MAXN];</span><br><span class="line">	<span class="keyword">int</span> length;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//构造函数 </span></span><br><span class="line">	BigInteger();</span><br><span class="line">	BigInteger(<span class="keyword">int</span> x);</span><br><span class="line">	BigInteger(<span class="built_in">string</span> str);</span><br><span class="line">	BigInteger(<span class="keyword">const</span> BigInteger&amp; b);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//赋值函数</span></span><br><span class="line">	BigInteger <span class="keyword">operator</span>=(<span class="keyword">int</span> x); </span><br><span class="line">	BigInteger <span class="keyword">operator</span>=(<span class="built_in">string</span> str);</span><br><span class="line">	BigInteger <span class="keyword">operator</span>=(<span class="keyword">const</span> BigInteger&amp; b); </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//比大小</span></span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&lt;=(<span class="keyword">const</span> BigInteger&amp; b); </span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> BigInteger&amp; b); </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//运算符</span></span><br><span class="line">	BigInteger <span class="keyword">operator</span>+(<span class="keyword">const</span> BigInteger&amp; b); </span><br><span class="line">	BigInteger <span class="keyword">operator</span>-(<span class="keyword">const</span> BigInteger&amp; b); </span><br><span class="line">	BigInteger <span class="keyword">operator</span>*(<span class="keyword">const</span> BigInteger&amp; b); </span><br><span class="line">	BigInteger <span class="keyword">operator</span>/(<span class="keyword">const</span> BigInteger&amp; b); </span><br><span class="line">	BigInteger <span class="keyword">operator</span>%(<span class="keyword">const</span> BigInteger&amp; b); </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//输入输出</span></span><br><span class="line">	<span class="keyword">friend</span> istream&amp; <span class="keyword">operator</span>&gt;&gt;(istream&amp; in, BigInteger&amp; x);</span><br><span class="line">	<span class="keyword">friend</span> ostream&amp; <span class="keyword">operator</span>&lt;&lt;(ostream&amp; out, <span class="keyword">const</span> BigInteger&amp; x); </span><br><span class="line">}; </span><br><span class="line"></span><br><span class="line"><span class="comment">//构造函数 </span></span><br><span class="line">BigInteger::BigInteger(){</span><br><span class="line">	<span class="built_in">memset</span>(digit,<span class="number">0</span>,<span class="keyword">sizeof</span>(digit));</span><br><span class="line">	length=<span class="number">0</span>;<span class="comment">//初始化 </span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">BigInteger::BigInteger(<span class="keyword">int</span> x){</span><br><span class="line">	<span class="built_in">memset</span>(digit,<span class="number">0</span>,<span class="keyword">sizeof</span>(digit));</span><br><span class="line">	length=<span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//x=0要分开处理，因为它进不去while </span></span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">0</span>){</span><br><span class="line">		digit[length++]=x;</span><br><span class="line">	} </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(x!=<span class="number">0</span>){</span><br><span class="line">		digit[length++]=x%<span class="number">10</span>;<span class="comment">//索引小的存的是低位，倒过来了 </span></span><br><span class="line">		x/=<span class="number">10</span>; </span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">BigInteger::BigInteger(<span class="built_in">string</span> str){</span><br><span class="line">	<span class="built_in">memset</span>(digit,<span class="number">0</span>,<span class="keyword">sizeof</span>(digit));</span><br><span class="line">	length=str.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;length;i++){</span><br><span class="line">		digit[i]=str[length-i<span class="number">-1</span>]-<span class="string">'0'</span>;<span class="comment">//也是倒着存 </span></span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">BigInteger::BigInteger(<span class="keyword">const</span> BigInteger&amp; b){</span><br><span class="line">	<span class="built_in">memset</span>(digit,<span class="number">0</span>,<span class="keyword">sizeof</span>(digit));</span><br><span class="line">	length=b.length;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;length;i++){</span><br><span class="line">		digit[i]=b.digit[i];</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//赋值函数</span></span><br><span class="line">BigInteger BigInteger::<span class="keyword">operator</span>=(<span class="keyword">int</span> x){</span><br><span class="line">	<span class="built_in">memset</span>(digit,<span class="number">0</span>,<span class="keyword">sizeof</span>(digit));</span><br><span class="line">	length=<span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//x=0要分开处理，因为它进不去while </span></span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">0</span>){</span><br><span class="line">		digit[length++]=x;</span><br><span class="line">	} </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(x!=<span class="number">0</span>){</span><br><span class="line">		digit[length++]=x%<span class="number">10</span>;<span class="comment">//索引小的存的是低位，倒过来了 </span></span><br><span class="line">		x/=<span class="number">10</span>; </span><br><span class="line">	}	</span><br><span class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">BigInteger BigInteger::<span class="keyword">operator</span>=(<span class="built_in">string</span> str){</span><br><span class="line">	<span class="built_in">memset</span>(digit,<span class="number">0</span>,<span class="keyword">sizeof</span>(digit));</span><br><span class="line">	length=str.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;length;i++){</span><br><span class="line">		digit[i]=str[length-i<span class="number">-1</span>]-<span class="string">'0'</span>;<span class="comment">//也是倒着存 </span></span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;	</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">BigInteger BigInteger::<span class="keyword">operator</span>=(<span class="keyword">const</span> BigInteger&amp; b){</span><br><span class="line">	<span class="built_in">memset</span>(digit,<span class="number">0</span>,<span class="keyword">sizeof</span>(digit));</span><br><span class="line">	length=b.length;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;length;i++){</span><br><span class="line">		digit[i]=b.digit[i];</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//比大小</span></span><br><span class="line"><span class="keyword">bool</span> BigInteger::<span class="keyword">operator</span>&lt;=(<span class="keyword">const</span> BigInteger&amp; b){</span><br><span class="line">	<span class="keyword">if</span>(length&lt;b.length){</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	}<span class="keyword">else</span> <span class="keyword">if</span>(b.length&lt;length){</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	}<span class="keyword">else</span>{</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=length<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--){</span><br><span class="line">			<span class="keyword">if</span>(digit[i]==b.digit[i]){</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			}<span class="keyword">else</span>{</span><br><span class="line">				<span class="keyword">return</span> digit[i]&lt;b.digit[i];<span class="comment">//妙啊！ </span></span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;<span class="comment">//相等返回true </span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> BigInteger::<span class="keyword">operator</span>==(<span class="keyword">const</span> BigInteger&amp; b){</span><br><span class="line">	<span class="keyword">if</span>(length!=b.length){</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	}<span class="keyword">else</span>{</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=length<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--){</span><br><span class="line">			<span class="keyword">if</span>(digit[i]!=b.digit[i]){</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">			}</span><br><span class="line">		}		</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>; </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//运算符</span></span><br><span class="line">BigInteger BigInteger::<span class="keyword">operator</span>+(<span class="keyword">const</span> BigInteger&amp; b){</span><br><span class="line">	BigInteger answer;</span><br><span class="line">	<span class="keyword">int</span> carry=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;length||i&lt;b.length;i++){<span class="comment">//i与较长的length保持一致 </span></span><br><span class="line">		<span class="keyword">int</span> current=carry+digit[i]+b.digit[i];</span><br><span class="line">		carry=current/<span class="number">10</span>;</span><br><span class="line">		answer.digit[answer.length++]=current%<span class="number">10</span>; </span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">if</span>(carry!=<span class="number">0</span>){<span class="comment">//还要多一位 </span></span><br><span class="line">		answer.digit[answer.length++]=carry;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> answer;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">BigInteger BigInteger::<span class="keyword">operator</span>-(<span class="keyword">const</span> BigInteger&amp; b){</span><br><span class="line">	BigInteger answer;</span><br><span class="line">	<span class="keyword">int</span> carry=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;length;i++){</span><br><span class="line">		<span class="keyword">int</span> current=digit[i]-b.digit[i]-carry;</span><br><span class="line">		<span class="keyword">if</span>(current&lt;<span class="number">0</span>){<span class="comment">//要借位 </span></span><br><span class="line">			current+=<span class="number">10</span>;</span><br><span class="line">			carry=<span class="number">1</span>; </span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">			carry=<span class="number">0</span>;</span><br><span class="line">		}</span><br><span class="line">		answer.digit[answer.length++]=current;</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 去掉多余的0 </span></span><br><span class="line">	<span class="keyword">while</span>(answer.digit[answer.length]==<span class="number">0</span>&amp;&amp;answer.length&gt;<span class="number">1</span>){</span><br><span class="line">		answer.length--;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> answer; </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line">BigInteger BigInteger::<span class="keyword">operator</span>*(<span class="keyword">const</span> BigInteger&amp; b){</span><br><span class="line">	BigInteger answer;</span><br><span class="line">	answer.length=length+b.length;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;length;i++){</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;b.length;j++){</span><br><span class="line">			answer.digit[i+j]+=digit[i]*b.digit[j];<span class="comment">//这个i+j就很自然地实现了乘法，但是还没进位 </span></span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;answer.length;i++){</span><br><span class="line">		answer.digit[i+<span class="number">1</span>]+=answer.digit[i]/<span class="number">10</span>;</span><br><span class="line">		answer.digit[i]%=<span class="number">10</span>;</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(answer.digit[answer.length]==<span class="number">0</span>&amp;&amp;answer.length&gt;<span class="number">1</span>){</span><br><span class="line">		answer.length--;</span><br><span class="line">	} </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> answer;</span><br><span class="line">} </span><br><span class="line"></span><br><span class="line">BigInteger BigInteger::<span class="keyword">operator</span>/(<span class="keyword">const</span> BigInteger&amp; b){</span><br><span class="line">	BigInteger answer;</span><br><span class="line">	answer.length=length;</span><br><span class="line">	BigInteger remainder=<span class="number">0</span>;<span class="comment">//余数 </span></span><br><span class="line">	BigInteger temp=b;<span class="comment">//除数 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=length<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--){<span class="comment">//从高位除起 </span></span><br><span class="line">		<span class="keyword">if</span>(!(remainder.length==<span class="number">1</span>&amp;&amp;remainder.digit[<span class="number">0</span>]==<span class="number">0</span>)){</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=remainder.length<span class="number">-1</span>;j&gt;=<span class="number">0</span>;j--){</span><br><span class="line">				remainder.digit[j+<span class="number">1</span>]=remainder.digit[j];</span><br><span class="line">			}</span><br><span class="line">			remainder.length++;</span><br><span class="line">		}</span><br><span class="line">		remainder.digit[<span class="number">0</span>]=digit[i];</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//相当于除法 </span></span><br><span class="line">		<span class="keyword">while</span>(temp&lt;=remainder){</span><br><span class="line">			remainder=remainder-temp;</span><br><span class="line">			answer.digit[i]++; </span><br><span class="line">		} </span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(answer.digit[answer.length]==<span class="number">0</span>&amp;&amp;answer.length&gt;<span class="number">1</span>){</span><br><span class="line">		answer.length--;</span><br><span class="line">	} </span><br><span class="line">	<span class="keyword">return</span> answer;		</span><br><span class="line">} </span><br><span class="line"></span><br><span class="line">BigInteger BigInteger::<span class="keyword">operator</span>%(<span class="keyword">const</span> BigInteger&amp; b){</span><br><span class="line">	BigInteger remainder=<span class="number">0</span>;<span class="comment">//余数 </span></span><br><span class="line">	BigInteger temp=b;<span class="comment">//除数 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=length<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--){<span class="comment">//从高位除起 </span></span><br><span class="line">		<span class="keyword">if</span>(!(remainder.length==<span class="number">1</span>&amp;&amp;remainder.digit[<span class="number">0</span>]==<span class="number">0</span>)){</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=remainder.length<span class="number">-1</span>;j&gt;=<span class="number">0</span>;j--){</span><br><span class="line">				remainder.digit[j+<span class="number">1</span>]=remainder.digit[j];</span><br><span class="line">			}</span><br><span class="line">			remainder.length++;</span><br><span class="line">		}</span><br><span class="line">		remainder.digit[<span class="number">0</span>]=digit[i];</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//相当于除法 </span></span><br><span class="line">		<span class="keyword">while</span>(temp&lt;=remainder){</span><br><span class="line">			remainder=remainder-temp;</span><br><span class="line">		} </span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> remainder;	</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//输入输出</span></span><br><span class="line">istream&amp; <span class="keyword">operator</span>&gt;&gt;(istream&amp; in, BigInteger&amp; x){</span><br><span class="line">	<span class="built_in">string</span> str;</span><br><span class="line">	in&gt;&gt;str;</span><br><span class="line">	x=str;</span><br><span class="line">	<span class="keyword">return</span> in;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">ostream&amp; <span class="keyword">operator</span>&lt;&lt;(ostream&amp; out, <span class="keyword">const</span> BigInteger&amp; x){</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=x.length<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--){</span><br><span class="line">		out&lt;&lt;x.digit[i];</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> out;</span><br><span class="line">}</span><br><span class="line"> </span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">//高精度整数板子
+ 
+const int MAXN=10000;//最多多少位
+
+struct BigInteger{
+	int digit[MAXN];
+	int length;
+	
+	//构造函数 
+	BigInteger();
+	BigInteger(int x);
+	BigInteger(string str);
+	BigInteger(const BigInteger&amp; b);
+	
+	//赋值函数
+	BigInteger operator=(int x); 
+	BigInteger operator=(string str);
+	BigInteger operator=(const BigInteger&amp; b); 
+	
+	//比大小
+	bool operator&lt;=(const BigInteger&amp; b); 
+	bool operator==(const BigInteger&amp; b); 
+	
+	//运算符
+	BigInteger operator+(const BigInteger&amp; b); 
+	BigInteger operator-(const BigInteger&amp; b); 
+	BigInteger operator*(const BigInteger&amp; b); 
+	BigInteger operator/(const BigInteger&amp; b); 
+	BigInteger operator%(const BigInteger&amp; b); 
+	
+	//输入输出
+	friend istream&amp; operator&gt;&gt;(istream&amp; in, BigInteger&amp; x);
+	friend ostream&amp; operator&lt;&lt;(ostream&amp; out, const BigInteger&amp; x); 
+}; 
+
+//构造函数 
+BigInteger::BigInteger(){
+	memset(digit,0,sizeof(digit));
+	length=0;//初始化 
+}
+
+BigInteger::BigInteger(int x){
+	memset(digit,0,sizeof(digit));
+	length=0;
+	
+	//x=0要分开处理，因为它进不去while 
+	if(x==0){
+		digit[length++]=x;
+	} 
+	
+	while(x!=0){
+		digit[length++]=x%10;//索引小的存的是低位，倒过来了 
+		x/=10; 
+	}
+}
+
+BigInteger::BigInteger(string str){
+	memset(digit,0,sizeof(digit));
+	length=str.size();
+	for(int i=0;i&lt;length;i++){
+		digit[i]=str[length-i-1]-'0';//也是倒着存 
+	}
+}
+
+BigInteger::BigInteger(const BigInteger&amp; b){
+	memset(digit,0,sizeof(digit));
+	length=b.length;
+	for(int i=0;i&lt;length;i++){
+		digit[i]=b.digit[i];
+	}
+}
+
+//赋值函数
+BigInteger BigInteger::operator=(int x){
+	memset(digit,0,sizeof(digit));
+	length=0;
+	
+	//x=0要分开处理，因为它进不去while 
+	if(x==0){
+		digit[length++]=x;
+	} 
+	
+	while(x!=0){
+		digit[length++]=x%10;//索引小的存的是低位，倒过来了 
+		x/=10; 
+	}	
+	return *this;
+}
+
+BigInteger BigInteger::operator=(string str){
+	memset(digit,0,sizeof(digit));
+	length=str.size();
+	for(int i=0;i&lt;length;i++){
+		digit[i]=str[length-i-1]-'0';//也是倒着存 
+	}
+	return *this;	
+}
+
+BigInteger BigInteger::operator=(const BigInteger&amp; b){
+	memset(digit,0,sizeof(digit));
+	length=b.length;
+		for(int i=0;i&lt;length;i++){
+		digit[i]=b.digit[i];
+	}
+	return *this;
+}
+
+//比大小
+bool BigInteger::operator&lt;=(const BigInteger&amp; b){
+	if(length&lt;b.length){
+		return true;
+	}else if(b.length&lt;length){
+		return false;
+	}else{
+		for(int i=length-1;i&gt;=0;i--){
+			if(digit[i]==b.digit[i]){
+				continue;
+			}else{
+				return digit[i]&lt;b.digit[i];//妙啊！ 
+			}
+		}
+	}
+	return true;//相等返回true 
+}
+
+bool BigInteger::operator==(const BigInteger&amp; b){
+	if(length!=b.length){
+		return false;
+	}else{
+		for(int i=length-1;i&gt;=0;i--){
+			if(digit[i]!=b.digit[i]){
+				return false;
+			}
+		}		
+	}
+	return true; 
+}
+
+//运算符
+BigInteger BigInteger::operator+(const BigInteger&amp; b){
+	BigInteger answer;
+	int carry=0;
+	for(int i=0;i&lt;length||i&lt;b.length;i++){//i与较长的length保持一致 
+		int current=carry+digit[i]+b.digit[i];
+		carry=current/10;
+		answer.digit[answer.length++]=current%10; 
+	}
+	if(carry!=0){//还要多一位 
+		answer.digit[answer.length++]=carry;
+	}
+	return answer;
+}
+
+BigInteger BigInteger::operator-(const BigInteger&amp; b){
+	BigInteger answer;
+	int carry=0;
+	for(int i=0;i&lt;length;i++){
+		int current=digit[i]-b.digit[i]-carry;
+		if(current&lt;0){//要借位 
+			current+=10;
+			carry=1; 
+		}else{
+			carry=0;
+		}
+		answer.digit[answer.length++]=current;
+	}
+	
+	// 去掉多余的0 
+	while(answer.digit[answer.length]==0&amp;&amp;answer.length&gt;1){
+		answer.length--;
+	}
+	return answer; 
+} 
+
+BigInteger BigInteger::operator*(const BigInteger&amp; b){
+	BigInteger answer;
+	answer.length=length+b.length;
+	for(int i=0;i&lt;length;i++){
+		for(int j=0;j&lt;b.length;j++){
+			answer.digit[i+j]+=digit[i]*b.digit[j];//这个i+j就很自然地实现了乘法，但是还没进位 
+		}
+	}
+	
+	for(int i=0;i&lt;answer.length;i++){
+		answer.digit[i+1]+=answer.digit[i]/10;
+		answer.digit[i]%=10;
+	}
+	
+	while(answer.digit[answer.length]==0&amp;&amp;answer.length&gt;1){
+		answer.length--;
+	} 
+	
+	return answer;
+} 
+
+BigInteger BigInteger::operator/(const BigInteger&amp; b){
+	BigInteger answer;
+	answer.length=length;
+	BigInteger remainder=0;//余数 
+	BigInteger temp=b;//除数 
+	for(int i=length-1;i&gt;=0;i--){//从高位除起 
+		if(!(remainder.length==1&amp;&amp;remainder.digit[0]==0)){
+			for(int j=remainder.length-1;j&gt;=0;j--){
+				remainder.digit[j+1]=remainder.digit[j];
+			}
+			remainder.length++;
+		}
+		remainder.digit[0]=digit[i];
+		
+		//相当于除法 
+		while(temp&lt;=remainder){
+			remainder=remainder-temp;
+			answer.digit[i]++; 
+		} 
+	}
+	
+	while(answer.digit[answer.length]==0&amp;&amp;answer.length&gt;1){
+		answer.length--;
+	} 
+	return answer;		
+} 
+
+BigInteger BigInteger::operator%(const BigInteger&amp; b){
+	BigInteger remainder=0;//余数 
+	BigInteger temp=b;//除数 
+	for(int i=length-1;i&gt;=0;i--){//从高位除起 
+		if(!(remainder.length==1&amp;&amp;remainder.digit[0]==0)){
+			for(int j=remainder.length-1;j&gt;=0;j--){
+				remainder.digit[j+1]=remainder.digit[j];
+			}
+			remainder.length++;
+		}
+		remainder.digit[0]=digit[i];
+		
+		//相当于除法 
+		while(temp&lt;=remainder){
+			remainder=remainder-temp;
+		} 
+	}
+	return remainder;	
+}
+
+//输入输出
+istream&amp; operator&gt;&gt;(istream&amp; in, BigInteger&amp; x){
+	string str;
+	in&gt;&gt;str;
+	x=str;
+	return in;
+}
+
+ostream&amp; operator&lt;&lt;(ostream&amp; out, const BigInteger&amp; x){
+	for(int i=x.length-1;i&gt;=0;i--){
+		out&lt;&lt;x.digit[i];
+	}
+	return out;
+}
+ <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="a-b（华科）"><a class="header-anchor" href="#a-b（华科）">¶</a>a+b（华科）</h2>
@@ -50,7 +306,42 @@
 <p>要求阶乘的这个数本身不大（0-1000），int就装得下</p>
 <p>我和书上敲的一模一样，不知道为啥错……</p>
 <p>网上找了个：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">int</span> result[<span class="number">20001</span>] = {<span class="number">0</span>};<span class="comment">//结果</span></span><br><span class="line">		result[<span class="number">0</span>] = <span class="number">1</span>;<span class="comment">//初始化</span></span><br><span class="line">		<span class="keyword">int</span> index = <span class="number">1</span>;<span class="comment">//记录最高位的后一位下标</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i)<span class="comment">//阶乘</span></span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">int</span> temp = <span class="number">0</span>;<span class="comment">//用于进位</span></span><br><span class="line">			<span class="comment">//按位相乘，可以将这当作一个模板，很多大数运算都可以按照这种思路来做</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; index; ++j)</span><br><span class="line">			{</span><br><span class="line">				temp += result[j] * i;</span><br><span class="line">				result[j] = temp % <span class="number">10</span>;</span><br><span class="line">				temp /= <span class="number">10</span>;</span><br><span class="line">			}</span><br><span class="line">			<span class="keyword">while</span>(temp)<span class="comment">//判断最高位有没有进位</span></span><br><span class="line">			{</span><br><span class="line">				result[index++] = temp % <span class="number">10</span>;</span><br><span class="line">				temp /= <span class="number">10</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = index<span class="number">-1</span>; i &gt;= <span class="number">0</span>; --i)<span class="comment">//输出结果</span></span><br><span class="line">		{</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; result[i];</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
+
+using namespace std;
+
+int main(void)
+{
+	int n;
+	while(cin &gt;&gt; n)
+	{
+		int result[20001] = {0};//结果
+		result[0] = 1;//初始化
+		int index = 1;//记录最高位的后一位下标
+		for(int i = 2; i &lt;= n; ++i)//阶乘
+		{
+			int temp = 0;//用于进位
+			//按位相乘，可以将这当作一个模板，很多大数运算都可以按照这种思路来做
+			for(int j = 0; j &lt; index; ++j)
+			{
+				temp += result[j] * i;
+				result[j] = temp % 10;
+				temp /= 10;
+			}
+			while(temp)//判断最高位有没有进位
+			{
+				result[index++] = temp % 10;
+				temp /= 10;
+			}
+		}
+		for(int i = index-1; i &gt;= 0; --i)//输出结果
+		{
+			cout &lt;&lt; result[i];
+		}
+		cout &lt;&lt; endl;
+	}
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>牢记模板！！</p>
 <h2 id="数字阶梯求和"><a class="header-anchor" href="#数字阶梯求和">¶</a>数字阶梯求和</h2>
 <p><a target="_blank" rel="noopener" href="http://t.cn/Aipak8BQ">http://t.cn/Aipak8BQ</a></p>
@@ -58,7 +349,35 @@
 <p>这道题的思路还挺巧妙的，并不是按照题目意思去构造出每一个加数；</p>
 <p>而是从另一个角度想：</p>
 <p>这样的序列加起来，个位数上加了n个a；十位数上加了n-1个a</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1000</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> a,n;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;n){</span><br><span class="line">		<span class="keyword">int</span> sum[MAXN]={<span class="number">0</span>};<span class="comment">//结果最多有n+1位 </span></span><br><span class="line">		<span class="keyword">int</span> carry=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n+<span class="number">1</span>;i++){</span><br><span class="line">			<span class="keyword">int</span> current=(a*(n-i)+carry);</span><br><span class="line">			sum[i]=current%<span class="number">10</span>;</span><br><span class="line">			carry=current/<span class="number">10</span>;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> length=n;</span><br><span class="line">		<span class="keyword">while</span>(sum[length]==<span class="number">0</span>&amp;&amp;length&gt;<span class="number">0</span>){</span><br><span class="line">			length--;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=length;i&gt;=<span class="number">0</span>;i--){</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d"</span>,sum[i]);</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	} </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+
+using namespace std;
+
+#define MAXN 1000
+
+int main(void){
+	int a,n;
+	while(cin&gt;&gt;a&gt;&gt;n){
+		int sum[MAXN]={0};//结果最多有n+1位 
+		int carry=0;
+		for(int i=0;i&lt;n+1;i++){
+			int current=(a*(n-i)+carry);
+			sum[i]=current%10;
+			carry=current/10;
+		}
+		
+		int length=n;
+		while(sum[length]==0&amp;&amp;length&gt;0){
+			length--;
+		}
+		
+		for(int i=length;i&gt;=0;i--){
+			printf("%d",sum[i]);
+		}
+		printf("\n");
+	} 
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>自己写出来啦！注意一下length&gt;0这个，有时候搞不清就多试几次，多调几次</p>
 <h2 id="大整数的因子"><a class="header-anchor" href="#大整数的因子">¶</a>大整数的因子</h2>
 <p><a target="_blank" rel="noopener" href="http://t.cn/AipaFCJE">http://t.cn/AipaFCJE</a></p>

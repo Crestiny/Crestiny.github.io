@@ -37,13 +37,13 @@
 <p>有两种</p>
 <ul>
 <li>覆盖后续堆管理结构：把前向后向指针的内容改掉，利用时关注os的堆分配与释放<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210113191104.png" alt=""></li>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210113191104.png" alt="" loading="lazy"></li>
 <li>覆盖后续堆的数据：关注被覆盖的堆中是否有虚函数指针<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210113191506.png" alt=""></li>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210113191506.png" alt="" loading="lazy"></li>
 </ul>
 <h4 id="（3）释放后重用漏洞UAF"><a class="header-anchor" href="#（3）释放后重用漏洞UAF">¶</a>（3）释放后重用漏洞UAF</h4>
 <p>释放后立刻申请，可能申请到同一块；例如B被释放后，攻击者为C申请内存，A就访问了攻击者希望它去往的恶意代码</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210113192112.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210113192112.png" alt="" loading="lazy"></p>
 <h4 id="（4）整数溢出漏洞"><a class="header-anchor" href="#（4）整数溢出漏洞">¶</a>（4）整数溢出漏洞</h4>
 <p>目标也是覆盖堆栈内容，分为宽度溢出和算术溢出</p>
 <h4 id="（5）其他类型漏洞"><a class="header-anchor" href="#（5）其他类型漏洞">¶</a>（5）其他类型漏洞</h4>
@@ -120,7 +120,7 @@
 <li>用跳转指令：常用的有……</li>
 </ul>
 <p>区别与联系：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210113215052.png" alt=""></p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210113215052.png" alt="" loading="lazy"></p>
 <h3 id="9-3-2-漏洞攻击路径触发"><a class="header-anchor" href="#9-3-2-漏洞攻击路径触发">¶</a>9.3.2 漏洞攻击路径触发</h3>
 <p>目标：构造输入数据，使程序能运行到劫持点</p>
 <p>如何构造呢？</p>

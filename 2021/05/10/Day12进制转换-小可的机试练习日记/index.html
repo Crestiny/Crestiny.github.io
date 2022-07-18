@@ -47,7 +47,87 @@
 <p>还是看着书上来写吧……明天？</p>
 <hr>
 <p>过得很艰难……这道题值得记忆啊</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串除法</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">divide</span><span class="params">(<span class="built_in">string</span> str,<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> remainder=<span class="number">0</span>;<span class="comment">//高位余数 </span></span><br><span class="line">	<span class="keyword">int</span> current;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.<span class="built_in">size</span>();i++){</span><br><span class="line">		current=remainder*<span class="number">10</span>+(str[i]-<span class="string">'0'</span>);<span class="comment">//求现在的被除数</span></span><br><span class="line">		str[i]=current/x+<span class="string">'0'</span>;<span class="comment">//将商保存到这一位数字</span></span><br><span class="line">		remainder=current%x; <span class="comment">//计算这次的余数 </span></span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//最后的结果，要处理一下去掉高位的0 </span></span><br><span class="line">	<span class="keyword">int</span> index=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(str[index]==<span class="string">'0'</span>){<span class="comment">//这里别写成0！！！！ </span></span><br><span class="line">		index++;</span><br><span class="line">	} </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> str.substr(index); </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串乘法 </span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">multiple</span><span class="params">(<span class="built_in">string</span> str,<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> carry=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> current;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=str.<span class="built_in">size</span>()<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--){<span class="comment">//注意乘法是从最低位往前面乘的 </span></span><br><span class="line">		current=carry+(str[i]-<span class="string">'0'</span>)*x;</span><br><span class="line">		str[i]=current%<span class="number">10</span>+<span class="string">'0'</span>;</span><br><span class="line">		carry=current/<span class="number">10</span>; </span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//处理最高位进位 </span></span><br><span class="line">	<span class="keyword">if</span>(carry!=<span class="number">0</span>){</span><br><span class="line">		str=<span class="string">"1"</span>+str; </span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> str;</span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串加法 </span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">add</span><span class="params">(<span class="built_in">string</span> str,<span class="keyword">int</span> x)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> carry=x;</span><br><span class="line">	<span class="keyword">int</span> current;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=str.<span class="built_in">size</span>()<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--){</span><br><span class="line">		current=carry+(str[i]-<span class="string">'0'</span>);</span><br><span class="line">		str[i]=current%<span class="number">10</span>+<span class="string">'0'</span>;</span><br><span class="line">		carry=current/<span class="number">10</span>;</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(carry!=<span class="number">0</span>){</span><br><span class="line">		str=<span class="string">"1"</span>+str;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> str;</span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="built_in">string</span> str;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;str){</span><br><span class="line">		<span class="comment">//原数字转2进制 </span></span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; binary;</span><br><span class="line">		<span class="keyword">int</span> last;</span><br><span class="line">		<span class="keyword">while</span>(str.<span class="built_in">size</span>()!=<span class="number">0</span>){</span><br><span class="line">			last=str[str.<span class="built_in">size</span>()<span class="number">-1</span>]-<span class="string">'0'</span>;</span><br><span class="line">			binary.push_back(last%<span class="number">2</span>);</span><br><span class="line">			str=divide(str,<span class="number">2</span>);</span><br><span class="line">		} </span><br><span class="line">		<span class="comment">//binary里面是倒着放的二进制</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//二进制转十进制 </span></span><br><span class="line">		<span class="built_in">string</span> answer=<span class="string">"0"</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;binary.<span class="built_in">size</span>();i++){</span><br><span class="line">			answer=multiple(answer,<span class="number">2</span>);	<span class="comment">//说实话，不是很理解先乘后加…… </span></span><br><span class="line">			answer=add(answer,binary[i]);</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;answer&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+//字符串除法
+string divide(string str,int x){
+	int remainder=0;//高位余数 
+	int current;
+	for(int i=0;i&lt;str.size();i++){
+		current=remainder*10+(str[i]-'0');//求现在的被除数
+		str[i]=current/x+'0';//将商保存到这一位数字
+		remainder=current%x; //计算这次的余数 
+	}
+	
+	//最后的结果，要处理一下去掉高位的0 
+	int index=0;
+	while(str[index]=='0'){//这里别写成0！！！！ 
+		index++;
+	} 
+	
+	return str.substr(index); 
+} 
+
+//字符串乘法 
+string multiple(string str,int x){
+	int carry=0;
+	int current;
+	for(int i=str.size()-1;i&gt;=0;i--){//注意乘法是从最低位往前面乘的 
+		current=carry+(str[i]-'0')*x;
+		str[i]=current%10+'0';
+		carry=current/10; 
+	}
+	
+	//处理最高位进位 
+	if(carry!=0){
+		str="1"+str; 
+	}
+	return str;
+} 
+
+//字符串加法 
+string add(string str,int x){
+	int carry=x;
+	int current;
+	for(int i=str.size()-1;i&gt;=0;i--){
+		current=carry+(str[i]-'0');
+		str[i]=current%10+'0';
+		carry=current/10;
+	}
+	
+	if(carry!=0){
+		str="1"+str;
+	}
+	return str;
+} 
+
+int main(void){
+	string str;
+	while(cin&gt;&gt;str){
+		//原数字转2进制 
+		vector&lt;int&gt; binary;
+		int last;
+		while(str.size()!=0){
+			last=str[str.size()-1]-'0';
+			binary.push_back(last%2);
+			str=divide(str,2);
+		} 
+		//binary里面是倒着放的二进制
+		
+		//二进制转十进制 
+		string answer="0";
+		for(int i=0;i&lt;binary.size();i++){
+			answer=multiple(answer,2);	//说实话，不是很理解先乘后加…… 
+			answer=add(answer,binary[i]);
+		}
+		cout&lt;&lt;answer&lt;&lt;endl; 
+	}
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="进制转换2（重要）"><a class="header-anchor" href="#进制转换2（重要）">¶</a>进制转换2（重要）</h2>
 <p><a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/ae4b3c4a968745618d65b866002bbd32?tpId=60&amp;tqId=31034&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F1001&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey">https://www.nowcoder.com/practice/ae4b3c4a968745618d65b866002bbd32?tpId=60&amp;tqId=31034&amp;tPage=2&amp;ru=%2Fkaoyan%2Fretest%2F1001&amp;qru=%2Fta%2Ftsing-kaoyan%2Fquestion-ranking&amp;tab=answerKey</a></p>
 <p>清华的题……表面看起来平平无奇，实际上难得一匹</p>
@@ -69,7 +149,58 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">char2int</span><span class="params">(<span class="keyword">char</span> c)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> result;</span><br><span class="line">	<span class="keyword">if</span>(c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>){</span><br><span class="line">		result=c-<span class="string">'0'</span>;</span><br><span class="line">	}<span class="keyword">else</span>{</span><br><span class="line">		result=c-<span class="string">'A'</span>+<span class="number">10</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> result;	</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">int2char</span><span class="params">(<span class="keyword">int</span> i)</span></span>{</span><br><span class="line">	<span class="keyword">char</span> result;</span><br><span class="line">	<span class="keyword">if</span>(i&gt;=<span class="number">0</span>&amp;&amp;i&lt;=<span class="number">9</span>){</span><br><span class="line">		result=i+<span class="string">'0'</span>;</span><br><span class="line">	}<span class="keyword">else</span>{</span><br><span class="line">		result=i<span class="number">-10</span>+<span class="string">'a'</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> M,N;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;M&gt;&gt;N){</span><br><span class="line">		<span class="built_in">string</span> x;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;x;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//m进制转10进制 </span></span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> num=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;x.<span class="built_in">size</span>();i++){<span class="comment">//为什么感觉这里是反的？？ ——懂了，没反…… </span></span><br><span class="line">			num*=M;</span><br><span class="line">			num+=char2int(x[i]);</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; answer;</span><br><span class="line">		<span class="keyword">while</span>(num!=<span class="number">0</span>){</span><br><span class="line">			answer.push_back(int2char(num%N));</span><br><span class="line">			num/=N;</span><br><span class="line">		} </span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=answer.<span class="built_in">size</span>()<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--){</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%c"</span>,answer[i]);</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int char2int(char c){
+	int result;
+	if(c&gt;='0'&amp;&amp;c&lt;='9'){
+		result=c-'0';
+	}else{
+		result=c-'A'+10;
+	}
+	return result;	
+}
+
+char int2char(int i){
+	char result;
+	if(i&gt;=0&amp;&amp;i&lt;=9){
+		result=i+'0';
+	}else{
+		result=i-10+'a';
+	}
+	return result;
+}
+
+int main(void){
+	int M,N;
+	while(cin&gt;&gt;M&gt;&gt;N){
+		string x;
+		cin&gt;&gt;x;
+		
+		//m进制转10进制 
+		long long num=0;
+		for(int i=0;i&lt;x.size();i++){//为什么感觉这里是反的？？ ——懂了，没反…… 
+			num*=M;
+			num+=char2int(x[i]);
+		}
+		
+		vector&lt;char&gt; answer;
+		while(num!=0){
+			answer.push_back(int2char(num%N));
+			num/=N;
+		} 
+		
+		for(int i=answer.size()-1;i&gt;=0;i--){
+			printf("%c",answer[i]);
+		}
+		cout&lt;&lt;endl;
+	}
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我知道M-&gt;10的操作是什么意思了……</p>
 <p>是每次加完高位的数字，然后乘以M，也就是把它往前推一位，升一下它的权重</p>
 <p>所以其实没反，高位一直乘到最后，它还是拥有最高权重的那个</p>

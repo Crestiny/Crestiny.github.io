@@ -74,7 +74,7 @@
 <p>接下来逐步介绍到协议</p>
 <h4 id="（1）一个简单的认证会话"><a class="header-anchor" href="#（1）一个简单的认证会话">¶</a>（1）一个简单的认证会话</h4>
 <p>来看下面这个会话：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE60.png" alt=""></p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE60.png" alt="" loading="lazy"></p>
 <p>书上说明了第（3）步中消息每一部分的必要性</p>
 <h4 id="（2）一个更安全的认证会话"><a class="header-anchor" href="#（2）一个更安全的认证会话">¶</a>（2）一个更安全的认证会话</h4>
 <p>上述方式仍然存在问题：</p>
@@ -88,14 +88,14 @@
 <li>提出避免明文传口令的方案</li>
 </ul>
 <p>具体流程如下：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230230940.png" alt=""></p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230230940.png" alt="" loading="lazy"></p>
 <h4 id="（3）真正的Kerbores认证对话！"><a class="header-anchor" href="#（3）真正的Kerbores认证对话！">¶</a>（3）真正的Kerbores认证对话！</h4>
 <p>没想到吧……上面的图已经那么完备了却还是存在缺陷……那么问题在哪呢？</p>
 <ul>
 <li>票据的有效期太长也不好，太短也不好；根本问题是，服务器要能判断持有票据的是正确的人</li>
 <li>服务器也有被假冒的风险，所以它要向用户证明自己的身份</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE112.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE112.png" alt="" loading="lazy"></p>
 <h3 id="4-2-1-Kerberos版本5"><a class="header-anchor" href="#4-2-1-Kerberos版本5">¶</a>4.2.1 Kerberos版本5</h3>
 <h4 id="（1）版本4与版本5的不同"><a class="header-anchor" href="#（1）版本4与版本5的不同">¶</a>（1）版本4与版本5的不同</h4>
 <h4 id="（2）版本5的认证对话"><a class="header-anchor" href="#（2）版本5的认证对话">¶</a>（2）版本5的认证对话</h4>
@@ -129,7 +129,7 @@
 <li>X.509还定义了一个基于公钥证书的认证协议</li>
 </ul>
 <p>下图表示了公钥证书的产生：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231110704.png" alt=""></p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231110704.png" alt="" loading="lazy"></p>
 <h3 id="4-4-1-证书"><a class="header-anchor" href="#4-4-1-证书">¶</a>4.4.1 证书</h3>
 <h4 id="（1）公钥证书使用步骤"><a class="header-anchor" href="#（1）公钥证书使用步骤">¶</a>（1）公钥证书使用步骤</h4>
 <ul>
@@ -138,10 +138,10 @@
 <li>目录服务器提供一个方便访问证书的场所</li>
 </ul>
 <h4 id="（2）X-509定义的公钥证书格式"><a class="header-anchor" href="#（2）X-509定义的公钥证书格式">¶</a>（2）X.509定义的公钥证书格式</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231130854.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231130854.png" alt="" loading="lazy"></p>
 <p><strong>CA用自己的私钥对证书签名，用户知道CA的公钥的话，就可以解密，验证证书是否合法</strong></p>
 <p>这其实是一个典型的数字签名过程，可以如下描述：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231130247.png" alt=""></p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231130247.png" alt="" loading="lazy"></p>
 <h4 id="（3）CA生成的公钥证书的特征"><a class="header-anchor" href="#（3）CA生成的公钥证书的特征">¶</a>（3）CA生成的公钥证书的特征</h4>
 <ul>
 <li>用户可以用CA的公钥去解密证书，看里面的用户公钥，以验证</li>
@@ -163,7 +163,7 @@
 <pre><code>X1&lt;&lt;X2&gt;&gt;X2&lt;&lt;X3&gt;&gt;...XN&lt;&lt;B&gt;&gt;
 </code></pre>
 <p>相邻的两个X应该互相生成过证书，为了更明确这个关系，我们用下图来描述：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE138.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE138.png" alt="" loading="lazy"></p>
 <h4 id="（5）证书撤销"><a class="header-anchor" href="#（5）证书撤销">¶</a>（5）证书撤销</h4>
 <p>一般都是自然过期，不过有以下情况需要提前撤销：<br>
 见书P98</p>
@@ -201,7 +201,7 @@
 基于X.509的PKI</li>
 <li>所以具体来说，PKIX包括些什么呢？</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231152633.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231152633.png" alt="" loading="lazy"></p>
 <h3 id="4-5-1-PKIX管理功能"><a class="header-anchor" href="#4-5-1-PKIX管理功能">¶</a>4.5.1 PKIX管理功能</h3>
 <ul>
 <li>注册：注册开始了一个PKI中的登记过程</li>
@@ -223,7 +223,7 @@
 <p>见书P102</p>
 <p>值得注意的是，Kerberos包含身份管理系统的许多要素</p>
 <h4 id="（3）通用的身份管理系统"><a class="header-anchor" href="#（3）通用的身份管理系统">¶</a>（3）通用的身份管理系统</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231153605.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231153605.png" alt="" loading="lazy"></p>
 <h3 id="4-6-2-身份联合"><a class="header-anchor" href="#4-6-2-身份联合">¶</a>4.6.2 身份联合</h3>
 <p>身份联合就是将身份管理扩展到多个安全域，也就是说，多个域之间共享用户的数字身份，使得用户只要一次认证就可以接入多个域的应用及其资源</p>
 <h4 id="（1）联合身份管理的作用"><a class="header-anchor" href="#（1）联合身份管理的作用">¶</a>（1）联合身份管理的作用</h4>
@@ -233,7 +233,7 @@
 <li>身份映射：同一个用户在不同的域中身份和属性可能不同，身份映射可以将一个域的身份和属性映射到另一个域的要求</li>
 </ul>
 <h4 id="（2）联合身份管理的实体与数据流"><a class="header-anchor" href="#（2）联合身份管理的实体与数据流">¶</a>（2）联合身份管理的实体与数据流</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231193813.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201231193813.png" alt="" loading="lazy"></p>
 <h4 id="（3）标准"><a class="header-anchor" href="#（3）标准">¶</a>（3）标准</h4>
 <p>联合身份管理使用了一些标准，作为系统的构件，实现在不同的域之间进行安全身份交换的要求：</p>
 <ul>

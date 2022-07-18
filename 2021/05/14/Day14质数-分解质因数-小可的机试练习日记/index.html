@@ -6,12 +6,12 @@
 </script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/qie.ico"><link rel="mask-icon" href="/qie.ico" color="#24367d"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
     const Yun = window.Yun || {};
     window.CONFIG = {"hostname":"crestiny.github.io","root":"/","title":["汉","月","沦","西","海"],"version":"1.6.2","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"search here","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"D:/sentences.json"},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
-  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="¶素数判定 http:&#x2F;&#x2F;t.cn&#x2F;AiCuWE0Q 注意单独处理一下0&#x2F;1&#x2F;负数的情况 记录一下素数判定的函数： 1234567891011bool isPrime(int n){	int i;	for(i&#x3D;2;i&lt;&#x3D;sqrt(n);i++){		if(n%i&#x3D;&#x3D;0){			return 0;		}else{			continue;		}	}	return 1;} ¶素数 http:&#x2F;&#x2F;t">
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="¶素数判定 http:&#x2F;&#x2F;t.cn&#x2F;AiCuWE0Q 注意单独处理一下0&#x2F;1&#x2F;负数的情况 记录一下素数判定的函数： bool isPrime(int n){ 	int i; 	for(i&#x3D;2;i&lt;&#x3D;sqrt(n);i++){ 		if(n%i&#x3D;&#x3D;0){ 			return 0; 		}else{ 			continue; 		} 	} 	return 1; } ¶素数 http:&#x2F;&#x2F;t.cn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Day14质数&amp;分解质因数-小可的机试练习日记">
 <meta property="og:url" content="https://crestiny.github.io/2021/05/14/Day14%E8%B4%A8%E6%95%B0-%E5%88%86%E8%A7%A3%E8%B4%A8%E5%9B%A0%E6%95%B0-%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Crestiny&#39;s Blog">
-<meta property="og:description" content="¶素数判定 http:&#x2F;&#x2F;t.cn&#x2F;AiCuWE0Q 注意单独处理一下0&#x2F;1&#x2F;负数的情况 记录一下素数判定的函数： 1234567891011bool isPrime(int n){	int i;	for(i&#x3D;2;i&lt;&#x3D;sqrt(n);i++){		if(n%i&#x3D;&#x3D;0){			return 0;		}else{			continue;		}	}	return 1;} ¶素数 http:&#x2F;&#x2F;t">
+<meta property="og:description" content="¶素数判定 http:&#x2F;&#x2F;t.cn&#x2F;AiCuWE0Q 注意单独处理一下0&#x2F;1&#x2F;负数的情况 记录一下素数判定的函数： bool isPrime(int n){ 	int i; 	for(i&#x3D;2;i&lt;&#x3D;sqrt(n);i++){ 		if(n%i&#x3D;&#x3D;0){ 			return 0; 		}else{ 			continue; 		} 	} 	return 1; } ¶素数 http:&#x2F;&#x2F;t.cn">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="c:/Users/10437/AppData/Roaming/Typora/typora-user-images/image-20210515150931046.png">
 <meta property="article:published_time" content="2021-05-14T05:12:13.000Z">
@@ -25,7 +25,17 @@
 <p><a target="_blank" rel="noopener" href="http://t.cn/AiCuWE0Q">http://t.cn/AiCuWE0Q</a></p>
 <p>注意单独处理一下0/1/负数的情况</p>
 <p>记录一下素数判定的函数：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPrime</span><span class="params">(<span class="keyword">int</span> n)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=<span class="built_in">sqrt</span>(n);i++){</span><br><span class="line">		<span class="keyword">if</span>(n%i==<span class="number">0</span>){</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">bool isPrime(int n){
+	int i;
+	for(i=2;i&lt;=sqrt(n);i++){
+		if(n%i==0){
+			return 0;
+		}else{
+			continue;
+		}
+	}
+	return 1;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="素数"><a class="header-anchor" href="#素数">¶</a>素数</h2>
 <p><a target="_blank" rel="noopener" href="http://t.cn/AiCulqtW">http://t.cn/AiCulqtW</a></p>
 <p>比较简单~只要遍历这个区间就可</p>
@@ -42,7 +52,7 @@
 <p>这道题书上给了不错的思路，听起来很优雅：</p>
 <p>预处理，找出题目数据范围中所有可能的素数；输入n之后，再判断小于n的那些素数是否是n的因子；如果是因子，则通过<strong>试除</strong>来判断此因子的幂指数</p>
 <p>这个试除非常有意思，值得好好学习一下：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>
 <p>错误</p>
@@ -52,7 +62,58 @@
 </li>
 <li>
 <p>学习</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; prime;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span>* isPrime)</span></span>{</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="keyword">int</span>)<span class="built_in">sqrt</span>(<span class="number">1e9</span>)+<span class="number">1</span>;i++){</span><br><span class="line">		isPrime[i]=<span class="number">1</span>;</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preProcess</span><span class="params">(<span class="keyword">int</span>* isPrime)</span></span>{</span><br><span class="line">	isPrime[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	isPrime[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;(<span class="keyword">int</span>)<span class="built_in">sqrt</span>(<span class="number">1e9</span>)+<span class="number">1</span>;i++){</span><br><span class="line">		<span class="keyword">if</span>(!isPrime[i]){<span class="comment">//如果不是质数，就跳过 </span></span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		}<span class="keyword">else</span>{<span class="comment">//如果是质数，就加到prime向量里 ；并设置其倍数为false </span></span><br><span class="line">			prime.push_back(i);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=i*i;j&lt;(<span class="keyword">int</span>)<span class="built_in">sqrt</span>(<span class="number">1e9</span>)+<span class="number">1</span>;j+=i){</span><br><span class="line">				isPrime[j]=<span class="number">0</span>;</span><br><span class="line">			} </span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> isPrime[(<span class="keyword">int</span>)<span class="built_in">sqrt</span>(<span class="number">1e9</span>)+<span class="number">1</span>];</span><br><span class="line">	init(isPrime);</span><br><span class="line">	preProcess(isPrime);</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n){</span><br><span class="line">		<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;prime.<span class="built_in">size</span>()&amp;&amp;prime[i]&lt;=n;i++){</span><br><span class="line">			<span class="keyword">while</span>(n%prime[i]==<span class="number">0</span>){</span><br><span class="line">				n/=prime[i];</span><br><span class="line">				sum++;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(n&gt;<span class="number">1</span>){</span><br><span class="line">			sum++;</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;sum&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt; 
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+vector&lt;int&gt; prime;
+
+
+void init(int* isPrime){
+	for(int i=0;i&lt;(int)sqrt(1e9)+1;i++){
+		isPrime[i]=1;
+	}
+}
+
+void preProcess(int* isPrime){
+	isPrime[0]=0;
+	isPrime[1]=0;
+	for(int i=1;i&lt;(int)sqrt(1e9)+1;i++){
+		if(!isPrime[i]){//如果不是质数，就跳过 
+			continue;
+		}else{//如果是质数，就加到prime向量里 ；并设置其倍数为false 
+			prime.push_back(i);
+			for(int j=i*i;j&lt;(int)sqrt(1e9)+1;j+=i){
+				isPrime[j]=0;
+			} 
+		}
+	}
+}
+
+int main(void){
+	int isPrime[(int)sqrt(1e9)+1];
+	init(isPrime);
+	preProcess(isPrime);
+	int n;
+	while(cin&gt;&gt;n){
+		int sum=0;
+		for(int i=0;i&lt;prime.size()&amp;&amp;prime[i]&lt;=n;i++){
+			while(n%prime[i]==0){
+				n/=prime[i];
+				sum++;
+			}
+		}
+		
+		if(n&gt;1){
+			sum++;
+		}
+		cout&lt;&lt;sum&lt;&lt;endl;
+	}
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>注意<code>while(n%prime[i]==0)</code>是一个试除的方法</p>
 <p>还有我搞不懂为什么要加n&gt;1…………，但是就这样记着吧</p>
 <p>书上给的道理是：<strong>n至多只存在一个大于sqrt(n)的素因数</strong></p>
@@ -64,27 +125,194 @@
 <li>
 <p>错误</p>
 <p>超时：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">count</span><span class="params">(<span class="keyword">int</span> num)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=num;i++){</span><br><span class="line">		<span class="keyword">if</span>(num%i==<span class="number">0</span>){</span><br><span class="line">			sum++;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> N;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;N){</span><br><span class="line">		<span class="keyword">int</span> num[N];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;num[i];</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++){</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;count(num[i])&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	} </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+
+using namespace std;
+
+int count(int num){
+	int sum=0;
+	for(int i=1;i&lt;=num;i++){
+		if(num%i==0){
+			sum++;
+		}
+	}
+	return sum;
+}
+
+int main(void){
+	int N;
+	while(cin&gt;&gt;N){
+		int num[N];
+		for(int i=0;i&lt;N;i++){
+			cin&gt;&gt;num[i];
+		}
+		
+		for(int i=0;i&lt;N;i++){
+			cout&lt;&lt;count(num[i])&lt;&lt;" ";
+		}
+		cout&lt;&lt;endl;
+	} 
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>再改了一版，还是超时：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int count(int num){</span><br><span class="line">	int sum=2;</span><br><span class="line">	for(int i=2;i&lt;num;i++){</span><br><span class="line">		if(num%i==0){</span><br><span class="line">			sum++;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	return sum;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">int main(void){</span><br><span class="line">	int N;</span><br><span class="line">	while(cin&gt;&gt;N){</span><br><span class="line">		int num[N];</span><br><span class="line">		for(int i=0;i&lt;N;i++){</span><br><span class="line">			cin&gt;&gt;num[i];</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		for(int i=0;i&lt;N;i++){</span><br><span class="line">			if(num[i]==1){</span><br><span class="line">				cout&lt;&lt;1&lt;&lt;" ";</span><br><span class="line">			}else{</span><br><span class="line">				cout&lt;&lt;count(num[i])&lt;&lt;" ";</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line">	} </span><br><span class="line">	return 0;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+int count(int num){
+	int sum=2;
+	for(int i=2;i&lt;num;i++){
+		if(num%i==0){
+			sum++;
+		}
+	}
+	return sum;
+}
+
+int main(void){
+	int N;
+	while(cin&gt;&gt;N){
+		int num[N];
+		for(int i=0;i&lt;N;i++){
+			cin&gt;&gt;num[i];
+		}
+		
+		for(int i=0;i&lt;N;i++){
+			if(num[i]==1){
+				cout&lt;&lt;1&lt;&lt;" ";
+			}else{
+				cout&lt;&lt;count(num[i])&lt;&lt;" ";
+			}
+		}
+		cout&lt;&lt;endl;
+	} 
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>感觉这样做的复杂度是O(n^2)</p>
 <p>试下预处理吧……不对啊这又不是素数问题</p>
 </li>
 <li>
 <p>内存超限：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">count</span><span class="params">(<span class="keyword">int</span> num)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> flag[num+<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num+<span class="number">1</span>;i++){</span><br><span class="line">		flag[i]=<span class="number">0</span>;</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=num;i++){</span><br><span class="line">		<span class="keyword">if</span>(i*i==num){<span class="comment">//平方数 </span></span><br><span class="line">			sum++;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}<span class="keyword">else</span>{<span class="comment">//非平方数 </span></span><br><span class="line">			<span class="keyword">if</span>(flag[i]==<span class="number">1</span>){</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			}<span class="keyword">else</span>{</span><br><span class="line">				<span class="keyword">if</span>(num%i==<span class="number">0</span>){</span><br><span class="line">					sum+=<span class="number">2</span>;</span><br><span class="line">					flag[num/i]=<span class="number">1</span>;				</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> N;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;N){</span><br><span class="line">		<span class="keyword">int</span> num[N];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;num[i];</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++){</span><br><span class="line">			<span class="keyword">if</span>(num[i]==<span class="number">1</span>){</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="number">1</span>&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">			}<span class="keyword">else</span>{</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;count(num[i])&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	} </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+int count(int num){
+	int sum=0;
+	int flag[num+1];
+	for(int i=0;i&lt;num+1;i++){
+		flag[i]=0;
+	}
+	
+	for(int i=1;i&lt;=num;i++){
+		if(i*i==num){//平方数 
+			sum++;
+			break;
+		}else{//非平方数 
+			if(flag[i]==1){
+				break;
+			}else{
+				if(num%i==0){
+					sum+=2;
+					flag[num/i]=1;				
+				}
+			}
+		}
+	}
+	return sum;
+}
+
+int main(void){
+	int N;
+	while(cin&gt;&gt;N){
+		int num[N];
+		for(int i=0;i&lt;N;i++){
+			cin&gt;&gt;num[i];
+		}
+		
+		for(int i=0;i&lt;N;i++){
+			if(num[i]==1){
+				cout&lt;&lt;1&lt;&lt;" ";
+			}else{
+				cout&lt;&lt;count(num[i])&lt;&lt;" ";
+			}
+		}
+		cout&lt;&lt;endl;
+	} 
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>是不是用flag用的……换一种标记方式？</p>
 </li>
 <li>
 <p>又超时……</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">count</span><span class="params">(<span class="keyword">int</span> num)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> endpoint=num;</span><br><span class="line">	 </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=num;i++){</span><br><span class="line">		<span class="keyword">if</span>(i*i==num){<span class="comment">//平方数 </span></span><br><span class="line">			sum++;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}<span class="keyword">else</span>{<span class="comment">//非平方数 </span></span><br><span class="line">			<span class="keyword">if</span>(i==endpoint){</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			}<span class="keyword">else</span>{</span><br><span class="line">				<span class="keyword">if</span>(num%i==<span class="number">0</span>){</span><br><span class="line">					sum+=<span class="number">2</span>;</span><br><span class="line">					endpoint=num/i;</span><br><span class="line">				}							</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> N;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;N){</span><br><span class="line">		<span class="keyword">int</span> num[N];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;num[i];</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++){</span><br><span class="line">			<span class="keyword">if</span>(num[i]==<span class="number">1</span>){</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="number">1</span>&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">			}<span class="keyword">else</span>{</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;count(num[i])&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	} </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+int count(int num){
+	int sum=0;
+	int endpoint=num;
+	 
+	for(int i=1;i&lt;=num;i++){
+		if(i*i==num){//平方数 
+			sum++;
+			break;
+		}else{//非平方数 
+			if(i==endpoint){
+				break;
+			}else{
+				if(num%i==0){
+					sum+=2;
+					endpoint=num/i;
+				}							
+			}
+		}
+	}
+	return sum;
+}
+
+int main(void){
+	int N;
+	while(cin&gt;&gt;N){
+		int num[N];
+		for(int i=0;i&lt;N;i++){
+			cin&gt;&gt;num[i];
+		}
+		
+		for(int i=0;i&lt;N;i++){
+			if(num[i]==1){
+				cout&lt;&lt;1&lt;&lt;" ";
+			}else{
+				cout&lt;&lt;count(num[i])&lt;&lt;" ";
+			}
+		}
+		cout&lt;&lt;endl;
+	} 
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li>
 <p>学习</p>
 <p>咱们还是看下评论区学习一下吧</p>
 <p>其实思路是想到了的，基本一样，但是我的就是没过……</p>
 <p>学一下count函数吧：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">count</span><span class="params">(<span class="keyword">int</span> num)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i*i&lt;num;i++){</span><br><span class="line">		<span class="keyword">if</span>(num%i==<span class="number">0</span>){</span><br><span class="line">			sum+=<span class="number">2</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(i*i==num){</span><br><span class="line">		sum++;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">} </span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int count(int num){
+	int sum=0;
+	int i;
+	for(i=1;i*i&lt;num;i++){
+		if(num%i==0){
+			sum+=2;
+		}
+	}
+	
+	if(i*i==num){
+		sum++;
+	}
+	return sum;
+} <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="整除问题（重要，较难）"><a class="header-anchor" href="#整除问题（重要，较难）">¶</a>整除问题（重要，较难）</h2>

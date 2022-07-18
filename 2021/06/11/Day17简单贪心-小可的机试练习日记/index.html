@@ -55,9 +55,73 @@
 </li>
 <li>
 <p>TLE：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="built_in">pair</span>&lt;<span class="keyword">int</span>,<span class="keyword">double</span>&gt; p1,<span class="built_in">pair</span>&lt;<span class="keyword">int</span>,<span class="keyword">double</span>&gt; p2)</span></span>{</span><br><span class="line">	<span class="keyword">if</span>(p1.second&gt;p2.second){</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	}<span class="keyword">else</span>{</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> M,N;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;M&gt;&gt;N){</span><br><span class="line">		<span class="keyword">if</span>(M==<span class="number">-1</span>&amp;&amp;N==<span class="number">-1</span>){</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">double</span> J[MAXN],F[MAXN];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;J[i]&gt;&gt;F[i];</span><br><span class="line">		}</span><br><span class="line">	</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="built_in">pair</span>&lt;<span class="keyword">int</span>,<span class="keyword">double</span>&gt; &gt; v;</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="built_in">pair</span>&lt;<span class="keyword">int</span>,<span class="keyword">double</span>&gt; &gt;::iterator it;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++){</span><br><span class="line">			v.push_back(<span class="built_in">pair</span>&lt;<span class="keyword">int</span>,<span class="keyword">double</span>&gt;(i,J[i]/F[i]));</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//降排列 </span></span><br><span class="line">		sort(v.<span class="built_in">begin</span>(),v.<span class="built_in">end</span>(),compare);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">double</span> left=(<span class="keyword">double</span>)M;</span><br><span class="line">		<span class="keyword">double</span> food=<span class="number">0.0</span>;</span><br><span class="line">		<span class="keyword">for</span>(it=v.<span class="built_in">begin</span>();it!=v.<span class="built_in">end</span>();it++){</span><br><span class="line">			<span class="comment">//如果需要的猫粮小于老鼠拥有的猫粮，可以换走这个房间所有的食物 </span></span><br><span class="line">			<span class="keyword">if</span>(F[it-&gt;first]&lt;=left){</span><br><span class="line">				left-=F[it-&gt;first];</span><br><span class="line">				food+=J[it-&gt;first];</span><br><span class="line">			}<span class="keyword">else</span>{</span><br><span class="line">				<span class="keyword">double</span> a=left/F[it-&gt;first];</span><br><span class="line">				food+=J[it-&gt;first]*a;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			} </span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%.3f\n"</span>,food);</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+#define MAXN 100
+
+using namespace std;
+
+bool compare(pair&lt;int,double&gt; p1,pair&lt;int,double&gt; p2){
+	if(p1.second&gt;p2.second){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+int main(void){
+	int M,N;
+	while(cin&gt;&gt;M&gt;&gt;N){
+		if(M==-1&amp;&amp;N==-1){
+			break;
+		}
+		
+		double J[MAXN],F[MAXN];
+		for(int i=0;i&lt;N;i++){
+			cin&gt;&gt;J[i]&gt;&gt;F[i];
+		}
+	
+		vector&lt;pair&lt;int,double&gt; &gt; v;
+		vector&lt;pair&lt;int,double&gt; &gt;::iterator it;
+		for(int i=0;i&lt;N;i++){
+			v.push_back(pair&lt;int,double&gt;(i,J[i]/F[i]));
+		}
+		
+		//降排列 
+		sort(v.begin(),v.end(),compare);
+		
+		double left=(double)M;
+		double food=0.0;
+		for(it=v.begin();it!=v.end();it++){
+			//如果需要的猫粮小于老鼠拥有的猫粮，可以换走这个房间所有的食物 
+			if(F[it-&gt;first]&lt;=left){
+				left-=F[it-&gt;first];
+				food+=J[it-&gt;first];
+			}else{
+				double a=left/F[it-&gt;first];
+				food+=J[it-&gt;first]*a;
+				break;
+			} 
+		}
+		printf("%.3f\n",food);
+	}
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我改了一版，之前好像忘记把left置0了，但还是TLE：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(it=v.<span class="built_in">begin</span>();it!=v.<span class="built_in">end</span>()&amp;&amp;left&gt;<span class="number">0.0</span>;it++){</span><br><span class="line">	<span class="comment">//如果需要的猫粮小于老鼠拥有的猫粮，可以换走这个房间所有的食物 </span></span><br><span class="line">	<span class="keyword">if</span>(F[it-&gt;first]&lt;=left){</span><br><span class="line">		left-=F[it-&gt;first];</span><br><span class="line">		food+=J[it-&gt;first];</span><br><span class="line">	}<span class="keyword">else</span>{</span><br><span class="line">		<span class="keyword">double</span> a=left/F[it-&gt;first];</span><br><span class="line">		left=<span class="number">0.0</span>;<span class="comment">//left清零~ </span></span><br><span class="line">		food+=J[it-&gt;first]*a;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	} </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">for(it=v.begin();it!=v.end()&amp;&amp;left&gt;0.0;it++){
+	//如果需要的猫粮小于老鼠拥有的猫粮，可以换走这个房间所有的食物 
+	if(F[it-&gt;first]&lt;=left){
+		left-=F[it-&gt;first];
+		food+=J[it-&gt;first];
+	}else{
+		double a=left/F[it-&gt;first];
+		left=0.0;//left清零~ 
+		food+=J[it-&gt;first]*a;
+		break;
+	} 
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>后来仔细想了一下，其实不用置0，因为已经break了</p>
 <p>问题原来在于：</p>
 <p><img src="D:%5C%E8%83%A1%E5%8F%AF%5C%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CDay17%E7%AE%80%E5%8D%95%E8%B4%AA%E5%BF%83-%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0.assets%5Cimage-20210611122641861.png" alt="image-20210611122641861" loading="lazy"></p>
@@ -77,7 +141,50 @@
 <p>a,b的范围还挺大的……试下longlong</p>
 <p>分数最大，即a[i]-b[j]最大，所以我们应该用攻击力最大的枪打防御力最低的怪兽？（虽然直觉上有点浪费）</p>
 <p>居然就这样过了……虽然900ms差点超时：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> one,<span class="keyword">int</span> two)</span></span>{</span><br><span class="line">	<span class="keyword">return</span> one&gt;two;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> n,m,T;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> a[MAXN],b[MAXN];</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--){</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;m;j++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;b[j];</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//给攻击力降序排列</span></span><br><span class="line">		sort(a,a+n,compare); </span><br><span class="line">		<span class="comment">//给防御力升序排列 </span></span><br><span class="line">		sort(b,b+m);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> sum=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="built_in">min</span>(n,m);i++){</span><br><span class="line">			<span class="keyword">if</span>(a[i]&gt;b[i]){</span><br><span class="line">				sum+=a[i]-b[i];</span><br><span class="line">			}<span class="keyword">else</span>{</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;sum&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+
+#define MAXN 100000
+
+using namespace std;
+
+bool compare(int one,int two){
+	return one&gt;two;
+}
+
+int main(void){
+	int n,m,T;
+	long long a[MAXN],b[MAXN];
+	cin&gt;&gt;T;
+	while(T--){
+		cin&gt;&gt;n&gt;&gt;m;
+		
+		for(int i=0;i&lt;n;i++){
+			cin&gt;&gt;a[i];
+		}
+		for(int j=0;j&lt;m;j++){
+			cin&gt;&gt;b[j];
+		}
+		
+		//给攻击力降序排列
+		sort(a,a+n,compare); 
+		//给防御力升序排列 
+		sort(b,b+m);
+		
+		long long sum=0;
+		for(int i=0;i&lt;min(n,m);i++){
+			if(a[i]&gt;b[i]){
+				sum+=a[i]-b[i];
+			}else{
+				break;
+			}
+		}
+		
+		cout&lt;&lt;sum&lt;&lt;endl;
+	}
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>看了下书上的做法，和我也差不多</p>
 <p>科普一下：对于long long的printf输出：<code>printf("lld\n",answer);</code></p>
 <h2 id="代理服务器"><a class="header-anchor" href="#代理服务器">¶</a>代理服务器</h2>
@@ -96,12 +203,66 @@
 <p>超时：</p>
 <img src="D:\胡可\博客\blog\source\_posts\Day17简单贪心-小可的机试练习日记.assets\image-20210611131338908.png" alt="image-20210611131338908" style="zoom: 50%;" loading="lazy">
 <p>对应的代码：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXM 5000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> one,<span class="keyword">int</span> two)</span></span>{</span><br><span class="line">	<span class="keyword">return</span> one&gt;two;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n){</span><br><span class="line">		<span class="built_in">string</span> proxy[MAXN];</span><br><span class="line">		<span class="keyword">int</span> occur[MAXN];</span><br><span class="line">		<span class="built_in">string</span> server[MAXM];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;proxy[i];</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">int</span> m;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;m;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;server[i];</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> index=<span class="number">0</span>;<span class="comment">//记录访问列表断点位置</span></span><br><span class="line">		<span class="keyword">int</span> count=<span class="number">0</span>;<span class="comment">//记录切换次数 </span></span><br><span class="line">		<span class="keyword">while</span>(index&lt;m){</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++){</span><br><span class="line">				occur[i]=<span class="built_in">find</span>(server+index,server+m,proxy[i])-(server+index);</span><br><span class="line">			}</span><br><span class="line">			<span class="comment">//给出现位置降序排列 </span></span><br><span class="line">			sort(occur,occur+n,compare);</span><br><span class="line">			index+=occur[<span class="number">0</span>]; </span><br><span class="line">			count++; </span><br><span class="line">		} </span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;count<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;string&gt; 
+#include &lt;algorithm&gt;
+
+#define MAXN 1000
+#define MAXM 5000
+
+using namespace std;
+
+bool compare(int one,int two){
+	return one&gt;two;
+}
+
+int main(void){
+	int n;
+	while(cin&gt;&gt;n){
+		string proxy[MAXN];
+		int occur[MAXN];
+		string server[MAXM];
+		for(int i=0;i&lt;n;i++){
+			cin&gt;&gt;proxy[i];
+		}
+		int m;
+		cin&gt;&gt;m;
+		for(int i=0;i&lt;m;i++){
+			cin&gt;&gt;server[i];
+		}
+		
+		int index=0;//记录访问列表断点位置
+		int count=0;//记录切换次数 
+		while(index&lt;m){
+			for(int i=0;i&lt;n;i++){
+				occur[i]=find(server+index,server+m,proxy[i])-(server+index);
+			}
+			//给出现位置降序排列 
+			sort(occur,occur+n,compare);
+			index+=occur[0]; 
+			count++; 
+		} 
+		cout&lt;&lt;count-1&lt;&lt;endl;
+	}
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>没过的用例：</p>
 <p>输入：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">17.151.164.96</span><br><span class="line">10</span><br><span class="line">17.151.164.96</span><br><span class="line">17.151.164.96</span><br><span class="line">17.151.164.96</span><br><span class="line">17.151.164.96</span><br><span class="line">17.151.164.96</span><br><span class="line">17.151.164.96</span><br><span class="line">17.151.164.96</span><br><span class="line">17.151.164.96</span><br><span class="line">17.151.164.96</span><br><span class="line">17.151.164.96</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">1
+17.151.164.96
+10
+17.151.164.96
+17.151.164.96
+17.151.164.96
+17.151.164.96
+17.151.164.96
+17.151.164.96
+17.151.164.96
+17.151.164.96
+17.151.164.96
+17.151.164.96<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>预期输出：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">-1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 </ul>
 <p>而我实际没有输出……因为卡住了，index更新不了</p>

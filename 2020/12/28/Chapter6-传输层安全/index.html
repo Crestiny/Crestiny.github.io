@@ -55,10 +55,10 @@
 </li>
 </ul>
 <h4 id="（2）各类Web安全威胁的比较"><a class="header-anchor" href="#（2）各类Web安全威胁的比较">¶</a>（2）各类Web安全威胁的比较</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225334.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225334.png" alt="" loading="lazy"></p>
 <h3 id="6-1-2-Web流量安全方法"><a class="header-anchor" href="#6-1-2-Web流量安全方法">¶</a>6.1.2 Web流量安全方法</h3>
 <p>按照安全设施的实现位置不同，可以分成以下三种：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225804.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201227225804.png" alt="" loading="lazy"></p>
 <ul>
 <li>网络层：可以用IPSec，之后作详细介绍</li>
 <li>传输层：SSL或TLS</li>
@@ -75,7 +75,7 @@
 </ul>
 <p>每个会话有若干个状态</p>
 <p>SSL协议：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE31.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE31.png" alt="" loading="lazy"></p>
 <h2 id="6-3-传输层安全TLS"><a class="header-anchor" href="#6-3-传输层安全TLS">¶</a>6.3 传输层安全TLS</h2>
 <p>TLS目标是编写SSL的互联网标准版本，RFC 5246中定义的TLS非常接近于SSLv3，这里着重介绍区别</p>
 <h3 id="6-3-1-版本号"><a class="header-anchor" href="#6-3-1-版本号">¶</a>6.3.1 版本号</h3>
@@ -127,7 +127,7 @@ TLS使用伪随机函数的目的：使用相对较小的共享密钥值，生�
 <h2 id="6-5-SSH（Secure-Shell）"><a class="header-anchor" href="#6-5-SSH（Secure-Shell）">¶</a>6.5 SSH（Secure Shell）</h2>
 <p>SSH是个简单又安全的通信协议，用于远程登录、隧道等</p>
 <p>SSH协议栈：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101142842.png" alt=""></p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101142842.png" alt="" loading="lazy"></p>
 <p>接下来分别介绍SSH传输层协议、SSH用户认证协议、SSH连接协议</p>
 <h3 id="6-5-1-传输层协议"><a class="header-anchor" href="#6-5-1-传输层协议">¶</a>6.5.1 传输层协议</h3>
 <h4 id="（1）主机密钥"><a class="header-anchor" href="#（1）主机密钥">¶</a>（1）主机密钥</h4>
@@ -139,25 +139,34 @@ TLS使用伪随机函数的目的：使用相对较小的共享密钥值，生�
 </ul>
 <h4 id="（2）分组交换"><a class="header-anchor" href="#（2）分组交换">¶</a>（2）分组交换</h4>
 <h4 id="（3）SSH传输层协议流程"><a class="header-anchor" href="#（3）SSH传输层协议流程">¶</a>（3）SSH传输层协议流程</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE77.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE77.png" alt="" loading="lazy"></p>
 <h3 id="6-5-2-用户身份认证协议"><a class="header-anchor" href="#6-5-2-用户身份认证协议">¶</a>6.5.2 用户身份认证协议</h3>
 <p>是用户向服务器证明自己的身份</p>
 <h4 id="（1）消息类型和格式"><a class="header-anchor" href="#（1）消息类型和格式">¶</a>（1）消息类型和格式</h4>
 <ul>
 <li>用户请求服务器帮自己做个认证的格式</li>
 </ul>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">byte SSH_MSG_USERAUTH_REQUEST (50)</span><br><span class="line">string user name</span><br><span class="line">string server name</span><br><span class="line">string method name</span><br><span class="line">... method specific fields</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">byte SSH_MSG_USERAUTH_REQUEST (50)
+string user name
+string server name
+string method name
+... method specific fields
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>服务器拒绝帮用户做认证或者需要它提供更多信息的话，会发这种格式的</li>
 </ul>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">byte SSH_MSG_USERAUTH_FAILURE (51)</span><br><span class="line">name-list authentications that can continue</span><br><span class="line">boolean partial success</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">byte SSH_MSG_USERAUTH_FAILURE (51)
+name-list authentications that can continue
+boolean partial success
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>服务器同意帮你认证</li>
 </ul>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">byte SSH_MSG_USERAUTH_SUCEESS（52）</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">byte SSH_MSG_USERAUTH_SUCEESS（52）
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="（2）消息交换"><a class="header-anchor" href="#（2）消息交换">¶</a>（2）消息交换</h4>
 <p>流程如下：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101154055.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101154055.png" alt="" loading="lazy"></p>
 <h4 id="（3）身份认证方式"><a class="header-anchor" href="#（3）身份认证方式">¶</a>（3）身份认证方式</h4>
 <p>说的是上图中认证方法列表的内容？</p>
 <h3 id="6-5-3-连接协议"><a class="header-anchor" href="#6-5-3-连接协议">¶</a>6.5.3 连接协议</h3>
@@ -174,7 +183,13 @@ TLS使用伪随机函数的目的：使用相对较小的共享密钥值，生�
 <ul>
 <li>某一方想开了，给信道分配一个本地序列号，发这种消息：</li>
 </ul>
-  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">byte SSH_MSG_CHANNEL_OPEN</span><br><span class="line">string channel type</span><br><span class="line">uint32 sender channel</span><br><span class="line">uint32 initial window size</span><br><span class="line">uint32 maximum packet size</span><br><span class="line">... channel type specific data follows</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+  <pre class="line-numbers language-none"><code class="language-none">byte SSH_MSG_CHANNEL_OPEN
+string channel type
+uint32 sender channel
+uint32 initial window size
+uint32 maximum packet size
+... channel type specific data follows
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>另一方同意或不同意，如果同意则开启信道</li>
 </ul>
@@ -187,7 +202,7 @@ TLS使用伪随机函数的目的：使用相对较小的共享密钥值，生�
 </li>
 </ul>
 <p>过程如下图：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101161117.png" alt=""></p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101161117.png" alt="" loading="lazy"></p>
 <h4 id="（2）信道类型"><a class="header-anchor" href="#（2）信道类型">¶</a>（2）信道类型</h4>
 <p>4种</p>
 <h4 id="（3）端口转发（即SSH隧道）"><a class="header-anchor" href="#（3）端口转发（即SSH隧道）">¶</a>（3）端口转发（即SSH隧道）</h4>

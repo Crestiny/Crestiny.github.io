@@ -28,9 +28,9 @@
 <p>You need to merge them into a new binary tree. The merge rule is that if two nodes overlap, then sum node values up as the new value of the merged node. Otherwise, the NOT null node will be used as the node of new tree.</p>
 </blockquote>
 <h1>Input</h1>
-<p><img src="/2020/08/21/Merge-Two-Binary-Trees-Leetcode/%5CMerge-Two-Binary-Trees-Leetcode%5Cinput.png" alt=""></p>
+<p><img src="%5CMerge-Two-Binary-Trees-Leetcode%5Cinput.png" alt="" loading="lazy"></p>
 <h1>Output</h1>
-<p><img src="/2020/08/21/Merge-Two-Binary-Trees-Leetcode/%5CMerge-Two-Binary-Trees-Leetcode%5Coutput.png" alt=""></p>
+<p><img src="%5CMerge-Two-Binary-Trees-Leetcode%5Coutput.png" alt="" loading="lazy"></p>
 <h1>Analysis</h1>
 <h3 id="题意"><a class="header-anchor" href="#题意">¶</a>题意</h3>
 <p>默认代码中给出了“TreeNode”数据结构的定义。每个节点有一个值，这个值可以通过两种函数给出，之后就把它们叫函数1和函数2。<br>
@@ -43,7 +43,35 @@
 假如其中一个是空的，合并结果就是另一个，直接返回就好了<br>
 假如两者都不空，就应该此处结点的值赋为两个相加，然后此结点的左子树等于参数1的左子树+参数2的左子树，右子树等于参数1的右子树+参数2的右子树。这个+其实就是在调用mergeTrees函数，所以是递归。</p>
 <h2 id="Code"><a class="header-anchor" href="#Code">¶</a>Code</h2>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode {</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode() {}</span><br><span class="line"> *     TreeNode(int val) { this.val = val; }</span><br><span class="line"> *     TreeNode(int val, TreeNode left, TreeNode right) {</span><br><span class="line"> *         this.val = val;</span><br><span class="line"> *         this.left = left;</span><br><span class="line"> *         this.right = right;</span><br><span class="line"> *     }</span><br><span class="line"> * }</span><br><span class="line"> */</span><br><span class="line">class Solution {</span><br><span class="line">    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {</span><br><span class="line">        if (t1==null){</span><br><span class="line">            return t2;</span><br><span class="line">        }</span><br><span class="line">        if (t2==null){</span><br><span class="line">            return t1;</span><br><span class="line">        }</span><br><span class="line">        t1.val+=t2.val;</span><br><span class="line">        t1.left=mergeTrees(t1.left,t2.left);</span><br><span class="line">        t1.right=mergeTrees(t1.right,t2.right);</span><br><span class="line">		return t1;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+        if (t1==null){
+            return t2;
+        }
+        if (t2==null){
+            return t1;
+        }
+        t1.val+=t2.val;
+        t1.left=mergeTrees(t1.left,t2.left);
+        t1.right=mergeTrees(t1.right,t2.right);
+		return t1;
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="Complexity"><a class="header-anchor" href="#Complexity">¶</a>Complexity</h2>
 <h2 id="Attention"><a class="header-anchor" href="#Attention">¶</a>Attention</h2>
 <ol>

@@ -44,7 +44,7 @@
 </li>
 </ul>
 <p>详解一下这三个层次：</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210304205612407.png" alt="image-20210304205612407" style="height:500px;width:800px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210304205612407.png" alt="image-20210304205612407" style="height:500px;width:800px" loading="lazy">
 <p>Linux将设备分成三大类：</p>
 <ul>
 <li>块设备</li>
@@ -55,7 +55,7 @@
 <p><strong>Linux驱动在本质上就是一种软件程序</strong>：上层软件可以<strong>不需要了解硬件特性</strong>，仅通过驱动提供的接口与计算机硬件进行通信</p>
 <p><strong>系统调用</strong>是内核和应用程序之间的接口；<strong>驱动程序</strong>是内核和硬件之间的接口</p>
 <p>下图说明了用户进程请求设备进行输入/输出的简单流程：</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210304211006642.png" alt="image-20210304211006642" style="height:360px;width:400px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210304211006642.png" alt="image-20210304211006642" style="height:360px;width:400px" loading="lazy">
 <p><strong>上一层的抽象屏蔽了下一层的特性</strong></p>
 <h2 id="9-2-设备驱动程序框架"><a class="header-anchor" href="#9-2-设备驱动程序框架">¶</a>9.2 设备驱动程序框架</h2>
 <p>设备驱动程序，一头连了外设，一头连了内核；后者由DDI/DKI规范来规范（好拗口<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8">😂</span>）</p>
@@ -68,17 +68,60 @@
 <ul>
 <li>
 <p>file结构：用户进程是通过file结构与<strong>文件或者设备</strong>进行交互的</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">file</span> {</span></span><br><span class="line">    ...</span><br><span class="line">        <span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span> *<span class="title">f_op</span>;</span></span><br><span class="line">    ...</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">struct file {
+    ...
+        const struct file_operations *f_op;
+    ...
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li>
 <p>file_operation结构：file中的一部分</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span>{</span></span><br><span class="line">    <span class="keyword">int</span> (*open) (struct inode*, struct file*);	<span class="comment">//打开</span></span><br><span class="line">    <span class="keyword">int</span> (*close) (struct inode*, struct file*);	  <span class="comment">//关闭</span></span><br><span class="line">    <span class="keyword">loff_t</span> (*llseek) (struct file*, <span class="keyword">loff_t</span>, <span class="keyword">int</span>);	<span class="comment">//修改文件当前的读写位置</span></span><br><span class="line">    <span class="keyword">ssize_t</span> (*read) (struct file*, <span class="keyword">char</span> *, <span class="keyword">size_t</span>, <span class="keyword">loff_t</span> *); 	<span class="comment">//从设备中同步读取数据</span></span><br><span class="line">    <span class="keyword">ssize_t</span>  (*write) (struct file*,<span class="keyword">const</span> <span class="keyword">char</span>*, <span class="keyword">size_t</span>, <span class="keyword">loff_t</span> * );	<span class="comment">//向设备中发送数据</span></span><br><span class="line">    <span class="keyword">int</span> (*mmap) (struct file*, struct vm_area_struct *);	<span class="comment">//将设备的内存映射到进程地址空间</span></span><br><span class="line">  <span class="keyword">int</span> (*ioctl) (struct inode*, struct file *, <span class="keyword">unsigned</span> <span class="keyword">int</span>, <span class="keyword">unsigned</span> <span class="keyword">long</span>);	<span class="comment">//执行设备上的I/O控制指令</span></span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="title">int</span> <span class="params">(*poll)</span> <span class="params">(struct file*, struct poll_table_struct *)</span></span>;	<span class="comment">//轮询，判断是否可以进行非阻塞的读取或者写入</span></span><br><span class="line">    ...</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">struct file_operations{
+    int (*open) (struct inode*, struct file*);	//打开
+    int (*close) (struct inode*, struct file*);	  //关闭
+    loff_t (*llseek) (struct file*, loff_t, int);	//修改文件当前的读写位置
+    ssize_t (*read) (struct file*, char *, size_t, loff_t *); 	//从设备中同步读取数据
+    ssize_t  (*write) (struct file*,const char*, size_t, loff_t * );	//向设备中发送数据
+    int (*mmap) (struct file*, struct vm_area_struct *);	//将设备的内存映射到进程地址空间
+  int (*ioctl) (struct inode*, struct file *, unsigned int, unsigned long);	//执行设备上的I/O控制指令
+    unsigned int (*poll) (struct file*, struct poll_table_struct *);	//轮询，判断是否可以进行非阻塞的读取或者写入
+    ...
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可以看出file_operation结构中对文件操作的函数只给出了定义，实现是留给具体的驱动程序来完成的。</p>
-<p><span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/2753.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/2753.png?v8">❓</span>听不懂<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8">😢</span></p>
+<p>:question:听不懂:cry:</p>
 <p>下面是字符设备驱动程序打开、读、写以及I/O控制函数的模板：</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">char_open</span><span class="params">(struct inode* inode, struct file* filp)</span></span>{	<span class="comment">//filp是文件结构的指针</span></span><br><span class="line">    ...</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">xxx_read</span><span class="params">(struct file* filp, char_user *buf, <span class="keyword">size_t</span> count, <span class="keyword">loff_t</span> *f_pos)</span></span>{		<span class="comment">//count是要读的字节数，f_pos是读的位置相对于文件开头的偏移量</span></span><br><span class="line">    																	   <span class="comment">//buf是用户空间的内存地址，在内核空间不能直接读写，所以调用了那两个copy函数</span></span><br><span class="line">    ...</span><br><span class="line">        copy_to_user(buf, ...,count);	<span class="comment">//原型：unsigned long copy_from_user(void* to, count void_user *from, unsigned long count);</span></span><br><span class="line">    ...</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">xxx_write</span><span class="params">(struct file* filp, char_user *buf, <span class="keyword">size_t</span> count, <span class="keyword">loff_t</span> *f_pos)</span></span>{</span><br><span class="line">    ...</span><br><span class="line">        copy_from_user(..., buf, count);	<span class="comment">//原型：unsigned long copy_to_user(void _user *to, count void *from, unsigned long count);</span></span><br><span class="line">    ...</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">xxx_ioctl</span><span class="params">(struct inode *inode, struct filr* filp, <span class="keyword">unsigned</span> <span class="keyword">int</span> cmd, <span class="keyword">unsigned</span> <span class="keyword">long</span> arg)</span></span>{</span><br><span class="line">    ...</span><br><span class="line">        <span class="keyword">switch</span>(cmd){</span><br><span class="line">                <span class="keyword">case</span> xxx_cmd1;</span><br><span class="line">                ...</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> xxx_cmd2;</span><br><span class="line">                ...</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:			<span class="comment">//不支持的命令</span></span><br><span class="line">                <span class="keyword">return</span> -enotty;</span><br><span class="line">        }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">static int char_open(struct inode* inode, struct file* filp){	//filp是文件结构的指针
+    ...
+}
+
+ssize_t xxx_read(struct file* filp, char_user *buf, size_t count, loff_t *f_pos){		//count是要读的字节数，f_pos是读的位置相对于文件开头的偏移量
+    																	   //buf是用户空间的内存地址，在内核空间不能直接读写，所以调用了那两个copy函数
+    ...
+        copy_to_user(buf, ...,count);	//原型：unsigned long copy_from_user(void* to, count void_user *from, unsigned long count);
+    ...
+}
+
+ssize_t xxx_write(struct file* filp, char_user *buf, size_t count, loff_t *f_pos){
+    ...
+        copy_from_user(..., buf, count);	//原型：unsigned long copy_to_user(void _user *to, count void *from, unsigned long count);
+    ...
+}
+
+int xxx_ioctl(struct inode *inode, struct filr* filp, unsigned int cmd, unsigned long arg){
+    ...
+        switch(cmd){
+                case xxx_cmd1;
+                ...
+                    break;
+                case xxx_cmd2;
+                ...
+                    break;
+            default:			//不支持的命令
+                return -enotty;
+        }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里研究一下书上的简单字符驱动程序mycdev.c：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210306192757023.png" alt="image-20210306192757023"></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210306192757023.png" alt="image-20210306192757023" loading="lazy"></p>
 <p>​	看起来就是个模块源代码而已啊！什么是字符设备呢？</p>
 <blockquote>
 <p>字符设备是指在I/O传输过程中以字符为单位进行传输的设备，例如键盘，打印机等。</p>
@@ -94,7 +137,7 @@
 </ul>
 <h3 id="9-3-1-I-O端口和I-O内存"><a class="header-anchor" href="#9-3-1-I-O端口和I-O内存">¶</a>9.3.1 I/O端口和I/O内存</h3>
 <p>每个设备的I/O端口都要被组织成下图这样：</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210306200956303.png" alt="image-20210306200956303" style="height:300px;width:460px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210306200956303.png" alt="image-20210306200956303" style="height:300px;width:460px" loading="lazy">
 <p>用法是这样子：</p>
 <ul>
 <li>CPU把要发给设备的命令写入<strong>控制寄存器</strong>，并从<strong>状态寄存器</strong>中读出表示设备内部状态的值</li>

@@ -46,7 +46,7 @@
 <h4 id="（1）认证与加密"><a class="header-anchor" href="#（1）认证与加密">¶</a>（1）认证与加密</h4>
 <p>把这两个词放一起的时候，我常常感觉……很迷糊，现在理一理：<br>
 一般来说认证和加密是两个功能，说一句话可能会让关系更明白：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如我们有一个对消息作处理的算法，这里面可以包含两步操作：先对消息加密，再打上认证标签；这样我们就可以说：把消息的认证和保密结合起来了</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">比如我们有一个对消息作处理的算法，这里面可以包含两步操作：先对消息加密，再打上认证标签；这样我们就可以说：把消息的认证和保密结合起来了<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>在满足安全需求这件事上，认证和加密是各有应用场景的</p>
 <h4 id="（2）什么时候可以不加密只认证呢？"><a class="header-anchor" href="#（2）什么时候可以不加密只认证呢？">¶</a>（2）什么时候可以不加密只认证呢？</h4>
 <ol>
@@ -57,7 +57,7 @@
 <h4 id="（3）消息认证码MAC"><a class="header-anchor" href="#（3）消息认证码MAC">¶</a>（3）消息认证码MAC</h4>
 <p>定义：用私钥产生一小块数据，它可以作为MAC<br>
 工作流程：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/MAC.png" alt=""></p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/MAC.png" alt="" loading="lazy"></p>
 <ul>
 <li>A和B共享一个密钥K</li>
 <li>A给B发消息的时候，A用(消息+K)生成MAC，再把消息和MAC一起发给B</li>
@@ -67,7 +67,7 @@
 <h4 id="（4）单向散列函数"><a class="header-anchor" href="#（4）单向散列函数">¶</a>（4）单向散列函数</h4>
 <p>这是MAC的一种替代品，不同之处在于：<strong>MAC需要密钥而单向散列不需要</strong>，它只是输入M得到H(M)而已。</p>
 <p>H函数可以有以下三种形式：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/HASH.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/HASH.png" alt="" loading="lazy"></p>
 <ul>
 <li>传统加密：先hash再加密</li>
 <li>公钥加密：先hash再用公钥加密</li>
@@ -91,17 +91,17 @@
 <h4 id="（1）散列函数基本原理"><a class="header-anchor" href="#（1）散列函数基本原理">¶</a>（1）散列函数基本原理</h4>
 <p>把消息按照n比特每块划分，迭代地每次处理一块，最后生成n比特的散列函数</p>
 <h4 id="（2）一种最简单的散列函数"><a class="header-anchor" href="#（2）一种最简单的散列函数">¶</a>（2）一种最简单的散列函数</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230095511.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230095511.png" alt="" loading="lazy"></p>
 <p>对于随机数据的完整性校验很有效，书上有一些数学推导和改进；但是这些改进并不是很有效……</p>
 <p>举个例子，如果我们想替换一个假消息上去，为了让散列函数不变，我们可以根据需要附加一个n比特的数据块，想怎么调怎么调，非常容易生成相同的散列码……所以我们可以考虑散列码拼在消息后面以后，对整个进行加密</p>
 <h3 id="3-2-4-SHA安全散列函数"><a class="header-anchor" href="#3-2-4-SHA安全散列函数">¶</a>3.2.4 SHA安全散列函数</h3>
 <p>SHA-1有时候也叫加密散列码，码和函数貌似差不多，不要纠结<br>
 经过一段时间的发展，现在主要是用SHA-2：</p>
 <blockquote>
-<p>SHA-2，名称来自于安全散列算法2（英语：Secure Hash Algorithm 2）的缩写，一种密码散列函数算法标准，由美国国家安全局研发[3]，由美国国家标准与技术研究院（NIST）在2001年发布。属于SHA算法之一，是SHA-1的后继者。其下又可再分为六个不同的算法标准，包括了  ：SHA-224、SHA-256、SHA-384、SHA-512、SHA-512/224、SHA-512/256。<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230104252.png" alt=""></p>
+<p>SHA-2，名称来自于安全散列算法2（英语：Secure Hash Algorithm 2）的缩写，一种密码散列函数算法标准，由美国国家安全局研发[3]，由美国国家标准与技术研究院（NIST）在2001年发布。属于SHA算法之一，是SHA-1的后继者。其下又可再分为六个不同的算法标准，包括了  ：SHA-224、SHA-256、SHA-384、SHA-512、SHA-512/224、SHA-512/256。<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230104252.png" alt="" loading="lazy"></p>
 </blockquote>
 <p>这里介绍一下SHA-512：<br>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE2.png" alt=""></p>
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE2.png" alt="" loading="lazy"></p>
 <p>（？）M和K是干嘛的？</p>
 <p>书上有些安全性的数学表达</p>
 <h2 id="3-3-消息认证码MAC"><a class="header-anchor" href="#3-3-消息认证码MAC">¶</a>3.3 消息认证码MAC</h2>
@@ -118,17 +118,17 @@
 </ul>
 <p><strong>把散列函数模块化是个不错的做法</strong></p>
 <h4 id="（3）HMAC的算法设计"><a class="header-anchor" href="#（3）HMAC的算法设计">¶</a>（3）HMAC的算法设计</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE12.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE12.png" alt="" loading="lazy"></p>
 <h3 id="3-3-2-基于分组密码的MAC"><a class="header-anchor" href="#3-3-2-基于分组密码的MAC">¶</a>3.3.2 基于分组密码的MAC</h3>
 <h4 id="（1）基于密文的消息认证码CMAC"><a class="header-anchor" href="#（1）基于密文的消息认证码CMAC">¶</a>（1）基于密文的消息认证码CMAC</h4>
 <p>适用于AES和3DES</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230125126.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230125126.png" alt="" loading="lazy"></p>
 <h4 id="（2）具有密码块链式信息认证码的计数器CCM"><a class="header-anchor" href="#（2）具有密码块链式信息认证码的计数器CCM">¶</a>（2）具有密码块链式信息认证码的计数器CCM</h4>
 <p>（？）好迷惑的名字</p>
 <p>又叫认证加密模式<br>
 CCM=AES+CTR操作模式（2.5节提过）+CMAC认证算法</p>
 <p>认证和加密一直是被设计成两种单独的服务的，前者保证可靠性（完整性），后者保证机密性</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230130735.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230130735.png" alt="" loading="lazy"></p>
 <p>感觉有点改进后的散列算法的味道，最后送出的是加密的消息+加密的标签（由消息生成）</p>
 <h2 id="3-4-公钥密码原理"><a class="header-anchor" href="#3-4-公钥密码原理">¶</a>3.4 公钥密码原理</h2>
 <h3 id="3-4-1-公钥密码思想"><a class="header-anchor" href="#3-4-1-公钥密码思想">¶</a>3.4.1 公钥密码思想</h3>
@@ -148,7 +148,7 @@ CCM=AES+CTR操作模式（2.5节提过）+CMAC认证算法</p>
 </ul>
 <p>都是成双成对哒~</p>
 <h4 id="（3）公钥密码算法基本流程"><a class="header-anchor" href="#（3）公钥密码算法基本流程">¶</a>（3）公钥密码算法基本流程</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230132126.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230132126.png" alt="" loading="lazy"></p>
 <h3 id="3-4-2-公钥密码系统的应用"><a class="header-anchor" href="#3-4-2-公钥密码系统的应用">¶</a>3.4.2 公钥密码系统的应用</h3>
 <p>发送者用什么，有三种情况：</p>
 <ul>
@@ -158,19 +158,19 @@ CCM=AES+CTR操作模式（2.5节提过）+CMAC认证算法</p>
 </ul>
 <p>3密钥交换：双方互换会话密钥</p>
 <p>123是公钥密码的三种应用，不同的算法对这几种应用的支持也不同</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230132641.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230132641.png" alt="" loading="lazy"></p>
 <h3 id="3-4-3-公钥密码的要求"><a class="header-anchor" href="#3-4-3-公钥密码的要求">¶</a>3.4.3 公钥密码的要求</h3>
 <p>见书P63</p>
 <h2 id="3-5-公钥密码算法"><a class="header-anchor" href="#3-5-公钥密码算法">¶</a>3.5 公钥密码算法</h2>
 <p>本节重点介绍RSA+DH，简要介绍DSS+椭圆曲线</p>
 <h3 id="3-5-1-RSA"><a class="header-anchor" href="#3-5-1-RSA">¶</a>3.5.1 RSA</h3>
 <p>基于大数分解的困难</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230140625.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230140625.png" alt="" loading="lazy"></p>
 <h3 id="3-5-2-Diffie-Hellman"><a class="header-anchor" href="#3-5-2-Diffie-Hellman">¶</a>3.5.2 Diffie-Hellman</h3>
 <p>基于离散对数计算的困难</p>
 <p>由于DH只有密钥交换的应用，所以通常被叫做DH密钥交换</p>
 <h4 id="（1）算法"><a class="header-anchor" href="#（1）算法">¶</a>（1）算法</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230141939.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20201230141939.png" alt="" loading="lazy"></p>
 <p>这种会受到中间人攻击，见（3）</p>
 <h4 id="（2）使用DH的另外一个例子"><a class="header-anchor" href="#（2）使用DH的另外一个例子">¶</a>（2）使用DH的另外一个例子</h4>
 <p>见书P68</p>

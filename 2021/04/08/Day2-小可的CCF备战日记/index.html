@@ -41,12 +41,116 @@
 <ul>
 <li>记录一个神奇的错误：</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210409004823996.png" alt="image-20210409004823996"></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210409004823996.png" alt="image-20210409004823996" loading="lazy"></p>
 <p>这里好像空栈不能调用top？</p>
 <ul>
 <li>
 <p>过了样例但只有70分</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//ASCII码：+是43，-是45，x是120，/是47 </span></span><br><span class="line"><span class="comment">//优先级大小和ASCII码大小好像…… </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_prior</span><span class="params">(<span class="keyword">char</span> c)</span></span>{</span><br><span class="line">	<span class="keyword">switch</span>(c){</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'+'</span>:<span class="keyword">case</span> <span class="string">'-'</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">'x'</span>:<span class="keyword">case</span> <span class="string">'/'</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="number">2</span>;	</span><br><span class="line">	}</span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n){</span><br><span class="line">		<span class="keyword">char</span> reverse[n][<span class="number">7</span>];</span><br><span class="line">		<span class="keyword">char</span> middle[n][<span class="number">7</span>];</span><br><span class="line">		<span class="built_in">stack</span>&lt;<span class="keyword">char</span>&gt; transform;</span><br><span class="line">		<span class="built_in">stack</span>&lt;<span class="keyword">char</span>&gt; calc; </span><br><span class="line">		</span><br><span class="line">		<span class="comment">//先读进字符数组里面吧 </span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;middle[i][<span class="number">0</span>]&gt;&gt;middle[i][<span class="number">1</span>]&gt;&gt;middle[i][<span class="number">2</span>]&gt;&gt;middle[i][<span class="number">3</span>]&gt;&gt;middle[i][<span class="number">4</span>]&gt;&gt;middle[i][<span class="number">5</span>]&gt;&gt;middle[i][<span class="number">6</span>];</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="comment">//中缀转后缀 </span></span><br><span class="line">		<span class="keyword">char</span> temp,top_op;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++){</span><br><span class="line">			<span class="keyword">int</span> k=<span class="number">0</span>;</span><br><span class="line">			<span class="comment">//每处理一行表达式，都要清空transform栈，因为它只是处理运算符的中转站</span></span><br><span class="line">			<span class="comment">//但是仔细一想，好像每次处理完都会全部弹出去了？ </span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">7</span>;j++){</span><br><span class="line">				temp=middle[i][j];</span><br><span class="line">				<span class="keyword">if</span>(temp&gt;=<span class="number">48</span>&amp;&amp;temp&lt;=<span class="number">57</span>){	<span class="comment">//是操作数的话，直接存到后缀表达式的字符数组里面 </span></span><br><span class="line">					reverse[i][k++]=temp;</span><br><span class="line">				}<span class="keyword">else</span>{<span class="comment">//如果是操作符 </span></span><br><span class="line">					 <span class="keyword">if</span>(transform.empty()){<span class="comment">//栈为空可以直接压栈 </span></span><br><span class="line">					 	transform.push(temp);</span><br><span class="line">					 }<span class="keyword">else</span>{<span class="comment">//栈不空就比较优先级 </span></span><br><span class="line">					 	top_op=transform.top();<span class="comment">//获取栈顶运算符</span></span><br><span class="line">						<span class="keyword">if</span>(get_prior(temp)&gt;get_prior(top_op)){</span><br><span class="line">							transform.push(temp);</span><br><span class="line">						}<span class="keyword">else</span>{</span><br><span class="line">							<span class="keyword">while</span>(get_prior(top_op)&gt;=get_prior(temp)&amp;&amp;(!transform.empty())){</span><br><span class="line">								reverse[i][k++]=transform.top();</span><br><span class="line">								transform.pop();</span><br><span class="line">								<span class="keyword">if</span>(transform.empty()){</span><br><span class="line">									<span class="keyword">break</span>;<span class="comment">//栈空了就直接退出while </span></span><br><span class="line">								}<span class="keyword">else</span>{</span><br><span class="line">									top_op=transform.top();</span><br><span class="line">								} </span><br><span class="line">							}</span><br><span class="line">							transform.push(temp);</span><br><span class="line">						}</span><br><span class="line">					 }</span><br><span class="line">				}</span><br><span class="line"></span><br><span class="line">			}</span><br><span class="line">			<span class="comment">//各字符处理完毕，栈中剩余的运算符直接出栈 </span></span><br><span class="line">			<span class="keyword">while</span>(!transform.empty()){</span><br><span class="line">				reverse[i][k++]=transform.top();</span><br><span class="line">				transform.pop(); </span><br><span class="line">			} 			</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="comment">//后缀运算，把每个表达式利用calc来做计算</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++){</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">7</span>;j++){</span><br><span class="line">				temp=reverse[i][j];</span><br><span class="line">				<span class="keyword">if</span>(temp&gt;=<span class="number">48</span>&amp;&amp;temp&lt;=<span class="number">57</span>){</span><br><span class="line">					calc.push(temp);</span><br><span class="line">				}<span class="keyword">else</span>{</span><br><span class="line">					<span class="keyword">int</span> op2=calc.top()<span class="number">-48</span>;</span><br><span class="line">					calc.pop();</span><br><span class="line">					<span class="keyword">int</span> op1=calc.top()<span class="number">-48</span>;</span><br><span class="line">					calc.pop();</span><br><span class="line">					<span class="keyword">switch</span>(temp){</span><br><span class="line">						<span class="keyword">case</span> <span class="string">'+'</span>:</span><br><span class="line">							calc.push(op1+op2+<span class="string">'0'</span>);<span class="keyword">break</span>;</span><br><span class="line">						<span class="keyword">case</span> <span class="string">'-'</span>:</span><br><span class="line">							calc.push(op1-op2+<span class="string">'0'</span>);<span class="keyword">break</span>;	</span><br><span class="line">						<span class="keyword">case</span> <span class="string">'x'</span>:</span><br><span class="line">							calc.push(op1*op2+<span class="string">'0'</span>);<span class="keyword">break</span>;	</span><br><span class="line">						<span class="keyword">case</span> <span class="string">'/'</span>:</span><br><span class="line">							calc.push(op1/op2+<span class="string">'0'</span>);<span class="keyword">break</span>;	</span><br><span class="line">					}</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">			<span class="comment">//看结果是否等于24 </span></span><br><span class="line">			<span class="keyword">if</span>(calc.top()<span class="number">-48</span>==<span class="number">24</span>){</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="string">"Yes"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">			}<span class="keyword">else</span>{</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="string">"No"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		 </span><br><span class="line">		</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt; 
+#include &lt;stack&gt;
+
+using namespace std;
+
+//ASCII码：+是43，-是45，x是120，/是47 
+//优先级大小和ASCII码大小好像…… 
+
+int get_prior(char c){
+	switch(c){
+		case '+':case '-':
+			return 1;
+		case 'x':case '/':
+			return 2;	
+	}
+} 
+
+int main(void){
+	int n;
+	while(cin&gt;&gt;n){
+		char reverse[n][7];
+		char middle[n][7];
+		stack&lt;char&gt; transform;
+		stack&lt;char&gt; calc; 
+		
+		//先读进字符数组里面吧 
+		for(int i=0;i&lt;n;i++){
+			cin&gt;&gt;middle[i][0]&gt;&gt;middle[i][1]&gt;&gt;middle[i][2]&gt;&gt;middle[i][3]&gt;&gt;middle[i][4]&gt;&gt;middle[i][5]&gt;&gt;middle[i][6];
+		}
+
+		//中缀转后缀 
+		char temp,top_op;
+		for(int i=0;i&lt;n;i++){
+			int k=0;
+			//每处理一行表达式，都要清空transform栈，因为它只是处理运算符的中转站
+			//但是仔细一想，好像每次处理完都会全部弹出去了？ 
+			for(int j=0;j&lt;7;j++){
+				temp=middle[i][j];
+				if(temp&gt;=48&amp;&amp;temp&lt;=57){	//是操作数的话，直接存到后缀表达式的字符数组里面 
+					reverse[i][k++]=temp;
+				}else{//如果是操作符 
+					 if(transform.empty()){//栈为空可以直接压栈 
+					 	transform.push(temp);
+					 }else{//栈不空就比较优先级 
+					 	top_op=transform.top();//获取栈顶运算符
+						if(get_prior(temp)&gt;get_prior(top_op)){
+							transform.push(temp);
+						}else{
+							while(get_prior(top_op)&gt;=get_prior(temp)&amp;&amp;(!transform.empty())){
+								reverse[i][k++]=transform.top();
+								transform.pop();
+								if(transform.empty()){
+									break;//栈空了就直接退出while 
+								}else{
+									top_op=transform.top();
+								} 
+							}
+							transform.push(temp);
+						}
+					 }
+				}
+
+			}
+			//各字符处理完毕，栈中剩余的运算符直接出栈 
+			while(!transform.empty()){
+				reverse[i][k++]=transform.top();
+				transform.pop(); 
+			} 			
+		}
+
+		//后缀运算，把每个表达式利用calc来做计算
+		for(int i=0;i&lt;n;i++){
+			for(int j=0;j&lt;7;j++){
+				temp=reverse[i][j];
+				if(temp&gt;=48&amp;&amp;temp&lt;=57){
+					calc.push(temp);
+				}else{
+					int op2=calc.top()-48;
+					calc.pop();
+					int op1=calc.top()-48;
+					calc.pop();
+					switch(temp){
+						case '+':
+							calc.push(op1+op2+'0');break;
+						case '-':
+							calc.push(op1-op2+'0');break;	
+						case 'x':
+							calc.push(op1*op2+'0');break;	
+						case '/':
+							calc.push(op1/op2+'0');break;	
+					}
+				}
+			}
+			//看结果是否等于24 
+			if(calc.top()-48==24){
+				cout&lt;&lt;"Yes"&lt;&lt;endl;
+			}else{
+				cout&lt;&lt;"No"&lt;&lt;endl;
+			}
+		}
+		 
+		
+	}
+	return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>1551实在想不出哪里错了</p>
 <p>明天网上找一下吧</p>
 <hr>

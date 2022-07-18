@@ -25,10 +25,51 @@
 <p>Given a binary tree, find its maximum depth.</p>
 <p>The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.</p>
 <h1>Input&amp;Output</h1>
-<p><img src="/2020/09/30/Maximum-Depth-of-Binary-Tree/%5CMaximum-Depth-of-Binary-Tree%5CIO.png" alt=""></p>
+<p><img src="%5CMaximum-Depth-of-Binary-Tree%5CIO.png" alt="" loading="lazy"></p>
 <h1>Analysis</h1>
 <p>大致的思路是，一直往下，过程中有计数器，到底了就返回数字啥的</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * public class TreeNode {</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode left;</span><br><span class="line"> *     TreeNode right;</span><br><span class="line"> *     TreeNode() {}</span><br><span class="line"> *     TreeNode(int val) { this.val = val; }</span><br><span class="line"> *     TreeNode(int val, TreeNode left, TreeNode right) {</span><br><span class="line"> *         this.val = val;</span><br><span class="line"> *         this.left = left;</span><br><span class="line"> *         this.right = right;</span><br><span class="line"> *     }</span><br><span class="line"> * }</span><br><span class="line"> */</span><br><span class="line">class Solution {</span><br><span class="line">    int depth=0;</span><br><span class="line">    </span><br><span class="line">    public int maxDepth(TreeNode root) {</span><br><span class="line">        if(root!=null){</span><br><span class="line">            depth++;</span><br><span class="line">            if(root.left==null&amp;&amp;root.right==null){</span><br><span class="line">                return depth;</span><br><span class="line">            }</span><br><span class="line">            if(root.left!=null&amp;&amp;root.right==null){</span><br><span class="line">                depth=maxDepth(root.left);</span><br><span class="line">            }       </span><br><span class="line">            if(root.left==null&amp;&amp;root.right!=null){</span><br><span class="line">                depth=maxDepth(root.right);</span><br><span class="line">            }</span><br><span class="line">            if(root.left!=null&amp;&amp;root.right!=null){</span><br><span class="line">                int depthTemp=depth;</span><br><span class="line">                int depthLeft=maxDepth(root.left);</span><br><span class="line">                depth=depthTemp;</span><br><span class="line">                int depthRight=maxDepth(root.right);</span><br><span class="line">                depth=depthLeft&gt;depthRight?depthLeft:depthRight;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        </span><br><span class="line">        return depth;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int depth=0;
+    
+    public int maxDepth(TreeNode root) {
+        if(root!=null){
+            depth++;
+            if(root.left==null&amp;&amp;root.right==null){
+                return depth;
+            }
+            if(root.left!=null&amp;&amp;root.right==null){
+                depth=maxDepth(root.left);
+            }       
+            if(root.left==null&amp;&amp;root.right!=null){
+                depth=maxDepth(root.right);
+            }
+            if(root.left!=null&amp;&amp;root.right!=null){
+                int depthTemp=depth;
+                int depthLeft=maxDepth(root.left);
+                depth=depthTemp;
+                int depthRight=maxDepth(root.right);
+                depth=depthLeft&gt;depthRight?depthLeft:depthRight;
+            }
+        }
+        
+        return depth;
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

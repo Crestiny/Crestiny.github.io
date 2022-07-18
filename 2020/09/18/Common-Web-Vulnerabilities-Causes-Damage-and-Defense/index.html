@@ -32,7 +32,8 @@
 <li>攻击者利用发送给SQL服务器的输入参数构造可执行的SQL代码（可加入到get请求、post请求、http头信息、cookie中）</li>
 <li>数据库未做相应的安全配置</li>
 </ol>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人总结：</span><br><span class="line">网页需要根据用户输入动态构造SQL语句的时候，如果过滤之类的安全工作没做好，就会导致恶意代码执行、绕过认证、数据泄露等危害。</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">个人总结：
+网页需要根据用户输入动态构造SQL语句的时候，如果过滤之类的安全工作没做好，就会导致恶意代码执行、绕过认证、数据泄露等危害。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h3 id="Damage"><a class="header-anchor" href="#Damage">¶</a>Damage</h3>
 <ul>
 <li>数据库信息泄漏：数据库中存放的用户的隐私信息的泄露。猜解后台数据库，这是利用最多的方式，盗取网站的敏感信息。</li>
@@ -191,7 +192,9 @@ XML外部实体攻击是一种针对解析XML格式应用程序的攻击类型�
 <p>执行SSRF攻击，其中外部实体是基于后端系统的URL定义的，如：</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY xxe SYSTEM "http://127.0.0.1:8080" &gt;探测端口；</span><br><span class="line"></span><br><span class="line"> &lt;!ENTITY xxe SYSTEM "expect://id" &gt;执行命令；</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&lt;!ENTITY xxe SYSTEM "http://127.0.0.1:8080" &gt;探测端口；
+
+ &lt;!ENTITY xxe SYSTEM "expect://id" &gt;执行命令；<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>
 <p>敏感文件泄露:无回显读取本地敏感文件(Blind OOB XXE)，敏感数据从应用服务器传输到攻击者的服务器上。</p>
@@ -303,7 +306,8 @@ RBAC访问控制框架应该为Web应用程序安全管理员提供确定的“�
 <p>Insecure deserialization often leads to remote code execution. Even if deserialization flaws do not result in remote code execution, they can be used to perform attacks, including replay attacks, injection attacks, and privilege escalation attacks.</p>
 <h3 id="什么是序列化-反序列化？"><a class="header-anchor" href="#什么是序列化-反序列化？">¶</a>什么是序列化/反序列化？</h3>
 <p>序列化（serialization）在计算机科学的资料处理中，是指将数据结构或对象状态转换成可取用格式（例如存成文件，存于缓冲，或经由网络中发送），以留待后续在相同或另一台计算机环境中，能恢复原先状态的过程。依照序列化格式重新获取字节的结果时，可以利用它来产生与原始对象相同语义的副本。对于许多对象，像是使用大量引用的复杂对象，这种序列化重建的过程并不容易。面向对象中的对象序列化，并不概括之前原始对象所关系的函数。这种过程也称为对象编组（marshalling）。从一系列字节提取数据结构的反向操作，是反序列化（也称为解编组、deserialization、unmarshalling）。</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">个人理解：</span><br><span class="line">序列化：对象到字节流；反序列化：字节流到对象</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">个人理解：
+序列化：对象到字节流；反序列化：字节流到对象<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h3 id="Causes-v8"><a class="header-anchor" href="#Causes-v8">¶</a>Causes</h3>
 <p>PHP 的反序列化漏洞也叫PHP 对象注⼊，是⼀个⾮常常⻅的漏洞，这种漏洞充某些场景下虽然有些难以利⽤，但是⼀旦利⽤成功就会造成⾮常危险的后果。</p>
 <p>漏洞形成的根本原因就是程序没有对⽤户输⼊的反序列化字符串进⾏检测，导致反序列化过程可以被恶意控制，进⽽造成代码执⾏、GetShell 等⼀系列不可控的后果。反序列化漏洞并不是PHP 特有的，也存在与Java、Python 语⾔中。其原理基本相同。在Java反序列化中，会调用被反序列化的readObject方法，当readObject方法书写不当时就会引发漏洞</p>

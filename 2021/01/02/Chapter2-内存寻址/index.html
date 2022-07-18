@@ -34,7 +34,7 @@
 <p>8个32位通用寄存器指的是：EAX/EBX/ECX/EDX/EBP/ESP/ESI/EDI</p>
 <p>他们低16位可以当做8个寄存器：AX/BX/CX/DX/BP/SP/SI/DI</p>
 <p>其中AX/BX/CX/DX又可以分为8位一组的低字节和高字节两部分，作为8个8位寄存器</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102161511.png" style="width:800px;height:400px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102161511.png" style="width:800px;height:400px" loading="lazy">
 <h4 id="（2）4个16位段寄存器"><a class="header-anchor" href="#（2）4个16位段寄存器">¶</a>（2）4个16位段寄存器</h4>
 <p>分别用于存放几个段的段地址</p>
 <ul>
@@ -64,10 +64,10 @@
 <li>保护属性</li>
 </ul>
 <p>可以用下图描述：</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218140252969.png" alt="image-20210218140252969" style="width:500px;height:500px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218140252969.png" alt="image-20210218140252969" style="width:500px;height:500px" loading="lazy">
 <p>​	每个段可以用下图这样的段描述符来表示，多个段描述符就可以组成段描述符表；存取权字节不同位有不同的作用。</p>
 <p>​	我们分实模式和保护模式来考虑，后者会更复杂一些，引入了4个特权级来实现保护</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218144256015.png" alt="image-20210218144256015" style="width:800px;height:500px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218144256015.png" alt="image-20210218144256015" style="width:800px;height:500px" loading="lazy">
 <p>​	在保护模式下，段寄存器也叫作选择符，它其中存的数据是这样的：</p>
 <table>
 <thead>
@@ -93,7 +93,7 @@
 <p>​	分页机制在段机制之后进行，实现线性地址$\rightarrow$物理地址的转换；段机制是实现虚拟地址$\rightarrow$线性地址。如果操作系统不支持分页的话，线性地址=物理地址</p>
 <h3 id="2-3-1-页与页表"><a class="header-anchor" href="#2-3-1-页与页表">¶</a>2.3.1 页与页表</h3>
 <h4 id="1-页、物理页面及页大小"><a class="header-anchor" href="#1-页、物理页面及页大小">¶</a>1. 页、物理页面及页大小</h4>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218170045854.png" alt="image-20210218170045854" style="width:500px;height:500px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218170045854.png" alt="image-20210218170045854" style="width:500px;height:500px" loading="lazy">
 <p>​	线性地址被分为页，物理地址被分为页面，两者大小相等；标准页大小为4KB</p>
 <h4 id="2-页表"><a class="header-anchor" href="#2-页表">¶</a>2.页表</h4>
 <p>​	页表是把线性地址映射成物理地址的一种数据结构，那么页表的每一项需要包含什么内容呢？</p>
@@ -104,10 +104,10 @@
 <p>​	当页数过多导致页表项占用的空间过多，我们可以使用两级页表来解决这个问题。</p>
 <h4 id="3-两级页表"><a class="header-anchor" href="#3-两级页表">¶</a>3. 两级页表</h4>
 <p>​	两级页表就是对页表再分页；下图左边是两级页表，右边是两级页表的地址结构：先找到页目录项，看看其中的内容（也就是第二级页表的序号）；找到了第二级页表，根据“页”里面的内容（就是第几页），去找对应的页，然后根据页内偏移量，在此页内偏移找到需要的东西</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218223210873.png" alt="image-20210218223210873"></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218223210873.png" alt="image-20210218223210873" loading="lazy"></p>
 <h4 id="4-页表项结构"><a class="header-anchor" href="#4-页表项结构">¶</a>4. 页表项结构</h4>
 <p>​	页表的每一项占4个字节，内容如下图分配：</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218223320249.png" alt="image-20210218223320249" style="width:500px;height:280px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210218223320249.png" alt="image-20210218223320249" style="width:500px;height:280px" loading="lazy">
 <h4 id="5-硬件保护机制"><a class="header-anchor" href="#5-硬件保护机制">¶</a>5. 硬件保护机制</h4>
 <p>​	用一些位来控制存取权限、寻址权限等等</p>
 <h3 id="2-3-2-线性地址到物理地址的转换"><a class="header-anchor" href="#2-3-2-线性地址到物理地址的转换">¶</a>2.3.2 线性地址到物理地址的转换</h3>
@@ -115,10 +115,10 @@
 <h3 id="2-3-3-分页举例"><a class="header-anchor" href="#2-3-3-分页举例">¶</a>2.3.3 分页举例</h3>
 <h3 id="2-3-4-页面高速缓存"><a class="header-anchor" href="#2-3-4-页面高速缓存">¶</a>2.3.4 页面高速缓存</h3>
 <p>​	页表放在内存中，所以CPU每次取用一个数据，都至少要访问两次内存，大大降低了访问的速度；所以就有了TLB</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210219000620882.png" alt="image-20210219000620882" style="width:500px;height:280px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210219000620882.png" alt="image-20210219000620882" style="width:500px;height:280px" loading="lazy">
 <h2 id="2-4-Linux中的分页机制"><a class="header-anchor" href="#2-4-Linux中的分页机制">¶</a>2.4 Linux中的分页机制</h2>
 <p>​	Linux有分页也有分段；先分段，使得虚拟地址可以转换为线性地址；再分页，使线性地址可以转换为物理地址。Linux采用三级分页地址，如下图：</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210219001957454.png" alt="image-20210219001957454" style="width:600px;height:320px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210219001957454.png" alt="image-20210219001957454" style="width:600px;height:320px" loading="lazy">
 <h2 id="2-5-Linux中的汇编语言"><a class="header-anchor" href="#2-5-Linux中的汇编语言">¶</a>2.5 Linux中的汇编语言</h2>
 <p>​	Linux的源代码中，有C语言编写的、汇编语言（AT&amp;T的i386汇编语言）编写的、还有C语言里面嵌汇编语言的</p>
 <p>​	这一节就是在介绍汇编语言的语法等等</p>

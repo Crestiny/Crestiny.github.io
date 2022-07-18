@@ -37,22 +37,28 @@
 <h3 id="8-1-1-符号约定"><a class="header-anchor" href="#8-1-1-符号约定">¶</a>8.1.1 符号约定</h3>
 <h3 id="8-1-2-操作描述"><a class="header-anchor" href="#8-1-2-操作描述">¶</a>8.1.2 操作描述</h3>
 <p>PGP的实操包括如下服务：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101233530.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210101233530.png" alt="" loading="lazy"></p>
 <h4 id="（1）认证"><a class="header-anchor" href="#（1）认证">¶</a>（1）认证</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE130.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE130.png" alt="" loading="lazy"></p>
 <h4 id="（2）保密"><a class="header-anchor" href="#（2）保密">¶</a>（2）保密</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE131.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE131.png" alt="" loading="lazy"></p>
 <h4 id="（3）保密与认证"><a class="header-anchor" href="#（3）保密与认证">¶</a>（3）保密与认证</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE133.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE133.png" alt="" loading="lazy"></p>
 <h4 id="（4）压缩"><a class="header-anchor" href="#（4）压缩">¶</a>（4）压缩</h4>
 <h4 id="（5）电子邮件兼容性"><a class="header-anchor" href="#（5）电子邮件兼容性">¶</a>（5）电子邮件兼容性</h4>
 <p>总结一下PGP消息的的接收和发送流程如下：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102000654.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102000654.png" alt="" loading="lazy"></p>
 <h2 id="8-2-S-MIME"><a class="header-anchor" href="#8-2-S-MIME">¶</a>8.2 S/MIME</h2>
 <p>S/MIME是对MIME的电子邮件格式做安全性增强</p>
 <h3 id="8-2-1-RFC-5322"><a class="header-anchor" href="#8-2-1-RFC-5322">¶</a>8.2.1 RFC 5322</h3>
 <p>RFC 5322定义了一种电子邮件传输的文本消息格式：报头+空行+正文</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Date: Tue, 16 Jan 1998 10: 37:17(EST)</span><br><span class="line">From: "william stallings" ws@shore.netSubject: The Syntax in RFC 5322</span><br><span class="line">To: Smith@other-host.com</span><br><span class="line">cc: Jones@Yet-Another-Host.com</span><br><span class="line"></span><br><span class="line">Hello.This section begins the actual message body，which is delimited fromthe message heading by a blank line.</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">Date: Tue, 16 Jan 1998 10: 37:17(EST)
+From: "william stallings" ws@shore.netSubject: The Syntax in RFC 5322
+To: Smith@other-host.com
+cc: Jones@Yet-Another-Host.com
+
+Hello.This section begins the actual message body，which is delimited fromthe message heading by a blank line.
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="8-2-2-MIME"><a class="header-anchor" href="#8-2-2-MIME">¶</a>8.2.2 MIME</h3>
 <p>学名叫：多用途网际邮件扩展，是对RFC 5322的扩展，用于解决这个格式存在的问题、协议存在的问题等……</p>
 <p>MIME定义了：</p>
@@ -68,7 +74,7 @@
 内容ID  Content-ID：在多个上下文中唯一标识MIME实体的标识。<br>
 内容描述 Content-Description：正文对象的文本描述，在该对象不可读（如音频数据）时使用。</p>
 <h4 id="（2）多种内容格式"><a class="header-anchor" href="#（2）多种内容格式">¶</a>（2）多种内容格式</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102105630.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102105630.png" alt="" loading="lazy"></p>
 <h4 id="（3）编码转换方式"><a class="header-anchor" href="#（3）编码转换方式">¶</a>（3）编码转换方式</h4>
 <p>提供可靠的传输</p>
 <h3 id="8-2-3-S-MIME的功能"><a class="header-anchor" href="#8-2-3-S-MIME的功能">¶</a>8.2.3 S/MIME的功能</h3>
@@ -81,7 +87,7 @@
 <li>签名并封装数据：签名+加密</li>
 </ul>
 <h4 id="（2）加密算法"><a class="header-anchor" href="#（2）加密算法">¶</a>（2）加密算法</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102121624.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102121624.png" alt="" loading="lazy"></p>
 <p>如何选择加密算法？<br>
 书上有一些判断规则之类的</p>
 <h3 id="8-2-4-S-MIME消息"><a class="header-anchor" href="#8-2-4-S-MIME消息">¶</a>8.2.4 S/MIME消息</h3>
@@ -94,7 +100,7 @@
 <li>在将PKCS对象封装为MIME消息</li>
 </ul>
 <p>S/MIME的内容类型如下：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102123027.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102123027.png" alt="" loading="lazy"></p>
 <p>下面逐一介绍这些类型：</p>
 <h4 id="（2）封装数据"><a class="header-anchor" href="#（2）封装数据">¶</a>（2）封装数据</h4>
 <p>准备封装数据MIME实体的步骤如下：</p>
@@ -104,13 +110,13 @@
 <li>准备信息块</li>
 <li>用会话密钥加密消息</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE129.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE129.png" alt="" loading="lazy"></p>
 <h4 id="（3）签名数据"><a class="header-anchor" href="#（3）签名数据">¶</a>（3）签名数据</h4>
 <p>MIME实体准备签名数据的步骤如下：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/22RRV%7B8Y50AF0NZSN@N94R5.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/22RRV%7B8Y50AF0NZSN@N94R5.png" alt="" loading="lazy"></p>
 <h4 id="（4）透明签名"><a class="header-anchor" href="#（4）透明签名">¶</a>（4）透明签名</h4>
 <p>主要用在多部分的，消息与签名分离</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE128.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE128.png" alt="" loading="lazy"></p>
 <h4 id="（5）注册请求"><a class="header-anchor" href="#（5）注册请求">¶</a>（5）注册请求</h4>
 <p>向CA申请公钥证书</p>
 <h4 id="（6）仅证书消息"><a class="header-anchor" href="#（6）仅证书消息">¶</a>（6）仅证书消息</h4>
@@ -127,7 +133,7 @@
 <p>说人话：<br>
 受到这种信息的一方，可以查询其中的签名域，获取公钥，并且确定对方的身份可信</p>
 <h3 id="8-3-1-互联网邮件体系结构"><a class="header-anchor" href="#8-3-1-互联网邮件体系结构">¶</a>8.3.1 互联网邮件体系结构</h3>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE125.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE125.png" alt="" loading="lazy"></p>
 <p>补充一个概念：行政管理域ADMD</p>
 <blockquote>
 <p>每个行政管理域可以用不同的决策，比如，组织内部的邮件交换处理，组织之间的……</p>
@@ -141,7 +147,7 @@
 <p>提供一种对终端用户透明的E-mail认证技术</p>
 <p>透明到底是啥意思（？）</p>
 <p>DKIM工作流程：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE126.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE126.png" alt="" loading="lazy"></p>
 <p>基本架构和互联网邮件体系结构是一致的</p>
 <h3 id="8-3-4-DKIM的功能流程"><a class="header-anchor" href="#8-3-4-DKIM的功能流程">¶</a>8.3.4 DKIM的功能流程</h3>
 <p>上面是举了一个例子，现在有一份更详细的描述：</p>

@@ -38,7 +38,7 @@
 <li>Ordered lists (<code>&lt;ol&gt;</code>) are numbered and unordered lists (<code>&lt;ul&gt;</code>) are bulleted.</li>
 <li>Images (<code>&lt;img&gt;</code>) and videos (<code>&lt;video&gt;</code>) can be added by linking to an existing source.</li>
 </ul>
-<aside>*P.S. `<img>` is a single tag.*</aside>
+<aside>*P.S. `<img>` is a single tag.*</aside loading="lazy">
 <h2 id="2-HTML-Document-Standards"><a class="header-anchor" href="#2-HTML-Document-Standards">¶</a>2. HTML Document Standards</h2>
 <h3 id="2-1-Summary"><a class="header-anchor" href="#2-1-Summary">¶</a>2.1 Summary</h3>
 <p><em>HTML Tags</em><br>
@@ -107,8 +107,8 @@
 &lt;/html&gt;
 </pre>
 <p> Let’ see what it looks like in a browser:<br>
-<img src="%5CA-Summary-for-Learn-HTML-Codecademy%5Cwebsite1.png" alt=""><br>
-<img src="%5CA-Summary-for-Learn-HTML-Codecademy%5Cwebsite2.png" alt=""></p>
+<img src="%5CA-Summary-for-Learn-HTML-Codecademy%5Cwebsite1.png" alt="" loading="lazy"><br>
+<img src="%5CA-Summary-for-Learn-HTML-Codecademy%5Cwebsite2.png" alt="" loading="lazy"></p>
 <h2 id="2-Tables"><a class="header-anchor" href="#2-Tables">¶</a>2. Tables</h2>
 <h3 id="2-1-Summary-v2"><a class="header-anchor" href="#2-1-Summary-v2">¶</a>2.1  Summary</h3>
 <p> In this lesson, we learned how to create a table, add data to it, and section the table into smaller parts that make it easier to read.</p>
@@ -125,9 +125,55 @@
 <li>All the CSS properties you learned about in this course can be applied to tables and their data.</li>
 </ul>
 <h3 id="2-2-Demo-v2"><a class="header-anchor" href="#2-2-Demo-v2">¶</a>2.2 Demo</h3>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">  &lt;thead&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;th&gt;Company Name&lt;/th&gt;</span><br><span class="line">    &lt;th&gt;Number of Items to Ship&lt;/th&gt;</span><br><span class="line">    &lt;th&gt;Next Action&lt;/th&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;/thead&gt;</span><br><span class="line">  &lt;tbody&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td colspan="2"&gt;Adam’s Greenworks&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;14&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;Package Items&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;Davie's Burgers&lt;/td&gt;</span><br><span class="line">    &lt;td rowspan="2"&gt;2&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;Send Invoice&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;Baker's Bike Shop&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;3&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;Send Invoice&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;Miss Sally's Southern&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;4&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;Ship&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;Summit Resort Rentals&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;4&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;Ship&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;Strike Fitness&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;1&lt;/td&gt;</span><br><span class="line">    &lt;td&gt;Enter Order&lt;/td&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  &lt;tfoot&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">      &lt;td&gt;Total&lt;/td&gt;</span><br><span class="line">      &lt;td&gt;28&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">  &lt;/tfoot&gt;</span><br><span class="line">  &lt;/tbody&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&lt;table&gt;
+  &lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Company Name&lt;/th&gt;
+    &lt;th&gt;Number of Items to Ship&lt;/th&gt;
+    &lt;th&gt;Next Action&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td colspan="2"&gt;Adam’s Greenworks&lt;/td&gt;
+    &lt;td&gt;14&lt;/td&gt;
+    &lt;td&gt;Package Items&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Davie's Burgers&lt;/td&gt;
+    &lt;td rowspan="2"&gt;2&lt;/td&gt;
+    &lt;td&gt;Send Invoice&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Baker's Bike Shop&lt;/td&gt;
+    &lt;td&gt;3&lt;/td&gt;
+    &lt;td&gt;Send Invoice&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Miss Sally's Southern&lt;/td&gt;
+    &lt;td&gt;4&lt;/td&gt;
+    &lt;td&gt;Ship&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Summit Resort Rentals&lt;/td&gt;
+    &lt;td&gt;4&lt;/td&gt;
+    &lt;td&gt;Ship&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Strike Fitness&lt;/td&gt;
+    &lt;td&gt;1&lt;/td&gt;
+    &lt;td&gt;Enter Order&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Total&lt;/td&gt;
+      &lt;td&gt;28&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>This is what it looks like:<br>
-<img src="%5CA-Summary-for-Learn-HTML-Codecademy%5Ctable.png" alt=""><br>
+<img src="%5CA-Summary-for-Learn-HTML-Codecademy%5Ctable.png" alt="" loading="lazy"><br>
 <br></p>
 <h2 id="To-be-continued…"><a class="header-anchor" href="#To-be-continued…">¶</a>To be continued…</h2>
 <hr>

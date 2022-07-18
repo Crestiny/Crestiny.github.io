@@ -6,12 +6,12 @@
 </script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/qie.ico"><link rel="mask-icon" href="/qie.ico" color="#24367d"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
     const Yun = window.Yun || {};
     window.CONFIG = {"hostname":"crestiny.github.io","root":"/","title":["汉","月","沦","西","海"],"version":"1.6.2","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"search here","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"D:/sentences.json"},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
-  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="2.2 模拟 ¶输出梯形 ¶题目 见书P10 ¶分析 涉及到printf的格式控制： https:&#x2F;&#x2F;blog.csdn.net&#x2F;xiexievv&#x2F;article&#x2F;details&#x2F;6831194 ¶代码 1234567891011121314151617181920212223#include &lt;iostream&gt;#include &lt;cstdio&gt;using namespa">
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="2.2 模拟 ¶输出梯形 ¶题目 见书P10 ¶分析 涉及到printf的格式控制： https:&#x2F;&#x2F;blog.csdn.net&#x2F;xiexievv&#x2F;article&#x2F;details&#x2F;6831194 ¶代码 #include &lt;iostream&gt; #include &lt;cstdio&gt;  using namespace std;  int main(void){ 	int h;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小可的机试练习日记Day2-模拟">
 <meta property="og:url" content="https://crestiny.github.io/2021/03/18/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day2-%E6%A8%A1%E6%8B%9F/index.html">
 <meta property="og:site_name" content="Crestiny&#39;s Blog">
-<meta property="og:description" content="2.2 模拟 ¶输出梯形 ¶题目 见书P10 ¶分析 涉及到printf的格式控制： https:&#x2F;&#x2F;blog.csdn.net&#x2F;xiexievv&#x2F;article&#x2F;details&#x2F;6831194 ¶代码 1234567891011121314151617181920212223#include &lt;iostream&gt;#include &lt;cstdio&gt;using namespa">
+<meta property="og:description" content="2.2 模拟 ¶输出梯形 ¶题目 见书P10 ¶分析 涉及到printf的格式控制： https:&#x2F;&#x2F;blog.csdn.net&#x2F;xiexievv&#x2F;article&#x2F;details&#x2F;6831194 ¶代码 #include &lt;iostream&gt; #include &lt;cstdio&gt;  using namespace std;  int main(void){ 	int h;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210318105823301.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210318162135062.png">
@@ -37,10 +37,32 @@
 <p>涉及到printf的格式控制：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiexievv/article/details/6831194">https://blog.csdn.net/xiexievv/article/details/6831194</a></p>
 <h3 id="代码"><a class="header-anchor" href="#代码">¶</a>代码</h3>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> h;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;h){</span><br><span class="line">		<span class="keyword">int</span> b=(h<span class="number">-1</span>)*<span class="number">2</span>+h;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=h;i++){</span><br><span class="line">			<span class="keyword">int</span> now=(i<span class="number">-1</span>)*<span class="number">2</span>+h;</span><br><span class="line">			<span class="keyword">int</span> space=b-now;</span><br><span class="line">			<span class="keyword">while</span>(space--){</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">" "</span>);</span><br><span class="line">			}</span><br><span class="line">			<span class="keyword">while</span>(now--){</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"*"</span>);</span><br><span class="line">			}</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		}</span><br><span class="line">	} </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int main(void){
+	int h;
+	while(cin&gt;&gt;h){
+		int b=(h-1)*2+h;
+		for(int i=1;i&lt;=h;i++){
+			int now=(i-1)*2+h;
+			int space=b-now;
+			while(space--){
+				printf(" ");
+			}
+			while(now--){
+				printf("*");
+			}
+			printf("\n");
+		}
+	} 
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>呜呜呜没找到线上提交的地方qwq，不过在本地是一切正常</p>
 <h3 id="学习"><a class="header-anchor" href="#学习">¶</a>学习</h3>
-<p>书上的代码用了另一个输入条件：<code>while(scanf("%d",&amp;h)!=EOF)</code>，这里解释一下（多年的疑惑终于要解开了！<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8">😂</span>）</p>
+<p>书上的代码用了另一个输入条件：<code>while(scanf("%d",&amp;h)!=EOF)</code>，这里解释一下（多年的疑惑终于要解开了！:joy:）</p>
 <ul>
 <li>EOF=End of File，表示输入的结尾，貌似值为-1？</li>
 <li>scanf函数是有返回值的！分为两种情况：
@@ -65,16 +87,100 @@
 <p>第一个好解决，第二个……我觉得可以不用重写代码，只需要判断是不是需要内外两个字符互换就可</p>
 <p>怎么调都说我格式不对orz</p>
 <h3 id="代码-v2"><a class="header-anchor" href="#代码-v2">¶</a>代码</h3>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="keyword">char</span> out,in;</span><br><span class="line">	<span class="keyword">int</span> firstCase=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d %c %c"</span>,&amp;n,&amp;out,&amp;in)!=EOF){</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(firstCase==<span class="number">1</span>){</span><br><span class="line">			firstCase=<span class="number">0</span>;</span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">1</span>){</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%c\n"</span>,out);</span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">		<span class="keyword">char</span> fig[n][n];</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//一圈一圈向内填，从最外圈的里面一个开始 ,先判断是否要交换符号 </span></span><br><span class="line">		<span class="keyword">if</span>(((n+<span class="number">1</span>)/<span class="number">2</span>)%<span class="number">2</span>==<span class="number">0</span>){</span><br><span class="line">			<span class="keyword">char</span> temp;</span><br><span class="line">			temp=in;</span><br><span class="line">			in=out;</span><br><span class="line">			out=temp;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//先右边四个的空格 </span></span><br><span class="line">		fig[<span class="number">0</span>][<span class="number">0</span>]=<span class="string">' '</span>;</span><br><span class="line">		fig[<span class="number">0</span>][n<span class="number">-1</span>]=<span class="string">' '</span>;</span><br><span class="line">		fig[n<span class="number">-1</span>][<span class="number">0</span>]=<span class="string">' '</span>;</span><br><span class="line">		fig[n<span class="number">-1</span>][n<span class="number">-1</span>]=<span class="string">' '</span>;</span><br><span class="line">				</span><br><span class="line">		<span class="comment">//再填特殊的最外圈</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n<span class="number">-1</span>;i++){</span><br><span class="line">			fig[i][<span class="number">0</span>]=out;</span><br><span class="line">			fig[i][n<span class="number">-1</span>]=out;</span><br><span class="line">		} </span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;n<span class="number">-1</span>;j++){</span><br><span class="line">			fig[<span class="number">0</span>][j]=out;</span><br><span class="line">			fig[n<span class="number">-1</span>][j]=out;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> c=<span class="number">1</span>;c&lt;(n+<span class="number">1</span>)/<span class="number">2</span>;c++){</span><br><span class="line">			<span class="keyword">if</span>(c%<span class="number">2</span>==<span class="number">0</span>){</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> i=c;i&lt;=n<span class="number">-1</span>-c;i++){</span><br><span class="line">					fig[i][c]=out;</span><br><span class="line">					fig[i][n<span class="number">-1</span>-c]=out;</span><br><span class="line">				}	</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j=c+<span class="number">1</span>;j&lt;=n<span class="number">-2</span>-c;j++){</span><br><span class="line">					fig[c][j]=out;</span><br><span class="line">					fig[n<span class="number">-1</span>-c][j]=out;</span><br><span class="line">				}				</span><br><span class="line">			}<span class="keyword">else</span>{</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> i=c;i&lt;=n<span class="number">-1</span>-c;i++){</span><br><span class="line">					fig[i][c]=in;</span><br><span class="line">					fig[i][n<span class="number">-1</span>-c]=in;</span><br><span class="line">				}	</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j=c+<span class="number">1</span>;j&lt;=n<span class="number">-2</span>-c;j++){</span><br><span class="line">					fig[c][j]=in;</span><br><span class="line">					fig[n<span class="number">-1</span>-c][j]=in;</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">		} 	</span><br><span class="line">		<span class="comment">//输出图形 </span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++){</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++){</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"%c"</span>,fig[i][j]); </span><br><span class="line">			}</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		}				</span><br><span class="line">		} </span><br><span class="line">	} </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int main(void){
+	int n;
+	char out,in;
+	int firstCase=1;
+	while(scanf("%d %c %c",&amp;n,&amp;out,&amp;in)!=EOF){
+		
+		
+		if(firstCase==1){
+			firstCase=0;
+		}else{
+			printf("\n");
+		}
+		
+		if(n==1){
+			printf("%c\n",out);
+		}else{
+		char fig[n][n];
+		
+		//一圈一圈向内填，从最外圈的里面一个开始 ,先判断是否要交换符号 
+		if(((n+1)/2)%2==0){
+			char temp;
+			temp=in;
+			in=out;
+			out=temp;
+		}
+		
+		
+		//先右边四个的空格 
+		fig[0][0]=' ';
+		fig[0][n-1]=' ';
+		fig[n-1][0]=' ';
+		fig[n-1][n-1]=' ';
+				
+		//再填特殊的最外圈
+		for(int i=1;i&lt;n-1;i++){
+			fig[i][0]=out;
+			fig[i][n-1]=out;
+		} 
+		for(int j=1;j&lt;n-1;j++){
+			fig[0][j]=out;
+			fig[n-1][j]=out;
+		}
+		
+		for(int c=1;c&lt;(n+1)/2;c++){
+			if(c%2==0){
+				for(int i=c;i&lt;=n-1-c;i++){
+					fig[i][c]=out;
+					fig[i][n-1-c]=out;
+				}	
+				for(int j=c+1;j&lt;=n-2-c;j++){
+					fig[c][j]=out;
+					fig[n-1-c][j]=out;
+				}				
+			}else{
+				for(int i=c;i&lt;=n-1-c;i++){
+					fig[i][c]=in;
+					fig[i][n-1-c]=in;
+				}	
+				for(int j=c+1;j&lt;=n-2-c;j++){
+					fig[c][j]=in;
+					fig[n-1-c][j]=in;
+				}
+			}
+		} 	
+		//输出图形 
+		for(int i=0;i&lt;n;i++){
+			for(int j=0;j&lt;n;j++){
+				printf("%c",fig[i][j]); 
+			}
+			printf("\n");
+		}				
+		} 
+	} 
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>终于过了aaa！这题格式控制卡了很久……题目又没说明qwq</p>
 <h2 id="Repeater"><a class="header-anchor" href="#Repeater">¶</a>Repeater</h2>
 <h3 id="题目-v3"><a class="header-anchor" href="#题目-v3">¶</a>题目</h3>
 <h4 id="描述"><a class="header-anchor" href="#描述">¶</a>描述</h4>
 <p>Harmony is indispensible in our daily life and no one can live without it----may be Facer is the only exception. One day it is rumored that repeat painting will create harmony and then hundreds of people started their endless drawing. Their paintings were based on a small template and a simple method of duplicating. Though Facer can easily imagine the style of the whole picture, but he cannot find the essential harmony. Now you need to help Facer by showing the picture on computer. You will be given a template containing only one kind of character and spaces, and the template shows how the endless picture is created----use the characters as basic elements and put them in the right position to form a bigger template, and then repeat and repeat doing that. Here is an example. # #  #   &lt;-template # # So the Level 1 picture will be # #  # # # Level 2 picture will be # #   # #  #     # # #   # #    # #      #     # #  # #  # #  #    # # #   # #</p>
 <h4 id="输入描述"><a class="header-anchor" href="#输入描述">¶</a>输入描述</h4>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">The input contains multiple test cases.</span><br><span class="line">The first line of each case is an integer N, representing the size of the template is N*N (N could only be 3, 4 or 5).</span><br><span class="line">Next N lines describe the template.</span><br><span class="line">The following line contains an integer Q, which is the Scale Level of the picture.</span><br><span class="line">Input is ended with a case of N=0.</span><br><span class="line">It is guaranteed that the size of one picture will not exceed 3000*3000.</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">The input contains multiple test cases.
+The first line of each case is an integer N, representing the size of the template is N*N (N could only be 3, 4 or 5).
+Next N lines describe the template.
+The following line contains an integer Q, which is the Scale Level of the picture.
+Input is ended with a case of N=0.
+It is guaranteed that the size of one picture will not exceed 3000*3000.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="输出描述"><a class="header-anchor" href="#输出描述">¶</a>输出描述</h4>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">For each test case, just print the Level Q picture by using the given template.</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">For each test case, just print the Level Q picture by using the given template.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="示例1"><a class="header-anchor" href="#示例1">¶</a>示例1</h4>
 <ul>
 <li>输入</li>
@@ -88,20 +194,21 @@
 <p>盯了一会，有点明白题目意思了：我们需要用这个小模板来组成大模板，大模板的构造与小模板要基本相同。</p>
 <p>画个图解释一下：</p>
 <p>……算了意会吧，脑子里已经懂了</p>
-<p>脑补了一下，好难啊<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8">😢</span>，暂时没什么好想法，小菜鸡回头再做吧，感觉要用递归，但是我不太会qwq</p>
+<p>脑补了一下，好难啊:cry:，暂时没什么好想法，小菜鸡回头再做吧，感觉要用递归，但是我不太会qwq</p>
 <h2 id="Hello-World-for-U"><a class="header-anchor" href="#Hello-World-for-U">¶</a>Hello World for U</h2>
 <h3 id="题目-v4"><a class="header-anchor" href="#题目-v4">¶</a>题目</h3>
 <h4 id="题目描述"><a class="header-anchor" href="#题目描述">¶</a>题目描述</h4>
 <p>Given any string of N (&gt;=5) characters, you are asked to form the characters into the shape of U. For example, “helloworld” can be printed as: h d e  l l r lowo That is, the characters must be printed in the original order, starting top-down from the left vertical line with n1 characters, then left to right along the bottom line with n2 characters, and finally bottom-up along the vertical line with n3 characters. And more, we would like U to be as squared as possible – that is, it must be satisfied that n1 = n3 = max { k| k &lt;= n2 for all 3 &lt;= n2 &lt;= N } with n1 + n2 + n3 - 2 = N.</p>
 <h4 id="输入描述-v2"><a class="header-anchor" href="#输入描述-v2">¶</a>输入描述:</h4>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">There are multiple test cases.Each case contains one string with no less than 5 and no more than 80 characters in a line. The string contains no white space.</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">There are multiple test cases.Each case contains one string with no less than 5 and no more than 80 characters in a line. The string contains no white space.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="输出描述-v2"><a class="header-anchor" href="#输出描述-v2">¶</a>输出描述:</h4>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">For each test case, print the input string in the shape of U as specified in the description.</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">For each test case, print the input string in the shape of U as specified in the description.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="示例1-v2"><a class="header-anchor" href="#示例1-v2">¶</a>示例1</h4>
 <ul>
 <li>输入</li>
 </ul>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">helloworld!</span><br><span class="line">www.nowcoder.com</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">helloworld!
+www.nowcoder.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>输出</li>
 </ul>
@@ -123,7 +230,46 @@
 </ul>
 <h3 id="代码-v3"><a class="header-anchor" href="#代码-v3">¶</a>代码</h3>
 <p>一遍过了，开心</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="built_in">string</span> str;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;str){</span><br><span class="line">		<span class="keyword">int</span> length=str.<span class="built_in">size</span>();</span><br><span class="line">		<span class="keyword">int</span> n1,n2;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//分配n1、n2 </span></span><br><span class="line">		<span class="keyword">if</span>(length%<span class="number">3</span>==<span class="number">0</span>){</span><br><span class="line">			n1=length/<span class="number">3</span>;</span><br><span class="line">			n2=n1+<span class="number">2</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>((length+<span class="number">1</span>)%<span class="number">3</span>==<span class="number">0</span>){</span><br><span class="line">			n1=(length+<span class="number">1</span>)/<span class="number">3</span>;</span><br><span class="line">			n2=n1+<span class="number">1</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span> ((length<span class="number">-1</span>)%<span class="number">3</span>==<span class="number">0</span>){</span><br><span class="line">			n1=(length+<span class="number">2</span>)/<span class="number">3</span>;</span><br><span class="line">			n2=n1;</span><br><span class="line">		} </span><br><span class="line">		</span><br><span class="line">		<span class="comment">//打印左边一竖和右边一横 </span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n1<span class="number">-1</span>;i++){</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%c"</span>,str[i<span class="number">-1</span>]);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n2<span class="number">-2</span>;j++){</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">" "</span>);</span><br><span class="line">			}</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%c\n"</span>,str[length-i]);</span><br><span class="line">		} </span><br><span class="line">		</span><br><span class="line">		<span class="comment">//打印下面一横</span></span><br><span class="line">		<span class="built_in">string</span> bottom=str.substr(n1<span class="number">-1</span>,n2); </span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;bottom&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		</span><br><span class="line">	}</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int main(void){
+	string str;
+	while(cin&gt;&gt;str){
+		int length=str.size();
+		int n1,n2;
+		
+		//分配n1、n2 
+		if(length%3==0){
+			n1=length/3;
+			n2=n1+2;
+		}else if((length+1)%3==0){
+			n1=(length+1)/3;
+			n2=n1+1;
+		}else if ((length-1)%3==0){
+			n1=(length+2)/3;
+			n2=n1;
+		} 
+		
+		//打印左边一竖和右边一横 
+		for(int i=1;i&lt;=n1-1;i++){
+			printf("%c",str[i-1]);
+			for(int j=1;j&lt;=n2-2;j++){
+				printf(" ");
+			}
+			printf("%c\n",str[length-i]);
+		} 
+		
+		//打印下面一横
+		string bottom=str.substr(n1-1,n2); 
+		cout&lt;&lt;bottom&lt;&lt;endl;
+		
+	}
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="运行效率"><a class="header-anchor" href="#运行效率">¶</a>运行效率</h3>
 <p>运行时间：10ms<br>
 超过6.98%用C++提交的代码</p>
@@ -138,7 +284,39 @@
 <p>除此之外，注意一下闰年的判断就好</p>
 <p><code>(year%4==0&amp;&amp;year%100!=0)||(year%400==0)</code></p>
 <h3 id="代码-v4"><a class="header-anchor" href="#代码-v4">¶</a>代码</h3>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这里有两个细节：第一个0以及给闰年、平年分别写一组 </span></span><br><span class="line"><span class="keyword">int</span> day[<span class="number">2</span>][<span class="number">13</span>]={</span><br><span class="line">	{<span class="number">0</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>},</span><br><span class="line">	{<span class="number">0</span>,<span class="number">31</span>,<span class="number">29</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IsLeapYear</span><span class="params">(<span class="keyword">int</span> Y)</span></span>{</span><br><span class="line">	<span class="keyword">return</span> (Y%<span class="number">4</span>==<span class="number">0</span>&amp;&amp;Y%<span class="number">100</span>!=<span class="number">0</span>)||(Y%<span class="number">400</span>==<span class="number">0</span>); </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> Y,M,D;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;Y&gt;&gt;M&gt;&gt;D){</span><br><span class="line">		<span class="keyword">int</span> result=D;</span><br><span class="line">		<span class="keyword">if</span>(IsLeapYear(Y)){</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++){</span><br><span class="line">				result+=day[<span class="number">1</span>][i];</span><br><span class="line">			}			</span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++){</span><br><span class="line">				result+=day[<span class="number">0</span>][i];</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;result&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	}</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+//这里有两个细节：第一个0以及给闰年、平年分别写一组 
+int day[2][13]={
+	{0,31,28,31,30,31,30,31,31,30,31,30,31},
+	{0,31,29,31,30,31,30,31,31,30,31,30,31}
+};
+
+int IsLeapYear(int Y){
+	return (Y%4==0&amp;&amp;Y%100!=0)||(Y%400==0); 
+} 
+
+int main(void){
+	int Y,M,D;
+	while(cin&gt;&gt;Y&gt;&gt;M&gt;&gt;D){
+		int result=D;
+		if(IsLeapYear(Y)){
+			for(int i=0;i&lt;M;i++){
+				result+=day[1][i];
+			}			
+		}else{
+			for(int i=0;i&lt;M;i++){
+				result+=day[0][i];
+			}
+		}
+		
+		cout&lt;&lt;result&lt;&lt;endl;
+	}
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="运行效率-v2"><a class="header-anchor" href="#运行效率-v2">¶</a>运行效率</h3>
 <p>运行时间：7ms<br>
 超过18.32%用C++提交的代码</p>
@@ -153,7 +331,51 @@
 <h3 id="学习-v3"><a class="header-anchor" href="#学习-v3">¶</a>学习</h3>
 <p>输出右对齐补0：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wguoyong/article/details/6845595">https://blog.csdn.net/wguoyong/article/details/6845595</a></p>
 <h3 id="代码-v5"><a class="header-anchor" href="#代码-v5">¶</a>代码</h3>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> day[<span class="number">2</span>][<span class="number">13</span>]={</span><br><span class="line">	{<span class="number">0</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>},</span><br><span class="line">	{<span class="number">0</span>,<span class="number">31</span>,<span class="number">29</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IsLeapYear</span><span class="params">(<span class="keyword">int</span> Y)</span></span>{</span><br><span class="line">	<span class="keyword">return</span> (Y%<span class="number">4</span>==<span class="number">0</span>&amp;&amp;Y%<span class="number">100</span>!=<span class="number">0</span>)||(Y%<span class="number">400</span>==<span class="number">0</span>); </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> year,days;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;year&gt;&gt;days){</span><br><span class="line">		<span class="keyword">int</span> count=<span class="number">0</span>,i;</span><br><span class="line">		<span class="keyword">int</span> Y=year,M,D;</span><br><span class="line">		<span class="keyword">if</span>(IsLeapYear(year)){</span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">0</span>;;i++){</span><br><span class="line">				<span class="keyword">if</span>(count&lt;days){</span><br><span class="line">					count+=day[<span class="number">1</span>][i];</span><br><span class="line">				}<span class="keyword">else</span>{</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">			M=i<span class="number">-1</span>;</span><br><span class="line">			D=days-(count-day[<span class="number">1</span>][i<span class="number">-1</span>]);</span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">0</span>;;i++){</span><br><span class="line">				<span class="keyword">if</span>(count&lt;days){</span><br><span class="line">					count+=day[<span class="number">0</span>][i];</span><br><span class="line">				}<span class="keyword">else</span>{</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">			M=i<span class="number">-1</span>;</span><br><span class="line">			D=days-(count-day[<span class="number">0</span>][i<span class="number">-1</span>]);			</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%04d-%02d-%02d\n"</span>,Y,M,D);</span><br><span class="line">	} </span><br><span class="line">	</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int day[2][13]={
+	{0,31,28,31,30,31,30,31,31,30,31,30,31},
+	{0,31,29,31,30,31,30,31,31,30,31,30,31}
+};
+
+int IsLeapYear(int Y){
+	return (Y%4==0&amp;&amp;Y%100!=0)||(Y%400==0); 
+} 
+
+int main(void){
+	int year,days;
+	while(cin&gt;&gt;year&gt;&gt;days){
+		int count=0,i;
+		int Y=year,M,D;
+		if(IsLeapYear(year)){
+			for(i=0;;i++){
+				if(count&lt;days){
+					count+=day[1][i];
+				}else{
+					break;
+				}
+			}
+			M=i-1;
+			D=days-(count-day[1][i-1]);
+		}else{
+			for(i=0;;i++){
+				if(count&lt;days){
+					count+=day[0][i];
+				}else{
+					break;
+				}
+			}
+			M=i-1;
+			D=days-(count-day[0][i-1]);			
+		}
+		printf("%04d-%02d-%02d\n",Y,M,D);
+	} 
+	
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="运行效率-v3"><a class="header-anchor" href="#运行效率-v3">¶</a>运行效率</h3>
 <p>运行时间：8ms<br>
 超过13.97%用C++提交的代码</p>
@@ -167,9 +389,77 @@
 <h3 id="错误-v2"><a class="header-anchor" href="#错误-v2">¶</a>错误</h3>
 <p>不能太草率地拼在一起就完事了，还要注意会不会加到下*年去……</p>
 <h3 id="代码-v6"><a class="header-anchor" href="#代码-v6">¶</a>代码</h3>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> day[<span class="number">2</span>][<span class="number">13</span>]={</span><br><span class="line">	{<span class="number">0</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>},</span><br><span class="line">	{<span class="number">0</span>,<span class="number">31</span>,<span class="number">29</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IsLeapYear</span><span class="params">(<span class="keyword">int</span> Y)</span></span>{</span><br><span class="line">	<span class="keyword">return</span> (Y%<span class="number">4</span>==<span class="number">0</span>&amp;&amp;Y%<span class="number">100</span>!=<span class="number">0</span>)||(Y%<span class="number">400</span>==<span class="number">0</span>); </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">countDays</span><span class="params">(<span class="keyword">int</span> Y,<span class="keyword">int</span> M,<span class="keyword">int</span> D)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> result=D;</span><br><span class="line">	<span class="keyword">if</span>(IsLeapYear(Y)){</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++){</span><br><span class="line">			result+=day[<span class="number">1</span>][i];</span><br><span class="line">		}			</span><br><span class="line">	}<span class="keyword">else</span>{</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++){</span><br><span class="line">			result+=day[<span class="number">0</span>][i];</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">while</span>(n--){</span><br><span class="line">		<span class="keyword">int</span> Y,M,D,days,i,count=<span class="number">0</span>;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;Y&gt;&gt;M&gt;&gt;D&gt;&gt;days;</span><br><span class="line">		<span class="keyword">int</span> days1=countDays(Y,M,D);</span><br><span class="line">		<span class="keyword">int</span> days2=days1+days;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(days2&gt;<span class="number">365</span>+IsLeapYear(Y))	{</span><br><span class="line">			<span class="keyword">while</span>(days2&gt;<span class="number">365</span>+IsLeapYear(Y)){</span><br><span class="line">				days2-=<span class="number">365</span>+IsLeapYear(Y++);</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(IsLeapYear(Y)){</span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">13</span>;i++){</span><br><span class="line">				<span class="keyword">if</span>(count&lt;days2){</span><br><span class="line">					count+=day[<span class="number">1</span>][i];</span><br><span class="line">				}<span class="keyword">else</span>{</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">			M=i<span class="number">-1</span>;</span><br><span class="line">			D=days2-(count-day[<span class="number">1</span>][i<span class="number">-1</span>]);</span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">0</span>;;i++){</span><br><span class="line">				<span class="keyword">if</span>(count&lt;days2){</span><br><span class="line">					count+=day[<span class="number">0</span>][i];</span><br><span class="line">				}<span class="keyword">else</span>{</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">			M=i<span class="number">-1</span>;</span><br><span class="line">			D=days2-(count-day[<span class="number">0</span>][i<span class="number">-1</span>]);			</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%04d-%02d-%02d\n"</span>,Y,M,D);		</span><br><span class="line">		</span><br><span class="line">	} </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+int day[2][13]={
+	{0,31,28,31,30,31,30,31,31,30,31,30,31},
+	{0,31,29,31,30,31,30,31,31,30,31,30,31}
+};
+
+int IsLeapYear(int Y){
+	return (Y%4==0&amp;&amp;Y%100!=0)||(Y%400==0); 
+} 
+
+int countDays(int Y,int M,int D){
+	int result=D;
+	if(IsLeapYear(Y)){
+		for(int i=0;i&lt;M;i++){
+			result+=day[1][i];
+		}			
+	}else{
+		for(int i=0;i&lt;M;i++){
+			result+=day[0][i];
+		}
+	}
+		
+	return result;
+}
+
+int main(void){
+	int n;
+	cin&gt;&gt;n;
+	while(n--){
+		int Y,M,D,days,i,count=0;
+		cin&gt;&gt;Y&gt;&gt;M&gt;&gt;D&gt;&gt;days;
+		int days1=countDays(Y,M,D);
+		int days2=days1+days;
+		
+		if(days2&gt;365+IsLeapYear(Y))	{
+			while(days2&gt;365+IsLeapYear(Y)){
+				days2-=365+IsLeapYear(Y++);
+			}
+		}
+		
+		if(IsLeapYear(Y)){
+			for(i=0;i&lt;13;i++){
+				if(count&lt;days2){
+					count+=day[1][i];
+				}else{
+					break;
+				}
+			}
+			M=i-1;
+			D=days2-(count-day[1][i-1]);
+		}else{
+			for(i=0;;i++){
+				if(count&lt;days2){
+					count+=day[0][i];
+				}else{
+					break;
+				}
+			}
+			M=i-1;
+			D=days2-(count-day[0][i-1]);			
+		}
+		printf("%04d-%02d-%02d\n",Y,M,D);		
+		
+	} 
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>注意加上那一段处理（到下一年的</p>
-<p>好开心，改改就过了<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f603.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png?v8">😃</span></p>
+<p>好开心，改改就过了:smiley:</p>
 <h3 id="运行效率-v4"><a class="header-anchor" href="#运行效率-v4">¶</a>运行效率</h3>
 <p>运行时间：3ms<br>
 超过26.37%用C++提交的代码</p>
@@ -184,7 +474,71 @@
 <h3 id="学习-v4"><a class="header-anchor" href="#学习-v4">¶</a>学习</h3>
 <p>string转int：<a target="_blank" rel="noopener" href="https://blog.csdn.net/li6727975/article/details/42875641">https://blog.csdn.net/li6727975/article/details/42875641</a></p>
 <h3 id="代码-v7"><a class="header-anchor" href="#代码-v7">¶</a>代码</h3>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> day[<span class="number">2</span>][<span class="number">13</span>]={</span><br><span class="line">	{<span class="number">0</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>},</span><br><span class="line">	{<span class="number">0</span>,<span class="number">31</span>,<span class="number">29</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IsLeapYear</span><span class="params">(<span class="keyword">int</span> Y)</span></span>{</span><br><span class="line">	<span class="keyword">return</span> (Y%<span class="number">4</span>==<span class="number">0</span>&amp;&amp;Y%<span class="number">100</span>!=<span class="number">0</span>)||(Y%<span class="number">400</span>==<span class="number">0</span>); </span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">countDays</span><span class="params">(<span class="keyword">int</span> Y,<span class="keyword">int</span> M,<span class="keyword">int</span> D)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> result=D;</span><br><span class="line">	<span class="keyword">if</span>(IsLeapYear(Y)){</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++){</span><br><span class="line">			result+=day[<span class="number">1</span>][i];</span><br><span class="line">		}			</span><br><span class="line">	}<span class="keyword">else</span>{</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++){</span><br><span class="line">			result+=day[<span class="number">0</span>][i];</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="built_in">string</span> d1,d2;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;d1&gt;&gt;d2){</span><br><span class="line">		<span class="keyword">int</span> Y1=stoi(d1.substr(<span class="number">0</span>,<span class="number">4</span>));</span><br><span class="line">		<span class="keyword">int</span> M1=stoi(d1.substr(<span class="number">4</span>,<span class="number">2</span>));</span><br><span class="line">		<span class="keyword">int</span> D1=stoi(d1.substr(<span class="number">6</span>,<span class="number">2</span>));</span><br><span class="line">		<span class="keyword">int</span> Y2=stoi(d2.substr(<span class="number">0</span>,<span class="number">4</span>));</span><br><span class="line">		<span class="keyword">int</span> M2=stoi(d2.substr(<span class="number">4</span>,<span class="number">2</span>));</span><br><span class="line">		<span class="keyword">int</span> D2=stoi(d2.substr(<span class="number">6</span>,<span class="number">2</span>));	</span><br><span class="line">		<span class="keyword">int</span> days1=countDays(Y1,M1,D1);</span><br><span class="line">		<span class="keyword">int</span> days2=countDays(Y2,M2,D2);</span><br><span class="line">		<span class="keyword">int</span> days3=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> totalDays=<span class="number">0</span>;</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(Y1==Y2){</span><br><span class="line">			totalDays=days2-days1+<span class="number">1</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(Y1&gt;Y2){</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=Y2+<span class="number">1</span>;i&lt;Y1;i++){</span><br><span class="line">				days3+=<span class="number">365</span>+IsLeapYear(i);</span><br><span class="line">			}</span><br><span class="line">			totalDays=days3+days1+(<span class="number">365</span>+IsLeapYear(Y2)-days2)+<span class="number">1</span>;				</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(Y1&lt;Y2){</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=Y1+<span class="number">1</span>;i&lt;Y2;i++){</span><br><span class="line">				days3+=<span class="number">365</span>+IsLeapYear(i);</span><br><span class="line">			}</span><br><span class="line">			totalDays=days3+days2+(<span class="number">365</span>+IsLeapYear(Y1)-days1)+<span class="number">1</span>;		</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;totalDays&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	} </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+#include &lt;stdlib.h&gt;
+
+using namespace std;
+
+int day[2][13]={
+	{0,31,28,31,30,31,30,31,31,30,31,30,31},
+	{0,31,29,31,30,31,30,31,31,30,31,30,31}
+};
+
+int IsLeapYear(int Y){
+	return (Y%4==0&amp;&amp;Y%100!=0)||(Y%400==0); 
+} 
+
+int countDays(int Y,int M,int D){
+	int result=D;
+	if(IsLeapYear(Y)){
+		for(int i=0;i&lt;M;i++){
+			result+=day[1][i];
+		}			
+	}else{
+		for(int i=0;i&lt;M;i++){
+			result+=day[0][i];
+		}
+	}
+		
+	return result;
+}
+
+int main(void){
+	string d1,d2;
+	while(cin&gt;&gt;d1&gt;&gt;d2){
+		int Y1=stoi(d1.substr(0,4));
+		int M1=stoi(d1.substr(4,2));
+		int D1=stoi(d1.substr(6,2));
+		int Y2=stoi(d2.substr(0,4));
+		int M2=stoi(d2.substr(4,2));
+		int D2=stoi(d2.substr(6,2));	
+		int days1=countDays(Y1,M1,D1);
+		int days2=countDays(Y2,M2,D2);
+		int days3=0;
+		int totalDays=0;
+		
+
+		
+		if(Y1==Y2){
+			totalDays=days2-days1+1;
+		}else if(Y1&gt;Y2){
+			for(int i=Y2+1;i&lt;Y1;i++){
+				days3+=365+IsLeapYear(i);
+			}
+			totalDays=days3+days1+(365+IsLeapYear(Y2)-days2)+1;				
+		}else if(Y1&lt;Y2){
+			for(int i=Y1+1;i&lt;Y2;i++){
+				days3+=365+IsLeapYear(i);
+			}
+			totalDays=days3+days2+(365+IsLeapYear(Y1)-days1)+1;		
+		}
+		
+		cout&lt;&lt;totalDays&lt;&lt;endl;
+	} 
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="运行效率-v5"><a class="header-anchor" href="#运行效率-v5">¶</a>运行效率</h3>
 <p>运行时间：7ms<br>
 超过38.01%用C++提交的代码</p>
@@ -204,7 +558,110 @@
 <hr>
 <p>终于过了哈哈哈哈！关键就在那个<code>(4+d)%7</code></p>
 <h3 id="代码-v8"><a class="header-anchor" href="#代码-v8">¶</a>代码</h3>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> day[<span class="number">2</span>][<span class="number">13</span>]={</span><br><span class="line">	{<span class="number">0</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>},</span><br><span class="line">	{<span class="number">0</span>,<span class="number">31</span>,<span class="number">29</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IsLeapYear</span><span class="params">(<span class="keyword">int</span> Y)</span></span>{</span><br><span class="line">	<span class="keyword">return</span> (Y%<span class="number">4</span>==<span class="number">0</span>&amp;&amp;Y%<span class="number">100</span>!=<span class="number">0</span>)||(Y%<span class="number">400</span>==<span class="number">0</span>); </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">countDays</span><span class="params">(<span class="keyword">int</span> Y,<span class="keyword">int</span> M,<span class="keyword">int</span> D)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> result=D;</span><br><span class="line">	<span class="keyword">if</span>(IsLeapYear(Y)){</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++){</span><br><span class="line">			result+=day[<span class="number">1</span>][i];</span><br><span class="line">		}			</span><br><span class="line">	}<span class="keyword">else</span>{</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++){</span><br><span class="line">			result+=day[<span class="number">0</span>][i];</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> D2,Y2,M2;</span><br><span class="line">	<span class="keyword">int</span> D1=<span class="number">18</span>,M1=<span class="number">3</span>,Y1=<span class="number">2021</span>;</span><br><span class="line">	<span class="built_in">string</span> strM2;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;D2&gt;&gt;strM2&gt;&gt;Y2){</span><br><span class="line">		<span class="keyword">if</span>(strM2.compare(<span class="string">"January"</span>)==<span class="number">0</span>){</span><br><span class="line">			M2=<span class="number">1</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(strM2.compare(<span class="string">"February"</span>)==<span class="number">0</span>){</span><br><span class="line">			M2=<span class="number">2</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(strM2.compare(<span class="string">"March"</span>)==<span class="number">0</span>){</span><br><span class="line">			M2=<span class="number">3</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(strM2.compare(<span class="string">"April"</span>)==<span class="number">0</span>){</span><br><span class="line">			M2=<span class="number">4</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(strM2.compare(<span class="string">"May"</span>)==<span class="number">0</span>){</span><br><span class="line">			M2=<span class="number">5</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(strM2.compare(<span class="string">"June"</span>)==<span class="number">0</span>){</span><br><span class="line">			M2=<span class="number">6</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(strM2.compare(<span class="string">"July"</span>)==<span class="number">0</span>){</span><br><span class="line">			M2=<span class="number">7</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(strM2.compare(<span class="string">"August"</span>)==<span class="number">0</span>){</span><br><span class="line">			M2=<span class="number">8</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(strM2.compare(<span class="string">"September"</span>)==<span class="number">0</span>){</span><br><span class="line">			M2=<span class="number">9</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(strM2.compare(<span class="string">"October"</span>)==<span class="number">0</span>){</span><br><span class="line">			M2=<span class="number">10</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(strM2.compare(<span class="string">"November"</span>)==<span class="number">0</span>){</span><br><span class="line">			M2=<span class="number">11</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(strM2.compare(<span class="string">"December"</span>)==<span class="number">0</span>){</span><br><span class="line">			M2=<span class="number">12</span>;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> days1=countDays(Y1,M1,D1);</span><br><span class="line">		<span class="keyword">int</span> days2=countDays(Y2,M2,D2);</span><br><span class="line">		<span class="keyword">int</span> days3=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> totalDays=<span class="number">0</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(Y1==Y2){</span><br><span class="line">			totalDays=days2-days1+<span class="number">1</span>;</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(Y1&gt;Y2){</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=Y2+<span class="number">1</span>;i&lt;Y1;i++){</span><br><span class="line">				days3+=<span class="number">365</span>+IsLeapYear(i);</span><br><span class="line">			}</span><br><span class="line">			totalDays=days3+days1+(<span class="number">365</span>+IsLeapYear(Y2)-days2)+<span class="number">1</span>;				</span><br><span class="line">		}<span class="keyword">else</span> <span class="keyword">if</span>(Y1&lt;Y2){</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=Y1+<span class="number">1</span>;i&lt;Y2;i++){</span><br><span class="line">				days3+=<span class="number">365</span>+IsLeapYear(i);</span><br><span class="line">			}</span><br><span class="line">			totalDays=days3+days2+(<span class="number">365</span>+IsLeapYear(Y1)-days1)+<span class="number">1</span>;		</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> d=totalDays%<span class="number">7</span><span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">int</span> result=(<span class="number">4</span>+d)%<span class="number">7</span>;;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">switch</span>(result){</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="string">"Monday"</span>&lt;&lt;<span class="built_in">endl</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="string">"Tuesday"</span>&lt;&lt;<span class="built_in">endl</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="string">"Wednesday"</span>&lt;&lt;<span class="built_in">endl</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="string">"Thursday"</span>&lt;&lt;<span class="built_in">endl</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="string">"Friday"</span>&lt;&lt;<span class="built_in">endl</span>;<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="string">"Saturday"</span>&lt;&lt;<span class="built_in">endl</span>;<span class="keyword">break</span>;	</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="string">"Sunday"</span>&lt;&lt;<span class="built_in">endl</span>;<span class="keyword">break</span>;																																		</span><br><span class="line">		}		</span><br><span class="line">	</span><br><span class="line">	}</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;stdlib.h&gt;
+
+using namespace std;
+
+int day[2][13]={
+	{0,31,28,31,30,31,30,31,31,30,31,30,31},
+	{0,31,29,31,30,31,30,31,31,30,31,30,31}
+};
+
+int IsLeapYear(int Y){
+	return (Y%4==0&amp;&amp;Y%100!=0)||(Y%400==0); 
+}
+
+int countDays(int Y,int M,int D){
+	int result=D;
+	if(IsLeapYear(Y)){
+		for(int i=0;i&lt;M;i++){
+			result+=day[1][i];
+		}			
+	}else{
+		for(int i=0;i&lt;M;i++){
+			result+=day[0][i];
+		}
+	}
+		
+	return result;
+} 
+
+int main(void){
+	int D2,Y2,M2;
+	int D1=18,M1=3,Y1=2021;
+	string strM2;
+	while(cin&gt;&gt;D2&gt;&gt;strM2&gt;&gt;Y2){
+		if(strM2.compare("January")==0){
+			M2=1;
+		}else if(strM2.compare("February")==0){
+			M2=2;
+		}else if(strM2.compare("March")==0){
+			M2=3;
+		}else if(strM2.compare("April")==0){
+			M2=4;
+		}else if(strM2.compare("May")==0){
+			M2=5;
+		}else if(strM2.compare("June")==0){
+			M2=6;
+		}else if(strM2.compare("July")==0){
+			M2=7;
+		}else if(strM2.compare("August")==0){
+			M2=8;
+		}else if(strM2.compare("September")==0){
+			M2=9;
+		}else if(strM2.compare("October")==0){
+			M2=10;
+		}else if(strM2.compare("November")==0){
+			M2=11;
+		}else if(strM2.compare("December")==0){
+			M2=12;
+		}
+		
+		int days1=countDays(Y1,M1,D1);
+		int days2=countDays(Y2,M2,D2);
+		int days3=0;
+		int totalDays=0;
+		
+		if(Y1==Y2){
+			totalDays=days2-days1+1;
+		}else if(Y1&gt;Y2){
+			for(int i=Y2+1;i&lt;Y1;i++){
+				days3+=365+IsLeapYear(i);
+			}
+			totalDays=days3+days1+(365+IsLeapYear(Y2)-days2)+1;				
+		}else if(Y1&lt;Y2){
+			for(int i=Y1+1;i&lt;Y2;i++){
+				days3+=365+IsLeapYear(i);
+			}
+			totalDays=days3+days2+(365+IsLeapYear(Y1)-days1)+1;		
+		}
+		
+		int d=totalDays%7-1;
+		int result=(4+d)%7;;
+		
+		switch(result){
+			case 1:
+				cout&lt;&lt;"Monday"&lt;&lt;endl;break;
+			case 2:
+				cout&lt;&lt;"Tuesday"&lt;&lt;endl;break;
+			case 3:
+				cout&lt;&lt;"Wednesday"&lt;&lt;endl;break;
+			case 4:
+				cout&lt;&lt;"Thursday"&lt;&lt;endl;break;
+			case 5:
+				cout&lt;&lt;"Friday"&lt;&lt;endl;break;
+			case 6:
+				cout&lt;&lt;"Saturday"&lt;&lt;endl;break;	
+			case 0:
+				cout&lt;&lt;"Sunday"&lt;&lt;endl;break;																																		
+		}		
+	
+	}
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="运行效率-v6"><a class="header-anchor" href="#运行效率-v6">¶</a>运行效率</h3>
 <p>运行时间：11ms<br>
 超过20.04%用C++提交的代码</p>
@@ -220,7 +677,56 @@
 <h3 id="学习-v5"><a class="header-anchor" href="#学习-v5">¶</a>学习</h3>
 <p>C++的类：<a target="_blank" rel="noopener" href="https://www.runoob.com/cplusplus/cpp-classes-objects.html">https://www.runoob.com/cplusplus/cpp-classes-objects.html</a></p>
 <h3 id="代码-v9"><a class="header-anchor" href="#代码-v9">¶</a>代码</h3>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这里有两个细节：第一个0以及给闰年、平年分别写一组 </span></span><br><span class="line"><span class="keyword">int</span> day[<span class="number">2</span>][<span class="number">13</span>]={</span><br><span class="line">	{<span class="number">0</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>},</span><br><span class="line">	{<span class="number">0</span>,<span class="number">31</span>,<span class="number">29</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Day</span>{</span></span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		<span class="keyword">int</span> _Y;</span><br><span class="line">		<span class="keyword">int</span> _M;</span><br><span class="line">		<span class="keyword">int</span> _D;</span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">printDay</span><span class="params">()</span></span>;</span><br><span class="line">		Day(<span class="keyword">int</span> Y,<span class="keyword">int</span> M,<span class="keyword">int</span> D);</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line">Day::Day(<span class="keyword">int</span> Y,<span class="keyword">int</span> M,<span class="keyword">int</span> D){</span><br><span class="line">	_Y=Y;</span><br><span class="line">	_M=M;</span><br><span class="line">	_D=D;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Day::printDay</span><span class="params">()</span></span>{</span><br><span class="line">	<span class="keyword">if</span>(_M==<span class="number">12</span>&amp;&amp;_D==<span class="number">31</span>){<span class="comment">//只有12月31日的才有可能会到下一年 </span></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;_Y+<span class="number">1</span>&lt;&lt;<span class="string">"-"</span>&lt;&lt;<span class="string">"01-01"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	}<span class="keyword">else</span>{<span class="comment">//这些都不会加到下一年 </span></span><br><span class="line">		<span class="keyword">if</span>((_D+<span class="number">1</span>)&gt;day[<span class="number">0</span>][_M]){<span class="comment">//如果天数加一超过了本月的总天数</span></span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%04d-%02d-01\n"</span>,_Y,_M+<span class="number">1</span>);</span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%04d-%02d-%02d\n"</span>,_Y,_M,_D+<span class="number">1</span>);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> m;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;m;</span><br><span class="line">	<span class="keyword">while</span>(m--){</span><br><span class="line">		<span class="keyword">int</span> Y,M,D;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;Y&gt;&gt;M&gt;&gt;D;</span><br><span class="line">		Day d=Day(Y,M,D);</span><br><span class="line">		d.printDay();</span><br><span class="line">	} </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+//这里有两个细节：第一个0以及给闰年、平年分别写一组 
+int day[2][13]={
+	{0,31,28,31,30,31,30,31,31,30,31,30,31},
+	{0,31,29,31,30,31,30,31,31,30,31,30,31}
+};
+
+class Day{
+	private:
+		int _Y;
+		int _M;
+		int _D;
+	public:
+		void printDay();
+		Day(int Y,int M,int D);
+};
+
+Day::Day(int Y,int M,int D){
+	_Y=Y;
+	_M=M;
+	_D=D;
+}
+
+void Day::printDay(){
+	if(_M==12&amp;&amp;_D==31){//只有12月31日的才有可能会到下一年 
+		cout&lt;&lt;_Y+1&lt;&lt;"-"&lt;&lt;"01-01"&lt;&lt;endl;
+	}else{//这些都不会加到下一年 
+		if((_D+1)&gt;day[0][_M]){//如果天数加一超过了本月的总天数
+			printf("%04d-%02d-01\n",_Y,_M+1);
+		}else{
+			printf("%04d-%02d-%02d\n",_Y,_M,_D+1);
+		}
+	}
+}
+
+int main(void){
+	int m;
+	cin&gt;&gt;m;
+	while(m--){
+		int Y,M,D;
+		cin&gt;&gt;Y&gt;&gt;M&gt;&gt;D;
+		Day d=Day(Y,M,D);
+		d.printDay();
+	} 
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="运行效率-v7"><a class="header-anchor" href="#运行效率-v7">¶</a>运行效率</h3>
 <p>运行时间：3ms<br>
 超过33.35%用C++提交的代码</p>

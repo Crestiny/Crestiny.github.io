@@ -6,12 +6,12 @@
 </script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/qie.ico"><link rel="mask-icon" href="/qie.ico" color="#24367d"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
     const Yun = window.Yun || {};
     window.CONFIG = {"hostname":"crestiny.github.io","root":"/","title":["汉","月","沦","西","海"],"version":"1.6.2","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"search here","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"D:/sentences.json"},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
-  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="¶剩下的树 ¶题目  ¶分析 这道题比较麻烦的就是……区间会有交集 没什么思路，直接看书吧qwq  woc，书上的思路我直呼妙啊！！！ 用bool型数组来模拟整个线段，有树设为true，没树设为false，最后统计有多少个true就可以了；很巧妙地避免了求区间之间的交集的时间爆炸的问题💇♂ 要注意移走树是包括端点的 ¶代码 一遍过哈哈哈哈 1234567891011121314151617181">
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="¶剩下的树 ¶题目  ¶分析 这道题比较麻烦的就是……区间会有交集 没什么思路，直接看书吧qwq  woc，书上的思路我直呼妙啊！！！ 用bool型数组来模拟整个线段，有树设为true，没树设为false，最后统计有多少个true就可以了；很巧妙地避免了求区间之间的交集的时间爆炸的问题:haircut_man: 要注意移走树是包括端点的 ¶代码 一遍过哈哈哈哈 #include &lt;iostr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小可的机试练习日记Day3-模拟">
 <meta property="og:url" content="https://crestiny.github.io/2021/03/19/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day3-%E6%A8%A1%E6%8B%9F/index.html">
 <meta property="og:site_name" content="Crestiny&#39;s Blog">
-<meta property="og:description" content="¶剩下的树 ¶题目  ¶分析 这道题比较麻烦的就是……区间会有交集 没什么思路，直接看书吧qwq  woc，书上的思路我直呼妙啊！！！ 用bool型数组来模拟整个线段，有树设为true，没树设为false，最后统计有多少个true就可以了；很巧妙地避免了求区间之间的交集的时间爆炸的问题💇♂ 要注意移走树是包括端点的 ¶代码 一遍过哈哈哈哈 1234567891011121314151617181">
+<meta property="og:description" content="¶剩下的树 ¶题目  ¶分析 这道题比较麻烦的就是……区间会有交集 没什么思路，直接看书吧qwq  woc，书上的思路我直呼妙啊！！！ 用bool型数组来模拟整个线段，有树设为true，没树设为false，最后统计有多少个true就可以了；很巧妙地避免了求区间之间的交集的时间爆炸的问题:haircut_man: 要注意移走树是包括端点的 ¶代码 一遍过哈哈哈哈 #include &lt;iostr">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210319124523605.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210319130247648.png">
@@ -33,11 +33,43 @@
 <p>没什么思路，直接看书吧qwq</p>
 <hr>
 <p>woc，书上的思路我直呼妙啊！！！</p>
-<p>用<strong>bool型数组</strong>来模拟整个线段，有树设为true，没树设为false，最后统计有多少个true就可以了；很巧妙地避免了求区间之间的交集的时间<strong>爆炸</strong>的问题<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f487-2642.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f487-2642.png?v8">💇♂</span></p>
+<p>用<strong>bool型数组</strong>来模拟整个线段，有树设为true，没树设为false，最后统计有多少个true就可以了；很巧妙地避免了求区间之间的交集的时间<strong>爆炸</strong>的问题:haircut_man:</p>
 <p>要注意移走树是<strong>包括端点</strong>的</p>
 <h3 id="代码"><a class="header-anchor" href="#代码">¶</a>代码</h3>
 <p>一遍过哈哈哈哈</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> interv[<span class="number">101</span>][<span class="number">2</span>];<span class="comment">//直接开大数组存区间 </span></span><br><span class="line"><span class="keyword">bool</span> road[<span class="number">10001</span>]; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> L,M;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;L&gt;&gt;M){<span class="comment">//对于每组测试案例 </span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++){</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;interv[i][<span class="number">0</span>]&gt;&gt;interv[i][<span class="number">1</span>];<span class="comment">//读入区间 </span></span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=L;i++){</span><br><span class="line">			road[i]=<span class="literal">true</span>;<span class="comment">//road数组初始化，L+1个位置全部种上树 </span></span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++){<span class="comment">//遍历每个区间，进行处理 </span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=interv[i][<span class="number">0</span>];j&lt;=interv[i][<span class="number">1</span>];j++){<span class="comment">//对每个区间，两个端点中间夹的点设为false </span></span><br><span class="line">				road[j]=<span class="literal">false</span>;</span><br><span class="line">			} </span><br><span class="line">		} </span><br><span class="line">		<span class="keyword">int</span> remained=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=L;i++){</span><br><span class="line">			<span class="keyword">if</span>(road[i]==<span class="literal">true</span>){</span><br><span class="line">				remained++;</span><br><span class="line">			}</span><br><span class="line">		} </span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;remained&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	} </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int interv[101][2];//直接开大数组存区间 
+bool road[10001]; 
+
+int main(void){
+	int L,M;
+	while(cin&gt;&gt;L&gt;&gt;M){//对于每组测试案例 
+		for(int i=0;i&lt;M;i++){
+			cin&gt;&gt;interv[i][0]&gt;&gt;interv[i][1];//读入区间 
+		}
+		for(int i=0;i&lt;=L;i++){
+			road[i]=true;//road数组初始化，L+1个位置全部种上树 
+		}
+		
+		for(int i=0;i&lt;M;i++){//遍历每个区间，进行处理 
+			for(int j=interv[i][0];j&lt;=interv[i][1];j++){//对每个区间，两个端点中间夹的点设为false 
+				road[j]=false;
+			} 
+		} 
+		int remained=0;
+		for(int i=0;i&lt;=L;i++){
+			if(road[i]==true){
+				remained++;
+			}
+		} 
+		cout&lt;&lt;remained&lt;&lt;endl;
+	} 
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="运行效率"><a class="header-anchor" href="#运行效率">¶</a>运行效率</h3>
 <p>运行时间：10ms<br>
 超过2.96%用C++提交的代码</p>
@@ -48,7 +80,67 @@
 <img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210319130247648.png" alt="image-20210319130247648" style="width:80%;" loading="lazy">
 <h3 id="代码-v2"><a class="header-anchor" href="#代码-v2">¶</a>代码</h3>
 <p>哈哈哈又是一遍过</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="built_in">string</span> str;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;str){</span><br><span class="line">		<span class="keyword">int</span> time=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.length();i++){</span><br><span class="line">			<span class="keyword">switch</span>(str[i]){</span><br><span class="line">				<span class="keyword">case</span> <span class="string">'a'</span>:<span class="keyword">case</span> <span class="string">'d'</span>:<span class="keyword">case</span> <span class="string">'g'</span>:<span class="keyword">case</span> <span class="string">'j'</span>:<span class="keyword">case</span> <span class="string">'m'</span>:<span class="keyword">case</span> <span class="string">'p'</span>:<span class="keyword">case</span> <span class="string">'t'</span>:<span class="keyword">case</span> <span class="string">'w'</span>:</span><br><span class="line">					time+=<span class="number">1</span>;<span class="comment">//先处理每个字符的按键时间 </span></span><br><span class="line">					<span class="keyword">if</span>(str[i]==<span class="string">'p'</span>||str[i]==<span class="string">'w'</span>){<span class="comment">//p和w特殊处理一下 </span></span><br><span class="line">						<span class="keyword">if</span>((str[i]==str[i<span class="number">-1</span>])||(str[i]==str[i<span class="number">-1</span>]<span class="number">-1</span>)||(str[i]==str[i<span class="number">-1</span>]<span class="number">-2</span>)||(str[i]==str[i<span class="number">-1</span>]<span class="number">-3</span>)){</span><br><span class="line">							time+=<span class="number">2</span>;</span><br><span class="line">						}					</span><br><span class="line">					}<span class="keyword">else</span>{</span><br><span class="line">						<span class="keyword">if</span>((str[i]==str[i<span class="number">-1</span>])||(str[i]==str[i<span class="number">-1</span>]<span class="number">-1</span>)||(str[i]==str[i<span class="number">-1</span>]<span class="number">-2</span>)){</span><br><span class="line">							time+=<span class="number">2</span>;</span><br><span class="line">						}	</span><br><span class="line">					}</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">'b'</span>:<span class="keyword">case</span> <span class="string">'e'</span>:<span class="keyword">case</span> <span class="string">'h'</span>:<span class="keyword">case</span> <span class="string">'k'</span>:<span class="keyword">case</span> <span class="string">'n'</span>:<span class="keyword">case</span> <span class="string">'q'</span>:<span class="keyword">case</span> <span class="string">'u'</span>:<span class="keyword">case</span> <span class="string">'x'</span>:</span><br><span class="line">					time+=<span class="number">2</span>;</span><br><span class="line">					<span class="keyword">if</span>(str[i]==<span class="string">'q'</span>||str[i]==<span class="string">'x'</span>){<span class="comment">//q和x特殊处理一下 </span></span><br><span class="line">						<span class="keyword">if</span>((str[i]==str[i<span class="number">-1</span>])||(str[i]==str[i<span class="number">-1</span>]<span class="number">-1</span>)||(str[i]==str[i<span class="number">-1</span>]<span class="number">-2</span>)||(str[i]==str[i<span class="number">-1</span>]+<span class="number">1</span>)){</span><br><span class="line">							time+=<span class="number">2</span>;</span><br><span class="line">						}					</span><br><span class="line">					}<span class="keyword">else</span>{</span><br><span class="line">						<span class="keyword">if</span>((str[i]==str[i<span class="number">-1</span>])||(str[i]==str[i<span class="number">-1</span>]<span class="number">-1</span>)||(str[i]==str[i<span class="number">-1</span>]+<span class="number">1</span>)){</span><br><span class="line">							time+=<span class="number">2</span>;</span><br><span class="line">						}	</span><br><span class="line">					}					</span><br><span class="line">					<span class="keyword">break</span>;	</span><br><span class="line">				<span class="keyword">case</span> <span class="string">'c'</span>:<span class="keyword">case</span> <span class="string">'f'</span>:<span class="keyword">case</span> <span class="string">'i'</span>:<span class="keyword">case</span> <span class="string">'l'</span>:<span class="keyword">case</span> <span class="string">'o'</span>:<span class="keyword">case</span> <span class="string">'r'</span>:<span class="keyword">case</span> <span class="string">'v'</span>:<span class="keyword">case</span> <span class="string">'y'</span>:</span><br><span class="line">					time+=<span class="number">3</span>;</span><br><span class="line">					<span class="keyword">if</span>(str[i]==<span class="string">'r'</span>||str[i]==<span class="string">'y'</span>){<span class="comment">//r和y特殊处理一下 </span></span><br><span class="line">						<span class="keyword">if</span>((str[i]==str[i<span class="number">-1</span>])||(str[i]==str[i<span class="number">-1</span>]<span class="number">-1</span>)||(str[i]==str[i<span class="number">-1</span>]+<span class="number">1</span>)||(str[i]==str[i<span class="number">-1</span>]+<span class="number">2</span>)){</span><br><span class="line">							time+=<span class="number">2</span>;</span><br><span class="line">						}					</span><br><span class="line">					}<span class="keyword">else</span>{</span><br><span class="line">						<span class="keyword">if</span>((str[i]==str[i<span class="number">-1</span>])||(str[i]==str[i<span class="number">-1</span>]+<span class="number">1</span>)||(str[i]==str[i<span class="number">-1</span>]+<span class="number">2</span>)){</span><br><span class="line">							time+=<span class="number">2</span>;</span><br><span class="line">						}	</span><br><span class="line">					}						</span><br><span class="line">					<span class="keyword">break</span>;	</span><br><span class="line">				<span class="keyword">case</span> <span class="string">'s'</span>:<span class="keyword">case</span> <span class="string">'z'</span>:</span><br><span class="line">					time+=<span class="number">4</span>;</span><br><span class="line">					<span class="keyword">if</span>((str[i]==str[i<span class="number">-1</span>])||(str[i]==str[i<span class="number">-1</span>]+<span class="number">1</span>)||(str[i]==str[i<span class="number">-1</span>]+<span class="number">2</span>)||(str[i]==str[i<span class="number">-1</span>]+<span class="number">3</span>)){</span><br><span class="line">						time+=<span class="number">2</span>;</span><br><span class="line">					}									</span><br><span class="line">					<span class="keyword">break</span>;						</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;time&lt;&lt;<span class="built_in">endl</span>;	</span><br><span class="line">	} </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int main(void){
+	string str;
+	while(cin&gt;&gt;str){
+		int time=0;
+		for(int i=0;i&lt;str.length();i++){
+			switch(str[i]){
+				case 'a':case 'd':case 'g':case 'j':case 'm':case 'p':case 't':case 'w':
+					time+=1;//先处理每个字符的按键时间 
+					if(str[i]=='p'||str[i]=='w'){//p和w特殊处理一下 
+						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]-2)||(str[i]==str[i-1]-3)){
+							time+=2;
+						}					
+					}else{
+						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]-2)){
+							time+=2;
+						}	
+					}
+					break;
+				case 'b':case 'e':case 'h':case 'k':case 'n':case 'q':case 'u':case 'x':
+					time+=2;
+					if(str[i]=='q'||str[i]=='x'){//q和x特殊处理一下 
+						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]-2)||(str[i]==str[i-1]+1)){
+							time+=2;
+						}					
+					}else{
+						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]+1)){
+							time+=2;
+						}	
+					}					
+					break;	
+				case 'c':case 'f':case 'i':case 'l':case 'o':case 'r':case 'v':case 'y':
+					time+=3;
+					if(str[i]=='r'||str[i]=='y'){//r和y特殊处理一下 
+						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]+1)||(str[i]==str[i-1]+2)){
+							time+=2;
+						}					
+					}else{
+						if((str[i]==str[i-1])||(str[i]==str[i-1]+1)||(str[i]==str[i-1]+2)){
+							time+=2;
+						}	
+					}						
+					break;	
+				case 's':case 'z':
+					time+=4;
+					if((str[i]==str[i-1])||(str[i]==str[i-1]+1)||(str[i]==str[i-1]+2)||(str[i]==str[i-1]+3)){
+						time+=2;
+					}									
+					break;						
+			}
+		}
+		cout&lt;&lt;time&lt;&lt;endl;	
+	} 
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="运行效率-v2"><a class="header-anchor" href="#运行效率-v2">¶</a>运行效率</h3>
 <p>运行时间：8ms<br>
 超过7.30%用C++提交的代码</p>
@@ -67,7 +159,30 @@
 <ul>
 <li>
 <p>超时了！！</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">while</span>(n!=<span class="number">0</span>){</span><br><span class="line">		<span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(n!=<span class="number">1</span>){</span><br><span class="line">			<span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span>){</span><br><span class="line">				n=n/<span class="number">2</span>;</span><br><span class="line">			}<span class="keyword">else</span>{</span><br><span class="line">				n=<span class="number">3</span>*n+<span class="number">1</span>;</span><br><span class="line">				n=n/<span class="number">2</span>;</span><br><span class="line">			}</span><br><span class="line">			count++;</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;count&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	} </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int main(void){
+	int n;
+	cin&gt;&gt;n;
+	while(n!=0){
+		int count=0;
+		while(n!=1){
+			if(n%2==0){
+				n=n/2;
+			}else{
+				n=3*n+1;
+				n=n/2;
+			}
+			count++;
+		}
+		cout&lt;&lt;count&lt;&lt;endl;
+		cin&gt;&gt;n;
+	} 
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>本来很自信地想说：就这？</p>
 <p>结果灰溜溜地超时了qwq，看来并没有想象的那么简单</p>
 <p>先来研究一下题目说的变化方法的实际意义：</p>
@@ -78,12 +193,69 @@
 <p>如果一个数的2的幂，那么就直接判断它的多少次幂就行</p>
 <p>关于这一点，我找到了很棒的代码：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wanrenwangxuejing/article/details/28940769">https://blog.csdn.net/wanrenwangxuejing/article/details/28940769</a></p>
 <p>优化之后……</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">log2</span><span class="params">(<span class="keyword">int</span> value)</span>   <span class="comment">//递归判断一个数是2的多少次方  </span></span></span><br><span class="line"><span class="function"></span>{  </span><br><span class="line">    <span class="keyword">if</span> (value == <span class="number">1</span>)  </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>+log2(value&gt;&gt;<span class="number">1</span>);  </span><br><span class="line">}  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	<span class="keyword">while</span>(n!=<span class="number">0</span>){</span><br><span class="line">		<span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span>(n!=<span class="number">1</span>){</span><br><span class="line">			<span class="keyword">if</span>(n&amp;(n<span class="number">-1</span>)){<span class="comment">//一个数不是2的幂次方 </span></span><br><span class="line">				<span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span>){</span><br><span class="line">					n/=<span class="number">2</span>;</span><br><span class="line">				}<span class="keyword">else</span>{</span><br><span class="line">					n=<span class="number">3</span>*n+<span class="number">1</span>;</span><br><span class="line">					n/=<span class="number">2</span>;</span><br><span class="line">				}</span><br><span class="line">				count++;			</span><br><span class="line">			}<span class="keyword">else</span>{<span class="comment">//一个数是2的幂次方 </span></span><br><span class="line">				count+=log2(n); </span><br><span class="line">				n=<span class="number">1</span>;</span><br><span class="line">			}	</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,count);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	} </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+
+int log2(int value)   //递归判断一个数是2的多少次方  
+{  
+    if (value == 1)  
+        return 0;  
+    else  
+        return 1+log2(value&gt;&gt;1);  
+}  
+
+
+int main(void){
+	int n;
+	scanf("%d",&amp;n);
+	while(n!=0){
+		int count=0;
+
+		while(n!=1){
+			if(n&amp;(n-1)){//一个数不是2的幂次方 
+				if(n%2==0){
+					n/=2;
+				}else{
+					n=3*n+1;
+					n/=2;
+				}
+				count++;			
+			}else{//一个数是2的幂次方 
+				count+=log2(n); 
+				n=1;
+			}	
+		}
+
+		printf("%d\n",count);
+		scanf("%d",&amp;n);
+	} 
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>依旧还是超时</p>
 <p>看了书上的题解之后，我突然发现我并不是因为算法超时的……</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n){</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">int</span> times=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(n!=<span class="number">1</span>){</span><br><span class="line">            <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span>)</span><br><span class="line">                n/=<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                n=(<span class="number">3</span>*n+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">            times++;</span><br><span class="line">        }</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;times&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>这是别人的代码<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f53a.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f53a.png?v8">🔺</span>，好家伙，我到底错哪了……</p>
-<p>之后再看吧，属实迷惑<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f615.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f615.png?v8">😕</span></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
+using namespace std;
+int main(){
+    int n;
+    while(cin&gt;&gt;n){
+        if(n==0)
+            break;
+        int times=0;
+        while(n!=1){
+            if(n%2==0)
+                n/=2;
+            else
+                n=(3*n+1)/2;
+            times++;
+        }
+        cout&lt;&lt;times&lt;&lt;endl;
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这是别人的代码:small_red_triangle:，好家伙，我到底错哪了……</p>
+<p>之后再看吧，属实迷惑:confused:</p>
 </li>
 </ul>
 </li>
@@ -91,7 +263,26 @@
 <hr>
 <h3 id="代码-v3"><a class="header-anchor" href="#代码-v3">¶</a>代码</h3>
 <p>在在线oj里面直接敲的，过了……</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&amp;&amp;n!=<span class="number">0</span>){</span><br><span class="line">        <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(n!=<span class="number">1</span>){</span><br><span class="line">             <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span>){</span><br><span class="line">                n/=<span class="number">2</span>;</span><br><span class="line">            }<span class="keyword">else</span>{</span><br><span class="line">                n=(<span class="number">3</span>*n+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">            }</span><br><span class="line">            count++;</span><br><span class="line">        }</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;count&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;cstdio&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+
+int main (void){
+    int n;
+    while(cin&gt;&gt;n&amp;&amp;n!=0){
+        int count=0;
+        while(n!=1){
+             if(n%2==0){
+                n/=2;
+            }else{
+                n=(3*n+1)/2;
+            }
+            count++;
+        }
+        cout&lt;&lt;count&lt;&lt;endl;
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行时间：3ms<br>
 超过80.09%用C++提交的代码</p>
 <p>占用内存：508KB<br>
@@ -102,7 +293,33 @@
 <h3 id="错误-v2"><a class="header-anchor" href="#错误-v2">¶</a>错误</h3>
 <p>注意浮点数的处理！<code>(G1+G2)*1.0/2</code>，要乘以1.0！！</p>
 <h3 id="代码-v4"><a class="header-anchor" href="#代码-v4">¶</a>代码</h3>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>{</span><br><span class="line">	<span class="keyword">int</span> P,T,G1,G2,G3,GJ;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;P&gt;&gt;T&gt;&gt;G1&gt;&gt;G2&gt;&gt;G3&gt;&gt;GJ){</span><br><span class="line">		<span class="keyword">float</span> result;</span><br><span class="line">		<span class="keyword">int</span> temp;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">abs</span>(G1-G2)&lt;=T){</span><br><span class="line">			result=(<span class="keyword">float</span>)((G1+G2)*<span class="number">1.0</span>/<span class="number">2</span>);</span><br><span class="line">		}<span class="keyword">else</span>{</span><br><span class="line">			<span class="keyword">if</span>( ((<span class="built_in">abs</span>(G1-G3)&lt;=T)||(<span class="built_in">abs</span>(G2-G3)&lt;=T))  &amp;&amp; (! ((<span class="built_in">abs</span>(G1-G3)&lt;=T)&amp;&amp;(<span class="built_in">abs</span>(G2-G3)&lt;=T)) )   ){</span><br><span class="line">				temp=(<span class="built_in">abs</span>(G1-G3)&lt;=<span class="built_in">abs</span>(G2-G3))?G1:G2;</span><br><span class="line">				result=(<span class="keyword">float</span>)((temp+G3)*<span class="number">1.0</span>/<span class="number">2</span>);</span><br><span class="line">			}<span class="keyword">else</span> <span class="keyword">if</span>((<span class="built_in">abs</span>(G1-G3)&lt;=T)&amp;&amp;(<span class="built_in">abs</span>(G2-G3)&lt;=T)){</span><br><span class="line">				result=<span class="built_in">max</span>(<span class="built_in">max</span>(G1,G2),G3);</span><br><span class="line">			}<span class="keyword">else</span> <span class="keyword">if</span>(!(<span class="built_in">abs</span>(G1-G3)&lt;=T)&amp;&amp;!(<span class="built_in">abs</span>(G2-G3)&lt;=T)){</span><br><span class="line">				result=GJ;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%.1f\n"</span>,result);</span><br><span class="line">	}</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+int main(void){
+	int P,T,G1,G2,G3,GJ;
+	while(cin&gt;&gt;P&gt;&gt;T&gt;&gt;G1&gt;&gt;G2&gt;&gt;G3&gt;&gt;GJ){
+		float result;
+		int temp;
+		if(abs(G1-G2)&lt;=T){
+			result=(float)((G1+G2)*1.0/2);
+		}else{
+			if( ((abs(G1-G3)&lt;=T)||(abs(G2-G3)&lt;=T))  &amp;&amp; (! ((abs(G1-G3)&lt;=T)&amp;&amp;(abs(G2-G3)&lt;=T)) )   ){
+				temp=(abs(G1-G3)&lt;=abs(G2-G3))?G1:G2;
+				result=(float)((temp+G3)*1.0/2);
+			}else if((abs(G1-G3)&lt;=T)&amp;&amp;(abs(G2-G3)&lt;=T)){
+				result=max(max(G1,G2),G3);
+			}else if(!(abs(G1-G3)&lt;=T)&amp;&amp;!(abs(G2-G3)&lt;=T)){
+				result=GJ;
+			}
+		}
+		printf("%.1f\n",result);
+	}
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="运行效率-v3"><a class="header-anchor" href="#运行效率-v3">¶</a>运行效率</h3>
 <p>运行时间：5ms<br>
 超过35.33%用C++提交的代码</p>

@@ -31,7 +31,7 @@
 <h3 id="1-1-2-从程序开发者的角度看"><a class="header-anchor" href="#1-1-2-从程序开发者的角度看">¶</a>1.1.2 从程序开发者的角度看</h3>
 <p>不用关心在内存的哪里存放变量，并不需要自己指定</p>
 <h3 id="1-1-3-从操作系统在整个计算机系统所处的位置看"><a class="header-anchor" href="#1-1-3-从操作系统在整个计算机系统所处的位置看">¶</a>1.1.3 从操作系统在整个计算机系统所处的位置看</h3>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE174.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE174.png" alt="" loading="lazy"></p>
 <h3 id="1-1-4-从操作系统设计者的角度看"><a class="header-anchor" href="#1-1-4-从操作系统设计者的角度看">¶</a>1.1.4 从操作系统设计者的角度看</h3>
 <p>操作系统设计有两个目标：</p>
 <ul>
@@ -47,7 +47,7 @@
 <li>文件管理</li>
 </ul>
 <h3 id="1-1-5-操作系统组成"><a class="header-anchor" href="#1-1-5-操作系统组成">¶</a>1.1.5 操作系统组成</h3>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE173.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE173.png" alt="" loading="lazy"></p>
 <h2 id="1-2-开放源代码的UNIX-Linux操作系统"><a class="header-anchor" href="#1-2-开放源代码的UNIX-Linux操作系统">¶</a>1.2 开放源代码的UNIX/Linux操作系统</h2>
 <h3 id="1-2-1-UNIX诞生和发展"><a class="header-anchor" href="#1-2-1-UNIX诞生和发展">¶</a>1.2.1 UNIX诞生和发展</h3>
 <p>最开始想开发MULTICS，多年以后成功了……后来又因为想要运行一个游戏，为它重写了一套操作系统UNIX（后来用C语言全部重写了）</p>
@@ -70,15 +70,15 @@
 <li>延迟执行机制</li>
 </ul>
 <h3 id="1-3-2-Linux内核的位置"><a class="header-anchor" href="#1-3-2-Linux内核的位置">¶</a>1.3.2 Linux内核的位置</h3>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102150309.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102150309.png" alt="" loading="lazy"></p>
 <p>​	中间括起来的是Linux内核</p>
 <h3 id="1-3-3-Linux内核体系结构"><a class="header-anchor" href="#1-3-3-Linux内核体系结构">¶</a>1.3.3 Linux内核体系结构</h3>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE172.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE172.png" alt="" loading="lazy"></p>
 <h2 id="1-4-Linux内核源代码"><a class="header-anchor" href="#1-4-Linux内核源代码">¶</a>1.4 Linux内核源代码</h2>
 <h3 id="1-3-1-Linux内核版本"><a class="header-anchor" href="#1-3-1-Linux内核版本">¶</a>1.3.1 Linux内核版本</h3>
 <p>​	其实用.分割的三四个数字是各自有含义的！</p>
 <h3 id="1-3-2-Linux内核源代码的结构"><a class="header-anchor" href="#1-3-2-Linux内核源代码的结构">¶</a>1.3.2 Linux内核源代码的结构</h3>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102151334.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/20210102151334.png" alt="" loading="lazy"></p>
 <h3 id="1-3-3-Linux内核源代码分析工具"><a class="header-anchor" href="#1-3-3-Linux内核源代码分析工具">¶</a>1.3.3 Linux内核源代码分析工具</h3>
 <ul>
 <li>Linux的LXR</li>
@@ -91,9 +91,18 @@
 <p>模块可以被单独编译，但是不能单独运行，运行时被链接到内核作为内核的一部分在<strong>内核空间</strong>运行</p>
 <h3 id="1-5-2-编写一个简单的模块"><a class="header-anchor" href="#1-5-2-编写一个简单的模块">¶</a>1.5.2 编写一个简单的模块</h3>
 <h4 id="（1）程序举例"><a class="header-anchor" href="#（1）程序举例">¶</a>（1）程序举例</h4>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE171.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/%E7%BB%98%E5%9B%BE171.png" alt="" loading="lazy"></p>
 <h4 id="（2）编译"><a class="header-anchor" href="#（2）编译">¶</a>（2）编译</h4>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#Makefile2.6</span><br><span class="line">obj-m : = hellomod.o 	#产生hellomod模块的目标文件</span><br><span class="line">CURRENT_PATH : = $ (shell pwd) 	#模块所在的当前路径，这里直接用shell命令获取</span><br><span class="line">LINUX_KERNEL : = $(shell uname - r) 	#Linux内核源代码的当前版本</span><br><span class="line">LINUX_KERNEL_PATH : = /usr/src/linux - headers - $ (LINUX_KERNEL)  #Linux内核源代码的绝对路径</span><br><span class="line"></span><br><span class="line">all:</span><br><span class="line">make -c $ (LINUX_KERNEL_PATH)M = $ ( CURRENT_PATH) modules   #编译模块</span><br><span class="line">clean:</span><br><span class="line">make -c $ (LINUX_KERNEL_PATH)M= $ ( CURRENT_PATH) clean    #井清理</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">#Makefile2.6
+obj-m : = hellomod.o 	#产生hellomod模块的目标文件
+CURRENT_PATH : = $ (shell pwd) 	#模块所在的当前路径，这里直接用shell命令获取
+LINUX_KERNEL : = $(shell uname - r) 	#Linux内核源代码的当前版本
+LINUX_KERNEL_PATH : = /usr/src/linux - headers - $ (LINUX_KERNEL)  #Linux内核源代码的绝对路径
+
+all:
+make -c $ (LINUX_KERNEL_PATH)M = $ ( CURRENT_PATH) modules   #编译模块
+clean:
+make -c $ (LINUX_KERNEL_PATH)M= $ ( CURRENT_PATH) clean    #井清理<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="（3）运行"><a class="header-anchor" href="#（3）运行">¶</a>（3）运行</h4>
 <p>插入和移除就不说了，说下printk</p>
 <p>可以用tail /var/log/message查看日志</p>
@@ -105,21 +114,31 @@
 <p><strong>值得注意的是，它们的内存无需占用连续的单元</strong>，每个元素都包含一个指向下一个元素的指针，当有元素加入时，只要改变这个指针即可</p>
 <h3 id="1-6-1-链表的演化"><a class="header-anchor" href="#1-6-1-链表的演化">¶</a>1.6.1 链表的演化</h3>
 <p>C语言中最基本的双向链表结构：</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_List</span>{</span></span><br><span class="line">    <span class="keyword">void</span> *mydata;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">my_List</span> *<span class="title">next</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">my_list</span> *<span class="title">prev</span>;</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">struct my_List{
+    void *mydata;
+    struct my_List *next;
+    struct my_list *prev;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在此基础上做一些变化，可以得到二叉树、循环链表以及更多复杂的树状结构</p>
 <h3 id="1-6-2-链表的定义和操作"><a class="header-anchor" href="#1-6-2-链表的定义和操作">¶</a>1.6.2 链表的定义和操作</h3>
 <p>来看下Linux内核的实现方式​​</p>
 <h4 id="（1）链表的定义"><a class="header-anchor" href="#（1）链表的定义">¶</a>（1）链表的定义</h4>
 <p>首先定义一个不含数据域的链表结点</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">list_head</span>{</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> *<span class="title">next</span>, *<span class="title">prev</span>;</span><span class="comment">//注意写的时候prev前面要加*</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">struct list_head{
+    struct list_head *next, *prev;//注意写的时候prev前面要加*
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>我们把这个嵌入到别的结构中，来形成具有数据域的链表：</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_List</span>{</span></span><br><span class="line">    <span class="keyword">void</span> *mydata;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">list</span>;</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">struct my_List{
+    void *mydata;
+    struct list_head list;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="（2）链表的声明和初始化宏"><a class="header-anchor" href="#（2）链表的声明和初始化宏">¶</a>（2）链表的声明和初始化宏</h4>
 <p>在list.h中定义了宏来实现声明和初始化的操作，所以我们可以方便地使用<code>LIST_HEAD(my_listhead)</code>来创造一个空链表，头指针就是<code>my_listhead</code></p>
 <h4 id="（3）在链表中增加一个结点"><a class="header-anchor" href="#（3）在链表中增加一个结点">¶</a>（3）在链表中增加一个结点</h4>
 <p><strong>在内核代码中，函数名前加两个下划线表示内部函数</strong></p>
 <p>list.h中增加结点的函数是：</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">list_add</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">list_add_tail</span><span class="params">()</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">static inline void list_add();
+static inline void list_add_tail();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h4 id="（4）遍历链表"><a class="header-anchor" href="#（4）遍历链表">¶</a>（4）遍历链表</h4>
 <p>有点没看懂，用到的时候再回头看吧</p>
 <h3 id="1-6-3-链表的应用"><a class="header-anchor" href="#1-6-3-链表的应用">¶</a>1.6.3 链表的应用</h3>

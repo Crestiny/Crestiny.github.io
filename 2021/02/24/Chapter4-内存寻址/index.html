@@ -30,17 +30,17 @@
 <h3 id="4-1-1-虚拟内存、内核空间和用户空间"><a class="header-anchor" href="#4-1-1-虚拟内存、内核空间和用户空间">¶</a>4.1.1 虚拟内存、内核空间和用户空间</h3>
 <p>Linux简化了分段机制，使得虚拟地址和线性地址总是一致的。</p>
 <p>虚拟地址空间是4GB，最高1GB是内核空间（放的是内核代码和数据），下面3GB是用户空间（放的是用户代码和数据）。内核空间是所有进程共享的，结构示意图如下：</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224165919056.png" alt="image-20210224165919056" style="height:250px;width:500px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224165919056.png" alt="image-20210224165919056" style="height:250px;width:500px" loading="lazy">
 <p>任何一个时刻CPU上只有一个进程在运行，所以每一时刻系统都只有一个4GB的虚拟地址空间。</p>
 <p>**用户空间不是被进程共享的，而是被进程隔离的。**不同的进程的同一个地址对应的是不同的内容哦。这是为什么呢？</p>
 <p>因为CPU将虚拟地址转换为物理地址，靠的是每个进程的页表；既然每个进程的页表不同，那么转换的结果也就不同了。</p>
 <p><strong>内核空间中的内核程序，和用户空间中的用户程序，它们编译链接后形成的地址空间是一个虚拟地址空间。</strong></p>
 <h4 id="1-内核空间到物理内存的映射"><a class="header-anchor" href="#1-内核空间到物理内存的映射">¶</a>1. 内核空间到物理内存的映射</h4>
 <p>见下图：</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224172008342.png" alt="image-20210224172008342" style="height:400px;width:430px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224172008342.png" alt="image-20210224172008342" style="height:400px;width:430px" loading="lazy">
 <h4 id="2-内核映像"><a class="header-anchor" href="#2-内核映像">¶</a>2. 内核映像</h4>
 <p>内核映像这个词听起来比较抽象，它其实是：内核的代码和数据。</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224173830494.png" alt="image-20210224173830494" style="height:150px;width:700px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224173830494.png" alt="image-20210224173830494" style="height:150px;width:700px" loading="lazy">
 <p>（这一段我看的好晕QWQ）</p>
 <h3 id="4-1-2-虚拟内存实现机制间的关系"><a class="header-anchor" href="#4-1-2-虚拟内存实现机制间的关系">¶</a>4.1.2 虚拟内存实现机制间的关系</h3>
 <p>实现虚存需要很多机制的支持，比如：</p>
@@ -52,10 +52,10 @@
 <li>缓存和刷新机制</li>
 </ul>
 <p>它们之间的关系如下图所示：</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224231527062.png" alt="image-20210224231527062" style="height:330px;width:700px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210224231527062.png" alt="image-20210224231527062" style="height:330px;width:700px" loading="lazy">
 <h2 id="4-2-进程的用户空间管理"><a class="header-anchor" href="#4-2-进程的用户空间管理">¶</a>4.2 进程的用户空间管理</h2>
 <p>每个进程最大可以拥有3GB的私有虚存空间，那么这3GB是如何划分的？如下图所示：</p>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210225001310006.png" alt="image-20210225001310006" style="height:500px;width:200px">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210225001310006.png" alt="image-20210225001310006" style="height:500px;width:200px" loading="lazy">
 <p>BSS=Block Started by Symbol，是未初始化的数据段。</p>
 <p>内核在创建进程时，并不是为整个用户空间都分配物理空间，而是采用请页的方法（按需调页）</p>
 <h3 id="4-2-1-进程用户空间的描述"><a class="header-anchor" href="#4-2-1-进程用户空间的描述">¶</a>4.2.1 进程用户空间的描述</h3>
@@ -97,7 +97,7 @@
 <li>保护错误。要访问的虚地址被“写保护”，根据不同情况，处理方法不同</li>
 </ul>
 <p>缺页异常整个处理流程（简单版和完整版）：</p>
-<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210225143752072.png" alt="image-20210225143752072"></p>
+<p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210225143752072.png" alt="image-20210225143752072" loading="lazy"></p>
 <h3 id="4-3-2-请求调页"><a class="header-anchor" href="#4-3-2-请求调页">¶</a>4.3.2 请求调页</h3>
 <p>请求调页大部分还是好处多多的，但是也要付出额外的开销：浪费CPU的周期去处理缺页异常。不过幸好，按规律来说，缺页异常算是稀有事件。</p>
 <p>有两种情况，被寻址的页面可以不在物理内存中：（？？？）</p>

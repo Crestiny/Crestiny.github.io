@@ -45,7 +45,26 @@
 <li>PHP 脚本以 <strong><!--?php** 开始，以 **?--></strong> 结束</li>
 <li>注释和C差不多</li>
 </ul>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;h1&gt;My first PHP page&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"Hello World!"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这是 PHP 单行注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">这是</span></span><br><span class="line"><span class="comment">PHP 多行</span></span><br><span class="line"><span class="comment">注释</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;h1&gt;My first PHP page&lt;/h1&gt;
+
+&lt;?php
+echo "Hello World!";
+?&gt;
+
+// 这是 PHP 单行注释
+
+/*
+这是
+PHP 多行
+注释
+*/
+
+&lt;/body&gt;
+&lt;/html&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="PHP变量"><a class="header-anchor" href="#PHP变量">¶</a>PHP变量</h2>
 <h3 id="命名规则"><a class="header-anchor" href="#命名规则">¶</a>命名规则</h3>
 <ul>
@@ -74,16 +93,52 @@
 </ul>
 <h3 id="global"><a class="header-anchor" href="#global">¶</a>global</h3>
 <p>在函数外面定义的就叫全局变量，函数里面定义的就叫局部变量。神奇的是global并不是声明变量时使用的（php也没有变量声明），而是在函数内访问全局变量时使用</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$x=<span class="number">5</span>;</span><br><span class="line">$y=<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line"><span class="keyword">global</span> $x,$y;</span><br><span class="line">$y=$x+$y;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">myTest();</span><br><span class="line"><span class="keyword">echo</span> $y; <span class="comment">// 输出 15</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+$x=5;
+$y=10;
+
+function myTest()
+{
+global $x,$y;
+$y=$x+$y;
+}
+
+myTest();
+echo $y; // 输出 15
+?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>PHP 将所有全局变量存储在一个名为 $GLOBALS[<em>index</em>] 的数组中。 <em>index</em> 保存变量的名称。这个数组可以在函数内部访问，也可以直接用来更新全局变量。</p>
 <p>上面的实例可以写成这样：</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$x=<span class="number">5</span>;</span><br><span class="line">$y=<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">$GLOBALS[<span class="string">'y'</span>]=$GLOBALS[<span class="string">'x'</span>]+$GLOBALS[<span class="string">'y'</span>];</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">myTest();</span><br><span class="line"><span class="keyword">echo</span> $y;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+$x=5;
+$y=10;
+
+function myTest()
+{
+$GLOBALS['y']=$GLOBALS['x']+$GLOBALS['y'];
+}
+
+myTest();
+echo $y;
+?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="static"><a class="header-anchor" href="#static">¶</a>static</h3>
 <p>当一个函数完成时，它的所有变量通常都会被删除。然而，有时候您希望某个局部变量不要被删除。</p>
 <p>要做到这一点，请在您第一次声明变量时使用 <strong>static</strong> 关键字：</p>
 <p>然后，每次调用该函数时，该变量将会保留着函数前一次被调用时的值。</p>
 <p>**注释：**该变量仍然是函数的局部变量。</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line"><span class="built_in">static</span> $x=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">echo</span> $x;</span><br><span class="line">$x++;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">myTest();</span><br><span class="line">myTest();</span><br><span class="line">myTest();</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+
+function myTest()
+{
+static $x=0;
+echo $x;
+$x++;
+}
+
+myTest();
+myTest();
+myTest();
+
+?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="参数作用域"><a class="header-anchor" href="#参数作用域">¶</a>参数作用域</h3>
 <p>在函数的参数列表里的参数，有参数作用域</p>
 <h2 id="echo和print"><a class="header-anchor" href="#echo和print">¶</a>echo和print</h2>
@@ -94,19 +149,95 @@
 <li>print_r - 可以输出复杂类型变量的值,如数组,对象</li>
 </ul>
 <p>PHP 是通过 print 和 echo 语句来动态输出 HTML 内容，虽然 print 和 echo 语句两者的功能几乎是完全一样，但是还是有一点差别的。</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$txt1=<span class="string">"Learn PHP"</span>;</span><br><span class="line">$a=<span class="number">1</span>;</span><br><span class="line">$txt2=<span class="string">"w3cschool.cn"</span>;</span><br><span class="line">$cars=<span class="keyword">array</span>(<span class="string">"Volvo"</span>,<span class="string">"BMW"</span>,<span class="string">"Toyota"</span>);</span><br><span class="line"><span class="keyword">echo</span> $txt1;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br /&gt;"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"Study PHP at $txt2"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br /&gt;"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"My car is a {$cars[0]}"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br /&gt;"</span>;</span><br><span class="line"><span class="keyword">echo</span> $a;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Learn PHP</span></span><br><span class="line"><span class="comment">Study PHP at w3cschool.cn</span></span><br><span class="line"><span class="comment">My car is a Volvo</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+$txt1="Learn PHP";
+$a=1;
+$txt2="w3cschool.cn";
+$cars=array("Volvo","BMW","Toyota");
+echo $txt1;
+echo "&lt;br /&gt;";
+echo "Study PHP at $txt2";
+echo "&lt;br /&gt;";
+echo "My car is a {$cars[0]}";
+echo "&lt;br /&gt;";
+echo $a;
+?&gt;
+
+/*
+Learn PHP
+Study PHP at w3cschool.cn
+My car is a Volvo
+1
+*/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>print_r可以输出数组</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$cars=<span class="keyword">array</span>(<span class="string">"Volvo"</span>,<span class="string">"BMW"</span>,<span class="string">"Toyota"</span>);</span><br><span class="line"></span><br><span class="line">print_r($cars);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Array</span></span><br><span class="line"><span class="comment">(</span></span><br><span class="line"><span class="comment">    [0] =&gt; Volvo</span></span><br><span class="line"><span class="comment">    [1] =&gt; BMW</span></span><br><span class="line"><span class="comment">    [2] =&gt; Toyota</span></span><br><span class="line"><span class="comment">)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+$cars=array("Volvo","BMW","Toyota");
+
+print_r($cars);
+?&gt;
+
+/*
+Array
+(
+    [0] =&gt; Volvo
+    [1] =&gt; BMW
+    [2] =&gt; Toyota
+)
+*/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="PHP-5-数据类型"><a class="header-anchor" href="#PHP-5-数据类型">¶</a>PHP 5 数据类型</h2>
 <p>String（字符串）, Integer（整型）, Float（浮点型）, Boolean（布尔型）, Array（数组）, Object（对象）, NULL（空值）。</p>
 <p>数组可以在一个变量中存储多个值。</p>
 <p>在以下实例中创建了一个数组， 然后使用 PHP var_dump() 函数返回数组的数据类型和值：</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$cars=<span class="keyword">array</span>(<span class="string">"Volvo"</span>,<span class="string">"BMW"</span>,<span class="string">"Toyota"</span>);</span><br><span class="line">var_dump($cars);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">array(3) {</span></span><br><span class="line"><span class="comment">  [0]=&gt;</span></span><br><span class="line"><span class="comment">  string(5) "Volvo"</span></span><br><span class="line"><span class="comment">  [1]=&gt;</span></span><br><span class="line"><span class="comment">  string(3) "BMW"</span></span><br><span class="line"><span class="comment">  [2]=&gt;</span></span><br><span class="line"><span class="comment">  string(6) "Toyota"</span></span><br><span class="line"><span class="comment">}</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+$cars=array("Volvo","BMW","Toyota");
+var_dump($cars);
+?&gt;
+    
+/*
+array(3) {
+  [0]=&gt;
+  string(5) "Volvo"
+  [1]=&gt;
+  string(3) "BMW"
+  [2]=&gt;
+  string(6) "Toyota"
+}
+*/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>类和对象：</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span></span></span><br><span class="line"><span class="class"></span>{</span><br><span class="line">    <span class="keyword">var</span> $color;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Car</span>(<span class="params">$color=<span class="string">"green"</span></span>) </span>{</span><br><span class="line">        <span class="keyword">$this</span>-&gt;color = $color;</span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">what_color</span>(<span class="params"></span>) </span>{   </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;color;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print_vars</span>(<span class="params">$obj</span>) </span>{</span><br><span class="line">    <span class="keyword">foreach</span> (get_object_vars($obj) <span class="keyword">as</span> $prop =&gt; $val) {</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"$prop = $val"</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 new 语句实例化一个对象（类）。</span></span><br><span class="line">$herbie = <span class="keyword">new</span> Car(<span class="string">"white"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出变量 $herbie 的属性。</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"herbie: Properties&lt;br&gt;"</span>;</span><br><span class="line">print_vars($herbie);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span>&nbsp;</span><br><span class="line">    </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">herbie: Properties</span></span><br><span class="line"><span class="comment">color = white</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+class Car
+{
+    var $color;
+    function Car($color="green") {
+        $this-&gt;color = $color;
+    }
+    function what_color() {   
+        return $this-&gt;color;
+    }
+}
+
+function print_vars($obj) {
+    foreach (get_object_vars($obj) as $prop =&gt; $val) {
+        echo "$prop = $val";
+    }
+}
+
+// 使用 new 语句实例化一个对象（类）。
+$herbie = new Car("white");
+
+// 输出变量 $herbie 的属性。
+echo "herbie: Properties&lt;br&gt;";
+print_vars($herbie);
+
+?&gt;&nbsp;
+    
+/*
+herbie: Properties
+color = white
+*/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="PHP5-常量"><a class="header-anchor" href="#PHP5-常量">¶</a>PHP5 常量</h2>
 <p>设置常量，使用 define() 函数，函数语法如下：</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> define ( <span class="keyword">string</span> $name , mixed $value [, <span class="keyword">bool</span> $case_insensitive = <span class="literal">false</span> ] )</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">bool define ( string $name , mixed $value [, bool $case_insensitive = false ] )<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>该函数有三个参数:</p>
 <ul>
 <li>constant_name：必选参数，常量名称，即标志符。</li>
@@ -114,17 +245,39 @@
 <li>case_insensitive ：可选参数，如果设置为 TRUE，该常量则大小写不敏感。默认是大小写敏感的。</li>
 </ul>
 <p>大小写不敏感：</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// define a case-insensitive constant</span></span><br><span class="line">define(<span class="string">"GREETING"</span>, <span class="string">"Welcome to w3cschool.cn!"</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">echo</span> GREETING;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br /&gt;"</span>;</span><br><span class="line"><span class="comment">// will also output the value of the constant</span></span><br><span class="line"><span class="keyword">echo</span> greeting;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Welcome to w3cschool.cn!</span></span><br><span class="line"><span class="comment">Welcome to w3cschool.cn!</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+// define a case-insensitive constant
+define("GREETING", "Welcome to w3cschool.cn!", true);
+echo GREETING;
+echo "&lt;br /&gt;";
+// will also output the value of the constant
+echo greeting;
+?&gt;
+
+/*
+Welcome to w3cschool.cn!
+Welcome to w3cschool.cn!
+*/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="PHP-字符串变量"><a class="header-anchor" href="#PHP-字符串变量">¶</a>PHP 字符串变量</h2>
 <h3 id="并置运算符"><a class="header-anchor" href="#并置运算符">¶</a>并置运算符</h3>
 <p>就是一个点.</p>
 <p>可以在两个字符串中间插入空格：</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$txt1=<span class="string">"Hello world!"</span>;</span><br><span class="line">$txt2=<span class="string">"What a nice day!"</span>;</span><br><span class="line"><span class="keyword">echo</span> $txt1 . <span class="string">" "</span> . $txt2;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+$txt1="Hello world!";
+$txt2="What a nice day!";
+echo $txt1 . " " . $txt2;
+?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="strlen-函数"><a class="header-anchor" href="#strlen-函数">¶</a>strlen() 函数</h3>
 <p>获取字符串长度</p>
 <h3 id="strpos-函数"><a class="header-anchor" href="#strpos-函数">¶</a>strpos() 函数</h3>
 <p>strpos() 函数用于在字符串内查找一个字符或一段指定的文本。下标从0开始，如果未找到匹配，则返回 FALSE。</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> strpos(<span class="string">"Hello world!"</span>,<span class="string">"world"</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">6</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+echo strpos("Hello world!","world");
+?&gt;
+
+/*
+6
+*/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="PHP运算符"><a class="header-anchor" href="#PHP运算符">¶</a>PHP运算符</h2>
 <p>基本和c一样</p>
 <p>逻辑运算符有and、or、xor，当然用符号也是可以的</p>
@@ -180,20 +333,71 @@
 </ul>
 <h3 id="数值数组"><a class="header-anchor" href="#数值数组">¶</a>数值数组</h3>
 <p>自动分配 ID 键（ID 键总是从 0 开始）：</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cars=<span class="keyword">array</span>(<span class="string">"Volvo"</span>,<span class="string">"BMW"</span>,<span class="string">"Toyota"</span>);</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">$cars=array("Volvo","BMW","Toyota");<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>人工分配 ID 键：</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$cars[<span class="number">0</span>]=<span class="string">"Volvo"</span>;        </span><br><span class="line">$cars[<span class="number">1</span>]=<span class="string">"BMW"</span>;        </span><br><span class="line">$cars[<span class="number">2</span>]=<span class="string">"Toyota"</span>;</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">$cars[0]="Volvo";        
+$cars[1]="BMW";        
+$cars[2]="Toyota";<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>count() 函数用于返回数组的长度（元素的数量）</p>
 <h3 id="遍历数值数组"><a class="header-anchor" href="#遍历数值数组">¶</a>遍历数值数组</h3>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$cars=<span class="keyword">array</span>(<span class="string">"Volvo"</span>,<span class="string">"BMW"</span>,<span class="string">"Toyota"</span>);</span><br><span class="line">$arrlength=count($cars);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>($x=<span class="number">0</span>;$x&lt;$arrlength;$x++)</span><br><span class="line">{</span><br><span class="line"><span class="keyword">echo</span> $cars[$x];</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">}</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Volvo</span></span><br><span class="line"><span class="comment">BMW</span></span><br><span class="line"><span class="comment">Toyota</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+$cars=array("Volvo","BMW","Toyota");
+$arrlength=count($cars);
+
+for($x=0;$x&lt;$arrlength;$x++)
+{
+echo $cars[$x];
+echo "&lt;br&gt;";
+}
+?&gt;
+    
+/*
+Volvo
+BMW
+Toyota
+*/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="关联数组"><a class="header-anchor" href="#关联数组">¶</a>关联数组</h3>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">这里有两种创建关联数组的方法：    </span><br><span class="line"></span><br><span class="line">$age=<span class="keyword">array</span>(<span class="string">"Peter"</span>=&gt;<span class="string">"35"</span>,<span class="string">"Ben"</span>=&gt;<span class="string">"37"</span>,<span class="string">"Joe"</span>=&gt;<span class="string">"43"</span>);</span><br><span class="line">或者:    </span><br><span class="line"></span><br><span class="line">$age[<span class="string">'Peter'</span>]=<span class="string">"35"</span>;        </span><br><span class="line">$age[<span class="string">'Ben'</span>]=<span class="string">"37"</span>;        </span><br><span class="line">$age[<span class="string">'Joe'</span>]=<span class="string">"43"</span>;</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$age=<span class="keyword">array</span>(<span class="string">"Peter"</span>=&gt;<span class="string">"35"</span>,<span class="string">"Ben"</span>=&gt;<span class="string">"37"</span>,<span class="string">"Joe"</span>=&gt;<span class="string">"43"</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"Peter is "</span> . $age[<span class="string">'Peter'</span>] . <span class="string">" years old."</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Peter is 35 years old.</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">这里有两种创建关联数组的方法：    
+
+$age=array("Peter"=&gt;"35","Ben"=&gt;"37","Joe"=&gt;"43");
+或者:    
+
+$age['Peter']="35";        
+$age['Ben']="37";        
+$age['Joe']="43";<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+$age=array("Peter"=&gt;"35","Ben"=&gt;"37","Joe"=&gt;"43");
+echo "Peter is " . $age['Peter'] . " years old.";
+?&gt;
+    
+/*
+Peter is 35 years old.
+*/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="遍历关联数组"><a class="header-anchor" href="#遍历关联数组">¶</a>遍历关联数组</h3>
 <p>使用foreach</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$age=<span class="keyword">array</span>(<span class="string">"Peter"</span>=&gt;<span class="string">"35"</span>,<span class="string">"Ben"</span>=&gt;<span class="string">"37"</span>,<span class="string">"Joe"</span>=&gt;<span class="string">"43"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>($age <span class="keyword">as</span> $x=&gt;$x_value)</span><br><span class="line">{</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">"Key="</span> . $x . <span class="string">", Value="</span> . $x_value;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">"&lt;br /&gt;"</span>;</span><br><span class="line">}</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Key=Peter, Value=35</span></span><br><span class="line"><span class="comment">Key=Ben, Value=37</span></span><br><span class="line"><span class="comment">Key=Joe, Value=43</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+$age=array("Peter"=&gt;"35","Ben"=&gt;"37","Joe"=&gt;"43");
+
+foreach($age as $x=&gt;$x_value)
+{
+  echo "Key=" . $x . ", Value=" . $x_value;
+  echo "&lt;br /&gt;";
+}
+?&gt;
+
+/*
+Key=Peter, Value=35
+Key=Ben, Value=37
+Key=Joe, Value=43
+*/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>foreach的两种语法：</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (array_expression <span class="keyword">as</span> $value)</span><br><span class="line">    statement</span><br><span class="line"><span class="keyword">foreach</span> (array_expression <span class="keyword">as</span> $key =&gt; $value)</span><br><span class="line">    statement</span><br><span class="line">第一种格式遍历给定的 array_expression 数组。每次循环中，当前单元的值被赋给 $value 并且数组内部的指针向前移一步（因此下一次循环中将会得到下一个单元）。</span><br><span class="line"></span><br><span class="line">第二种格式做同样的事，只除了当前单元的键名也会在每次循环中被赋给变量 $key。</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">foreach (array_expression as $value)
+    statement
+foreach (array_expression as $key =&gt; $value)
+    statement
+第一种格式遍历给定的 array_expression 数组。每次循环中，当前单元的值被赋给 $value 并且数组内部的指针向前移一步（因此下一次循环中将会得到下一个单元）。
+
+第二种格式做同样的事，只除了当前单元的键名也会在每次循环中被赋给变量 $key。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="PHP数组排序"><a class="header-anchor" href="#PHP数组排序">¶</a>PHP数组排序</h2>
 <p>在本章中，我们将一一介绍下列 PHP 数组排序函数：</p>
 <ul>
@@ -209,7 +413,17 @@
 <p>任何有效的 PHP 代码都有可能出现在函数内部，甚至包括其它函数和类定义。</p>
 <h2 id="PHP面向对象"><a class="header-anchor" href="#PHP面向对象">¶</a>PHP面向对象</h2>
 <p>PHP 定义类通常语法格式如下：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class phpClass {</span><br><span class="line">  var $var1;</span><br><span class="line">  var $var2 = "constant string";</span><br><span class="line">  </span><br><span class="line">  function myfunc ($arg1, $arg2) {</span><br><span class="line">     [..]</span><br><span class="line">  }</span><br><span class="line">  [..]</span><br><span class="line">}</span><br><span class="line">?&gt;</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&lt;?php
+class phpClass {
+  var $var1;
+  var $var2 = "constant string";
+  
+  function myfunc ($arg1, $arg2) {
+     [..]
+  }
+  [..]
+}
+?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>解析如下：</p>
 <ul>
 <li>类使用 <strong>class</strong> 关键字后加上类名定义。</li>
@@ -218,9 +432,46 @@
 <li>函数定义类似 PHP 函数的定义，但函数只能通过该类及其实例化的对象访问。</li>
 </ul>
 <p>一个例子：</p>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Site</span> </span>{</span><br><span class="line">  <span class="comment">/* 成员变量 */</span></span><br><span class="line">  <span class="keyword">var</span> $url;</span><br><span class="line">  <span class="keyword">var</span> $title;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* 成员函数 */</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setUrl</span>(<span class="params">$par</span>)</span>{</span><br><span class="line">     <span class="keyword">$this</span>-&gt;url = $par;</span><br><span class="line">  }</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getUrl</span>(<span class="params"></span>)</span>{</span><br><span class="line">     <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;url . PHP_EOL;</span><br><span class="line">  }</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setTitle</span>(<span class="params">$par</span>)</span>{</span><br><span class="line">     <span class="keyword">$this</span>-&gt;title = $par;</span><br><span class="line">  }</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getTitle</span>(<span class="params"></span>)</span>{</span><br><span class="line">     <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;title . PHP_EOL;</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+class Site {
+  /* 成员变量 */
+  var $url;
+  var $title;
+  
+  /* 成员函数 */
+  function setUrl($par){
+     $this-&gt;url = $par;
+  }
+  
+  function getUrl(){
+     echo $this-&gt;url . PHP_EOL;
+  }
+  
+  function setTitle($par){
+     $this-&gt;title = $par;
+  }
+  
+  function getTitle(){
+     echo $this-&gt;title . PHP_EOL;
+  }
+}
+?&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="构造函数和析构函数"><a class="header-anchor" href="#构造函数和析构函数">¶</a>构造函数和析构函数</h3>
-<figure class="highlight php"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDestructableClass</span> </span>{</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>{</span><br><span class="line">       <span class="keyword">print</span> <span class="string">"构造函数\n"</span>;</span><br><span class="line">       <span class="keyword">$this</span>-&gt;name = <span class="string">"MyDestructableClass"</span>;</span><br><span class="line">   }</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>) </span>{</span><br><span class="line">       <span class="keyword">print</span> <span class="string">"销毁 "</span> . <span class="keyword">$this</span>-&gt;name . <span class="string">"\n"</span>;</span><br><span class="line">   }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">$obj = <span class="keyword">new</span> MyDestructableClass();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+class MyDestructableClass {
+   function __construct() {
+       print "构造函数\n";
+       $this-&gt;name = "MyDestructableClass";
+   }
+
+   function __destruct() {
+       print "销毁 " . $this-&gt;name . "\n";
+   }
+}
+
+$obj = new MyDestructableClass();
+?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

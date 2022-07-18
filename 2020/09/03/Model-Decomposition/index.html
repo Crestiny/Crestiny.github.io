@@ -49,7 +49,7 @@
 <h3>特殊地</h3>
 ![](\Model-Decomposition\adefinition.png)
 <h3>说人话</h3>
-如果是分解成两个关系要判别是否无损连接性，写出“U1交U2->U1-U2(谁先谁后看情况)”，看看这个函数依赖是否在F的闭包内，在的话就……
+如果是分解成两个关系要判别是否无损连接性，写出“U1交U2-&gt;U1-U2(谁先谁后看情况)”，看看这个函数依赖是否在F的闭包内，在的话就……
 <h2>保持函数依赖</h2>
 <h3>定义</h3>
 ![](\Model-Decomposition\depend.png)
@@ -60,7 +60,7 @@
 1. 如果保持了“无损连接性”，则分解后的关系一定是4NF的
 2. 如果保持了“保持函数依赖性”，则分解后的关系一定是3NF的，不一定能到BCNF
 3. 如果保持了“无损连接性”和“保持函数依赖性”，则分解后的关系一定是3NF的，不一定能到BCNF（？？？）
-<h3>“保持函数依赖性”+3NF&emsp;模式分解算法</h3>
+<h3>“保持函数依赖性”+3NF 模式分解算法</h3>
 <h4>教科书式定义</h4>
 ![](\Model-Decomposition\a1.png)
 <h4>说人话</h4>
@@ -69,14 +69,14 @@
 *注：接下来讨论的都是处理后的F和U了！！！*
 - 第三步：假如F中有函数依赖能使左右两边合并起来恰好是U，那没事了，R不用作分解，算法终止；不是的话就转第四步
 - 第四步：把F按照相同左边X的规则分组成几个小的函数依赖集F'(i)，对应地有它的U(i)，再用U(i)在F上找到对应的F(i)，R就这样被分解了
-<h3>“保持函数依赖性”+“无损连接性”+3NF&emsp;模式分解算法</h3>
+<h3>“保持函数依赖性”+“无损连接性”+3NF 模式分解算法</h3>
 <h4>教科书式定义</h4>
 ![](\Model-Decomposition\a2.png)
 <h4>说人话</h4>
 - 第一步：先做算法6.3，也就是先让分解后的模式“保持函数依赖性”。
 - 第二步：找到原关系R的码X，和它在F上的闭包，形成一个对应关系R(x)
 - 第三步：在先前得到的几个子关系R(i)中，寻找一下有没有对应的U(i)包含了X的，要是有，那么这个R(x)就不用加到分解出的子关系里面了，反之是需要的
-<h3>“无损连接性”+BCNF&emsp;模式分解算法</h3>
+<h3>“无损连接性”+BCNF 模式分解算法</h3>
 <h4>教科书式定义</h4>
 ![](\Model-Decomposition\a3.png)
 <h4>说人话</h4>
@@ -85,7 +85,7 @@
 <li>第二步：检查一下当前分解中是不是每个关系都符合BCNF了，如果是，就可以终止了；如果不是，跳第三步</li>
 <li>第三步：对于那些不符合BCNF的关系，我们找到某个函数依赖——它的左边X并非此关系的码。我们把这个函数依赖的左右两边合并，这是一个属性集；然后在此关系属性集里面剔除“此函数依赖的右边Y”就形成另一个属性集。有了分解后的两个属性集，根据它们生成对应的F就好啦。这样就把这个关系分解好了。跳第二步</li>
 </ul>
-<h3>“无损连接性”+4NF&emsp;模式分解算法</h3>
+<h3>“无损连接性”+4NF 模式分解算法</h3>
 <h4>教科书式定义</h4>
 ![](\Model-Decomposition\a4.png)
 <h4>说人话</h4>
@@ -94,13 +94,31 @@
 - 第三步：分解中的每个子关系都属于4NF即可终止
 <h4>补充：什么是传说中的定理6.6呢？</h4>
 ![](\Model-Decomposition\d1.png)
-这个定理的意思就是，既然这个关系不符合4NF吧，那就是有非平凡非函数依赖的多值依赖，也就是X-->Y。有了它我们把关系分成（X,Y）和（X,Z），有点奇怪的是，为什么关系可以这样表示啊？
+这个定理的意思就是，既然这个关系不符合4NF吧，那就是有非平凡非函数依赖的多值依赖，也就是X--&gt;Y。有了它我们把关系分成（X,Y）和（X,Z），有点奇怪的是，为什么关系可以这样表示啊？
 <h2>完整版数据依赖的公理系统</h2>
 <h3>8条公理</h3>
 ![](\Model-Decomposition\g1.png)
 <h3>4条推理规则</h3>
 ![](\Model-Decomposition\g2.png)
-</div><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><i class="ri:alipay-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><i class="ri:qq-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><i class="ri:wechat-pay-line"></i></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>CrestinyCoco</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://crestiny.github.io/2020/09/03/Model-Decomposition/" title="Model Decomposition">https://crestiny.github.io/2020/09/03/Model-Decomposition/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2020/09/04/Skills-for-Database-Exercises/" rel="prev" title="Skills for Database Exercises"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">Skills for Database Exercises</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2020/09/02/Axiom-System-of-Data-Dependency/" rel="next" title=""><span class="post-nav-text"></span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>要不要和我说些什么？</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><i class="ri:cloud-line"></i></span><span class="author"> CrestinyCoco</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.0.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.2</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><i class="ri:alipay-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><i class="ri:qq-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><i class="ri:wechat-pay-line"></i></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>CrestinyCoco</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://crestiny.github.io/2020/09/03/Model-Decomposition/" title="Model Decomposition">https://crestiny.github.io/2020/09/03/Model-Decomposition/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2020/09/04/Skills-for-Database-Exercises/" rel="prev" title="Skills for Database Exercises"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">Skills for Database Exercises</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2020/09/02/Axiom-System-of-Data-Dependency/" rel="next" title=""><span class="post-nav-text"></span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>要不要和我说些什么？</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><i class="ri:cloud-line"></i></span><span class="author"> CrestinyCoco</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.0.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.2</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
   setTimeout(blog_live_time, 1000);
   const start = new Date('2022-07-13T00:00:00');
   const now = new Date();
