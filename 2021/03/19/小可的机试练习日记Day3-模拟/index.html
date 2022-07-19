@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#24367d"><meta name="author" content="CrestinyCoco"><meta name="copyright" content="CrestinyCoco"><meta name="generator" content="Hexo 6.0.0"><meta name="theme" content="hexo-theme-yun"><title>小可的机试练习日记Day3-模拟 | Crestiny's Blog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#24367d"><meta name="author" content="CrestinyCoco"><meta name="copyright" content="CrestinyCoco"><meta name="generator" content="Hexo 6.0.0"><meta name="theme" content="hexo-theme-yun"><title>小可的机试练习日记Day3-模拟 | Crestiny's Blog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
   [".post-card",".post-content img",".markdown-body img"].forEach((target)=> {
     ScrollReveal().reveal(target);
   })
 });
-</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/qie.ico"><link rel="mask-icon" href="/qie.ico" color="#24367d"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+</script><link rel="icon" href="/qie.ico"><link rel="mask-icon" href="/qie.ico" color="#24367d"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
     const Yun = window.Yun || {};
     window.CONFIG = {"hostname":"crestiny.github.io","root":"/","title":["汉","月","沦","西","海"],"version":"1.6.2","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"search here","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"D:/sentences.json"},"local_search":{"path":"/search.xml"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
   </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="¶剩下的树 ¶题目  ¶分析 这道题比较麻烦的就是……区间会有交集 没什么思路，直接看书吧qwq  woc，书上的思路我直呼妙啊！！！ 用bool型数组来模拟整个线段，有树设为true，没树设为false，最后统计有多少个true就可以了；很巧妙地避免了求区间之间的交集的时间爆炸的问题:haircut_man: 要注意移走树是包括端点的 ¶代码 一遍过哈哈哈哈 #include &lt;iostr">
@@ -24,10 +24,9 @@
 <meta property="article:author" content="CrestinyCoco">
 <meta property="article:tag" content="模拟">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210319124523605.png"><script src="/js/ui/mode.js"></script><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info mickey-mouse"><a class="site-author-avatar" href="/about/" title="CrestinyCoco"><img width="96" loading="lazy" src="/images/sakura.jpg" alt="CrestinyCoco"><span class="site-author-status" title="Life is fantastic!"></span></a><div class="site-author-name"><a href="/about/">CrestinyCoco</a></div><span class="site-name">Crestiny's Blog</span><sub class="site-subtitle">Life is fantastic ! </sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">123</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">25</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">67</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=910426929&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/Crestiny" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:1043729366@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://m.weibo.cn/u/6869522716?uid=6869522716&amp;t=0&amp;luicode=10000011&amp;lfid=100103type%3D1%26q%3Dforeverwildsummer" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=1484676321" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/xi-shang-qin-heng" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/13347719" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/mmqrcode1658050168755.png" title="微信" target="_blank" style="color:#1AAD19"><i class="ri:wechat-2-line"></i></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/about/white-qrcode-and-search.jpg" title="微信公众号" target="_blank" style="color:#1AAD19"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat-2-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://twitter.com/YunYouJun" title="Twitter" target="_blank" style="color:#1da1f2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-twitter-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://t.me/elpsycn" title="Telegram Channel" target="_blank" style="color:#0088CC"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-telegram-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:me@yunyoujun.cn" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://travellings.link" title="Travelling" target="_blank" style="color:var(--hty-text-color)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-train-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:#e6c35c"><i class="ri:folder-user-line"></i></a><a class="links-item hty-icon-button" href="/albums/" title="相册集" style="color:#00008b"><i class="ri:book-mark-line"></i></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%A9%E4%B8%8B%E7%9A%84%E6%A0%91"><span class="toc-number">1.</span> <span class="toc-text">剩下的树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87"><span class="toc-number">1.4.</span> <span class="toc-text">运行效率</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E6%9C%BA%E9%94%AE%E7%9B%98"><span class="toc-number">2.</span> <span class="toc-text">手机键盘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-v2"><span class="toc-number">2.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-v2"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87-v2"><span class="toc-number">2.3.</span> <span class="toc-text">运行效率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.5.</span> <span class="toc-text">学习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XXX%E5%AE%9A%E5%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">XXX定律</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-v3"><span class="toc-number">3.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%99%E8%AF%AF"><span class="toc-number">3.2.</span> <span class="toc-text">错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-v3"><span class="toc-number">3.3.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grading"><span class="toc-number">4.</span> <span class="toc-text">Grading</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-v4"><span class="toc-number">4.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%99%E8%AF%AF-v2"><span class="toc-number">4.2.</span> <span class="toc-text">错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-v4"><span class="toc-number">4.3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87-v3"><span class="toc-number">4.4.</span> <span class="toc-text">运行效率</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E6%89%93%E5%8D%B0"><span class="toc-number">5.</span> <span class="toc-text">路径打印</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-v5"><span class="toc-number">5.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90-v2"><span class="toc-number">5.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0-v2"><span class="toc-number">5.3.</span> <span class="toc-text">学习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%A0%E8%90%BD%E7%9A%84%E8%9A%82%E8%9A%81"><span class="toc-number">6.</span> <span class="toc-text">坠落的蚂蚁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-v6"><span class="toc-number">6.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90-v3"><span class="toc-number">6.2.</span> <span class="toc-text">分析</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://crestiny.github.io/2021/03/19/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day3-%E6%A8%A1%E6%8B%9F/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="CrestinyCoco"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Crestiny's Blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">小可的机试练习日记Day3-模拟</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2021-03-19 11:15:24" itemprop="dateCreated datePublished" datetime="2021-03-19T11:15:24+08:00">2021-03-19</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <time title="修改时间：2022-03-20 17:12:07" itemprop="dateModified" datetime="2022-03-20T17:12:07+08:00">2022-03-20</time></div><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><i class="ri:eye-line"></i> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E6%9C%BA%E8%AF%95/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">机试</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/%E6%A8%A1%E6%8B%9F/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">模拟</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#24367d;"><h2 id="剩下的树"><a class="header-anchor" href="#剩下的树">¶</a>剩下的树</h2>
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210319124523605.png"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info mickey-mouse"><a class="site-author-avatar" href="/about/" title="CrestinyCoco"><img width="96" loading="lazy" src="/images/sakura.jpg" alt="CrestinyCoco"><span class="site-author-status" title="Life is fantastic!"></span></a><div class="site-author-name"><a href="/about/">CrestinyCoco</a></div><span class="site-name">Crestiny's Blog</span><sub class="site-subtitle">Life is fantastic ! </sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">123</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">25</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">67</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://wpa.qq.com/msgrd?v=3&amp;uin=910426929&amp;site=qq&amp;menu=yes" title="QQ" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/Crestiny" title="GitHub" target="_blank" style="color:dark"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:1043729366@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://m.weibo.cn/u/6869522716?uid=6869522716&amp;t=0&amp;luicode=10000011&amp;lfid=100103type%3D1%26q%3Dforeverwildsummer" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=1484676321" title="网易云音乐" target="_blank" style="color:#C10D0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/xi-shang-qin-heng" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/13347719" title="哔哩哔哩动画" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/mmqrcode1658050168755.png" title="微信" target="_blank" style="color:#1AAD19"><i class="wechat.ico"></i></a><a class="links-of-author-item hty-icon-button" rel="noopener" title="微信公众号（暂无）" target="_blank" style="color:#1AAD19"><i class="ri:wechat-2-line"></i></a><a class="links-of-author-item hty-icon-button" rel="noopener" title="Twitter（暂无）" target="_blank" style="color:#1da1f2"><i class="ri:twitter-line"></i></a><a class="links-of-author-item hty-icon-button" rel="noopener" title="Telegram（暂无）" target="_blank" style="color:#0088CC"><i class="ri:telegram-line"></i></a><a class="links-of-author-item hty-icon-button" rel="noopener" title="Telegram Channel（暂无）" target="_blank" style="color:#0088CC"><i class="ri:telegram-fill"></i></a><a class="links-of-author-item hty-icon-button" rel="noopener" title="Travelling（暂无）" target="_blank" style="color:var(--hty-text-color)"><i class="ri:send-plane-2-line"></i></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:#e6c35c"><i class="ri:parent-line"></i></a><a class="links-item hty-icon-button" href="/albums/" title="相册集" style="color:#00008b"><i class="ri:camera-3-line"></i></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%A9%E4%B8%8B%E7%9A%84%E6%A0%91"><span class="toc-number">1.</span> <span class="toc-text">剩下的树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87"><span class="toc-number">1.4.</span> <span class="toc-text">运行效率</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E6%9C%BA%E9%94%AE%E7%9B%98"><span class="toc-number">2.</span> <span class="toc-text">手机键盘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-v2"><span class="toc-number">2.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-v2"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87-v2"><span class="toc-number">2.3.</span> <span class="toc-text">运行效率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.5.</span> <span class="toc-text">学习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XXX%E5%AE%9A%E5%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">XXX定律</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-v3"><span class="toc-number">3.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%99%E8%AF%AF"><span class="toc-number">3.2.</span> <span class="toc-text">错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-v3"><span class="toc-number">3.3.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grading"><span class="toc-number">4.</span> <span class="toc-text">Grading</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-v4"><span class="toc-number">4.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%99%E8%AF%AF-v2"><span class="toc-number">4.2.</span> <span class="toc-text">错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-v4"><span class="toc-number">4.3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%95%88%E7%8E%87-v3"><span class="toc-number">4.4.</span> <span class="toc-text">运行效率</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E6%89%93%E5%8D%B0"><span class="toc-number">5.</span> <span class="toc-text">路径打印</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-v5"><span class="toc-number">5.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90-v2"><span class="toc-number">5.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0-v2"><span class="toc-number">5.3.</span> <span class="toc-text">学习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%A0%E8%90%BD%E7%9A%84%E8%9A%82%E8%9A%81"><span class="toc-number">6.</span> <span class="toc-text">坠落的蚂蚁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE-v6"><span class="toc-number">6.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90-v3"><span class="toc-number">6.2.</span> <span class="toc-text">分析</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://crestiny.github.io/2021/03/19/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day3-%E6%A8%A1%E6%8B%9F/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="CrestinyCoco"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Crestiny's Blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">小可的机试练习日记Day3-模拟</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2021-03-19 11:15:24" itemprop="dateCreated datePublished" datetime="2021-03-19T11:15:24+08:00">2021-03-19</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <time title="修改时间：2022-03-20 17:12:07" itemprop="dateModified" datetime="2022-03-20T17:12:07+08:00">2022-03-20</time></div><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><i class="ri:eye-line"></i> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E6%9C%BA%E8%AF%95/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">机试</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/%E6%A8%A1%E6%8B%9F/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">模拟</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#24367d;"><h2 id="剩下的树"><a class="header-anchor" href="#剩下的树">¶</a>剩下的树</h2>
 <h3 id="题目"><a class="header-anchor" href="#题目">¶</a>题目</h3>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210319124523605.png" alt="image-20210319124523605" style="width:80%;" loading="lazy">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210319124523605.png" alt="image-20210319124523605" style="width:80%;" / loading="lazy">
 <h3 id="分析"><a class="header-anchor" href="#分析">¶</a>分析</h3>
 <p>这道题比较麻烦的就是……区间会有交集</p>
 <p>没什么思路，直接看书吧qwq</p>
@@ -37,7 +36,7 @@
 <p>要注意移走树是<strong>包括端点</strong>的</p>
 <h3 id="代码"><a class="header-anchor" href="#代码">¶</a>代码</h3>
 <p>一遍过哈哈哈哈</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+<pre><code class="language-c++">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
 
 using namespace std;
@@ -45,31 +44,32 @@ using namespace std;
 int interv[101][2];//直接开大数组存区间 
 bool road[10001]; 
 
-int main(void){
+int main(void)&#123;
 	int L,M;
-	while(cin&gt;&gt;L&gt;&gt;M){//对于每组测试案例 
-		for(int i=0;i&lt;M;i++){
+	while(cin&gt;&gt;L&gt;&gt;M)&#123;//对于每组测试案例 
+		for(int i=0;i&lt;M;i++)&#123;
 			cin&gt;&gt;interv[i][0]&gt;&gt;interv[i][1];//读入区间 
-		}
-		for(int i=0;i&lt;=L;i++){
+		&#125;
+		for(int i=0;i&lt;=L;i++)&#123;
 			road[i]=true;//road数组初始化，L+1个位置全部种上树 
-		}
+		&#125;
 		
-		for(int i=0;i&lt;M;i++){//遍历每个区间，进行处理 
-			for(int j=interv[i][0];j&lt;=interv[i][1];j++){//对每个区间，两个端点中间夹的点设为false 
+		for(int i=0;i&lt;M;i++)&#123;//遍历每个区间，进行处理 
+			for(int j=interv[i][0];j&lt;=interv[i][1];j++)&#123;//对每个区间，两个端点中间夹的点设为false 
 				road[j]=false;
-			} 
-		} 
+			&#125; 
+		&#125; 
 		int remained=0;
-		for(int i=0;i&lt;=L;i++){
-			if(road[i]==true){
+		for(int i=0;i&lt;=L;i++)&#123;
+			if(road[i]==true)&#123;
 				remained++;
-			}
-		} 
+			&#125;
+		&#125; 
 		cout&lt;&lt;remained&lt;&lt;endl;
-	} 
+	&#125; 
     return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#125;
+</code></pre>
 <h3 id="运行效率"><a class="header-anchor" href="#运行效率">¶</a>运行效率</h3>
 <p>运行时间：10ms<br>
 超过2.96%用C++提交的代码</p>
@@ -77,70 +77,71 @@ int main(void){
 超过23.54%用C++提交的代码</p>
 <h2 id="手机键盘"><a class="header-anchor" href="#手机键盘">¶</a>手机键盘</h2>
 <h3 id="题目-v2"><a class="header-anchor" href="#题目-v2">¶</a>题目</h3>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210319130247648.png" alt="image-20210319130247648" style="width:80%;" loading="lazy">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210319130247648.png" alt="image-20210319130247648" style="width:80%;" / loading="lazy">
 <h3 id="代码-v2"><a class="header-anchor" href="#代码-v2">¶</a>代码</h3>
 <p>哈哈哈又是一遍过</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+<pre><code class="language-c++">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string&gt;
 
 using namespace std;
 
-int main(void){
+int main(void)&#123;
 	string str;
-	while(cin&gt;&gt;str){
+	while(cin&gt;&gt;str)&#123;
 		int time=0;
-		for(int i=0;i&lt;str.length();i++){
-			switch(str[i]){
+		for(int i=0;i&lt;str.length();i++)&#123;
+			switch(str[i])&#123;
 				case 'a':case 'd':case 'g':case 'j':case 'm':case 'p':case 't':case 'w':
 					time+=1;//先处理每个字符的按键时间 
-					if(str[i]=='p'||str[i]=='w'){//p和w特殊处理一下 
-						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]-2)||(str[i]==str[i-1]-3)){
+					if(str[i]=='p'||str[i]=='w')&#123;//p和w特殊处理一下 
+						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]-2)||(str[i]==str[i-1]-3))&#123;
 							time+=2;
-						}					
-					}else{
-						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]-2)){
+						&#125;					
+					&#125;else&#123;
+						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]-2))&#123;
 							time+=2;
-						}	
-					}
+						&#125;	
+					&#125;
 					break;
 				case 'b':case 'e':case 'h':case 'k':case 'n':case 'q':case 'u':case 'x':
 					time+=2;
-					if(str[i]=='q'||str[i]=='x'){//q和x特殊处理一下 
-						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]-2)||(str[i]==str[i-1]+1)){
+					if(str[i]=='q'||str[i]=='x')&#123;//q和x特殊处理一下 
+						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]-2)||(str[i]==str[i-1]+1))&#123;
 							time+=2;
-						}					
-					}else{
-						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]+1)){
+						&#125;					
+					&#125;else&#123;
+						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]+1))&#123;
 							time+=2;
-						}	
-					}					
+						&#125;	
+					&#125;					
 					break;	
 				case 'c':case 'f':case 'i':case 'l':case 'o':case 'r':case 'v':case 'y':
 					time+=3;
-					if(str[i]=='r'||str[i]=='y'){//r和y特殊处理一下 
-						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]+1)||(str[i]==str[i-1]+2)){
+					if(str[i]=='r'||str[i]=='y')&#123;//r和y特殊处理一下 
+						if((str[i]==str[i-1])||(str[i]==str[i-1]-1)||(str[i]==str[i-1]+1)||(str[i]==str[i-1]+2))&#123;
 							time+=2;
-						}					
-					}else{
-						if((str[i]==str[i-1])||(str[i]==str[i-1]+1)||(str[i]==str[i-1]+2)){
+						&#125;					
+					&#125;else&#123;
+						if((str[i]==str[i-1])||(str[i]==str[i-1]+1)||(str[i]==str[i-1]+2))&#123;
 							time+=2;
-						}	
-					}						
+						&#125;	
+					&#125;						
 					break;	
 				case 's':case 'z':
 					time+=4;
-					if((str[i]==str[i-1])||(str[i]==str[i-1]+1)||(str[i]==str[i-1]+2)||(str[i]==str[i-1]+3)){
+					if((str[i]==str[i-1])||(str[i]==str[i-1]+1)||(str[i]==str[i-1]+2)||(str[i]==str[i-1]+3))&#123;
 						time+=2;
-					}									
+					&#125;									
 					break;						
-			}
-		}
+			&#125;
+		&#125;
 		cout&lt;&lt;time&lt;&lt;endl;	
-	} 
+	&#125; 
     return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#125;
+</code></pre>
 <h3 id="运行效率-v2"><a class="header-anchor" href="#运行效率-v2">¶</a>运行效率</h3>
 <p>运行时间：8ms<br>
 超过7.30%用C++提交的代码</p>
@@ -154,35 +155,36 @@ int main(void){
 <p>TO BE CONTINUED</p>
 <h2 id="XXX定律"><a class="header-anchor" href="#XXX定律">¶</a>XXX定律</h2>
 <h3 id="题目-v3"><a class="header-anchor" href="#题目-v3">¶</a>题目</h3>
-<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210319140529054.png" alt="image-20210319140529054" style="width:75%;" loading="lazy">
+<img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210319140529054.png" alt="image-20210319140529054" style="width:75%;" / loading="lazy">
 <h3 id="错误"><a class="header-anchor" href="#错误">¶</a>错误</h3>
 <ul>
 <li>
 <p>超时了！！</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+<pre><code class="language-c++">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
 
 using namespace std;
 
-int main(void){
+int main(void)&#123;
 	int n;
 	cin&gt;&gt;n;
-	while(n!=0){
+	while(n!=0)&#123;
 		int count=0;
-		while(n!=1){
-			if(n%2==0){
+		while(n!=1)&#123;
+			if(n%2==0)&#123;
 				n=n/2;
-			}else{
+			&#125;else&#123;
 				n=3*n+1;
 				n=n/2;
-			}
+			&#125;
 			count++;
-		}
+		&#125;
 		cout&lt;&lt;count&lt;&lt;endl;
 		cin&gt;&gt;n;
-	} 
+	&#125; 
     return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#125;
+</code></pre>
 <p>本来很自信地想说：就这？</p>
 <p>结果灰溜溜地超时了qwq，看来并没有想象的那么简单</p>
 <p>先来研究一下题目说的变化方法的实际意义：</p>
@@ -193,67 +195,69 @@ int main(void){
 <p>如果一个数的2的幂，那么就直接判断它的多少次幂就行</p>
 <p>关于这一点，我找到了很棒的代码：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wanrenwangxuejing/article/details/28940769">https://blog.csdn.net/wanrenwangxuejing/article/details/28940769</a></p>
 <p>优化之后……</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+<pre><code class="language-c++">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
 
 using namespace std;
 
 
 int log2(int value)   //递归判断一个数是2的多少次方  
-{  
+&#123;  
     if (value == 1)  
         return 0;  
     else  
         return 1+log2(value&gt;&gt;1);  
-}  
+&#125;  
 
 
-int main(void){
+int main(void)&#123;
 	int n;
-	scanf("%d",&amp;n);
-	while(n!=0){
+	scanf(&quot;%d&quot;,&amp;n);
+	while(n!=0)&#123;
 		int count=0;
 
-		while(n!=1){
-			if(n&amp;(n-1)){//一个数不是2的幂次方 
-				if(n%2==0){
+		while(n!=1)&#123;
+			if(n&amp;(n-1))&#123;//一个数不是2的幂次方 
+				if(n%2==0)&#123;
 					n/=2;
-				}else{
+				&#125;else&#123;
 					n=3*n+1;
 					n/=2;
-				}
+				&#125;
 				count++;			
-			}else{//一个数是2的幂次方 
+			&#125;else&#123;//一个数是2的幂次方 
 				count+=log2(n); 
 				n=1;
-			}	
-		}
+			&#125;	
+		&#125;
 
-		printf("%d\n",count);
-		scanf("%d",&amp;n);
-	} 
+		printf(&quot;%d\n&quot;,count);
+		scanf(&quot;%d&quot;,&amp;n);
+	&#125; 
     return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#125;
+</code></pre>
 <p>依旧还是超时</p>
 <p>看了书上的题解之后，我突然发现我并不是因为算法超时的……</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
+<pre><code class="language-c++">#include&lt;iostream&gt;
 using namespace std;
-int main(){
+int main()&#123;
     int n;
-    while(cin&gt;&gt;n){
+    while(cin&gt;&gt;n)&#123;
         if(n==0)
             break;
         int times=0;
-        while(n!=1){
+        while(n!=1)&#123;
             if(n%2==0)
                 n/=2;
             else
                 n=(3*n+1)/2;
             times++;
-        }
+        &#125;
         cout&lt;&lt;times&lt;&lt;endl;
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    &#125;
+&#125;
+</code></pre>
 <p>这是别人的代码:small_red_triangle:，好家伙，我到底错哪了……</p>
 <p>之后再看吧，属实迷惑:confused:</p>
 </li>
@@ -263,26 +267,27 @@ int main(){
 <hr>
 <h3 id="代码-v3"><a class="header-anchor" href="#代码-v3">¶</a>代码</h3>
 <p>在在线oj里面直接敲的，过了……</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;cstdio&gt;
+<pre><code class="language-c++">#include &lt;cstdio&gt;
 #include &lt;iostream&gt;
 
 using namespace std;
 
-int main (void){
+int main (void)&#123;
     int n;
-    while(cin&gt;&gt;n&amp;&amp;n!=0){
+    while(cin&gt;&gt;n&amp;&amp;n!=0)&#123;
         int count=0;
-        while(n!=1){
-             if(n%2==0){
+        while(n!=1)&#123;
+             if(n%2==0)&#123;
                 n/=2;
-            }else{
+            &#125;else&#123;
                 n=(3*n+1)/2;
-            }
+            &#125;
             count++;
-        }
+        &#125;
         cout&lt;&lt;count&lt;&lt;endl;
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    &#125;
+&#125;
+</code></pre>
 <p>运行时间：3ms<br>
 超过80.09%用C++提交的代码</p>
 <p>占用内存：508KB<br>
@@ -293,33 +298,34 @@ int main (void){
 <h3 id="错误-v2"><a class="header-anchor" href="#错误-v2">¶</a>错误</h3>
 <p>注意浮点数的处理！<code>(G1+G2)*1.0/2</code>，要乘以1.0！！</p>
 <h3 id="代码-v4"><a class="header-anchor" href="#代码-v4">¶</a>代码</h3>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+<pre><code class="language-c++">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
 #include &lt;cmath&gt;
 
 using namespace std;
 
-int main(void){
+int main(void)&#123;
 	int P,T,G1,G2,G3,GJ;
-	while(cin&gt;&gt;P&gt;&gt;T&gt;&gt;G1&gt;&gt;G2&gt;&gt;G3&gt;&gt;GJ){
+	while(cin&gt;&gt;P&gt;&gt;T&gt;&gt;G1&gt;&gt;G2&gt;&gt;G3&gt;&gt;GJ)&#123;
 		float result;
 		int temp;
-		if(abs(G1-G2)&lt;=T){
+		if(abs(G1-G2)&lt;=T)&#123;
 			result=(float)((G1+G2)*1.0/2);
-		}else{
-			if( ((abs(G1-G3)&lt;=T)||(abs(G2-G3)&lt;=T))  &amp;&amp; (! ((abs(G1-G3)&lt;=T)&amp;&amp;(abs(G2-G3)&lt;=T)) )   ){
+		&#125;else&#123;
+			if( ((abs(G1-G3)&lt;=T)||(abs(G2-G3)&lt;=T))  &amp;&amp; (! ((abs(G1-G3)&lt;=T)&amp;&amp;(abs(G2-G3)&lt;=T)) )   )&#123;
 				temp=(abs(G1-G3)&lt;=abs(G2-G3))?G1:G2;
 				result=(float)((temp+G3)*1.0/2);
-			}else if((abs(G1-G3)&lt;=T)&amp;&amp;(abs(G2-G3)&lt;=T)){
+			&#125;else if((abs(G1-G3)&lt;=T)&amp;&amp;(abs(G2-G3)&lt;=T))&#123;
 				result=max(max(G1,G2),G3);
-			}else if(!(abs(G1-G3)&lt;=T)&amp;&amp;!(abs(G2-G3)&lt;=T)){
+			&#125;else if(!(abs(G1-G3)&lt;=T)&amp;&amp;!(abs(G2-G3)&lt;=T))&#123;
 				result=GJ;
-			}
-		}
-		printf("%.1f\n",result);
-	}
+			&#125;
+		&#125;
+		printf(&quot;%.1f\n&quot;,result);
+	&#125;
     return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#125;
+</code></pre>
 <h3 id="运行效率-v3"><a class="header-anchor" href="#运行效率-v3">¶</a>运行效率</h3>
 <p>运行时间：5ms<br>
 超过35.33%用C++提交的代码</p>
@@ -351,25 +357,7 @@ int main(void){
 <p><img src="https://raw.githubusercontent.com/Crestiny/BlogImgBed/main/img/image-20210319161711595.png" alt="image-20210319161711595" loading="lazy"></p>
 <h3 id="分析-v3"><a class="header-anchor" href="#分析-v3">¶</a>分析</h3>
 <p>题面有点复杂qwq</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script></div><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><i class="ri:alipay-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><i class="ri:qq-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><i class="ri:wechat-pay-line"></i></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>CrestinyCoco</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://crestiny.github.io/2021/03/19/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day3-%E6%A8%A1%E6%8B%9F/" title="小可的机试练习日记Day3-模拟">https://crestiny.github.io/2021/03/19/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day3-%E6%A8%A1%E6%8B%9F/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2021/03/22/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day4-%E6%8E%92%E5%BA%8F/" rel="prev" title="小可的机试练习日记Day4-排序"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">小可的机试练习日记Day4-排序</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2021/03/18/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day2-%E6%A8%A1%E6%8B%9F/" rel="next" title="小可的机试练习日记Day2-模拟"><span class="post-nav-text">小可的机试练习日记Day2-模拟</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>要不要和我说些什么？</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><i class="ri:cloud-line"></i></span><span class="author"> CrestinyCoco</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.0.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.2</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+</div><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/alipay.jpg" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><i class="ri:alipay-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/qq.png" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><i class="ri:qq-line"></i></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png"><img loading="lazy" src="https://raw.githubusercontent.com/Crestiny/BlogImgBed2/main/img/wechat.png" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><i class="ri:wechat-pay-line"></i></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>CrestinyCoco</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://crestiny.github.io/2021/03/19/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day3-%E6%A8%A1%E6%8B%9F/" title="小可的机试练习日记Day3-模拟">https://crestiny.github.io/2021/03/19/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day3-%E6%A8%A1%E6%8B%9F/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2021/03/22/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day4-%E6%8E%92%E5%BA%8F/" rel="prev" title="小可的机试练习日记Day4-排序"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">小可的机试练习日记Day4-排序</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2021/03/18/%E5%B0%8F%E5%8F%AF%E7%9A%84%E6%9C%BA%E8%AF%95%E7%BB%83%E4%B9%A0%E6%97%A5%E8%AE%B0Day2-%E6%A8%A1%E6%8B%9F/" rel="next" title="小可的机试练习日记Day2-模拟"><span class="post-nav-text">小可的机试练习日记Day2-模拟</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>要不要和我说些什么？</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><i class="ri:cloud-line"></i></span><span class="author"> CrestinyCoco</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.0.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.2</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
   setTimeout(blog_live_time, 1000);
   const start = new Date('2022-07-13T00:00:00');
   const now = new Date();
@@ -385,7 +373,9 @@ int main(void){
 }
 blog_live_time();
 </script></div><div id="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv" title="总访客量"><span><i class="ri:user-line"></i></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="总访问量"><span><i class="ri:eye-line"></i></span><span id="busuanzi_value_site_pv"></span></span></div></footer><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#24367d" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search-line"></use></svg></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+</script>
+<link rel="stylesheet" href="/css/prism.css">
+<script src="/js/prism.js" async></script><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#24367d" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search-line"></use></svg></span></a><script>window.addEventListener("DOMContentLoaded", () => {
   // Handle and trigger popup window
   document.querySelector(".popup-trigger").addEventListener("click", () => {
     document.querySelector(".popup").classList.add("show");
